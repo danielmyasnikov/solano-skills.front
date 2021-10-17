@@ -1,10 +1,14 @@
 import React from "react";
 import styles from "./styles.module.less";
-import cn from 'classnames'
+import cn from "classnames";
 
-const Button = ({ children, variant, className }) => {
+const Button = ({ children, variant, className, onClick }) => {
   return (
-    <button type="button" className={cn(styles.btn, styles[variant], className)}>
+    <button
+      type="button"
+      className={cn(styles.btn, styles[variant], className)}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

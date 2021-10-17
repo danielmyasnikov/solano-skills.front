@@ -8,5 +8,9 @@
     {
       "text": "<code>seaborn</code> : библиотека визуализации; обычно имеет псевдоним <code>sns</code>"
     }
-  ]
+  ],
+  "hint": "Просто добавьте   print(7 + 10)   сценарий в правом верхнем углу и нажмите кнопку «Отправить ответ».",
+  "pre_exersize_code": "import math",
+  "sample_code": "#this is an example code \n\r print(a)",
+  "solution": "print(1)"
 }
