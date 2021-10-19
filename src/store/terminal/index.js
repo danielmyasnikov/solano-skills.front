@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export default function terminalReducer(state = initialState, action) {
+  console.log(action)
   switch (action.type) {
     case COMPILE_CODE: {
       return {

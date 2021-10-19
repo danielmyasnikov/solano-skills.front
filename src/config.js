@@ -1,1 +1,1 @@
-export const API_URL = ``
+export const API_URL = `84.201.187.101:8090`

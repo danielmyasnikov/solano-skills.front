@@ -6,7 +6,7 @@ import "brace/mode/python";
 import "brace/ext/language_tools";
 import Button from "../common/button";
 import { useDispatch } from "react-redux";
-import { COMPILE_CODE } from "../../store/reducers/terminal/actions";
+import { COMPILE_CODE } from "../../store/terminal/actions";
 
 import Reset from 'assets/Reset.svg'
 import styles from "./styles.module.less";

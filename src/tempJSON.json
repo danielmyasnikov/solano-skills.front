@@ -11,6 +11,6 @@
   ],
   "hint": "Просто добавьте   <code>print(7 + 10)</code>   сценарий в правом верхнем углу и нажмите кнопку «Отправить ответ».",
   "pre_exersize_code": "import math",
-  "sample_code": "#this is an example code \n\rprint(a)",
+  "sample_code": "#this is an example code\na = 5\nprint(a)",
   "solution": "def fac(n):\n\tif n == 0:\n\t\treturn 1\n\treturn fac(n-1) * n \nprint(fac(5))"
 }
