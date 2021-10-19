@@ -1,0 +1,16 @@
+{
+  "title": "Импорт модулей Python",
+  "description": "Модули (иногда называемые пакетами или библиотеками) помогают группировать связанные наборы инструментов в Python. В этом упражнении мы рассмотрим два модуля, которые часто используются специалистами по анализу данных:",
+  "list": [
+    {
+      "text": "<code>statsmodels</code> : используются в машинном обучении; обычно обозначается как <code>sm</code>"
+    },
+    {
+      "text": "<code>seaborn</code> : библиотека визуализации; обычно имеет псевдоним <code>sns</code>"
+    }
+  ],
+  "hint": "Просто добавьте   <code>print(7 + 10)</code>   сценарий в правом верхнем углу и нажмите кнопку «Отправить ответ».",
+  "pre_exersize_code": "import math",
+  "sample_code": "#this is an example code \n\rprint(a)",
+  "solution": "def fac(n):\n\tif n == 0:\n\t\treturn 1\n\treturn fac(n-1) * n \nprint(fac(5))"
+}
