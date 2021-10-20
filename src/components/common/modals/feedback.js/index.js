@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import Button from '../../button';
 import styles from './styles.module.less';
-import Close from 'assets/close.svg';
+import Close from '../../../../../assets/close.svg';
 
 const FeedbackModal = ({onClick}) => {
   const options = [
