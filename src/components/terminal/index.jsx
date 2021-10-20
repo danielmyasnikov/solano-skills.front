@@ -6,7 +6,7 @@ import "brace/mode/python";
 import "brace/ext/language_tools";
 import Button from "../common/button";
 import { useDispatch } from "react-redux";
-import { COMPILE_CODE } from "../../store/terminal/actions";
+import { COMPILE_CODE } from "../../store/reducers/terminal/actions";
 
 import Reset from 'assets/Reset.svg'
 import styles from "./styles.module.less";
@@ -58,8 +58,7 @@ function Terminal({ sampleCode, readonly }) {
       />
       <div className={styles.actions}>
         <Button
-          variant={"outline"}
-          className={styles.btnOutline}
+          variant={"outlineWhite"}
           onClick={() => {
             setValue(sampleCode)
           }}
@@ -67,8 +66,7 @@ function Terminal({ sampleCode, readonly }) {
           <Reset />
         </Button>
         <Button
-          variant={"outline"}
-          className={styles.btnOutline}
+          variant={"outlineWhite"}
           onClick={() => {
             dispatch({
               type: COMPILE_CODE,
@@ -81,8 +79,7 @@ function Terminal({ sampleCode, readonly }) {
           Выполнить код
         </Button>
         <Button
-          variant={"fill"}
-          className={styles.btnFill}
+          variant={"fillWhite"}
           onClick={() => {
             dispatch({
               type: COMPILE_CODE,
