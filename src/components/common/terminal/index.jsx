@@ -56,7 +56,7 @@ function Terminal({ sampleCode, readonly, onCompile, setModalOpen }) {
         <Button
           variant={'outlineWhite'}
           onClick={() => {
-            onCompile()
+            onCompile
             dispatch(compileCode(value));
           }}
         >

@@ -8,9 +8,6 @@ export default function App() {
       <Route exect path="/courses/:courseId/exercises/:exerciseId">
         <ExercisePage />
       </Route>
-      <Route exect path="/">
-        <Link to="/courses/python-for-beginners/exercises/1">Упражнение</Link>
-      </Route>
     </Router>
   );
 }
