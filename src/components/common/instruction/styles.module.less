@@ -16,7 +16,7 @@
   background: #ffe27b;
   color: #2d2d2d;
   font-size: 16px;
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
   border-radius: 4px;
   padding: 3px 6px;
   text-transform: uppercase;
@@ -31,11 +31,46 @@
   p {
     margin: 20px 0;
   }
+  ul {
+    margin-left: 20px;
+    list-style-type: disc;
+    li {
+      margin: 20px 0;
+    }
+  }
   p,
   li,
   code {
     font-size: 16px;
   }
+}
+
+.quiz {
+  margin: 0 20px 20px 20px;
+  .quizItem {
+    margin: 20px 0;
+    label {
+      font-size: 16px;
+    }
+    span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+    .top {
+      align-items: flex-start;
+    }
+  }
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 .header {
@@ -51,13 +86,5 @@
     font-size: 16px;
     line-height: 127%;
     color: #ffffff;
-  }
-}
-
-.disc {
-  margin-left: 20px;
-  list-style-type: disc;
-  li {
-    margin: 20px 0;
   }
 }

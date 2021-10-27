@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import terminalReducer from './terminal';
+import exerciseReducer from './exercise/reducer';
+import terminalReducer from './terminal/reducer';
 
 const initial = {};
 
@@ -10,6 +11,7 @@ export function appReducer(state = initial, action) {
 const rootReducer = combineReducers({
     app: appReducer,
     terminal: terminalReducer,
+    exercise: exerciseReducer,
 })
 
 export default rootReducer;

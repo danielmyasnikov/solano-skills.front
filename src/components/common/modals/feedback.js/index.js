@@ -2,13 +2,12 @@ import React from 'react';
 import Select from 'react-select';
 import Button from '../../button';
 import styles from './styles.module.less';
-import Close from '../../../../../assets/Close.svg';
+import Close from 'assets/Close.svg';
 
 const FeedbackModal = ({onClick}) => {
   const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'variant1', label: '1 Вариант' },
+    { value: 'variant2', label: '2 Вариант' },
   ];
   return (
     <div className={styles.modal}>

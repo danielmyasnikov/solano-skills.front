@@ -1,13 +1,12 @@
-import axios from "axios";
-import { call, takeLeading, put } from "redux-saga/effects";
-import { API_URL } from "../../../config";
-import { COMPILE_CODE } from "../../reducers/terminal/actions";
+import { call, takeLeading, put } from 'redux-saga/effects';
+import { CLEAR_TERMINAL, COMPILE_CODE } from './actions';
+import { API_URL } from '../../config';
+import axios from 'axios';
 
-const pushCode = ({ code }) => {
-  console.log(code)
+const pushCode = (code) => {
   return axios
     .post(`${API_URL}/compile`, {
-      code
+      code,
     })
     .then((res) => res.data)
     .catch((error) => {
@@ -15,8 +14,13 @@ const pushCode = ({ code }) => {
     });
 };
 
+export function* clearTerminal() {
+  yield put({
+    type: CLEAR_TERMINAL,
+  });
+}
+
 export function* compileCode({ payload }) {
-  console.log(payload)
   const response = yield call(pushCode, payload);
 
   yield put({
@@ -27,5 +31,5 @@ export function* compileCode({ payload }) {
 
 export default function* terminalSaga() {
   yield takeLeading(COMPILE_CODE, compileCode);
+  yield takeLeading(CLEAR_TERMINAL, clearTerminal);
 }
-
