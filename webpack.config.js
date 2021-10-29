@@ -47,13 +47,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: `index.html`,
       template: `public/index.html`,
-      favicon: 'public/favicon.ico',
       name: 'index',
       inject: true,
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
+    new webpack.EnvironmentPlugin({
+      API_TERMINAL: JSON.stringify(process.env.REACT_APP_API_TERMINAL),
+      API_COURSE: JSON.stringify(process.env.REACT_APP_API_COURSE),
     }),
   ],
 

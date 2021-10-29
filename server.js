@@ -11,6 +11,4 @@ app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
-console.log('server', process.env.REACT_APP_API_TERMINAL)
-
 app.listen(port);

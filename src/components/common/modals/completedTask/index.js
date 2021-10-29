@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../button';
+import Button from '../../../mui/button';
 import styles from './styles.module.less';
 import Complete from 'assets/Complete.svg';
 import Star from 'assets/Star.svg';

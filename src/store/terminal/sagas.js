@@ -1,11 +1,10 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
 import { CLEAR_TERMINAL, COMPILE_CODE } from './actions';
-import { API_URL } from '../../config';
 import axios from 'axios';
 
 const pushCode = (code) => {
   return axios
-    .post(`${API_URL}/compile`, {
+    .post(`${process.env.API_TERMINAL}/compile`, {
       code,
     })
     .then((res) => res.data)

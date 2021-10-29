@@ -7,7 +7,6 @@ export default function App() {
     <Router>
       <Route exact path="/courses/:courseId/exercises/:exerciseId">
         <ExercisePage />
-        {console.log('react', process.env)}
       </Route>
     </Router>
   );

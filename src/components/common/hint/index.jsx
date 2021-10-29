@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
-import cn from 'classnames'
+import cn from 'classnames';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import { selectExercise } from '../../../store/exercise/selector';
-import Button from '../button';
+import Button from '../../mui/button';
 
-const Hint = ({
-  solution,
-  onOpenFeedback,
-  onSetSolution,
-  onSetActiveTerminalTab,
-}) => {
-  const [hint, setHint] = useState();
+const Hint = ({ hint, onClick, solution, onSetSolution }) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
+  const [showAnswer, setShowAnswer] = useState(true);
   const exercise = useSelector(selectExercise);
   return (
     <>
-      <div className={cn(styles.hint, exercise.type==='quiz' ? styles.hintQuiz : '')}>
+      <div className={cn(styles.hint, exercise.type === 'quiz' ? styles.hintQuiz : '')}>
         {hint && (
           <>
             <div className={styles.hintInfo}>
@@ -27,7 +22,7 @@ const Hint = ({
               <div className={styles.feedback}>
                 <p>Вам помогла эта подсказка?</p>
                 <div className={styles.feedbackAnswer}>
-                  <Button variant="outlineRed" onClick={() => onOpenFeedback()}>
+                  <Button variant="outlineRed" onClick={onClick}>
                     Нет
                   </Button>
                   <Button variant="outlinePurple" onClick={() => setFeedbackOpen(false)}>
@@ -36,23 +31,19 @@ const Hint = ({
                 </div>
               </div>
             )}
+            {solution && showAnswer && (
+              <Button
+                className={styles.btn}
+                variant="outlinePurple"
+                onClick={() => {
+                  onSetSolution()
+                  setShowAnswer(false)
+                }}
+              >
+                Показать ответ (-70 XP)
+              </Button>
+            )}
           </>
-        )}
-        {!solution && (
-          <Button
-            className={styles.btn}
-            variant="outlinePurple"
-            onClick={() => {
-              if (hint) {
-                onSetSolution();
-                onSetActiveTerminalTab();
-              } else {
-                setHint(true);
-              }
-            }}
-          >
-            {!hint ? `Подсказка (-30 XP)` : `Показать ответ (-70 XP)`}
-          </Button>
         )}
       </div>
     </>

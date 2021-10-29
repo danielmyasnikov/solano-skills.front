@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import Button from '../../button';
+import Button from '../../../mui/button';
 import styles from './styles.module.less';
 import Close from 'assets/Close.svg';
 

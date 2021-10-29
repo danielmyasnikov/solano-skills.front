@@ -3,76 +3,98 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/python';
 import 'brace/ext/language_tools';
-import Button from '../button';
+import Button from '../../mui/button';
 import { useDispatch } from 'react-redux';
-
+import cn from 'classnames';
 import Reset from 'assets/Reset.svg';
 import styles from './styles.module.less';
 import './terminal.module.less';
-import { compileCode, COMPILE_CODE } from '../../../store/terminal/actions';
+import { compileCode } from '../../../store/terminal/actions';
 
-function Terminal({ sampleCode, readonly, onCompile, setModalOpen }) {
+function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
   const [value, setValue] = useState();
+  const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
   useEffect(() => {
-    setValue(sampleCode);
-  }, [sampleCode]);
+    if (solution) {
+      setActiveTab('solution');
+    } else {
+      setValue(sampleCode);
+    }
+  }, [sampleCode, solution]);
   function onChange(value) {
     setValue(value);
   }
-
   return (
-    <div className={styles.terminal}>
-      <AceEditor
-        mode="python"
-        className="editor"
-        width="100%"
-        height="100%"
-        showGutter={true}
-        highlightActiveLine={true}
-        defaultValue={sampleCode}
-        value={value}
-        readOnly={readonly}
-        fontSize="16px"
-        setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
-          enableSnippets: true,
-          showLineNumbers: true,
-          tabSize: 4,
-        }}
-        onChange={onChange}
-        name="UNIQUE_ID_OF_DIV"
-      />
-      <div className={styles.actions}>
-        <Button
-          variant={'outlineWhite'}
-          onClick={() => {
-            setValue(sampleCode);
-          }}
+    <>
+      <div className={styles.terminalHeader}>
+        <div
+          onClick={() => setActiveTab('script')}
+          className={cn(activeTab === 'script' ? styles.tabActive : '', styles.tab)}
         >
-          <Reset />
-        </Button>
-        <Button
-          variant={'outlineWhite'}
-          onClick={() => {
-            onCompile
-            dispatch(compileCode(value));
-          }}
-        >
-          Выполнить код
-        </Button>
-        <Button
-          variant={'fillWhite'}
-          onClick={() => {
-            dispatch(compileCode(value));
-            setModalOpen();
-          }}
-        >
-          Ответить
-        </Button>
+          script.py
+        </div>
+        {solution && (
+          <div
+            onClick={() => setActiveTab('solution')}
+            className={cn(activeTab === 'solution' ? styles.tabActive : '', styles.tab)}
+          >
+            solution.py
+          </div>
+        )}
       </div>
-    </div>
+      <div className={styles.terminal}>
+        <AceEditor
+          mode="python"
+          className="editor"
+          width="100%"
+          height="100%"
+          showGutter={true}
+          highlightActiveLine={true}
+          defaultValue={sampleCode}
+          value={activeTab === 'solution' ? solution : value}
+          readOnly={activeTab === 'solution' ? true : false}
+          fontSize="16px"
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: true,
+            showLineNumbers: true,
+            tabSize: 4,
+          }}
+          onChange={onChange}
+          name="UNIQUE_ID_OF_DIV"
+        />
+        <div className={styles.actions}>
+          <Button
+            variant={'outlineWhite'}
+            onClick={() => {
+              setValue(sampleCode);
+            }}
+          >
+            <Reset />
+          </Button>
+          <Button
+            variant={'outlineWhite'}
+            onClick={() => {
+              onCompile;
+              dispatch(compileCode(activeTab === 'solution' ? solution : value));
+            }}
+          >
+            Выполнить код
+          </Button>
+          <Button
+            variant={'fillWhite'}
+            onClick={() => {
+              dispatch(compileCode(activeTab === 'solution' ? solution : value));
+              setModalOpen();
+            }}
+          >
+            Ответить
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }
 
