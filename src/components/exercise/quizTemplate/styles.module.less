@@ -1,0 +1,117 @@
+.exerciseContainer {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+.overflowHidden {
+  overflow-y: hidden !important;
+}
+
+.sidebar {
+  padding-bottom: 15px;
+  background: #ffffff;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+}
+
+.layout {
+  position: relative;
+  width: calc(43% - 20px);
+  margin-right: 20px;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.terminal {
+  width: 57%;
+}
+
+.quizOutputContainer {
+  background: #2c2a3f;
+  padding: 10px 20px;
+  height: calc(100% - 66px);
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.outputContainer {
+  background: #2c2a3f;
+  padding: 10px 20px;
+  height: calc(40% - 66px);
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  .output {
+    display: block;
+    color: #fff;
+  }
+  .error {
+    display: block;
+    color: #d15555;
+  }
+}
+
+.terminalHeader {
+  width: 100%;
+  display: flex;
+  background: #413f56;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  .tab {
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #413f56;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: #6a687a;
+    &:nth-child(1) {
+      border-top-left-radius: 18px;
+    }
+  }
+  .tabActive {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #fff;
+    background: rgba(44, 42, 63, 0.45);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.outputHeader {
+  margin-top: 5px;
+}
+.quiz {
+  margin: 0 20px 20px 20px;
+  .quizItem {
+    margin: 20px 0;
+    label {
+      font-size: 16px;
+      align-items: flex-start;
+    }
+    span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 15px 20px 5px 20px;
+  .btn {
+    &:nth-child(1){
+      margin-right: 15px;
+    }
+  }
+}
