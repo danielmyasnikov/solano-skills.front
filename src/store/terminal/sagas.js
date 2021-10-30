@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const pushCode = (code) => {
   return axios
-    .post(`${process.env.API_TERMINAL}/compile`, {
+    .post(`http://84.201.152.65:8090/compile`, {
       code,
     })
     .then((res) => res.data)

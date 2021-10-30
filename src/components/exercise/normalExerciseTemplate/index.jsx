@@ -80,8 +80,8 @@ function NormalExerciseTemplate() {
         <Output className={styles.outputContainer}>
           {terminal.map((item, i) => (
             <React.Fragment key={i}>
-              <span className={cn(item.status === 'error' ? styles.error : 'success')}>
-                {item.status === 'error' ? item.error : item.success}
+              <span className={cn(item.status === 'error' ? styles.error : styles.success)}>
+                {item.status === 'error' ? item.error : item.output}
               </span>
             </React.Fragment>
           ))}

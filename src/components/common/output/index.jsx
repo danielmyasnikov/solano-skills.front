@@ -27,7 +27,7 @@ const Output = ({ children, className }) => {
             <Viewer fileUrl="python-for-beginners.pdf" />;
           </Worker>
         )}
-        {children}
+        {activeTab === 'output' && <React.Fragment>{children}</React.Fragment>}
       </div>
     </>
   );
