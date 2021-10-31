@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/python';
 import 'brace/ext/language_tools';
+import 'ace-builds/src-noconflict/theme-monokai';
 import Button from '../../mui/button';
 import { useDispatch } from 'react-redux';
 import cn from 'classnames';
@@ -46,6 +47,7 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
       <div className={styles.terminal}>
         <AceEditor
           mode="python"
+          theme="monokai"
           className="editor"
           width="100%"
           height="100%"
@@ -67,6 +69,7 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
         />
         <div className={styles.actions}>
           <Button
+            className={styles.reset}
             variant={'outlineWhite'}
             onClick={() => {
               setValue(sampleCode);
@@ -84,7 +87,7 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
             Выполнить код
           </Button>
           <Button
-            variant={'fillWhite'}
+            variant="containedWhite"
             onClick={() => {
               dispatch(compileCode(activeTab === 'solution' ? solution : value));
               setModalOpen();

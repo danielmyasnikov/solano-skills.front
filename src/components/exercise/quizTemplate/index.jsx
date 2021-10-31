@@ -72,7 +72,7 @@ function QuizTemplate({ onSubmit }) {
                 )}
                 <Button
                   className={styles.btn}
-                  variant="fillPurple"
+                  variant="containedPurple"
                   onClick={() => {
                     checkAnswer();
                   }}
@@ -92,6 +92,7 @@ function QuizTemplate({ onSubmit }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            onClose={() => setCompletedTaskModalOpen(false)}
             onClick={() => {
               onSubmit();
               setCompletedTaskModalOpen(false);

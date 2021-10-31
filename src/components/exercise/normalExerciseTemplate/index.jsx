@@ -53,7 +53,7 @@ function NormalExerciseTemplate() {
           </div>
           {!hint && (
             <Button
-              className={cn(styles.btn, styles.hintBtn)}
+              className={ styles.hintBtn}
               variant="outlinePurple"
               onClick={() => setHint(true)}
             >
@@ -69,7 +69,7 @@ function NormalExerciseTemplate() {
             onSetSolution={() => setSolution(exercise.solution)}
           />
         </div>
-        {completedTaskModalOpen && <CompletedTask onClick={onSubmit} />}
+        {completedTaskModalOpen && <CompletedTask onClose={() => setCompletedTaskModalOpen(false)} onClick={onSubmit} />}
       </div>
       <div className={styles.terminal}>
         <Terminal

@@ -22,7 +22,7 @@ const FeedbackModal = ({onClick}) => {
           options={options}
         />
         <textarea placeholder="Введите текст"></textarea>
-        <Button className={styles.btn} variant="fillPurple" onClick={() => console.log('some action')}>
+        <Button className={styles.btn} variant="containedPurple" onClick={() => console.log('some action')}>
           Отправить отзыв
         </Button>
       </div>

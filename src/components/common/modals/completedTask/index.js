@@ -2,25 +2,18 @@ import React from 'react';
 import Button from '../../../mui/button';
 import styles from './styles.module.less';
 import Complete from 'assets/Complete.svg';
-import Star from 'assets/Star.svg';
 import Close from 'assets/Close.svg';
-import { useHistory, useParams } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { getExercise } from '../../../../store/exercise/actions';
+import Rating from '../../../mui/rating';
 
-const CompletedTask = ({ onClick }) => {
+const CompletedTask = ({ onClick, onClose }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
-        <Close className={styles.closeModal} onClick={onClick} />
+        <Close className={styles.closeModal} onClick={onClose} />
         <Complete />
         <span className={styles.xp}>+10 XP</span>
         <div className={styles.rating}>
-          <Star />
-          <Star />
-          <Star />
-          <Star />
-          <Star />
+          <Rating readonly='true' value='5' />
         </div>
         <span className={styles.title}>
           Отлично!
@@ -30,7 +23,7 @@ const CompletedTask = ({ onClick }) => {
         <span className={styles.dis}>Нажмите кнопку ниже</span>
         <Button
           onClick={onClick}
-          variant="fillWhite"
+          variant="containedWhite"
         >
           Следующее упражнение
         </Button>

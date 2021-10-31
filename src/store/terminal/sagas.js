@@ -2,9 +2,9 @@ import { call, takeLeading, put } from 'redux-saga/effects';
 import { CLEAR_TERMINAL, COMPILE_CODE } from './actions';
 import axios from 'axios';
 
-const pushCode = (code) => {
+const compileCodeApi = (code) => {
   return axios
-    .post(`http://84.201.152.65:8090/compile`, {
+    .post(`${API_TERMINAL}/compile`, {
       code,
     })
     .then((res) => res.data)
@@ -20,7 +20,7 @@ export function* clearTerminal() {
 }
 
 export function* compileCode({ payload }) {
-  const response = yield call(pushCode, payload);
+  const response = yield call(compileCodeApi, payload);
 
   yield put({
     type: COMPILE_CODE,

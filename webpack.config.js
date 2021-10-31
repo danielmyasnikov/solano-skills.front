@@ -51,7 +51,7 @@ module.exports = {
       inject: true,
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new webpack.EnvironmentPlugin({
+    new webpack.DefinePlugin({
       API_TERMINAL: JSON.stringify(process.env.REACT_APP_API_TERMINAL),
       API_COURSE: JSON.stringify(process.env.REACT_APP_API_COURSE),
     }),

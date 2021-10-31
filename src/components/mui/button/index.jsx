@@ -1,16 +1,18 @@
-import React from "react";
-import styles from "./styles.module.less";
-import cn from "classnames";
+import React from 'react';
+import { Button as MuiButton } from '@mui/material';
+import { buttonTheme } from '../theme';
 
 const Button = ({ children, variant, className, onClick }) => {
   return (
-    <button
+    <MuiButton
       type="button"
-      className={cn(styles.btn, styles[variant], className)}
+      variant={variant}
+      className={className}
+      theme={buttonTheme}
       onClick={onClick}
     >
       {children}
-    </button>
+    </MuiButton>
   );
 };
 
