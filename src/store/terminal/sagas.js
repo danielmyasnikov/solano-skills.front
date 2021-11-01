@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const compileCodeApi = (code) => {
   return axios
-    .post(`${API_TERMINAL}/compile`, {
+    .post(`${process.env.REACT_APP_API_TERMINAL}/compile`, {
       code,
     })
     .then((res) => res.data)

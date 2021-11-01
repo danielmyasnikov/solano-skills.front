@@ -1,13 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
+import { Switch, Link, Route } from 'react-router-dom';
 import './index.less';
 import ExercisePage from './components/exercise';
+import  Container  from './components/container';
+import { routes } from './routes';
+import styles from './app.module.css';
+
 export default function App() {
+  console.log('http-proxy-hbjnkmlmiddleware ')
   return (
-    <Router>
-      <Route exact path="/courses/:courseId/exercises/:exerciseId">
-        <ExercisePage />
-      </Route>
-    </Router>
+    <div className={styles.wrapper}>
+      {routes.map((route, i) => (
+        <Route exact={route.exact} path={route.path} key={route.path}>
+          <Container key={i} {...route} Component={route.component} />
+        </Route>
+      ))}
+    </div>
   );
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import Select from 'react-select';
-import Button from '../../../mui/button';
+import Button from '@components/mui/button';
 import styles from './styles.module.less';
-import Close from 'assets/Close.svg';
+import Close from '@assets/Close.js';
 
-const FeedbackModal = ({onClick}) => {
+const FeedbackModal = ({ onClick }) => {
   const options = [
     { value: 'variant1', label: '1 Вариант' },
     { value: 'variant2', label: '2 Вариант' },
@@ -22,7 +22,11 @@ const FeedbackModal = ({onClick}) => {
           options={options}
         />
         <textarea placeholder="Введите текст"></textarea>
-        <Button className={styles.btn} variant="containedPurple" onClick={() => console.log('some action')}>
+        <Button
+          className={styles.btn}
+          variant="containedPurple"
+          onClick={() => console.log('some action')}
+        >
           Отправить отзыв
         </Button>
       </div>

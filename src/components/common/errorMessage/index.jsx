@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.module.less';
-import Error from 'assets/Error.svg';
+import Error from '@assets/Error.js';
 
 const ErrorMessage = ({ message }) => {
   return (

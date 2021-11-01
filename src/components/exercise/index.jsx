@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Container from '../common/container';
 import { useSelector } from 'react-redux';
 import { getExercise } from '../../store/exercise/actions';
 import { clearTerminal } from '../../store/terminal/actions';
@@ -10,7 +9,10 @@ import { selectExercise } from '../../store/exercise/selector';
 import QuizTemplate from './quizTemplate';
 import styles from './styles.module.less';
 import NormalExerciseTemplate from './normalExerciseTemplate';
+import { VideoExercise } from './videoExercise';
+
 function ExercisePage() {
+  const isViseo = true;
   const { courseId, exerciseId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -29,15 +31,13 @@ function ExercisePage() {
         return <QuizTemplate onSubmit={onSubmit} />;
       case 'normal_exercise':
         return <NormalExerciseTemplate />;
+      case 'video':
+        return <VideoExercise />;
       default:
         break;
     }
   };
-  return (
-    <Container>
-      <div className={styles.exerciseContainer}>{renderExercise()}</div>
-    </Container>
-  );
+  return <div className={styles.exerciseContainer}>{renderExercise()}</div>;
 }
 
 export default ExercisePage;

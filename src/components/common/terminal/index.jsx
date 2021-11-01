@@ -7,7 +7,7 @@ import 'ace-builds/src-noconflict/theme-monokai';
 import Button from '../../mui/button';
 import { useDispatch } from 'react-redux';
 import cn from 'classnames';
-import Reset from 'assets/Reset.svg';
+import Reset from '@assets/Reset.js';
 import styles from './styles.module.less';
 import './terminal.module.less';
 import { compileCode } from '../../../store/terminal/actions';
@@ -80,7 +80,6 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
           <Button
             variant={'outlineWhite'}
             onClick={() => {
-              onCompile;
               dispatch(compileCode(activeTab === 'solution' ? solution : value));
             }}
           >

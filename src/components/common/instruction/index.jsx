@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './styles.module.less';
-import InstructionSvg from 'assets/Instruction.svg';
+import InstructionSvg from '@assets/Instruction.js';
 import { useSelector } from 'react-redux';
 import { selectExercise } from '../../../store/exercise/selector';
 const Instructions = ({ children }) => {

@@ -1,4 +1,4 @@
-import ExercisePage from './components/pages/exercise'
+import ExercisePage from './components/exercise'
 
 export const routes = [
   {
