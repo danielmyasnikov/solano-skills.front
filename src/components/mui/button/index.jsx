@@ -2,7 +2,7 @@ import React from 'react';
 import { Button as MuiButton } from '@mui/material';
 import { buttonTheme } from '../theme';
 
-const Button = ({ children, variant, className, onClick }) => {
+const Button = ({ children, variant, className, onClick, disabled }) => {
   return (
     <MuiButton
       type="button"
@@ -10,6 +10,7 @@ const Button = ({ children, variant, className, onClick }) => {
       className={className}
       theme={buttonTheme}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </MuiButton>

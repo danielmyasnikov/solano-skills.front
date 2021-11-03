@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Container from '../common/container';
 import { useSelector } from 'react-redux';
-import { getExercise } from '../../store/exercise/actions';
+import { getExercise, GET_EXERCISE_REQUESTED } from '../../store/exercise/actions';
 import { clearTerminal } from '../../store/terminal/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -16,7 +16,7 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   useEffect(() => {
-    dispatch(getExercise(courseId, exerciseId));
+    dispatch({ type: GET_EXERCISE_REQUESTED, payload: { courseId, exerciseId } });
   }, []);
   const onSubmit = () => {
     history.push(`/courses/python-for-beginners/exercises/${exercise.next_exercise_id}`);
@@ -28,7 +28,7 @@ function ExercisePage() {
       case 'quiz':
         return <QuizTemplate onSubmit={onSubmit} />;
       case 'normal_exercise':
-        return <NormalExerciseTemplate />;
+        return <NormalExerciseTemplate onSubmit={onSubmit} />;
       default:
         break;
     }

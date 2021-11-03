@@ -10,9 +10,9 @@ import cn from 'classnames';
 import Reset from 'assets/Reset.svg';
 import styles from './styles.module.less';
 import './terminal.module.less';
-import { compileCode } from '../../../store/terminal/actions';
+import { checkAnswer, compileCode } from '../../../store/terminal/actions';
 
-function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
+function Terminal({ sampleCode, solution, correct, onCompile, exerciseId }) {
   const [value, setValue] = useState();
   const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
@@ -74,8 +74,11 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
             onClick={() => {
               setValue(sampleCode);
             }}
+            disabled={correct}
           >
-            <Reset />
+            <Reset 
+              className={cn(correct ? styles.disable : '')}
+            />
           </Button>
           <Button
             variant={'outlineWhite'}
@@ -83,15 +86,16 @@ function Terminal({ sampleCode, solution, onCompile, setModalOpen }) {
               onCompile;
               dispatch(compileCode(activeTab === 'solution' ? solution : value));
             }}
+            disabled={correct}
           >
             Выполнить код
           </Button>
           <Button
             variant="containedWhite"
             onClick={() => {
-              dispatch(compileCode(activeTab === 'solution' ? solution : value));
-              setModalOpen();
+              dispatch(checkAnswer(activeTab === 'solution' ? solution : value, exerciseId));
             }}
+            disabled={correct}
           >
             Ответить
           </Button>

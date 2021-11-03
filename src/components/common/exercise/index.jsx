@@ -19,7 +19,7 @@ const Exercise = () => {
         </div>
       </div>
       <div className={styles.exercise}>
-        <h1>Title</h1>
+        <h1 dangerouslySetInnerHTML={{__html: exercise.title || 'Заголовок не задан'}} />
         <div dangerouslySetInnerHTML={{ __html: exercise.description }}/>
       </div>
     </>
