@@ -1,17 +1,14 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { CLEAR_TERMINAL, COMPILE_CODE } from './actions';
-import axios from 'axios';
-
-const compileCodeApi = (code) => {
-  return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/compile`, {
-      code,
-    })
-    .then((res) => res.data)
-    .catch((error) => {
-      throw error;
-    });
-};
+import { compileCodeApi, checkAnswerApi } from '../api/terminal';
+import {
+  CLEAR_TERMINAL,
+  COMPILE_CODE_REQUESTED,
+  COMPILE_CODE_SUCCESSED,
+  COMPILE_CODE_FAILED,
+  CHECK_ANSWER_FAILED,
+  CHECK_ANSWER_SUCCESSED,
+  CHECK_ANSWER_REQUESTED
+} from './actions';
 
 export function* clearTerminal() {
   yield put({
@@ -19,16 +16,46 @@ export function* clearTerminal() {
   });
 }
 
-export function* compileCode({ payload }) {
-  const response = yield call(compileCodeApi, payload);
+export function* compileCode(action) {
+  try {
+    const response = yield call(compileCodeApi, action.payload);
+    yield put({
+      type: COMPILE_CODE_SUCCESSED,
+      payload: {
+        data: response,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: COMPILE_CODE_FAILED,
+      payload: {
+        message: e.message,
+      },
+    });
+  }
+}
 
-  yield put({
-    type: COMPILE_CODE,
-    payload: response,
-  });
+export function* checkAnswer(action) {
+  try {
+    const response = yield call(checkAnswerApi, action.payload);
+    yield put({
+      type: CHECK_ANSWER_SUCCESSED,
+      payload: {
+        data: response,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: CHECK_ANSWER_FAILED,
+      payload: {
+        message: e.message,
+      },
+    });
+  }
 }
 
 export default function* terminalSaga() {
-  yield takeLeading(COMPILE_CODE, compileCode);
+  yield takeLeading(COMPILE_CODE_REQUESTED, compileCode);
+  yield takeLeading(CHECK_ANSWER_REQUESTED, checkAnswer);
   yield takeLeading(CLEAR_TERMINAL, clearTerminal);
 }

@@ -1,25 +1,26 @@
-import axios from 'axios';
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { GET_EXERCISE } from './actions';
+import { getExerciseApi } from '../api/exercise';
+import { GET_EXERCISE_REQUESTED, GET_EXERCISE_SUCCESSED, GET_EXERCISE_FAILED } from './actions';
 
-const getExerciseApi = ({courseId, exerciseId}) => {
-  return axios
-    .get(`${process.env.REACT_APP_API_COURSE}/api/v1/courses/${courseId}/exercises/${exerciseId}`, {})
-    .then((res) => res.data)
-    .catch((error) => {
-      throw error;
-    })
-};
-
-export function* getExercise({ payload }) {
-  const response = yield call(getExerciseApi, payload);
-
-  yield put({
-    type: GET_EXERCISE,
-    payload: response,
-  });
+export function* getExercise(action) {
+  try {
+    const response = yield call(getExerciseApi, action.payload);
+    yield put({
+      type: GET_EXERCISE_SUCCESSED,
+      payload: {
+        data: response,
+      },
+    });
+  } catch (e) {
+    yield put({
+      type: GET_EXERCISE_FAILED,
+      payload: {
+        message: e.message,
+      },
+    });
+  }
 }
 
 export default function* exerciseSaga() {
-  yield takeLeading(GET_EXERCISE, getExercise);
+  yield takeLeading(GET_EXERCISE_REQUESTED, getExercise);
 }

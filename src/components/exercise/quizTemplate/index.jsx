@@ -17,7 +17,6 @@ import ErrorMessage from '../../common/errorMessage';
 import Output from '../../common/output';
 
 function QuizTemplate({ onSubmit }) {
-  const [activeTab, setActiveTab] = useState('output');
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -30,7 +29,6 @@ function QuizTemplate({ onSubmit }) {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
   const checkAnswer = () => {
-    console.log(answer);
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
@@ -71,7 +69,6 @@ function QuizTemplate({ onSubmit }) {
                   </Button>
                 )}
                 <Button
-                  className={styles.btn}
                   variant="containedPurple"
                   onClick={() => {
                     checkAnswer();
@@ -101,7 +98,7 @@ function QuizTemplate({ onSubmit }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Output className={styles.quizOutputContainer} />
+        <Output presentation_url={exercise.presentation_url} className={styles.quizOutputContainer} />
       </div>
     </>
   );

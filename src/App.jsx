@@ -7,7 +7,6 @@ import { routes } from './routes';
 import styles from './app.module.css';
 
 export default function App() {
-  console.log('http-proxy-hbjnkmlmiddleware ')
   return (
     <div className={styles.wrapper}>
       {routes.map((route, i) => (

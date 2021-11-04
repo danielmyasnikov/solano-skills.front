@@ -13,7 +13,7 @@ const CompletedTask = ({ onClick, onClose }) => {
         <Complete />
         <span className={styles.xp}>+10 XP</span>
         <div className={styles.rating}>
-          <Rating readonly="true" value="5" />
+          <Rating readonly={true} value={5} />
         </div>
         <span className={styles.title}>
           Отлично!

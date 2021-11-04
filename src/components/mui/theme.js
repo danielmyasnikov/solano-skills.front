@@ -9,10 +9,11 @@ export const buttonTheme = createTheme({
       styleOverrides: {
         root: {
           fontFamily: 'Jost',
-          fontSize: '14px',
+          fontSize: '16px',
           letterSpacing: 0.4,
           fontWeight: 700,
           padding: '8px 20px',
+          textTransform: 'none',
           borderRadius: 30,
         },
       },
@@ -26,6 +27,13 @@ export const buttonTheme = createTheme({
               background: '#fff',
               color: '#CBC7FA',
             },
+          },
+        },
+        {
+          props: { variant: 'containedWhite', disabled: true },
+          style: {
+            background: '#4A4856!important',
+            color: '#646370!important',
           },
         },
         {
@@ -63,6 +71,14 @@ export const buttonTheme = createTheme({
               transition: '0.2s ease-in-out',
               background: '#474650',
             },
+          },
+        },
+        {
+          props: { variant: 'outlineWhite', disabled: true },
+          style: {
+            background: 'none',
+            color: '#4A4856!important',
+            border: '1px solid #4A4856!important',
           },
         },
         {
