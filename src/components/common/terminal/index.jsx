@@ -12,7 +12,7 @@ import styles from './styles.module.less';
 import './terminal.module.less';
 import { checkAnswer, compileCode } from '../../../store/terminal/actions';
 
-function Terminal({ sampleCode, solution, correct, onCompile, exerciseId }) {
+function Terminal({ sampleCode, solution, correct, exerciseId }) {
   const [value, setValue] = useState();
   const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
@@ -83,7 +83,6 @@ function Terminal({ sampleCode, solution, correct, onCompile, exerciseId }) {
           <Button
             variant={'outlineWhite'}
             onClick={() => {
-              onCompile;
               dispatch(compileCode(activeTab === 'solution' ? solution : value));
             }}
             disabled={correct}

@@ -6,7 +6,7 @@ import { selectExercise } from '@store/exercise/selector';
 
 import styles from './styles.module.less';
 
-export const VideoExercise = () => {
+export const VideoExercise = ({ onSubmit }) => {
   const exercise = useSelector(selectExercise);
 
   // const [sourceData, setSourceData] = useState({});
@@ -51,7 +51,9 @@ export const VideoExercise = () => {
       </div>
       <div className={styles.btnWrapper}>
         <Button variant="outlinePurple">Показать стенограмму</Button>
-        <Button variant={'containedPurple'}>Продолжить</Button>
+        <Button variant={'containedPurple'} onClick={onSubmit}>
+          Продолжить
+        </Button>
       </div>
     </div>
   );
