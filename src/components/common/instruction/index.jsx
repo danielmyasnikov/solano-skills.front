@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './styles.module.less';
 import InstructionSvg from '@assets/Instruction.js';
 import { useSelector } from 'react-redux';
