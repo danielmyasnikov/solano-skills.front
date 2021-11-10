@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getExercise, GET_EXERCISE_REQUESTED } from '../../store/exercise/actions';
+import { getExercise } from '../../store/exercise/actions';
 import { clearTerminal } from '../../store/terminal/actions';
 import { useParams } from 'react-router-dom';
 import { selectExercise } from '../../store/exercise/selector';
@@ -16,7 +16,7 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   useEffect(() => {
-    dispatch({ type: GET_EXERCISE_REQUESTED, payload: { courseId, exerciseId } });
+    dispatch(getExercise(courseId, exerciseId));
   }, []);
 
   const onSubmit = () => {

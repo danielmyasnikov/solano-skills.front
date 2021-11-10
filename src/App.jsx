@@ -1,7 +1,6 @@
 import React from 'react';
-import { Switch, Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './index.less';
-import ExercisePage from './components/exercise';
 import  Container  from './components/container';
 import { routes } from './routes';
 import styles from './app.module.css';

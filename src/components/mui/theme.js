@@ -82,6 +82,28 @@ export const buttonTheme = createTheme({
           },
         },
         {
+          props: { variant: 'outlineBlack' },
+          style: {
+            height: '33px',
+            background: 'none',
+            color: '#2D2D2D',
+            border: '1px solid #2D2D2D',
+            '&:hover': {
+              background: 'none',
+              transition: '0.2s ease-in-out',
+              color: '#7469EF',
+              border: '1px solid #7469EF',
+            },
+          },
+        },
+        {
+          props: { variant: 'outlineBlack', disabled: true },
+          style: {
+            color: '#D6D6D6',
+            border: '1px solid #D6D6D6',
+          },
+        },
+        {
           props: { variant: 'outlineRed' },
           style: {
             background: 'none',
@@ -104,6 +126,85 @@ export const ratingTheme = createTheme({
       styleOverrides: {
         root: {
           color: '#F7CC35',
+        },
+      },
+    },
+  },
+});
+
+export const menuTheme = createTheme({
+  components: {
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: '0',
+          paddingBottom: '0',
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          minWidth: '200px',
+          cursor: 'pointer',
+          borderRadius: '5px',
+          margin: '1px 0',
+          ':hover': {
+            transition: '.2s ease-in-out',
+            background: '#7469EF',
+            color: '#fff',
+            svg: {
+              path: {
+                fill: '#fff',
+              },
+            },
+            span: {
+              color: '#fff',
+            },
+          },
+        },
+      },
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: '1px',
+          marginRight: '14px',
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          span: {
+            fontFamily: 'Jost',
+            color: '#8A92A6',
+            fontWeight: 400,
+            fontSize: '16px',
+          },
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          margin: '12px 36px 20px 36px',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          marginTop: '73px',
+          height: 'calc(100% - 73px)',
+        },
+      },
+    },
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          marginTop: '73px',
         },
       },
     },

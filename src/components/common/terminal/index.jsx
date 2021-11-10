@@ -76,9 +76,7 @@ function Terminal({ sampleCode, solution, correct, exerciseId }) {
             }}
             disabled={correct}
           >
-            <Reset 
-              className={cn(correct ? styles.disable : '')}
-            />
+            <Reset className={cn(correct ? styles.disable : '')} />
           </Button>
           <Button
             variant={'outlineWhite'}
@@ -92,6 +90,7 @@ function Terminal({ sampleCode, solution, correct, exerciseId }) {
           <Button
             variant="containedWhite"
             onClick={() => {
+              dispatch(compileCode(activeTab === 'solution' ? solution : value, exerciseId));
               dispatch(checkAnswer(activeTab === 'solution' ? solution : value, exerciseId));
             }}
             disabled={correct}
