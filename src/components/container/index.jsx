@@ -1,10 +1,11 @@
 import React from 'react';
-import { Menu } from '@components/menu';
 import styles from './styles.module.less';
+import Header from '@components/header';
+import Menu from '../mui/menu';
 
 const Container = ({ Component }) => (
   <div className={styles.wrapper}>
-    <Menu />
+    <Header />
     <div className={styles.container}>
       <Component />
     </div>

@@ -3,11 +3,22 @@ import css from './styles.module.less';
 import { Link } from 'react-router-dom';
 import Button from '@components/mui/button';
 import TimerOutlined from '@assets/TimerOutlined.png';
+import Py from '@assets/py.png';
 
 export const Card = ({ info }) => {
+  const getTypeImg = () => {
+    switch (info.lang) {
+      case 'python':
+        return Py;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className={css.wrapper}>
+    <Link className={css.wrapper} to={`/courses/${info.slug}`}>
       <div className={css.about}>
+        <img className={css.langImg} src={getTypeImg()} alt="" />
         <h2 className={css.title}>{info.title}</h2>
         <span className={css.description}>{info.description}</span>
         <div className={css.time}>
@@ -16,10 +27,8 @@ export const Card = ({ info }) => {
         </div>
       </div>
       <div className={css.actionBlock}>
-        <Link className={css.link} to={`/courses/${info.slug}`}>
-          <Button variant="outlinePurple">Показать стенограмму</Button>
-        </Link>
+        <Button variant="outlinePurple">Перейти</Button>
       </div>
-    </div>
+    </Link>
   );
 };

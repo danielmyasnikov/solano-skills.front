@@ -1,0 +1,50 @@
+.wrapper {
+  max-width: 384px;
+}
+
+.blocks {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.block {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background: var(--color-white);
+  box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  button:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.title {
+  color: var(--dark);
+  font-family: Jost;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.description {
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #46445c;
+}

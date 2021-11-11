@@ -1,0 +1,124 @@
+.wrapper {
+  max-width: 1153px;
+  background: var(--color-white);
+  box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+  padding: 40px;
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+}
+
+.descriptionTitle {
+  margin-bottom: 10px;
+  font-family: Jost;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 139.5%;
+  color: var(--color-black);
+}
+
+.descriptionText {
+  font-family: Nunito;
+  font-size: 16px;
+  line-height: 139.5%;
+  color: var(--color-black);
+}
+
+.courseWrap {
+  padding-top: 35px;
+  border-top: 1px solid #d8d8d8;
+}
+
+.courseHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  max-width: 777px;
+  margin-right: 50px;
+  width: 100%;
+}
+
+.courseTitle {
+  font-family: Jost;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 127%;
+  line-height: 139.5%;
+  color: var(--color-black);
+  margin-bottom: 13px;
+}
+
+.courseDescription {
+  font-family: Nunito;
+  font-size: 16px;
+  line-height: 139.5%;
+  color: var(--color-black);
+}
+
+.btnWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  button:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.btn {
+  width: max-content;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}
+
+.listWrap {
+  margin-top: 0px;
+  height: auto;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.downOpen {
+  opacity: 1;
+  max-height: 1000px;
+  margin-top: 40px;
+}
+
+.itemTitle {
+  font-family: Jost;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--color-black);
+}
+
+.point {
+  width: 7px;
+  height: 7px;
+  background: var(--color-green);
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.openRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
