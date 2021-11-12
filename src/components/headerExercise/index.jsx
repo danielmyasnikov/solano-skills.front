@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.less';
 import Prev from '@assets/Prev.js';
 import Next from '@assets/Next.js';
@@ -6,15 +6,18 @@ import MenuCourse from '@assets/MenuCourse.js';
 import Menu from '@components/mui/menu';
 import Button from '@components/mui/button';
 import cn from 'classnames';
-import Logo from '@assets/Logo';
+import Burger from '@assets/Burger';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className={styles.wrapper}>
-      <Menu isOpen={true} />
+      <Menu isOpen={isMenuOpen} />
       <header className={styles.header}>
         <div className={styles.burgerMenu}>
-          <Logo />
+          <div className={styles.menuToggle} onClick={() => setIsMenuOpen(isMenuOpen === false ? true : false)}>
+            <Burger />
+          </div>
         </div>
         <nav className={styles.navbarCourse}>
           <Button

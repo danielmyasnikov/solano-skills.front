@@ -4,6 +4,7 @@ import { buttonTheme } from '../theme';
 
 const Button = ({ children, variant, className, onClick, disabled }) => {
   return (
+    <>
     <MuiButton
       type="button"
       variant={variant}
@@ -14,6 +15,7 @@ const Button = ({ children, variant, className, onClick, disabled }) => {
     >
       {children}
     </MuiButton>
+    </>
   );
 };
 

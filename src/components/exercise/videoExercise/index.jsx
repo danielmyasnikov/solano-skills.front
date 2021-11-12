@@ -23,7 +23,7 @@ export const VideoExercise = ({ onSubmit }) => {
         {
           src: exercise.video_id['540'],
           type: 'video/mp4',
-          size: 576,
+          size: 540,
         },
         {
           src: exercise.video_id['720'],

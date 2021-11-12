@@ -1,18 +1,6 @@
-import ExercisePage from './components/exercise';
-import { CoursesPage } from '@components/coursesPage';
-import { CoursePage } from '@components/coursePage';
+import ExercisePage from './components/exercise'
 
 export const routes = [
-  {
-    path: '/courses',
-    component: CoursesPage,
-    exact: true,
-  },
-  {
-    path: '/courses/:is',
-    component: CoursePage,
-    exact: true,
-  },
   {
     path: '/courses/:courseId/exercises/:exerciseId',
     component: ExercisePage,

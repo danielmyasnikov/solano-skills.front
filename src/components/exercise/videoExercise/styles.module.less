@@ -12,7 +12,7 @@
   font-weight: 800;
   font-size: 24px;
   line-height: 127%;
-  color: var(--color-black);
+  color: #2d2d2d;
 }
 
 .description {
@@ -20,7 +20,7 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 127%;
-  color: var(--color-black);
+  color: #2d2d2d;
 }
 
 .xp {
@@ -31,7 +31,7 @@
   font-size: 16px;
   line-height: 127%;
   text-transform: uppercase;
-  color: var(--color-black);
+  color: #2d2d2d;
 }
 
 .btnWrapper {
@@ -48,48 +48,20 @@
   max-height: 626px;
   border-radius: 20px;
   box-shadow: 0px 4px 56px rgb(82 60 100 / 53%);
-
-  video{
-    object-fit: fill;
+  video {
+    border-radius: 20px;
   }
-
   :global {
     .plyr-react .plyr,
     .plyr,
     .plyr-react,
     .plyr--menu-open,
     .plyr__video-wrapper,
-    .plyr__poster video {
+    video {
+
       height: 100%;
       border-radius: 20px;
-      height: 626px;
-      width: 1200px;
-      object-fit: fill;
-    }
-
-    @media screen and (max-width: 1344px) {
-      .plyr-react .plyr,
-      .plyr,
-      .plyr-react,
-      .plyr--menu-open,
-      .plyr__video-wrapper,
-      .plyr__poster video {
-        height: 532px;
-        width: 1021px;
-        object-fit: fill;
-      }
-    }
-    @media screen and (max-width: 1024px) {
-      .plyr-react .plyr,
-      .plyr,
-      .plyr-react,
-      .plyr--menu-open,
-      .plyr__video-wrapper,
-      .plyr__poster video {
-        height: auto;
-        width: 90vw;
-        object-fit: fill;
-      }
+    
     }
 
     --plyr-color-main: var(--purple);
