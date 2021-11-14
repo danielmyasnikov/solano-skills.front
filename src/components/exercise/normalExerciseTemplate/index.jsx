@@ -33,6 +33,7 @@ function NormalExerciseTemplate({ onSubmit }) {
   useEffect(() => {
     setSolution('')
     setHint('')
+    setCorrect('')
   }, [exercise])
   return ( 
     <>
