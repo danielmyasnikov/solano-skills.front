@@ -12,7 +12,7 @@ const HeaderExercise = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={styles.wrapper}>
-      <MenuItems isOpen={true} />
+      <MenuItems isOpen={false} />
       <header className={styles.header}>
         <div className={styles.headerItem}>
           <div className={styles.logo}>
