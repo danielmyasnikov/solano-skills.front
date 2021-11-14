@@ -6,13 +6,14 @@ import { profileItems, studyItems } from './menuItems';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
 import { menuTheme } from '../theme';
+import Button from '@components/mui/button';
 import Logo from '@assets/Logo';
 
-const Menu = ({ isOpen }) => {
+const MenuItems = () => {
   const [activeTab, setActiveTab] = useState('');
   return (
-    <ThemeProvider theme={menuTheme}>
-      <Drawer open={isOpen}>
+    <>
+      <div className={styles.items}>
         <Box className={styles.logo}>
           <Logo />
         </Box>
@@ -25,7 +26,10 @@ const Menu = ({ isOpen }) => {
               }}
             >
               <List>
-                <ListItem onClick={() => setActiveTab(item.label)} className={activeTab === item.label ? styles.activeTab : ''}>
+                <ListItem
+                  onClick={() => setActiveTab(item.label)}
+                  className={activeTab === item.label ? styles.activeTab : ''}
+                >
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItem>
@@ -43,7 +47,10 @@ const Menu = ({ isOpen }) => {
               }}
             >
               <List>
-                <ListItem onClick={() => setActiveTab(item.label)} className={activeTab === item.label ? styles.activeTab : ''}>
+                <ListItem
+                  onClick={() => setActiveTab(item.label)}
+                  className={activeTab === item.label ? styles.activeTab : ''}
+                >
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.label} />
                 </ListItem>
@@ -51,7 +58,22 @@ const Menu = ({ isOpen }) => {
             </Box>
           </React.Fragment>
         ))}
-      </Drawer>
+      </div>
+      <Button className={styles.btn} variant="outlineGreen">
+        Обновить подписку
+      </Button>
+    </>
+  );
+};
+
+const Menu = ({ isOpen, className }) => {
+  return (
+    <ThemeProvider theme={menuTheme}>
+      <div className={isOpen === true ? className : ''}>
+        <Drawer open={isOpen}>
+          <MenuItems />
+        </Drawer>
+      </div>
     </ThemeProvider>
   );
 };

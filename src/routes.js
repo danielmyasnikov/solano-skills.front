@@ -16,6 +16,7 @@ export const routes = [
   {
     path: '/courses/:courseId/exercises/:exerciseId',
     component: ExercisePage,
+    headerVariant: 'exercise',
     exact: true,
   },
 ];

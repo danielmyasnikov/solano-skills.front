@@ -10,7 +10,6 @@ const CompletedTask = ({ onClick, onClose }) => {
     <div className={styles.modal}>
       <div className={styles.content}>
         <img src ={Close} className={styles.closeModal} onClick={onClose} />
-        {/* <Close className={styles.closeModal} onClick={onClose} /> */}
         <Complete />
         <span className={styles.xp}>+10 XP</span>
         <div className={styles.rating}>
