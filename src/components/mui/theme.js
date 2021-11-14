@@ -82,6 +82,46 @@ export const buttonTheme = createTheme({
           },
         },
         {
+          props: { variant: 'outlineGreen' },
+          style: {
+            background: 'none',
+            color: '#67C080',
+            border: '1px solid #67C080',
+            '&:hover': {
+              transition: '0.2s ease-in-out',
+              background: '#67C080',
+              color: '#fff',
+            },
+          },
+        },
+        {
+          props: { variant: 'containedGreen' },
+          style: {
+            background: '#67C080',
+            color: '#fff',
+            boxShadow: '0px 3px 18px rgba(0, 0, 0, 0.23)',
+            '&:hover': {
+              background: '#67c0808a',
+              color: '#fff',
+            },
+          },
+        },
+        {
+          props: { variant: 'containedGreen', disabled: true },
+          style: {
+            background: '#4A4856!important',
+            color: '#646370!important',
+          },
+        },
+        {
+          props: { variant: 'outlineGreen', disabled: true },
+          style: {
+            background: 'none',
+            color: '#4A4856!important',
+            border: '1px solid #4A4856!important',
+          },
+        },
+        {
           props: { variant: 'outlineBlack' },
           style: {
             height: '33px',
@@ -195,9 +235,18 @@ export const menuTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          alignItems: 'center',
           boxShadow: 'none',
           marginTop: '73px',
-          height: 'calc(100% - 73px)',
+          height: 'calc(100% - 73px)!important',
+          justifyContent: 'space-between',
+        },
+      },
+    },
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          marginTop: '73px',
         },
       },
     },

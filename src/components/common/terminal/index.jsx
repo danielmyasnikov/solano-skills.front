@@ -5,17 +5,19 @@ import 'brace/mode/python';
 import 'brace/ext/language_tools';
 import 'ace-builds/src-noconflict/theme-monokai';
 import Button from '../../mui/button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import Reset from '@assets/Reset.js';
 import styles from './styles.module.less';
 import './terminal.module.less';
 import { checkAnswer, compileCode } from '../../../store/terminal/actions';
+import { selectExercise } from '../../../store/exercise/selector';
 
 function Terminal({ sampleCode, solution, correct, exerciseId }) {
   const [value, setValue] = useState();
   const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
+  const exercise = useSelector(selectExercise);
   useEffect(() => {
     if (solution) {
       setActiveTab('solution');
@@ -23,6 +25,9 @@ function Terminal({ sampleCode, solution, correct, exerciseId }) {
       setValue(sampleCode);
     }
   }, [sampleCode, solution]);
+  useEffect(() => {
+    setActiveTab('script')
+  }, [sampleCode])
   function onChange(value) {
     setValue(value);
   }

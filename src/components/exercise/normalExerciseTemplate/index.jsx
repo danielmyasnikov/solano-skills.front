@@ -30,7 +30,12 @@ function NormalExerciseTemplate({ onSubmit }) {
       setCompletedTaskModalOpen(true);
     }
   }, [terminal]);
-  return (
+  useEffect(() => {
+    setSolution('')
+    setHint('')
+    setCorrect('')
+  }, [exercise])
+  return ( 
     <>
       {feedbackModalOpen && <FeedbackModal onClick={() => setFeedbackModalOpen(false)} />}
       <div className={styles.layout}>

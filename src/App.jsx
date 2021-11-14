@@ -8,9 +8,9 @@ import styles from './app.module.css';
 export default function App() {
   return (
     <div className={styles.wrapper}>
-      {routes.map((route, i) => (
+      {routes.map((route, i, headerVariant) => (
         <Route exact={route.exact} path={route.path} key={route.path}>
-          <Container key={i} {...route} Component={route.component} />
+          <Container variant={headerVariant}  key={i} {...route} Component={route.component} />
         </Route>
       ))}
     </div>
