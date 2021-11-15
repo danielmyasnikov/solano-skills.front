@@ -12,7 +12,7 @@ export default function terminalReducer(state = initialState, action) {
     case COMPILE_CODE_SUCCESSED: {
       return {
         outputs: [...state.outputs, action.payload.data],
-        message: state.message,
+        message: { status: '' },
       };
     }
     case CHECK_ANSWER_SUCCESSED: {

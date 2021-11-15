@@ -3,7 +3,7 @@
   height: 73px;
   background-color: var(--color-white);
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.3);
-  z-index: 30;
+  z-index: 1201;
 }
 
 .header {
@@ -16,56 +16,77 @@
 }
 
 .headerItem {
-  display: flex;
-}
-
-.logo {
-  margin-right: 55px;
+  flex: 1;
 }
 
 .burgerMenu {
-  display: none;
+  cursor: pointer;
+  width: fit-content;
+  .menuToggle {
+    width: max-content;
+    cursor: pointer;
+  }
 }
 
-.profile {
+.navbarCourse {
   display: flex;
-  align-items: center;
-  background: rgba(138, 146, 166, 0.16);
-  padding: 2px;
-  border-radius: 50px;
-  margin-left: 40px;
-  img {
-    width: 41px;
-    height: 41px;
-    border-radius: 50%;
+  .prev,
+  .next {
+    min-width: 33px;
+    padding: 0;
+    max-width: 33px;
+    margin: 0 11px;
   }
-  svg {
-    cursor: pointer;
-    margin: 15px;
-  }
-}
-
-
-@media screen and (max-width: 900px) {
-  .logo {
-    margin-right: 35px;
-  }
-  .profile {
-    margin-left: 20px;
-  }
-}
-
-@media screen and (max-width: 820px) {
-  .logo {
-    display: none;
-  }
-  .burgerMenu {
-    cursor: pointer;
+  .courseContent {
     display: flex;
-    margin-right: 20px;
-    align-items: center;
+    svg {
+      margin-right: 10px;
+    }
+    span {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
-  .profile {
-    margin-left: 20px;
+  .disabled {
+    svg {
+      path {
+        fill: #d6d6d6;
+      }
+    }
+  }
+  .btn {
+    &:hover {
+      svg {
+        path {
+          transition: 0.2s ease-in-out;
+          fill: #7469ef;
+        }
+      }
+    }
+  }
+}
+
+.navbarMenu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  .dailyXp {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    margin-right: 10px;
+  }
+  .xp {
+    background: var(--color-yelow);
+    color: #2d2d2d;
+    font-size: 16px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 3px 6px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
   }
 }

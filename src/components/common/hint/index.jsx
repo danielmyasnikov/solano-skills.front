@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
@@ -7,8 +7,11 @@ import Button from '../../mui/button';
 
 const Hint = ({ hint, onClick, solution, onSetSolution }) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
-  const [showAnswer, setShowAnswer] = useState(true);
   const exercise = useSelector(selectExercise);
+  const [showAnswer, setShowAnswer] = useState(true);
+  useEffect(() => {
+    setShowAnswer(true);
+  }, [exercise]);
   return (
     <>
       <div className={cn(styles.hint, exercise.type === 'quiz' ? styles.hintQuiz : '')}>
@@ -36,8 +39,8 @@ const Hint = ({ hint, onClick, solution, onSetSolution }) => {
                 className={styles.btn}
                 variant="outlinePurple"
                 onClick={() => {
-                  onSetSolution()
-                  setShowAnswer(false)
+                  onSetSolution();
+                  setShowAnswer(false);
                 }}
               >
                 Показать ответ (-70 XP)

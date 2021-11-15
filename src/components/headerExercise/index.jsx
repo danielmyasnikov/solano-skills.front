@@ -1,35 +1,44 @@
 import React, { useState } from 'react';
 import styles from './styles.module.less';
-import MenuItems from '@components/mui/menu';
+import Prev from '@assets/Prev.js';
+import Next from '@assets/Next.js';
+import MenuCourse from '@assets/MenuCourse.js';
+import Menu from '@components/mui/menu';
 import Button from '@components/mui/button';
-import Input from '@components/mui/input';
-import Logo from '@assets/Logo';
+import cn from 'classnames';
 import Burger from '@assets/Burger';
-import ArrowDown from '@assets/ArrowDown';
-import AvatarDefault from '@assets/avatarDefault.png';
 
 const HeaderExercise = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={styles.wrapper}>
-      <MenuItems isOpen={false} />
+      <Menu className={styles.drawer} isOpen={isOpen} />
       <header className={styles.header}>
         <div className={styles.headerItem}>
-          <div className={styles.logo}>
-            <Logo />
-          </div>
           <div onClick={() => setIsOpen(isOpen ? false : true)} className={styles.burgerMenu}>
             <Burger />
           </div>
-          <Input className={styles.search} placeholder="Search..." />
         </div>
-        <div className={styles.headerItem}>
-          <Button variant="containedGreen">Обновить тариф</Button>
-          <div className={styles.profile}>
-            <img src={AvatarDefault} />
-            <ArrowDown />
-          </div>
-        </div>
+        <nav className={cn(styles.headerItem, styles.navbarCourse)}>
+          <Button
+            className={cn(styles.btn, styles.prev, styles.disabled)}
+            disabled={true}
+            variant="outlineBlack"
+          >
+            <Prev />
+          </Button>
+          <Button className={cn(styles.courseContent, styles.btn)} variant="outlineBlack">
+            <MenuCourse />
+            <span>Содержание курса</span>
+          </Button>
+          <Button className={cn(styles.btn, styles.next)} variant="outlineBlack">
+            <Next />
+          </Button>
+        </nav>
+        <nav className={cn(styles.headerItem, styles.navbarMenu)}>
+          <span className={styles.dailyXp}>Ежедневный опыт</span>
+          <div className={styles.xp}>100 xp</div>
+        </nav>
       </header>
     </div>
   );

@@ -8,72 +8,63 @@ import { Box } from '@mui/system';
 import { menuTheme } from '../theme';
 import Button from '@components/mui/button';
 import Logo from '@assets/Logo';
+import cn from 'classnames';
 
-const MenuItems = () => {
+const Menu = ({ isOpen, onClose, variant }) => {
   const [activeTab, setActiveTab] = useState('');
   return (
-    <>
-      <div className={styles.items}>
-        <Box className={styles.logo}>
-          <Logo />
-        </Box>
-        <Box className={styles.label}>Профиль</Box>
-        {profileItems.map((item) => (
-          <React.Fragment key={item.label}>
-            <Box
-              sx={{
-                margin: '0 20px',
-              }}
-            >
-              <List>
-                <ListItem
-                  onClick={() => setActiveTab(item.label)}
-                  className={activeTab === item.label ? styles.activeTab : ''}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              </List>
-            </Box>
-          </React.Fragment>
-        ))}
-        <Divider />
-        <Box className={styles.label}>Обучение</Box>
-        {studyItems.map((item) => (
-          <React.Fragment key={item.label}>
-            <Box
-              sx={{
-                margin: '0 20px',
-              }}
-            >
-              <List>
-                <ListItem
-                  onClick={() => setActiveTab(item.label)}
-                  className={activeTab === item.label ? styles.activeTab : ''}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              </List>
-            </Box>
-          </React.Fragment>
-        ))}
-      </div>
-      <Button className={styles.btn} variant="outlineGreen">
-        Обновить подписку
-      </Button>
-    </>
-  );
-};
-
-const Menu = ({ isOpen, className }) => {
-  return (
     <ThemeProvider theme={menuTheme}>
-      <div className={isOpen === true ? className : ''}>
-        <Drawer open={isOpen}>
-          <MenuItems />
-        </Drawer>
-      </div>
+      <Drawer onBackdropClick={onClose} variant={variant} open={isOpen}>
+        <div className={styles.items}>
+          <Box className={cn(styles.logo, variant === 'mainHeader' ? styles.hiddenLogo : '')}>
+            <Logo />
+          </Box>
+          <Box className={styles.label}>Профиль</Box>
+          {profileItems.map((item) => (
+            <React.Fragment key={item.label}>
+              <Box
+                sx={{
+                  margin: '0 20px',
+                }}
+              >
+                <List>
+                  <ListItem
+                    onClick={() => setActiveTab(item.label)}
+                    className={activeTab === item.label ? styles.activeTab : ''}
+                  >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                </List>
+              </Box>
+            </React.Fragment>
+          ))}
+          <Divider />
+          <Box className={styles.label}>Обучение</Box>
+          {studyItems.map((item) => (
+            <React.Fragment key={item.label}>
+              <Box
+                sx={{
+                  margin: '0 20px',
+                }}
+              >
+                <List>
+                  <ListItem
+                    onClick={() => setActiveTab(item.label)}
+                    className={activeTab === item.label ? styles.activeTab : ''}
+                  >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.label} />
+                  </ListItem>
+                </List>
+              </Box>
+            </React.Fragment>
+          ))}
+        </div>
+        <Button className={styles.btn} variant="outlineGreen">
+          Обновить подписку
+        </Button>
+      </Drawer>
     </ThemeProvider>
   );
 };
