@@ -3,6 +3,7 @@ import styles from './styles.module.less';
 import { Auth } from './author';
 import { CourseInfo } from './courseInfo';
 import { CourseList } from './courseList';
+import { CourseSidebar } from './courseSidebar';
 
 export const CoursePage = () => {
   return (
@@ -23,6 +24,7 @@ export const CoursePage = () => {
         </div>
         <div className={styles.contentWrap}>
           <CourseList />
+          <CourseSidebar />
         </div>
       </div>
     </div>

@@ -1,12 +1,15 @@
 .courseWrap {
-  padding-top: 35px;
-  border-top: 1px solid #d8d8d8;
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
 }
 
 .courseHead {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-top: 35px;
+  border-top: 1px solid #d8d8d8;
 }
 
 .info {
@@ -36,10 +39,16 @@
   color: var(--color-black);
 }
 
+.itemLeft {
+  display: flex;
+  align-items: center;
+}
+
 .btnWrap {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  min-width: 225px;
   button:not(:last-child) {
     margin-bottom: 10px;
   }
@@ -80,6 +89,7 @@
   font-size: 18px;
   line-height: 24px;
   color: var(--color-black);
+  margin-left: 15px;
 }
 
 .point {

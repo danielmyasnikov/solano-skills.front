@@ -1,5 +1,8 @@
 import cn from 'classnames';
 import Button from '@components/mui/button';
+import TerminalType from '@assets/TerminalType';
+import VideoType from '@assets/VideoType';
+import QuizType from '@assets/QuizType';
 import React, { useState } from 'react';
 import styles from './styles.module.less';
 import { temp } from './temp';
@@ -7,11 +10,23 @@ import { useHistory } from 'react-router';
 
 export const CourseContent = () => {
   const history = useHistory();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState('');
+  const ExerciseTypeImage = ({ type }) => {
+    switch (type) {
+      case 'normal_exercise':
+        return <QuizType />;
+      case 'video':
+        return <VideoType />;
+      case 'quiz':
+        return <QuizType />;
+      default:
+        break;
+    }
+  };
   return (
-    <div className={styles.courseWrap}>
+    <React.Fragment>
       {temp.parts.map((partItem, i) => (
-        <React.Fragment key={partItem.title}>
+        <div key={partItem.title} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
@@ -22,16 +37,22 @@ export const CourseContent = () => {
               <span className={styles.courseDescription}>{partItem.description}</span>
             </div>
             <div className={styles.btnWrap}>
-              <Button variant="containedPurple" className={styles.btn}>
+              <Button
+                variant="containedPurple"
+                onClick={() => console.log(open)}
+                className={styles.btn}
+              >
                 Изучать раздел
               </Button>
-              <Button variant="outlineBlack" onClick={() => setOpen(!open)}>
+              <Button
+                variant="outlineBlack"
+                onClick={() => setOpen(partItem.course_id !== open ? partItem.course_id : '')}
+              >
                 Содержание раздела
               </Button>
             </div>
           </div>
-
-          <div className={cn(styles.listWrap, { [styles.downOpen]: open })}>
+          <div className={cn(styles.listWrap, { [styles.downOpen]: open === partItem.course_id })}>
             {partItem.exercises.map((item) => (
               <div
                 key={item.title}
@@ -41,6 +62,7 @@ export const CourseContent = () => {
                 className={styles.item}
               >
                 <div className={styles.itemLeft}>
+                  <ExerciseTypeImage type={item.type} />
                   <span className={styles.itemTitle}>{item.title}</span>
                 </div>
                 <div className={styles.openRight}>
@@ -50,8 +72,8 @@ export const CourseContent = () => {
               </div>
             ))}
           </div>
-        </React.Fragment>
+        </div>
       ))}
-    </div>
+    </React.Fragment>
   );
 };

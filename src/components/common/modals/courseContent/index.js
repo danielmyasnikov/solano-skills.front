@@ -1,8 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
-import Button from '@components/mui/button';
 import styles from './styles.module.less';
-import Close from '@assets/Close.js';
 import { CourseContent } from '../../courseContent';
 import { Modal } from '@mui/material';
 

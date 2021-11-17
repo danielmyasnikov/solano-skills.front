@@ -1,0 +1,86 @@
+.wrapper {
+  max-width: 384px;
+}
+
+.courseTrackWrapper {
+  background: #fff9c5;
+  color: var(--color-black);
+}
+
+.collaboratorsWrapper, .datasetWrapper {
+  background: #fff;
+  color: var(--color-black);
+}
+
+.card {
+  box-shadow: 0px 4px 17px rgb(0 0 0 / 4%);
+  padding: 20px;
+  border-radius: 10px;
+  &:not(:first-child) {
+    margin-top: 30px;
+  }
+}
+
+.courseTracks {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  margin-top: 10px;
+  .courseTrack {
+    font-size: 16px;
+    margin-left: 20px;
+    &:not(:first-child) {
+      margin-top: 7px;
+    }
+  }
+}
+
+.description {
+  font-size: 16px;
+}
+
+.title {
+  display: block;
+  font-family: "Jost", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.collaborators {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  list-style: none;
+  .collaborator {
+    display: flex;
+    align-items: center;
+    .image {
+      width: 30px;
+      height: 30px;
+    }
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+}
+
+.datasets {
+  list-style: none;
+}
+
+.dataset {
+  display: flex;
+  align-items: center;
+  .image {
+    width: 16px;
+    height: 16px;
+  }
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 10px;
+}
