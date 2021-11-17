@@ -95,7 +95,7 @@ export const temp = {
       title: 'Функции и пакеты',
       description:
         'Вы узнаете, как использовать функции, методы и пакеты для эффективного использования кода, написанного блестящими разработчиками Python. Цель состоит в том, чтобы уменьшить количество кода, необходимого для решения сложных задач!',
-      isFree: true,
+      isFree: false,
       status: 'untouched',
       course_id: 'introduction-to-data-science-in-python',
       exercises: [
@@ -140,9 +140,9 @@ export const temp = {
       title: 'NumPy',
       description:
         'NumPy - это фундаментальный пакет Python для эффективной практики обработки данных. Научитесь работать с мощными инструментами в массиве NumPy и начните исследование данных.',
-      isFree: true,
+      isFree: false,
       status: 'untouched',
-      course_id: 'introduction-to-data-science-in-numpy',
+      course_id: 'introduction-to-data-science-in-python',
       exercises: [
         {
           title: 'Интерфейс Python',

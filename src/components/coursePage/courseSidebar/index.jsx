@@ -32,11 +32,11 @@ export const CourseSidebar = () => {
         <ul className={styles.datasets}>
           <li className={styles.dataset}>
             <Dataset />
-            <span className={styles.name}>Александров Александр Александрович</span>
+            <span className={styles.name}>MLB (baseball)</span>
           </li>
           <li className={styles.dataset}>
             <Dataset />
-            <span className={styles.name}>Ширшов Олег Игоревич</span>
+            <span className={styles.name}>FIFA (soccer)</span>
           </li>
         </ul>
       </div>

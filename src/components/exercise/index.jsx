@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getExercise } from '@store/exercise/actions';
 import { clearTerminal } from '@store/terminal/actions';
@@ -13,12 +13,12 @@ import { VideoExercise } from './videoExercise';
 function ExercisePage() {
   const { courseId, exerciseId } = useParams();
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
-  }, []);
-
+  }, [location.pathname]);
   const onSubmit = () => {
     history.push(`/courses/python-for-beginners/exercises/${exercise.next_exercise_id}`);
     dispatch(getExercise(courseId, exercise.next_exercise_id));

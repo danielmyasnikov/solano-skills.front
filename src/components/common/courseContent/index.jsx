@@ -8,7 +8,7 @@ import styles from './styles.module.less';
 import { temp } from './temp';
 import { useHistory } from 'react-router';
 
-export const CourseContent = () => {
+export const CourseContent = ({ onClose }) => {
   const history = useHistory();
   const [open, setOpen] = useState('');
   const ExerciseTypeImage = ({ type }) => {
@@ -39,7 +39,12 @@ export const CourseContent = () => {
             <div className={styles.btnWrap}>
               <Button
                 variant="containedPurple"
-                onClick={() => console.log(open)}
+                onClick={() => {
+                  history.push(`/courses/${partItem.course_id}/exercises/1`);
+                  if (onClose) {
+                    onClose();
+                  }
+                }}
                 className={styles.btn}
               >
                 Изучать раздел
@@ -56,9 +61,12 @@ export const CourseContent = () => {
             {partItem.exercises.map((item) => (
               <div
                 key={item.title}
-                onClick={() =>
-                  history.push(`/courses/${partItem.course_id}/exercises/${item.exercise_id}`)
-                }
+                onClick={() => {
+                  history.push(`/courses/${partItem.course_id}/exercises/${item.exercise_id}`);
+                  if (onClose) {
+                    onClose();
+                  }
+                }}
                 className={styles.item}
               >
                 <div className={styles.itemLeft}>

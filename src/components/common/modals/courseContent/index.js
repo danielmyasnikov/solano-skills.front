@@ -8,7 +8,7 @@ const CourseContentModal = ({ onClose, isOpen }) => {
     <Modal open={isOpen} onClose={onClose}>
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <CourseContent />
+          <CourseContent onClose={onClose}/>
         </div>
       </div>
     </Modal>
