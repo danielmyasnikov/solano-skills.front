@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
-import FeedbackModal from '../../common/modals/feedback.js/index.js';
-import CompletedTask from '../../common/modals/completedTask';
-import { getExercise } from '../../../store/exercise/actions';
+import FeedbackModal from '@components/common/modals/feedback/index.js';
+import CompletedTask from '@components/common/modals/completedTask';
+import { getExercise } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectExercise } from '../../../store/exercise/selector';
-import cn from 'classnames';
-import Hint from '../../common/hint';
-import Exercise from '../../common/exercise';
-import Instruction from '../../common/instruction';
-import RadioButton from '../../mui/radioButton';
-import Button from '../../mui/button';
-import ErrorMessage from '../../common/errorMessage';
-import Output from '../../common/output';
+import { selectExercise } from '@store/exercise/selector';
+import Hint from '@components/common/hint';
+import Exercise from '@components/common/exercise';
+import Instruction from '@components/common/instruction';
+import RadioButton from '@components/mui/radioButton';
+import Button from '@components/mui/button';
+import ErrorMessage from '@components/common/errorMessage';
+import Output from '@components/common/output';
 
 function QuizTemplate({ onSubmit }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);

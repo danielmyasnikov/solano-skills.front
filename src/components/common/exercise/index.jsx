@@ -3,7 +3,7 @@ import styles from './styles.module.less';
 import Terminal from '@assets/terminal.png';
 import SideBarArrowLeft from '@assets/SideBarArrowLeft.js';
 import { useSelector } from 'react-redux';
-import { selectExercise } from '../../../store/exercise/selector';
+import { selectExercise } from '@store/exercise/selector';
 
 const Exercise = () => {
   const exercise = useSelector(selectExercise);

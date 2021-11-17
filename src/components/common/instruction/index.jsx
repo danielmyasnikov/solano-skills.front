@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.less';
 import InstructionSvg from '@assets/Instruction.js';
 import { useSelector } from 'react-redux';
-import { selectExercise } from '../../../store/exercise/selector';
+import { selectExercise } from '@store/exercise/selector';
 const Instructions = ({ children }) => {
   const exercise = useSelector(selectExercise);
   return (

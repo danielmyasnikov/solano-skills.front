@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
-import { selectExercise } from '../../../store/exercise/selector';
-import Button from '../../mui/button';
+import { selectExercise } from '@store/exercise/selector';
+import Button from '@components/mui/button';
 
 const Hint = ({ hint, onClick, solution, onSetSolution }) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);

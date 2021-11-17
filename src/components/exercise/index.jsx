@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getExercise } from '../../store/exercise/actions';
-import { clearTerminal } from '../../store/terminal/actions';
+import { getExercise } from '@store/exercise/actions';
+import { clearTerminal } from '@store/terminal/actions';
 import { useParams } from 'react-router-dom';
-import { selectExercise } from '../../store/exercise/selector';
+import { selectExercise } from '@store/exercise/selector';
 import QuizTemplate from './quizTemplate';
 import styles from './styles.module.less';
 import NormalExerciseTemplate from './normalExerciseTemplate';
