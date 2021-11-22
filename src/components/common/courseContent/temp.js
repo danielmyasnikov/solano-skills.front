@@ -142,7 +142,7 @@ export const temp = {
         'NumPy - это фундаментальный пакет Python для эффективной практики обработки данных. Научитесь работать с мощными инструментами в массиве NumPy и начните исследование данных.',
       isFree: false,
       status: 'untouched',
-      course_id: 'introduction-to-data-science-in-python',
+      course_id: 'introduction-to-data-science-in-python2',
       exercises: [
         {
           title: 'Интерфейс Python',

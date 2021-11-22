@@ -10,10 +10,10 @@ export const CHECK_ANSWER_FAILED = 'CHECK_ANSWER_FAILED';
 
 export const CLEAR_TERMINAL = 'CLEAR_TERMINAL';
 
-export const compileCode = (code) => {
+export const compileCode = (code, exerciseId) => {
   return {
     type: COMPILE_CODE_REQUESTED,
-    payload: code,
+    payload: { code, exerciseId },
   };
 };
 

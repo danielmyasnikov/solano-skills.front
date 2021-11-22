@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const compileCodeApi = (code) => {
+export const compileCodeApi = ({ code, exerciseId }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/execute`, {
+    .post(`${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}`, {
       code,
     })
     .then((res) => res.data)

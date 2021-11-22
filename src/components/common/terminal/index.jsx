@@ -86,7 +86,7 @@ function Terminal({ sampleCode, solution, correct, exerciseId }) {
           <Button
             variant={'outlineWhite'}
             onClick={() => {
-              dispatch(compileCode(activeTab === 'solution' ? solution : value));
+              dispatch(compileCode(activeTab === 'solution' ? solution : value, exerciseId));
             }}
             disabled={correct}
           >

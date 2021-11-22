@@ -10,7 +10,7 @@ import { useHistory } from 'react-router';
 
 export const CourseContent = ({ onClose }) => {
   const history = useHistory();
-  const [open, setOpen] = useState('');
+  const [open, setOpen] = useState();
   const ExerciseTypeImage = ({ type }) => {
     switch (type) {
       case 'normal_exercise':
