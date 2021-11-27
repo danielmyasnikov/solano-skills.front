@@ -3,6 +3,7 @@ import css from './styles.module.less';
 import { Link } from 'react-router-dom';
 import Button from '@components/mui/button';
 import TimerOutlined from '@assets/TimerOutlined.png';
+import AvatarDefault from '@assets/avatarDefault.png';
 import Py from '@assets/py.png';
 
 export const Card = ({ info }) => {
@@ -14,6 +15,9 @@ export const Card = ({ info }) => {
         break;
     }
   };
+
+  const status = info.status;
+  const author = info.instructor;
 
   return (
     <Link className={css.wrapper} to={`/courses/${info.slug}`}>
@@ -27,8 +31,21 @@ export const Card = ({ info }) => {
         </div>
       </div>
       <div className={css.actionBlock}>
-        <Button variant="outlinePurple">Перейти</Button>
+        {status === 'in_progress' || status === 'done' ? (
+          <Button variant="outlinePurple">
+            {status === 'in_progress' ? 'Продолжить курс' : 'Пройти заново курс'}{' '}
+          </Button>
+        ) : (
+          <div className={css.author}>
+            <img src={AvatarDefault} className={css.avatar} alt="" />
+            <div className={css.infoWrap}>
+              <h4 className={css.authorTitle}>{`${author.first_name} ${author.last_name}`}</h4>
+              <p className={css.text}>{author.description}</p>
+            </div>
+          </div>
+        )}
       </div>
     </Link>
   );
 };
+
