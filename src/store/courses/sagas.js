@@ -1,10 +1,10 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { courseApi } from '../api/courses';
+import { coursesApi } from '../api/courses';
 import { LOAD_COURSES } from './actions';
 
 export function* loadCourcesList() {
   try {
-    const response = yield call(courseApi);
+    const response = yield call(coursesApi);
     yield put({
       type: LOAD_COURSES,
       payload: response,

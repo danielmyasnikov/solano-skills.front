@@ -20,7 +20,7 @@ function ExercisePage() {
     dispatch(getExercise(courseId, exerciseId));
   }, [location.pathname]);
   const onSubmit = () => {
-    history.push(`/courses/python-for-beginners/exercises/${exercise.next_exercise_id}`);
+    history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
     dispatch(getExercise(courseId, exercise.next_exercise_id));
     dispatch(clearTerminal());
   };
