@@ -1,30 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.less';
+import { selectCourse } from '@store/course/selector';
+import { getCourse } from '@store/course/actions';
 import { Auth } from './author';
 import { CourseInfo } from './courseInfo';
 import { CourseList } from './courseList';
 import { CourseSidebar } from './courseSidebar';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const CoursePage = () => {
+  const { courseId } = useParams();
+  const history = useHistory();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const course = useSelector(selectCourse);
+  useEffect(() => {
+    dispatch(getCourse(courseId));
+  }, [location.pathname]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Курсы</h1>
-        <p className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
-        </p>
+        <h1 className={styles.title}>{course.title}</h1>
+        <p className={styles.description}>{course.description}</p>
       </div>
       <div className={styles.content}>
         <div className={styles.headerInfo}>
           <div className={styles.authWrap}>
-            <Auth />
+            <Auth instructor={course.instructor} />
           </div>
-          <CourseInfo />
+          <CourseInfo
+            hours={course?.time}
+            videos={course?.count_videos}
+            exercises={course?.count_exercises}
+            xps={course?.count_xps}
+          />
         </div>
         <div className={styles.contentWrap}>
           <CourseList />
-          <CourseSidebar />
+          <CourseSidebar coauthors={course?.coauthors} datasets={course?.datasets} tracks={course?.career_tracks} />
         </div>
       </div>
     </div>

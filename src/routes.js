@@ -9,7 +9,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/courses/:is',
+    path: '/courses/:courseId',
     component: CoursePage,
     exact: true,
   },

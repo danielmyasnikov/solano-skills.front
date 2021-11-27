@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -22,6 +22,7 @@ function NormalExerciseTemplate({ onSubmit }) {
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [correct, setCorrect] = useState(false);
   const { exerciseId } = useParams();
+  const errorRef = useRef();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
   useEffect(() => {
@@ -32,13 +33,18 @@ function NormalExerciseTemplate({ onSubmit }) {
   useEffect(() => {
     setSolution('');
     setCorrect('');
-    setHint(false)
+    setHint(false);
   }, [exercise]);
   useEffect(() => {
     if (correct) {
       setCompletedTaskModalOpen(true);
     }
   }, [correct]);
+  useEffect(() => {
+    if (terminal.message.error) {
+      errorRef.current?.scrollIntoView();
+    }
+  }, [terminal]);
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClick={() => setFeedbackModalOpen(false)} />}
@@ -53,7 +59,9 @@ function NormalExerciseTemplate({ onSubmit }) {
               />
             </Instruction>
           </div>
-          {terminal.message.status === 'error' && <ErrorMessage message={terminal.message.error} />}
+          <div ref={errorRef}>
+            <ErrorMessage message={terminal.message.error} />
+          </div>
           {!hint && (
             <Button
               className={styles.hintBtn}

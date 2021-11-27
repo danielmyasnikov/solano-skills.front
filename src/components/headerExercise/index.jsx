@@ -8,10 +8,16 @@ import Button from '@components/mui/button';
 import cn from 'classnames';
 import Burger from '@assets/Burger';
 import CourseContentModal from '../common/modals/courseContent';
+import { selectExercise } from '@store/exercise/selector';
+import { useHistory, useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const HeaderExercise = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
+  const { courseId } = useParams();
+  const exercise = useSelector(selectExercise);
+  const history = useHistory();
   return (
     <div className={styles.wrapper}>
       {courseContentIsOpen && (
@@ -29,9 +35,12 @@ const HeaderExercise = () => {
         </div>
         <nav className={cn(styles.headerItem, styles.navbarCourse)}>
           <Button
-            className={cn(styles.btn, styles.prev, styles.disabled)}
-            disabled={true}
+            className={cn(styles.btn, styles.prev, {[styles.disabled]: !exercise.prev_exercise_id})}
+            disabled={exercise.prev_exercise_id ? false : true}
             variant="outlineBlack"
+            onClick={() =>
+              history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`)
+            }
           >
             <Prev />
           </Button>
@@ -43,7 +52,14 @@ const HeaderExercise = () => {
             <MenuCourse />
             <span>Содержание курса</span>
           </Button>
-          <Button className={cn(styles.btn, styles.next)} variant="outlineBlack">
+          <Button
+            onClick={() =>
+              history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`)
+            }
+            disabled={exercise.next_exercise_id ? false : true}
+            className={cn(styles.btn, styles.next, {[styles.disabled]: !exercise.next_exercise_id})}
+            variant="outlineBlack"
+          >
             <Next />
           </Button>
         </nav>
