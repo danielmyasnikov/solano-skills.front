@@ -27,16 +27,24 @@ function ExercisePage() {
   const renderExercise = () => {
     switch (exercise.type) {
       case 'quiz':
-        return <QuizTemplate onSubmit={onSubmit} />;
+        return (
+          <div className={styles.exerciseContainer}>
+            <QuizTemplate onSubmit={onSubmit} />
+          </div>
+        );
       case 'normal_exercise':
-        return <NormalExerciseTemplate onSubmit={onSubmit} />;
+        return (
+          <div className={styles.exerciseContainer}>
+            <NormalExerciseTemplate onSubmit={onSubmit} />{' '}
+          </div>
+        );
       case 'video':
         return <VideoExercise onSubmit={onSubmit} />;
       default:
         break;
     }
   };
-  return <div className={styles.exerciseContainer}>{renderExercise()}</div>;
+  return <>{renderExercise()}</>;
 }
 
 export default ExercisePage;

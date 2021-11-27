@@ -1,10 +1,10 @@
 .wrapper {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .title {
@@ -49,7 +49,7 @@
   border-radius: 20px;
   box-shadow: 0px 4px 56px rgb(82 60 100 / 53%);
 
-  video{
+  video {
     object-fit: fill;
   }
 
@@ -58,7 +58,6 @@
     .plyr,
     .plyr-react,
     .plyr--menu-open,
-    .plyr__video-wrapper,
     .plyr__poster video {
       height: 100%;
       border-radius: 20px;
@@ -95,4 +94,10 @@
     --plyr-color-main: var(--purple);
     --plyr-video-range-track-background: var(--lavender);
   }
+}
+
+.transcript {
+  white-space: pre-line;
+  max-width: 922px;
+  margin-top: 100px;
 }
