@@ -5,10 +5,9 @@ import VideoType from '@assets/VideoType';
 import QuizType from '@assets/QuizType';
 import React, { useState } from 'react';
 import styles from './styles.module.less';
-import { temp } from './temp';
 import { useHistory } from 'react-router';
 
-export const CourseContent = ({ onClose }) => {
+export const CourseContent = ({ onClose, parts, slug }) => {
   const history = useHistory();
   const [open, setOpen] = useState();
   const ExerciseTypeImage = ({ type }) => {
@@ -25,7 +24,7 @@ export const CourseContent = ({ onClose }) => {
   };
   return (
     <React.Fragment>
-      {temp.parts.map((partItem, i) => (
+      {parts.map((partItem, i) => (
         <div key={partItem.title} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
@@ -40,7 +39,7 @@ export const CourseContent = ({ onClose }) => {
               <Button
                 variant="containedPurple"
                 onClick={() => {
-                  history.push(`/courses/${partItem.course_id}/exercises/1`);
+                  history.push(`/courses/${slug}/exercises/1`);
                   if (onClose) {
                     onClose();
                   }
@@ -51,18 +50,18 @@ export const CourseContent = ({ onClose }) => {
               </Button>
               <Button
                 variant="outlineBlack"
-                onClick={() => setOpen(partItem.course_id !== open ? partItem.course_id : '')}
+                onClick={() => setOpen(i !== open ? i : '')}
               >
                 Содержание раздела
               </Button>
             </div>
           </div>
-          <div className={cn(styles.listWrap, { [styles.downOpen]: open === partItem.course_id })}>
+          <div className={cn(styles.listWrap, { [styles.downOpen]: open === i })}>
             {partItem.exercises.map((item) => (
               <div
                 key={item.title}
                 onClick={() => {
-                  history.push(`/courses/${partItem.course_id}/exercises/${item.exercise_id}`);
+                  history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
                   if (onClose) {
                     onClose();
                   }
