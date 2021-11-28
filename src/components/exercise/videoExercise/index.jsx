@@ -9,7 +9,7 @@ import styles from './styles.module.less';
 export const VideoExercise = ({ onSubmit }) => {
   const exercise = useSelector(selectExercise);
 
-  // const [sourceData, setSourceData] = useState({});
+  const [showTranscript, setShowTranscript] = useState(true);
 
   const sourceData = useMemo(
     () => ({
@@ -50,11 +50,14 @@ export const VideoExercise = ({ onSubmit }) => {
         <VideoPlayer sourceData={sourceData} />
       </div>
       <div className={styles.btnWrapper}>
-        <Button variant="outlinePurple">Показать стенограмму</Button>
+        <Button variant="outlinePurple" onClick={() => setShowTranscript(!showTranscript)}>
+          {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
+        </Button>
         <Button variant={'containedPurple'} onClick={onSubmit}>
           Продолжить
         </Button>
       </div>
+      {showTranscript && <div className={styles.transcript}>{exercise.transcript}</div>}
     </div>
   );
 };

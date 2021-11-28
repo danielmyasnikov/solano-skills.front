@@ -25,7 +25,12 @@ export const CoursesPage = () => {
         </p>
       </div>
       <div className={styles.content}>
-        {coursesList && coursesList.map((item) => <Card info={item} />)}
+        {coursesList &&
+          coursesList.map((item, i) => (
+            <React.Fragment key={i}>
+              <Card info={item} />
+            </React.Fragment>
+          ))}
       </div>
     </div>
   );

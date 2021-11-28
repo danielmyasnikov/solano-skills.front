@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
@@ -14,10 +14,16 @@ export const CoursePage = () => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
-  const course = useSelector(selectCourse);
+  const courseData = useSelector(selectCourse);
+  const [course, setCourse] = useState({});
+  useEffect(() => {
+    setCourse(courseData);
+  }, [courseData]);
+
   useEffect(() => {
     dispatch(getCourse(courseId));
   }, [location.pathname]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -37,8 +43,16 @@ export const CoursePage = () => {
           />
         </div>
         <div className={styles.contentWrap}>
-          <CourseList />
-          <CourseSidebar coauthors={course?.coauthors} datasets={course?.datasets} tracks={course?.career_tracks} />
+          <CourseList
+            parts={course.parts || []}
+            description={course.description}
+            slug={course.slug}
+          />
+          <CourseSidebar
+            coauthors={course?.coauthors}
+            datasets={course?.datasets}
+            tracks={course?.career_tracks}
+          />
         </div>
       </div>
     </div>

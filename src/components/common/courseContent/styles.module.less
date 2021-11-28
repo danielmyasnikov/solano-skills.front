@@ -42,6 +42,9 @@
 .itemLeft {
   display: flex;
   align-items: center;
+  .itemImg {
+    width: 24px;
+  }
 }
 
 .btnWrap {
@@ -63,8 +66,19 @@
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  &:not(:last-child) {
-    margin-bottom: 25px;
+  padding: 10px 20px;
+  &:hover {
+    circle {
+      fill: #fff;
+    }
+    path {
+      fill: var(--purple);
+    }
+    .itemTitle {
+      color: #fff;
+    }
+    background: var(--purple);
+    transition: .3s ease-in-out;
   }
 }
 
@@ -79,8 +93,8 @@
 
 .downOpen {
   opacity: 1;
-  max-height: 1000px;
-  margin-top: 40px;
+  max-height: 2000px;
+  margin-top: 25px;
 }
 
 .itemTitle {
@@ -98,6 +112,7 @@
   background: var(--color-poisonous-green);
   border-radius: 50%;
   margin-right: 15px;
+  margin-left: 15px;
 }
 
 .openRight {

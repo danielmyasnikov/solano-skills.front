@@ -3,7 +3,6 @@ const TerminalType = () => (
     <circle cx="12" cy="12" r="12" fill="#7469EF" />
     <mask
       id="mask0_643_4090"
-      style="mask-type:alpha"
       maskUnits="userSpaceOnUse"
       x="5"
       y="5"
