@@ -17,6 +17,7 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   useEffect(() => {
+    dispatch(clearTerminal())
     dispatch(getExercise(courseId, exerciseId));
   }, [location.pathname]);
   const onSubmit = () => {

@@ -13,7 +13,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
   const ExerciseTypeImage = ({ type }) => {
     switch (type) {
       case 'normal_exercise':
-        return <QuizType />;
+        return <TerminalType />;
       case 'video':
         return <VideoType />;
       case 'quiz':
@@ -25,13 +25,13 @@ export const CourseContent = ({ onClose, parts, slug }) => {
   return (
     <React.Fragment>
       {parts.map((partItem, i) => (
-        <div key={partItem.title} className={styles.courseWrap}>
+        <div key={partItem.title + i} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
                 <span>{i + 1}.</span>
-                <span>&nbsp;{partItem.title}</span>
-                {partItem.isFree && <span className={styles.free}>Бесплатно</span>}
+                <span>&nbsp;{partItem.name}</span>
+                {partItem.is_free && <span className={styles.free}>Бесплатно</span>}
               </div>
               <span className={styles.courseDescription}>{partItem.description}</span>
             </div>
@@ -39,7 +39,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
               <Button
                 variant="containedPurple"
                 onClick={() => {
-                  history.push(`/courses/${slug}/exercises/1`);
+                  history.push(`/courses/${slug}/exercises/${partItem.exercises[0].exercise_id}`);
                   if (onClose) {
                     onClose();
                   }
@@ -48,18 +48,15 @@ export const CourseContent = ({ onClose, parts, slug }) => {
               >
                 Изучать раздел
               </Button>
-              <Button
-                variant="outlineBlack"
-                onClick={() => setOpen(i !== open ? i : '')}
-              >
+              <Button variant="outlineBlack" onClick={() => setOpen(i !== open ? i : '')}>
                 Содержание раздела
               </Button>
             </div>
           </div>
           <div className={cn(styles.listWrap, { [styles.downOpen]: open === i })}>
-            {partItem.exercises.map((item) => (
+            {partItem.exercises.map((item, i) => (
               <div
-                key={item.title}
+                key={item.title + i}
                 onClick={() => {
                   history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
                   if (onClose) {
@@ -69,7 +66,9 @@ export const CourseContent = ({ onClose, parts, slug }) => {
                 className={styles.item}
               >
                 <div className={styles.itemLeft}>
-                  <ExerciseTypeImage type={item.type} />
+                  <div className={styles.itemImg}>
+                    <ExerciseTypeImage type={item.type} />
+                  </div>
                   <span className={styles.itemTitle}>{item.title}</span>
                 </div>
                 <div className={styles.openRight}>
