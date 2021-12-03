@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const compileCodeApi = ({ code, exerciseId }) => {
+export const compileCodeApi = ({ code, exerciseId, isGraphRequired }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}`, {
+    .post(`${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}?isGraphRequired=${isGraphRequired}`, {
       code,
     })
     .then((res) => res.data)
@@ -11,9 +11,9 @@ export const compileCodeApi = ({ code, exerciseId }) => {
     });
 };
 
-export const checkAnswerApi = ({ code, exerciseId }) => {
+export const checkAnswerApi = ({ code, exerciseId, isGraphRequired }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=false&userId=2`, {
+    .post(`${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=${isGraphRequired}&userId=2`, {
       code,
     })
     .then((res) => res.data)

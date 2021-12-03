@@ -10,17 +10,17 @@ export const CHECK_ANSWER_FAILED = 'CHECK_ANSWER_FAILED';
 
 export const CLEAR_TERMINAL = 'CLEAR_TERMINAL';
 
-export const compileCode = (code, exerciseId) => {
+export const compileCode = (code, exerciseId, isGraphRequired) => {
   return {
     type: COMPILE_CODE_REQUESTED,
-    payload: { code, exerciseId },
+    payload: { code, exerciseId, isGraphRequired },
   };
 };
 
-export const checkAnswer = (code, exerciseId) => {
+export const checkAnswer = (code, exerciseId, isGraphRequired) => {
   return {
     type: CHECK_ANSWER_REQUESTED,
-    payload: { code, exerciseId },
+    payload: { code, exerciseId, isGraphRequired },
   };
 };
 

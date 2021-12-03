@@ -17,13 +17,12 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   useEffect(() => {
-    dispatch(clearTerminal())
+    dispatch(clearTerminal());
     dispatch(getExercise(courseId, exerciseId));
   }, [location.pathname]);
   const onSubmit = () => {
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
     dispatch(getExercise(courseId, exercise.next_exercise_id));
-    dispatch(clearTerminal());
   };
   const renderExercise = () => {
     switch (exercise.type) {

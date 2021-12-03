@@ -5,6 +5,7 @@ const initialState = {
   message: {
     status: '',
   },
+  bytePayload: '',
 };
 
 export default function terminalReducer(state = initialState, action) {
@@ -12,13 +13,17 @@ export default function terminalReducer(state = initialState, action) {
     case COMPILE_CODE_SUCCESSED: {
       return {
         outputs: [...state.outputs, action.payload.data],
-        message: state.message,
+        message: {
+          status: '',
+        },
+        bytePayload: action.payload.data.bytePayload || state.bytePayload,
       };
     }
     case CHECK_ANSWER_SUCCESSED: {
       return {
         outputs: [...state.outputs, action.payload.data],
         message: action.payload.data,
+        bytePayload: action.payload.data.bytePayload || state.bytePayload,
       };
     }
     case CLEAR_TERMINAL: {

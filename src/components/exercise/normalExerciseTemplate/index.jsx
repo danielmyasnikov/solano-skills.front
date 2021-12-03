@@ -99,6 +99,8 @@ function NormalExerciseTemplate({ onSubmit }) {
           sampleCode={exercise.sample_code}
           exerciseId={exerciseId}
           correct={correct}
+          bytePayload={terminal.bytePayload}
+          isGraphRequired={exercise.is_graph_required}
         />
         <Output presentation_url={exercise.presentation_url} className={styles.outputContainer}>
           {terminal.outputs.map((item, i) => (
