@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import Menu from '@components/mui/menu';
 import Button from '@components/mui/button';
-import Input from '@components/mui/input';
+import Input from '@components/mui/inputSearch';
 import Logo from '@assets/Logo';
 import Burger from '@assets/Burger';
 import ArrowDown from '@assets/ArrowDown';
