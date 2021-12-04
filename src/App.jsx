@@ -1,30 +1,22 @@
 import React, { useEffect } from 'react';
-import { Route, useHistory, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import './index.less';
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
 import Container from './components/container';
 import { routes } from './routes';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from './app.module.css';
 import * as AuthStore from '@store/auth';
 
 export default function App() {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
   const uid = localStorage.getItem('uid');
   const client = localStorage.getItem('client');
   const accessToken = localStorage.getItem('access-token');
 
   const isLogIn = !uid && !client && !accessToken;
-
-  useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
-    }
-  }, [headers]);
 
   useEffect(() => {
     const expiry = localStorage.getItem('expiry');
