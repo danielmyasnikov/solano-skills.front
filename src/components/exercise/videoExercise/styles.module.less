@@ -1,10 +1,10 @@
-.wrapper {
+.content {
   width: 100%;
+  min-height: calc(100vh - 73px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
 }
 
 .title {
@@ -61,8 +61,8 @@
     .plyr__poster video {
       height: 100%;
       border-radius: 20px;
-      height: 626px;
-      width: 1200px;
+      height: calc(65vh - 73px);
+      width: auto;
       object-fit: fill;
     }
 
@@ -99,5 +99,7 @@
 .transcript {
   white-space: pre-line;
   max-width: 922px;
+  margin: 0 auto;
   margin-top: 100px;
+  margin-bottom: 100px;
 }
