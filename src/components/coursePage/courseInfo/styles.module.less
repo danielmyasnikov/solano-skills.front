@@ -1,5 +1,6 @@
 .wrapper {
-  max-width: 384px;
+  min-width: 390px;
+  max-width: 400px;
 }
 
 .blocks {
@@ -47,4 +48,25 @@
   font-size: 14px;
   line-height: 20px;
   color: #46445c;
+}
+
+@media screen and (max-width: 1430px) {
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    max-width: 100%;
+  }
+  .btnWrapper {
+    align-items: flex-end;
+    flex-direction: column;
+    button:not(:last-child) {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+  .blocks {
+    margin-bottom: 0;
+  }
 }

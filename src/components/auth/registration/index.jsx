@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import { InputPassword } from '@components/mui/inputPassword';
 import { Input } from '@components/mui/input';
 import Button from '@components/mui/button';
 import { CheckboxBtn } from '@components/mui/checkbox';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 
@@ -12,15 +12,15 @@ import { AuthContainer } from './../authContainer';
 
 export const Registration = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
-  const { errors } = useSelector(AuthStore.Selectors.getAuth);
+  const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
 
   function handleChange(e) {
     const { value, name } = e.target;
-
     switch (name) {
       case 'email':
         dispatch(AuthStore.Actions.clearErrors({ emailError: '', fullMessagesError: '' }));
@@ -44,7 +44,13 @@ export const Registration = () => {
   function submit() {
     dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
   }
-
+  
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      history.push('/courses');
+    }
+  }, [headers]);
+  
   return (
     <AuthContainer>
       <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>

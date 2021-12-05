@@ -38,10 +38,24 @@
 
 .authWrap {
   width: 100%;
+  flex: 1;
   margin-right: 20px;
 }
 
 .contentWrap {
   display: flex;
   margin-top: 70px;
+}
+
+@media screen and (max-width: 1430px) {
+  .headerInfo {
+    flex-direction: column;
+  }
+  .authWrap {
+    margin-right: 0;
+  }
+  .contentWrap {
+    margin-top: 40px;
+    flex-direction: column;
+  }
 }

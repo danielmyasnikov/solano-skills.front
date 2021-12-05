@@ -7,7 +7,7 @@
 
 .courseHead {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding-top: 35px;
   border-top: 1px solid #d8d8d8;
@@ -23,12 +23,11 @@
 
 .courseTitle {
   display: flex;
-  align-items: center;
+  white-space: break-spaces;
   font-family: Jost;
   font-weight: bold;
   font-size: 24px;
   line-height: 127%;
-  line-height: 139.5%;
   color: var(--color-black);
   margin-bottom: 13px;
 }
@@ -50,11 +49,12 @@
 
 .btnWrap {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 30px;
   min-width: 225px;
   button:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 }
 
@@ -79,7 +79,7 @@
       color: #fff;
     }
     background: var(--purple);
-    transition: .3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 }
 
@@ -112,7 +112,6 @@
   height: 7px;
   background: var(--color-poisonous-green);
   border-radius: 50%;
-  margin-right: 15px;
   margin-left: 15px;
 }
 
@@ -130,4 +129,17 @@
   padding: 1px 14px;
   border-radius: 15px;
   background: var(--color-yelow);
+}
+
+.btnContentOpen {
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.btnContent {
+  svg {
+    transition: 0.2s ease-in-out;
+    margin-left: 8px;
+  }
 }

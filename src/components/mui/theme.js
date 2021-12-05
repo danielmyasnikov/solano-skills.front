@@ -47,7 +47,7 @@ export const buttonTheme = createTheme({
         {
           props: { variant: 'containedPurple' },
           style: {
-            border: 'none',
+            border: '2px solid transparent',
             background: '#7469EF',
             color: '#fff',
             boxShadow:
@@ -132,7 +132,6 @@ export const buttonTheme = createTheme({
         {
           props: { variant: 'outlineBlack' },
           style: {
-            height: '33px',
             background: 'none',
             color: '#2D2D2D',
             border: '1px solid #2D2D2D',
@@ -141,6 +140,10 @@ export const buttonTheme = createTheme({
               transition: '0.2s ease-in-out',
               color: '#7469EF',
               border: '1px solid #7469EF',
+              path: {
+                transition: '0.2s ease-in-out',
+                fill: '#7469EF',
+              }
             },
           },
         },
