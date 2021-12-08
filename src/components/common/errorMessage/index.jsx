@@ -5,11 +5,11 @@ import Error from '@assets/Error.js';
 
 const ErrorMessage = ({ message }) => {
   return (
-    <div className={cn(styles.errorMessage, {[styles.hidden]: !message})}>
+    <div className={cn(styles.errorMessage, { [styles.hidden]: !message })}>
       <Error />
       <div className={styles.content}>
         <h6>Некорректный ответ</h6>
-        <span>{message}</span>
+        <span dangerouslySetInnerHTML={{ __html: message }} />
       </div>
     </div>
   );

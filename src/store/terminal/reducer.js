@@ -21,7 +21,7 @@ export default function terminalReducer(state = initialState, action) {
     }
     case CHECK_ANSWER_SUCCESSED: {
       return {
-        outputs: [...state.outputs, action.payload.data],
+        outputs: [...state.outputs],
         message: action.payload.data,
         bytePayload: action.payload.data.bytePayload || state.bytePayload,
       };
