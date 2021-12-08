@@ -16,7 +16,7 @@ export default function App() {
   const client = localStorage.getItem('client');
   const accessToken = localStorage.getItem('access-token');
 
-  const isLogIn = !uid && !client && !accessToken;
+  // const isLogIn = !uid && !client && !accessToken;
 
   useEffect(() => {
     const expiry = localStorage.getItem('expiry');
@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <div className={styles.wrapper}>
-      {isLogIn && <Redirect to="/sing-in" />}
+      {/* {isLogIn && <Redirect to="/sing-in" />} */}
 
       <Route exact path={'/registration'}>
         <Registration />
