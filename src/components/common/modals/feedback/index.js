@@ -4,7 +4,7 @@ import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import Close from '@assets/Close.js';
 
-const FeedbackModal = ({ onClick }) => {
+const FeedbackModal = ({ onClose }) => {
   const options = [
     { value: 'variant1', label: '1 Вариант' },
     { value: 'variant2', label: '2 Вариант' },
@@ -12,7 +12,9 @@ const FeedbackModal = ({ onClick }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
-        <Close className={styles.closeModal} onClick={onClick} />
+        <div className={styles.closeModal} onClick={onClose}>
+          <Close />
+        </div>
         <h2>Обратная связь</h2>
         <span>Пожалуйста, опишите свою проблему и расскажите нам о вашем предложении.</span>
         <Select
@@ -22,7 +24,11 @@ const FeedbackModal = ({ onClick }) => {
           options={options}
         />
         <textarea placeholder="Введите текст"></textarea>
-        <Button className={styles.btn} variant="containedPurple" onClick={() => console.log('some action')}>
+        <Button
+          className={styles.btn}
+          variant="containedPurple"
+          onClick={() => onClose()}
+        >
           Отправить отзыв
         </Button>
       </div>

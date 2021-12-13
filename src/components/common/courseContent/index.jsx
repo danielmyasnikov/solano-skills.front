@@ -15,12 +15,14 @@ export const CourseContent = ({ onClose, parts, slug }) => {
     switch (type) {
       case 'normal_exercise':
         return <TerminalType />;
+      case 'bullet_point_exercise':
+        return <TerminalType />;
       case 'video':
         return <VideoType />;
       case 'quiz':
         return <QuizType />;
       default:
-        break;
+        return '';
     }
   };
   return (
