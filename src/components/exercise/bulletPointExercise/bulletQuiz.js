@@ -15,7 +15,7 @@ import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 
-function QuizTemplate({ onSubmit }) {
+function BulletQuiz({ onSubmit }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -106,4 +106,4 @@ function QuizTemplate({ onSubmit }) {
   );
 }
 
-export default QuizTemplate;
+export default BulletQuiz;

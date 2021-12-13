@@ -9,6 +9,7 @@ import QuizTemplate from './quizTemplate';
 import styles from './styles.module.less';
 import NormalExerciseTemplate from './normalExerciseTemplate';
 import { VideoExercise } from './videoExercise';
+import BulletPointExercise from './bulletPointExercise';
 
 function ExercisePage() {
   const { courseId, exerciseId } = useParams();
@@ -36,6 +37,12 @@ function ExercisePage() {
         return (
           <div className={styles.exerciseContainer}>
             <NormalExerciseTemplate onSubmit={onSubmit} />{' '}
+          </div>
+        );
+      case 'bullet_point_exercise':
+        return (
+          <div className={styles.exerciseContainer}>
+            <BulletPointExercise onSubmit={onSubmit} />{' '}
           </div>
         );
       case 'video':

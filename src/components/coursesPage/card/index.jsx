@@ -37,7 +37,7 @@ export const Card = ({ info }) => {
           </Button>
         ) : (
           <div className={css.author}>
-            <img src={AvatarDefault} className={css.avatar} alt="" />
+            <img src={author?.avatar_url || AvatarDefault} className={css.avatar} alt="" />
             <div className={css.infoWrap}>
               <h4 className={css.authorTitle}>{`${author.first_name} ${author.last_name}`}</h4>
               <p className={css.text}>{author.description}</p>
