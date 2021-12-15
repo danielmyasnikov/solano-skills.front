@@ -45,7 +45,7 @@ export const CoursePage = () => {
         <div className={styles.contentWrap}>
           <CourseList
             parts={course.parts || []}
-            description={course.description}
+            description={course.long_description}
             slug={course.slug}
           />
           <CourseSidebar
