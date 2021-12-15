@@ -40,7 +40,6 @@ function BulletPointExercise({ onSubmit }) {
     }
   }, [terminal]);
   useEffect(() => {
-    window.scrollTo({ top: 0 });
     setNestedExercise(exercise?.nested_exercises);
     setSolution('');
     setCorrect('');
@@ -50,6 +49,7 @@ function BulletPointExercise({ onSubmit }) {
   useEffect(() => {
     setNestedExercise(exercise?.nested_exercises);
     setSolution('');
+    setErrorMessage('');
     setCorrect('');
     setHint(false);
     setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
@@ -71,10 +71,12 @@ function BulletPointExercise({ onSubmit }) {
     }
   }, [terminal]);
   const checkAnswer = () => {
+    console.log(errorMessage)
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
     } else {
+      console.log(errorMessage)
       setErrorMessage(answer.error);
     }
   };
@@ -107,19 +109,20 @@ function BulletPointExercise({ onSubmit }) {
               {isQuiz && (
                 <>
                   <div className={styles.quiz}>
-                    {exercise.nested_exercises[activeExercise]?.answers.map((item) => (
-                      <React.Fragment key={item.value}>
-                        <RadioButton
-                          checked={answer.value === item.value}
-                          className={styles.quizItem}
-                          isHtml={true}
-                          onChange={(e) => {
-                            setAnswer(item);
-                          }}
-                          value={item.value}
-                        />
-                      </React.Fragment>
-                    ))}
+                    {exercise.nested_exercises[activeExercise].answers &&
+                      exercise.nested_exercises[activeExercise]?.answers.map((item) => (
+                        <React.Fragment key={item.value}>
+                          <RadioButton
+                            checked={answer.value === item.value}
+                            className={styles.quizItem}
+                            isHtml={true}
+                            onChange={(e) => {
+                              setAnswer(item);
+                            }}
+                            value={item.value}
+                          />
+                        </React.Fragment>
+                      ))}
                   </div>
                   <div className={styles.btnContainer}>
                     {!hint && (
@@ -145,7 +148,7 @@ function BulletPointExercise({ onSubmit }) {
             </BulletInstruction>
           </div>
           <div ref={errorRef}>
-            <ErrorMessage message={message} />
+            <ErrorMessage message={message || errorMessage} />
           </div>
           {!hint && (
             <Button

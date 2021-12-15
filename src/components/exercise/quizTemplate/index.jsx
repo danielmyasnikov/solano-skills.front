@@ -6,6 +6,7 @@ import CompletedTask from '@components/common/modals/completedTask';
 import { getExercise } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { selectTerminal } from '@store/terminal/selector';
 import { selectExercise } from '@store/exercise/selector';
 import { QuizHint } from '@components/hint';
 import { NormalExercise } from '@components/common/exercise';
@@ -24,6 +25,7 @@ function QuizTemplate({ onSubmit }) {
   const { courseId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
+  const terminal = useSelector(selectTerminal);
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
@@ -97,10 +99,15 @@ function QuizTemplate({ onSubmit }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Output
-          presentation_url={exercise.presentation_url}
-          className={styles.quizOutputContainer}
-        />
+        <Output presentation_url={exercise.presentation_url} className={styles.quizOutputContainer}>
+          {terminal.outputs.map((item, i) => (
+            <React.Fragment key={i}>
+              <span className={styles[item.status]}>
+                {item.status === 'error' ? item.error : item.output}
+              </span>
+            </React.Fragment>
+          ))}
+        </Output>
       </div>
     </>
   );

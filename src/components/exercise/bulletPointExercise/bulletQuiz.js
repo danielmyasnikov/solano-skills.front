@@ -15,7 +15,7 @@ import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 
-function BulletQuiz({ onSubmit }) {
+function BulletQuiz({ exercise }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -28,6 +28,7 @@ function BulletQuiz({ onSubmit }) {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
   const checkAnswer = () => {
+    console.log(errorMessage)
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
@@ -50,6 +51,7 @@ function BulletQuiz({ onSubmit }) {
                       checked={answer.value === item.value}
                       className={styles.quizItem}
                       onChange={(e) => {
+                        console.log(answer)
                         setAnswer(item);
                       }}
                       value={item.value}

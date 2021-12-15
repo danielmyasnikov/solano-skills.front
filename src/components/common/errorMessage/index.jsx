@@ -9,7 +9,11 @@ const ErrorMessage = ({ message }) => {
       <Error />
       <div className={styles.content}>
         <h6>Некорректный ответ</h6>
-        <span dangerouslySetInnerHTML={{ __html: message }} />
+        <span
+          dangerouslySetInnerHTML={{
+            __html: message ? message.replace('`', '<code>').replace('`', '</code>') : '',
+          }}
+        />
       </div>
     </div>
   );

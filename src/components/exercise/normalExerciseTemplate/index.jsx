@@ -105,7 +105,7 @@ function NormalExerciseTemplate({ onSubmit }) {
         <Output presentation_url={exercise.presentation_url} className={styles.outputContainer}>
           {terminal.outputs.map((item, i) => (
             <React.Fragment key={i}>
-              <span className={cn(item.status === 'error' ? styles.error : styles.success)}>
+              <span className={styles[item.status]}>
                 {item.status === 'error' ? item.error : item.output}
               </span>
             </React.Fragment>

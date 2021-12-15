@@ -16,12 +16,13 @@ function BulletTerminal({ exercise, solution, terminal, correct, activeExercise 
         isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
       />
       <Output
+        output={terminal.outputs}
         presentation_url={exercise?.nested_exercises[activeExercise].presentation_url}
         className={styles.outputContainer}
       >
         {terminal.outputs.map((item, i) => (
           <React.Fragment key={i}>
-            <span className={cn(item.status === 'error' ? styles.error : styles.success)}>
+            <span className={styles[item.status]}>
               {item.status === 'error' ? item.error : item.output}
             </span>
           </React.Fragment>
