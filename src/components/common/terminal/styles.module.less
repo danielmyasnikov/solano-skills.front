@@ -3,10 +3,44 @@
   border-radius: 18px;
 }
 
+.terminalContainer {
+  height: 60%;
+}
+
+.terminalWrapper {
+  height: calc(100% - 40px);
+}
+
+.terminalWithGraph {
+  display: flex;
+  justify-content: space-between;
+  .terminal {
+    width: 50%;
+  }
+}
+
+.bytePayload {
+  position: relative;
+  width: calc(50% - 5px);
+  background: #2c2a3f;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+  }
+}
+
 .terminal {
   width: 100%;
-  height: calc(60% - 40px);
-  max-height: 540px;
+  height: 100%;
   position: relative;
 }
 
@@ -33,7 +67,7 @@
   }
   .disable {
     path {
-      fill: #4A4856;
+      fill: #4a4856;
     }
   }
 }

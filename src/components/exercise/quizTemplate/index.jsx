@@ -6,10 +6,11 @@ import CompletedTask from '@components/common/modals/completedTask';
 import { getExercise } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { selectTerminal } from '@store/terminal/selector';
 import { selectExercise } from '@store/exercise/selector';
-import Hint from '@components/common/hint';
-import Exercise from '@components/common/exercise';
-import Instruction from '@components/common/instruction';
+import { QuizHint } from '@components/hint';
+import { NormalExercise } from '@components/common/exercise';
+import { NormalInstruction } from '@components/instruction';
 import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
@@ -24,6 +25,7 @@ function QuizTemplate({ onSubmit }) {
   const { courseId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
+  const terminal = useSelector(selectTerminal);
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
@@ -37,12 +39,12 @@ function QuizTemplate({ onSubmit }) {
   };
   return (
     <>
-      {feedbackModalOpen && <FeedbackModal onClick={() => setFeedbackModalOpen(false)} />}
+      {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
-            <Exercise />
-            <Instruction onSubmit={() => setCompletedTaskModalOpen(true)}>
+            <NormalExercise />
+            <NormalInstruction onSubmit={() => setCompletedTaskModalOpen(true)}>
               <div className={styles.quiz}>
                 {exercise.answers.map((item) => (
                   <React.Fragment key={item.value}>
@@ -76,10 +78,10 @@ function QuizTemplate({ onSubmit }) {
                   Ответить
                 </Button>
               </div>
-            </Instruction>
+            </NormalInstruction>
           </div>
           {errorMessage && <ErrorMessage message={errorMessage} />}
-          <Hint
+          <QuizHint
             hint={hint}
             onClick={() => {
               setFeedbackModalOpen(true);
@@ -97,7 +99,15 @@ function QuizTemplate({ onSubmit }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Output presentation_url={exercise.presentation_url} className={styles.quizOutputContainer} />
+        <Output presentation_url={exercise.presentation_url} className={styles.quizOutputContainer}>
+          {terminal.outputs.map((item, i) => (
+            <React.Fragment key={i}>
+              <span className={styles[item.status]}>
+                {item.status === 'error' ? item.error : item.output}
+              </span>
+            </React.Fragment>
+          ))}
+        </Output>
       </div>
     </>
   );

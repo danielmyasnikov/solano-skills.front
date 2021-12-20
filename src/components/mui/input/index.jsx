@@ -1,20 +1,15 @@
-import React from 'react';
-import { InputAdornment, InputUnstyled } from '@mui/material';
-import Search from '@assets/Search';
-import styles from './styles.module.less'
+import React, { useState } from 'react';
+import { InputUnstyled } from '@mui/material';
+import styles from './styles.module.less';
 
-const Input = ({ placeholder }) => {
+export const Input = ({ value, handleChange, name }) => {
   return (
     <InputUnstyled
-      placeholder={placeholder}
-      className={styles.search}
-      startAdornment={
-        <InputAdornment position="start">
-          <Search />
-        </InputAdornment>
-      }
+      name={name}
+      type="email"
+      value={value}
+      onChange={handleChange}
+      className={styles.input}
     />
   );
 };
-
-export default Input;

@@ -1,6 +1,20 @@
 import axios from 'axios';
 
-export const compileCodeApi = ({ code, exerciseId }) => {
+export const compileCodeApi = ({ code, exerciseId, isGraphRequired }) => {
+  return axios
+    .post(
+      `${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}?isGraphRequired=${isGraphRequired}`,
+      {
+        code,
+      },
+    )
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const compileShellApi = ({ code, exerciseId }) => {
   return axios
     .post(`${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}`, {
       code,
@@ -11,11 +25,14 @@ export const compileCodeApi = ({ code, exerciseId }) => {
     });
 };
 
-export const checkAnswerApi = ({ code, exerciseId }) => {
+export const checkAnswerApi = ({ code, exerciseId, isGraphRequired }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=false&userId=2`, {
-      code,
-    })
+    .post(
+      `${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=${isGraphRequired}&userId=2`,
+      {
+        code,
+      },
+    )
     .then((res) => res.data)
     .catch((error) => {
       throw error;

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import * as CoursesStore from '@store/courses';
 import { Card } from './card';
 
@@ -20,8 +19,9 @@ export const CoursesPage = () => {
       <div className={styles.header}>
         <h1 className={styles.title}>Курсы</h1>
         <p className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+          Пришло время засучить рукава — мы лучше всего учимся на практике. Все наши курсы являются
+          интерактивными, сочетающими короткие видеоролики с практическими упражнениями. Это подход
+          к обучению Deepskills.
         </p>
       </div>
       <div className={styles.content}>

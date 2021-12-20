@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { VideoPlayer } from './player';
 import { useSelector } from 'react-redux';
 import Button from '@components/mui/button';
@@ -8,8 +8,8 @@ import styles from './styles.module.less';
 
 export const VideoExercise = ({ onSubmit }) => {
   const exercise = useSelector(selectExercise);
-
-  const [showTranscript, setShowTranscript] = useState(true);
+  const transcriptRef = useRef();
+  const [showTranscript, setShowTranscript] = useState(false);
 
   const sourceData = useMemo(
     () => ({
@@ -40,24 +40,30 @@ export const VideoExercise = ({ onSubmit }) => {
     [exercise],
   );
 
+  useEffect(() => {
+    transcriptRef.current?.scrollIntoView();
+  }, [showTranscript])
+
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{exercise.title}</h1>
-      <p className={styles.description}>
-        Вы получите<span className={styles.xp}> {` ${exercise.xp} xp`}</span>
-      </p>
-      <div className={styles.playerWrapper}>
-        <VideoPlayer sourceData={sourceData} />
+      <div className={styles.content}>
+        <h1 className={styles.title}>{exercise.title}</h1>
+        <p className={styles.description}>
+          Вы получите<span className={styles.xp}> {` ${exercise.xp} xp`}</span>
+        </p>
+        <div className={styles.playerWrapper}>
+          <VideoPlayer sourceData={sourceData} />
+        </div>
+        <div className={styles.btnWrapper}>
+          <Button variant="outlinePurple" onClick={() => {setShowTranscript(!showTranscript)}}>
+            {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
+          </Button>
+          <Button variant={'containedPurple'} onClick={onSubmit}>
+            Продолжить
+          </Button>
+        </div>
       </div>
-      <div className={styles.btnWrapper}>
-        <Button variant="outlinePurple" onClick={() => setShowTranscript(!showTranscript)}>
-          {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
-        </Button>
-        <Button variant={'containedPurple'} onClick={onSubmit}>
-          Продолжить
-        </Button>
-      </div>
-      {showTranscript && <div className={styles.transcript}>{exercise.transcript}</div>}
+      {showTranscript && <div ref={transcriptRef} className={styles.transcript}>{exercise.transcript}</div>}
     </div>
   );
 };

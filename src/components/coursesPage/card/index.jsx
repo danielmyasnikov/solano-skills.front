@@ -24,7 +24,7 @@ export const Card = ({ info }) => {
       <div className={css.about}>
         <img className={css.langImg} src={getTypeImg()} alt="" />
         <h2 className={css.title}>{info.title}</h2>
-        <span className={css.description}>{info.description}</span>
+        <span className={css.description} dangerouslySetInnerHTML={{ __html: info?.description }} />
         <div className={css.time}>
           <img className={css.timeIcon} src={TimerOutlined} alt="" />
           {info.time}
@@ -37,10 +37,10 @@ export const Card = ({ info }) => {
           </Button>
         ) : (
           <div className={css.author}>
-            <img src={AvatarDefault} className={css.avatar} alt="" />
+            <img src={author?.avatar_url || AvatarDefault} className={css.avatar} alt="" />
             <div className={css.infoWrap}>
               <h4 className={css.authorTitle}>{`${author.first_name} ${author.last_name}`}</h4>
-              <p className={css.text}>{author.description}</p>
+              <p className={css.text} dangerouslySetInnerHTML={{ __html: author?.description }} />
             </div>
           </div>
         )}
@@ -48,4 +48,3 @@ export const Card = ({ info }) => {
     </Link>
   );
 };
-

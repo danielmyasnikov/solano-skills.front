@@ -5,6 +5,7 @@ import VideoType from '@assets/VideoType';
 import QuizType from '@assets/QuizType';
 import React, { useState } from 'react';
 import styles from './styles.module.less';
+import ArrowDown from '@assets/ArrowDown';
 import { useHistory } from 'react-router';
 
 export const CourseContent = ({ onClose, parts, slug }) => {
@@ -14,12 +15,14 @@ export const CourseContent = ({ onClose, parts, slug }) => {
     switch (type) {
       case 'normal_exercise':
         return <TerminalType />;
+      case 'bullet_point_exercise':
+        return <TerminalType />;
       case 'video':
         return <VideoType />;
       case 'quiz':
         return <QuizType />;
       default:
-        break;
+        return '';
     }
   };
   return (
@@ -29,7 +32,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
-                <span>{i + 1}.</span>
+                <span>{i + 1}. </span>
                 <span>&nbsp;{partItem.name}</span>
                 {partItem.is_free && <span className={styles.free}>Бесплатно</span>}
               </div>
@@ -48,8 +51,13 @@ export const CourseContent = ({ onClose, parts, slug }) => {
               >
                 Изучать раздел
               </Button>
-              <Button variant="outlineBlack" onClick={() => setOpen(i !== open ? i : '')}>
+              <Button
+                className={cn(styles.btnContent, { [styles.btnContentOpen]: open === i })}
+                variant="outlineBlack"
+                onClick={() => setOpen(i !== open ? i : '')}
+              >
                 Содержание раздела
+                <ArrowDown />
               </Button>
             </div>
           </div>

@@ -1,0 +1,113 @@
+.exerciseContainer {
+  display: flex;
+  height: calc(100vh - 150px);
+}
+
+.overflowHidden {
+  overflow-y: hidden !important;
+}
+
+.sidebar {
+  padding-bottom: 15px;
+  background: #ffffff;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+}
+
+.layout {
+  position: relative;
+  width: calc(43% - 20px);
+  margin-right: 20px;
+  .hintBtn {
+    display: flex;
+    margin-top: 30px;
+    margin-left: auto;
+  }
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.instructions {
+  margin-top: 35px;
+  padding-left: 20px;
+  padding-right: 10px;
+  p {
+    margin: 20px 0;
+  }
+  ul {
+    margin-left: 20px;
+    list-style-type: disc;
+    li {
+      margin: 20px 0;
+    }
+  }
+  p,
+  li,
+  code {
+    font-size: 16px;
+  }
+}
+
+.terminal {
+  width: 57%;
+}
+
+.outputContainer {
+  white-space: pre;
+  background: #2c2a3f;
+  padding: 10px 20px;
+  height: calc(40% - 47px);
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  .success {
+    display: block;
+    color: rgba(200, 193, 133, 1);
+  }
+  .error {
+    display: block;
+    color: #d15555;
+    margin-bottom: 15px;
+  }
+  .shell {
+    display: block;
+    color: #fff;
+    &:not(&:first-child){
+      margin-top: 15px;
+    }
+  }
+}
+
+.quiz {
+  margin: 0 20px 20px 20px;
+  .quizItem {
+    margin: 20px 0;
+    label {
+      font-size: 16px;
+      align-items: flex-start;
+    }
+    span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 15px 20px 5px 20px;
+  button {
+    height: 46px;
+  }
+  .btn {
+    margin-right: 15px;
+  }
+}

@@ -57,7 +57,7 @@
 }
 
 .outputContainer {
-  white-space: pre-line;
+  white-space: pre;
   background: #2c2a3f;
   padding: 10px 20px;
   height: calc(40% - 47px);
@@ -66,10 +66,18 @@
   border-bottom-right-radius: 12px;
   .success {
     display: block;
-    color: #fff;
+    color: rgba(200, 193, 133, 1);
   }
   .error {
     display: block;
     color: #d15555;
+    margin-bottom: 15px;
+  }
+  .shell {
+    display: block;
+    color: #fff;
+    &:not(&:first-child){
+      margin-top: 15px;
+    }
   }
 }

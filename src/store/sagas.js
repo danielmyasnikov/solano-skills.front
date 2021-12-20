@@ -4,7 +4,9 @@ import terminalSaga from './terminal/sagas';
 import coursesSaga from './courses/sagas';
 import courseSaga from './course/sagas';
 
+import authSaga from './auth/sagas';
+
 export default function* rootSaga() {
-  const sagas = [terminalSaga, exerciseSaga, coursesSaga, courseSaga];
+  const sagas = [terminalSaga, exerciseSaga, coursesSaga, courseSaga, authSaga];
   yield all(sagas.map((s) => spawn(s)));
 }

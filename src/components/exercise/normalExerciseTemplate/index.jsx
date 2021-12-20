@@ -8,9 +8,9 @@ import Terminal from '@components/common/terminal';
 import { useParams } from 'react-router-dom';
 import { selectExercise } from '@store/exercise/selector';
 import { selectTerminal } from '@store/terminal/selector';
-import Hint from '@components/common/hint';
-import Exercise from '@components/common/exercise';
-import Instruction from '@components/common/instruction';
+import { NormalHint } from '@components/hint';
+import { NormalExercise } from '@components/common/exercise';
+import { NormalInstruction } from '@components/instruction';
 import Button from '@components/mui/button';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
@@ -47,17 +47,17 @@ function NormalExerciseTemplate({ onSubmit }) {
   }, [terminal]);
   return (
     <>
-      {feedbackModalOpen && <FeedbackModal onClick={() => setFeedbackModalOpen(false)} />}
+      {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
-            <Exercise />
-            <Instruction onSubmit={() => setCompletedTaskModalOpen(true)}>
+            <NormalExercise />
+            <NormalInstruction xp={exercise.xp} onSubmit={() => setCompletedTaskModalOpen(true)}>
               <div
                 dangerouslySetInnerHTML={{ __html: exercise.instruction }}
                 className={styles.instructions}
               />
-            </Instruction>
+            </NormalInstruction>
           </div>
           <div ref={errorRef}>
             <ErrorMessage message={terminal.message.error} />
@@ -71,7 +71,7 @@ function NormalExerciseTemplate({ onSubmit }) {
               Подсказка (-30 XP)
             </Button>
           )}
-          <Hint
+          <NormalHint
             hint={hint}
             onClick={() => {
               setFeedbackModalOpen(true);
@@ -99,11 +99,13 @@ function NormalExerciseTemplate({ onSubmit }) {
           sampleCode={exercise.sample_code}
           exerciseId={exerciseId}
           correct={correct}
+          bytePayload={terminal.bytePayload}
+          isGraphRequired={exercise.is_graph_required}
         />
         <Output presentation_url={exercise.presentation_url} className={styles.outputContainer}>
           {terminal.outputs.map((item, i) => (
             <React.Fragment key={i}>
-              <span className={cn(item.status === 'error' ? styles.error : styles.success)}>
+              <span className={styles[item.status]}>
                 {item.status === 'error' ? item.error : item.output}
               </span>
             </React.Fragment>
