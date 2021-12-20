@@ -9,9 +9,10 @@ const ErrorMessage = ({ message }) => {
       <Error />
       <div className={styles.content}>
         <h6>Некорректный ответ</h6>
+        {console.log}
         <span
           dangerouslySetInnerHTML={{
-            __html: message ? message.replace('`', '<code>').replace('`', '</code>') : '',
+            __html: message ? message.replace(/`(.*?)`/g,'<code>$1</code>') : '',
           }}
         />
       </div>
