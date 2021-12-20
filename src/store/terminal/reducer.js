@@ -39,7 +39,6 @@ export default function terminalReducer(state = initialState, action) {
         message: {
           status: '',
         },
-        bytePayload: state.bytePayload,
       };
     }
     case CHECK_ANSWER_SUCCESSED: {

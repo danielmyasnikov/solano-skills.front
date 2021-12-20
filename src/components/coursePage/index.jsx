@@ -28,7 +28,10 @@ export const CoursePage = () => {
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <h1 className={styles.title}>{course.title}</h1>
-        <p className={styles.description}>{course.description}</p>
+        <p
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: course.description }}
+        />
       </div>
       <div className={styles.content}>
         <div className={styles.headerInfo}>
