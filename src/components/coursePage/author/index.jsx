@@ -10,7 +10,7 @@ export const Auth = ({ instructor }) => {
       <div className={css.infoWrap}>
         <div className={css.label}>Преподаватель</div>
         <h4 className={css.title}>{`${instructor?.first_name} ${instructor?.last_name}`}</h4>
-        <p className={css.text}>{instructor?.description}</p>
+        <p className={css.text} dangerouslySetInnerHTML={{ __html: instructor?.description }} />
       </div>
     </div>
   );
