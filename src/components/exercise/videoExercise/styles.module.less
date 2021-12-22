@@ -50,8 +50,8 @@
   box-shadow: 0px 4px 56px rgb(82 60 100 / 53%);
 
   video {
-    max-height: 626px;
     object-fit: fill;
+    border-radius: 20px;
   }
 
   :global {
@@ -59,15 +59,17 @@
     .plyr,
     .plyr-react,
     .plyr--menu-open,
+    .plyr__video-wrapper,
     .plyr__poster video {
       height: 100%;
       border-radius: 20px;
-      width: 100%;
-      max-width: 1200px;
+      height: 626px;
+      width: 1200px;
+      border-radius: 20px;
       object-fit: fill;
     }
 
-    @media screen and (max-width: 1344px) {
+    @media screen and (max-width: 1800px) {
       .plyr-react .plyr,
       .plyr,
       .plyr-react,
