@@ -59,12 +59,21 @@
     .plyr-react,
     .plyr--menu-open,
     .plyr__poster video {
-      height: 100%;
-      border-radius: 20px;
       height: 626px;
       width: 1200px;
       border-radius: 20px;
       object-fit: fill;
+    }
+
+    .plyr:fullscreen  .plyr__video-wrapper{
+      border-radius: 0px;
+      object-fit: fill;
+      height: auto;
+    }
+    .plyr__video-wrapper{
+      border-radius: 20px;
+      object-fit: fill;
+      height: auto;
     }
 
     @media screen and (max-width: 1800px) {
