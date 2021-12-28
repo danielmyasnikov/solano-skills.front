@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 import styles from './styles.module.less';
 import { InputPassword } from '@components/mui/inputPassword';
 import { Input } from '@components/mui/input';
@@ -8,12 +9,14 @@ import * as AuthStore from '@store/auth';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContainer } from './../authContainer';
 import { SocialNetworks } from './../socialNetworks';
+import { CheckboxBtn } from '@components/mui/checkbox';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
 
   function handleChange(e) {
@@ -38,24 +41,40 @@ export const Authorization = () => {
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
+      //history.push('/courses');
     }
   }, [headers]);
+
+  function handleRemberMe() {
+    setRememberMe(!rememberMe);
+  }
 
   return (
     <AuthContainer>
       <h1 className={styles.title}>Добро пожаловать</h1>
-      <span className={styles.subTitile}>E-mail</span>
-      <div className={styles.inputWrapper}>
+      <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.errorMassege })}>
+        E-mail
+      </span>
+      <div className={cn(styles.inputWrapper, { [styles.inputWrapperError]: errors.errorMassege })}>
         <Input value={email} handleChange={handleChange} name="email" />
       </div>
-      <span className={styles.subTitile}>Пароль</span>
-      <div className={styles.inputWrapper}>
+      <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.errorMassege })}>
+        Пароль
+      </span>
+      <div className={cn(styles.inputWrapper, { [styles.inputWrapperError]: errors.errorMassege })}>
         <InputPassword value={password} handleChange={handleChange} name="password" />
       </div>
-
+      <div className={styles.infoWrapper}>
+        <div className={styles.rememberMe}>
+          <CheckboxBtn value={rememberMe} handleChange={handleRemberMe} />
+          <div className={styles.rememberMeInfo} onClick={() => handleRemberMe()}>
+            Запомнить меня
+          </div>
+        </div>
+        <div className={styles.forgotPassword}>Забыли пароль?</div>
+      </div>
       <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
-        Войти
+        Авторизоваться
       </Button>
       <span className={styles.error}>{errors.errorMassege}</span>
 
