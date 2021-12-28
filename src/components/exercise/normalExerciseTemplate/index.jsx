@@ -20,6 +20,7 @@ function NormalExerciseTemplate({ onSubmit }) {
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
+  const [withoutHint, setWithoutHint] = useState(false);
   const [correct, setCorrect] = useState(false);
   const { exerciseId } = useParams();
   const errorRef = useRef();
@@ -34,10 +35,13 @@ function NormalExerciseTemplate({ onSubmit }) {
     setSolution('');
     setCorrect('');
     setHint(false);
+    setWithoutHint(exercise.hint ? true : false);
   }, [exercise]);
   useEffect(() => {
     if (correct) {
       setCompletedTaskModalOpen(true);
+    } else {
+      setCompletedTaskModalOpen(false);
     }
   }, [correct]);
   useEffect(() => {
@@ -62,15 +66,16 @@ function NormalExerciseTemplate({ onSubmit }) {
           <div ref={errorRef}>
             <ErrorMessage message={terminal.message.error} />
           </div>
-          {!hint && (
-            <Button
-              className={styles.hintBtn}
-              variant="outlinePurple"
-              onClick={() => setHint(true)}
-            >
-              Подсказка (-30 XP)
-            </Button>
-          )}
+          {!hint === false ||
+            (withoutHint === true && (
+              <Button
+                className={styles.hintBtn}
+                variant="outlinePurple"
+                onClick={() => setHint(true)}
+              >
+                Подсказка (-30 XP)
+              </Button>
+            ))}
           <NormalHint
             hint={hint}
             onClick={() => {
@@ -82,6 +87,7 @@ function NormalExerciseTemplate({ onSubmit }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            correctMessage={exercise?.correct_message}
             onClose={() => {
               setCorrect(false);
               setCompletedTaskModalOpen(false);

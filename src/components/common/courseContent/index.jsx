@@ -3,12 +3,12 @@ import Button from '@components/mui/button';
 import TerminalType from '@assets/TerminalType';
 import VideoType from '@assets/VideoType';
 import QuizType from '@assets/QuizType';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import ArrowDown from '@assets/ArrowDown';
 import { useHistory } from 'react-router';
 
-export const CourseContent = ({ onClose, parts, slug }) => {
+export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   const history = useHistory();
   const [open, setOpen] = useState();
   const ExerciseTypeImage = ({ type }) => {
@@ -28,7 +28,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
   return (
     <React.Fragment>
       {parts.map((partItem, i) => (
-        <div key={partItem.title + i} className={styles.courseWrap}>
+        <div key={partItem.title} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
@@ -54,7 +54,10 @@ export const CourseContent = ({ onClose, parts, slug }) => {
               <Button
                 className={cn(styles.btnContent, { [styles.btnContentOpen]: open === i })}
                 variant="outlineBlack"
-                onClick={() => setOpen(i !== open ? i : '')}
+                onClick={() => {
+                  console.log(partItem);
+                  setOpen(i !== open ? i : '');
+                }}
               >
                 Содержание раздела
                 <ArrowDown />
@@ -64,7 +67,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
           <div className={cn(styles.listWrap, { [styles.downOpen]: open === i })}>
             {partItem.exercises.map((item, i) => (
               <div
-                key={item.title + i}
+                key={item.title}
                 onClick={() => {
                   history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
                   if (onClose) {

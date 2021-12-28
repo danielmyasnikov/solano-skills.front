@@ -41,6 +41,7 @@ const HeaderExercise = () => {
           slug={courseId}
           parts={course.parts || []}
           isOpen={courseContentIsOpen}
+          coursePartSlug={exercise.course_part_slug}
           onClose={() => setCourseContentIsOpen(!courseContentIsOpen)}
         />
       )}

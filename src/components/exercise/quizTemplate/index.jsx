@@ -19,6 +19,7 @@ import Output from '@components/common/output';
 function QuizTemplate({ onSubmit }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
+  const [withoutHint, setWithoutHint] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [errorMessage, setErrorMessage] = useState();
   const [hint, setHint] = useState();
@@ -26,6 +27,12 @@ function QuizTemplate({ onSubmit }) {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
+  useEffect(() => {
+    setWithoutHint(exercise.hint ? true : false);
+    setHint(false);
+    setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
+    setCompletedTaskModalOpen(false);
+  }, [exercise]);
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
@@ -60,15 +67,16 @@ function QuizTemplate({ onSubmit }) {
                 ))}
               </div>
               <div className={styles.btnContainer}>
-                {!hint && (
-                  <Button
-                    className={styles.btn}
-                    variant="outlinePurple"
-                    onClick={() => setHint(true)}
-                  >
-                    Подсказка (-30 XP)
-                  </Button>
-                )}
+                {!hint === false ||
+                  (withoutHint === true && (
+                    <Button
+                      className={styles.btn}
+                      variant="outlinePurple"
+                      onClick={() => setHint(true)}
+                    >
+                      Подсказка (-30 XP)
+                    </Button>
+                  ))}
                 <Button
                   variant="containedPurple"
                   onClick={() => {
@@ -90,6 +98,7 @@ function QuizTemplate({ onSubmit }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            correctMessage={exercise?.correct_message}
             onClose={() => setCompletedTaskModalOpen(false)}
             onClick={() => {
               onSubmit();
