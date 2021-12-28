@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+}
+
+.title {
+  color: var(--color-black);
+  font-family: Jost;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 127%;
+  margin-bottom: 30px;
+}
+
+.icons {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  max-width: 52px;
+  max-height: 52px;
+  border-radius: 50px;
+  border: 1px solid #bcbcbc;
+  padding: 9px 9px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrapper:not(:last-child) {
+  margin-right: 21px;
+}
+
+.icon {
+  width: auto;
+  max-height: 33px;
+}

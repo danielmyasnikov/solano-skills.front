@@ -6,6 +6,7 @@ import Button from '@components/mui/button';
 import { CheckboxBtn } from '@components/mui/checkbox';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { SocialNetworks } from './../socialNetworks';
 import * as AuthStore from '@store/auth';
 
 import { AuthContainer } from './../authContainer';
@@ -18,6 +19,7 @@ export const Registration = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const [checkedError, setCheckedError] = useState('');
 
   function handleChange(e) {
     const { value, name } = e.target;
@@ -42,15 +44,24 @@ export const Registration = () => {
   }
 
   function submit() {
-    dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
+    if (checked) {
+      dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
+    } else {
+      setCheckedError('Ошибка ввода данных');
+    }
   }
-  
+
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
       history.push('/courses');
     }
   }, [headers]);
-  
+
+  function handleChacked() {
+    setCheckedError('');
+    setChecked(!checked);
+  }
+
   return (
     <AuthContainer>
       <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>
@@ -73,7 +84,7 @@ export const Registration = () => {
         <span className={styles.error}>{errors.passwordConfirmationError}</span>
       </div>
       <div className={styles.infoWrapper}>
-        <CheckboxBtn value={checked} handleChange={() => setChecked(!checked)} />
+        <CheckboxBtn error={!!checkedError} value={checked} handleChange={handleChacked} />
         <div className={styles.info}>
           Я принимаю условия
           <Link className={styles.infoLink} to={'/'}>
@@ -89,7 +100,10 @@ export const Registration = () => {
       <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
         Перейти к обучению
       </Button>
-      <span className={styles.error}>{errors.fullMessagesError}</span>
+      <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+
+      <SocialNetworks />
+      
       <div className={styles.toAuth}>
         <span className={styles.text}>
           {'Уже есть аккаунт? '}
