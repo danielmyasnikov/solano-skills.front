@@ -40,7 +40,7 @@ export const Card = ({ info }) => {
             <img src={author?.avatar_url || AvatarDefault} className={css.avatar} alt="" />
             <div className={css.infoWrap}>
               <h4 className={css.authorTitle}>{`${author.first_name} ${author.last_name}`}</h4>
-              <p className={css.text} dangerouslySetInnerHTML={{ __html: author?.description }} />
+              <p className={css.text} dangerouslySetInnerHTML={{ __html: author?.subtitle }} />
             </div>
           </div>
         )}

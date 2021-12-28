@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-export const CheckboxBtn = ({ value, handleChange }) => {
+export const CheckboxBtn = ({ value, handleChange, error }) => {
   return (
     <div>
       <Checkbox
@@ -11,7 +11,7 @@ export const CheckboxBtn = ({ value, handleChange }) => {
         onChange={handleChange}
         {...label}
         sx={{
-          color: '#7469EF',
+          color: error ? '#F44336' : '#7469EF',
           '&.Mui-checked': {
             color: '#7469EF',
           },

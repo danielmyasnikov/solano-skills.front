@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContainer } from './../authContainer';
+import { SocialNetworks } from './../socialNetworks';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,11 @@ export const Authorization = () => {
         Войти
       </Button>
       <span className={styles.error}>{errors.errorMassege}</span>
+
+      <div className={styles.socialNetworksWrap}>
+        <SocialNetworks />
+      </div>
+
       <div className={styles.toAuth}>
         <span className={styles.text}>
           {'У вас нет аккаунта? '}
