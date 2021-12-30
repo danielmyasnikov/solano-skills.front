@@ -3,14 +3,17 @@ import Button from '@components/mui/button';
 import TerminalType from '@assets/TerminalType';
 import VideoType from '@assets/VideoType';
 import QuizType from '@assets/QuizType';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import ArrowDown from '@assets/ArrowDown';
 import { useHistory } from 'react-router';
 
-export const CourseContent = ({ onClose, parts, slug }) => {
+export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   const history = useHistory();
-  const [open, setOpen] = useState();
+  const [active, setActive] = useState();
+  useEffect(() => {
+    setActive(coursePartSlug);
+  }, []);
   const ExerciseTypeImage = ({ type }) => {
     switch (type) {
       case 'normal_exercise':
@@ -28,7 +31,7 @@ export const CourseContent = ({ onClose, parts, slug }) => {
   return (
     <React.Fragment>
       {parts.map((partItem, i) => (
-        <div key={partItem.title + i} className={styles.courseWrap}>
+        <div key={partItem.title} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
@@ -52,19 +55,21 @@ export const CourseContent = ({ onClose, parts, slug }) => {
                 Изучать раздел
               </Button>
               <Button
-                className={cn(styles.btnContent, { [styles.btnContentOpen]: open === i })}
+                className={cn(styles.btnContent, { [styles.btnContentOpen]: active === partItem.slug })}
                 variant="outlineBlack"
-                onClick={() => setOpen(i !== open ? i : '')}
+                onClick={() => {
+                  setActive(partItem.slug !== active ? partItem.slug : '');
+                }}
               >
                 Содержание раздела
                 <ArrowDown />
               </Button>
             </div>
           </div>
-          <div className={cn(styles.listWrap, { [styles.downOpen]: open === i })}>
+          <div className={cn(styles.listWrap, { [styles.downOpen]: active === partItem.slug })}>
             {partItem.exercises.map((item, i) => (
               <div
-                key={item.title + i}
+                key={item.title}
                 onClick={() => {
                   history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
                   if (onClose) {

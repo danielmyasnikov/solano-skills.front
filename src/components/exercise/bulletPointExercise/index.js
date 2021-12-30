@@ -18,6 +18,7 @@ function BulletPointExercise({ onSubmit }) {
   const [doneExercises, setDoneExercises] = useState([]);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [hint, setHint] = useState();
+  const [withoutHint, setWithoutHint] = useState(false);
   const [message, setMessage] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [nestedExercise, setNestedExercise] = useState([]);
@@ -45,6 +46,7 @@ function BulletPointExercise({ onSubmit }) {
     setCorrect('');
     setHint(false);
     setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
+    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
   }, [exercise]);
   useEffect(() => {
     setNestedExercise(exercise?.nested_exercises);
@@ -53,6 +55,7 @@ function BulletPointExercise({ onSubmit }) {
     setCorrect('');
     setHint(false);
     setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
+    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
   }, [activeExercise]);
   useEffect(() => {
     if (correct) {
@@ -71,12 +74,10 @@ function BulletPointExercise({ onSubmit }) {
     }
   }, [terminal]);
   const checkAnswer = () => {
-    console.log(errorMessage)
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
     } else {
-      console.log(errorMessage)
       setErrorMessage(answer.error);
     }
   };
@@ -125,15 +126,16 @@ function BulletPointExercise({ onSubmit }) {
                       ))}
                   </div>
                   <div className={styles.btnContainer}>
-                    {!hint && (
-                      <Button
-                        className={styles.btn}
-                        variant="outlinePurple"
-                        onClick={() => setHint(true)}
-                      >
-                        Подсказка (-30 XP)
-                      </Button>
-                    )}
+                    {!hint === false === false ||
+                      (withoutHint === true && (
+                        <Button
+                          className={styles.btn}
+                          variant="outlinePurple"
+                          onClick={() => setHint(true)}
+                        >
+                          Подсказка (-30 XP)
+                        </Button>
+                      ))}
                     <Button
                       variant="containedPurple"
                       onClick={() => {
@@ -150,15 +152,16 @@ function BulletPointExercise({ onSubmit }) {
           <div ref={errorRef}>
             <ErrorMessage message={message || errorMessage} />
           </div>
-          {!hint && (
-            <Button
-              className={styles.hintBtn}
-              variant="outlinePurple"
-              onClick={() => setHint(true)}
-            >
-              Подсказка (-30 XP)
-            </Button>
-          )}
+          {!hint === false ||
+            (withoutHint === true && (
+              <Button
+                className={styles.hintBtn}
+                variant="outlinePurple"
+                onClick={() => setHint(true)}
+              >
+                Подсказка (-30 XP)
+              </Button>
+            ))}
           <BulletHint
             hint={hint}
             activeExercise={activeExercise}
@@ -171,6 +174,7 @@ function BulletPointExercise({ onSubmit }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            correctMessage={exercise?.correct_message}
             onClose={() => {
               setCorrect(false);
               setCompletedTaskModalOpen(false);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 import styles from './styles.module.less';
 import { InputPassword } from '@components/mui/inputPassword';
 import { Input } from '@components/mui/input';
@@ -8,13 +9,35 @@ import * as AuthStore from '@store/auth';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContainer } from './../authContainer';
 import { SocialNetworks } from './../socialNetworks';
+import { CheckboxBtn } from '@components/mui/checkbox';
+import { AuthorizationByEmail } from '../authorizationByEmail';
+import { ByPhoneNumber } from '../byPhoneNumber';
+import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
+  const [buttonTitle, setButtonTitle] = useState('Авторизоваться');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [confirmationСode, setConfirmationCode] = useState('');
+  const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
+  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+
+  useEffect(() => {
+    if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
+      setButtonTitle('Авторизоваться');
+    }
+    if (isRegistrationByPhone && isPhoneNumberConfirmation) {
+      setButtonTitle('Авторизоваться');
+    }
+    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
+      setButtonTitle('Отправить код');
+    }
+  }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
 
   function handleChange(e) {
     const { value, name } = e.target;
@@ -22,6 +45,12 @@ export const Authorization = () => {
       case 'email':
         dispatch(AuthStore.Actions.clearErrors({ errorMassege: '' }));
         setEmail(value);
+        break;
+      case 'phone':
+        setPhoneNumber(value);
+        break;
+      case 'confirmationCode':
+        setConfirmationCode(value);
         break;
       case 'password':
         dispatch(AuthStore.Actions.clearErrors({ errorMassege: '' }));
@@ -33,7 +62,13 @@ export const Authorization = () => {
   }
 
   function submit() {
-    dispatch(AuthStore.Actions.singIn(email, password));
+    if (!isRegistrationByPhone) {
+      dispatch(AuthStore.Actions.singIn(email, password));
+    }
+    if (isRegistrationByPhone) {
+      setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''));
+      setIsPhoneNumberConfirmation(true);
+    }
   }
 
   useEffect(() => {
@@ -42,20 +77,53 @@ export const Authorization = () => {
     }
   }, [headers]);
 
+  function handleRemberMe() {
+    setRememberMe(!rememberMe);
+  }
+
+  function handleAuthMethod() {
+    dispatch(
+      AuthStore.Actions.clearErrors({
+        errorMassege: '',
+      }),
+    );
+    setIsRegistrationByPhone(!isRegistrationByPhone);
+  }
+
   return (
     <AuthContainer>
       <h1 className={styles.title}>Добро пожаловать</h1>
-      <span className={styles.subTitile}>E-mail</span>
-      <div className={styles.inputWrapper}>
-        <Input value={email} handleChange={handleChange} name="email" />
-      </div>
-      <span className={styles.subTitile}>Пароль</span>
-      <div className={styles.inputWrapper}>
-        <InputPassword value={password} handleChange={handleChange} name="password" />
-      </div>
-
+      {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
+        <AuthorizationByEmail
+          handleChange={handleChange}
+          email={email}
+          password={password}
+          errors={errors}
+          rememberMe={rememberMe}
+          handleRemberMe={handleRemberMe}
+          handleAuthMethod={handleAuthMethod}
+        />
+      )}
+      {isRegistrationByPhone && !isPhoneNumberConfirmation && (
+        <ByPhoneNumber
+          handleAuthMethod={handleAuthMethod}
+          authMethodText="Авторизоваться по Email"
+          handleChange={handleChange}
+          phoneNumber={phoneNumber}
+        />
+      )}
+      {isPhoneNumberConfirmation && (
+        <PhoneNumberConfirmation
+          handleChange={handleChange}
+          confirmationСode={confirmationСode}
+          handleAuthMethod={() => {
+            setConfirmationCode('');
+            setIsPhoneNumberConfirmation(false);
+          }}
+        />
+      )}
       <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
-        Войти
+        {buttonTitle}
       </Button>
       <span className={styles.error}>{errors.errorMassege}</span>
 

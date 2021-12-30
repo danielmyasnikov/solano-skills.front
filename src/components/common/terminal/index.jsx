@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
-
+import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import 'brace/mode/python';
 import 'brace/ext/language_tools';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -12,8 +12,17 @@ import styles from './styles.module.less';
 import './terminal.module.less';
 import { checkAnswer, compileCode } from '@store/terminal/actions';
 
-function Terminal({ sampleCode, solution, isGraphRequired, correct, exerciseId, bytePayload }) {
+function Terminal({
+  sampleCode,
+  solution,
+  isGraphRequired,
+  correct,
+  exerciseId,
+  bytePayload,
+  isAuth,
+}) {
   const [value, setValue] = useState();
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
   useEffect(() => {
@@ -31,6 +40,7 @@ function Terminal({ sampleCode, solution, isGraphRequired, correct, exerciseId, 
   }
   return (
     <div className={styles.terminalContainer}>
+      {registrationModalOpen && <RegistrationModal />}
       <div className={styles.terminalHeader}>
         <div
           onClick={() => setActiveTab('script')}
@@ -89,13 +99,17 @@ function Terminal({ sampleCode, solution, isGraphRequired, correct, exerciseId, 
             <Button
               variant={'outlineWhite'}
               onClick={() => {
-                dispatch(
-                  compileCode(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
-                );
+                if (isAuth) {
+                  dispatch(
+                    compileCode(
+                      activeTab === 'solution' ? solution : value,
+                      exerciseId,
+                      isGraphRequired,
+                    ),
+                  );
+                } else {
+                  setRegistrationModalOpen(true)
+                }
               }}
               disabled={correct}
             >
@@ -104,20 +118,24 @@ function Terminal({ sampleCode, solution, isGraphRequired, correct, exerciseId, 
             <Button
               variant="containedWhite"
               onClick={() => {
-                dispatch(
-                  compileCode(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
-                );
-                dispatch(
-                  checkAnswer(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
-                );
+                if (isAuth) {
+                  dispatch(
+                    compileCode(
+                      activeTab === 'solution' ? solution : value,
+                      exerciseId,
+                      isGraphRequired,
+                    ),
+                  );
+                  dispatch(
+                    checkAnswer(
+                      activeTab === 'solution' ? solution : value,
+                      exerciseId,
+                      isGraphRequired,
+                    ),
+                  );
+                } else {
+                  setRegistrationModalOpen(true)
+                }
               }}
               disabled={correct}
             >

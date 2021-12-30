@@ -15,10 +15,13 @@ import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
+import RegistrationModal from '@components/common/modals/registration/registrationModal';
 
-function QuizTemplate({ onSubmit }) {
+function QuizTemplate({ onSubmit, isAuth }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
+  const [withoutHint, setWithoutHint] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [errorMessage, setErrorMessage] = useState();
   const [hint, setHint] = useState();
@@ -26,6 +29,12 @@ function QuizTemplate({ onSubmit }) {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
+  useEffect(() => {
+    setWithoutHint(exercise.hint ? true : false);
+    setHint(false);
+    setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
+    setCompletedTaskModalOpen(false);
+  }, [exercise]);
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
@@ -40,6 +49,7 @@ function QuizTemplate({ onSubmit }) {
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
+      {registrationModalOpen && <RegistrationModal />}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
@@ -60,19 +70,24 @@ function QuizTemplate({ onSubmit }) {
                 ))}
               </div>
               <div className={styles.btnContainer}>
-                {!hint && (
-                  <Button
-                    className={styles.btn}
-                    variant="outlinePurple"
-                    onClick={() => setHint(true)}
-                  >
-                    Подсказка (-30 XP)
-                  </Button>
-                )}
+                {!hint === false ||
+                  (withoutHint === true && (
+                    <Button
+                      className={styles.btn}
+                      variant="outlinePurple"
+                      onClick={() => setHint(true)}
+                    >
+                      Подсказка (-30 XP)
+                    </Button>
+                  ))}
                 <Button
                   variant="containedPurple"
                   onClick={() => {
-                    checkAnswer();
+                    if (isAuth) {
+                      checkAnswer();
+                    } else {
+                      setRegistrationModalOpen(true);
+                    }
                   }}
                 >
                   Ответить
@@ -90,6 +105,7 @@ function QuizTemplate({ onSubmit }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            correctMessage={exercise?.correct_message}
             onClose={() => setCompletedTaskModalOpen(false)}
             onClick={() => {
               onSubmit();

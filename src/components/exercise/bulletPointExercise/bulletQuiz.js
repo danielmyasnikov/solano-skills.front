@@ -28,7 +28,6 @@ function BulletQuiz({ exercise }) {
     dispatch(getExercise(courseId, exerciseId));
   }, []);
   const checkAnswer = () => {
-    console.log(errorMessage)
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
@@ -51,7 +50,6 @@ function BulletQuiz({ exercise }) {
                       checked={answer.value === item.value}
                       className={styles.quizItem}
                       onChange={(e) => {
-                        console.log(answer)
                         setAnswer(item);
                       }}
                       value={item.value}
@@ -60,7 +58,7 @@ function BulletQuiz({ exercise }) {
                 ))}
               </div>
               <div className={styles.btnContainer}>
-                {!hint && (
+                {!hint || withoutHint === true  && (
                   <Button
                     className={styles.btn}
                     variant="outlinePurple"
@@ -90,6 +88,7 @@ function BulletQuiz({ exercise }) {
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
+            correctMessage={exercise?.correct_message}
             onClose={() => setCompletedTaskModalOpen(false)}
             onClick={() => {
               onSubmit();
