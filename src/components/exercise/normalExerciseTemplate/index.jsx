@@ -15,7 +15,7 @@ import Button from '@components/mui/button';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
 
-function NormalExerciseTemplate({ onSubmit }) {
+function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [solution, setSolution] = useState();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -105,6 +105,7 @@ function NormalExerciseTemplate({ onSubmit }) {
           sampleCode={exercise.sample_code}
           exerciseId={exerciseId}
           correct={correct}
+          isAuth={isAuth}
           bytePayload={terminal.bytePayload}
           isGraphRequired={exercise.is_graph_required}
         />

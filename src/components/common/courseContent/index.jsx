@@ -11,6 +11,10 @@ import { useHistory } from 'react-router';
 export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   const history = useHistory();
   const [open, setOpen] = useState();
+  const [active, setActive] = useState();
+  useEffect(() => {
+    setActive(coursePartSlug);
+  }, []);
   const ExerciseTypeImage = ({ type }) => {
     switch (type) {
       case 'normal_exercise':
@@ -55,8 +59,7 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
                 className={cn(styles.btnContent, { [styles.btnContentOpen]: open === i })}
                 variant="outlineBlack"
                 onClick={() => {
-                  console.log(partItem);
-                  setOpen(i !== open ? i : '');
+                  setActive(partItem.slug !== active ? partItem.slug : '');
                 }}
               >
                 Содержание раздела
@@ -64,7 +67,7 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
               </Button>
             </div>
           </div>
-          <div className={cn(styles.listWrap, { [styles.downOpen]: open === i })}>
+          <div className={cn(styles.listWrap, { [styles.downOpen]: active === partItem.slug })}>
             {partItem.exercises.map((item, i) => (
               <div
                 key={item.title}

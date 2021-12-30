@@ -8,7 +8,12 @@ const CourseContentModal = ({ onClose, isOpen, parts, slug, coursePartSlug }) =>
     <Modal open={isOpen} onClose={onClose}>
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <CourseContent onClose={onClose} parts={parts} slug={slug} coursePartSlug={coursePartSlug} />
+          <CourseContent
+            onClose={onClose}
+            parts={parts}
+            slug={slug}
+            coursePartSlug={coursePartSlug}
+          />
         </div>
       </div>
     </Modal>

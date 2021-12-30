@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getExercise } from '@store/exercise/actions';
@@ -10,6 +10,7 @@ import styles from './styles.module.less';
 import NormalExerciseTemplate from './normalExerciseTemplate';
 import { VideoExercise } from './videoExercise';
 import BulletPointExercise from './bulletPointExercise';
+import * as AuthStore from '@store/auth';
 
 function ExercisePage() {
   const { courseId, exerciseId } = useParams();
@@ -17,10 +18,19 @@ function ExercisePage() {
   const location = useLocation();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
+  const [isAuth, setIsAuth] = useState(false);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
   useEffect(() => {
     dispatch(clearTerminal());
     dispatch(getExercise(courseId, exerciseId));
   }, [location.pathname]);
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [headers]);
   const onSubmit = () => {
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
     dispatch(getExercise(courseId, exercise.next_exercise_id));
@@ -30,23 +40,23 @@ function ExercisePage() {
       case 'quiz':
         return (
           <div className={styles.exerciseContainer}>
-            <QuizTemplate onSubmit={onSubmit} />
+            <QuizTemplate isAuth={isAuth} onSubmit={onSubmit} />
           </div>
         );
       case 'normal_exercise':
         return (
           <div className={styles.exerciseContainer}>
-            <NormalExerciseTemplate onSubmit={onSubmit} />{' '}
+            <NormalExerciseTemplate isAuth={isAuth} onSubmit={onSubmit} />{' '}
           </div>
         );
       case 'bullet_point_exercise':
         return (
           <div className={styles.exerciseContainer}>
-            <BulletPointExercise onSubmit={onSubmit} />{' '}
+            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} />{' '}
           </div>
         );
       case 'video':
-        return <VideoExercise onSubmit={onSubmit} />;
+        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} />;
       default:
         break;
     }
