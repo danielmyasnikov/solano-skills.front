@@ -15,9 +15,11 @@ import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
+import RegistrationModal from '@components/common/modals/registration/registrationModal';
 
-function QuizTemplate({ onSubmit }) {
+function QuizTemplate({ onSubmit, isAuth }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [withoutHint, setWithoutHint] = useState(false);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -47,6 +49,7 @@ function QuizTemplate({ onSubmit }) {
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
+      {registrationModalOpen && <RegistrationModal />}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
@@ -80,7 +83,11 @@ function QuizTemplate({ onSubmit }) {
                 <Button
                   variant="containedPurple"
                   onClick={() => {
-                    checkAnswer();
+                    if (isAuth) {
+                      checkAnswer();
+                    } else {
+                      setRegistrationModalOpen(true);
+                    }
                   }}
                 >
                   Ответить

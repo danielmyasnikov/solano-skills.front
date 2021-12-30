@@ -74,12 +74,10 @@ function BulletPointExercise({ onSubmit }) {
     }
   }, [terminal]);
   const checkAnswer = () => {
-    console.log(errorMessage);
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
     } else {
-      console.log(errorMessage);
       setErrorMessage(answer.error);
     }
   };

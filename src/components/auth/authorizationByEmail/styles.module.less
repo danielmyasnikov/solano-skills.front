@@ -20,28 +20,6 @@
   color: var(--color-black);
 }
 
-.input {
-  display: flex;
-  align-items: center;
-  justify-self: flex-start;
-  border: 1px solid #7469ef;
-  border-radius: 58px;
-  padding: 14px 30px;
-  margin-top: 10px;
-  font-family: Nunito;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 127%;
-  width: 100%;
-  background: transparent;
-  &::placeholder {
-    color: #adb5bd;
-  }
-  &:focus {
-    outline: none;
-  }
-}
-
 .inputWrapper {
   max-width: 564px;
   width: 100%;
@@ -51,13 +29,55 @@
     font-family: 'Nunito';
     font-weight: 600;
   }
+  .error {
+    margin-left: 30px;
+  }
+}
+
+.inputWrapperError {
+  :global {
+    .MuiInput-root {
+      border: 1px solid #f44336;
+      background: #f1e6e5;
+    }
+  }
+}
+
+.link {
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 16px;
+  color: var(--purple);
+}
+
+.subTitileError {
+  color: #621b16;
 }
 
 .infoWrapper {
+  width: 100%;
   margin-top: 14px;
   display: flex;
-  flex-flow: row nowrap;
+  justify-content: space-between;
   align-items: center;
+  .rememberMe {
+    display: flex;
+    align-items: center;
+    .rememberMeInfo {
+      font-family: 'Nunito';
+      cursor: pointer;
+      color: #2d2d2d;
+      font-weight: normal;
+      font-size: 16px;
+    }
+  }
+  .forgotPassword {
+    color: #bcbcbc;
+    font-weight: normal;
+    font-size: 16px;
+    font-family: 'Nunito';
+    cursor: pointer;
+  }
 }
 
 .info {
@@ -76,14 +96,8 @@
   margin-top: 30px !important;
   width: max-content;
 }
-.link {
-  cursor: pointer;
-  margin-top: 15px;
-  font-size: 16px;
-  color: var(--purple);
-}
+
 .toAuth {
-  margin-top: 70px;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

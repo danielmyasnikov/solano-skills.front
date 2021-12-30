@@ -15,7 +15,7 @@ export const RegistrationByEmail = ({
   errors,
   checkedError,
   checked,
-  handleRegistrationMethod,
+  handleAuthMethod,
 }) => {
   return (
     <>
@@ -26,7 +26,7 @@ export const RegistrationByEmail = ({
         <Input value={email} handleChange={handleChange} name="email" />
         {errors.emailError && <span className={styles.error}>{errors.emailError}</span>}
       </div>
-      <div onClick={() => handleRegistrationMethod()} className={styles.link}>
+      <div onClick={() => handleAuthMethod()} className={styles.link}>
         Регистрация по номеру телефона
       </div>
       <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.passwordError })}>

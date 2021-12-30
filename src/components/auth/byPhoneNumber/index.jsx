@@ -3,12 +3,16 @@ import styles from './styles.module.less';
 import cn from 'classnames';
 import InputMask from 'react-input-mask';
 
-export const RegistrationByPhone = ({ handleRegistrationMethod, handleChange, phoneNumber, errors }) => {
+export const ByPhoneNumber = ({
+  handleAuthMethod,
+  authMethodText,
+  handleChange,
+  phoneNumber,
+  errors,
+}) => {
   return (
     <>
-      <span className={cn(styles.subTitile)}>
-        Номер телефона
-      </span>
+      <span className={cn(styles.subTitile)}>Номер телефона</span>
       <InputMask
         value={phoneNumber}
         className={styles.input}
@@ -16,9 +20,11 @@ export const RegistrationByPhone = ({ handleRegistrationMethod, handleChange, ph
         maskChar="_"
         alwaysShowMask={true}
         mask="+7\ (999) 999-99-99"
+        name="phone"
+        type="tel"
       ></InputMask>
-      <div onClick={() => handleRegistrationMethod()} className={styles.link}>
-        Регистрация по почте
+      <div onClick={() => handleAuthMethod()} className={styles.link}>
+        {authMethodText}
       </div>
     </>
   );
