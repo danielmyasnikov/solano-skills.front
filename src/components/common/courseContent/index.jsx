@@ -10,7 +10,6 @@ import { useHistory } from 'react-router';
 
 export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   const history = useHistory();
-  const [open, setOpen] = useState();
   const [active, setActive] = useState();
   useEffect(() => {
     setActive(coursePartSlug);
@@ -56,7 +55,7 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
                 Изучать раздел
               </Button>
               <Button
-                className={cn(styles.btnContent, { [styles.btnContentOpen]: open === i })}
+                className={cn(styles.btnContent, { [styles.btnContentOpen]: active === partItem.slug })}
                 variant="outlineBlack"
                 onClick={() => {
                   setActive(partItem.slug !== active ? partItem.slug : '');
