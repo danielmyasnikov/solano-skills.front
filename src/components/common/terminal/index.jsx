@@ -108,7 +108,7 @@ function Terminal({
                     ),
                   );
                 } else {
-                  setRegistrationModalOpen(true)
+                  // setRegistrationModalOpen(true)
                 }
               }}
               disabled={correct}
@@ -134,7 +134,7 @@ function Terminal({
                     ),
                   );
                 } else {
-                  setRegistrationModalOpen(true)
+                  // setRegistrationModalOpen(true)
                 }
               }}
               disabled={correct}

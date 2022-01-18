@@ -86,7 +86,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
                     if (isAuth) {
                       checkAnswer();
                     } else {
-                      setRegistrationModalOpen(true);
+                      // setRegistrationModalOpen(true);
                     }
                   }}
                 >
