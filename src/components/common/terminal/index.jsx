@@ -99,17 +99,17 @@ function Terminal({
             <Button
               variant={'outlineWhite'}
               onClick={() => {
-                if (isAuth) {
-                  dispatch(
-                    compileCode(
-                      activeTab === 'solution' ? solution : value,
-                      exerciseId,
-                      isGraphRequired,
-                    ),
-                  );
-                } else {
-                  setRegistrationModalOpen(true)
-                }
+                // if (isAuth) {
+                dispatch(
+                  compileCode(
+                    activeTab === 'solution' ? solution : value,
+                    exerciseId,
+                    isGraphRequired,
+                  ),
+                );
+                // } else {
+                //   setRegistrationModalOpen(true);
+                // }
               }}
               disabled={correct}
             >
@@ -118,24 +118,24 @@ function Terminal({
             <Button
               variant="containedWhite"
               onClick={() => {
-                if (isAuth) {
-                  dispatch(
-                    compileCode(
-                      activeTab === 'solution' ? solution : value,
-                      exerciseId,
-                      isGraphRequired,
-                    ),
-                  );
-                  dispatch(
-                    checkAnswer(
-                      activeTab === 'solution' ? solution : value,
-                      exerciseId,
-                      isGraphRequired,
-                    ),
-                  );
-                } else {
-                  setRegistrationModalOpen(true)
-                }
+                // if (isAuth) {
+                dispatch(
+                  compileCode(
+                    activeTab === 'solution' ? solution : value,
+                    exerciseId,
+                    isGraphRequired,
+                  ),
+                );
+                dispatch(
+                  checkAnswer(
+                    activeTab === 'solution' ? solution : value,
+                    exerciseId,
+                    isGraphRequired,
+                  ),
+                );
+                // } else {
+                //   setRegistrationModalOpen(true)
+                // }
               }}
               disabled={correct}
             >
