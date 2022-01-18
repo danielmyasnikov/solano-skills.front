@@ -5,10 +5,16 @@ import Done from '@assets/Done.js';
 import cn from 'classnames';
 
 export const NormalInstruction = ({ children, xp }) => {
+  const [isInstructionHidden, setIsInstructionHidden] = useState(false);
+
+  const handleSize = () => {
+    setIsInstructionHidden(!isInstructionHidden);
+  };
+
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.left__side}>
+        <div onClick={handleSize} className={styles.left__side}>
           <InstructionSvg />
           <span className={styles.title}>Инструкции</span>
         </div>
@@ -40,24 +46,30 @@ export const BulletInstruction = ({
           <div className={styles.experience}>{xp} xp</div>
         </div>
         <div className={styles.right__side}>
-          {nestedExercise && nestedExercise.map((item, i) => (
-            <div
-              key={i}
-              className={cn(styles.bulletPoint, {
-                [styles.activeBulletPoint]: activeExercise === i,
-                [styles.doneBulletPoint]: doneExercises?.find((item) => item.activeExercise === i),
-              })}
-              onClick={() => {
-                if (doneExercises?.find((item) => item.activeExercise === i) || doneExercises?.find((item) => item.activeExercise === i - 1)) {
-                  onSetActiveExercise({ activeExercise: i });
-                }
-              }}
-            >
-              <span>
-                {doneExercises?.find((item) => item.activeExercise === i) ? <Done /> : i + 1}
-              </span>
-            </div>
-          ))}
+          {nestedExercise &&
+            nestedExercise.map((item, i) => (
+              <div
+                key={i}
+                className={cn(styles.bulletPoint, {
+                  [styles.activeBulletPoint]: activeExercise === i,
+                  [styles.doneBulletPoint]: doneExercises?.find(
+                    (item) => item.activeExercise === i,
+                  ),
+                })}
+                onClick={() => {
+                  if (
+                    doneExercises?.find((item) => item.activeExercise === i) ||
+                    doneExercises?.find((item) => item.activeExercise === i - 1)
+                  ) {
+                    onSetActiveExercise({ activeExercise: i });
+                  }
+                }}
+              >
+                <span>
+                  {doneExercises?.find((item) => item.activeExercise === i) ? <Done /> : i + 1}
+                </span>
+              </div>
+            ))}
         </div>
       </div>
       {children}

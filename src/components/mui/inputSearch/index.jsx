@@ -3,11 +3,13 @@ import { InputAdornment, InputUnstyled } from '@mui/material';
 import Search from '@assets/Search';
 import styles from './styles.module.less'
 
-const Input = ({ placeholder }) => {
+const Input = ({ placeholder, onChange, search }) => {
   return (
     <InputUnstyled
       placeholder={placeholder}
       className={styles.search}
+      onChange={onChange}
+      value={search}
       startAdornment={
         <InputAdornment position="start">
           <Search />

@@ -9,7 +9,6 @@ export function* loadCourcesList() {
       type: LOAD_COURSES,
       payload: response,
     });
-    console.log(response)
   } catch (e) {}
 }
 

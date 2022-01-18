@@ -143,7 +143,7 @@ export const buttonTheme = createTheme({
               path: {
                 transition: '0.2s ease-in-out',
                 fill: '#7469EF',
-              }
+              },
             },
           },
         },
@@ -242,95 +242,6 @@ export const menuTheme = createTheme({
           margin: '12px 36px 20px 36px',
         },
       },
-    },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          alignItems: 'center',
-          boxShadow: 'none',
-          marginTop: '73px',
-          height: 'calc(100% - 73px)!important',
-          justifyContent: 'space-between',
-        },
-      },
-    },
-    MuiModal: {
-      styleOverrides: {
-        root: {
-          marginTop: '73px',
-        },
-      },
-      variants: [
-        {
-          props: { variant: 'mainHeader' },
-          style: {
-            [breakpoints.between('xs', 'md')]: {
-              marginTop: 0,
-            },
-          },
-        },
-      ],
-    },
-    MuiBackdrop: {
-      styleOverrides: {
-        root: {
-          marginTop: '73px',
-        },
-      },
-      variants: [
-        {
-          props: { variant: 'mainHeader' },
-          style: {
-            [breakpoints.between('xs', 'md')]: {
-              marginTop: 0,
-            },
-          },
-        },
-      ],
-    },
-    MuiDrawer: {
-      variants: [
-        {
-          props: { variant: 'mainHeader' },
-          style: {
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            left: 'auto',
-            right: 'auto',
-            top: 'auto',
-            bottom: 'auto',
-            zIndex: '75',
-            '& .MuiBackdrop-root': {
-              left: 'auto',
-              right: 'auto',
-              top: 'auto',
-              bottom: 'auto',
-              backgroundColor: 'transparent',
-              [breakpoints.between('xs', 'md')]: {
-                left: '0',
-                right: '0',
-                top: '0',
-                bottom: '0',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                marginTop: '0',
-              },
-            },
-            '& .MuiDrawer-paper': {
-              [breakpoints.between('xs', 'md')]: {
-                height: '100%!important',
-                marginTop: '0',
-              },
-            },
-            [breakpoints.between('xs', 'md')]: {
-              left: '0',
-              right: '0',
-              top: '0',
-              bottom: '0',
-            },
-          },
-        },
-      ],
     },
   },
 });

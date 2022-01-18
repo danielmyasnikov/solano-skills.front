@@ -1,5 +1,6 @@
 .exerciseContainer {
   display: flex;
+  width: 100%;
   height: calc(100vh - 150px);
 }
 
@@ -8,10 +9,22 @@
 }
 
 .sidebar {
+  position: relative;
+  overflow-x: hidden;
   padding-bottom: 15px;
   background: #ffffff;
   box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.04);
   border-radius: 18px;
+}
+
+.draggable {
+  position: absolute;
+  cursor: col-resize;
+  background: #7469ef4d;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
 }
 
 .layout {
@@ -57,7 +70,7 @@
 }
 
 .terminal {
-  width: 57%;
+  flex: 1;
 }
 
 .outputContainer {
@@ -80,7 +93,7 @@
   .shell {
     display: block;
     color: #fff;
-    &:not(&:first-child){
+    &:not(&:first-child) {
       margin-top: 15px;
     }
   }
