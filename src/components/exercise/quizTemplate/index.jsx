@@ -83,11 +83,11 @@ function QuizTemplate({ onSubmit, isAuth }) {
                 <Button
                   variant="containedPurple"
                   onClick={() => {
-                    if (isAuth) {
-                      checkAnswer();
-                    } else {
-                      // setRegistrationModalOpen(true);
-                    }
+                    // if (isAuth) {
+                    checkAnswer();
+                    // } else {
+                    //   setRegistrationModalOpen(true);
+                    // }
                   }}
                 >
                   Ответить
