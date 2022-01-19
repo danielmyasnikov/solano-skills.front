@@ -11,7 +11,7 @@ import { useRef } from 'react';
 
 const Profile = () => {
   const [fullnameActive, setFullnameActive] = useState(false);
-  const [fullName, setFullName] = useState('Кира Борисенко');
+  const [fullName, setFullName] = useState('Dan Myasnikov');
 
   const EditFragment = ({ name }) => {
     return (
