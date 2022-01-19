@@ -3,7 +3,6 @@ import styles from './styles.module.less';
 import Prev from '@assets/Prev.js';
 import Next from '@assets/Next.js';
 import MenuCourse from '@assets/MenuCourse.js';
-import Menu from '@components/mui/menu';
 import Button from '@components/mui/button';
 import cn from 'classnames';
 import Burger from '@assets/Burger';
@@ -14,9 +13,8 @@ import { selectExercise } from '@store/exercise/selector';
 import { useHistory, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-const HeaderExercise = () => {
+const HeaderExercise = ({ handleSidebar, headerRef }) => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
   const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
   const { courseId } = useParams();
   const location = useLocation();
@@ -35,7 +33,7 @@ const HeaderExercise = () => {
   }, [location.pathname]);
 
   return (
-    <div className={styles.wrapper}>
+    <div ref={headerRef} className={styles.wrapper}>
       {courseContentIsOpen && (
         <CourseContentModal
           slug={courseId}
@@ -45,10 +43,9 @@ const HeaderExercise = () => {
           onClose={() => setCourseContentIsOpen(!courseContentIsOpen)}
         />
       )}
-      <Menu className={styles.drawer} isOpen={isOpen} />
       <header className={styles.header}>
         <div className={styles.headerItem}>
-          <div onClick={() => setIsOpen(!isOpen)} className={styles.burgerMenu}>
+          <div onClick={handleSidebar} className={styles.burgerMenu}>
             <Burger />
           </div>
         </div>
