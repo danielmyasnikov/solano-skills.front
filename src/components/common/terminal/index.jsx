@@ -11,6 +11,8 @@ import Reset from '@assets/Reset.js';
 import styles from './styles.module.less';
 import './terminal.module.less';
 import { checkAnswer, compileCode } from '@store/terminal/actions';
+import Plots from '@assets/Plots';
+import GraphArrow from '@assets/GraphArrow';
 
 function Terminal({
   sampleCode,
@@ -22,9 +24,11 @@ function Terminal({
   isAuth,
 }) {
   const [value, setValue] = useState();
+  const [activeBytePayload, setActiveBytePayload] = useState(0);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (solution) {
       setActiveTab('solution');
@@ -32,36 +36,56 @@ function Terminal({
       setValue(sampleCode);
     }
   }, [sampleCode, solution]);
+
   useEffect(() => {
     setActiveTab('script');
   }, [sampleCode]);
+
   function onChange(value) {
     setValue(value);
   }
+
+  const handleActiveBytePayload = (action) => {
+    if (action === 'add' && activeBytePayload < bytePayload.length - 1) {
+      setActiveBytePayload(activeBytePayload + 1);
+    }
+    if (action === 'sub' && activeBytePayload > 0) {
+      setActiveBytePayload(activeBytePayload - 1);
+    }
+  };
+
+  const OpenNewWindow = () => {
+    window.open()
+  }
+
+  useEffect(() => {
+    setActiveBytePayload(bytePayload.length - 1);
+  }, [bytePayload]);
+
   return (
-    <div className={styles.terminalContainer}>
+    <div
+      className={cn(styles.terminalContainer, {
+        [styles.terminalWithGraph]: isGraphRequired && bytePayload.length > 0,
+      })}
+    >
       {registrationModalOpen && <RegistrationModal />}
-      <div className={styles.terminalHeader}>
-        <div
-          onClick={() => setActiveTab('script')}
-          className={cn(activeTab === 'script' ? styles.tabActive : '', styles.tab)}
-        >
-          script.py
-        </div>
-        {solution && (
+      <div className={styles.terminalWrapper}>
+        <div className={styles.terminalHeader}>
           <div
-            onClick={() => setActiveTab('solution')}
-            className={cn(activeTab === 'solution' ? styles.tabActive : '', styles.tab)}
+            onClick={() => setActiveTab('script')}
+            className={cn(activeTab === 'script' ? styles.tabActive : '', styles.tab)}
           >
-            solution.py
+            script.py
           </div>
-        )}
-      </div>
-      <div
-        className={cn(styles.terminalWrapper, {
-          [styles.terminalWithGraph]: bytePayload && isGraphRequired,
-        })}
-      >
+          {solution && (
+            <div
+              onClick={() => setActiveTab('solution')}
+              className={cn(activeTab === 'solution' ? styles.tabActive : '', styles.tab)}
+            >
+              solution.py
+            </div>
+          )}
+        </div>
         <div className={styles.terminal}>
           <AceEditor
             mode="python"
@@ -99,6 +123,7 @@ function Terminal({
             <Button
               variant={'outlineWhite'}
               onClick={() => {
+<<<<<<< HEAD
                 // if (isAuth) {
                 dispatch(
                   compileCode(
@@ -110,6 +135,19 @@ function Terminal({
                 // } else {
                 //   setRegistrationModalOpen(true);
                 // }
+=======
+                if (isAuth) {
+                  dispatch(
+                    compileCode(
+                      activeTab === 'solution' ? solution : value,
+                      exerciseId,
+                      isGraphRequired,
+                    ),
+                  );
+                } else {
+                  setRegistrationModalOpen(true);
+                }
+>>>>>>> cb209473be75f6de3a70106e7ddebbcc6ec06fbf
               }}
               disabled={correct}
             >
@@ -143,12 +181,42 @@ function Terminal({
             </Button>
           </div>
         </div>
-        {isGraphRequired && bytePayload && (
-          <div className={styles.bytePayload}>
-            <img src={bytePayload} />
-          </div>
-        )}
       </div>
+      {isGraphRequired && bytePayload.length > 0 && (
+        <div className={styles.bytePayload}>
+          <div className={styles.terminalHeader}>
+            <div className={cn(styles.tabActive, styles.tab)}>
+              Графики
+              <a onClick={() => OpenNewWindow()} target='_blank'><Plots /></a>
+            </div>
+          </div>
+          <div className={styles.content}>
+            <div className={styles.graph}>
+              <img src={bytePayload[activeBytePayload]?.payload} />
+            </div>
+            <div className={styles.btnWrap}>
+              <button
+                className={cn({ [styles.disable]: activeBytePayload === 0 })}
+                onClick={() => handleActiveBytePayload('sub')}
+              >
+                <GraphArrow />
+                Назад
+              </button>
+              <div className={styles.count}>
+                {activeBytePayload + 1}
+                <span className={styles.disable}>/{bytePayload.length}</span>
+              </div>
+              <button
+                className={cn({ [styles.disable]: activeBytePayload === bytePayload.length - 1 })}
+                onClick={() => handleActiveBytePayload('add')}
+              >
+                Вперед
+                <GraphArrow />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
