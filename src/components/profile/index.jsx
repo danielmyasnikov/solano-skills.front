@@ -8,6 +8,7 @@ import Button from '@components/mui/button';
 import { Link } from 'react-router-dom';
 import Card from './card';
 import { useRef } from 'react';
+import CropImage from './cropImage';
 
 const Profile = () => {
   const [fullnameActive, setFullnameActive] = useState(false);

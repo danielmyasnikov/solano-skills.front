@@ -14,17 +14,29 @@
 .terminalWithGraph {
   display: flex;
   justify-content: space-between;
-  .terminal {
-    width: 50%;
+  .terminalWrapper {
+    width: calc(50% - 5px);
   }
 }
 
 .bytePayload {
   position: relative;
   width: calc(50% - 5px);
-  background: #2c2a3f;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.04);
+  .terminalHeader {
+    .tab {
+      position: relative;
+      padding-right: 49px;
+      svg {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
   img {
     position: absolute;
     left: 50%;
@@ -35,6 +47,57 @@
     width: 100%;
     max-width: 400px;
     height: auto;
+  }
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 40px);
+}
+
+.graph {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.btnWrap {
+  display: flex;
+  justify-content: space-between;
+  button {
+    cursor: pointer;
+    font-family: Jost;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    background: none;
+    margin: 0 20px;
+    &:first-child {
+      svg {
+        margin-right: 10px;
+      }
+    }
+    &:last-child {
+      svg {
+        margin-left: 10px;
+        transform: rotate(-180deg);
+      }
+    }
+  }
+  .count {
+    font-family: Jost;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.disable {
+  font-size: 14px;
+  color: #b2b2b2;
+  path {
+    stroke: #b2b2b2;
   }
 }
 

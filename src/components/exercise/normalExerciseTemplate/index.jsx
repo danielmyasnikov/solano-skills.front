@@ -14,8 +14,11 @@ import { NormalInstruction } from '@components/instruction';
 import Button from '@components/mui/button';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
+import Draggable from '@assets/Draggable';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
+  const [bytePayload, setBytePayload] = useState([]);
+  const [height, setHeight] = useState(0);
   const [solution, setSolution] = useState();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -29,6 +32,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const contentRef = useRef();
   const resizableRef = useRef();
   const layoutRef = useRef();
+  const sidebarRef = useRef();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
 
@@ -67,14 +71,21 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     if (terminal.message.error) {
       errorRef.current?.scrollIntoView();
     }
+    if (terminal.bytePayload !== '' && terminal.status === 'success') {
+      setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
+    }
   }, [terminal]);
+
+  useEffect(() => {
+    setHeight(sidebarRef?.current?.offsetHeight);
+  }, []);
 
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
       <div ref={layoutRef} className={styles.layout}>
         <div ref={contentRef} className={styles.content}>
-          <div className={styles.sidebar}>
+          <div ref={sidebarRef} className={styles.sidebar}>
             <Exercise exercise={exercise} />
             <NormalInstruction xp={exercise.xp} onSubmit={() => setCompletedTaskModalOpen(true)}>
               <div
@@ -84,11 +95,14 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
             </NormalInstruction>
             <div
               ref={resizableRef}
+              style={{ marginTop: `${height / 2}px` }}
               className={styles.draggable}
               draggable={true}
               onDragStart={initial}
               onDrag={resize}
-            />
+            >
+              <Draggable />
+            </div>
           </div>
           <div ref={errorRef}>
             <ErrorMessage message={terminal.message.error} />
@@ -133,7 +147,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
           exerciseId={exerciseId}
           correct={correct}
           isAuth={isAuth}
-          bytePayload={terminal.bytePayload}
+          bytePayload={bytePayload}
           isGraphRequired={exercise.is_graph_required}
         />
         <Output presentation_url={exercise.presentation_url} variant="outputContainer" />

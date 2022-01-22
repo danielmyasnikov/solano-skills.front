@@ -16,6 +16,7 @@ import { Exercise } from '@components/common/exercise';
 
 function BulletPointExercise({ onSubmit, isAuth }) {
   const [solution, setSolution] = useState();
+  const [bytePayload, setBytePayload] = useState([]);
   const [xp, setXp] = useState(0);
   const [doneExercises, setDoneExercises] = useState([]);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -51,6 +52,9 @@ function BulletPointExercise({ onSubmit, isAuth }) {
       setMessage(terminal.message.error);
     } else {
       setMessage();
+    }
+    if (terminal.bytePayload !== '') {
+      setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
     }
   }, [terminal]);
 
@@ -213,7 +217,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
           exerciseId={exercise?.nested_exercises[activeExercise].id}
           correct={correct}
           isAuth={isAuth}
-          bytePayload={terminal.bytePayload}
+          bytePayload={bytePayload}
           isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
         />
         <Output presentation_url={exercise.presentation_url} variant="outputContainer" />

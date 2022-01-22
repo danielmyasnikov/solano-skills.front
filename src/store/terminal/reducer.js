@@ -21,7 +21,7 @@ export default function terminalReducer(state = initialState, action) {
         message: {
           status: '',
         },
-        bytePayload: action.payload.data.bytePayload || state.bytePayload,
+        bytePayload: action.payload.data.bytePayload,
       };
     }
     case COMPILE_SHELL_SUCCESSED: {
@@ -45,7 +45,7 @@ export default function terminalReducer(state = initialState, action) {
       return {
         outputs: [...state.outputs],
         message: action.payload.data,
-        bytePayload: action.payload.data.bytePayload || state.bytePayload,
+        bytePayload: '',
       };
     }
     case CLEAR_TERMINAL: {
