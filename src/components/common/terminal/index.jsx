@@ -123,7 +123,6 @@ function Terminal({
             <Button
               variant={'outlineWhite'}
               onClick={() => {
-<<<<<<< HEAD
                 // if (isAuth) {
                 dispatch(
                   compileCode(
@@ -135,19 +134,6 @@ function Terminal({
                 // } else {
                 //   setRegistrationModalOpen(true);
                 // }
-=======
-                if (isAuth) {
-                  dispatch(
-                    compileCode(
-                      activeTab === 'solution' ? solution : value,
-                      exerciseId,
-                      isGraphRequired,
-                    ),
-                  );
-                } else {
-                  setRegistrationModalOpen(true);
-                }
->>>>>>> cb209473be75f6de3a70106e7ddebbcc6ec06fbf
               }}
               disabled={correct}
             >
