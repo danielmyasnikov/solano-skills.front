@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { selectTerminal } from '@store/terminal/selector';
 import { selectExercise } from '@store/exercise/selector';
 import { QuizHint } from '@components/hint';
-import { NormalExercise } from '@components/common/exercise';
+import { Exercise } from '@components/common/exercise';
 import { NormalInstruction } from '@components/instruction';
 import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
@@ -53,7 +53,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
-            <NormalExercise />
+            <Exercise exercise={exercise} />
             <NormalInstruction onSubmit={() => setCompletedTaskModalOpen(true)}>
               <div className={styles.quiz}>
                 {exercise.answers.map((item) => (
@@ -83,11 +83,11 @@ function QuizTemplate({ onSubmit, isAuth }) {
                 <Button
                   variant="containedPurple"
                   onClick={() => {
-                    if (isAuth) {
-                      checkAnswer();
-                    } else {
-                      setRegistrationModalOpen(true);
-                    }
+                    // if (isAuth) {
+                    checkAnswer();
+                    // } else {
+                    //   setRegistrationModalOpen(true);
+                    // }
                   }}
                 >
                   Ответить
@@ -115,15 +115,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Output presentation_url={exercise.presentation_url} className={styles.quizOutputContainer}>
-          {terminal.outputs.map((item, i) => (
-            <React.Fragment key={i}>
-              <span className={styles[item.status]}>
-                {item.status === 'error' ? item.error : item.output}
-              </span>
-            </React.Fragment>
-          ))}
-        </Output>
+        <Output presentation_url={exercise.presentation_url} variant="quizOutputContainer" />
       </div>
     </>
   );

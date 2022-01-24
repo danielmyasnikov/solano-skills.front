@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   exercise: exerciseReducer,
   courses: coursesReducer,
   auth: authReducer,
-     course: courseReducer,
+  course: courseReducer,
 });
 
 export default rootReducer;

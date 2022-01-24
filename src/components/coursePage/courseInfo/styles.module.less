@@ -70,3 +70,51 @@
     margin-bottom: 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-wrap: wrap;
+    .blocks {
+      width: 100%;
+      margin-bottom: 20px;
+      .block {
+        width: 25%;
+      }
+    }
+    .btnWrapper {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .wrapper {
+    flex-wrap: wrap;
+    .blocks {
+      width: 100%;
+      margin-bottom: 20px;
+      .block {
+        width: 25%;
+      }
+    }
+    .btnWrapper {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .wrapper {
+    min-width: auto;
+    .blocks {
+      flex-wrap: wrap;
+      gap: 5px;
+      .block {
+        width: calc(50% - 5px);
+        &:not(:last-child) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

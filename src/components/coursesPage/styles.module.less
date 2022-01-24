@@ -1,6 +1,6 @@
 .wrapper {
   position: relative;
-  margin-left: 240px;
+  width: 100%;
 }
 
 .header {
@@ -17,6 +17,7 @@
   line-height: 127%;
   color: var(--color-white);
 }
+
 .description {
   margin-top: 12px;
   font-size: 20px;
@@ -32,8 +33,12 @@
   padding: 0 40px;
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 480px) {
   .wrapper {
-    margin-left: 0;
+    width: auto;
+    margin: 0 -20px;
+  }
+  .content {
+    padding: 0 20px;
   }
 }

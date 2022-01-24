@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
 import { Viewer, Worker } from '@react-pdf-viewer/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { compileShell } from '@store/terminal/actions';
 import { useParams } from 'react-router-dom';
+import { selectTerminal } from '@store/terminal/selector';
 
-const Output = ({ children, className, presentation_url }) => {
+const Output = ({ variant, presentation_url }) => {
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
   const { exerciseId } = useParams();
+  const terminal = useSelector(selectTerminal);
   const dispatch = useDispatch();
   const onSubmit = (e) => {
     if (e.keyCode === 13) {
@@ -35,7 +37,7 @@ const Output = ({ children, className, presentation_url }) => {
           Слайды
         </div>
       </div>
-      <div className={className}>
+      <div className={styles[variant]}>
         {activeTab === 'slides' && (
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
             <Viewer
@@ -49,7 +51,13 @@ const Output = ({ children, className, presentation_url }) => {
         )}
         {activeTab === 'output' && (
           <React.Fragment>
-            {children}
+            {terminal.outputs.map((item, i) => (
+              <React.Fragment key={i}>
+                <span className={styles[item.status]}>
+                  {item.status === 'error' ? item.error : item.output}
+                </span>
+              </React.Fragment>
+            ))}
             <div className={styles.shell}>
               <span>In [{lineNumber}]:</span>
               <input
