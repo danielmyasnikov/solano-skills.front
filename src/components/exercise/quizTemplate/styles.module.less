@@ -40,7 +40,7 @@ label {
 }
 
 .quizOutputContainer {
-  white-space: pre;
+  white-space: break-spaces;
   background: #2c2a3f;
   padding: 10px 20px;
   height: calc(100% - 50px);
@@ -54,13 +54,14 @@ label {
   .error {
     display: block;
     color: #d15555;
-    margin-bottom: 15px;
   }
   .shell {
     display: block;
     color: #fff;
+  }
+  span {
     &:not(&:first-child) {
-      margin-top: 15px;
+      margin-bottom: 15px;
     }
   }
 }
@@ -95,22 +96,6 @@ label {
 
 .outputHeader {
   margin-top: 5px;
-}
-.quiz {
-  margin: 0 20px 20px 20px;
-  .quizItem {
-    margin: 20px 0;
-    label {
-      font-size: 16px;
-      align-items: flex-start;
-    }
-    span {
-      font-family: 'Nunito', sans-serif;
-      font-size: 16px;
-      line-height: normal;
-      letter-spacing: normal;
-    }
-  }
 }
 
 .btnContainer {

@@ -53,7 +53,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     } else {
       setMessage();
     }
-    if (terminal.bytePayload !== '') {
+    if (terminal.bytePayload) {
       setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
     }
   }, [terminal]);
@@ -62,6 +62,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     setNestedExercise(exercise?.nested_exercises);
     setSolution('');
     setCorrect('');
+    setBytePayload([]);
     setHint(false);
     setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
     setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);

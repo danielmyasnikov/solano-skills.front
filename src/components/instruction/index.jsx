@@ -3,12 +3,30 @@ import styles from './styles.module.less';
 import InstructionSvg from '@assets/Instruction.js';
 import Done from '@assets/Done.js';
 import cn from 'classnames';
+import { InstructionQuizPart } from '@components/parts/instruction';
 
-export const NormalInstruction = ({ children, xp }) => {
+export const NormalInstruction = ({ exercise, children, xp, answer, handleAnswer }) => {
   const [isInstructionHidden, setIsInstructionHidden] = useState(false);
 
   const handleSize = () => {
     setIsInstructionHidden(!isInstructionHidden);
+  };
+
+  const RenderInstructionPart = () => {
+    console.log('test')
+    if (exercise) {
+      switch (exercise.type) {
+        case 'quiz':
+          console.log('test2')
+          return (
+            <InstructionQuizPart handleAnswer={handleAnswer} answer={answer} exercise={exercise} />
+          );
+        default:
+          return null;
+      }
+    } else {
+      return null;
+    }
   };
 
   return (
@@ -22,6 +40,7 @@ export const NormalInstruction = ({ children, xp }) => {
           <div className={styles.experience}>{xp} xp</div>
         </div>
       </div>
+      <RenderInstructionPart />
       {children}
     </>
   );

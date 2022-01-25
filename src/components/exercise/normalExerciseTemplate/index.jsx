@@ -54,6 +54,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   useEffect(() => {
     setSolution('');
     setCorrect('');
+    setBytePayload([]);
     setHint(false);
     setWithoutHint(exercise.hint ? true : false);
   }, [exercise]);
@@ -71,7 +72,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     if (terminal.message.error) {
       errorRef.current?.scrollIntoView();
     }
-    if (terminal.bytePayload !== '' && terminal.status === 'success') {
+    if (terminal.bytePayload) {
       setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
     }
   }, [terminal]);
