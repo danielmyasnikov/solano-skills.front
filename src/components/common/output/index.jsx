@@ -22,7 +22,7 @@ const Output = ({ variant, presentation_url }) => {
     }
   };
   return (
-    <>
+    <div className={styles.outputWrapper}>
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>
         <div
           onClick={() => setActiveTab('output')}
@@ -70,7 +70,7 @@ const Output = ({ variant, presentation_url }) => {
           </React.Fragment>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -41,11 +41,15 @@
   }
 }
 
+.outputWrapper {
+  height: calc(40% - 47px);
+}
+
 .outputContainer {
   white-space: break-spaces;
   background: #2c2a3f;
   padding: 10px 20px;
-  height: calc(40% - 47px);
+  height: 100%;
   overflow-y: auto;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
@@ -93,4 +97,15 @@
 
 .outputHeader {
   margin-top: 5px;
+}
+
+@media screen and (max-width: 640px) {
+  .outputWrapper {
+    margin-top: 40px;
+    min-height: 330px;
+    height: auto;
+  }
+  .outputContainer {
+    min-height: 330px;
+  }
 }

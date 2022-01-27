@@ -110,3 +110,23 @@
     }
   }
 }
+
+@media screen and (max-width: 640px) {
+  .draggable {
+    display: none;
+  }
+  .layout {
+    width: 100%;
+    .hintBtn {
+      margin-right: auto;
+    }
+  }
+  .terminal {
+    margin-top: 65px;
+    :global {
+      .ace_editor {
+        min-height: 596px;
+      }
+    }
+  }
+}

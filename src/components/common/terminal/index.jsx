@@ -55,8 +55,8 @@ function Terminal({
   };
 
   const OpenNewWindow = () => {
-    window.open()
-  }
+    window.open();
+  };
 
   useEffect(() => {
     setActiveBytePayload(bytePayload.length - 1);
@@ -98,6 +98,7 @@ function Terminal({
             defaultValue={sampleCode}
             value={activeTab === 'solution' ? solution : value}
             readOnly={activeTab === 'solution' ? true : false}
+            wrapEnabled={true}
             fontSize="16px"
             setOptions={{
               enableBasicAutocompletion: true,
@@ -173,7 +174,9 @@ function Terminal({
           <div className={styles.terminalHeader}>
             <div className={cn(styles.tabActive, styles.tab)}>
               Графики
-              <a onClick={() => OpenNewWindow()} target='_blank'><Plots /></a>
+              <a onClick={() => OpenNewWindow()} target="_blank">
+                <Plots />
+              </a>
             </div>
           </div>
           <div className={styles.content}>

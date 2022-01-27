@@ -166,3 +166,26 @@
 .outputHeader {
   margin-top: 5px;
 }
+
+@media screen and (max-width: 640px) {
+  .terminalContainer {
+    flex-direction: column;
+  }
+  .terminalWithGraph {
+    height: auto;
+    .terminalWrapper {
+      width: 100%;
+    }
+    .bytePayload {
+      width: 100%;
+      margin-top: 35px;
+      img {
+        position: static;
+        transform: none;
+      }
+      .btnWrap {
+        padding: 20px 0;
+      }
+    }
+  }
+}

@@ -15,10 +15,12 @@ import Button from '@components/mui/button';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
 import Draggable from '@assets/Draggable';
+import WarningMobile from '../../common/warningMobile';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
   const [height, setHeight] = useState(0);
+  const [isWarningHidden, setIsWarningHidden] = useState(false);
   const [solution, setSolution] = useState();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -81,8 +83,13 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     setHeight(sidebarRef?.current?.offsetHeight);
   }, []);
 
+  const closeWarning = () => {
+    setIsWarningHidden(true)
+  }
+
   return (
     <>
+      {!isWarningHidden && <WarningMobile handleClose={closeWarning} /> }
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
       <div ref={layoutRef} className={styles.layout}>
         <div ref={contentRef} className={styles.content}>
