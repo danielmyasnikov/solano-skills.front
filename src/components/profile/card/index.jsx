@@ -20,7 +20,7 @@ const Card = () => {
       <div className={cn(styles.card, styles.progress)}>
         <div className={styles.title}>
           Завершенные курсы
-          <Link>
+          <Link to='/'>
             Все <ArrowRight />
           </Link>
         </div>

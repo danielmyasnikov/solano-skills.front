@@ -29,15 +29,25 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
+
+  const handleAnswer = ( item ) => {
+    setAnswer(item);
+  };
+
   useEffect(() => {
     setWithoutHint(exercise.hint ? true : false);
     setHint(false);
     setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
     setCompletedTaskModalOpen(false);
   }, [exercise]);
+
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
+    if(!exercise) {
+      return null
+    }
   }, []);
+
   const checkAnswer = () => {
     if (answer.correct === true) {
       setErrorMessage('');
@@ -46,6 +56,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
       setErrorMessage(answer.error);
     }
   };
+
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
@@ -54,21 +65,13 @@ function QuizTemplate({ onSubmit, isAuth }) {
         <div className={styles.content}>
           <div className={styles.sidebar}>
             <Exercise exercise={exercise} />
-            <NormalInstruction onSubmit={() => setCompletedTaskModalOpen(true)}>
-              <div className={styles.quiz}>
-                {exercise.answers.map((item) => (
-                  <React.Fragment key={item.value}>
-                    <RadioButton
-                      checked={answer.value === item.value}
-                      className={styles.quizItem}
-                      onChange={(e) => {
-                        setAnswer(item);
-                      }}
-                      value={item.value}
-                    />
-                  </React.Fragment>
-                ))}
-              </div>
+            <NormalInstruction
+              answer={answer}
+              handleAnswer={handleAnswer}
+              exercise={exercise}
+              onSubmit={() => setCompletedTaskModalOpen(true)}
+            >
+              
               <div className={styles.btnContainer}>
                 {!hint === false ||
                   (withoutHint === true && (
@@ -83,11 +86,11 @@ function QuizTemplate({ onSubmit, isAuth }) {
                 <Button
                   variant="containedPurple"
                   onClick={() => {
-                    if (isAuth) {
-                      checkAnswer();
-                    } else {
-                      setRegistrationModalOpen(true);
-                    }
+                    // if (isAuth) {
+                    checkAnswer();
+                    // } else {
+                    //   setRegistrationModalOpen(true);
+                    // }
                   }}
                 >
                   Ответить

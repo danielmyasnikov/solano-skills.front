@@ -12,7 +12,7 @@ import {
   CLEAR_ERRORS,
 } from './actions';
 
-export function* setLocalHeaders(payload) {
+export function* setLocalHeaders({ payload }) {
   yield put({
     type: LOCAL_HEADERS,
     payload: payload.headers,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import AvatarDefault from '@assets/avatarDefault.png';
@@ -9,21 +9,36 @@ import { Link } from 'react-router-dom';
 import Card from './card';
 import { useRef } from 'react';
 import CropImage from './cropImage';
+import { useDispatch, useSelector } from 'react-redux';
+import * as AuthStore from '@store/auth';
+import { patchProfile, getProfile } from '@store/profile/actions';
+import { selectProfile } from '@store/profile/selector';
 
 const Profile = () => {
   const [fullnameActive, setFullnameActive] = useState(false);
-  const [fullName, setFullName] = useState('Кира Борисенко');
+  const [fullName, setFullName] = useState('');
+  const fullnameRef = useRef();
+  const dispatch = useDispatch();
+  const headers = useSelector(AuthStore.Selectors.getAuth);
+  const profile = useSelector(selectProfile);
+
+  const saveProfile = () => {
+    setFullName(fullnameRef.current.innerText);
+    dispatch(patchProfile({ name: fullnameRef.current.innerText, headers: headers }));
+  };
 
   const EditFragment = ({ name }) => {
     return (
       <div onClick={() => setEditActive(name)} className={styles.edit}>
-        {!fullnameActive ? <Edit /> : <div className={styles.save}>Сохранить</div>}
+        {!fullnameActive ? (
+          <Edit />
+        ) : (
+          <div onClick={saveProfile} className={styles.save}>
+            Сохранить
+          </div>
+        )}
       </div>
     );
-  };
-
-  const handleValue = (e) => {
-    setFullName(e.target.value);
   };
 
   const setEditActive = (name) => {
@@ -58,7 +73,8 @@ const Profile = () => {
               <div
                 name="fullname"
                 contentEditable={fullnameActive}
-                onInput={(e) => handleValue(e)}
+                suppressContentEditableWarning={true}
+                ref={fullnameRef}
                 className={styles.unstyled}
               >
                 {fullName}

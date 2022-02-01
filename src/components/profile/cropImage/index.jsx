@@ -5,20 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import 'react-image-crop/dist/ReactCrop.css';
 import Button from '@components/mui/button';
 
-export default function CropImage() {
-  const [upImg, setUpImg] = useState();
+export default function CropImage({ upImg, onClose }) {
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [crop, setCrop] = useState({ unit: 'px', width: 80, height: 80, aspect: 4 / 4 });
   const [completedCrop, setCompletedCrop] = useState(null);
-
-  const onSelectFile = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener('load', () => setUpImg(reader.result));
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
 
   const onLoad = useCallback((img) => {
     imgRef.current = img;
@@ -59,10 +50,7 @@ export default function CropImage() {
 
   return (
     <div className={styles.cropImage}>
-      <div>
-        <input type="file" accept="image/*" onChange={onSelectFile} />
-      </div>
-      <Dialog open={true} onClose={() => console.log()}>
+      <Dialog open={true}>
         <ReactCrop
           src={upImg}
           onImageLoaded={onLoad}
@@ -70,7 +58,9 @@ export default function CropImage() {
           onChange={(c) => setCrop(c)}
           onComplete={(c) => setCompletedCrop(c)}
         />
-        <Button variant='fillPurple'>Save</Button>
+        <Button onClick={() => onClose()} variant="fillPurple">
+          Save
+        </Button>
       </Dialog>
     </div>
   );

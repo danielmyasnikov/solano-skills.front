@@ -47,6 +47,7 @@ a {
   height: calc(100vh - 73px);
   transition: 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transform: translateX(-250px);
+  -webkit-transform: translateX(-250px);
   margin-right: 20px;
   margin-left: -20px;
 }
@@ -54,6 +55,7 @@ a {
 .sidebarOpened {
   transition: 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transform: none;
+  -webkit-transform: none;
 }
 
 .content {
@@ -72,7 +74,10 @@ a {
 
 .modal {
   position: fixed;
-  inset: 0px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   max-width: 0px;
   margin-top: 73px;
@@ -96,7 +101,10 @@ a {
   margin-top: 73px;
   opacity: 1;
   transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  inset: 0px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-tap-highlight-color: transparent;
   z-index: -1;
@@ -122,7 +130,10 @@ a {
 @media screen and (max-width: 1300px) {
   .modalFixed {
     position: fixed;
-    inset: 0px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     max-width: 0;
     margin-top: 73px;
@@ -130,10 +141,12 @@ a {
     z-index: 1201;
     .sidebar {
       transform: translateX(-250px);
+      -webkit-transform: translateX(-250px);
       margin-left: 0;
     }
     .sidebarOpened {
       transform: none;
+      -webkit-transform: none;
     }
     .backdropFixed {
       position: fixed;
@@ -141,7 +154,10 @@ a {
       margin-top: 73px;
       opacity: 1;
       transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      inset: 0px;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
       background-color: rgba(0, 0, 0, 0.5);
       -webkit-tap-highlight-color: transparent;
       z-index: -1;

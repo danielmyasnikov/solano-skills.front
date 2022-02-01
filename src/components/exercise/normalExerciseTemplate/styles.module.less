@@ -85,7 +85,7 @@
 }
 
 .outputContainer {
-  white-space: pre;
+  white-space: break-spaces;
   background: #2c2a3f;
   padding: 10px 20px;
   height: calc(40% - 47px);
@@ -99,13 +99,38 @@
   .error {
     display: block;
     color: #d15555;
-    margin-bottom: 15px;
   }
   .shell {
     display: block;
     color: #fff;
+  }
+  span {
     &:not(&:first-child) {
-      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  
+}
+
+@media screen and (max-width: 640px) {
+  .draggable {
+    display: none;
+  }
+  .layout {
+    width: 100%;
+    .hintBtn {
+      margin-right: auto;
+    }
+  }
+  .terminal {
+    margin-top: 65px;
+    :global {
+      .ace_editor {
+        min-height: 596px;
+      }
     }
   }
 }

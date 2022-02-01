@@ -23,17 +23,3 @@ export const singInApi = ({ email, password }) => {
       throw error;
     });
 };
-
-// res:
-// data:
-// allow_password_change: false
-// created_at: "2021-11-24T19:42:27.252Z"
-// email: "test4@mail.ru"
-// id: 6
-// provider: "email"
-// uid: "test4@mail.ru"
-// updated_at: "2021-11-24T19:42:27.397Z"
-// [[Prototype]]: Object
-// status: "success"
-// [[Prototype]]: Object
-// [[Prototype]]: Object
