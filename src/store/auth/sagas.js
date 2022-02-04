@@ -1,5 +1,5 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { registrationApi, singInApi } from '../api/auth';
+import { registrationApi, signInByPhoneApi, signInByPhoneVerifyApi, singInApi } from '../api/auth';
 
 import {
   REGISTRATION_SUCCESSED,
@@ -10,9 +10,15 @@ import {
   REGISTRATION,
   LOCAL_HEADERS,
   CLEAR_ERRORS,
+  SIGN_IN_BY_PHONE,
+  SIGN_IN_BY_PHONE_FAILED,
+  SIGN_IN_BY_PHONE_SUCCESSED,
+  SIGN_IN_BY_PHONE_VERIFY_SUCCESSED,
+  SIGN_IN_BY_PHONE_VERIFY,
+  SIGN_IN_BY_PHONE_VERIFY_FAILED,
 } from './actions';
 
-export function* setLocalHeaders(payload) {
+export function* setLocalHeaders({ payload }) {
   yield put({
     type: LOCAL_HEADERS,
     payload: payload.headers,
@@ -50,6 +56,52 @@ export function* singIn(action) {
       type: SING_IN_FAILED,
       payload: {
         errorMassege,
+      },
+    });
+  }
+}
+
+export function* signInByPhone(action) {
+  try {
+    const res = yield call(signInByPhoneApi, action.payload);
+    console.log(res);
+  } catch (err) {
+    const error = err.response.data.errors;
+    yield put({
+      type: SIGN_IN_BY_PHONE_FAILED,
+      payload: {
+        error,
+      },
+    });
+  }
+}
+
+export function* signInByPhoneVerify(action) {
+  try {
+    const res = yield call(signInByPhoneVerifyApi, action.payload);
+    // const client = res.headers.client;
+    // const accessToken = res.headers['access-token'];
+    // const uid = res.headers.uid;
+
+    // localStorage.setItem('uid', uid);
+    // localStorage.setItem('access-token', accessToken);
+    // localStorage.setItem('client', client);
+    // localStorage.setItem('expiry', res.headers.expiry);
+    // const headers = { client, uid, 'access-token': accessToken };
+
+    yield put({
+      type: SIGN_IN_BY_PHONE_VERIFY_SUCCESSED,
+      payload: {
+        
+      },
+    });
+  } catch (err) {
+    console.log(err.response);
+    const errorVerify = 'Неверный код';
+    yield put({
+      type: SIGN_IN_BY_PHONE_VERIFY_FAILED,
+      payload: {
+        errorVerify,
       },
     });
   }
@@ -94,5 +146,7 @@ export function* registration(action) {
 export default function* authSaga() {
   yield takeLeading(REGISTRATION, registration);
   yield takeLeading(SING_IN, singIn);
+  yield takeLeading(SIGN_IN_BY_PHONE, signInByPhone);
+  yield takeLeading(SIGN_IN_BY_PHONE_VERIFY, signInByPhoneVerify);
   yield takeLeading(LOCAL_HEADERS, setLocalHeaders);
 }

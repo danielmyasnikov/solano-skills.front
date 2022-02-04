@@ -13,6 +13,8 @@ import './terminal.module.less';
 import { checkAnswer, compileCode } from '@store/terminal/actions';
 import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';
+import Draggable from '../draggable';
+import { useRef } from 'react';
 
 function Terminal({
   sampleCode,
@@ -24,9 +26,12 @@ function Terminal({
   isAuth,
 }) {
   const [value, setValue] = useState();
+  const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
+  const wrapperRef = useRef();
+  const terminalRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,6 +45,10 @@ function Terminal({
   useEffect(() => {
     setActiveTab('script');
   }, [sampleCode]);
+
+  useEffect(() => {
+    setHeight(wrapperRef?.current?.offsetHeight);
+  }, []);
 
   function onChange(value) {
     setValue(value);
@@ -55,8 +64,8 @@ function Terminal({
   };
 
   const OpenNewWindow = () => {
-    window.open()
-  }
+    window.open();
+  };
 
   useEffect(() => {
     setActiveBytePayload(bytePayload.length - 1);
@@ -66,10 +75,11 @@ function Terminal({
     <div
       className={cn(styles.terminalContainer, {
         [styles.terminalWithGraph]: isGraphRequired && bytePayload.length > 0,
+        [styles.terminalFullWidth]: isGraphRequired,
       })}
     >
       {registrationModalOpen && <RegistrationModal />}
-      <div className={styles.terminalWrapper}>
+      <div ref={wrapperRef} className={styles.terminalWrapper}>
         <div className={styles.terminalHeader}>
           <div
             onClick={() => setActiveTab('script')}
@@ -98,10 +108,17 @@ function Terminal({
             defaultValue={sampleCode}
             value={activeTab === 'solution' ? solution : value}
             readOnly={activeTab === 'solution' ? true : false}
+            wrapEnabled={true}
             fontSize="16px"
             setOptions={{
               enableBasicAutocompletion: true,
               enableLiveAutocompletion: true,
+              wrap: true,
+              behavioursEnabled: true,
+              newLineMode: true,
+              showGutter: true,
+              minLines: 1,
+              wrapBehavioursEnabled: true,
               enableSnippets: true,
               showLineNumbers: true,
               tabSize: 4,
@@ -167,13 +184,18 @@ function Terminal({
             </Button>
           </div>
         </div>
+        {isGraphRequired && bytePayload.length > 0 && (
+          <Draggable resizeContainer={wrapperRef} parentContainer={wrapperRef} height={height} />
+        )}
       </div>
       {isGraphRequired && bytePayload.length > 0 && (
         <div className={styles.bytePayload}>
           <div className={styles.terminalHeader}>
             <div className={cn(styles.tabActive, styles.tab)}>
               Графики
-              <a onClick={() => OpenNewWindow()} target='_blank'><Plots /></a>
+              <a onClick={() => OpenNewWindow()} target="_blank">
+                <Plots />
+              </a>
             </div>
           </div>
           <div className={styles.content}>

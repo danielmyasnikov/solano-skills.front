@@ -7,6 +7,7 @@ export const PhoneNumberConfirmation = ({
   handleAuthMethod,
   confirmationСode,
   handleChange,
+  errors,
 }) => {
   return (
     <>
@@ -16,11 +17,12 @@ export const PhoneNumberConfirmation = ({
         className={styles.input}
         onChange={handleChange}
         maskChar="_"
-        placeholder="___ - ___"
+        placeholder="__"
         alwaysShowMask={false}
-        name='confirmationCode'
-        mask="999 - 999"
+        name="confirmationCode"
+        mask="99"
       ></InputMask>
+      {errors.errorVerify && <span className={styles.error}>{errors.errorVerify}</span>}
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         Изменить номер телефона
       </div>

@@ -25,6 +25,7 @@ export const Authorization = () => {
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [disable, setDisable] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export const Authorization = () => {
         setEmail(value);
         break;
       case 'phone':
-        setPhoneNumber(value);
+        setPhoneNumber(value.replace(/[^0-9]/g, ''));
         break;
       case 'confirmationCode':
         setConfirmationCode(value);
@@ -61,15 +62,29 @@ export const Authorization = () => {
     }
   }
 
-  function submit() {
+  const submit = () => {
     if (!isRegistrationByPhone) {
       dispatch(AuthStore.Actions.singIn(email, password));
     }
-    if (isRegistrationByPhone) {
-      setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''));
-      setIsPhoneNumberConfirmation(true);
+    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
+      dispatch(AuthStore.Actions.signInByPhoneRequest(phoneNumber));
+      if (!disable) {
+        setIsPhoneNumberConfirmation(true);
+      }
     }
-  }
+    if (isPhoneNumberConfirmation && isRegistrationByPhone) {
+      dispatch(AuthStore.Actions.signInByPhoneVerify(confirmationСode));
+    }
+  };
+
+  useEffect(() => {
+    if (disable && !errors.error) {
+      setDisable(false);
+    }
+    if (errors.error) {
+      setDisable(true);
+    }
+  }, [errors.error]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
@@ -106,6 +121,7 @@ export const Authorization = () => {
       )}
       {isRegistrationByPhone && !isPhoneNumberConfirmation && (
         <ByPhoneNumber
+          errors={errors}
           handleAuthMethod={handleAuthMethod}
           authMethodText="Авторизоваться по Email"
           handleChange={handleChange}
@@ -114,6 +130,7 @@ export const Authorization = () => {
       )}
       {isPhoneNumberConfirmation && (
         <PhoneNumberConfirmation
+          errors={errors}
           handleChange={handleChange}
           confirmationСode={confirmationСode}
           handleAuthMethod={() => {

@@ -14,36 +14,25 @@ import { NormalInstruction } from '@components/instruction';
 import Button from '@components/mui/button';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
-import Draggable from '@assets/Draggable';
+import WarningMobile from '@components/common/warningMobile';
+import Draggable from '@components/common/draggable';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
   const [height, setHeight] = useState(0);
+  const [isWarningHidden, setIsWarningHidden] = useState(false);
   const [solution, setSolution] = useState();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [withoutHint, setWithoutHint] = useState(false);
   const [correct, setCorrect] = useState(false);
-  const [initialPos, setInitialPos] = useState();
-  const [initialSize, setInitialSize] = useState();
   const { exerciseId } = useParams();
   const errorRef = useRef();
   const contentRef = useRef();
-  const resizableRef = useRef();
   const layoutRef = useRef();
-  const sidebarRef = useRef();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
-
-  const initial = (e) => {
-    setInitialPos(e.clientX);
-    setInitialSize(contentRef.current.offsetWidth);
-  };
-
-  const resize = (e) => {
-    layoutRef.current.style.width = `${parseInt(initialSize) + parseInt(e.clientX - initialPos)}px`;
-  };
 
   useEffect(() => {
     if (terminal.message.status === 'success') {
@@ -54,6 +43,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   useEffect(() => {
     setSolution('');
     setCorrect('');
+    setBytePayload([]);
     setHint(false);
     setWithoutHint(exercise.hint ? true : false);
   }, [exercise]);
@@ -71,21 +61,26 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     if (terminal.message.error) {
       errorRef.current?.scrollIntoView();
     }
-    if (terminal.bytePayload !== '' && terminal.status === 'success') {
+    if (terminal.bytePayload) {
       setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
     }
   }, [terminal]);
 
   useEffect(() => {
-    setHeight(sidebarRef?.current?.offsetHeight);
+    setHeight(contentRef?.current?.offsetHeight);
   }, []);
+
+  const closeWarning = () => {
+    setIsWarningHidden(true);
+  };
 
   return (
     <>
+      {!isWarningHidden && <WarningMobile handleClose={closeWarning} />}
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
       <div ref={layoutRef} className={styles.layout}>
         <div ref={contentRef} className={styles.content}>
-          <div ref={sidebarRef} className={styles.sidebar}>
+          <div className={styles.sidebar}>
             <Exercise exercise={exercise} />
             <NormalInstruction xp={exercise.xp} onSubmit={() => setCompletedTaskModalOpen(true)}>
               <div
@@ -93,16 +88,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
                 className={styles.instructions}
               />
             </NormalInstruction>
-            <div
-              ref={resizableRef}
-              style={{ marginTop: `${height / 2}px` }}
-              className={styles.draggable}
-              draggable={true}
-              onDragStart={initial}
-              onDrag={resize}
-            >
-              <Draggable />
-            </div>
+            <Draggable parentContainer={contentRef} resizeContainer={layoutRef} height={height} />
           </div>
           <div ref={errorRef}>
             <ErrorMessage message={terminal.message.error} />

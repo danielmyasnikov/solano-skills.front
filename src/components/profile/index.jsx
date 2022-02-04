@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import AvatarDefault from '@assets/avatarDefault.png';
@@ -9,32 +9,60 @@ import { Link } from 'react-router-dom';
 import Card from './card';
 import { useRef } from 'react';
 import CropImage from './cropImage';
+import { useDispatch, useSelector } from 'react-redux';
+import * as AuthStore from '@store/auth';
+import { patchProfile, getProfile } from '@store/profile/actions';
+import { selectProfile } from '@store/profile/selector';
 
 const Profile = () => {
-  const [fullnameActive, setFullnameActive] = useState(false);
-  const [fullName, setFullName] = useState('Dan Myasnikov');
+  const [activeEditField, setActiveEditField] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [information, setInformation] = useState('');
+  const fullnameRef = useRef();
+  const informationRef = useRef();
+  const dispatch = useDispatch();
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+  const profile = useSelector(selectProfile);
+
+  const saveProfile = () => {
+    setActiveEditField('');
+    setFullName(fullnameRef.current.innerText);
+    setInformation(informationRef.current.innerText);
+    dispatch(
+      patchProfile({
+        name: fullnameRef.current.innerText,
+        about: informationRef.current.innerText,
+        headers: headers,
+      }),
+    );
+  };
 
   const EditFragment = ({ name }) => {
     return (
-      <div onClick={() => setEditActive(name)} className={styles.edit}>
-        {!fullnameActive ? <Edit /> : <div className={styles.save}>Сохранить</div>}
+      <div className={styles.edit}>
+        {activeEditField !== name ? (
+          <div onClick={() => setActiveEditField(name)}>
+            <Edit />
+          </div>
+        ) : (
+          <div onClick={saveProfile} className={styles.save}>
+            Сохранить
+          </div>
+        )}
       </div>
     );
   };
 
-  const handleValue = (e) => {
-    setFullName(e.target.value);
-  };
-
-  const setEditActive = (name) => {
-    switch (name) {
-      case 'fullname':
-        setFullnameActive(!fullnameActive);
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (headers.uid) {
+      dispatch(getProfile({ headers: headers }));
     }
-  };
+  }, [headers]);
+
+  useEffect(() => {
+    setFullName(profile.name);
+    setInformation(profile.about)
+  }, [profile]);
 
   return (
     <div className={styles.wrapper}>
@@ -54,15 +82,16 @@ const Profile = () => {
                 <AddImage />
               </div>
             </div>
-            <div className={cn(styles.fullName, { [styles.active]: fullnameActive })}>
-              <div
-                name="fullname"
-                contentEditable={fullnameActive}
-                onInput={(e) => handleValue(e)}
-                className={styles.unstyled}
-              >
-                {fullName}
-              </div>
+            <div
+              name="fullname"
+              contentEditable={activeEditField === 'fullname'}
+              suppressContentEditableWarning={true}
+              ref={fullnameRef}
+              className={cn(styles.unstyled, {
+                [styles.active]: activeEditField === 'fullname',
+              })}
+            >
+              {fullName}
             </div>
             <EditFragment name="fullname" />
           </div>
@@ -102,14 +131,20 @@ const Profile = () => {
           <div className={cn(styles.card, styles.information)}>
             <div className={styles.title}>
               Информация
-              {/* <EditFragment name="fullname" /> */}
+              <EditFragment name="information" />
             </div>
             <div className={styles.items}>
-              <ul>
-                <li>- Политик</li>
-                <li>- Frontend разработчик</li>
-                <li>- UI/UX designer</li>
-              </ul>
+              <div
+                name="information"
+                contentEditable={activeEditField === 'information'}
+                suppressContentEditableWarning={true}
+                ref={informationRef}
+                className={cn(styles.about, {
+                  [styles.active]: activeEditField === 'information',
+                })}
+              >
+                {information}
+              </div>
               <div className={styles.additionalInfo}>
                 <div>
                   <span>ID:</span> @Kiraborisenko

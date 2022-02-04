@@ -27,40 +27,53 @@
 }
 
 .quizOutputContainer {
-  white-space: pre;
+  white-space: break-spaces;
   background: #2c2a3f;
   padding: 10px 20px;
   height: calc(100% - 50px);
   overflow-y: auto;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  span {
+    &:not(&:first-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.outputWrapper {
+  height: calc(40% - 47px);
 }
 
 .outputContainer {
-  white-space: pre;
+  white-space: break-spaces;
   background: #2c2a3f;
   padding: 10px 20px;
-  height: calc(40% - 47px);
+  height: 100%;
   overflow-y: auto;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
+  span {
+    &:not(&:first-child) {
+      margin-bottom: 15px;
+    }
+  }
 }
 
 .success {
   display: block;
   color: rgba(200, 193, 133, 1);
 }
+
 .error {
   display: block;
   color: #d15555;
   margin-bottom: 15px;
 }
+
 .shell {
   display: block;
   color: #fff;
-  &:not(&:first-child) {
-    margin-top: 15px;
-  }
 }
 
 .shell {
@@ -70,7 +83,7 @@
     font-size: 16px;
   }
   input {
-    width: 100%;
+    flex: 1;
     font-size: 16px;
     background: none;
     margin-left: 10px;
@@ -84,4 +97,15 @@
 
 .outputHeader {
   margin-top: 5px;
+}
+
+@media screen and (max-width: 640px) {
+  .outputWrapper {
+    margin-top: 40px;
+    min-height: 330px;
+    height: auto;
+  }
+  .outputContainer {
+    min-height: 330px;
+  }
 }
