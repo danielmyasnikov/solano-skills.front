@@ -8,6 +8,7 @@
 }
 
 .terminalWrapper {
+  position: relative;
   height: calc(100% - 40px);
 }
 
@@ -15,13 +16,15 @@
   display: flex;
   justify-content: space-between;
   .terminalWrapper {
-    width: calc(50% - 5px);
+    width: calc(50% - 10px);
   }
 }
 
 .bytePayload {
   position: relative;
-  width: calc(50% - 5px);
+  margin-left: 20px;
+  flex: 1 1;
+  width: calc(50% - 10px);
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.04);
@@ -165,6 +168,41 @@
 
 .outputHeader {
   margin-top: 5px;
+}
+
+@media screen and (max-width: 1533px) {
+  .terminalWithGraph {
+    height: auto;
+  }
+  .terminalFullWidth {
+    display: block;
+    .terminalWrapper {
+      width: 100%;
+    }
+    .graph {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .bytePayload {
+      width: 100%;
+      margin-top: 5px;
+      img {
+        position: relative;
+        transform: none;
+        left: auto;
+        top: auto;
+      }
+      .btnWrap {
+        padding: 30px 20px;
+      }
+    }
+  }
+  :global {
+    .ace_editor {
+      min-height: 420px;
+    }
+  }
 }
 
 @media screen and (max-width: 640px) {

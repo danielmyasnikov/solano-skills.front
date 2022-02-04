@@ -12,11 +12,35 @@ export const registrationApi = ({ email, password, passwordConfirmation }) => {
       throw error;
     });
 };
+
 export const singInApi = ({ email, password }) => {
   return axios
     .post(`${process.env.REACT_APP_API_COURSE}/auth/sign_in`, {
       email,
       password,
+    })
+    .then((res) => res)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const signInByPhoneApi = ({ phonenumber }) => {
+  console.log(phonenumber)
+  return axios
+    .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
+      phone_number: phonenumber,
+    })
+    .then((res) => res)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const signInByPhoneVerifyApi = ({ code }) => {
+  return axios
+    .post(`${process.env.REACT_APP_API_COURSE}/api/v1/verify_signature_code`, {
+      code,
     })
     .then((res) => res)
     .catch((error) => {

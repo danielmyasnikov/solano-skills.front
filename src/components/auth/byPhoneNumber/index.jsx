@@ -23,6 +23,7 @@ export const ByPhoneNumber = ({
         name="phone"
         type="tel"
       ></InputMask>
+      {errors.error && <span className={styles.error}>Вы сможете отправить смс код повторно через {errors?.error?.substring(0, 2)} сек</span>}
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         {authMethodText}
       </div>
