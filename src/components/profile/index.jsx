@@ -61,7 +61,7 @@ const Profile = () => {
 
   useEffect(() => {
     setFullName(profile.name);
-    setInformation(profile.about)
+    setInformation(profile.about);
   }, [profile]);
 
   return (
