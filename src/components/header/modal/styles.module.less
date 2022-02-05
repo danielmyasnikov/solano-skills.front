@@ -1,0 +1,36 @@
+
+.dialog {
+  
+  .dialogTitle {
+    padding: 40px 40px 0 0;
+    z-index: 2;
+    @media screen and(max-width:365px) {
+      padding: 25px 20px 0 0;
+      svg {
+        color: #fff !important;
+        font-size: 32px !important;
+      }
+    }
+    svg {
+      color: #d6d6d6;
+      cursor: pointer;
+      font-size: 40px;
+    }
+  }
+
+  .dialogContent {
+    overflow-y: unset;
+    width: 90%;
+    margin: 0 auto;
+    @media screen and(max-width: 1150px) {
+      padding-top: 100px !important;
+    }
+    @media screen and(max-width: 768px) {
+      width: 100%;
+    }
+    @media screen and(max-width:365px) {
+      padding-top: 55px !important;
+    }
+  }
+  
+}
