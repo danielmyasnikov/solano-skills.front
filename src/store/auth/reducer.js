@@ -44,7 +44,7 @@ export default function authReducer(state = initialState, action) {
       return { ...state, errors: action.payload };
     }
     case SIGN_IN_BY_PHONE_FAILED: {
-      return { ...state, errors: { ...state.errors, ...action.payload } };
+      return { ...state, errors: { ...action.payload } };
     }
     case CLEAR_ERRORS: {
       return { ...state, errors: { ...state.errors, ...action.payload } };

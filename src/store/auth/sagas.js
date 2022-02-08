@@ -64,7 +64,10 @@ export function* singIn(action) {
 export function* signInByPhone(action) {
   try {
     const res = yield call(signInByPhoneApi, action.payload);
-    console.log(res);
+    yield put({
+      type: SIGN_IN_BY_PHONE_SUCCESSED,
+      payload: {},
+    });
   } catch (err) {
     const error = err.response.data.errors;
     yield put({
@@ -91,9 +94,7 @@ export function* signInByPhoneVerify(action) {
 
     yield put({
       type: SIGN_IN_BY_PHONE_VERIFY_SUCCESSED,
-      payload: {
-        
-      },
+      payload: {},
     });
   } catch (err) {
     console.log(err.response);

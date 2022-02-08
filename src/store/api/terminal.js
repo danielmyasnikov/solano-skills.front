@@ -14,9 +14,18 @@ export const compileCodeApi = ({ code, exerciseId, isGraphRequired }) => {
     });
 };
 
-export const compileShellApi = ({ code, exerciseId }) => {
+export const startKernelApi = ({ exerciseId }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/executeWithExercise/${exerciseId}`, {
+    .post(`${process.env.REACT_APP_API_TERMINAL}/shell/startKernel/${exerciseId}`)
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const compileShellApi = ({ code, kernelId }) => {
+  return axios
+    .post(`${process.env.REACT_APP_API_TERMINAL}/shell/execute/${kernelId}`, {
       code,
     })
     .then((res) => res.data)

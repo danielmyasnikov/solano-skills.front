@@ -68,7 +68,7 @@ export const Authorization = () => {
     }
     if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
       dispatch(AuthStore.Actions.signInByPhoneRequest(phoneNumber));
-      if (!disable) {
+      if (!errors.error) {
         setIsPhoneNumberConfirmation(true);
       }
     }
@@ -76,15 +76,6 @@ export const Authorization = () => {
       dispatch(AuthStore.Actions.signInByPhoneVerify(confirmationСode));
     }
   };
-
-  useEffect(() => {
-    if (disable && !errors.error) {
-      setDisable(false);
-    }
-    if (errors.error) {
-      setDisable(true);
-    }
-  }, [errors.error]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {

@@ -5,12 +5,13 @@ import 'brace/mode/python';
 import 'brace/ext/language_tools';
 import 'ace-builds/src-noconflict/theme-monokai';
 import Button from '@components/mui/button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTerminal } from '@store/terminal/selector';
 import cn from 'classnames';
 import Reset from '@assets/Reset.js';
 import styles from './styles.module.less';
 import './terminal.module.less';
-import { checkAnswer, compileCode } from '@store/terminal/actions';
+import { checkAnswer, compileCode, compileShell } from '@store/terminal/actions';
 import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';
 import Draggable from '../draggable';
@@ -31,7 +32,7 @@ function Terminal({
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
   const wrapperRef = useRef();
-  const terminalRef = useRef();
+  const terminal = useSelector(selectTerminal);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -141,13 +142,24 @@ function Terminal({
               variant={'outlineWhite'}
               onClick={() => {
                 // if (isAuth) {
-                dispatch(
-                  compileCode(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
-                );
+                if (!isGraphRequired) {
+                  dispatch(
+                    compileShell({
+                      code: activeTab === 'solution' ? solution : value,
+                      exerciseId: exerciseId,
+                      kernelId: terminal.kernelId,
+                      type: 'compileExercise',
+                    }),
+                  );
+                } else {
+                  dispatch(
+                    compileCode(
+                      activeTab === 'solution' ? solution : value,
+                      exerciseId,
+                      isGraphRequired,
+                    ),
+                  );
+                }
                 // } else {
                 //   setRegistrationModalOpen(true);
                 // }

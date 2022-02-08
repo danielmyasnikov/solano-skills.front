@@ -3,6 +3,7 @@ import {
   COMPILE_CODE_SUCCESSED,
   COMPILE_SHELL_SUCCESSED,
   CHECK_ANSWER_SUCCESSED,
+  KERNEL_SUCCESSED,
 } from './actions';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   message: {
     status: '',
   },
+  kernelId: '',
   bytePayload: '',
 };
 
@@ -21,7 +23,18 @@ export default function terminalReducer(state = initialState, action) {
         message: {
           status: '',
         },
+        kernelId: state.kernelId,
         bytePayload: action.payload.data.bytePayload,
+      };
+    }
+    case KERNEL_SUCCESSED: {
+      return {
+        outputs: [...state.outputs],
+        message: {
+          status: '',
+        },
+        kernelId: action.payload.data.output,
+        bytePayload: state.bytePayload,
       };
     }
     case COMPILE_SHELL_SUCCESSED: {
@@ -39,6 +52,7 @@ export default function terminalReducer(state = initialState, action) {
         message: {
           status: '',
         },
+        kernelId: state.kernelId,
       };
     }
     case CHECK_ANSWER_SUCCESSED: {
@@ -46,6 +60,7 @@ export default function terminalReducer(state = initialState, action) {
         outputs: [...state.outputs],
         message: action.payload.data,
         bytePayload: '',
+        kernelId: state.kernelId,
       };
     }
     case CLEAR_TERMINAL: {

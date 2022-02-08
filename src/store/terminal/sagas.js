@@ -1,5 +1,5 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { compileCodeApi, checkAnswerApi, compileShellApi } from '../api/terminal';
+import { compileCodeApi, checkAnswerApi, compileShellApi, startKernelApi } from '../api/terminal';
 import {
   CLEAR_TERMINAL,
   COMPILE_CODE_REQUESTED,
@@ -11,6 +11,8 @@ import {
   COMPILE_SHELL_REQUESTED,
   COMPILE_SHELL_SUCCESSED,
   COMPILE_SHELL_FAILED,
+  KERNEL_REQUESTED,
+  KERNEL_SUCCESSED,
 } from './actions';
 
 export function* clearTerminal() {
@@ -41,14 +43,23 @@ export function* compileCode(action) {
 export function* compileShell(action) {
   try {
     const response = yield call(compileShellApi, action.payload);
-    yield put({
-      type: COMPILE_SHELL_SUCCESSED,
-      payload: {
-        data: response,
-        lineNumber: action.payload.lineNumber,
-        code: action.payload.code,
-      },
-    });
+    if (action.payload.type === 'compileExercise') {
+      yield put({
+        type: COMPILE_CODE_SUCCESSED,
+        payload: {
+          data: response,
+        },
+      });
+    } else {
+      yield put({
+        type: COMPILE_SHELL_SUCCESSED,
+        payload: {
+          data: response,
+          lineNumber: action.payload.lineNumber,
+          code: action.payload.code,
+        },
+      });
+    }
   } catch (e) {
     yield put({
       type: COMPILE_SHELL_FAILED,
@@ -57,6 +68,18 @@ export function* compileShell(action) {
       },
     });
   }
+}
+
+export function* startKernel(action) {
+  try {
+    const response = yield call(startKernelApi, action.payload);
+    yield put({
+      type: KERNEL_SUCCESSED,
+      payload: {
+        data: response,
+      },
+    });
+  } catch (e) {}
 }
 
 export function* checkAnswer(action) {
@@ -82,5 +105,6 @@ export default function* terminalSaga() {
   yield takeLeading(COMPILE_CODE_REQUESTED, compileCode);
   yield takeLeading(COMPILE_SHELL_REQUESTED, compileShell);
   yield takeLeading(CHECK_ANSWER_REQUESTED, checkAnswer);
+  yield takeLeading(KERNEL_REQUESTED, startKernel);
   yield takeLeading(CLEAR_TERMINAL, clearTerminal);
 }
