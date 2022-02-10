@@ -8,7 +8,7 @@ export const ByPhoneNumber = ({
   authMethodText,
   handleChange,
   phoneNumber,
-  errors,
+  countTime,
 }) => {
   return (
     <>
@@ -23,7 +23,7 @@ export const ByPhoneNumber = ({
         name="phone"
         type="tel"
       ></InputMask>
-      {errors.error && <span className={styles.error}>Вы сможете отправить смс код повторно через {errors?.error?.substring(0, 2)} сек</span>}
+      {countTime > 0 && <span className={styles.error}>Вы сможете отправить смс код повторно через {countTime} сек</span>}
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         {authMethodText}
       </div>

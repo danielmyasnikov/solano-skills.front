@@ -14,7 +14,6 @@ export const patchProfile = ({ name, about, email, headers }) => {
 };
 
 export const getProfile = ({ headers }) => {
-  console.log('act', headers);
   return {
     type: GET_PROFILE_REQUESTED,
     payload: { headers },

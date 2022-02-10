@@ -26,7 +26,6 @@ export function* patchProfile(action) {
 }
 
 export function* getProfile(action) {
-  console.log('saga', action);
   try {
     const response = yield call(GetProfileApi, action.payload);
     yield put({

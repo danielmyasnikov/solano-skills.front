@@ -13,6 +13,7 @@ import { CheckboxBtn } from '@components/mui/checkbox';
 import { AuthorizationByEmail } from '../authorizationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
+import axios from 'axios';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export const Authorization = () => {
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [disable, setDisable] = useState(false);
+  const [countTime, setCountTime] = useState(0);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
 
   useEffect(() => {
@@ -67,10 +68,17 @@ export const Authorization = () => {
       dispatch(AuthStore.Actions.singIn(email, password));
     }
     if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
-      dispatch(AuthStore.Actions.signInByPhoneRequest(phoneNumber));
-      if (!errors.error) {
-        setIsPhoneNumberConfirmation(true);
-      }
+      const sendCode = async () => {
+        return await axios
+          .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
+            phone_number: phoneNumber,
+          })
+          .then(() => setIsPhoneNumberConfirmation(true))
+          .catch((error) => {
+            setCountTime((Number(error.response.data.errors)).toFixed());
+          });
+      };
+      sendCode();
     }
     if (isPhoneNumberConfirmation && isRegistrationByPhone) {
       dispatch(AuthStore.Actions.signInByPhoneVerify(confirmationСode));
@@ -96,6 +104,19 @@ export const Authorization = () => {
     setIsRegistrationByPhone(!isRegistrationByPhone);
   }
 
+  useEffect(() => {
+    let timer;
+    if (countTime > 0) {
+      timer = setTimeout(() => setCountTime((count) => count - 1), 1000);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [countTime]);
+
   return (
     <AuthContainer>
       <h1 className={styles.title}>Добро пожаловать</h1>
@@ -117,6 +138,7 @@ export const Authorization = () => {
           authMethodText="Авторизоваться по Email"
           handleChange={handleChange}
           phoneNumber={phoneNumber}
+          countTime={countTime}
         />
       )}
       {isPhoneNumberConfirmation && (

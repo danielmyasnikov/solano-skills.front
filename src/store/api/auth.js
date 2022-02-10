@@ -26,7 +26,6 @@ export const singInApi = ({ email, password }) => {
 };
 
 export const signInByPhoneApi = ({ phonenumber }) => {
-  console.log(phonenumber);
   return axios
     .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
       phone_number: phonenumber,

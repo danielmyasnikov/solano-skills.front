@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import AvatarDefault from '@assets/avatarDefault.png';
@@ -16,32 +17,60 @@ import { selectProfile } from '@store/profile/selector';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
-  const [fullName, setFullName] = useState('');
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [friendlyid, setFriendlyid] = useState('');
+  const [registerationDate, setRegisterationDate] = useState('');
+  const [isFullnameActive, setIsFullnameActive] = useState(false);
   const [information, setInformation] = useState('');
   const fullnameRef = useRef();
   const informationRef = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
+  const uid = localStorage.getItem('uid');
+  const client = localStorage.getItem('client');
+  const accessToken = localStorage.getItem('access-token');
+
   const saveProfile = () => {
+    setIsFullnameActive(false);
     setActiveEditField('');
-    setFullName(fullnameRef.current.innerText);
     setInformation(informationRef.current.innerText);
     dispatch(
       patchProfile({
-        name: fullnameRef.current.innerText,
+        name: fullname,
         about: informationRef.current.innerText,
         headers: headers,
       }),
     );
   };
 
+  const handleChange = (e) => {
+    if (e.target?.name === 'fullname') {
+      setFullname(e.target.value);
+    }
+  };
+
+  const handleActiveField = (name) => {
+    console.log(name);
+    switch (name) {
+      case 'fullname':
+        setIsFullnameActive(!isFullnameActive);
+        setActiveEditField(isFullnameActive ? '' : 'fullname');
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const EditFragment = ({ name }) => {
     return (
       <div className={styles.edit}>
         {activeEditField !== name ? (
-          <div onClick={() => setActiveEditField(name)}>
+          <div onClick={() => handleActiveField(name)}>
             <Edit />
           </div>
         ) : (
@@ -54,14 +83,25 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    if (!uid && !client && !accessToken) {
+      history.push('/courses');
+    }
+  }, []);
+
+  useEffect(() => {
     if (headers.uid) {
       dispatch(getProfile({ headers: headers }));
     }
   }, [headers]);
 
   useEffect(() => {
-    setFullName(profile.name);
-    setInformation(profile.about);
+    if (profile.name) {
+      setFullname(profile.name);
+      setInformation(profile.about);
+      setEmail(profile.email);
+      setFriendlyid(profile.friendly_id);
+      setRegisterationDate(profile.registeration_date);
+    }
   }, [profile]);
 
   return (
@@ -82,17 +122,27 @@ const Profile = () => {
                 <AddImage />
               </div>
             </div>
-            <div
-              name="fullname"
-              contentEditable={activeEditField === 'fullname'}
-              suppressContentEditableWarning={true}
-              ref={fullnameRef}
-              className={cn(styles.unstyled, {
-                [styles.active]: activeEditField === 'fullname',
-              })}
-            >
-              {fullName}
-            </div>
+            {isFullnameActive && (
+              <input
+                name="fullname"
+                onChange={handleChange}
+                ref={fullnameRef}
+                className={cn(styles.unstyled, styles.fullname, {
+                  [styles.activeFullname]: activeEditField === 'fullname',
+                })}
+                value={fullname}
+              />
+            )}
+            {!isFullnameActive && (
+              <div
+                name="fullname"
+                onChange={handleChange}
+                ref={fullnameRef}
+                className={cn(styles.unstyled, styles.fullname)}
+              >
+                {fullname}
+              </div>
+            )}
             <EditFragment name="fullname" />
           </div>
           <div className={cn(styles.desktop, styles.links)}>
@@ -147,13 +197,13 @@ const Profile = () => {
               </div>
               <div className={styles.additionalInfo}>
                 <div>
-                  <span>ID:</span> @Kiraborisenko
+                  <span>ID:</span> {friendlyid}
                 </div>
                 <div>
-                  <span>E-mail:</span> Kirarslwebdesign@gmail.com
+                  <span>E-mail:</span> {email}
                 </div>
                 <div>
-                  <span>Дата регистрации:</span> 01/01/2021
+                  <span>Дата регистрации:</span> {registerationDate}
                 </div>
               </div>
             </div>

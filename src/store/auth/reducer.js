@@ -17,7 +17,6 @@ const initialState = {
 };
 
 export default function authReducer(state = initialState, action) {
-  console.log(action)
   switch (action.type) {
     case REGISTRATION_SUCCESSED: {
       return { ...state, headers: action.payload.headers };

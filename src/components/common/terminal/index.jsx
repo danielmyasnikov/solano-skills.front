@@ -103,7 +103,7 @@ function Terminal({
             theme="monokai"
             className="editor"
             width="100%"
-            height="100%"
+            height="calc(100% - 71px)"
             showGutter={true}
             highlightActiveLine={true}
             defaultValue={sampleCode}

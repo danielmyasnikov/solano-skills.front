@@ -19,7 +19,6 @@ export const PatchProfileApi = ({ name, about, email, headers }) => {
 };
 
 export const GetProfileApi = ({ headers }) => {
-  console.log('api', headers)
   try {
     return axios
       .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers: headers })

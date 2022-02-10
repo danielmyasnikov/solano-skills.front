@@ -10,13 +10,11 @@ export default function profileReducer(state = initialState, action) {
       };
     }
     case GET_PROFILE_SUCCESSED: {
-      console.log('red s', action.payload);
       return {
         ...action.payload.data,
       };
     }
     case GET_PROFILE_FAILED: {
-      console.log('red f', action.payload);
       return {
         ...action.payload,
       };
