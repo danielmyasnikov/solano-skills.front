@@ -96,11 +96,12 @@ const Profile = () => {
 
   useEffect(() => {
     if (profile.name) {
+      const date = new Date(profile.registeration_date);
       setFullname(profile.name);
       setInformation(profile.about);
       setEmail(profile.email);
       setFriendlyid(profile.friendly_id);
-      setRegisterationDate(profile.registeration_date);
+      setRegisterationDate(`${date.getUTCDay()}/${date.getMonth()}/${date.getFullYear()}`);
     }
   }, [profile]);
 
@@ -197,13 +198,13 @@ const Profile = () => {
               </div>
               <div className={styles.additionalInfo}>
                 <div>
-                  <span>ID:</span> {friendlyid}
+                  <span>ID: </span> {friendlyid}
                 </div>
                 <div>
-                  <span>E-mail:</span> {email}
+                  <span>E-mail: </span> {email}
                 </div>
                 <div>
-                  <span>Дата регистрации:</span> {registerationDate}
+                  <span>Дата регистрации: </span> {registerationDate}
                 </div>
               </div>
             </div>

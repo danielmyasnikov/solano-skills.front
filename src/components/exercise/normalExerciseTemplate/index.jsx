@@ -20,7 +20,7 @@ import Draggable from '@components/common/draggable';
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
   const [height, setHeight] = useState(0);
-  const [isWarningHidden, setIsWarningHidden] = useState(false);
+  const [isWarningHidden, setIsWarningHidden] = useState(true);
   const [solution, setSolution] = useState();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -68,9 +68,13 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
 
   useEffect(() => {
     setHeight(contentRef?.current?.offsetHeight);
+    if (!localStorage.getItem('warning')) {
+      setIsWarningHidden(false);
+    }
   }, []);
 
   const closeWarning = () => {
+    localStorage.setItem('warning', 'hidden');
     setIsWarningHidden(true);
   };
 

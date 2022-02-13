@@ -14,6 +14,7 @@ import {
 const initialState = {
   headers: {},
   errors: {},
+  status: '',
 };
 
 export default function authReducer(state = initialState, action) {

@@ -22,7 +22,7 @@ export const CoursePage = () => {
 
   useEffect(() => {
     dispatch(getCourse(courseId));
-  }, [location.pathname]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
