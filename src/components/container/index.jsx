@@ -34,11 +34,11 @@ const Container = ({ Component, headerVariant }) => {
 
   return (
     <div className={styles.wrapper}>
-      {headerVariant === 'exercise' ? (
-        <HeaderExercise headerRef={headerRef} handleSidebar={handleSidebar} />
-      ) : (
+      {
+        (headerVariant === 'exercise') ? 
+        <HeaderExercise headerRef={headerRef} handleSidebar={handleSidebar} /> :
         <Header headerRef={headerRef} handleSidebar={handleSidebar} />
-      )}
+      }
       <div className={styles.container}>
         <Sidebar
           closeSidebar={closeSidebar}

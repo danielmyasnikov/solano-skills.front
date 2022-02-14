@@ -38,6 +38,8 @@ export default function App() {
       </Route>
 
       {routes.map((route, i, headerVariant) => (
+        (route.path === '/') ? 
+        <Route exact path={'/'} key={route.path}>{route.component}</Route> :
         <Route exact={route.exact} path={route.path} key={route.path}>
           <Container variant={headerVariant} key={i} {...route} Component={route.component} />
         </Route>

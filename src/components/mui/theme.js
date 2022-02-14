@@ -166,6 +166,18 @@ export const buttonTheme = createTheme({
             },
           },
         },
+        {
+          props: { variant: 'outlineBlue' },
+          style: {
+            background: 'none',
+            color: '#46445C',
+            border: '2px solid #46445C',
+            '&:hover': {
+              background: '#46445C',
+              color: '#fff',
+            },
+          },
+        },
       ],
     },
   },

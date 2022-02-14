@@ -2,9 +2,15 @@ import ExercisePage from '@components/exercise';
 import Profile from '@components/profile';
 import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';
-import StatementPage from './components/statementPage/index';
+import StatementPage from './components/statementPage';
+import HomePage from './components/homePage';
 
 export const routes = [
+  {
+    path: '/',
+    component: HomePage,
+    exact: true,
+  },
   {
     path: '/courses',
     component: CoursesPage,

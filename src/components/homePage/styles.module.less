@@ -1,0 +1,1059 @@
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+.offer {
+  width: 95%;
+  max-width: 1720px;
+  min-height: 750px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 64px 150px 51px 82px;
+  position: relative;
+
+  &__bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  button {
+    margin-top: 40px;
+    background-color: #fff;
+  }
+
+  &__block {
+    max-width: 640px;
+    width: 48%;
+    z-index: 5;
+
+    &__right {
+      max-width: 484px;
+      background: #EDD765;
+      box-shadow: 10px 9px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 25px;
+
+      button {
+        display: flex;
+        margin: auto;
+        margin-top: 40px;
+      }
+
+      &__title {
+        height: 74px;
+        font-family: 'Jost';
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 76px;
+        text-align: center;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 60px;
+    font-family: 'Jost';
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 65px;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: 'online';
+      width: 129px;
+      height: 43px;
+      top: -50px;
+      right: 4px;
+      background: #63D167;
+      box-shadow: 7px 8px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 117px;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 45px;
+      text-align: center;
+      text-transform: lowercase;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 30px;
+    font-family: 'Nunito';
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.005em;
+    color: #fff;
+  }
+
+  &__facts {
+    margin-top: 140px;
+  }
+
+  &__fact {
+    margin-top: 26px;
+    width: 246px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 61px;
+    display: flex;
+    justify-content: center;
+
+    &__number {
+      font-family: 'Jost';
+      font-weight: 600;
+      font-size: 36px;
+      letter-spacing: -0.0142658px;
+      color: #EDD765;
+      text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    &__text {
+      margin-left: 6px;
+      font-family: 'Nunito';
+      font-size: 16px;
+      line-height: 65px;
+      letter-spacing: -0.149625px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__form {
+    width: 100%;
+    height: calc(100% - 74px);
+    background: #ECEAFB;
+    border-radius: 25px;
+    padding: 45px 38px 25px;
+
+    &__label {
+      margin-left: 30px;
+      font-family: 'Nunito';
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 127%;
+      color: #2D2D2D;
+    }
+
+    &__input {
+      margin-top: 10px;
+    }
+
+    &__link {
+      margin-top: 10px;
+      margin-bottom: 40px;
+      font-family: 'Roboto';
+      font-size: 16px;
+      line-height: 142.9%;
+      text-align: center;
+      letter-spacing: -0.015em;
+      color: #7469EF;
+    }
+
+    &__check {
+      margin-top: 24px;
+      display: flex;
+
+      label {
+        font-family: 'Roboto';
+        font-size: 12px;
+        line-height: 142.9%;
+        letter-spacing: -0.015em;
+        color: #525252;
+
+        span {
+          font-weight: normal;
+          color: #7469EF;
+        }
+      }
+    }
+
+    &__accounts {
+      width: 34%;
+      margin: 0 auto;
+      margin-top: 53px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.ways {
+  width: 95%;
+  max-width: 1820px;
+  margin-top: 170px;
+  margin-left: auto;
+
+  &__title {
+    font-family: 'Jost';
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 65px;
+    letter-spacing: 0.005em;
+    color: #7469EF;
+
+    span {
+      font-weight: 400;
+      letter-spacing: 0.001em;
+      color: #46445C;
+    }
+  }
+
+  &__block {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+
+    &_blue {
+      .ways__skills {
+        background: linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+      }
+
+      .ways__slide {
+        background: linear-gradient(90deg, #DBE3F7 0%, #D7DFF2 100%);
+      }
+    }
+
+    &_red {
+      .ways__skills {
+        background: linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+      }
+
+      .ways__slide {
+        background: linear-gradient(90deg, #F3DDD3 0%, #E7D2CA 100%);
+      }
+    }
+
+    &_green {
+      .ways__skills {
+        background: linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+      }
+
+      .ways__slide {
+        background: linear-gradient(90deg, #D0EDD7 0%, #D1E6D6 100%);
+      }
+    }
+  }
+
+  &__skills {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+    border-radius: 19px;
+    width: 284px;
+    height: 284px;
+    flex: 0 0 auto;
+    text-align: center;
+    position: relative;
+
+    &__img {
+      position: absolute;
+      top: 15px;
+      left: 12px;
+    }
+
+    &__title {
+      margin-top: 95px;
+      font-family: 'Jost';
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 27px;
+      letter-spacing: 0.005em;
+      color: #FFFFFF;
+    }
+
+    &__subtitle {
+      margin-top: 11px;
+      margin-bottom: 49px;
+      font-family: 'Nunito';
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: -0.005em;
+      color: rgba(255, 255, 255, 0.71);
+    }
+  }
+
+  &__slides {
+    margin-left: 40px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 6px;
+      background-color: #E0E0E0;
+      border-radius: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #F3F3F3;
+      border-radius: 12px;
+    }
+  }
+
+  &__slide {
+    border-radius: 19px;
+    width: 491px;
+    min-height: 284px;
+    margin-right: 20px;
+    color: #46445C;
+    padding: 216px 35px 35px;
+    flex: 0 0 auto;
+    position: relative;
+
+    &Container {
+      min-height: 304px;
+      padding-top: 20px;
+      transition: all 0.3s;
+
+      &:hover {
+        padding-top: 0px;
+
+        .ways__slide {
+          padding: 35px 35px 35px;
+
+          &__text,
+          &__button {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &__bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &__title {
+      font-family: 'Jost';
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 33px;
+      letter-spacing: -0.005em;
+    }
+
+    &__text {
+      margin-top: 10px;
+      display: none;
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21px;
+      letter-spacing: -0.005em;
+    }
+
+    &__button {
+      margin-top: 25px;
+      display: none;
+    }
+  }
+}
+
+.slogan {
+  width: 95%;
+  max-width: 1720px;
+  min-height: 367px;
+  margin: 160px auto;
+  padding: 70px 100px;
+  background:
+    linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
+    linear-gradient(180deg, #7469EF 0%, #EFC969 100%);
+  border-radius: 38px;
+  color: #FFFFFF;
+  position: relative;
+
+  &__center {
+    background:
+      linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
+      linear-gradient(266.45deg, #EFC969 -3.97%, #7469EF 43.02%, #EFC969 100%);
+    text-align: center;
+    padding-top: 60px;
+
+    .slogan__description {
+      width: 72%;
+      max-width: 1080px;
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 45px;
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__title {
+    font-family: 'Jost';
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 65px;
+    letter-spacing: 0.005em;
+  }
+
+  &__description {
+    width: 60%;
+    max-width: 850px;
+    margin-top: 20px;
+    font-family: 'Nunito';
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+.practices {
+  letter-spacing: 0.005em;
+  color: #46445C;
+  font-family: 'Nunito';
+
+  &__title {
+    text-align: center;
+    font-family: 'Jost';
+    font-size: 48px;
+    line-height: 58px;
+
+    span {
+      font-weight: 600;
+      color: #7469EF;
+    }
+  }
+
+  &__subtitle {
+    margin: 0 auto;
+    margin-top: 32px;
+    width: 60%;
+    max-width: 1040px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+}
+
+.practice {
+  margin-top: 120px;
+  margin-left: 100px;
+  width: 95%;
+  max-width: 1820px;
+  min-height: 493px;
+  display: flex;
+  justify-content: space-between;
+
+  &:nth-child(2n) {
+    margin-left: 0;
+    flex-direction: row-reverse;
+
+    .practice {
+      &__left {
+        text-align: right;
+      }
+
+      &__right {
+        border-radius: 0 27px 27px 0;
+      }
+
+      &__title,
+      &__text {
+        margin-left: auto;
+      }
+
+      &__textblock {
+        left: 550px;
+        text-align: right;
+      }
+
+      &__img {
+        left: 50px;
+      }
+
+      &__tochki {
+        left: 550px
+      }
+    }
+  }
+
+  &__left {
+    width: 50%;
+  }
+
+  &__right {
+    height: 461px;
+    width: 40%;
+    max-width: 706px;
+    background: rgba(203, 199, 250, 0.53);
+    border-radius: 27px 0 0 27px;
+    position: relative;
+  }
+
+  &__pretitle {
+    margin-top: 55px;
+    height: 34px;
+    padding: 0px 25px;
+    background: #FFF4BC;
+    border-radius: 27px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  &__title {
+    width: 80%;
+    margin-top: 14px;
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 46px;
+  }
+
+  &__text {
+    width: 95%;
+    max-width: 850px;
+    margin: 30px 0;
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  a {
+    font-family: 'Jost';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 33px;
+    color: #7469EF;
+  }
+
+  &__img {
+    width: 755px;
+    height: 419px;
+    top: -28px;
+    left: -200px;
+    position: absolute;
+  }
+
+  &__tochki {
+    position: absolute;
+    z-index: 5;
+    bottom: -8px;
+    left: 80px;
+  }
+
+  &__textblock {
+    background: #fff;
+    padding: 15px 20px;
+    position: absolute;
+    border: 1px solid #F2EEFF;
+    box-shadow: 6px 4px 28px rgba(116, 105, 239, 0.11);
+    border-radius: 15px;
+    width: 395px;
+    height: 82px;
+    bottom: -40px;
+    left: -250px;
+
+    &__title {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 21px;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+      line-height: 26px;
+      color: #BABABD;
+    }
+  }
+}
+
+.whatSays {
+  width: 95%;
+  max-width: 1720px;
+  min-height: 466px;
+  margin: 0 auto;
+  color: #46445C;
+  font-family: 'Nunito';
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    &__title {
+      font-family: 'Jost';
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 46px;
+    }
+
+    &__subtitle {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+
+  &__feedbacks {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 6px;
+      background-color: #E0E0E0;
+      border-radius: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #F3F3F3;
+      border-radius: 12px;
+    }
+  }
+
+  &__feedback {
+    width: 540px;
+    height: 298px;
+    flex: 0 0 auto;
+    padding: 65px;
+    margin-right: 50px;
+    margin-bottom: 40px;
+    border: 2px solid rgba(70, 68, 92, 0.15);
+    border-radius: 32px;
+    display: flex;
+
+    &__photo {
+      margin-right: 30px;
+      background: #e0e0e0;
+      flex: 0 0 auto;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+    }
+
+    &__data {
+      &__text {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.4px;
+      }
+
+      &__author {
+        margin-top: 32px;
+        opacity: 0.5;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.join {
+  width: 95%;
+  max-width: 1720px;
+  min-height: 550px;
+  margin: 0 auto;
+  margin-top: 180px;
+  padding-top: 145px;
+  color: #46445C;
+  position: relative;
+
+  &__title {
+    width: 40%;
+    max-width: 725px;
+    font-family: 'Jost';
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 46px;
+    letter-spacing: 0.005em;
+  }
+
+  &__subtitle {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    width: 60%;
+    max-width: 1000px;
+    font-family: 'Nunito';
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: -0.005em;
+  }
+
+  &__img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+}
+
+.signup {
+  width: 95%;
+  max-width: 1720px;
+  min-height: 506px;
+  margin: 0 auto;
+  margin-top: 190px;
+  margin-bottom: 100px;
+  padding: 50px 70px;
+  display: flex;
+  background: linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+  border-radius: 28px;
+  position: relative;
+
+  &__bg {
+    position: absolute;
+    top: 30px;
+    left: 200px
+  }
+
+  &__block {
+    width: 50%;
+
+    &_left {
+      padding-right: 10%;
+      font-family: 'Jost';
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 62px;
+      letter-spacing: -0.005em;
+      text-transform: uppercase;
+    }
+  }
+
+  &__title {
+    line-height: 75px;
+    width: 590px;
+    height: 75px;
+    background: #EFC969;
+    border-radius: 46px;
+    color: #46445C;
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-left: 26px;
+    color: #FFFFFF;
+  }
+
+  &__form {
+    width: 100%;
+    max-width: 500px;
+    min-height: 400px;
+    margin: 0 auto;
+    border-radius: 25px;
+    color: #fff;
+
+    &__label {
+      margin-left: 30px;
+      font-family: 'Nunito';
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 127%;
+    }
+
+    &__input {
+      margin-top: 10px;
+    }
+
+    &__link {
+      margin-top: 10px;
+      margin-bottom: 40px;
+      font-family: 'Roboto';
+      font-size: 16px;
+      line-height: 142.9%;
+      text-align: center;
+      letter-spacing: -0.015em;
+      text-decoration: underline;
+    }
+
+    &__check {
+      margin-top: 24px;
+      margin-bottom: 29px;
+      display: flex;
+
+      label {
+        font-family: 'Roboto';
+        font-size: 12px;
+        line-height: 142.9%;
+        letter-spacing: -0.015em;
+
+        span {
+          font-weight: normal;
+          color: #ffc700;
+        }
+      }
+    }
+
+    &__btn {
+      width: 212px;
+      margin: 0 auto;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1921px) {
+  .ways {
+    max-width: 1720px;
+    margin-left: 100px;
+  }
+
+  .practice {
+    &__right {
+      border-radius: 27px;
+    }
+
+    &:nth-child(2n) {
+      margin-left: 0;
+      flex-direction: row-reverse;
+
+      .practice {
+        &__right {
+          border-radius: 27px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1380px) {
+  .offer {
+    width: 90%;
+    max-width: 1210px;
+    min-height: 700px;
+    padding: 32px 60px;
+
+    &__block {
+      height: 635px;
+    }
+
+    &__title {
+      margin-top: 87px;
+      font-size: 40px;
+      line-height: 52px;
+    }
+
+    &__facts {
+      margin-top: 106px;
+    }
+
+    &__fact {
+      width: 212px;
+
+      &__number {
+        font-size: 28px;
+        line-height: 54px;
+      }
+
+      &__text {
+        font-size: 12px;
+      }
+    }
+
+    &__form {
+      padding: 45px 30px 20px;
+    }
+  }
+
+  .ways {
+    margin-left: 78px;
+
+    &__block {
+      margin-top: 55px;
+    }
+  }
+
+  .slogan {
+    margin: 130px auto;
+    padding: 60px 70px;
+    width: 90%;
+    max-width: 1206px;
+
+    &__title {
+      font-size: 40px;
+      line-height: 48px;
+    }
+
+    &__description {
+      width: 50%;
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  .practices {
+    &__title {
+      font-size: 40px;
+    }
+
+    &__subtitle {
+      margin-top: 10px;
+      font-weight: normal;
+      font-size: 18px;
+    }
+  }
+
+  .practice {
+    margin-left: 78px;
+    margin-top: 80px;
+    min-height: 413px;
+
+    &:nth-child(2n) {
+      margin: 140px 0;
+
+      .practice {
+        &__img {
+          left: 30px;
+        }
+
+        &__tochki,
+        &__textblock {
+          left: 320px
+        }
+      }
+
+    }
+
+    &__right {
+      max-width: 502px;
+      height: 364px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__text {
+      max-width: 604px;
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 27px;
+    }
+
+    &__tochki {}
+
+    &__img {
+      top: -20px;
+
+      img {
+        width: 681px;
+      }
+    }
+  }
+
+  .whatSays {
+    width: 90%;
+    max-width: 1220px;
+
+    &__header {
+      &__title {
+        width: 60%;
+        font-size: 40px;
+      }
+
+      &__subtitle {
+        width: 40%;
+        text-align: right;
+      }
+    }
+
+    &__feedbacks {
+      width: 106%;
+    }
+  }
+
+  .join {
+    width: 90%;
+    max-width: 1210px;
+    min-height: 400px;
+    padding-top: 0;
+
+    &__img {
+      top: -45px;
+      right: -130px;
+
+      svg {
+        height: 400px;
+      }
+    }
+
+    &__subtitle {
+      width: 55%;
+    }
+  }
+
+  .signup {
+    margin-top: 140px;
+    padding: 50px 40px;
+
+    &__title {
+      width: 426px;
+      height: 63px;
+      font-size: 34px;
+      line-height: 65px;
+    }
+
+    &__subtitle {
+      margin-top: 12px;
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    &__block {
+      &_left {
+        padding-right: 8%;
+      }
+    }
+
+    &__form {
+      max-width: 350px;
+    }
+  }
+}
