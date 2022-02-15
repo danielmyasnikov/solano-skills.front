@@ -1,0 +1,106 @@
+.dialog {
+  
+  .dialogTitle {
+    z-index: 2;
+    display: flex;
+    padding: 20px 40px 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #d6d6d6;
+    @media screen and(max-width:365px) {
+      padding: 25px 20px 0 0;
+      svg {
+        color: #fff !important;
+        font-size: 32px !important;
+      }
+    }
+    svg {
+      color: #d6d6d6;
+      cursor: pointer;
+      font-size: 40px;
+    }
+  }
+
+  .dialogTitleText {
+  font-family: Jost;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 127%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  }
+
+  .dialogContent {
+    overflow-y: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 127%;
+    text-align: center;
+    padding: 60px 40px !important;
+    margin: 0 auto;
+    @media screen and(max-width: 1150px) {
+      padding-top: 100px !important;
+    }
+    @media screen and(max-width: 768px) {
+      width: 100%;
+    }
+    @media screen and(max-width:365px) {
+      padding-top: 55px !important;
+    }
+  }
+
+  .dialogContent > span {
+    margin-bottom: 10px;
+  }
+
+  .dialogTitleText {
+    font-family: Jost;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 127%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    }
+  
+  .dialogActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 100px 20px;
+    border-top: 2px solid #d6d6d6;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 127%;
+    text-align: center;
+  }
+
+  .closeModal {
+    cursor: pointer;
+    right: 13px;
+    top: 15px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+  
+}
+
+.dialogActionsButtons {
+  display: flex;
+  margin: 0 auto;
+  margin-top: -50px;
+
+  & button:last-child {
+    margin-left: 20px;
+  }
+}

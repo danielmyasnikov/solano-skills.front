@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import styles from './styles.module.less';
 import cn from 'classnames';
-import AvatarDefault from '@assets/avatarDefault.png';
-import AddImage from '@assets/AddImage';
 import Edit from '@assets/Edit';
 import Button from '@components/mui/button';
 import { Link } from 'react-router-dom';
 import Card from './card';
+import { Avatar } from './Avatar';
 import { useRef } from 'react';
 import CropImage from './cropImage';
 import { useDispatch, useSelector } from 'react-redux';
@@ -117,12 +116,7 @@ const Profile = () => {
       <div className={styles.content}>
         <div className={cn(styles.profile, styles.card)}>
           <div className={styles.profileInfo}>
-            <div className={styles.avatar}>
-              <img src={AvatarDefault} />
-              <div className={styles.addImage}>
-                <AddImage />
-              </div>
-            </div>
+            <Avatar />
             {isFullnameActive && (
               <input
                 name="fullname"
