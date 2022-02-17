@@ -1,4 +1,7 @@
 :global {
+  .ace_editor {
+    min-width: 300px;
+  }
   .ace_gutter-layer {
     background: #2c2a3f;
   }
@@ -13,5 +16,11 @@
   }
   .ace_scroller .ace_print-margin {
     background: none;
+  }
+  @media screen and (max-width: 480px) {
+    .ace_editor {
+      height: 320px !important;
+      min-height: 320px !important;
+    }
   }
 }

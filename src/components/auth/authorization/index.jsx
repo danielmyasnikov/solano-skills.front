@@ -14,6 +14,7 @@ import { AuthorizationByEmail } from '../authorizationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import axios from 'axios';
+import Terms from '../terms';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,13 @@ export const Authorization = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [countTime, setCountTime] = useState(0);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const [checked, setChecked] = useState(false);
+  const [checkedError, setCheckedError] = useState(false);
+
+  function handleChecked() {
+    setCheckedError('');
+    setChecked(!checked);
+  }
 
   useEffect(() => {
     if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
@@ -67,7 +75,10 @@ export const Authorization = () => {
     if (!isRegistrationByPhone) {
       dispatch(AuthStore.Actions.singIn(email, password));
     }
-    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
+    if (isRegistrationByPhone && !isPhoneNumberConfirmation && !checked) {
+      setCheckedError('Неверные данные');
+    }
+    if (isRegistrationByPhone && !isPhoneNumberConfirmation && checked) {
       const sendCode = async () => {
         return await axios
           .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
@@ -75,7 +86,7 @@ export const Authorization = () => {
           })
           .then(() => setIsPhoneNumberConfirmation(true))
           .catch((error) => {
-            setCountTime((Number(error.response.data.errors)).toFixed());
+            setCountTime(Number(error.response.data.errors).toFixed());
           });
       };
       sendCode();
@@ -132,14 +143,22 @@ export const Authorization = () => {
         />
       )}
       {isRegistrationByPhone && !isPhoneNumberConfirmation && (
-        <ByPhoneNumber
-          errors={errors}
-          handleAuthMethod={handleAuthMethod}
-          authMethodText="Авторизоваться по Email"
-          handleChange={handleChange}
-          phoneNumber={phoneNumber}
-          countTime={countTime}
-        />
+        <>
+          <ByPhoneNumber
+            errors={errors}
+            handleAuthMethod={handleAuthMethod}
+            authMethodText="Авторизоваться по Email"
+            handleChange={handleChange}
+            phoneNumber={phoneNumber}
+            countTime={countTime}
+          />
+          <Terms
+            isPhoneNumber={isRegistrationByPhone}
+            checked={checked}
+            handleChecked={handleChecked}
+            checkedError={checkedError}
+          />
+        </>
       )}
       {isPhoneNumberConfirmation && (
         <PhoneNumberConfirmation

@@ -9,6 +9,7 @@ import { AuthContainer } from './../authContainer';
 import { RegistrationByEmail } from '../registrationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
+import Terms from '../terms';
 
 export const Registration = ({ isModal }) => {
   const dispatch = useDispatch();
@@ -22,8 +23,10 @@ export const Registration = ({ isModal }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
+  const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
   const [checkedError, setCheckedError] = useState('');
+  const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
 
   useEffect(() => {
     if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
@@ -69,9 +72,12 @@ export const Registration = ({ isModal }) => {
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
     }
-    if (isRegistrationByPhone) {
+    if (isRegistrationByPhone && phoneTermsChecked) {
       setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''));
       setIsPhoneNumberConfirmation(true);
+    }
+    if (isRegistrationByPhone && !phoneTermsChecked) {
+      setPhoneTermsCheckedError('Неверные данные');
     }
     if (!checked) {
       setCheckedError('Ошибка ввода данных');
@@ -84,9 +90,14 @@ export const Registration = ({ isModal }) => {
     }
   }, [headers]);
 
-  function handleChacked() {
+  function handleChecked() {
     setCheckedError('');
     setChecked(!checked);
+  }
+
+  function handlePhoneTermsChecked() {
+    setPhoneTermsCheckedError('');
+    setPhoneTermsChecked(!phoneTermsChecked);
   }
 
   function handleAuthMethod() {
@@ -107,7 +118,7 @@ export const Registration = ({ isModal }) => {
         <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>
         {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <RegistrationByEmail
-            handleChacked={handleChacked}
+            handleChecked={handleChecked}
             handleChange={handleChange}
             email={email}
             password={password}
@@ -119,12 +130,20 @@ export const Registration = ({ isModal }) => {
           />
         )}
         {isRegistrationByPhone && !isPhoneNumberConfirmation && (
-          <ByPhoneNumber
-            handleAuthMethod={handleAuthMethod}
-            authMethodText="Регистрация по Email"
-            handleChange={handleChange}
-            phoneNumber={phoneNumber}
-          />
+          <>
+            <ByPhoneNumber
+              handleAuthMethod={handleAuthMethod}
+              authMethodText="Регистрация по Email"
+              handleChange={handleChange}
+              phoneNumber={phoneNumber}
+            />
+            <Terms
+              isPhoneNumber={isRegistrationByPhone}
+              checked={phoneTermsChecked}
+              handleChecked={handlePhoneTermsChecked}
+              checkedError={phoneTermsCheckedError}
+            />
+          </>
         )}
         {isPhoneNumberConfirmation && (
           <PhoneNumberConfirmation

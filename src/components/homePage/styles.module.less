@@ -1,9 +1,5 @@
-.container {
-  width: 100%;
-  max-width: 1920px;
-  margin: 0 auto;
+.wrap {
   overflow-y: auto;
-  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -11,27 +7,36 @@
   }
 }
 
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
 .offer {
   width: 95%;
   max-width: 1720px;
   min-height: 750px;
-  margin: 0 auto;
-  margin-top: 20px;
+  margin: 20px auto 0;
+  background: linear-gradient(152.55deg, #7469EF 8.38%, #C2B9EE 73.74%);
+  border-radius: 38px;
   display: flex;
   justify-content: space-between;
   padding: 64px 150px 51px 82px;
   position: relative;
 
-  &__bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+  &__group {
+    &One {
+      position: absolute;
+      left: 26%;
+      bottom: -6px;
+    }
 
-    img {
-      width: 100%;
-      height: 100%;
+    &Two {
+      position: absolute;
+      right: 36px;
+      top: 70px;
     }
   }
 
@@ -53,8 +58,7 @@
 
       button {
         display: flex;
-        margin: auto;
-        margin-top: 40px;
+        margin: 40px auto auto;
       }
 
       &__title {
@@ -155,11 +159,22 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 127%;
-      color: #2D2D2D;
+      color: #7469EF;
     }
 
     &__input {
       margin-top: 10px;
+
+      div {
+        background: rgba(255, 255, 255, 0.46);
+        border: 1px solid #7469EF;
+      }
+
+      input {
+        &::placeholder {
+          color: rgba(70, 68, 92, 0.33);
+        }
+      }
     }
 
     &__link {
@@ -189,12 +204,15 @@
           color: #7469EF;
         }
       }
+
+      svg {
+        color: rgba(0, 0, 0, 0.26);
+      }
     }
 
     &__accounts {
       width: 34%;
-      margin: 0 auto;
-      margin-top: 53px;
+      margin: 53px auto 0;
       display: flex;
       justify-content: space-between;
     }
@@ -321,7 +339,7 @@
   &__slide {
     border-radius: 19px;
     width: 491px;
-    min-height: 284px;
+    height: 284px;
     margin-right: 20px;
     color: #46445C;
     padding: 216px 35px 35px;
@@ -334,7 +352,7 @@
       transition: all 0.3s;
 
       &:hover {
-        padding-top: 0px;
+        padding-top: 0;
 
         .ways__slide {
           padding: 35px 35px 35px;
@@ -385,33 +403,43 @@
   min-height: 367px;
   margin: 160px auto;
   padding: 70px 100px;
-  background:
-    linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
-    linear-gradient(180deg, #7469EF 0%, #EFC969 100%);
+  background: linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
+  linear-gradient(180deg, #7469EF 0%, #EFC969 100%);
   border-radius: 38px;
   color: #FFFFFF;
   position: relative;
 
   &__center {
-    background:
-      linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
-      linear-gradient(266.45deg, #EFC969 -3.97%, #7469EF 43.02%, #EFC969 100%);
+    background: linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
+    linear-gradient(266.45deg, #EFC969 -3.97%, #7469EF 43.02%, #EFC969 100%);
     text-align: center;
     padding-top: 60px;
 
     .slogan__description {
       width: 72%;
       max-width: 1080px;
-      margin: 0 auto;
-      margin-top: 20px;
-      margin-bottom: 45px;
+      margin: 20px auto 45px;
     }
   }
 
-  &__bg {
-    position: absolute;
-    top: 0;
-    left: 0;
+  &__img {
+    &_left {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &_center {
+      position: absolute;
+      left: 40%;
+      top: 0;
+    }
+
+    &_right {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 
   &__title {
@@ -451,8 +479,7 @@
   }
 
   &__subtitle {
-    margin: 0 auto;
-    margin-top: 32px;
+    margin: 32px auto 0;
     width: 60%;
     max-width: 1040px;
     text-align: center;
@@ -506,12 +533,13 @@
   }
 
   &__left {
-    width: 50%;
+    width: 60%;
   }
 
   &__right {
+    flex: 0 0 auto;
     height: 461px;
-    width: 40%;
+    width: 705px;
     max-width: 706px;
     background: rgba(203, 199, 250, 0.53);
     border-radius: 27px 0 0 27px;
@@ -521,7 +549,7 @@
   &__pretitle {
     margin-top: 55px;
     height: 34px;
-    padding: 0px 25px;
+    padding: 0 25px;
     background: #FFF4BC;
     border-radius: 27px;
     font-weight: 600;
@@ -532,7 +560,7 @@
   }
 
   &__title {
-    width: 80%;
+    width: 65%;
     margin-top: 14px;
     font-family: 'Jost';
     font-style: normal;
@@ -542,7 +570,7 @@
   }
 
   &__text {
-    width: 95%;
+    width: 80%;
     max-width: 850px;
     margin: 30px 0;
     font-size: 18px;
@@ -691,8 +719,7 @@
   width: 95%;
   max-width: 1720px;
   min-height: 550px;
-  margin: 0 auto;
-  margin-top: 180px;
+  margin: 180px auto 0;
   padding-top: 145px;
   color: #46445C;
   position: relative;
@@ -720,8 +747,8 @@
 
   &__img {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
   }
 }
 
@@ -729,9 +756,7 @@
   width: 95%;
   max-width: 1720px;
   min-height: 506px;
-  margin: 0 auto;
-  margin-top: 190px;
-  margin-bottom: 100px;
+  margin: 190px auto 100px;
   padding: 50px 70px;
   display: flex;
   background: linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
@@ -741,7 +766,7 @@
   &__bg {
     position: absolute;
     top: 30px;
-    left: 200px
+    left: 10%;
   }
 
   &__block {
@@ -791,6 +816,17 @@
 
     &__input {
       margin-top: 10px;
+
+      div {
+        background: rgba(255, 255, 255, 0.26);
+        border: 1px solid #fff;
+      }
+
+      input {
+        &::placeholder {
+          color: rgba(70, 68, 92, 0.33);
+        }
+      }
     }
 
     &__link {
@@ -814,11 +850,16 @@
         font-size: 12px;
         line-height: 142.9%;
         letter-spacing: -0.015em;
+        color: rgba(255, 255, 255, 0.68);
 
         span {
           font-weight: normal;
           color: #ffc700;
         }
+      }
+
+      svg {
+        color: rgba(255, 255, 255, 0.26);
       }
     }
 
@@ -828,15 +869,6 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
 
 @media (min-width: 1921px) {
   .ways {
@@ -865,10 +897,20 @@
 @media (max-width: 1380px) {
   .offer {
     width: 90%;
-    max-width: 1210px;
+    max-width: 1200px;
     min-height: 700px;
     padding: 32px 60px;
 
+    &__groupOne {
+      svg {
+        width: 618px;
+        height: 358px;
+      }
+    }
+
+    &__groupTwo {
+      right: 20px;
+    }
     &__block {
       height: 635px;
     }
@@ -913,7 +955,8 @@
     margin: 130px auto;
     padding: 60px 70px;
     width: 90%;
-    max-width: 1206px;
+    max-width: 1200px;
+    position: relative;
 
     &__title {
       font-size: 40px;
@@ -961,8 +1004,12 @@
     }
 
     &__right {
-      max-width: 502px;
+      width: 502px;
       height: 364px;
+    }
+
+    &__pretitle {
+      margin-top: 0;
     }
 
     &__title {
@@ -971,13 +1018,15 @@
     }
 
     &__text {
+      width: 74%;
       max-width: 604px;
       margin-top: 20px;
       font-size: 16px;
       line-height: 27px;
     }
 
-    &__tochki {}
+    &__tochki {
+    }
 
     &__img {
       top: -20px;
@@ -990,7 +1039,7 @@
 
   .whatSays {
     width: 90%;
-    max-width: 1220px;
+    max-width: 1200px;
 
     &__header {
       &__title {
@@ -1011,16 +1060,15 @@
 
   .join {
     width: 90%;
-    max-width: 1210px;
+    max-width: 1200px;
     min-height: 400px;
     padding-top: 0;
 
     &__img {
-      top: -45px;
-      right: -130px;
 
       svg {
-        height: 400px;
+        width: 490px;
+        height: 380px;
       }
     }
 
@@ -1030,30 +1078,1254 @@
   }
 
   .signup {
+    width: 90%;
+    max-width: 1200px;
     margin-top: 140px;
     padding: 50px 40px;
 
+    &__bg {
+      left: 0;
+    }
+
     &__title {
-      width: 426px;
+      width: 452px;
       height: 63px;
-      font-size: 34px;
+      font-size: 36px;
       line-height: 65px;
     }
 
     &__subtitle {
       margin-top: 12px;
-      font-size: 34px;
+      font-size: 36px;
       line-height: 42px;
     }
 
     &__block {
       &_left {
-        padding-right: 8%;
+        padding-right: 0;
       }
     }
 
     &__form {
       max-width: 350px;
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .offer {
+    padding: 38px 40px;
+    max-width: 900px;
+    min-height: 613px;
+
+    &__groupOne {
+      svg {
+        width: 610px;
+        height: 347px;
+      }
+    }
+
+    button {
+      margin-top: 30px;
+    }
+
+    &__title {
+      margin-top: 62px;
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    &__subtitle {
+      margin-top: 20px;
+      line-height: 24px;
+    }
+
+    &__facts {
+      margin-top: 85px;
+    }
+
+    &__fact {
+      width: 169px;
+      height: 46px;
+
+      &__number {
+        font-size: 22px;
+        line-height: 48px;
+      }
+
+      &__text {
+        line-height: 56px;
+      }
+    }
+
+    &__block {
+      height: 530px;
+      max-width: 450px;
+      width: 54%;
+
+      &__right {
+        max-width: 332px;
+
+        &__title {
+          height: 59px;
+          font-size: 22px;
+          line-height: 60px;
+        }
+      }
+    }
+
+    &__form {
+      height: calc(100% - 59px);
+      padding: 20px 11px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      &__label {
+        margin-left: 16px;
+        font-size: 14px;
+      }
+
+      &__input {
+        margin-top: 8px;
+
+        div {
+          padding: 15px 16px;
+        }
+      }
+
+      &__link {
+        margin: 8px 16px 23px;
+        font-size: 14px;
+        text-align: left;
+        text-decoration-line: underline;
+      }
+
+      &__check {
+        span {
+          padding: 0;
+
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        label {
+          margin-top: 4px;
+          margin-left: 6px;
+
+          span {
+            color: #EDD765;
+          }
+        }
+      }
+
+      button {
+        margin-top: 20px;
+      }
+
+      &__accounts {
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .ways {
+    margin-top: 110px;
+    margin-left: 60px;
+
+    &__title {
+      font-size: 36px;
+    }
+
+    &__block {
+      margin-top: 20px;
+    }
+
+    &__skills {
+      margin-top: 15px;
+    }
+
+    &__slide {
+      &Container {
+        padding-top: 15px;
+      }
+    }
+  }
+
+  .slogan {
+    max-width: 900px;
+    min-height: 300px;
+    margin: 90px auto;
+    padding: 50px;
+
+    &__center {
+      .slogan__description {
+        width: 96%;
+      }
+    }
+
+    &__img {
+
+      &_left {
+        svg {
+          height: 268px;
+        }
+      }
+
+      &_right {
+        svg {
+          width: 490px;
+          height: 300px;
+        }
+      }
+
+      &_center {
+        left: 4%;
+
+        svg {
+          width: 490px;
+          height: 300px;
+        }
+      }
+    }
+
+    &__title {
+      font-size: 36px;
+    }
+
+    &__description {
+      width: 98%;
+    }
+  }
+
+  .practices {
+    &__title {
+      font-size: 36px;
+    }
+
+    &__subtitle {
+      width: 70%;
+    }
+  }
+
+  .practice {
+
+    &:nth-child(2n) {
+
+      .practice {
+        &__right {
+          margin-top: 50px;
+        }
+
+        &__textblock {
+          left: 220px;
+        }
+
+        &__tochki {
+          left: 220px;
+        }
+      }
+    }
+
+    &__right {
+      margin-top: 80px;
+      width: 376px;
+      height: 318px;
+    }
+
+    &__pretitle {
+      margin-top: 0;
+    }
+
+    &__title {
+      width: 55%;
+    }
+
+    &__text {
+      width: 50%;
+    }
+
+    &__img {
+      top: -13px;
+      left: -240px;
+
+      img {
+        width: 580px;
+      }
+    }
+
+  }
+
+  .whatSays {
+    margin-top: 100px;
+    max-width: 900px;
+
+    &__header {
+      display: block;
+
+      &__title {
+        width: 100%;
+      }
+
+      &__subtitle {
+        margin-top: 30px;
+        margin-left: auto;
+        width: 55%;
+      }
+    }
+
+    &__feedbacks {
+      margin-top: 50px;
+    }
+  }
+
+  .join {
+    max-width: 900px;
+
+    &__title {
+      width: 55%;
+    }
+
+    &__img {
+      top: 30px;
+
+      svg {
+        width: 411px;
+        height: 326px;
+      }
+    }
+  }
+
+  .signup {
+    min-height: 455px;
+    padding: 40px;
+    margin-top: 100px;
+
+    &__title {
+      margin-top: 18px;
+    }
+
+    &__form {
+      max-width: 300px;
+      min-height: 380px;
+      margin: 0 25px 0 auto;
+
+      &__label {
+        margin-left: 16px;
+        font-size: 14px;
+      }
+
+      &__input {
+        margin-top: 8px;
+
+        div {
+          padding: 15px 16px;
+        }
+      }
+
+      &__link {
+        font-size: 14px;
+        text-align: left;
+        margin-left: 16px;
+        margin-bottom: 25px;
+      }
+
+      &__check {
+        span {
+          padding: 0;
+        }
+
+        label {
+          margin-left: 6px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .offer {
+    max-width: 688px;
+    padding: 38px 20px;
+
+    &__groupOne, &__groupTwo {
+      display: none;
+    }
+
+    &__block {
+      &__right {
+        &__title {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &__title {
+      margin-top: 76px;
+      font-size: 24px;
+      line-height: 35px;
+
+      &:before {
+        width: 81px;
+        height: 35px;
+        font-size: 18px;
+        line-height: 35px;
+        left: 0;
+      }
+    }
+
+    &__subtitle {
+      width: 90%;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    &__fact {
+      margin-top: 22px;
+    }
+  }
+
+  .ways {
+    margin-top: 90px;
+    margin-left: 40px;
+
+    &__title {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    &__skills {
+      width: 235px;
+      height: 235px;
+
+      &__img {
+        img {
+          width: 211px;
+          height: 211px;
+        }
+      }
+
+      &__title {
+        margin-top: 70px;
+      }
+
+      &__subtitle {
+        margin-top: 8px;
+        margin-bottom: 30px;
+      }
+    }
+
+    &__slide {
+      width: 405px;
+      height: 235px;
+      padding: 177px 30px 25px;
+
+      &Container {
+        min-height: 245px;
+
+        &:hover {
+          .ways__slide {
+            padding: 29px 30px 25px;
+          }
+        }
+      }
+
+      &__bg {
+        svg {
+          width: 405px;
+          height: 235px;
+        }
+      }
+
+      &__title {
+        font-size: 20px;
+      }
+
+      &__text {
+        height: 86px;
+        overflow: hidden;
+      }
+
+      &__button {
+        margin-top: 18px;
+
+        button {
+          padding: 2px 20px;
+        }
+
+        span {
+          font-weight: 400;
+          border: 1px;
+        }
+      }
+    }
+  }
+
+  .slogan {
+    max-width: 688px;
+    padding: 45px 50px;
+
+    &__center {
+      .slogan__description {
+        margin: 20px auto 30px;
+      }
+    }
+
+    &__img {
+      &_left, &_center {
+        display: none;
+      }
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__description {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .practices {
+    &__title {
+      font-size: 28px;
+      line-height: 38px;
+    }
+
+    &__subtitle {
+      width: 80%;
+      line-height: 28px;
+    }
+  }
+
+  .practice {
+    margin-left: 40px;
+    display: block;
+
+    &:nth-child(2n) {
+      width: 100%;
+      margin: 90px 0 90px auto;
+
+      .practice {
+        &__left {
+          width: 100%;
+          max-width: 688px;
+          margin: 0 auto;
+        }
+
+        &__right {
+          margin-left: 0;
+        }
+
+        &__img {
+          left: 104px;
+        }
+
+        &__tochki {
+          left: 345px;
+        }
+
+        &__textblock {
+          left: 315px;
+        }
+      }
+    }
+
+    &__left {
+      width: 90%;
+      max-width: 688px;
+    }
+
+    &__right {
+      margin-top: 30px;
+      margin-left: auto;
+    }
+
+    &__title {
+      width: 100%;
+    }
+
+    &__text {
+      margin-top: 15px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 688px;
+    }
+
+    &__img {
+      left: -290px;
+    }
+
+    &__textblock {
+      left: -350px;
+    }
+
+    &__tochki {
+      left: -20px;
+    }
+  }
+
+  .whatSays {
+    max-width: 688px;
+
+    &__header {
+      &__title {
+        font-size: 28px;
+      }
+
+      &__subtitle {
+        margin-top: 20px;
+        width: 70%;
+        font-size: 16px;
+      }
+    }
+
+    &__feedbacks {
+      margin-top: 40px;
+    }
+
+    &__feedback {
+      width: 450px;
+      height: 260px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      padding: 46px 20px;
+    }
+  }
+
+  .join {
+    &__img {
+      right: -45px;
+      top: -70px;
+      z-index: 1;
+
+      &:before {
+        position: absolute;
+        display: block;
+        content: '';
+        width: 100%;
+        height: 414px;
+        top: 0;
+        left: 0;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 40.36%, rgba(255, 255, 255, 0) 100%);
+      }
+
+      svg {
+        width: 550px;
+        height: 460px;
+      }
+    }
+
+    &__title {
+      position: absolute;
+      font-size: 28px;
+      line-height: 36px;
+      z-index: 2;
+    }
+
+    &__subtitle {
+      width: 70%;
+      top: 60px;
+      position: absolute;
+      font-size: 16px;
+      line-height: 26px;
+      z-index: 2;
+    }
+
+    &__btn {
+      z-index: 2;
+      position: absolute;
+      top: 270px;
+    }
+  }
+
+  .signup {
+    padding: 30px;
+    max-width: 688px;
+    min-height: 0;
+    display: block;
+
+    &__bg {
+      top: 115px;
+      left: 20%;
+
+      svg {
+        width: 445px;
+        height: 352px;
+      }
+    }
+
+    &__block {
+      width: 100%;
+    }
+
+    &__title {
+      width: 358px;
+      height: 51px;
+      font-size: 28px;
+      line-height: 52px;
+    }
+
+    &__subtitle {
+      margin-top: 7px;
+      margin-left: 0;
+      font-size: 28px;
+      line-height: 41px;
+    }
+
+    &__form {
+      margin-top: 28px;
+      position: relative;
+      max-width: none;
+      min-height: 0;
+
+      &_flex {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &__block {
+        width: 48%;
+      }
+
+      &__link {
+        position: absolute;
+        top: 75px;
+      }
+
+      &__check {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .offer {
+    width: 92%;
+    max-width: 440px;
+    display: block;
+    padding: 35px 20px;
+
+    &__groupOne {
+      width: 100%;
+      display: block;
+      top: 235px;
+      left: 0;
+
+      svg {
+        width: 100%;
+        height: 250px;
+      }
+    }
+
+    &__groupTwo {
+      display: block;
+      top: 30px;
+
+      svg {
+        width: 50px;
+        height: 30px;
+      }
+    }
+
+    &__block {
+      width: 100%;
+      height: inherit;
+
+      &__right {
+        margin-top: 38px;
+        max-width: none;
+      }
+    }
+
+    &__title {
+      margin-top: 60px;
+      line-height: 30px;
+    }
+
+    &__subtitle {
+      width: 100%;
+    }
+
+    &__facts {
+      margin-top: 40px;
+      display: flex;
+    }
+
+    &__fact {
+      margin-top: 0;
+      margin-right: 20px;
+    }
+
+    &__form {
+      border-radius: 17px;
+    }
+  }
+
+  .ways {
+    margin-left: 20px;
+
+    &__title {
+      span {
+        display: block;
+      }
+    }
+
+    &__block {
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #E0E0E0;
+        border-radius: 12px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: #F3F3F3;
+        border-radius: 12px;
+      }
+    }
+
+    &__slides {
+      overflow-x: visible;
+      margin-left: 20px;
+    }
+
+    &__slide {
+      padding: 29px 30px 25px;
+
+      &Container {
+        &:hover {
+          padding-top: 15px;
+        }
+      }
+
+      &__text,
+      &__button {
+        display: block;
+      }
+    }
+  }
+
+  .slogan {
+    width: 92%;
+    max-width: 440px;
+    padding: 50px 20px 40px 30px;
+
+    &__title {
+      line-height: 30px;
+    }
+
+    &__img_right {
+      svg {
+        width: 100%;
+      }
+    }
+  }
+
+  .practices {
+    &__subtitle {
+      width: 90%;
+    }
+  }
+
+  .practice {
+    margin-left: 20px;
+    width: 96%;
+
+    &:nth-child(2n) {
+      .practice {
+
+        &__left {
+          width: 92%;
+          max-width: 440px;
+        }
+
+        &__img {
+          left: -5px;
+        }
+
+        &__textblock {
+          width: 94%;
+          left: 45px;
+        }
+
+        &__tochki {
+          left: 45px;
+        }
+      }
+    }
+
+    &__left {
+      width: 95%;
+    }
+
+    &__right {
+      height: 284px;
+      margin-top: 50px;
+
+      img {
+        width: 500px;
+      }
+    }
+
+    &__title {
+      font-size: 22px;
+      line-height: 29px;
+    }
+
+    &__img {
+      left: -108px;
+      top: -7px;
+    }
+
+    &__tochki {
+      left: 275px;
+    }
+
+    &__textblock {
+      left: 0;
+      top: 240px;
+      padding: 10px 15px;
+      width: 90%;
+      height: 22%;
+
+      &__title, &__subtitle {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .whatSays {
+    width: 92%;
+    max-width: 440px;
+
+    &__header {
+      &__title {
+        line-height: 36px;
+      }
+
+      &__subtitle {
+        width: 100%;
+        text-align: left;
+        line-height: 24px;
+      }
+    }
+
+    &__feedback {
+      width: 369px;
+      padding: 38px 20px;
+    }
+  }
+
+  .join {
+    width: 92%;
+    max-width: 440px;
+
+    &__title {
+      width: 100%;
+    }
+
+    &__subtitle {
+      width: 100%;
+    }
+
+    &__btn {
+      top: 290px;
+    }
+
+    &__img {
+      top: 0;
+
+      &:before {
+        background: linear-gradient(125.21deg, #FFFFFF 0%, rgba(255, 255, 255, 0.83) 98.64%);
+      }
+
+      svg {
+        width: 100%;
+      }
+    }
+  }
+
+  .signup {
+    width: 92%;
+    max-width: 440px;
+    padding: 40px 20px;
+
+    &__bg {
+      left: 0;
+
+      svg {
+        width: 100%;
+      }
+    }
+
+    &__title {
+      margin-top: 0;
+      width: 100%;
+      max-width: 358px;
+    }
+
+    &__form {
+      &_flex {
+        display: block;
+      }
+
+      &__block {
+        width: 100%;
+        margin-top: 40px;
+      }
+
+      &__check {
+        margin-top: 25px;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 320px) {
+  .offer {
+    max-width: 280px;
+    border-radius: 27px;
+    padding: 35px 10px 20px;
+
+    &__block {
+      &__right {
+        &__title {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &__groupOne {
+      display: none;
+    }
+
+    button {
+      margin-top: 25px;
+      margin-left: 10px;
+    }
+
+    &__facts {
+      margin-left: 10px;
+      margin-top: 30px;
+      display: block;
+    }
+
+    &__fact {
+      margin-top: 10px;
+    }
+
+    &__form {
+      padding: 20px 11px 10px;
+      border-radius: 13px;
+
+      &__link {
+        margin: 8px 0 23px 16px;
+      }
+
+      &__accounts {
+        margin-top: 20px;
+        width: 40%;
+      }
+    }
+  }
+
+  .ways {
+    &__skills {
+      width: 175px;
+      height: 175px;
+
+      &__title {
+        margin-top: 55px;
+        font-size: 20px;
+        line-height: 10px;
+      }
+
+      &__subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      &__btn {
+        width: 132px;
+        height: 31px;
+        margin: 0 auto;
+
+        button {
+          padding: 5px 11px;
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+
+      &__img {
+        img {
+          width: 155px;
+          height: 155px;
+        }
+      }
+    }
+
+    &__slides {
+      margin-left: 10px;
+    }
+
+    &__slide {
+      width: 300px;
+      height: 174px;
+      padding: 15px;
+
+      &Container {
+        min-height: 190px;
+      }
+
+      &__bg {
+        svg {
+          width: 300px;
+          height: 174px;
+        }
+      }
+
+      &__title {
+        line-height: 15px;
+      }
+
+      &__text {
+        font-size: 14px;
+        line-height: 18px;
+        height: 74px;
+      }
+
+      &__button {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  .slogan {
+    padding: 28px 20px;
+
+  }
+
+  .practices {
+
+  }
+
+  .practice {
+    &__right {
+      width: 250px;
+      height: 196px;
+    }
+
+    &__img {
+      left: -70px;
+      top: 4px;
+
+      img{
+        width: 320px;
+      }
+    }
+
+    &__tochki {
+      left: 175px;
+      top: 142px;
+
+      svg {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    &__textblock {
+      left: -54px;
+      top: 163px;
+      padding: 10px 15px;
+      width: 110%;
+      height: min-content;
+
+      &__subtitle {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .whatSays {
+    &__header {
+      &__title {
+        line-height: 30px;
+      }
+    }
+
+    &__feedback {
+      width: 319px;
+      height: 228px;
+      padding: 20px;
+
+      &__data {
+        &__text {
+          font-size: 16px;
+          line-height: 24px;
+          height: 144px;
+          overflow: hidden;
+        }
+
+        &__author{
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  .join {
+    margin-top: 90px;
+    height: 430px;
+
+    &__subtitle {
+      top: 130px;
+    }
+
+    &__btn {
+      top: 420px;
+    }
+
+    &__img {
+      display: none;
+    }
+  }
+
+  .signup {
+    &__title {
+      height: 40px;
+      font-size: 20px;
+      line-height: 42px;
+    }
+
+    &__subtitle {
+      font-size: 22px;
+      line-height: 27px;
+      margin-left: 10px;
+    }
+
+    &__form {
+      margin-top: 10px;
+
+      &__block:first-child {
+        margin-top: 20px;
+      }
+    }
+
+
   }
 }

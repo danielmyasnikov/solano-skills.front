@@ -30,6 +30,7 @@ function Terminal({
   const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
   const wrapperRef = useRef();
   const terminal = useSelector(selectTerminal);
@@ -71,6 +72,14 @@ function Terminal({
   useEffect(() => {
     setActiveBytePayload(bytePayload.length - 1);
   }, [bytePayload]);
+
+  useEffect(() => {
+    if (terminal.kernelId) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }, [terminal.kernelId]);
 
   return (
     <div
@@ -129,42 +138,33 @@ function Terminal({
           />
           <div className={styles.actions}>
             <Button
-              className={styles.reset}
+              className={cn(styles.reset, {[styles.disable]: isDisabled || correct})}
               variant={'outlineWhite'}
               onClick={() => {
                 setValue(sampleCode);
               }}
-              disabled={correct}
+              disabled={correct || isDisabled}
             >
-              <Reset className={cn(correct ? styles.disable : '')} />
+              <Reset />
             </Button>
             <Button
               variant={'outlineWhite'}
               onClick={() => {
                 // if (isAuth) {
-                if (!isGraphRequired) {
-                  dispatch(
-                    compileShell({
-                      code: activeTab === 'solution' ? solution : value,
-                      exerciseId: exerciseId,
-                      kernelId: terminal.kernelId,
-                      type: 'compileExercise',
-                    }),
-                  );
-                } else {
-                  dispatch(
-                    compileCode(
-                      activeTab === 'solution' ? solution : value,
-                      exerciseId,
-                      isGraphRequired,
-                    ),
-                  );
-                }
+                dispatch(
+                  compileShell({
+                    code: activeTab === 'solution' ? solution : value,
+                    exerciseId: exerciseId,
+                    kernelId: terminal.kernelId,
+                    isGraphRequired: isGraphRequired,
+                    type: 'compileExercise',
+                  }),
+                );
                 // } else {
                 //   setRegistrationModalOpen(true);
                 // }
               }}
-              disabled={correct}
+              disabled={correct || isDisabled}
             >
               Выполнить код
             </Button>
@@ -190,14 +190,16 @@ function Terminal({
                 //   setRegistrationModalOpen(true)
                 // }
               }}
-              disabled={correct}
+              disabled={correct || isDisabled}
             >
               Ответить
             </Button>
           </div>
         </div>
         {isGraphRequired && bytePayload.length > 0 && (
-          <Draggable resizeContainer={wrapperRef} parentContainer={wrapperRef} height={height} />
+          <div className={styles.resize}>
+            <Draggable resizeContainer={wrapperRef} parentContainer={wrapperRef} height={height} />
+          </div>
         )}
       </div>
       {isGraphRequired && bytePayload.length > 0 && (

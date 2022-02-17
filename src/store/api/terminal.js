@@ -23,11 +23,15 @@ export const startKernelApi = ({ exerciseId }) => {
     });
 };
 
-export const compileShellApi = ({ code, kernelId }) => {
+export const compileShellApi = ({ code, kernelId, exerciseId, isGraphRequired }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/shell/execute/${kernelId}`, {
-      code,
-    })
+    .post(
+      `${process.env.REACT_APP_API_TERMINAL}/shell/execute/${kernelId}?exerciseId=${exerciseId}&isGraphRequired=${isGraphRequired}`,
+      {
+        code,
+        exerciseId,
+      },
+    )
     .then((res) => res.data)
     .catch((error) => {
       throw error;

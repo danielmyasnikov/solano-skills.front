@@ -22,7 +22,7 @@ export const PhoneNumberConfirmation = ({
         name="confirmationCode"
         mask="99"
       ></InputMask>
-      {errors.errorVerify && <span className={styles.error}>{errors.errorVerify}</span>}
+      {errors?.errorVerify && <span className={styles.error}>{errors?.errorVerify}</span>}
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         Изменить номер телефона
       </div>

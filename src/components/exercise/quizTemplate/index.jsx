@@ -71,7 +71,6 @@ function QuizTemplate({ onSubmit, isAuth }) {
               exercise={exercise}
               onSubmit={() => setCompletedTaskModalOpen(true)}
             >
-              
               <div className={styles.btnContainer}>
                 {!hint === false ||
                   (withoutHint === true && (

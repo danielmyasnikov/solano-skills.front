@@ -1,3 +1,47 @@
+import googleAccount from '@assets/homepage/GoogleAccount';
+import facebookAccount from '@assets/homepage/FacebookAccount';
+import groupOne from '@assets/homepage/GroupOne';
+import groupTwo from '@assets/homepage/GroupTwo';
+import slideBg from '@assets/homepage/slideBg';
+import whatLeft from '@assets/homepage/WhatLeft';
+import whatCenter from '@assets/homepage/WhatCenter';
+import whatRight from '@assets/homepage/WhatRight';
+import join from '@assets/homepage/Join';
+import tochki from '@assets/homepage/Tochki';
+import sloganLeft from '@assets/homepage/SloganLeft';
+import sloganRight from '@assets/homepage/SloganRight';
+import signUp from '@assets/homepage/SignUp';
+import lectures from '@assets/homepage/lectures.png';
+import practice from '@assets/homepage/practice.png';
+import statement from '@assets/homepage/statement.png';
+import mathematics from '@assets/homepage/mathematics.png';
+import trophy from '@assets/homepage/trophy.png';
+import courses from '@assets/homepage/courses.png';
+import avatar from '@assets/homepage/avatar.png';
+
+export const images = {
+  googleAccount,
+  facebookAccount,
+  groupOne,
+  groupTwo,
+  slideBg,
+  whatLeft,
+  whatCenter,
+  whatRight,
+  join,
+  tochki,
+  sloganLeft,
+  sloganRight,
+  signUp,
+  lectures,
+  practice,
+  statement,
+  mathematics,
+  trophy,
+  courses,
+  avatar
+}
+
 export const slides = [
   {
     bg: 'blue',
@@ -61,7 +105,7 @@ export const slides = [
   },
   {
     bg: 'green',
-    img: 'mathematic',
+    img: 'mathematics',
     title: 'Навыки',
     subtitle: '23 профессии',
     btn: 'Смотреть все >',
@@ -126,26 +170,32 @@ export const practices = [
 
 export const feedbacks = [
   {
+    avatar: 'avatar',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   },
   {
+    avatar: 'avatar',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   },
   {
+    avatar: 'avatar',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   },
   {
+    avatar: 'avatar',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   },
   {
+    avatar: 'avatar',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   },
   {
+    avatar: 'avatar',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”'
   }

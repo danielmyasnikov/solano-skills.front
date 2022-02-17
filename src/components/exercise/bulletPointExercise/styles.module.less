@@ -30,6 +30,9 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .instructions {
@@ -59,7 +62,9 @@
 
 .terminal {
   width: 57%;
-  margin-top: -6px;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .outputContainer {
@@ -119,9 +124,29 @@
   }
 }
 
+@media screen and (max-width: 1533px) {
+  .terminal {
+    height: 100%;
+    overflow-y: auto;
+  }
+  .resize {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 640px) {
   .layout {
     width: 100%;
     margin-right: 0;
+  }
+  .terminal {
+    width: 100%;
+    overflow-y: initial;
+    margin-top: 65px;
+    :global {
+      .ace_editor {
+        min-height: 596px;
+      }
+    }
   }
 }

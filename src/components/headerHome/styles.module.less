@@ -16,10 +16,18 @@
 
   &__block {
     display: flex;
-
-    &__signUpBtn {
+    button {
       margin-left: 20px;
     }
+
+  }
+
+  &__burger {
+    margin-left: 36px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    display: none;
+    align-items: center;
+    cursor: pointer;
   }
 
   &__logo {
@@ -57,6 +65,28 @@
       a {
         margin-right: 28px;
       }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    max-width: 904px;
+
+    &__menu {
+      display: none;
+    }
+
+    &__burger {
+      display: flex;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    button {
+      display: none;
     }
   }
 }

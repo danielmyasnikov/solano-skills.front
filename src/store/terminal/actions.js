@@ -38,10 +38,10 @@ export const startKernel = (exerciseId) => {
   };
 };
 
-export const compileShell = ({ code, exerciseId, lineNumber, kernelId, type }) => {
+export const compileShell = ({ code, exerciseId, lineNumber, kernelId, type, isGraphRequired }) => {
   return {
     type: COMPILE_SHELL_REQUESTED,
-    payload: { code, exerciseId, lineNumber, kernelId, type },
+    payload: { code, exerciseId, lineNumber, kernelId, type, isGraphRequired },
   };
 };
 

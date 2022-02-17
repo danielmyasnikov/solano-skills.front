@@ -36,6 +36,7 @@ label {
 }
 
 .terminal {
+  margin-top: -5px;
   width: 57%;
   margin-top: -6px;
 }
@@ -109,5 +110,19 @@ label {
   }
   .btn {
     margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .layout {
+    width: 100%;
+    .hintBtn {
+      margin-right: auto;
+    }
+  }
+  .terminal {
+    overflow-y: initial;
+    width: 100%;
+    height: 330px;
   }
 }

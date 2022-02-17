@@ -43,6 +43,7 @@ const Output = ({ variant, presentation_url }) => {
           exerciseId: exerciseId,
           lineNumber: lineNumber,
           kernelId: terminal.kernelId,
+          isGraphRequired: false,
         }),
       );
       setLineNumber(lineNumber + 1);

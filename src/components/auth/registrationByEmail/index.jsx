@@ -1,13 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
-import { Link } from 'react-router-dom';
 import { InputPassword } from '@components/mui/inputPassword';
 import { Input } from '@components/mui/input';
-import { CheckboxBtn } from '@components/mui/checkbox';
+import Terms from '../terms';
 
 export const RegistrationByEmail = ({
-  handleChacked,
+  handleChecked,
   handleChange,
   email,
   password,
@@ -52,20 +51,7 @@ export const RegistrationByEmail = ({
           <span className={styles.error}>{errors.passwordConfirmationError}</span>
         )}
       </div>
-      <div className={styles.infoWrapper}>
-        <CheckboxBtn error={!!checkedError} value={checked} handleChange={handleChacked} />
-        <div className={styles.info} onClick={() => handleChacked()}>
-          Я принимаю условия
-          <Link className={styles.infoLink} to={'/'}>
-            {' Пользовательского соглашения '}
-          </Link>
-          и даю своё согласие на обработку персональных данных на условиях, определенных
-          <Link className={styles.infoLink} to={'/'}>
-            {' Политикой конфиденциальности '}
-          </Link>
-          .
-        </div>
-      </div>
+      <Terms handleChecked={handleChecked} checked={checked} checkedError={checkedError} />
     </>
   );
 };

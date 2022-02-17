@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '@components/mui/button';
 import styles from './styles.module.less'
 import headerLogo from '@assets/homepage/headerLogo.png';
+import Burger from '@assets/Burger';
 
 const HeaderHome = () => {
   return ( 
@@ -19,12 +20,13 @@ const HeaderHome = () => {
           </div>
           <div className={styles.header__block}>
             <Button variant="outlinePurple">
-              Войти в аккаунт
+              Войти
             </Button>
-            <div className={styles.header__block__signUpBtn}>
-              <Button variant="containedPurple" >
-                Зарегистрироваться
-              </Button>
+            <Button variant="containedPurple" >
+              Зарегистрироваться
+            </Button>
+            <div className={styles.header__burger}>
+              <Burger />
             </div>
           </div>
         </header>

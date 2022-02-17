@@ -2,7 +2,6 @@
   width: 100%;
   min-height: 565px;
   background: #46445C;
-  padding: 70px 100px;
 
   &__menu {
 
@@ -22,8 +21,61 @@
   }
 }
 
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 70px 100px;
+}
+
+@media (min-width: 1921px) {
+
+}
+
 @media (max-width: 1380px) {
-  .footer{
-    min-height: 355px;
+  .footer {
+    min-height: 219px;
+
+    &__menu {
+      a {
+        font-size: 14px;
+        margin-top: 0;
+
+        &:first-child {
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+
+  .container {
+    padding: 35px 100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    &__logo {
+      svg {
+        width: 151px;
+        height: 28px;
+      }
+    }
+  }
+
+  .container {
+    padding: 35px 62px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 35px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 35px 20px;
   }
 }

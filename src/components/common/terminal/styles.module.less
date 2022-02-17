@@ -100,7 +100,7 @@
   font-size: 14px;
   color: #b2b2b2;
   path {
-    stroke: #b2b2b2;
+    fill: #b2b2b2;
   }
 }
 
@@ -177,8 +177,19 @@
 }
 
 @media screen and (max-width: 1533px) {
+  .resize {
+    display: none;
+  }
   .terminalWithGraph {
     height: auto;
+    .actions {
+      position: relative;
+    }
+    :global {
+      .ace_editor {
+        height: calc(390px - 71px) !important;
+      }
+    }
   }
   .terminalFullWidth {
     display: block;
@@ -193,6 +204,7 @@
     .bytePayload {
       width: 100%;
       margin-top: 5px;
+      margin-left: 0;
       img {
         position: relative;
         transform: none;
@@ -211,6 +223,9 @@
     flex-direction: column;
   }
   .terminalWithGraph {
+    .actions {
+      position: absolute;
+    }
     height: auto;
     .terminalWrapper {
       width: 100%;

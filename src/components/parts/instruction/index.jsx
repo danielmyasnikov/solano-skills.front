@@ -3,13 +3,13 @@ import styles from './styles.module.less';
 import RadioButton from '@components/mui/radioButton';
 
 export const InstructionQuizPart = ({ exercise, handleAnswer, answer }) => {
-
   if (!exercise) {
     return null;
   }
 
   return (
     <div className={styles.quiz}>
+      {exercise.instruction}
       {exercise.answers.map((item) => (
         <React.Fragment key={item.value}>
           <RadioButton
