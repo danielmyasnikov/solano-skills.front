@@ -7,11 +7,6 @@ import HomePage from './components/homePage';
 
 export const routes = [
   {
-    path: '/',
-    component: HomePage,
-    exact: true,
-  },
-  {
     path: '/courses',
     component: CoursesPage,
     exact: true,
@@ -38,3 +33,9 @@ export const routes = [
     exact: true,
   },
 ];
+
+export const homeRoute = {
+  path: '/',
+  component: HomePage,
+  exact: true,
+}

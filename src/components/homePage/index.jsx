@@ -38,6 +38,7 @@ const HomePage = () => {
       case "sloganOne": return sloganOne;
       case "sloganTwo": return sloganTwo;
       case "slideBg": return slideBg;
+      default: return;
     }
   }
 
@@ -47,7 +48,7 @@ const HomePage = () => {
       <div className={styles.container}>
         <main>
           <section className={styles.offer}>
-            <div className={styles.offer__bg}><img src={renderImage('offerBg')}/></div>
+            <div className={styles.offer__bg}><img src={renderImage('offerBg')} /></div>
             <div className={cn(styles.offer__block, styles.offer__block__left)}>
               <div className={styles.offer__title}>Развивайте навыки работы с данными</div>
               <div className={styles.offer__subtitle}>Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям и направлениям в сфере Информационных технологий.</div>
@@ -95,12 +96,12 @@ const HomePage = () => {
               <div className={
                 block.bg === 'blue' ?
                   cn(styles.ways__block, styles.ways__block_blue) :
-                block.bg === 'red' ?
-                  cn(styles.ways__block, styles.ways__block_red) :
-                  cn(styles.ways__block, styles.ways__block_green) 
+                  block.bg === 'red' ?
+                    cn(styles.ways__block, styles.ways__block_red) :
+                    cn(styles.ways__block, styles.ways__block_green)
               }>
                 <div className={styles.ways__skills}>
-                  <div className={styles.ways__skills__img}><img src={renderImage(block.img)}/></div>
+                  <div className={styles.ways__skills__img}><img src={renderImage(block.img)} /></div>
                   <div className={styles.ways__skills__title}>{block.title}</div>
                   <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
                   <div className={styles.ways__skills__btn}>
@@ -111,7 +112,7 @@ const HomePage = () => {
                   {block.items.map(item => (
                     <div className={styles.ways__slideContainer}>
                       <div className={styles.ways__slide}>
-                        <div className={styles.ways__slide__bg}><img src={renderImage(item.bg)}/></div>                      
+                        <div className={styles.ways__slide__bg}><img src={renderImage(item.bg)} /></div>
                         <div className={styles.ways__slide__title}>{item.title}</div>
                         <div className={styles.ways__slide__text}>{item.text}</div>
                         <div className={styles.ways__slide__button}>
@@ -149,7 +150,7 @@ const HomePage = () => {
                 </div>
                 <div className={styles.practice__right}>
                   <div className={styles.practice__tochki}><Tochki /></div>
-                  <div className={styles.practice__img}><img src={renderImage(practice.img)}/></div>
+                  <div className={styles.practice__img}><img src={renderImage(practice.img)} /></div>
                   <div className={styles.practice__textblock}>
                     <div className={styles.practice__textblock__title}>{practice.textblockTitle}</div>
                     <div className={styles.practice__textblock__subtitle}>{practice.textblockSubtitle}</div>
@@ -221,7 +222,7 @@ const HomePage = () => {
         </main>
         <Footer />
       </div>
-    </> 
+    </>
   );
 }
 

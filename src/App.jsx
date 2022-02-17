@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import './index.less';
+import { Route } from 'react-router-dom';
+
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
+
 import Container from './components/container';
+import HomePage from './components/homePage';
+
 import { routes } from './routes';
+
 import { useDispatch } from 'react-redux';
-import styles from './app.module.css';
+
 import * as AuthStore from '@store/auth';
+
+import styles from './app.module.css';
+import './index.less';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -33,13 +40,16 @@ export default function App() {
       <Route exact path={'/registration'}>
         <Registration />
       </Route>
+
       <Route exact path={'/sing-in'}>
         <Authorization />
       </Route>
 
+      <Route exact path={'/'}>
+        <HomePage />
+      </Route>
+
       {routes.map((route, i, headerVariant) => (
-        (route.path === '/') ? 
-        <Route exact path={'/'} key={route.path}>{route.component}</Route> :
         <Route exact={route.exact} path={route.path} key={route.path}>
           <Container variant={headerVariant} key={i} {...route} Component={route.component} />
         </Route>
