@@ -222,10 +222,22 @@
   .terminalContainer {
     flex-direction: column;
   }
-  .terminalWithGraph {
-    .actions {
-      position: absolute;
+  .actions {
+    position: relative;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    button {
+      width: 170px;
+      &:first-child {
+        min-width: 41px;
+      }
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
     }
+  }
+  .terminalWithGraph {
     height: auto;
     .terminalWrapper {
       width: 100%;

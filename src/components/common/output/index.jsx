@@ -25,19 +25,6 @@ const Output = ({ variant, presentation_url }) => {
 
   const dispatch = useDispatch();
 
-  const memoOutputs = useMemo(() => {
-    return (
-      <div className={styles.content}>
-        {terminal.outputs.map((item, i) => (
-          <span
-            className={cn({ [styles.shell]: item.status === 'shell' })}
-            dangerouslySetInnerHTML={{ __html: item.output || item.error }}
-          />
-        ))}
-      </div>
-    );
-  }, [terminal.outputs]);
-
   const onSubmit = (e) => {
     if (e.keyCode === 13) {
       dispatch(
@@ -81,7 +68,14 @@ const Output = ({ variant, presentation_url }) => {
       <div className={styles[variant]}>
         {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
           <>
-            {memoOutputs}
+            <div className={styles.content}>
+              {terminal.outputs.map((item, i) => (
+                <div
+                  className={cn({ [styles.shell]: item.status === 'shell' })}
+                  dangerouslySetInnerHTML={{ __html: item.error || item.output }}
+                ></div>
+              ))}
+            </div>
             <div className={styles.shell}>
               <span>In [{lineNumber}]:</span>
               <input
