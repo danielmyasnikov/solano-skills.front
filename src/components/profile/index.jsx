@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { patchProfile, getProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
+import { TextareaAutosize } from '@mui/material';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
@@ -22,6 +23,7 @@ const Profile = () => {
   const [registerationDate, setRegisterationDate] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
   const [information, setInformation] = useState('');
+  const [isInformationActive, setIsInformationActive] = useState(false);
   const fullnameRef = useRef();
   const informationRef = useRef();
   const dispatch = useDispatch();
@@ -35,12 +37,12 @@ const Profile = () => {
 
   const saveProfile = () => {
     setIsFullnameActive(false);
+    setIsInformationActive(false);
     setActiveEditField('');
-    setInformation(informationRef.current.innerText);
     dispatch(
       patchProfile({
         name: fullname,
-        about: informationRef.current.innerText,
+        about: information,
         headers: headers,
       }),
     );
@@ -49,6 +51,9 @@ const Profile = () => {
   const handleChange = (e) => {
     if (e.target?.name === 'fullname') {
       setFullname(e.target.value);
+    }
+    if (e.target?.name === 'information') {
+      setInformation(e.target.value);
     }
   };
 
@@ -59,7 +64,9 @@ const Profile = () => {
         setIsFullnameActive(!isFullnameActive);
         setActiveEditField(isFullnameActive ? '' : 'fullname');
         break;
-
+      case 'information':
+        setIsInformationActive(!isInformationActive);
+        setActiveEditField(isInformationActive ? '' : 'information');
       default:
         break;
     }
@@ -173,23 +180,23 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className={cn(styles.card, styles.information)}>
+          <div
+            className={cn(styles.card, styles.information, {
+              [styles.activeInformation]: isInformationActive,
+            })}
+          >
             <div className={styles.title}>
               Информация
               <EditFragment name="information" />
             </div>
             <div className={styles.items}>
-              <div
+              <TextareaAutosize
+                disabled={!isInformationActive}
                 name="information"
-                contentEditable={activeEditField === 'information'}
-                suppressContentEditableWarning={true}
-                ref={informationRef}
-                className={cn(styles.about, {
-                  [styles.active]: activeEditField === 'information',
-                })}
-              >
-                {information}
-              </div>
+                aria-label="empty textarea"
+                value={information}
+                onChange={handleChange}
+              />
               <div className={styles.additionalInfo}>
                 <div>
                   <span>ID: </span> {friendlyid}

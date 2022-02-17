@@ -26,14 +26,17 @@ const Output = ({ variant, presentation_url }) => {
   const dispatch = useDispatch();
 
   const memoOutputs = useMemo(() => {
-    return terminal.outputs.map((item, i) => (
-      <React.Fragment key={i}>
-        <span className={styles[item.status]}>
-          {(item.status === 'error' && item.error) || item.output}
-        </span>
-      </React.Fragment>
-    ))
-  }, [terminal.outputs])
+    return (
+      <div className={styles.content}>
+        {terminal.outputs.map((item, i) => (
+          <span
+            className={cn({ [styles.shell]: item.status === 'shell' })}
+            dangerouslySetInnerHTML={{ __html: item.output || item.error }}
+          />
+        ))}
+      </div>
+    );
+  }, [terminal.outputs]);
 
   const onSubmit = (e) => {
     if (e.keyCode === 13) {
@@ -56,7 +59,11 @@ const Output = ({ variant, presentation_url }) => {
   }, [exerciseId]);
 
   return (
-    <div className={styles.outputWrapper}>
+    <div
+      className={cn(styles.outputWrapper, {
+        [styles.fullHeight]: variant === 'quizOutputContainer',
+      })}
+    >
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>
         <div
           onClick={() => setActiveTab('output')}
@@ -72,28 +79,22 @@ const Output = ({ variant, presentation_url }) => {
         </div>
       </div>
       <div className={styles[variant]}>
-        {
-          (
-            activeTab === 'slides' && <PDFViewer src={presentation_url} />
-          )
-          || (
-            <>
-              {memoOutputs}
-              <div className={styles.shell}>
-                <span>In [{lineNumber}]:</span>
-                <input
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  type="text"
-                  onKeyDown={onSubmit}
-                />
-              </div>
-            </>
-          )
-        }
+        {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
+          <>
+            {memoOutputs}
+            <div className={styles.shell}>
+              <span>In [{lineNumber}]:</span>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                type="text"
+                onKeyDown={onSubmit}
+              />
+            </div>
+          </>
+        )}
       </div>
-
-    </div >
+    </div>
   );
 };
 

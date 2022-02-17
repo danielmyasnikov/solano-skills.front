@@ -2,7 +2,6 @@ import ExercisePage from '@components/exercise';
 import Profile from '@components/profile';
 import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';
-import StatementPage from '@components/statementPage';
 
 export const routes = [
   {
@@ -13,11 +12,6 @@ export const routes = [
   {
     path: '/profile',
     component: Profile,
-    exact: true,
-  },
-  {
-    path: '/statement',
-    component: StatementPage,
     exact: true,
   },
   {

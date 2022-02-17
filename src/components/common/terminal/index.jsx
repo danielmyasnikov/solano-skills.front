@@ -138,7 +138,7 @@ function Terminal({
           />
           <div className={styles.actions}>
             <Button
-              className={cn(styles.reset, {[styles.disable]: isDisabled || correct})}
+              className={cn(styles.reset, { [styles.disable]: isDisabled || correct })}
               variant={'outlineWhite'}
               onClick={() => {
                 setValue(sampleCode);
@@ -173,11 +173,13 @@ function Terminal({
               onClick={() => {
                 // if (isAuth) {
                 dispatch(
-                  compileCode(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
+                  compileShell({
+                    code: activeTab === 'solution' ? solution : value,
+                    exerciseId: exerciseId,
+                    kernelId: terminal.kernelId,
+                    isGraphRequired: isGraphRequired,
+                    type: 'compileExercise',
+                  }),
                 );
                 dispatch(
                   checkAnswer(

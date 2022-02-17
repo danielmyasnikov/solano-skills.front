@@ -101,6 +101,15 @@
   background: rgba(116, 105, 239, 0.1);
 }
 
+.activeInformation {
+  background: #efeeff;
+  border: 1px solid #bcb6f8;
+  textarea {
+    background: rgba(255, 255, 255, 0.41);
+    border-radius: 10px;
+  }
+}
+
 .activeFullname {
   min-width: 430px;
   max-width: 430px;
@@ -122,6 +131,20 @@
   border-radius: 15px;
   height: auto;
   white-space: break-spaces;
+  textarea {
+    padding: 8px 9px;
+    resize: none;
+    width: 100%;
+    max-height: 400px;
+    outline: none;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+    &:disabled {
+      background: transparent;
+    }
+  }
   .save {
     font-family: Nunito;
     font-weight: 600;
@@ -294,6 +317,10 @@
   }
   .information {
     flex: 1;
+    textarea {
+      padding: 2px;
+      margin-bottom: 13px;
+    }
     .additionalInfo {
       padding-left: 0;
     }
@@ -311,6 +338,11 @@
           list-style: none;
         }
       }
+    }
+  }
+  .activeInformation {
+    textarea {
+      padding: 6px;
     }
   }
   .blocks {
