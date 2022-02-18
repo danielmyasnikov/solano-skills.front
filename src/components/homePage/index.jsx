@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
 import Footer from '../footer';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
 import { Input } from '@components/mui/input';
 import { CheckboxBtn } from '@components/mui/checkbox';
 import styles from './styles.module.less';
 import { images, feedbacks, practices, slides } from './data';
 
-const HomePage = () => {
+export const HomePage = () => {
   const renderImage = (img) => {
     switch (img) {
       case "lectures": return images.lectures;
       case "practice": return images.practice;
       case "statement": return images.statement;
-      case "mathematics": return images.mathematics;
-      case "trophy": return images.trophy;
-      case "courses": return images.courses;
       case "avatar": return images.avatar;
     }
   }
@@ -29,12 +28,10 @@ const HomePage = () => {
 				<div className={styles.container}>
 					<main>
 						<section className={styles.offer}>
-							<div className={styles.offer__groupOne}><images.groupOne /></div>
-							<div className={styles.offer__groupTwo}><images.groupTwo /></div>
 							<div className={cn(styles.offer__block, styles.offer__block__left)}>
 								<div className={styles.offer__title}>Развивайте навыки работы с данными</div>
 								<div className={styles.offer__subtitle}>Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям и направлениям в сфере Информационных технологий.</div>
-								<Button variant="outlinePurple">
+								<Button variant="outlinePurpleWithoutBorder">
 									Посмотреть курсы
 								</Button>
 								<div className={styles.offer__facts}>
@@ -83,22 +80,22 @@ const HomePage = () => {
 										cn(styles.ways__block, styles.ways__block_green)
 								}>
 									<div className={styles.ways__skills}>
-										<div className={styles.ways__skills__img}><img src={renderImage(block.img)}/></div>
 										<div className={styles.ways__skills__title}>{block.title}</div>
 										<div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
 										<div className={styles.ways__skills__btn}>
-											<Button variant="outlineWhite">{block.btn}</Button>
+											<Button variant="outlineWhiteHome">{block.btn}<KeyboardArrowRightIcon /></Button>
 										</div>
 									</div>
 									<div className={styles.ways__slides}>
 										{block.items.map(item => (
 											<div className={styles.ways__slideContainer}>
 												<div className={styles.ways__slide}>
-													<div className={styles.ways__slide__bg}><images.slideBg /></div>
-													<div className={styles.ways__slide__title}>{item.title}</div>
-													<div className={styles.ways__slide__text}>{item.text}</div>
-													<div className={styles.ways__slide__button}>
-														<Button variant="outlineBlue">{block.btnlearn}</Button>
+													<div className={styles.ways__slide__bg}>
+														<div className={styles.ways__slide__title}>{item.title}</div>
+														<div className={styles.ways__slide__text}>{item.text}</div>
+														<div className={styles.ways__slide__button}>
+															<Button variant="outlineBlue">{block.btnlearn}</Button>
+														</div>
 													</div>
 												</div>
 											</div>
@@ -109,9 +106,6 @@ const HomePage = () => {
 						</section>
 
 						<section className={styles.slogan}>
-							<div className={styles.slogan__img_left}><images.whatLeft /></div>
-							<div className={styles.slogan__img_center}><images.whatCenter /></div>
-							<div className={styles.slogan__img_right}><images.whatRight /></div>
 							<div className={styles.slogan__title}>Что такое DeepSkills?</div>
 							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.</div>
 							<div className={styles.slogan__btn}>
@@ -130,6 +124,7 @@ const HomePage = () => {
 										<div className={styles.practice__text}>{practice.text}</div>
 										<Link to={practice.route}>
 											{practice.link}
+											<KeyboardDoubleArrowRightIcon />
 										</Link>
 									</div>
 									<div className={styles.practice__right}>
@@ -145,8 +140,6 @@ const HomePage = () => {
 						</section>
 
 						<section className={cn(styles.slogan, styles.slogan__center)}>
-							<div className={styles.slogan__img_left}><images.sloganLeft /></div>
-							<div className={styles.slogan__img_right}><images.sloganRight /></div>
 							<div className={styles.slogan__title}>Начните прямо сейчас</div>
 							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.</div>
 							<div className={styles.slogan__btn}>
@@ -176,11 +169,9 @@ const HomePage = () => {
 							<div className={styles.join__title}>Присоединяйтесь к команде преподавателей DeepSkills</div>
 							<div className={styles.join__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
 							<div className={styles.join__btn}><Button variant="containedPurple">Я преподаватель</Button></div>
-							<div className={styles.join__img}><images.join /></div>
 						</section>
 
 						<section className={styles.signup}>
-							 <div className={styles.signup__bg}><images.signUp /></div>
 							<div className={cn(styles.signup__block, styles.signup__block_left)}>
 								<div className={styles.signup__title}>Зарегистрируйтесь,</div>
 								<div className={styles.signup__subtitle}>чтобы начать обучение прямо сейчас</div>
@@ -217,5 +208,3 @@ const HomePage = () => {
 		</>
   );
 }
-
-export default HomePage;

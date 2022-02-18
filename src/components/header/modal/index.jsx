@@ -6,7 +6,7 @@ import { ModalItems } from './items';
 export const Modal = ({ handleClick, open }) => {
   return (
     <Dialog
-      maxWidth="lg"
+      maxWidth="xl"
       fullWidth
       open={open}
       onClose={handleClick}
@@ -18,7 +18,8 @@ export const Modal = ({ handleClick, open }) => {
           alignItems: 'flex-end',
           scrollbarWidth: 'none',
           paddingBottom: '70px',
-          minHeight: '70%',
+          minHeight: '884px',
+          maxWidth: '1440px',
           '&::-webkit-scrollbar': {
             display: 'none',
           },

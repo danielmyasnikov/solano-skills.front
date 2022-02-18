@@ -70,6 +70,18 @@ export const buttonTheme = createTheme({
           },
         },
         {
+          props: { variant: 'outlinePurpleWithoutBorder' },
+          style: {
+            background: 'none',
+            color: '#7469EF',
+            boxShadow: '11px 12px 25px rgba(116, 105, 239, 0.35)',
+            '&:hover': {
+              background: '#7469ef',
+              color: '#fff',
+            },
+          },
+        },
+        {
           props: { variant: 'outlineWhite' },
           style: {
             background: 'none',
@@ -77,7 +89,20 @@ export const buttonTheme = createTheme({
             border: '1px solid #fff',
             '&:hover': {
               transition: '0.2s ease-in-out',
-              background: '#474650',
+              background: 'rgba(255, 255, 255, 0.17)',
+            },
+          },
+        },
+        {
+          props: { variant: 'outlineWhiteHome' },
+          style: {
+            background: 'none',
+            color: '#fff',
+            border: '1px solid #fff',
+            '&:hover': {
+              transition: '0.2s ease-in-out',
+              background: '#fff',
+              color: '#7469EF;'
             },
           },
         },
@@ -173,8 +198,9 @@ export const buttonTheme = createTheme({
             color: '#46445C',
             border: '2px solid #46445C',
             '&:hover': {
-              background: '#46445C',
+              background: '#7469EF',
               color: '#fff',
+              border: '2px solid #7469EF'
             },
           },
         },

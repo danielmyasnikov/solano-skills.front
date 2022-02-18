@@ -19,26 +19,15 @@
   max-width: 1720px;
   min-height: 750px;
   margin: 20px auto 0;
-  background: linear-gradient(152.55deg, #7469EF 8.38%, #C2B9EE 73.74%);
+  background: url('../../assets/homepage/offerBg.png') 400px bottom no-repeat,
+  url('../../assets/homepage/offerAir.png') right 30px top 40px no-repeat,
+  linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
+  background-blend-mode: luminosity;
   border-radius: 38px;
   display: flex;
   justify-content: space-between;
   padding: 64px 150px 51px 82px;
   position: relative;
-
-  &__group {
-    &One {
-      position: absolute;
-      left: 26%;
-      bottom: -6px;
-    }
-
-    &Two {
-      position: absolute;
-      right: 36px;
-      top: 70px;
-    }
-  }
 
   button {
     margin-top: 40px;
@@ -52,7 +41,7 @@
 
     &__right {
       max-width: 484px;
-      background: #EDD765;
+      background: #FA7F6E;
       box-shadow: 10px 9px 30px rgba(0, 0, 0, 0.1);
       border-radius: 25px;
 
@@ -122,7 +111,7 @@
     margin-top: 26px;
     width: 246px;
     height: 52px;
-    background: rgba(255, 255, 255, 0.22);
+    background: #948BF9;
     border-radius: 61px;
     display: flex;
     justify-content: center;
@@ -151,10 +140,10 @@
     height: calc(100% - 74px);
     background: #ECEAFB;
     border-radius: 25px;
-    padding: 45px 38px 25px;
+    padding: 45px 25px 25px;
 
     &__label {
-      margin-left: 30px;
+      margin-left: 20px;
       font-family: 'Nunito';
       font-weight: 600;
       font-size: 16px;
@@ -168,6 +157,7 @@
       div {
         background: rgba(255, 255, 255, 0.46);
         border: 1px solid #7469EF;
+        padding: 14px 20px;
       }
 
       input {
@@ -194,7 +184,7 @@
 
       label {
         font-family: 'Roboto';
-        font-size: 12px;
+        font-size: 14px;
         line-height: 142.9%;
         letter-spacing: -0.015em;
         color: #525252;
@@ -247,7 +237,8 @@
 
     &_blue {
       .ways__skills {
-        background: linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+        background: url('../../assets/homepage/trophy.png') center center no-repeat,
+        linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
       }
 
       .ways__slide {
@@ -257,7 +248,8 @@
 
     &_red {
       .ways__skills {
-        background: linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+        background: url('../../assets/homepage/mathematics.png') center center no-repeat,
+        linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
       }
 
       .ways__slide {
@@ -267,7 +259,8 @@
 
     &_green {
       .ways__skills {
-        background: linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+        background: url('../../assets/homepage/courses.png') center center no-repeat,
+        linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
       }
 
       .ways__slide {
@@ -286,12 +279,6 @@
     text-align: center;
     position: relative;
 
-    &__img {
-      position: absolute;
-      top: 15px;
-      left: 12px;
-    }
-
     &__title {
       margin-top: 95px;
       font-family: 'Jost';
@@ -306,10 +293,10 @@
       margin-top: 11px;
       margin-bottom: 49px;
       font-family: 'Nunito';
-      font-size: 18px;
+      font-size: 20px;
       line-height: 28px;
       letter-spacing: -0.005em;
-      color: rgba(255, 255, 255, 0.71);
+      color: #fff;
     }
   }
 
@@ -342,9 +329,16 @@
     height: 284px;
     margin-right: 20px;
     color: #46445C;
-    padding: 216px 35px 35px;
     flex: 0 0 auto;
     position: relative;
+
+    &__bg {
+      border-radius: 19px;
+      padding: 216px 35px 35px;
+      background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #DBE3F7 100%),
+      url('../../assets/homepage/slideBg.png') left top no-repeat;
+      mix-blend-mode: luminosity;
+    }
 
     &Container {
       min-height: 304px;
@@ -355,7 +349,10 @@
         padding-top: 0;
 
         .ways__slide {
-          padding: 35px 35px 35px;
+          &__bg {
+            padding: 35px 35px 35px;
+            background: none;
+          }
 
           &__text,
           &__button {
@@ -363,12 +360,6 @@
           }
         }
       }
-    }
-
-    &__bg {
-      position: absolute;
-      left: 0;
-      top: 0;
     }
 
     &__title {
@@ -403,42 +394,24 @@
   min-height: 367px;
   margin: 160px auto;
   padding: 70px 100px;
-  background: linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
-  linear-gradient(180deg, #7469EF 0%, #EFC969 100%);
+  background: url('../../assets/homepage/sloganLeft.png') left top no-repeat,
+  url('../../assets/homepage/sloganRight.png') right top no-repeat,
+  linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+  text-align: center;
+  background-blend-mode: luminosity;
   border-radius: 38px;
   color: #FFFFFF;
   position: relative;
 
   &__center {
-    background: linear-gradient(90deg, rgba(116, 105, 239, 0) 0%, #7469EF 48.44%, rgba(116, 105, 239, 0) 100%),
-    linear-gradient(266.45deg, #EFC969 -3.97%, #7469EF 43.02%, #EFC969 100%);
-    text-align: center;
+    background: url('../../assets/homepage/startLeft.png') left top no-repeat,
+    url('../../assets/homepage/startRight.png') right top no-repeat,
+    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
     padding-top: 60px;
 
-    .slogan__description {
-      width: 72%;
+    &__description {
       max-width: 1080px;
-      margin: 20px auto 45px;
-    }
-  }
-
-  &__img {
-    &_left {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
-    &_center {
-      position: absolute;
-      left: 40%;
-      top: 0;
-    }
-
-    &_right {
-      position: absolute;
-      right: 0;
-      top: 0;
+      text-align: center;
     }
   }
 
@@ -451,13 +424,14 @@
   }
 
   &__description {
-    width: 60%;
-    max-width: 850px;
-    margin-top: 20px;
+    text-align: left;
+    width: 72%;
+    max-width: 960px;
     font-family: 'Nunito';
     font-size: 20px;
     line-height: 30px;
-    margin-bottom: 30px;
+    margin: 20px auto 45px;
+
   }
 }
 
@@ -514,7 +488,8 @@
 
       &__title,
       &__text {
-        margin-left: auto;
+        width: auto;
+        margin: 30px 0 30px 180px;
       }
 
       &__textblock {
@@ -523,12 +498,16 @@
       }
 
       &__img {
-        left: 50px;
+        left: 100px;
       }
 
       &__tochki {
         left: 550px
       }
+    }
+
+    a {
+      justify-content: flex-end
     }
   }
 
@@ -570,9 +549,7 @@
   }
 
   &__text {
-    width: 80%;
-    max-width: 850px;
-    margin: 30px 0;
+    margin: 30px 180px 30px 0;
     font-size: 18px;
     line-height: 30px;
   }
@@ -583,13 +560,17 @@
     font-size: 20px;
     line-height: 33px;
     color: #7469EF;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 5px;
+    }
   }
 
   &__img {
-    width: 755px;
-    height: 419px;
-    top: -28px;
-    left: -200px;
+    top: 20px;
+    left: -150px;
     position: absolute;
   }
 
@@ -621,7 +602,7 @@
     &__subtitle {
       font-size: 16px;
       line-height: 26px;
-      color: #BABABD;
+      color: #979797;
     }
   }
 }
@@ -720,9 +701,10 @@
   max-width: 1720px;
   min-height: 550px;
   margin: 180px auto 0;
-  padding-top: 145px;
+  padding-top: 140px;
   color: #46445C;
   position: relative;
+  background: url('../../assets/homepage/join.png') right top no-repeat;
 
   &__title {
     width: 40%;
@@ -735,20 +717,11 @@
   }
 
   &__subtitle {
-    margin-top: 30px;
-    margin-bottom: 40px;
-    width: 60%;
-    max-width: 1000px;
+    margin: 30px 730px 40px 0;
     font-family: 'Nunito';
     font-size: 18px;
     line-height: 30px;
     letter-spacing: -0.005em;
-  }
-
-  &__img {
-    position: absolute;
-    top: 0;
-    right: 0;
   }
 }
 
@@ -759,15 +732,11 @@
   margin: 190px auto 100px;
   padding: 50px 70px;
   display: flex;
-  background: linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+  background: url('../../assets/homepage/signup.png') left 60px bottom no-repeat,
+  linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+  background-blend-mode: luminosity;
   border-radius: 28px;
   position: relative;
-
-  &__bg {
-    position: absolute;
-    top: 30px;
-    left: 10%;
-  }
 
   &__block {
     width: 50%;
@@ -807,7 +776,7 @@
     color: #fff;
 
     &__label {
-      margin-left: 30px;
+      margin-left: 20px;
       font-family: 'Nunito';
       font-weight: 600;
       font-size: 16px;
@@ -824,7 +793,7 @@
 
       input {
         &::placeholder {
-          color: rgba(70, 68, 92, 0.33);
+          color: rgba(255, 255, 255, 0.5);
         }
       }
     }
@@ -894,31 +863,37 @@
   }
 }
 
+@media (max-width: 1700px) {
+  .practice {
+    &__pretitle {
+      margin-top: 0;
+    }
+  }
+}
+
 @media (max-width: 1380px) {
   .offer {
     width: 90%;
     max-width: 1200px;
     min-height: 700px;
     padding: 32px 60px;
+    background: url('../../assets/homepage/offerBg.png') 300px bottom / 612px no-repeat,
+    url('../../assets/homepage/offerAir.png') right 20px top 40px no-repeat,
+    linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
 
-    &__groupOne {
-      svg {
-        width: 618px;
-        height: 358px;
-      }
-    }
-
-    &__groupTwo {
-      right: 20px;
-    }
     &__block {
-      height: 635px;
+      min-height: 635px;
     }
 
     &__title {
       margin-top: 87px;
       font-size: 40px;
       line-height: 52px;
+
+      &:before {
+        top: -60px;
+        right: 30px;
+      }
     }
 
     &__facts {
@@ -957,6 +932,16 @@
     width: 90%;
     max-width: 1200px;
     position: relative;
+    min-height: 334px;
+    background: url('../../assets/homepage/sloganLeft.png') left top / 410px 334px no-repeat,
+    url('../../assets/homepage/sloganRight.png') right top / 582px 334px no-repeat,
+    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+
+    &__center {
+      background: url('../../assets/homepage/startLeft.png') left top / 342px 334px no-repeat,
+      url('../../assets/homepage/startRight.png') right top / 427px 334px no-repeat,
+      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+    }
 
     &__title {
       font-size: 40px;
@@ -964,7 +949,6 @@
     }
 
     &__description {
-      width: 50%;
       font-size: 18px;
       line-height: 28px;
     }
@@ -991,8 +975,16 @@
       margin: 140px 0;
 
       .practice {
+        &__title {
+          margin: 14px 0 14px 165px;
+        }
+
+        &__text {
+          margin: 22px 0 30px 165px;
+        }
+
         &__img {
-          left: 30px;
+          left: 50px;
         }
 
         &__tochki,
@@ -1018,21 +1010,19 @@
     }
 
     &__text {
-      width: 74%;
+      margin-right: 165px;
       max-width: 604px;
       margin-top: 20px;
       font-size: 16px;
       line-height: 27px;
     }
 
-    &__tochki {
-    }
-
     &__img {
-      top: -20px;
+      top: 21px;
 
       img {
-        width: 681px;
+        width: 581px;
+        height: 322px;
       }
     }
   }
@@ -1061,19 +1051,17 @@
   .join {
     width: 90%;
     max-width: 1200px;
-    min-height: 400px;
+    min-height: 360px;
     padding-top: 0;
+    background: url('../../assets/homepage/join.png') right center / 490px 379px no-repeat;
 
-    &__img {
-
-      svg {
-        width: 490px;
-        height: 380px;
-      }
+    &__title {
+      font-size: 34px;
+      line-height: 40px;
     }
 
     &__subtitle {
-      width: 55%;
+      margin-right: 500px;
     }
   }
 
@@ -1082,10 +1070,8 @@
     max-width: 1200px;
     margin-top: 140px;
     padding: 50px 40px;
-
-    &__bg {
-      left: 0;
-    }
+    background: url('../../assets/homepage/signup.png') left 60px bottom / 543px 435px no-repeat,
+    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
 
     &__title {
       width: 452px;
@@ -1117,6 +1103,9 @@
     padding: 38px 40px;
     max-width: 900px;
     min-height: 613px;
+    background: url('../../assets/homepage/offerBg.png') 240px bottom / 65% no-repeat,
+    url('../../assets/homepage/offerAir.png') right 15px top 40px no-repeat,
+    linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
 
     &__groupOne {
       svg {
@@ -1159,7 +1148,7 @@
     }
 
     &__block {
-      height: 530px;
+      min-height: 530px;
       max-width: 450px;
       width: 54%;
 
@@ -1242,16 +1231,40 @@
     }
 
     &__block {
-      margin-top: 20px;
+      margin-top: 40px;
     }
 
     &__skills {
-      margin-top: 15px;
+      margin-top: 0;
+    }
+
+    &__slides {
+      padding-bottom: 0;
     }
 
     &__slide {
+
+      &__bg {
+        padding: 35px 35px 28px;
+      }
+
+      &__text {
+        display: block;
+        height: 105px;
+      }
+
+      &__button {
+        display: block;
+      }
+
       &Container {
-        padding-top: 15px;
+        padding-top: 0;
+
+        &:hover {
+          .ways__slide__bg {
+            padding: 35px 35px 28px;
+          }
+        }
       }
     }
   }
@@ -1261,34 +1274,26 @@
     min-height: 300px;
     margin: 90px auto;
     padding: 50px;
+    background: url('../../assets/homepage/sloganLeft.png') left top / 400px 300px no-repeat,
+    url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
+    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
 
     &__center {
-      .slogan__description {
-        width: 96%;
-      }
-    }
+      padding: 45px;
+      min-height: 268px;
 
-    &__img {
+      background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
+      url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
+      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
 
-      &_left {
-        svg {
-          height: 268px;
+      .slogan {
+        &__title {
+          line-height: 36px;
         }
-      }
 
-      &_right {
-        svg {
-          width: 490px;
-          height: 300px;
-        }
-      }
-
-      &_center {
-        left: 4%;
-
-        svg {
-          width: 490px;
-          height: 300px;
+        &__description {
+          width: 96%;
+          margin-bottom: 26px;
         }
       }
     }
@@ -1313,10 +1318,20 @@
   }
 
   .practice {
+    margin-left: 62px;
 
     &:nth-child(2n) {
+      margin: 100px 0;
 
       .practice {
+        &__title {
+          margin: 14px 0 14px 210px;
+        }
+
+        &__text {
+          margin: 20px 0 25px 255px;
+        }
+
         &__right {
           margin-top: 50px;
         }
@@ -1329,6 +1344,10 @@
           left: 220px;
         }
       }
+    }
+
+    &__left {
+      padding-top: 20px;
     }
 
     &__right {
@@ -1346,15 +1365,17 @@
     }
 
     &__text {
-      width: 50%;
+      margin: 20px 255px 25px 0;
+      line-height: 24px;
     }
 
     &__img {
-      top: -13px;
-      left: -240px;
+      top: 20px;
+      left: -200px;
 
       img {
-        width: 580px;
+        width: 499px;
+        height: 276px;
       }
     }
 
@@ -1384,19 +1405,17 @@
   }
 
   .join {
-    max-width: 900px;
+    width: 95%;
+    margin-left: 5%;
+    background: url('../../assets/homepage/join.png') right center / 411px 325px no-repeat;
 
     &__title {
+      font-size: 36px;
       width: 55%;
     }
 
-    &__img {
-      top: 30px;
-
-      svg {
-        width: 411px;
-        height: 326px;
-      }
+    &__subtitle {
+      margin-right: 410px;
     }
   }
 
@@ -1404,15 +1423,24 @@
     min-height: 455px;
     padding: 40px;
     margin-top: 100px;
+    background: url('../../assets/homepage/signup.png') left 110px bottom 10px / 445px 352px no-repeat,
+    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
 
     &__title {
+      width: 100%;
+      font-size: 34px;
       margin-top: 18px;
+    }
+
+    &__subtitle {
+      font-size: 34px;
+      margin-left: 14px;
     }
 
     &__form {
       max-width: 300px;
       min-height: 380px;
-      margin: 0 25px 0 auto;
+      margin: 0 5% 0 auto;
 
       &__label {
         margin-left: 16px;
@@ -1447,14 +1475,24 @@
   }
 }
 
+@media (max-width: 950px) {
+  .signup {
+    &__title {
+      font-size: 30px;
+    }
+
+    &__subtitle {
+      margin-top: 5px;
+      font-size: 30px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .offer {
     max-width: 688px;
     padding: 38px 20px;
-
-    &__groupOne, &__groupTwo {
-      display: none;
-    }
+    background: linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
 
     &__block {
       &__right {
@@ -1465,7 +1503,7 @@
     }
 
     &__title {
-      margin-top: 76px;
+      margin-top: 50px;
       font-size: 24px;
       line-height: 35px;
 
@@ -1493,6 +1531,29 @@
     margin-top: 90px;
     margin-left: 40px;
 
+    &__block {
+      &_blue {
+        .ways__skills {
+          background: url('../../assets/homepage/trophy.png') center center / 211px 211px no-repeat,
+          linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+        }
+      }
+
+      &_red {
+        .ways__skills {
+          background: url('../../assets/homepage/mathematics.png') center center / 211px 211px no-repeat,
+          linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+        }
+      }
+
+      &_green {
+        .ways__skills {
+          background: url('../../assets/homepage/courses.png') center center / 211px 211px no-repeat,
+          linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+        }
+      }
+    }
+
     &__title {
       font-size: 28px;
       line-height: 36px;
@@ -1501,13 +1562,6 @@
     &__skills {
       width: 235px;
       height: 235px;
-
-      &__img {
-        img {
-          width: 211px;
-          height: 211px;
-        }
-      }
 
       &__title {
         margin-top: 70px;
@@ -1522,22 +1576,23 @@
     &__slide {
       width: 405px;
       height: 235px;
-      padding: 177px 30px 25px;
+
+      &__bg {
+        border-radius: 19px;
+        padding: 29px 30px 22px;
+        background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #DBE3F7 100%),
+        url('../../assets/homepage/slideBg.png') left top / 96% no-repeat;
+      }
 
       &Container {
         min-height: 245px;
 
         &:hover {
           .ways__slide {
-            padding: 29px 30px 25px;
+            &__bg {
+              padding: 29px 30px 22px;
+            }
           }
-        }
-      }
-
-      &__bg {
-        svg {
-          width: 405px;
-          height: 235px;
         }
       }
 
@@ -1568,16 +1623,19 @@
   .slogan {
     max-width: 688px;
     padding: 45px 50px;
+    background: url('../../assets/homepage/sloganLeft.png') right 440px top 32px / 239px 203px no-repeat,
+    url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
+    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
 
     &__center {
-      .slogan__description {
-        margin: 20px auto 30px;
-      }
-    }
+      background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
+      url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
+      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
 
-    &__img {
-      &_left, &_center {
-        display: none;
+      .slogan {
+        &__description {
+          margin: 20px auto 30px;
+        }
       }
     }
 
@@ -1613,25 +1671,30 @@
 
       .practice {
         &__left {
-          width: 100%;
+          width: 90%;
           max-width: 688px;
-          margin: 0 auto;
+          margin: 0 40px 0 auto;
         }
 
         &__right {
           margin-left: 0;
         }
 
+        &__text {
+          margin: 20px 0 25px;
+        }
+
         &__img {
-          left: 104px;
+          left: 17vw;
         }
 
         &__tochki {
-          left: 345px;
+          left: 46vw;
         }
 
         &__textblock {
-          left: 315px;
+          width: fit-content;
+          left: 43vw;
         }
       }
     }
@@ -1658,15 +1721,15 @@
     }
 
     &__img {
-      left: -290px;
+      left: -33vw;
     }
 
     &__textblock {
-      left: -350px;
+      left: -40vw;
     }
 
     &__tochki {
-      left: -20px;
+      left: 3vw;
     }
   }
 
@@ -1699,48 +1762,21 @@
   }
 
   .join {
-    &__img {
-      right: -45px;
-      top: -70px;
-      z-index: 1;
-
-      &:before {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 100%;
-        height: 414px;
-        top: 0;
-        left: 0;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 40.36%, rgba(255, 255, 255, 0) 100%);
-      }
-
-      svg {
-        width: 550px;
-        height: 460px;
-      }
-    }
+    min-height: 409px;
+    padding-top: 30px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 40.36%, rgba(255, 255, 255, 0) 100%),
+    url('../../assets/homepage/join.png') right center / 463px 409px no-repeat;
 
     &__title {
-      position: absolute;
       font-size: 28px;
       line-height: 36px;
-      z-index: 2;
     }
 
     &__subtitle {
-      width: 70%;
-      top: 60px;
-      position: absolute;
+      margin-top: 20px;
+      margin-right: 230px;
       font-size: 16px;
       line-height: 26px;
-      z-index: 2;
-    }
-
-    &__btn {
-      z-index: 2;
-      position: absolute;
-      top: 270px;
     }
   }
 
@@ -1749,16 +1785,8 @@
     max-width: 688px;
     min-height: 0;
     display: block;
-
-    &__bg {
-      top: 115px;
-      left: 20%;
-
-      svg {
-        width: 445px;
-        height: 352px;
-      }
-    }
+    background: url('../../assets/homepage/signup.png') center bottom / 445px 352px no-repeat,
+    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
 
     &__block {
       width: 100%;
@@ -1805,6 +1833,70 @@
   }
 }
 
+@media (max-width: 650px) {
+  .offer {
+    &__block {
+      &__right {
+        &__title {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .slogan {
+    &__center {
+      background: url('../../assets/homepage/startRight.png') center top / 385px 300px no-repeat,
+      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+    }
+  }
+
+  .practice {
+
+    &:nth-child(2n) {
+
+      .practice {
+
+        &__img {
+          left: 10vw;
+        }
+
+        &__tochki {
+          left: 40vw;
+        }
+
+        &__textblock {
+          left: 34vw;
+        }
+      }
+    }
+
+    &__img {
+      left: -30vw;
+    }
+
+    &__tochki {
+      left: 15vw;
+    }
+
+    &__textblock {
+      left: -34vw;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .offer {
+    &__block {
+      &__right {
+        &__title {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 480px) {
   .offer {
     width: 92%;
@@ -1812,35 +1904,18 @@
     display: block;
     padding: 35px 20px;
 
-    &__groupOne {
-      width: 100%;
-      display: block;
-      top: 235px;
-      left: 0;
-
-      svg {
-        width: 100%;
-        height: 250px;
-      }
-    }
-
-    &__groupTwo {
-      display: block;
-      top: 30px;
-
-      svg {
-        width: 50px;
-        height: 30px;
-      }
-    }
-
     &__block {
       width: 100%;
       height: inherit;
+      min-height: min-content;
 
       &__right {
         margin-top: 38px;
         max-width: none;
+
+        &__title {
+          font-size: 20px;
+        }
       }
     }
 
@@ -1901,12 +1976,12 @@
     }
 
     &__slide {
-      padding: 29px 30px 25px;
+      &__bg {
+        padding: 29px 30px 25px;
+      }
 
       &Container {
-        &:hover {
-          padding-top: 15px;
-        }
+        padding-top: 0;
       }
 
       &__text,
@@ -1920,15 +1995,16 @@
     width: 92%;
     max-width: 440px;
     padding: 50px 20px 40px 30px;
+    background: url('../../assets/homepage/sloganRight.png') right bottom / 100% no-repeat,
+    linear-gradient(90deg, #D7C096 0%, #7469EF 100%);
+
+    &__center {
+      background: url('../../assets/homepage/startRight.png') center bottom / 90% no-repeat,
+      linear-gradient(270deg, #D7C096 0%, #7469EF 100%);
+    }
 
     &__title {
       line-height: 30px;
-    }
-
-    &__img_right {
-      svg {
-        width: 100%;
-      }
     }
   }
 
@@ -1946,12 +2022,17 @@
       .practice {
 
         &__left {
+          margin: 0 20px 0 auto;
           width: 92%;
           max-width: 440px;
         }
 
+        &__title {
+          margin: 14px 0 14px 10px;
+        }
+
         &__img {
-          left: -5px;
+          left: 5vw;
         }
 
         &__textblock {
@@ -1974,7 +2055,8 @@
       margin-top: 50px;
 
       img {
-        width: 500px;
+        width: 400px;
+        height: 244px;
       }
     }
 
@@ -1984,16 +2066,16 @@
     }
 
     &__img {
-      left: -108px;
-      top: -7px;
+      left: -12vw;
+      top: 5vw;
     }
 
     &__tochki {
-      left: 275px;
+      left: 250px;
     }
 
     &__textblock {
-      left: 0;
+      left: -4vw;
       top: 240px;
       padding: 10px 15px;
       width: 90%;
@@ -2031,6 +2113,8 @@
   .join {
     width: 92%;
     max-width: 440px;
+    background: linear-gradient(125.21deg, #FFFFFF 0%, rgba(255, 255, 255, 0.83) 98.64%),
+    url('../../assets/homepage/join.png') right bottom / 100% no-repeat;
 
     &__title {
       width: 100%;
@@ -2043,32 +2127,14 @@
     &__btn {
       top: 290px;
     }
-
-    &__img {
-      top: 0;
-
-      &:before {
-        background: linear-gradient(125.21deg, #FFFFFF 0%, rgba(255, 255, 255, 0.83) 98.64%);
-      }
-
-      svg {
-        width: 100%;
-      }
-    }
   }
 
   .signup {
     width: 92%;
     max-width: 440px;
     padding: 40px 20px;
-
-    &__bg {
-      left: 0;
-
-      svg {
-        width: 100%;
-      }
-    }
+    background: url('../../assets/homepage/signup.png') center bottom / 100% no-repeat,
+    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
 
     &__title {
       margin-top: 0;
@@ -2094,6 +2160,27 @@
   }
 }
 
+@media (max-width: 425px) {
+  .signup {
+    &__title, &__subtitle {
+      font-size: 26px;
+    }
+  }
+
+  .practice {
+    &__img {
+      left: -3vw;
+
+      img {
+        width: 370px;
+
+      }
+    }
+
+
+  }
+}
+
 @media (max-width: 320px) {
   .offer {
     max-width: 280px;
@@ -2106,10 +2193,6 @@
           font-size: 18px;
         }
       }
-    }
-
-    &__groupOne {
-      display: none;
     }
 
     button {
@@ -2143,6 +2226,29 @@
   }
 
   .ways {
+    &__block {
+      &_blue {
+        .ways__skills {
+          background: url('../../assets/homepage/trophy.png') center center / 155px 155px no-repeat,
+          linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+        }
+      }
+
+      &_red {
+        .ways__skills {
+          background: url('../../assets/homepage/mathematics.png') center center / 155px 155px no-repeat,
+          linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+        }
+      }
+
+      &_green {
+        .ways__skills {
+          background: url('../../assets/homepage/courses.png') center center / 155px 155px no-repeat,
+          linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+        }
+      }
+    }
+
     &__skills {
       width: 175px;
       height: 175px;
@@ -2159,21 +2265,14 @@
       }
 
       &__btn {
-        width: 132px;
+        width: 140px;
         height: 31px;
         margin: 0 auto;
 
         button {
-          padding: 5px 11px;
+          padding: 5px 10px;
           font-size: 14px;
           line-height: 18px;
-        }
-      }
-
-      &__img {
-        img {
-          width: 155px;
-          height: 155px;
         }
       }
     }
@@ -2185,16 +2284,18 @@
     &__slide {
       width: 300px;
       height: 174px;
-      padding: 15px;
+
+      &__bg {
+        padding: 15px 15px 12px;
+      }
 
       &Container {
         min-height: 190px;
-      }
 
-      &__bg {
-        svg {
-          width: 300px;
-          height: 174px;
+        &:hover {
+          .ways__slide__bg {
+            padding: 15px 15px 12px;
+          }
         }
       }
 
@@ -2216,7 +2317,6 @@
 
   .slogan {
     padding: 28px 20px;
-
   }
 
   .practices {
@@ -2230,11 +2330,12 @@
     }
 
     &__img {
-      left: -70px;
-      top: 4px;
+      left: -18vw;
+      top: 6vw;
 
-      img{
-        width: 320px;
+      img {
+        width: 280px;
+        height: 156px;
       }
     }
 
@@ -2281,7 +2382,7 @@
           overflow: hidden;
         }
 
-        &__author{
+        &__author {
           margin-top: 20px;
         }
       }
@@ -2290,7 +2391,7 @@
 
   .join {
     margin-top: 90px;
-    height: 430px;
+    background: none;
 
     &__subtitle {
       top: 130px;
@@ -2298,10 +2399,6 @@
 
     &__btn {
       top: 420px;
-    }
-
-    &__img {
-      display: none;
     }
   }
 
@@ -2325,7 +2422,5 @@
         margin-top: 20px;
       }
     }
-
-
   }
 }

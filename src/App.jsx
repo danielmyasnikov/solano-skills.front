@@ -3,9 +3,9 @@ import { Route } from 'react-router-dom';
 
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
+import { HomePage } from './components/homePage';
 
 import Container from './components/container';
-import HomePage from './components/homePage';
 
 import { routes } from './routes';
 

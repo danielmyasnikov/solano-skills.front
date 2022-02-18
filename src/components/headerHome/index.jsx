@@ -2,16 +2,18 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@components/mui/button';
 import styles from './styles.module.less'
-import headerLogo from '@assets/homepage/headerLogo.png';
+import HeaderLogo from '@assets/homepage/HeaderLogo';
 import Burger from '@assets/Burger';
 
 const HeaderHome = () => {
-  return ( 
+  return (
     <Fragment>
       <div className={styles.wrapper}>
         <header className={styles.header}>
           <div className={styles.header__block}>
-            <div className={styles.header__logo}><img src={headerLogo}/></div>
+            <div className={styles.header__logo}>
+              <Link to='/'><HeaderLogo /></Link>
+            </div>
             <div className={styles.header__menu}>
               <Link to='/courses'>Обучение</Link>
               <Link to='/tariff'>Тарифы</Link>
@@ -34,5 +36,5 @@ const HeaderHome = () => {
     </Fragment>
   )
 }
- 
+
 export default HeaderHome;
