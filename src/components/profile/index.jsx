@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import Card from './card';
 import { Avatar } from './Avatar';
 import { useRef } from 'react';
-import CropImage from './cropImage';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { patchProfile, getProfile } from '@store/profile/actions';
@@ -26,8 +25,11 @@ const Profile = () => {
   const [isInformationActive, setIsInformationActive] = useState(false);
   const fullnameRef = useRef();
   const informationRef = useRef();
+
   const dispatch = useDispatch();
+
   const history = useHistory();
+
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
@@ -58,7 +60,6 @@ const Profile = () => {
   };
 
   const handleActiveField = (name) => {
-    console.log(name);
     switch (name) {
       case 'fullname':
         setIsFullnameActive(!isFullnameActive);

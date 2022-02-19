@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
 
 import Button from '@components/mui/button';
 import ReactCrop from 'react-image-crop';
@@ -12,23 +12,31 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 import styles from './styles.module.less';
 
-export const CropAvatar = ({ uploadImage }) => {
+export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
   const Input = styled('input')({
     display: 'none',
   });
-
   const hiddenFileInput = React.useRef(null);
   const cropRef = useRef(null);
 
   const [crop, setCrop] = useState({
     unit: 'px',
-    width: 250,
-    height: 250,
+    x: 75,
+    y: 25,
+    width: 350,
+    height: 350,
     aspect: 4 / 4,
   });
   const [rotate, setRotate] = useState(0);
   const [src, setSrc] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
+
+  useImperativeHandle(ref, () => ({
+    removeImage() {
+      setSrc(null);
+      handleActionWithImage();
+    },
+  }));
 
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -37,7 +45,7 @@ export const CropAvatar = ({ uploadImage }) => {
         'load',
         () => {
           setSrc(reader.result);
-          uploadImage();
+          handleActionWithImage();
         },
         false,
       );
@@ -115,10 +123,10 @@ export const CropAvatar = ({ uploadImage }) => {
             />
             <div className={styles.rotateButtonContainer}>
               <IconButton onClick={rotateLeftHandler}>
-                <RotateLeftIcon />
+                <RotateLeftIcon style={{ color: 'white' }} />
               </IconButton>
               <IconButton onClick={rotateRightHandler}>
-                <RotateRightIcon />
+                <RotateRightIcon style={{ color: 'white' }} />
               </IconButton>
             </div>
           </div>
@@ -133,4 +141,4 @@ export const CropAvatar = ({ uploadImage }) => {
       )}
     </>
   );
-};
+});

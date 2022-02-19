@@ -10,15 +10,23 @@
 
 .cropImgContainer {
   position: relative;
+  max-width: 500px;
+  max-height: 500px;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .rotateButtonContainer {
   position: absolute;
-  background: #C2C2C2;
+  background: var(--color-black);;
   border-radius: 10px;
-  opacity: .6;
-  right: 26%;
+  opacity: .9;
+  right: 2%;
   bottom: 19px;
+}
+
+.rotateButtonContainer > button {
+  padding: 3px;
 }
 
 .addImgButton {
