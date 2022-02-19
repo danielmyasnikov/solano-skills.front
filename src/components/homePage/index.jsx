@@ -9,29 +9,36 @@ import Button from '@components/mui/button';
 import { Input } from '@components/mui/input';
 import { CheckboxBtn } from '@components/mui/checkbox';
 import styles from './styles.module.less';
-import { images, feedbacks, practices, slides } from './data';
+import { feedbacks, images, practices, slides } from './data';
 
 export const HomePage = () => {
-  const renderImage = (img) => {
-    switch (img) {
-      case "lectures": return images.lectures;
-      case "practice": return images.practice;
-      case "statement": return images.statement;
-      case "avatar": return images.avatar;
-    }
-  }
+	const renderImage = (img) => {
+		switch (img) {
+			case 'lectures':
+				return images.lectures;
+			case 'practice':
+				return images.practice;
+			case 'statement':
+				return images.statement;
+			case 'avatar':
+				return images.avatar;
+		}
+	};
 
-  return (
-    <>
-      <HeaderHome />
+
+	return (
+		<>
+			<HeaderHome />
 			<div className={styles.wrap}>
 				<div className={styles.container}>
 					<main>
 						<section className={styles.offer}>
 							<div className={cn(styles.offer__block, styles.offer__block__left)}>
 								<div className={styles.offer__title}>Развивайте навыки работы с данными</div>
-								<div className={styles.offer__subtitle}>Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям и направлениям в сфере Информационных технологий.</div>
-								<Button variant="outlinePurpleWithoutBorder">
+								<div className={styles.offer__subtitle}>Обучаем с нуля профессиям и предоставляем знания по
+									востребованным специальностям и направлениям в сфере Информационных технологий.
+								</div>
+								<Button variant='outlinePurpleWithoutBorder'>
 									Посмотреть курсы
 								</Button>
 								<div className={styles.offer__facts}>
@@ -55,15 +62,22 @@ export const HomePage = () => {
 									<div className={styles.offer__form__input}><Input placeholder='Введите пароль' /></div>
 									<div className={styles.offer__form__check}>
 										<CheckboxBtn />
-										<label>Я принимаю условия <span>Пользовательского соглашения</span> и даю своё согласие на обработку персональных данных на условиях, определенных <span>Политикой конфиденциальности.</span></label>
+										<label>Я принимаю условия <span>Пользовательского соглашения</span> и даю своё согласие на обработку
+											персональных данных на условиях, определенных <span>Политикой конфиденциальности.</span></label>
 									</div>
-									<Button variant="outlinePurple">
+									<Button variant='outlinePurple'>
 										Перейти к обучению
 									</Button>
 									<div className={styles.offer__form__accounts}>
-										<div><images.googleAccount /></div>
-										<div><images.facebookAccount /></div>
-										<div><images.googleAccount /></div>
+										<div>
+											<images.googleAccount />
+										</div>
+										<div>
+											<images.facebookAccount />
+										</div>
+										<div>
+											<images.vkAccount />
+										</div>
 									</div>
 								</form>
 							</div>
@@ -75,15 +89,15 @@ export const HomePage = () => {
 								<div className={
 									block.bg === 'blue' ?
 										cn(styles.ways__block, styles.ways__block_blue) :
-									block.bg === 'red' ?
-										cn(styles.ways__block, styles.ways__block_red) :
-										cn(styles.ways__block, styles.ways__block_green)
+										block.bg === 'red' ?
+											cn(styles.ways__block, styles.ways__block_red) :
+											cn(styles.ways__block, styles.ways__block_green)
 								}>
 									<div className={styles.ways__skills}>
 										<div className={styles.ways__skills__title}>{block.title}</div>
 										<div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
 										<div className={styles.ways__skills__btn}>
-											<Button variant="outlineWhiteHome">{block.btn}<KeyboardArrowRightIcon /></Button>
+											<Button variant='outlineWhiteHome'>{block.btn}<KeyboardArrowRightIcon /></Button>
 										</div>
 									</div>
 									<div className={styles.ways__slides}>
@@ -94,7 +108,7 @@ export const HomePage = () => {
 														<div className={styles.ways__slide__title}>{item.title}</div>
 														<div className={styles.ways__slide__text}>{item.text}</div>
 														<div className={styles.ways__slide__button}>
-															<Button variant="outlineBlue">{block.btnlearn}</Button>
+															<Button variant='outlineBlue'>{block.btnlearn}</Button>
 														</div>
 													</div>
 												</div>
@@ -107,15 +121,20 @@ export const HomePage = () => {
 
 						<section className={styles.slogan}>
 							<div className={styles.slogan__title}>Что такое DeepSkills?</div>
-							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.</div>
+							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в
+								удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.
+							</div>
 							<div className={styles.slogan__btn}>
-								<Button variant="outlineWhite">Посмотреть курсы</Button>
+								<Button variant='outlineWhite'>Посмотреть курсы</Button>
 							</div>
 						</section>
 
 						<section className={styles.practices}>
 							<div className={styles.practices__title}><span>Практический</span> опыт обучения</div>
-							<div className={styles.practices__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </div>
+							<div className={styles.practices__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+								do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+								exercitation ullamco.
+							</div>
 							{practices.map(practice => (
 								<div className={styles.practice}>
 									<div className={styles.practice__left}>
@@ -128,8 +147,10 @@ export const HomePage = () => {
 										</Link>
 									</div>
 									<div className={styles.practice__right}>
-										<div className={styles.practice__tochki}><images.tochki /></div>
-										<div className={styles.practice__img}><img src={renderImage(practice.img)}/></div>
+										<div className={styles.practice__tochki}>
+											<images.tochki />
+										</div>
+										<div className={styles.practice__img}><img src={renderImage(practice.img)} /></div>
 										<div className={styles.practice__textblock}>
 											<div className={styles.practice__textblock__title}>{practice.textblockTitle}</div>
 											<div className={styles.practice__textblock__subtitle}>{practice.textblockSubtitle}</div>
@@ -141,21 +162,25 @@ export const HomePage = () => {
 
 						<section className={cn(styles.slogan, styles.slogan__center)}>
 							<div className={styles.slogan__title}>Начните прямо сейчас</div>
-							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.</div>
+							<div className={styles.slogan__description}>Изучайте необходимые вам навыки работы с данными онлайн в
+								удобном для вас темпе — от основ, не связанных с кодированием, до науки о данных и машинного обучения.
+							</div>
 							<div className={styles.slogan__btn}>
-								<Button variant="containedWhite">Посмотреть курсы</Button>
+								<Button variant='containedWhite'>Посмотреть курсы</Button>
 							</div>
 						</section>
 
 						<section className={styles.whatSays}>
 							<div className={styles.whatSays__header}>
 								<div className={styles.whatSays__header__title}>Что говорят наши пользователи</div>
-								<div className={styles.whatSays__header__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</div>
+								<div className={styles.whatSays__header__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing
+									elit, sed do eiusmod tempor incididunt
+								</div>
 							</div>
 							<div className={styles.whatSays__feedbacks}>
 								{feedbacks.map(feedback => (
 									<div className={styles.whatSays__feedback}>
-										<div className={styles.whatSays__feedback__photo}><img src={renderImage(feedback.avatar)}/></div>
+										<div className={styles.whatSays__feedback__photo}><img src={renderImage(feedback.avatar)} /></div>
 										<div className={styles.whatSays__feedback__data}>
 											<div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
 											<div className={styles.whatSays__feedback__data__author}>{feedback.author}</div>
@@ -167,8 +192,12 @@ export const HomePage = () => {
 
 						<section className={styles.join}>
 							<div className={styles.join__title}>Присоединяйтесь к команде преподавателей DeepSkills</div>
-							<div className={styles.join__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
-							<div className={styles.join__btn}><Button variant="containedPurple">Я преподаватель</Button></div>
+							<div className={styles.join__subtitle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+								exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+							</div>
+							<div className={styles.join__btn}><Button variant='containedPurple'>Я преподаватель</Button></div>
 						</section>
 
 						<section className={styles.signup}>
@@ -191,10 +220,11 @@ export const HomePage = () => {
 									</div>
 									<div className={styles.signup__form__check}>
 										<CheckboxBtn />
-										<label>Я принимаю условия <span>Пользовательского соглашения</span> и даю своё согласие на обработку персональных данных на условиях, определенных <span>Политикой конфиденциальности.</span></label>
+										<label>Я принимаю условия <span>Пользовательского соглашения</span> и даю своё согласие на обработку
+											персональных данных на условиях, определенных <span>Политикой конфиденциальности.</span></label>
 									</div>
 									<div className={styles.signup__form__btn}>
-										<Button variant="outlineWhite">
+										<Button variant='outlineWhite'>
 											Перейти к обучению
 										</Button>
 									</div>
@@ -206,5 +236,5 @@ export const HomePage = () => {
 				<Footer />
 			</div>
 		</>
-  );
-}
+	);
+};

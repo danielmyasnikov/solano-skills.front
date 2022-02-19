@@ -161,7 +161,17 @@
       }
 
       input {
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        color: rgba(70, 68, 92);
+
         &::placeholder {
+          font-family: 'Nunito';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
           color: rgba(70, 68, 92, 0.33);
         }
       }
@@ -776,7 +786,7 @@
     color: #fff;
 
     &__label {
-      margin-left: 20px;
+      margin-left: 30px;
       font-family: 'Nunito';
       font-weight: 600;
       font-size: 16px;
@@ -787,12 +797,21 @@
       margin-top: 10px;
 
       div {
+        padding: 12px 30px;
         background: rgba(255, 255, 255, 0.26);
         border: 1px solid #fff;
       }
 
       input {
+        font-family: 'Nunito';
+        font-weight: 600;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+
         &::placeholder {
+          font-family: 'Nunito';
+          font-weight: 600;
+          font-size: 16px;
           color: rgba(255, 255, 255, 0.5);
         }
       }
@@ -810,19 +829,18 @@
     }
 
     &__check {
-      margin-top: 24px;
+      margin-top: 34px;
       margin-bottom: 29px;
       display: flex;
 
       label {
         font-family: 'Roboto';
-        font-size: 12px;
+        font-size: 14px;
         line-height: 142.9%;
         letter-spacing: -0.015em;
         color: rgba(255, 255, 255, 0.68);
 
         span {
-          font-weight: normal;
           color: #ffc700;
         }
       }
@@ -1895,6 +1913,42 @@
       }
     }
   }
+
+  .practice {
+
+    &:nth-child(2n) {
+      .practice {
+        &__img {
+          left: 5vw;
+        }
+
+        &__tochki, &__textblock {
+          left: 12vw;
+        }
+      }
+    }
+
+    &__right {
+      height: 295px;
+    }
+
+    &__img {
+      left: -23vw;
+
+      img {
+        width: 461px;
+        height: 255px;
+      }
+    }
+
+    &__tochki {
+      left: 43vw;
+    }
+
+    &__textblock {
+      left: -16vw;
+    }
+  }
 }
 
 @media (max-width: 480px) {
@@ -2168,16 +2222,50 @@
   }
 
   .practice {
+    &__right {
+      width: 80%;
+    }
+
     &__img {
-      left: -3vw;
+      left: inherit;
+      right: 20px;
 
       img {
-        width: 370px;
-
+        width: 360px;
       }
     }
 
+    &__textblock {
+      height: fit-content;
+    }
 
+    &__tochki {
+      left: inherit;
+      right: 35px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .practice {
+
+    &__right {
+      height: 215px;
+    }
+
+    &__img {
+      left: inherit;
+      right: 20px;
+
+      img {
+        width: 320px;
+        height: auto;
+      }
+    }
+
+    &__textblock {
+      top: 175px;
+    }
   }
 }
 
