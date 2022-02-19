@@ -13,11 +13,14 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 import styles from './styles.module.less';
 import cn from 'classnames';
+import { useRef } from 'react';
 
 const Output = ({ variant, presentation_url }) => {
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
+
+  const outputRef = useRef();
 
   const { exerciseId } = useParams();
 
@@ -45,6 +48,12 @@ const Output = ({ variant, presentation_url }) => {
     dispatch(startKernel(exerciseId));
   }, [exerciseId]);
 
+  useEffect(() => {
+    if (outputRef && terminal.outputs) {
+      outputRef?.current?.scroll({ top: outputRef.current.scrollHeight, behavior: 'smooth' });
+    }
+  }, [terminal]);
+
   return (
     <div
       className={cn(styles.outputWrapper, {
@@ -68,9 +77,10 @@ const Output = ({ variant, presentation_url }) => {
       <div className={styles[variant]}>
         {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
           <>
-            <div className={styles.content}>
+            <div ref={outputRef} className={styles.content}>
               {terminal.outputs.map((item, i) => (
                 <div
+                  key={i}
                   className={cn({ [styles.shell]: item.status === 'shell' })}
                   dangerouslySetInnerHTML={{ __html: item.error || item.output }}
                 ></div>

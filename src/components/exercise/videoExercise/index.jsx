@@ -41,8 +41,8 @@ export const VideoExercise = ({ onSubmit }) => {
   );
 
   useEffect(() => {
-    transcriptRef.current?.scrollIntoView();
-  }, [showTranscript])
+    transcriptRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [showTranscript]);
 
   return (
     <div className={styles.wrapper}>
@@ -55,7 +55,12 @@ export const VideoExercise = ({ onSubmit }) => {
           <VideoPlayer sourceData={sourceData} />
         </div>
         <div className={styles.btnWrapper}>
-          <Button variant="outlinePurple" onClick={() => {setShowTranscript(!showTranscript)}}>
+          <Button
+            variant="outlinePurple"
+            onClick={() => {
+              setShowTranscript(!showTranscript);
+            }}
+          >
             {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
           </Button>
           <Button variant={'containedPurple'} onClick={onSubmit}>
@@ -63,7 +68,11 @@ export const VideoExercise = ({ onSubmit }) => {
           </Button>
         </div>
       </div>
-      {showTranscript && <div ref={transcriptRef} className={styles.transcript}>{exercise.transcript}</div>}
+      {showTranscript && (
+        <div ref={transcriptRef} className={styles.transcript}>
+          {exercise.transcript}
+        </div>
+      )}
     </div>
   );
 };

@@ -6,8 +6,12 @@ import Close from '@assets/Close.js';
 
 const FeedbackModal = ({ onClose }) => {
   const options = [
-    { value: 'variant1', label: '1 Вариант' },
-    { value: 'variant2', label: '2 Вариант' },
+    { value: 'variant1', label: 'Тема 1' },
+    { value: 'variant2', label: 'Тема 2' },
+    { value: 'variant3', label: 'Тема 3' },
+    { value: 'variant4', label: 'Тема 4' },
+    { value: 'variant5', label: 'Тема 5' },
+    { value: 'variant6', label: 'Другое' },
   ];
   return (
     <div className={styles.modal}>
@@ -20,7 +24,7 @@ const FeedbackModal = ({ onClose }) => {
         <Select
           classNamePrefix="customFeedback"
           className={styles.select}
-          placeholder="Ваша проблема описана здесь"
+          placeholder="Ваша проблема есть здесь"
           options={options}
         />
         <textarea placeholder="Введите текст"></textarea>

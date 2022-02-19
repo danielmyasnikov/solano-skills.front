@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
 import { HomePage } from './components/homePage';
+import * as Sentry from '@sentry/react';
 
 import Container from './components/container';
 
@@ -16,7 +17,7 @@ import * as AuthStore from '@store/auth';
 import styles from './app.module.css';
 import './index.less';
 
-export default function App() {
+function App() {
   const dispatch = useDispatch();
 
   const uid = localStorage.getItem('uid');
@@ -57,3 +58,5 @@ export default function App() {
     </div>
   );
 }
+
+export default Sentry.withProfiler(App);

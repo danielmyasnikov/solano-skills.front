@@ -59,7 +59,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
 
   useEffect(() => {
     if (terminal.message.error) {
-      errorRef.current?.scrollIntoView();
+      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
     if (terminal.bytePayload) {
       setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);

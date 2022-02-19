@@ -93,7 +93,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
 
   useEffect(() => {
     if (terminal.message.error) {
-      errorRef.current?.scrollIntoView();
+      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [terminal]);
 
@@ -178,7 +178,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
             <ErrorMessage message={message || errorMessage} />
           </div>
           {!hint === false ||
-            (withoutHint === true && (
+            (withoutHint === true && !isQuiz && (
               <Button
                 className={styles.hintBtn}
                 variant="outlinePurple"
