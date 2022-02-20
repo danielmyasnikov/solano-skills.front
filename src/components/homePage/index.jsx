@@ -22,6 +22,8 @@ export const HomePage = () => {
         return images.statement;
       case 'avatar':
         return images.avatar;
+      default:
+        return;
     }
   };
 
@@ -92,6 +94,7 @@ export const HomePage = () => {
               </div>
               {slides.map((block) => (
                 <div
+                  key={block.title}
                   className={
                     block.bg === 'blue'
                       ? cn(styles.ways__block, styles.ways__block_blue)
@@ -111,8 +114,8 @@ export const HomePage = () => {
                     </div>
                   </div>
                   <div className={styles.ways__slides}>
-                    {block.items.map((item) => (
-                      <div className={styles.ways__slideContainer}>
+                    {block.items.map((item, i) => (
+                      <div key={item.title + i} className={styles.ways__slideContainer}>
                         <div className={styles.ways__slide}>
                           <div className={styles.ways__slide__bg}>
                             <div className={styles.ways__slide__title}>{item.title}</div>
@@ -149,8 +152,8 @@ export const HomePage = () => {
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                 exercitation ullamco.
               </div>
-              {practices.map((practice) => (
-                <div className={styles.practice}>
+              {practices.map((practice, i) => (
+                <div key={practice.title + i} className={styles.practice}>
                   <div className={styles.practice__left}>
                     <div className={styles.practice__pretitle}>{practice.pretitle}</div>
                     <div className={styles.practice__title}>{practice.title}</div>
@@ -200,10 +203,10 @@ export const HomePage = () => {
                 </div>
               </div>
               <div className={styles.whatSays__feedbacks}>
-                {feedbacks.map((feedback) => (
-                  <div className={styles.whatSays__feedback}>
+                {feedbacks.map((feedback, i) => (
+                  <div key={feedback.avatar + i} className={styles.whatSays__feedback}>
                     <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} />
+                      <img src={renderImage(feedback.avatar)} alt="avatar" />
                     </div>
                     <div className={styles.whatSays__feedback__data}>
                       <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>

@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 
-import { Registration } from './components/auth/registration';
-import { Authorization } from './components/auth/authorization';
-import { HomePage } from './components/homePage';
 import * as Sentry from '@sentry/react';
 
 import Container from './components/container';
@@ -38,21 +35,11 @@ function App() {
     <div className={styles.wrapper}>
       {/* {isLogIn && <Redirect to="/sing-in" />} */}
 
-      <Route exact path={'/registration'}>
-        <Registration />
-      </Route>
-
-      <Route exact path={'/sing-in'}>
-        <Authorization />
-      </Route>
-
-      <Route exact path={'/'}>
-        <HomePage />
-      </Route>
-
       {routes.map((route, i, headerVariant) => (
         <Route exact={route.exact} path={route.path} key={route.path}>
-          <Container variant={headerVariant} key={i} {...route} Component={route.component} />
+          {(route.wrap && (
+            <Container variant={headerVariant} key={i} {...route} Component={route.component} />
+          )) || <route.component />}
         </Route>
       ))}
     </div>
