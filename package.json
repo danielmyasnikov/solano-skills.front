@@ -75,5 +75,8 @@
     ]
   },
   "lint-staged": "prettier --single-quote --use-tabs --trailing-comma es5 --write",
-  "lint": "eslint --ignore-path .gitignore ."
+  "lint": "eslint --ignore-path .gitignore .",
+  "devDependencies": {
+    "prettier": "2.5.1"
+  }
 }

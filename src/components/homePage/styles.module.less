@@ -15,13 +15,13 @@
 }
 
 .offer {
-  width: 95%;
+  width: 90%;
   max-width: 1720px;
   min-height: 750px;
   margin: 20px auto 0;
   background: url('../../assets/homepage/offerBg.png') 400px bottom no-repeat,
-  url('../../assets/homepage/offerAir.png') right 30px top 40px no-repeat,
-  linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
+    url('../../assets/homepage/offerAir.png') right 30px top 40px no-repeat,
+    linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
   background-blend-mode: luminosity;
   border-radius: 38px;
   display: flex;
@@ -41,13 +41,14 @@
 
     &__right {
       max-width: 484px;
-      background: #FA7F6E;
+      background: #fa7f6e;
       box-shadow: 10px 9px 30px rgba(0, 0, 0, 0.1);
       border-radius: 25px;
 
       button {
         display: flex;
         margin: 40px auto auto;
+        background: none;
       }
 
       &__title {
@@ -59,7 +60,7 @@
         text-align: center;
         letter-spacing: -0.005em;
         text-transform: uppercase;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
   }
@@ -82,12 +83,13 @@
       height: 43px;
       top: -50px;
       right: 4px;
-      background: #63D167;
+      background: #63d167;
       box-shadow: 7px 8px 15px rgba(0, 0, 0, 0.1);
       border-radius: 117px;
+      font-family: 'Jost';
       font-weight: 600;
       font-size: 24px;
-      line-height: 45px;
+      line-height: 43px;
       text-align: center;
       text-transform: lowercase;
     }
@@ -111,7 +113,7 @@
     margin-top: 26px;
     width: 246px;
     height: 52px;
-    background: #948BF9;
+    background: #948bf9;
     border-radius: 61px;
     display: flex;
     justify-content: center;
@@ -121,7 +123,7 @@
       font-weight: 600;
       font-size: 36px;
       letter-spacing: -0.0142658px;
-      color: #EDD765;
+      color: #edd765;
       text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.06);
     }
 
@@ -131,14 +133,14 @@
       font-size: 16px;
       line-height: 65px;
       letter-spacing: -0.149625px;
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 
   &__form {
     width: 100%;
     height: calc(100% - 74px);
-    background: #ECEAFB;
+    background: #eceafb;
     border-radius: 25px;
     padding: 45px 25px 25px;
 
@@ -148,7 +150,8 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 127%;
-      color: #7469EF;
+      color: #7469ef;
+      cursor: auto;
     }
 
     &__input {
@@ -156,7 +159,7 @@
 
       div {
         background: rgba(255, 255, 255, 0.46);
-        border: 1px solid #7469EF;
+        border: 1px solid #7469ef;
         padding: 14px 20px;
       }
 
@@ -180,12 +183,15 @@
     &__link {
       margin-top: 10px;
       margin-bottom: 40px;
-      font-family: 'Roboto';
+      font-family: 'Nunito';
       font-size: 16px;
       line-height: 142.9%;
       text-align: center;
       letter-spacing: -0.015em;
-      color: #7469EF;
+
+      a {
+        color: #7469ef;
+      }
     }
 
     &__check {
@@ -193,15 +199,20 @@
       display: flex;
 
       label {
-        font-family: 'Roboto';
+        font-family: 'Nunito';
         font-size: 14px;
         line-height: 142.9%;
         letter-spacing: -0.015em;
         color: #525252;
+        cursor: auto;
 
         span {
           font-weight: normal;
-          color: #7469EF;
+          color: #7469ef;
+
+          a {
+            color: #7469ef;
+          }
         }
       }
 
@@ -231,12 +242,12 @@
     font-size: 48px;
     line-height: 65px;
     letter-spacing: 0.005em;
-    color: #7469EF;
+    color: #7469ef;
 
     span {
       font-weight: 400;
       letter-spacing: 0.001em;
-      color: #46445C;
+      color: #46445c;
     }
   }
 
@@ -248,40 +259,40 @@
     &_blue {
       .ways__skills {
         background: url('../../assets/homepage/trophy.png') center center no-repeat,
-        linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+          linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
       }
 
       .ways__slide {
-        background: linear-gradient(90deg, #DBE3F7 0%, #D7DFF2 100%);
+        background: linear-gradient(90deg, #dbe3f7 0%, #d7dff2 100%);
       }
     }
 
     &_red {
       .ways__skills {
         background: url('../../assets/homepage/mathematics.png') center center no-repeat,
-        linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+          linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
       }
 
       .ways__slide {
-        background: linear-gradient(90deg, #F3DDD3 0%, #E7D2CA 100%);
+        background: linear-gradient(90deg, #f3ddd3 0%, #e7d2ca 100%);
       }
     }
 
     &_green {
       .ways__skills {
         background: url('../../assets/homepage/courses.png') center center no-repeat,
-        linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+          linear-gradient(135deg, #50b065 0%, #94cca0 100%);
       }
 
       .ways__slide {
-        background: linear-gradient(90deg, #D0EDD7 0%, #D1E6D6 100%);
+        background: linear-gradient(90deg, #d0edd7 0%, #d1e6d6 100%);
       }
     }
   }
 
   &__skills {
     margin-top: 20px;
-    background: linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+    background: linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
     border-radius: 19px;
     width: 284px;
     height: 284px;
@@ -296,7 +307,7 @@
       font-size: 30px;
       line-height: 27px;
       letter-spacing: 0.005em;
-      color: #FFFFFF;
+      color: #ffffff;
     }
 
     &__subtitle {
@@ -323,12 +334,12 @@
 
     &::-webkit-scrollbar-thumb {
       height: 6px;
-      background-color: #E0E0E0;
+      background-color: #e0e0e0;
       border-radius: 12px;
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #F3F3F3;
+      background-color: #f3f3f3;
       border-radius: 12px;
     }
   }
@@ -338,15 +349,15 @@
     width: 491px;
     height: 284px;
     margin-right: 20px;
-    color: #46445C;
+    color: #46445c;
     flex: 0 0 auto;
     position: relative;
 
     &__bg {
       border-radius: 19px;
       padding: 216px 35px 35px;
-      background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #DBE3F7 100%),
-      url('../../assets/homepage/slideBg.png') left top no-repeat;
+      background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #dbe3f7 100%),
+        url('../../assets/homepage/slideBg.png') left top no-repeat;
       mix-blend-mode: luminosity;
     }
 
@@ -399,24 +410,24 @@
 }
 
 .slogan {
-  width: 95%;
+  width: 90%;
   max-width: 1720px;
   min-height: 367px;
   margin: 160px auto;
   padding: 70px 100px;
   background: url('../../assets/homepage/sloganLeft.png') left top no-repeat,
-  url('../../assets/homepage/sloganRight.png') right top no-repeat,
-  linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+    url('../../assets/homepage/sloganRight.png') right top no-repeat,
+    linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
   text-align: center;
   background-blend-mode: luminosity;
   border-radius: 38px;
-  color: #FFFFFF;
+  color: #ffffff;
   position: relative;
 
   &__center {
     background: url('../../assets/homepage/startLeft.png') left top no-repeat,
-    url('../../assets/homepage/startRight.png') right top no-repeat,
-    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+      url('../../assets/homepage/startRight.png') right top no-repeat,
+      linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
     padding-top: 60px;
 
     &__description {
@@ -441,13 +452,14 @@
     font-size: 20px;
     line-height: 30px;
     margin: 20px auto 45px;
-
   }
 }
 
 .practices {
+  width: 90%;
+  margin: 0 auto;
   letter-spacing: 0.005em;
-  color: #46445C;
+  color: #46445c;
   font-family: 'Nunito';
 
   &__title {
@@ -458,7 +470,7 @@
 
     span {
       font-weight: 600;
-      color: #7469EF;
+      color: #7469ef;
     }
   }
 
@@ -471,12 +483,10 @@
     font-size: 20px;
     line-height: 30px;
   }
-
 }
 
 .practice {
-  margin-top: 120px;
-  margin-left: 100px;
+  margin: 120px 0 0 auto;
   width: 95%;
   max-width: 1820px;
   min-height: 493px;
@@ -512,12 +522,12 @@
       }
 
       &__tochki {
-        left: 550px
+        left: 550px;
       }
     }
 
     a {
-      justify-content: flex-end
+      justify-content: flex-end;
     }
   }
 
@@ -539,7 +549,7 @@
     margin-top: 55px;
     height: 34px;
     padding: 0 25px;
-    background: #FFF4BC;
+    background: #fff4bc;
     border-radius: 27px;
     font-weight: 600;
     font-size: 16px;
@@ -569,7 +579,7 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 33px;
-    color: #7469EF;
+    color: #7469ef;
     display: flex;
     align-items: center;
 
@@ -595,7 +605,7 @@
     background: #fff;
     padding: 15px 20px;
     position: absolute;
-    border: 1px solid #F2EEFF;
+    border: 1px solid #f2eeff;
     box-shadow: 6px 4px 28px rgba(116, 105, 239, 0.11);
     border-radius: 15px;
     width: 395px;
@@ -618,11 +628,11 @@
 }
 
 .whatSays {
-  width: 95%;
+  width: 90%;
   max-width: 1720px;
   min-height: 466px;
   margin: 0 auto;
-  color: #46445C;
+  color: #46445c;
   font-family: 'Nunito';
 
   &__header {
@@ -638,6 +648,7 @@
     }
 
     &__subtitle {
+      text-align: right;
       font-size: 20px;
       line-height: 30px;
     }
@@ -655,12 +666,12 @@
 
     &::-webkit-scrollbar-thumb {
       height: 6px;
-      background-color: #E0E0E0;
+      background-color: #e0e0e0;
       border-radius: 12px;
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #F3F3F3;
+      background-color: #f3f3f3;
       border-radius: 12px;
     }
   }
@@ -707,12 +718,12 @@
 }
 
 .join {
-  width: 95%;
+  width: 90%;
   max-width: 1720px;
   min-height: 550px;
   margin: 180px auto 0;
   padding-top: 140px;
-  color: #46445C;
+  color: #46445c;
   position: relative;
   background: url('../../assets/homepage/join.png') right top no-repeat;
 
@@ -736,14 +747,14 @@
 }
 
 .signup {
-  width: 95%;
+  width: 90%;
   max-width: 1720px;
   min-height: 506px;
   margin: 190px auto 100px;
   padding: 50px 70px;
   display: flex;
   background: url('../../assets/homepage/signup.png') left 60px bottom no-repeat,
-  linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+    linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
   background-blend-mode: luminosity;
   border-radius: 28px;
   position: relative;
@@ -766,15 +777,15 @@
     line-height: 75px;
     width: 590px;
     height: 75px;
-    background: #EFC969;
+    background: #efc969;
     border-radius: 46px;
-    color: #46445C;
+    color: #46445c;
     text-align: center;
   }
 
   &__subtitle {
     margin-left: 26px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   &__form {
@@ -820,7 +831,7 @@
     &__link {
       margin-top: 10px;
       margin-bottom: 40px;
-      font-family: 'Roboto';
+      font-family: 'Nunito';
       font-size: 16px;
       line-height: 142.9%;
       text-align: center;
@@ -834,7 +845,7 @@
       display: flex;
 
       label {
-        font-family: 'Roboto';
+        font-family: 'Nunito';
         font-size: 14px;
         line-height: 142.9%;
         letter-spacing: -0.015em;
@@ -889,15 +900,14 @@
   }
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1450px) {
   .offer {
     width: 90%;
-    max-width: 1200px;
     min-height: 700px;
     padding: 32px 60px;
     background: url('../../assets/homepage/offerBg.png') 300px bottom / 612px no-repeat,
-    url('../../assets/homepage/offerAir.png') right 20px top 40px no-repeat,
-    linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
+      url('../../assets/homepage/offerAir.png') right 20px top 40px no-repeat,
+      linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
 
     &__block {
       min-height: 635px;
@@ -937,28 +947,30 @@
   }
 
   .ways {
-    margin-left: 78px;
+    margin-top: 150px;
 
     &__block {
       margin-top: 55px;
+    }
+
+    &__title {
+      font-size: 40px;
     }
   }
 
   .slogan {
     margin: 130px auto;
     padding: 60px 70px;
-    width: 90%;
-    max-width: 1200px;
     position: relative;
     min-height: 334px;
     background: url('../../assets/homepage/sloganLeft.png') left top / 410px 334px no-repeat,
-    url('../../assets/homepage/sloganRight.png') right top / 582px 334px no-repeat,
-    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+      url('../../assets/homepage/sloganRight.png') right top / 582px 334px no-repeat,
+      linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
 
     &__center {
       background: url('../../assets/homepage/startLeft.png') left top / 342px 334px no-repeat,
-      url('../../assets/homepage/startRight.png') right top / 427px 334px no-repeat,
-      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+        url('../../assets/homepage/startRight.png') right top / 427px 334px no-repeat,
+        linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
     }
 
     &__title {
@@ -985,7 +997,6 @@
   }
 
   .practice {
-    margin-left: 78px;
     margin-top: 80px;
     min-height: 413px;
 
@@ -993,12 +1004,16 @@
       margin: 140px 0;
 
       .practice {
+        &__pretitle {
+          margin-top: 30px;
+        }
+
         &__title {
           margin: 14px 0 14px 165px;
         }
 
         &__text {
-          margin: 22px 0 30px 165px;
+          margin: 22px 0 30px 221px;
         }
 
         &__img {
@@ -1007,10 +1022,9 @@
 
         &__tochki,
         &__textblock {
-          left: 320px
+          left: 320px;
         }
       }
-
     }
 
     &__right {
@@ -1037,18 +1051,24 @@
 
     &__img {
       top: 21px;
+      left: -135px;
 
       img {
         width: 581px;
         height: 322px;
       }
     }
+
+    &__textblock {
+      left: -215px;
+    }
+
+    &__tochki {
+      left: 110px;
+    }
   }
 
   .whatSays {
-    width: 90%;
-    max-width: 1200px;
-
     &__header {
       &__title {
         width: 60%;
@@ -1067,8 +1087,6 @@
   }
 
   .join {
-    width: 90%;
-    max-width: 1200px;
     min-height: 360px;
     padding-top: 0;
     background: url('../../assets/homepage/join.png') right center / 490px 379px no-repeat;
@@ -1084,12 +1102,10 @@
   }
 
   .signup {
-    width: 90%;
-    max-width: 1200px;
     margin-top: 140px;
     padding: 50px 40px;
     background: url('../../assets/homepage/signup.png') left 60px bottom / 543px 435px no-repeat,
-    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+      linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
 
     &__title {
       width: 452px;
@@ -1112,18 +1128,23 @@
 
     &__form {
       max-width: 350px;
+
+      &__check {
+        label {
+          font-size: 13px;
+        }
+      }
     }
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1110px) {
   .offer {
     padding: 38px 40px;
-    max-width: 900px;
     min-height: 613px;
     background: url('../../assets/homepage/offerBg.png') 240px bottom / 65% no-repeat,
-    url('../../assets/homepage/offerAir.png') right 15px top 40px no-repeat,
-    linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
+      url('../../assets/homepage/offerAir.png') right 15px top 40px no-repeat,
+      linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
 
     &__groupOne {
       svg {
@@ -1223,10 +1244,6 @@
         label {
           margin-top: 4px;
           margin-left: 6px;
-
-          span {
-            color: #EDD765;
-          }
         }
       }
 
@@ -1242,7 +1259,6 @@
 
   .ways {
     margin-top: 110px;
-    margin-left: 60px;
 
     &__title {
       font-size: 36px;
@@ -1261,7 +1277,6 @@
     }
 
     &__slide {
-
       &__bg {
         padding: 35px 35px 28px;
       }
@@ -1288,21 +1303,20 @@
   }
 
   .slogan {
-    max-width: 900px;
     min-height: 300px;
     margin: 90px auto;
     padding: 50px;
     background: url('../../assets/homepage/sloganLeft.png') left top / 400px 300px no-repeat,
-    url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
-    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+      url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
+      linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
 
     &__center {
       padding: 45px;
       min-height: 268px;
 
       background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
-      url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
-      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+        url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
+        linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
 
       .slogan {
         &__title {
@@ -1336,12 +1350,14 @@
   }
 
   .practice {
-    margin-left: 62px;
-
     &:nth-child(2n) {
       margin: 100px 0;
 
       .practice {
+        &__pretitle {
+          margin-top: 0;
+        }
+
         &__title {
           margin: 14px 0 14px 210px;
         }
@@ -1354,12 +1370,9 @@
           margin-top: 50px;
         }
 
-        &__textblock {
-          left: 220px;
-        }
-
+        &__textblock,
         &__tochki {
-          left: 220px;
+          left: 190px;
         }
       }
     }
@@ -1389,7 +1402,7 @@
 
     &__img {
       top: 20px;
-      left: -200px;
+      left: -180px;
 
       img {
         width: 499px;
@@ -1397,11 +1410,17 @@
       }
     }
 
+    &__textblock {
+      left: -230px;
+    }
+
+    &__tochki {
+      left: 100px;
+    }
   }
 
   .whatSays {
     margin-top: 100px;
-    max-width: 900px;
 
     &__header {
       display: block;
@@ -1424,7 +1443,7 @@
 
   .join {
     width: 95%;
-    margin-left: 5%;
+    margin: 180px 0 180px auto;
     background: url('../../assets/homepage/join.png') right center / 411px 325px no-repeat;
 
     &__title {
@@ -1441,8 +1460,9 @@
     min-height: 455px;
     padding: 40px;
     margin-top: 100px;
-    background: url('../../assets/homepage/signup.png') left 110px bottom 10px / 445px 352px no-repeat,
-    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+    background: url('../../assets/homepage/signup.png') left 110px bottom 10px / 445px 352px
+        no-repeat,
+      linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
 
     &__title {
       width: 100%;
@@ -1486,7 +1506,8 @@
         }
 
         label {
-          margin-left: 6px;
+          margin-left: 5px;
+          font-size: 12px;
         }
       }
     }
@@ -1506,11 +1527,10 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .offer {
-    max-width: 688px;
     padding: 38px 20px;
-    background: linear-gradient(355deg, #EAE7FF -8.4%, #7469EF 84.73%);
+    background: linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
 
     &__block {
       &__right {
@@ -1547,27 +1567,27 @@
 
   .ways {
     margin-top: 90px;
-    margin-left: 40px;
 
     &__block {
       &_blue {
         .ways__skills {
           background: url('../../assets/homepage/trophy.png') center center / 211px 211px no-repeat,
-          linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+            linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
         }
       }
 
       &_red {
         .ways__skills {
-          background: url('../../assets/homepage/mathematics.png') center center / 211px 211px no-repeat,
-          linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+          background: url('../../assets/homepage/mathematics.png') center center / 211px 211px
+              no-repeat,
+            linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
         }
       }
 
       &_green {
         .ways__skills {
           background: url('../../assets/homepage/courses.png') center center / 211px 211px no-repeat,
-          linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+            linear-gradient(135deg, #50b065 0%, #94cca0 100%);
         }
       }
     }
@@ -1598,8 +1618,8 @@
       &__bg {
         border-radius: 19px;
         padding: 29px 30px 22px;
-        background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #DBE3F7 100%),
-        url('../../assets/homepage/slideBg.png') left top / 96% no-repeat;
+        background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #dbe3f7 100%),
+          url('../../assets/homepage/slideBg.png') left top / 96% no-repeat;
       }
 
       &Container {
@@ -1639,16 +1659,16 @@
   }
 
   .slogan {
-    max-width: 688px;
     padding: 45px 50px;
-    background: url('../../assets/homepage/sloganLeft.png') right 440px top 32px / 239px 203px no-repeat,
-    url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
-    linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+    background: url('../../assets/homepage/sloganLeft.png') right 440px top 32px / 239px 203px
+        no-repeat,
+      url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
+      linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
 
     &__center {
       background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
-      url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
-      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+        url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
+        linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
 
       .slogan {
         &__description {
@@ -1674,13 +1694,12 @@
     }
 
     &__subtitle {
-      width: 80%;
+      width: 92%;
       line-height: 28px;
     }
   }
 
   .practice {
-    margin-left: 40px;
     display: block;
 
     &:nth-child(2n) {
@@ -1689,9 +1708,8 @@
 
       .practice {
         &__left {
-          width: 90%;
-          max-width: 688px;
-          margin: 0 40px 0 auto;
+          width: 95%;
+          margin: 0 auto 0 0;
         }
 
         &__right {
@@ -1699,7 +1717,7 @@
         }
 
         &__text {
-          margin: 20px 0 25px;
+          margin: 20px 0 25px 50px;
         }
 
         &__img {
@@ -1718,8 +1736,7 @@
     }
 
     &__left {
-      width: 90%;
-      max-width: 688px;
+      width: 94%;
     }
 
     &__right {
@@ -1752,8 +1769,6 @@
   }
 
   .whatSays {
-    max-width: 688px;
-
     &__header {
       &__title {
         font-size: 28px;
@@ -1782,8 +1797,13 @@
   .join {
     min-height: 409px;
     padding-top: 30px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.94) 40.36%, rgba(255, 255, 255, 0) 100%),
-    url('../../assets/homepage/join.png') right center / 463px 409px no-repeat;
+    margin: 100px 0 120px auto;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.94) 40.36%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      url('../../assets/homepage/join.png') right center / 463px 409px no-repeat;
 
     &__title {
       font-size: 28px;
@@ -1800,11 +1820,10 @@
 
   .signup {
     padding: 30px;
-    max-width: 688px;
     min-height: 0;
     display: block;
     background: url('../../assets/homepage/signup.png') center bottom / 445px 352px no-repeat,
-    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+      linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
 
     &__block {
       width: 100%;
@@ -1865,16 +1884,13 @@
   .slogan {
     &__center {
       background: url('../../assets/homepage/startRight.png') center top / 385px 300px no-repeat,
-      linear-gradient(90deg, #D7C096 0%, #7469EF 50.52%, #D7C096 100%);
+        linear-gradient(90deg, #d7c096 0%, #7469ef 50.52%, #d7c096 100%);
     }
   }
 
   .practice {
-
     &:nth-child(2n) {
-
       .practice {
-
         &__img {
           left: 10vw;
         }
@@ -1915,14 +1931,14 @@
   }
 
   .practice {
-
     &:nth-child(2n) {
       .practice {
         &__img {
           left: 5vw;
         }
 
-        &__tochki, &__textblock {
+        &__tochki,
+        &__textblock {
           left: 12vw;
         }
       }
@@ -1953,8 +1969,6 @@
 
 @media (max-width: 480px) {
   .offer {
-    width: 92%;
-    max-width: 440px;
     display: block;
     padding: 35px 20px;
 
@@ -1998,8 +2012,6 @@
   }
 
   .ways {
-    margin-left: 20px;
-
     &__title {
       span {
         display: block;
@@ -2014,12 +2026,12 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #E0E0E0;
+        background-color: #e0e0e0;
         border-radius: 12px;
       }
 
       &::-webkit-scrollbar-track {
-        background-color: #F3F3F3;
+        background-color: #f3f3f3;
         border-radius: 12px;
       }
     }
@@ -2046,15 +2058,13 @@
   }
 
   .slogan {
-    width: 92%;
-    max-width: 440px;
     padding: 50px 20px 40px 30px;
     background: url('../../assets/homepage/sloganRight.png') right bottom / 100% no-repeat,
-    linear-gradient(90deg, #D7C096 0%, #7469EF 100%);
+      linear-gradient(90deg, #d7c096 0%, #7469ef 100%);
 
     &__center {
       background: url('../../assets/homepage/startRight.png') center bottom / 90% no-repeat,
-      linear-gradient(270deg, #D7C096 0%, #7469EF 100%);
+        linear-gradient(270deg, #d7c096 0%, #7469ef 100%);
     }
 
     &__title {
@@ -2069,12 +2079,8 @@
   }
 
   .practice {
-    margin-left: 20px;
-    width: 96%;
-
     &:nth-child(2n) {
       .practice {
-
         &__left {
           margin: 0 20px 0 auto;
           width: 92%;
@@ -2135,7 +2141,8 @@
       width: 90%;
       height: 22%;
 
-      &__title, &__subtitle {
+      &__title,
+      &__subtitle {
         font-size: 16px;
         line-height: 20px;
       }
@@ -2143,9 +2150,6 @@
   }
 
   .whatSays {
-    width: 92%;
-    max-width: 440px;
-
     &__header {
       &__title {
         line-height: 36px;
@@ -2165,10 +2169,9 @@
   }
 
   .join {
-    width: 92%;
-    max-width: 440px;
-    background: linear-gradient(125.21deg, #FFFFFF 0%, rgba(255, 255, 255, 0.83) 98.64%),
-    url('../../assets/homepage/join.png') right bottom / 100% no-repeat;
+    margin-top: 90px;
+    background: linear-gradient(125.21deg, #ffffff 0%, rgba(255, 255, 255, 0.83) 98.64%),
+      url('../../assets/homepage/join.png') right bottom / 100% no-repeat;
 
     &__title {
       width: 100%;
@@ -2184,11 +2187,9 @@
   }
 
   .signup {
-    width: 92%;
-    max-width: 440px;
     padding: 40px 20px;
     background: url('../../assets/homepage/signup.png') center bottom / 100% no-repeat,
-    linear-gradient(265.28deg, #7469EF 0.27%, #CAC3ED 99.93%);
+      linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
 
     &__title {
       margin-top: 0;
@@ -2210,13 +2211,13 @@
         margin-top: 25px;
       }
     }
-
   }
 }
 
 @media (max-width: 425px) {
   .signup {
-    &__title, &__subtitle {
+    &__title,
+    &__subtitle {
       font-size: 26px;
     }
   }
@@ -2248,7 +2249,6 @@
 
 @media (max-width: 380px) {
   .practice {
-
     &__right {
       height: 215px;
     }
@@ -2271,7 +2271,6 @@
 
 @media (max-width: 320px) {
   .offer {
-    max-width: 280px;
     border-radius: 27px;
     padding: 35px 10px 20px;
 
@@ -2318,21 +2317,22 @@
       &_blue {
         .ways__skills {
           background: url('../../assets/homepage/trophy.png') center center / 155px 155px no-repeat,
-          linear-gradient(135deg, #6078F5 0%, #97A3E2 100%);
+            linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
         }
       }
 
       &_red {
         .ways__skills {
-          background: url('../../assets/homepage/mathematics.png') center center / 155px 155px no-repeat,
-          linear-gradient(135deg, #EF9169 0%, #EAB6A0 100%);
+          background: url('../../assets/homepage/mathematics.png') center center / 155px 155px
+              no-repeat,
+            linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
         }
       }
 
       &_green {
         .ways__skills {
           background: url('../../assets/homepage/courses.png') center center / 155px 155px no-repeat,
-          linear-gradient(135deg, #50B065 0%, #94CCA0 100%);
+            linear-gradient(135deg, #50b065 0%, #94cca0 100%);
         }
       }
     }
@@ -2408,7 +2408,6 @@
   }
 
   .practices {
-
   }
 
   .practice {
@@ -2478,7 +2477,6 @@
   }
 
   .join {
-    margin-top: 90px;
     background: none;
 
     &__subtitle {

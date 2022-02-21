@@ -47,7 +47,7 @@ export const HomePage = () => {
                     <div className={styles.offer__fact__text}>профессий</div>
                   </div>
                   <div className={styles.offer__fact}>
-                    <div className={styles.offer__fact__number}>15000</div>
+                    <div className={styles.offer__fact__number}>15 000</div>
                     <div className={styles.offer__fact__text}>учеников</div>
                   </div>
                 </div>
@@ -59,7 +59,9 @@ export const HomePage = () => {
                   <div className={styles.offer__form__input}>
                     <Input placeholder="Email@gmail.com" />
                   </div>
-                  <div className={styles.offer__form__link}>Регистрация по номеру телефона</div>
+                  <div className={styles.offer__form__link}>
+                    <Link to={'/registration'}>Регистрация по номеру телефона</Link>
+                  </div>
                   <label className={styles.offer__form__label}>Пароль</label>
                   <div className={styles.offer__form__input}>
                     <Input placeholder="Введите пароль" />
@@ -67,9 +69,14 @@ export const HomePage = () => {
                   <div className={styles.offer__form__check}>
                     <CheckboxBtn />
                     <label>
-                      Я принимаю условия <span>Пользовательского соглашения</span> и даю своё
-                      согласие на обработку персональных данных на условиях, определенных{' '}
-                      <span>Политикой конфиденциальности.</span>
+                      Я принимаю условия{' '}
+                      <span>
+                        <Link>Пользовательского соглашения</Link>
+                      </span>{' '}
+                      и даю своё согласие на обработку персональных данных на условиях, определенных{' '}
+                      <span>
+                        <Link>Политикой конфиденциальности.</Link>
+                      </span>
                     </label>
                   </div>
                   <Button variant="outlinePurple">Перейти к обучению</Button>
@@ -139,7 +146,7 @@ export const HomePage = () => {
                 основ, не связанных с кодированием, до науки о данных и машинного обучения.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="outlineWhite">Посмотреть курсы</Button>
+                <Button variant="containedWhite">Посмотреть курсы</Button>
               </div>
             </section>
 
@@ -152,36 +159,37 @@ export const HomePage = () => {
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                 exercitation ullamco.
               </div>
-              {practices.map((practice, i) => (
-                <div key={practice.title + i} className={styles.practice}>
-                  <div className={styles.practice__left}>
-                    <div className={styles.practice__pretitle}>{practice.pretitle}</div>
-                    <div className={styles.practice__title}>{practice.title}</div>
-                    <div className={styles.practice__text}>{practice.text}</div>
-                    <Link to={practice.route}>
-                      {practice.link}
-                      <KeyboardDoubleArrowRightIcon />
-                    </Link>
+            </section>
+
+            {practices.map((practice) => (
+              <section className={styles.practice}>
+                <div className={styles.practice__left}>
+                  <div className={styles.practice__pretitle}>{practice.pretitle}</div>
+                  <div className={styles.practice__title}>{practice.title}</div>
+                  <div className={styles.practice__text}>{practice.text}</div>
+                  <Link to={practice.route}>
+                    {practice.link}
+                    <KeyboardDoubleArrowRightIcon />
+                  </Link>
+                </div>
+                <div className={styles.practice__right}>
+                  <div className={styles.practice__tochki}>
+                    <images.tochki />
                   </div>
-                  <div className={styles.practice__right}>
-                    <div className={styles.practice__tochki}>
-                      <images.tochki />
+                  <div className={styles.practice__img}>
+                    <img src={renderImage(practice.img)} />
+                  </div>
+                  <div className={styles.practice__textblock}>
+                    <div className={styles.practice__textblock__title}>
+                      {practice.textblockTitle}
                     </div>
-                    <div className={styles.practice__img}>
-                      <img src={renderImage(practice.img)} />
-                    </div>
-                    <div className={styles.practice__textblock}>
-                      <div className={styles.practice__textblock__title}>
-                        {practice.textblockTitle}
-                      </div>
-                      <div className={styles.practice__textblock__subtitle}>
-                        {practice.textblockSubtitle}
-                      </div>
+                    <div className={styles.practice__textblock__subtitle}>
+                      {practice.textblockSubtitle}
                     </div>
                   </div>
                 </div>
-              ))}
-            </section>
+              </section>
+            ))}
 
             <section className={cn(styles.slogan, styles.slogan__center)}>
               <div className={styles.slogan__title}>Начните прямо сейчас</div>
@@ -203,10 +211,10 @@ export const HomePage = () => {
                 </div>
               </div>
               <div className={styles.whatSays__feedbacks}>
-                {feedbacks.map((feedback, i) => (
-                  <div key={feedback.avatar + i} className={styles.whatSays__feedback}>
+                {feedbacks.map((feedback) => (
+                  <div className={styles.whatSays__feedback}>
                     <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} alt="avatar" />
+                      <img src={renderImage(feedback.avatar)} />
                     </div>
                     <div className={styles.whatSays__feedback__data}>
                       <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
