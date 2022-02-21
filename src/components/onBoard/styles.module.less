@@ -156,18 +156,44 @@
 
 @media screen and (max-width: 1134px) {
   .item:nth-child(3n){
-    margin: 0 0 0 40px;
+    margin: 0 0 50px 40px;
+  }
+
+  .item:nth-child(5n){
+    margin: 0 50px 0px;
+  }
+
+  .item:nth-child(6n){
+    margin: 0 40px 50px 0;
+  }
+
+  .mainSearch > div > input {
+    width: 580px;
+
   }
 }
 
+@media screen and (max-width: 769px) {
+  .mainCourses {
+    flex-direction: column;
+    align-items: center;
+  }
+  .item {
+    margin: 0px 40px 50px !important;
+  }
+}
 
-// @media screen and (min-width: 1344px) and (max-width: 1459px) {
-//   // .main {
-//   //   padding: 50px 158px 71px;
-//   // }
-//   .item:nth-child(4){
-//     margin: 0 40px;
-//   }
-// }
+@media screen and (max-width: 832px) {
+  .mainRecomendation {
+    flex-direction: column;
+  }
 
+  .activeLinkMain {
+    margin-top: 10px;
+  }
 
+  .mainRecomendationQuestion {
+    top: 25px;
+    left: -315px;
+  }
+}

@@ -30,15 +30,16 @@ export const OnBoardPage = () => {
     setCheckedCourseList(checkedCourseList.filter((item) => item !== id));
 
   const isShowButton = useCallback(() => {
+    let newArr = [];
     list.forEach((item) => {
       checkedCourseList.forEach((id) => {
-        if (item.item_id === id && item.isDevelopment) {
-          setShowButtonGoStudy(false);
-        } else if (item.item_id === id && !item.isDevelopment) {
-          setShowButtonGoStudy(true);
+        if (item.item_id === id) {
+          newArr.push(item);
         }
       });
     });
+    newArr = newArr.filter((item) => item.isDevelopment);
+    newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
   }, [checkedCourseList, list]);
 
   const renderCourseList = () => {
