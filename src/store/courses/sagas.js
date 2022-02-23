@@ -9,7 +9,9 @@ export function* loadCourcesList() {
       type: LOAD_COURSES,
       payload: response,
     });
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e);
+  }
 }
 
 export default function* coursesSaga() {

@@ -1,10 +1,10 @@
 import React, { createRef, useEffect, useState } from 'react';
-import styles from './styles.module.less';
 import Header from '@components/header';
 import HeaderExercise from '@components/headerExercise';
 import { useRouteMatch } from 'react-router-dom';
-import { sidebarPath } from '../../sidebarPath';
 import Sidebar from '@components/mui/sidebar';
+import { sidebarPath } from '../../sidebarPath';
+import styles from './styles.module.less';
 
 const Container = ({ Component, headerVariant }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -34,11 +34,11 @@ const Container = ({ Component, headerVariant }) => {
 
   return (
     <div className={styles.wrapper}>
-      {
-        (headerVariant === 'exercise') ? 
-        <HeaderExercise headerRef={headerRef} handleSidebar={handleSidebar} /> :
+      {headerVariant === 'exercise' ? (
+        <HeaderExercise headerRef={headerRef} handleSidebar={handleSidebar} />
+      ) : (
         <Header headerRef={headerRef} handleSidebar={handleSidebar} />
-      }
+      )}
       <div className={styles.container}>
         <Sidebar
           closeSidebar={closeSidebar}

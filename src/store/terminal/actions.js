@@ -17,43 +17,38 @@ export const KERNEL_FAILED = 'KERNEL_FAILED';
 export const CLEAR_TERMINAL = 'CLEAR_TERMINAL';
 export const ADD_SHELL_LINE = 'ADD_SHELL_LINE';
 
-export const compileCode = (code, exerciseId, isGraphRequired) => {
-  return {
-    type: COMPILE_CODE_REQUESTED,
-    payload: { code, exerciseId, isGraphRequired },
-  };
-};
+export const compileCode = (code, exerciseId, isGraphRequired) => ({
+  type: COMPILE_CODE_REQUESTED,
+  payload: { code, exerciseId, isGraphRequired },
+});
 
-export const addShellLine = (code, lineNumber) => {
-  return {
-    type: ADD_SHELL_LINE,
-    payload: { code, lineNumber },
-  };
-};
+export const addShellLine = (code, lineNumber) => ({
+  type: ADD_SHELL_LINE,
+  payload: { code, lineNumber },
+});
 
-export const startKernel = (exerciseId) => {
-  return {
-    type: KERNEL_REQUESTED,
-    payload: { exerciseId },
-  };
-};
+export const startKernel = (exerciseId) => ({
+  type: KERNEL_REQUESTED,
+  payload: { exerciseId },
+});
 
-export const compileShell = ({ code, exerciseId, lineNumber, kernelId, type, isGraphRequired }) => {
-  return {
-    type: COMPILE_SHELL_REQUESTED,
-    payload: { code, exerciseId, lineNumber, kernelId, type, isGraphRequired },
-  };
-};
+export const compileShell = ({
+  code,
+  exerciseId,
+  lineNumber,
+  kernelId,
+  type,
+  isGraphRequired,
+}) => ({
+  type: COMPILE_SHELL_REQUESTED,
+  payload: { code, exerciseId, lineNumber, kernelId, type, isGraphRequired },
+});
 
-export const checkAnswer = (code, exerciseId, isGraphRequired) => {
-  return {
-    type: CHECK_ANSWER_REQUESTED,
-    payload: { code, exerciseId, isGraphRequired },
-  };
-};
+export const checkAnswer = (code, exerciseId, isGraphRequired) => ({
+  type: CHECK_ANSWER_REQUESTED,
+  payload: { code, exerciseId, isGraphRequired },
+});
 
-export const clearTerminal = () => {
-  return {
-    type: CLEAR_TERMINAL,
-  };
-};
+export const clearTerminal = () => ({
+  type: CLEAR_TERMINAL,
+});

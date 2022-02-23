@@ -17,6 +17,7 @@ const initialState = {
   status: '',
 };
 
+// eslint-disable-next-line default-param-last
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case REGISTRATION_SUCCESSED: {
@@ -32,13 +33,13 @@ export default function authReducer(state = initialState, action) {
       return { ...state, errors: action.payload };
     }
     case SIGN_IN_BY_PHONE_SUCCESSED: {
-      return {...state, errors: {}}
+      return { ...state, errors: {} };
     }
     case SIGN_IN_BY_PHONE_VERIFY_FAILED: {
-      return {...state, errors: { ...state.errors, ...action.payload }}
+      return { ...state, errors: { ...state.errors, ...action.payload } };
     }
     case SIGN_IN_BY_PHONE_VERIFY: {
-      return {...state, errors: {}}
+      return { ...state, errors: {} };
     }
     case SING_IN_FAILED: {
       return { ...state, errors: action.payload };

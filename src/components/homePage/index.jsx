@@ -1,13 +1,15 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
+
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import HeaderHome from '../headerHome';
-import Footer from '../footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
 import { Input } from '@components/mui/input';
 import { CheckboxBtn } from '@components/mui/checkbox';
+import Footer from '../footer';
+import HeaderHome from '../headerHome';
 import styles from './styles.module.less';
 import { feedbacks, images, practices, slides } from './data';
 
@@ -23,7 +25,18 @@ export const HomePage = () => {
       case 'avatar':
         return images.avatar;
       default:
-        return;
+        return undefined;
+    }
+  };
+
+  const getClassName = (bg) => {
+    switch (bg) {
+      case 'blue':
+        return cn(styles.ways__block, styles.ways__block_blue);
+      case 'red':
+        return cn(styles.ways__block, styles.ways__block_red);
+      default:
+        return cn(styles.ways__block, styles.ways__block_green);
     }
   };
 
@@ -60,7 +73,7 @@ export const HomePage = () => {
                     <Input placeholder="Email@gmail.com" />
                   </div>
                   <div className={styles.offer__form__link}>
-                    <Link to={'/registration'}>Регистрация по номеру телефона</Link>
+                    <Link to="/registration">Регистрация по номеру телефона</Link>
                   </div>
                   <label className={styles.offer__form__label}>Пароль</label>
                   <div className={styles.offer__form__input}>
@@ -100,16 +113,7 @@ export const HomePage = () => {
                 Пути обучения, <span>разработанные экспертами</span>
               </div>
               {slides.map((block) => (
-                <div
-                  key={block.title}
-                  className={
-                    block.bg === 'blue'
-                      ? cn(styles.ways__block, styles.ways__block_blue)
-                      : block.bg === 'red'
-                      ? cn(styles.ways__block, styles.ways__block_red)
-                      : cn(styles.ways__block, styles.ways__block_green)
-                  }
-                >
+                <div key={block.title} className={getClassName(block.bg)}>
                   <div className={styles.ways__skills}>
                     <div className={styles.ways__skills__title}>{block.title}</div>
                     <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
@@ -121,8 +125,8 @@ export const HomePage = () => {
                     </div>
                   </div>
                   <div className={styles.ways__slides}>
-                    {block.items.map((item, i) => (
-                      <div key={item.title + i} className={styles.ways__slideContainer}>
+                    {block.items.map((item) => (
+                      <div key={uuid()} className={styles.ways__slideContainer}>
                         <div className={styles.ways__slide}>
                           <div className={styles.ways__slide__bg}>
                             <div className={styles.ways__slide__title}>{item.title}</div>
@@ -177,7 +181,7 @@ export const HomePage = () => {
                     <images.tochki />
                   </div>
                   <div className={styles.practice__img}>
-                    <img src={renderImage(practice.img)} />
+                    <img src={renderImage(practice.img)} alt="" />
                   </div>
                   <div className={styles.practice__textblock}>
                     <div className={styles.practice__textblock__title}>
@@ -214,7 +218,7 @@ export const HomePage = () => {
                 {feedbacks.map((feedback) => (
                   <div className={styles.whatSays__feedback}>
                     <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} />
+                      <img src={renderImage(feedback.avatar)} alt="" />
                     </div>
                     <div className={styles.whatSays__feedback__data}>
                       <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>

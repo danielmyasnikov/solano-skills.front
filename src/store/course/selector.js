@@ -1,1 +1,1 @@
-export const selectCourse = state => state.course;
+export const selectCourse = (state) => state.course;

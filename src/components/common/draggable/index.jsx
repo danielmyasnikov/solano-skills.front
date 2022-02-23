@@ -1,6 +1,6 @@
 import DraggableImg from '@assets/Draggable';
-import styles from './styles.module.less';
 import { useRef, useState } from 'react';
+import styles from './styles.module.less';
 
 const Draggable = ({ parentContainer, resizeContainer, height }) => {
   const [initialPos, setInitialPos] = useState();
@@ -13,7 +13,10 @@ const Draggable = ({ parentContainer, resizeContainer, height }) => {
   };
 
   const resize = (e) => {
-    resizeContainer.current.style.width = `${parseInt(initialSize) + parseInt(e.clientX - initialPos)}px`;
+    // eslint-disable-next-line no-param-reassign
+    resizeContainer.current.style.width = `${
+      parseInt(initialSize, 10) + parseInt(e.clientX - initialPos, 10)
+    }px`;
   };
 
   return (
@@ -21,7 +24,7 @@ const Draggable = ({ parentContainer, resizeContainer, height }) => {
       ref={resizableRef}
       style={{ marginTop: `${height / 2}px` }}
       className={styles.draggable}
-      draggable={true}
+      draggable
       onDragStart={initial}
       onDrag={resize}
     >

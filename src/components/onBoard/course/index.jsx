@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import styles from './styles.module.less';
-import logo from '../assets/Python.svg';
 import { CheckboxBtn } from '@components/mui/checkbox';
 import cn from 'classnames';
+import styles from './styles.module.less';
+import logo from '../assets/Python.svg';
 
 export const Course = ({
   id,

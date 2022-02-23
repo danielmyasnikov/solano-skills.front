@@ -19,44 +19,32 @@ export const LOCAL_HEADERS = 'LOCAL_HEADERS';
 
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
-export const singIn = (email, password) => {
-  return {
-    type: SING_IN,
-    payload: { email, password },
-  };
-};
+export const singIn = (email, password) => ({
+  type: SING_IN,
+  payload: { email, password },
+});
 
-export const signInByPhoneRequest = (phonenumber) => {
-  return {
-    type: SIGN_IN_BY_PHONE,
-    payload: { phonenumber },
-  };
-};
+export const signInByPhoneRequest = (phonenumber) => ({
+  type: SIGN_IN_BY_PHONE,
+  payload: { phonenumber },
+});
 
-export const signInByPhoneVerify = (code) => {
-  return {
-    type: SIGN_IN_BY_PHONE_VERIFY,
-    payload: { code },
-  };
-};
+export const signInByPhoneVerify = (code) => ({
+  type: SIGN_IN_BY_PHONE_VERIFY,
+  payload: { code },
+});
 
-export const registration = (email, password, passwordConfirm) => {
-  return {
-    type: REGISTRATION,
-    payload: { email, password, passwordConfirm },
-  };
-};
+export const registration = (email, password, passwordConfirm) => ({
+  type: REGISTRATION,
+  payload: { email, password, passwordConfirm },
+});
 
-export const setLocalHeaders = (headers) => {
-  return {
-    type: LOCAL_HEADERS,
-    payload: { headers },
-  };
-};
+export const setLocalHeaders = (headers) => ({
+  type: LOCAL_HEADERS,
+  payload: { headers },
+});
 
-export const clearErrors = (payload) => {
-  return {
-    type: CLEAR_ERRORS,
-    payload,
-  };
-};
+export const clearErrors = (payload) => ({
+  type: CLEAR_ERRORS,
+  payload,
+});

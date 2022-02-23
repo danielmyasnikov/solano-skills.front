@@ -79,7 +79,9 @@ export function* startKernel(action) {
         data: response,
       },
     });
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e);
+  }
 }
 
 export function* checkAnswer(action) {

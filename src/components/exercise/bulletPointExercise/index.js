@@ -1,5 +1,5 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import FeedbackModal from '@components/common/modals/feedback/index.js';
 import CompletedTask from '@components/common/modals/completedTask';
@@ -13,10 +13,12 @@ import Terminal from '@components/common/terminal';
 import Output from '@components/common/output';
 import RadioButton from '@components/mui/radioButton';
 import { Exercise } from '@components/common/exercise';
+import styles from './styles.module.less';
 
-function BulletPointExercise({ onSubmit, isAuth }) {
+const BulletPointExercise = ({ onSubmit, isAuth }) => {
   const [solution, setSolution] = useState();
   const [bytePayload, setBytePayload] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [xp, setXp] = useState(0);
   const [doneExercises, setDoneExercises] = useState([]);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -40,7 +42,10 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     //   setXp(xp + exercise.nested_exercises[activeExercise].xp);
     // }
 
-    exercise.nested_exercises.map((item) => (xpSum += item.xp));
+    exercise.nested_exercises.map((item) => {
+      xpSum += item.xp;
+      return xpSum;
+    });
     setXp(xpSum);
   };
 
@@ -64,8 +69,8 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     setCorrect('');
     setBytePayload([]);
     setHint(false);
-    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
-    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
+    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz');
+    setWithoutHint(!!exercise.nested_exercises[activeExercise].hint);
   }, [exercise]);
 
   useEffect(() => {
@@ -74,13 +79,13 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     setErrorMessage('');
     setCorrect('');
     setHint(false);
-    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
-    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
+    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz');
+    setWithoutHint(!!exercise.nested_exercises[activeExercise].hint);
   }, [activeExercise]);
 
   useEffect(() => {
     if (correct) {
-      if (exercise?.nested_exercises.length - 1 > activeExercise) {
+      if ((exercise && exercise.nested_exercises.length - 1) > activeExercise) {
         setDoneExercises([...doneExercises, { activeExercise }]);
         setActiveExercise(activeExercise + 1);
       } else {
@@ -119,8 +124,8 @@ function BulletPointExercise({ onSubmit, isAuth }) {
               nestedExercise={nestedExercise}
               xp={exercise?.nested_exercises[activeExercise].xp}
               onSubmit={() => setCompletedTaskModalOpen(true)}
-              onSetActiveExercise={({ activeExercise }) => {
-                setActiveExercise(activeExercise);
+              onSetActiveExercise={({ activeEx }) => {
+                setActiveExercise(activeEx);
                 setMessage('');
               }}
             >
@@ -141,8 +146,8 @@ function BulletPointExercise({ onSubmit, isAuth }) {
                           <RadioButton
                             checked={answer.value === item.value}
                             className={styles.quizItem}
-                            isHtml={true}
-                            onChange={(e) => {
+                            isHtml
+                            onChange={() => {
                               setAnswer(item);
                             }}
                             value={item.value}
@@ -193,7 +198,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
             onClick={() => {
               setFeedbackModalOpen(true);
             }}
-            solution={true}
+            solution
             onSetSolution={() => setSolution(exercise?.nested_exercises[activeExercise].solution)}
           />
         </div>
@@ -225,6 +230,6 @@ function BulletPointExercise({ onSubmit, isAuth }) {
       </div>
     </>
   );
-}
+};
 
 export default BulletPointExercise;

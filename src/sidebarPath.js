@@ -1,5 +1,1 @@
-export const sidebarPath = [
-    '/courses',
-    '/profile',
-    '/courses/:courseId',
-];
+export const sidebarPath = ['/courses', '/profile', '/courses/:courseId'];

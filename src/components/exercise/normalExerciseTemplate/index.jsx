@@ -1,7 +1,6 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
-import cn from 'classnames';
 import FeedbackModal from '@components/common/modals/feedback/index.js';
 import CompletedTask from '@components/common/modals/completedTask';
 import Terminal from '@components/common/terminal';
@@ -16,8 +15,9 @@ import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
 import WarningMobile from '@components/common/warningMobile';
 import Draggable from '@components/common/draggable';
+import styles from './styles.module.less';
 
-function NormalExerciseTemplate({ onSubmit, isAuth }) {
+const NormalExerciseTemplate = ({ onSubmit, isAuth }) => {
   const [bytePayload, setBytePayload] = useState([]);
   const [height, setHeight] = useState(0);
   const [isWarningHidden, setIsWarningHidden] = useState(true);
@@ -45,12 +45,12 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     setCorrect('');
     setBytePayload([]);
     setHint(false);
-    setWithoutHint(exercise.hint ? true : false);
+    setWithoutHint(!!exercise.hint);
   }, [exercise]);
 
   useEffect(() => {
     if (correct) {
-      //отправка опыта
+      // отправка опыта
       setCompletedTaskModalOpen(true);
     } else {
       setCompletedTaskModalOpen(false);
@@ -112,7 +112,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
             onClick={() => {
               setFeedbackModalOpen(true);
             }}
-            solution={true}
+            solution
             onSetSolution={() => setSolution(exercise.solution)}
           />
         </div>
@@ -140,10 +140,10 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
           bytePayload={bytePayload}
           isGraphRequired={exercise.is_graph_required}
         />
-        <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+        <Output presentationUrl={exercise.presentation_url} variant="outputContainer" />
       </div>
     </>
   );
-}
+};
 
 export default NormalExerciseTemplate;

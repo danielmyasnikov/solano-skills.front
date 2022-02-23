@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import cn from 'classnames';
-import styles from './styles.module.less';
-import { InputPassword } from '@components/mui/inputPassword';
-import { Input } from '@components/mui/input';
 import Button from '@components/mui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { Link, useHistory } from 'react-router-dom';
-import { AuthContainer } from './../authContainer';
-import { SocialNetworks } from './../socialNetworks';
-import { CheckboxBtn } from '@components/mui/checkbox';
-import { AuthorizationByEmail } from '../authorizationByEmail';
-import { ByPhoneNumber } from '../byPhoneNumber';
-import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import axios from 'axios';
+import { AuthContainer } from '../authContainer';
+import { SocialNetworks } from '../socialNetworks';
+import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
+import styles from './styles.module.less';
+import { ByPhoneNumber } from '../byPhoneNumber';
+import { AuthorizationByEmail } from '../authorizationByEmail';
 import Terms from '../terms';
 
 export const Authorization = () => {
@@ -32,24 +28,22 @@ export const Authorization = () => {
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
 
-  function handleChecked() {
+  const handleChecked = () => {
     setCheckedError('');
     setChecked(!checked);
-  }
+  };
 
   useEffect(() => {
     if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
       setButtonTitle('Авторизоваться');
-    }
-    if (isRegistrationByPhone && isPhoneNumberConfirmation) {
+    } else if (isRegistrationByPhone && isPhoneNumberConfirmation) {
       setButtonTitle('Авторизоваться');
-    }
-    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
+    } else if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
       setButtonTitle('Отправить код');
     }
   }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { value, name } = e.target;
     switch (name) {
       case 'email':
@@ -67,9 +61,9 @@ export const Authorization = () => {
         setPassword(value);
         break;
       default:
-        return undefined;
+        break;
     }
-  }
+  };
 
   const submit = () => {
     if (!isRegistrationByPhone) {
@@ -80,7 +74,7 @@ export const Authorization = () => {
     }
     if (isRegistrationByPhone && !isPhoneNumberConfirmation && checked) {
       const sendCode = async () => {
-        return await axios
+        await axios
           .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
             phone_number: phoneNumber,
           })
@@ -102,18 +96,18 @@ export const Authorization = () => {
     }
   }, [headers]);
 
-  function handleRemberMe() {
+  const handleRemberMe = () => {
     setRememberMe(!rememberMe);
-  }
+  };
 
-  function handleAuthMethod() {
+  const handleAuthMethod = () => {
     dispatch(
       AuthStore.Actions.clearErrors({
         errorMassege: '',
       }),
     );
     setIsRegistrationByPhone(!isRegistrationByPhone);
-  }
+  };
 
   useEffect(() => {
     let timer;
@@ -183,7 +177,7 @@ export const Authorization = () => {
       <div className={styles.toAuth}>
         <span className={styles.text}>
           {'У вас нет аккаунта? '}
-          <Link className={styles.infoLink} to={'/registration'}>
+          <Link className={styles.infoLink} to="/registration">
             Зарегистрироваться
           </Link>
         </span>

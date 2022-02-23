@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const registrationApi = ({ email, password, passwordConfirmation }) => {
-  return axios
+export const registrationApi = ({ email, password, passwordConfirmation }) =>
+  axios
     .post(`${process.env.REACT_APP_API_COURSE}/auth`, {
       email,
       password,
@@ -11,10 +11,9 @@ export const registrationApi = ({ email, password, passwordConfirmation }) => {
     .catch((error) => {
       throw error;
     });
-};
 
-export const singInApi = ({ email, password }) => {
-  return axios
+export const singInApi = ({ email, password }) =>
+  axios
     .post(`${process.env.REACT_APP_API_COURSE}/auth/sign_in`, {
       email,
       password,
@@ -23,10 +22,9 @@ export const singInApi = ({ email, password }) => {
     .catch((error) => {
       throw error;
     });
-};
 
-export const signInByPhoneApi = ({ phonenumber }) => {
-  return axios
+export const signInByPhoneApi = ({ phonenumber }) =>
+  axios
     .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
       phone_number: phonenumber,
     })
@@ -34,10 +32,9 @@ export const signInByPhoneApi = ({ phonenumber }) => {
     .catch((error) => {
       throw error;
     });
-};
 
-export const signInByPhoneVerifyApi = ({ code }) => {
-  return axios
+export const signInByPhoneVerifyApi = ({ code }) =>
+  axios
     .post(`${process.env.REACT_APP_API_COURSE}/api/v1/verify_signature_code`, {
       code,
     })
@@ -45,4 +42,3 @@ export const signInByPhoneVerifyApi = ({ code }) => {
     .catch((error) => {
       throw error;
     });
-};

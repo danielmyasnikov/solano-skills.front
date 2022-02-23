@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import styles from './styles.module.less';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import FeedbackModal from '@components/common/modals/feedback/index.js';
 import CompletedTask from '@components/common/modals/completedTask';
 import { getExercise } from '@store/exercise/actions';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectTerminal } from '@store/terminal/selector';
 import { selectExercise } from '@store/exercise/selector';
 import { QuizHint } from '@components/hint';
 import { Exercise } from '@components/common/exercise';
 import { NormalInstruction } from '@components/instruction';
-import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
+import styles from './styles.module.less';
 
-function QuizTemplate({ onSubmit, isAuth }) {
+// eslint-disable-next-line no-unused-vars
+const QuizTemplate = ({ onSubmit, isAuth }) => {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const [withoutHint, setWithoutHint] = useState(false);
@@ -28,23 +28,25 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const { courseId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
+  // eslint-disable-next-line no-unused-vars
   const terminal = useSelector(selectTerminal);
 
-  const handleAnswer = ( item ) => {
+  const handleAnswer = (item) => {
     setAnswer(item);
   };
 
   useEffect(() => {
-    setWithoutHint(exercise.hint ? true : false);
+    setWithoutHint(!!exercise.hint);
     setHint(false);
     setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
     setCompletedTaskModalOpen(false);
   }, [exercise]);
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
-    if(!exercise) {
-      return null
+    if (!exercise) {
+      return undefined;
     }
   }, []);
 
@@ -117,10 +119,10 @@ function QuizTemplate({ onSubmit, isAuth }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Output presentation_url={exercise.presentation_url} variant="quizOutputContainer" />
+        <Output presentationUrl={exercise.presentation_url} variant="quizOutputContainer" />
       </div>
     </>
   );
-}
+};
 
 export default QuizTemplate;

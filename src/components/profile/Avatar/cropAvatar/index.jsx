@@ -29,6 +29,7 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
   });
   const [rotate, setRotate] = useState(0);
   const [src, setSrc] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [croppedImage, setCroppedImage] = useState(null);
 
   useImperativeHandle(ref, () => ({
@@ -63,19 +64,13 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
     cropRef.current = img;
   }, []);
 
-  const makeClientCrop = async (crop) => {
-    if (cropRef && crop.width && crop.height) {
-      const croppedImage = await getCroppedImg(cropRef.current, crop, 'newFile.jpeg');
-      setCroppedImage(croppedImage);
-    }
-  };
-
-  const getCroppedImg = (image, crop, fileName) => {
+  // eslint-disable-next-line no-unused-vars
+  const getCroppedImg = (image, cropImage, fileName) => {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
+    canvas.width = cropImage.width;
+    canvas.height = cropImage.height;
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(
@@ -102,12 +97,19 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
     });
   };
 
-  const onCropComplete = (crop) => makeClientCrop(crop);
+  const makeClientCrop = async (clientCrop) => {
+    if (cropRef && clientCrop.width && clientCrop.height) {
+      const newCroppedImage = await getCroppedImg(cropRef.current, crop, 'newFile.jpeg');
+      setCroppedImage(newCroppedImage);
+    }
+  };
 
-  const onCropChange = (crop) => setCrop(crop);
+  const onCropComplete = (completeCrop) => makeClientCrop(completeCrop);
+
+  const onCropChange = (changedCrop) => setCrop(changedCrop);
 
   return (
-    <>
+    <div>
       {(src && (
         <div className={styles.rotateImgContainer}>
           <span>Выбранная область будет показываться на вашей странице.</span>
@@ -139,6 +141,6 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
           <Input accept="image/*" type="file" ref={hiddenFileInput} onChange={onSelectFile} />
         </label>
       )}
-    </>
+    </div>
   );
 });

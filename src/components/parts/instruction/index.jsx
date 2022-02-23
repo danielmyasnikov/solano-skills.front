@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './styles.module.less';
 import RadioButton from '@components/mui/radioButton';
+import styles from './styles.module.less';
 
 export const InstructionQuizPart = ({ exercise, handleAnswer, answer }) => {
   if (!exercise) {
-    return null;
+    return undefined;
   }
 
   return (

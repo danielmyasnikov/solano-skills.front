@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
+
 import { useDispatch, useSelector } from 'react-redux';
 import * as CoursesStore from '@store/courses';
 import { Card } from './card';
@@ -26,8 +28,8 @@ export const CoursesPage = () => {
       </div>
       <div className={styles.content}>
         {coursesList &&
-          coursesList.map((item, i) => (
-            <React.Fragment key={i}>
+          coursesList.map((item) => (
+            <React.Fragment key={uuid()}>
               <Card info={item} />
             </React.Fragment>
           ))}

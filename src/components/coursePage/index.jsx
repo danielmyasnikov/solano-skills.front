@@ -1,17 +1,20 @@
+/* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
-import styles from './styles.module.less';
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
+import { useHistory, useLocation, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './styles.module.less';
 import { Auth } from './author';
 import { CourseInfo } from './courseInfo';
 import { CourseList } from './courseList';
 import { CourseSidebar } from './courseSidebar';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 
 export const CoursePage = () => {
   const { courseId } = useParams();
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
+  // eslint-disable-next-line no-unused-vars
   const location = useLocation();
   const dispatch = useDispatch();
   const courseData = useSelector(selectCourse);
