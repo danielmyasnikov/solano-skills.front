@@ -6,12 +6,16 @@ export const GET_PROFILE_REQUESTED = 'GET_PROFILE_REQUESTED';
 export const GET_PROFILE_SUCCESSED = 'GET_PROFILE_SUCCESSED';
 export const GET_PROFILE_FAILED = 'GET_PROFILE_FAILED';
 
-export const patchProfile = ({ name, about, email, headers }) => ({
-  type: PATCH_PROFILE_REQUESTED,
-  payload: { name, about, email, headers },
-});
+export const patchProfile = ({ name, about, email, headers }) => {
+  return {
+    type: PATCH_PROFILE_REQUESTED,
+    payload: { name, about, email, headers },
+  };
+};
 
-export const getProfile = ({ headers }) => ({
-  type: GET_PROFILE_REQUESTED,
-  payload: { headers },
-});
+export const getProfile = ({ headers }) => {
+  return {
+    type: GET_PROFILE_REQUESTED,
+    payload: { headers },
+  };
+};

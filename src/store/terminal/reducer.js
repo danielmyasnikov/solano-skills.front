@@ -15,7 +15,6 @@ const initialState = {
   bytePayload: '',
 };
 
-// eslint-disable-next-line default-param-last
 export default function terminalReducer(state = initialState, action) {
   switch (action.type) {
     case COMPILE_CODE_SUCCESSED: {

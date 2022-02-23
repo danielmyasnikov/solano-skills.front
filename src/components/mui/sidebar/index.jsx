@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
+import styles from './styles.module.less';
+import { profileItems, studyItems } from './menuItems';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
+import { menuTheme } from '../theme';
 import Button from '@components/mui/button';
 import Logo from '@assets/Logo';
 import cn from 'classnames';
 import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
-import { menuTheme } from '../theme';
-import { profileItems, studyItems } from './menuItems';
-import styles from './styles.module.less';
+import { useRef } from 'react';
 
 const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, headerTarget }) => {
   const [activeTab, setActiveTab] = useState('');
@@ -39,7 +40,6 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
         document.removeEventListener('mousedown', handleMouseClick);
       };
     }
-    return undefined;
   });
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
 
   useEffect(() => {
     if (sidebarFixed) {
-      setIsDesktop(windowWidth > breakpoint);
+      setIsDesktop(windowWidth > breakpoint ? true : false);
     }
   }, [windowWidth, sidebarFixed]);
 

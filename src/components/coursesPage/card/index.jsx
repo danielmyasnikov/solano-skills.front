@@ -1,11 +1,10 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
+import css from './styles.module.less';
 import { Link } from 'react-router-dom';
 import Button from '@components/mui/button';
 import TimerOutlined from '@assets/TimerOutlined.png';
 import AvatarDefault from '@assets/avatarDefault.png';
 import Py from '@assets/py.png';
-import css from './styles.module.less';
 
 export const Card = ({ info }) => {
   const getTypeImg = () => {
@@ -13,11 +12,11 @@ export const Card = ({ info }) => {
       case 'python':
         return Py;
       default:
-        return undefined;
+        break;
     }
   };
 
-  const { status } = info;
+  const status = info.status;
   const author = info.instructor;
 
   return (

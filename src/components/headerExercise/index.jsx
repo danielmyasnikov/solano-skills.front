@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.less';
 import Prev from '@assets/Prev.js';
 import Next from '@assets/Next.js';
 import MenuCourse from '@assets/MenuCourse.js';
 import Button from '@components/mui/button';
 import cn from 'classnames';
 import Burger from '@assets/Burger';
+import CourseContentModal from '../common/modals/courseContent';
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
 import { selectExercise } from '@store/exercise/selector';
 import { useHistory, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import CourseContentModal from '../common/modals/courseContent';
-import styles from './styles.module.less';
 
 const HeaderExercise = ({ handleSidebar, headerRef }) => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
       )}
       <header className={styles.header}>
         <div className={styles.headerItem}>
-          <div onClick={handleSidebar} className={styles.burgerMenu} role="presentation">
+          <div onClick={handleSidebar} className={styles.burgerMenu}>
             <Burger />
           </div>
         </div>
@@ -54,7 +54,7 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
             className={cn(styles.btn, styles.prev, {
               [styles.disabled]: !exercise.prev_exercise_id,
             })}
-            disabled={!exercise.prev_exercise_id}
+            disabled={exercise.prev_exercise_id ? false : true}
             variant="outlineBlack"
             onClick={() =>
               history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`)
@@ -74,7 +74,7 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
             onClick={() =>
               history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`)
             }
-            disabled={!exercise.next_exercise_id}
+            disabled={exercise.next_exercise_id ? false : true}
             className={cn(styles.btn, styles.next, {
               [styles.disabled]: !exercise.next_exercise_id,
             })}

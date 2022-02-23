@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import AceEditor from 'react-ace';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import 'brace/mode/python';
@@ -9,28 +9,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectTerminal } from '@store/terminal/selector';
 import cn from 'classnames';
 import Reset from '@assets/Reset.js';
+import styles from './styles.module.less';
 import './terminal.module.less';
-import { checkAnswer, compileShell } from '@store/terminal/actions';
+import { checkAnswer, compileCode, compileShell } from '@store/terminal/actions';
 import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';
-
-import styles from './styles.module.less';
 import Draggable from '../draggable';
+import { useRef } from 'react';
 
-const Terminal = ({
+function Terminal({
   sampleCode,
   solution,
   isGraphRequired,
   correct,
   exerciseId,
   bytePayload,
-  // eslint-disable-next-line no-unused-vars
   isAuth,
-}) => {
+}) {
   const [value, setValue] = useState();
   const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
@@ -54,7 +52,9 @@ const Terminal = ({
     setHeight(wrapperRef?.current?.offsetHeight);
   }, []);
 
-  const onChange = (val) => setValue(val);
+  function onChange(value) {
+    setValue(value);
+  }
 
   const handleActiveBytePayload = (action) => {
     if (action === 'add' && activeBytePayload < bytePayload.length - 1) {
@@ -92,7 +92,6 @@ const Terminal = ({
       <div ref={wrapperRef} className={styles.terminalWrapper}>
         <div className={styles.terminalHeader}>
           <div
-            role="presentation"
             onClick={() => setActiveTab('script')}
             className={cn(activeTab === 'script' ? styles.tabActive : '', styles.tab)}
           >
@@ -100,7 +99,6 @@ const Terminal = ({
           </div>
           {solution && (
             <div
-              role="presentation"
               onClick={() => setActiveTab('solution')}
               className={cn(activeTab === 'solution' ? styles.tabActive : '', styles.tab)}
             >
@@ -115,12 +113,12 @@ const Terminal = ({
             className="editor"
             width="100%"
             height="calc(100% - 71px)"
-            showGutter
-            highlightActiveLine
+            showGutter={true}
+            highlightActiveLine={true}
             defaultValue={sampleCode}
             value={activeTab === 'solution' ? solution : value}
-            readOnly={activeTab === 'solution'}
-            wrapEnabled
+            readOnly={activeTab === 'solution' ? true : false}
+            wrapEnabled={true}
             fontSize="16px"
             setOptions={{
               enableBasicAutocompletion: true,
@@ -141,7 +139,7 @@ const Terminal = ({
           <div className={styles.actions}>
             <Button
               className={cn(styles.reset, { [styles.disable]: isDisabled || correct })}
-              variant="outlineWhite"
+              variant={'outlineWhite'}
               onClick={() => {
                 setValue(sampleCode);
               }}
@@ -150,15 +148,15 @@ const Terminal = ({
               <Reset />
             </Button>
             <Button
-              variant="outlineWhite"
+              variant={'outlineWhite'}
               onClick={() => {
                 // if (isAuth) {
                 dispatch(
                   compileShell({
                     code: activeTab === 'solution' ? solution : value,
-                    exerciseId,
+                    exerciseId: exerciseId,
                     kernelId: terminal.kernelId,
-                    isGraphRequired,
+                    isGraphRequired: isGraphRequired,
                     type: 'compileExercise',
                   }),
                 );
@@ -177,9 +175,9 @@ const Terminal = ({
                 dispatch(
                   compileShell({
                     code: activeTab === 'solution' ? solution : value,
-                    exerciseId,
+                    exerciseId: exerciseId,
                     kernelId: terminal.kernelId,
-                    isGraphRequired,
+                    isGraphRequired: isGraphRequired,
                     type: 'compileExercise',
                   }),
                 );
@@ -211,18 +209,17 @@ const Terminal = ({
           <div className={styles.terminalHeader}>
             <div className={cn(styles.tabActive, styles.tab)}>
               Графики
-              <a role="presentation" onClick={() => OpenNewWindow()} target="_blank">
+              <a onClick={() => OpenNewWindow()} target="_blank">
                 <Plots />
               </a>
             </div>
           </div>
           <div className={styles.content}>
             <div className={styles.graph}>
-              <img src={bytePayload[activeBytePayload]?.payload} alt="" />
+              <img src={bytePayload[activeBytePayload]?.payload} />
             </div>
             <div className={styles.btnWrap}>
               <button
-                type="button"
                 className={cn({ [styles.disable]: activeBytePayload === 0 })}
                 onClick={() => handleActiveBytePayload('sub')}
               >
@@ -234,7 +231,6 @@ const Terminal = ({
                 <span className={styles.disable}>/{bytePayload.length}</span>
               </div>
               <button
-                type="button"
                 className={cn({ [styles.disable]: activeBytePayload === bytePayload.length - 1 })}
                 onClick={() => handleActiveBytePayload('add')}
               >
@@ -247,6 +243,6 @@ const Terminal = ({
       )}
     </div>
   );
-};
+}
 
 export default Terminal;

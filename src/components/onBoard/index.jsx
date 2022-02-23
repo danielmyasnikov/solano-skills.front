@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import Input from '@components/mui/inputSearch';
-import Button from '@components/mui/button';
 import { Course } from './course';
 import { CoursesList } from './constants';
+import Input from '@components/mui/inputSearch';
 import ellipse from './assets/Ellipse.svg';
 import logo from './assets/Logo.svg';
 import logoModal from './assets/LogoModal.svg';
+import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import useDebounce from '../hooks/useDebounce';
 import { WelcomeCourse } from '../common/modals/welcomeCourse';
@@ -42,11 +42,11 @@ export const OnBoardPage = () => {
     newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
   }, [checkedCourseList, list]);
 
-  const renderCourseList = () =>
-    list.map(({ itemId, title, description, isDevelopment }) => (
-      <div key={itemId} className={styles.item}>
+  const renderCourseList = () => {
+    return list.map(({ item_id, title, description, isDevelopment }) => (
+      <div key={item_id} className={styles.item}>
         <Course
-          id={itemId}
+          id={item_id}
           title={title}
           description={description}
           isDevelopment={isDevelopment}
@@ -55,6 +55,7 @@ export const OnBoardPage = () => {
         />
       </div>
     ));
+  };
 
   useEffect(() => {
     if (searchCourse !== '') {

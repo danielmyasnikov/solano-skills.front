@@ -1,4 +1,12 @@
 import { createTheme } from '@mui/material';
+import { createBreakpoints } from '@mui/system';
+
+const breakpoints = createBreakpoints({
+  values: {
+    xs: 0,
+    md: 820,
+  },
+});
 
 export const buttonTheme = createTheme({
   shape: {
@@ -94,7 +102,7 @@ export const buttonTheme = createTheme({
             '&:hover': {
               transition: '0.2s ease-in-out',
               background: '#fff',
-              color: '#7469EF;',
+              color: '#7469EF;'
             },
           },
         },
@@ -192,7 +200,7 @@ export const buttonTheme = createTheme({
             '&:hover': {
               background: '#7469EF',
               color: '#fff',
-              border: '2px solid #7469EF',
+              border: '2px solid #7469EF'
             },
           },
         },

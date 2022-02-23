@@ -4,7 +4,6 @@ const initialState = {
   coursesList: [],
 };
 
-// eslint-disable-next-line default-param-last
 export default function coursesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_COURSES: {

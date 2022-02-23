@@ -10,20 +10,20 @@ export const PatchProfileApi = ({ name, about, email, headers }) => {
           about,
           email,
         },
-        { headers },
+        { headers: headers },
       )
       .then((res) => res.data);
   } catch (e) {
-    throw new Error(e);
+    console.log(e);
   }
 };
 
 export const GetProfileApi = ({ headers }) => {
   try {
     return axios
-      .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers })
+      .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers: headers })
       .then((res) => res.data);
   } catch (e) {
-    throw new Error(e);
+    console.log(e);
   }
 };

@@ -1,21 +1,22 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
 import cn from 'classnames';
-import Error from '@assets/Error.js';
 import styles from './styles.module.less';
+import Error from '@assets/Error.js';
 
-const ErrorMessage = ({ message }) => (
-  <div className={cn(styles.errorMessage, { [styles.hidden]: !message })}>
-    <Error />
-    <div className={styles.content}>
-      <h6>Некорректный ответ</h6>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: message ? message.replace(/`(.*?)`/g, '<code>$1</code>') : '',
-        }}
-      />
+const ErrorMessage = ({ message }) => {
+  return (
+    <div className={cn(styles.errorMessage, { [styles.hidden]: !message })}>
+      <Error />
+      <div className={styles.content}>
+        <h6>Некорректный ответ</h6>
+        <span
+          dangerouslySetInnerHTML={{
+            __html: message ? message.replace(/`(.*?)`/g,'<code>$1</code>') : '',
+          }}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ErrorMessage;

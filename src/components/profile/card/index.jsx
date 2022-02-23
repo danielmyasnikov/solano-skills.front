@@ -1,17 +1,18 @@
 import React from 'react';
+import styles from './styles.module.less';
 import cn from 'classnames';
 import Python from '@assets/Python.png';
 import ArrowRight from '@assets/ArrowRight';
 import { Link } from 'react-router-dom';
-import styles from './styles.module.less';
 
 const Card = () => {
   const renderImg = (type) => {
     switch (type) {
       case 'python':
-        return <img src={Python} alt="" />;
+        return <img src={Python} />;
+
       default:
-        return undefined;
+        break;
     }
   };
   return (
@@ -19,7 +20,7 @@ const Card = () => {
       <div className={cn(styles.card, styles.progress)}>
         <div className={styles.title}>
           Завершенные курсы
-          <Link to="/">
+          <Link to='/'>
             Все <ArrowRight />
           </Link>
         </div>

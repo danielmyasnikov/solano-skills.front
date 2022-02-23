@@ -1,8 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import Button from '@components/mui/button';
-import Close from '@assets/Close.js';
 import styles from './styles.module.less';
+import Close from '@assets/Close.js';
 
 const FeedbackModal = ({ onClose }) => {
   const options = [
@@ -16,7 +16,7 @@ const FeedbackModal = ({ onClose }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
-        <div className={styles.closeModal} onClick={onClose} role="presentation">
+        <div className={styles.closeModal} onClick={onClose}>
           <Close />
         </div>
         <h2>Обратная связь</h2>
@@ -27,8 +27,12 @@ const FeedbackModal = ({ onClose }) => {
           placeholder="Ваша проблема есть здесь"
           options={options}
         />
-        <textarea placeholder="Введите текст" />
-        <Button className={styles.btn} variant="containedPurple" onClick={() => onClose()}>
+        <textarea placeholder="Введите текст"></textarea>
+        <Button
+          className={styles.btn}
+          variant="containedPurple"
+          onClick={() => onClose()}
+        >
           Отправить отзыв
         </Button>
       </div>

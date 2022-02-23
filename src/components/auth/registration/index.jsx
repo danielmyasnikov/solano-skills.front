@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.less';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@components/mui/button';
+import { SocialNetworks } from './../socialNetworks';
 import * as AuthStore from '@store/auth';
-import { SocialNetworks } from '../socialNetworks';
-import styles from './styles.module.less';
-import { AuthContainer } from '../authContainer';
+import { AuthContainer } from './../authContainer';
 import { RegistrationByEmail } from '../registrationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
@@ -40,7 +40,7 @@ export const Registration = ({ isModal }) => {
     }
   }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { value, name } = e.target;
     switch (name) {
       case 'email':
@@ -64,11 +64,11 @@ export const Registration = ({ isModal }) => {
         setPasswordConfirmation(value);
         break;
       default:
-        break;
+        return undefined;
     }
-  };
+  }
 
-  const submit = () => {
+  function submit() {
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
     }
@@ -82,7 +82,7 @@ export const Registration = ({ isModal }) => {
     if (!checked) {
       setCheckedError('Ошибка ввода данных');
     }
-  };
+  }
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
@@ -90,17 +90,17 @@ export const Registration = ({ isModal }) => {
     }
   }, [headers]);
 
-  const handleChecked = () => {
+  function handleChecked() {
     setCheckedError('');
     setChecked(!checked);
-  };
+  }
 
-  const handlePhoneTermsChecked = () => {
+  function handlePhoneTermsChecked() {
     setPhoneTermsCheckedError('');
     setPhoneTermsChecked(!phoneTermsChecked);
-  };
+  }
 
-  const handleAuthMethod = () => {
+  function handleAuthMethod() {
     dispatch(
       AuthStore.Actions.clearErrors({
         emailError: '',
@@ -110,67 +110,69 @@ export const Registration = ({ isModal }) => {
       }),
     );
     setIsRegistrationByPhone(!isRegistrationByPhone);
-  };
+  }
 
-  const renderRegistration = () => (
-    <>
-      <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>
-      {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
-        <RegistrationByEmail
-          handleChecked={handleChecked}
-          handleChange={handleChange}
-          email={email}
-          password={password}
-          passwordConfirmation={passwordConfirmation}
-          errors={errors}
-          checkedError={checkedError}
-          checked={checked}
-          handleAuthMethod={handleAuthMethod}
-        />
-      )}
-      {isRegistrationByPhone && !isPhoneNumberConfirmation && (
-        <>
-          <ByPhoneNumber
-            handleAuthMethod={handleAuthMethod}
-            authMethodText="Регистрация по Email"
+  const renderRegistration = () => {
+    return (
+      <>
+        <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>
+        {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
+          <RegistrationByEmail
+            handleChecked={handleChecked}
             handleChange={handleChange}
-            phoneNumber={phoneNumber}
+            email={email}
+            password={password}
+            passwordConfirmation={passwordConfirmation}
+            errors={errors}
+            checkedError={checkedError}
+            checked={checked}
+            handleAuthMethod={handleAuthMethod}
           />
-          <Terms
-            isPhoneNumber={isRegistrationByPhone}
-            checked={phoneTermsChecked}
-            handleChecked={handlePhoneTermsChecked}
-            checkedError={phoneTermsCheckedError}
+        )}
+        {isRegistrationByPhone && !isPhoneNumberConfirmation && (
+          <>
+            <ByPhoneNumber
+              handleAuthMethod={handleAuthMethod}
+              authMethodText="Регистрация по Email"
+              handleChange={handleChange}
+              phoneNumber={phoneNumber}
+            />
+            <Terms
+              isPhoneNumber={isRegistrationByPhone}
+              checked={phoneTermsChecked}
+              handleChecked={handlePhoneTermsChecked}
+              checkedError={phoneTermsCheckedError}
+            />
+          </>
+        )}
+        {isPhoneNumberConfirmation && (
+          <PhoneNumberConfirmation
+            handleChange={handleChange}
+            confirmationСode={confirmationСode}
+            handleAuthMethod={() => {
+              setConfirmationCode('');
+              setIsPhoneNumberConfirmation(false);
+            }}
           />
-        </>
-      )}
-      {isPhoneNumberConfirmation && (
-        <PhoneNumberConfirmation
-          handleChange={handleChange}
-          confirmationСode={confirmationСode}
-          handleAuthMethod={() => {
-            setConfirmationCode('');
-            setIsPhoneNumberConfirmation(false);
-          }}
-        />
-      )}
-      <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
-        {buttonTitle}
-      </Button>
-      {errors.fullMessagesError && (
-        <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
-      )}
-      <SocialNetworks />
-      <div className={styles.toAuth}>
-        <span className={styles.text}>
-          {'Уже есть аккаунт? '}
-          <Link className={styles.infoLink} to="/sing-in">
-            Войти
-          </Link>
-        </span>
-      </div>
-    </>
-  );
+        )}
+        <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
+          {buttonTitle}
+        </Button>
+        {errors.fullMessagesError && (
+          <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+        )}
+        <SocialNetworks />
+        <div className={styles.toAuth}>
+          <span className={styles.text}>
+            {'Уже есть аккаунт? '}
+            <Link className={styles.infoLink} to={'/sing-in'}>
+              Войти
+            </Link>
+          </span>
+        </div>
+      </>
+    );
+  };
 
   return isModal ? renderRegistration() : <AuthContainer>{renderRegistration()}</AuthContainer>;
 };

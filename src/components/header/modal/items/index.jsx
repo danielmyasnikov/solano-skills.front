@@ -1,8 +1,5 @@
-import { v4 as uuid } from 'uuid';
-
 import styles from './styles.module.less';
 import { ModalItem } from '../item';
-
 const items = [
   {
     title: 'Эконом',
@@ -25,10 +22,12 @@ const items = [
     href: '#',
   },
 ];
-export const ModalItems = () => (
-  <div className={styles.items}>
-    {items.map((el) => (
-      <ModalItem {...el} key={uuid()} />
-    ))}
-  </div>
-);
+export const ModalItems = () => {
+  return (
+    <div className={styles.items}>
+      {items.map((el, idx) => (
+        <ModalItem {...el} key={idx} />
+      ))}
+    </div>
+  );
+};

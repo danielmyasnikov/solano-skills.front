@@ -1,17 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import styles from './styles.module.less';
 import cn from 'classnames';
 import Edit from '@assets/Edit';
 import Button from '@components/mui/button';
 import { Link } from 'react-router-dom';
+import Card from './card';
+import { Avatar } from './Avatar';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { patchProfile, getProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
 import { TextareaAutosize } from '@mui/material';
-import { Avatar } from './Avatar';
-import Card from './card';
-import styles from './styles.module.less';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
@@ -23,6 +24,7 @@ const Profile = () => {
   const [information, setInformation] = useState('');
   const [isInformationActive, setIsInformationActive] = useState(false);
   const fullnameRef = useRef();
+  const informationRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -43,7 +45,7 @@ const Profile = () => {
       patchProfile({
         name: fullname,
         about: information,
-        headers,
+        headers: headers,
       }),
     );
   };
@@ -66,26 +68,26 @@ const Profile = () => {
       case 'information':
         setIsInformationActive(!isInformationActive);
         setActiveEditField(isInformationActive ? '' : 'information');
-        break;
       default:
         break;
     }
   };
 
-  // eslint-disable-next-line react/no-unstable-nested-components
-  const EditFragment = ({ name }) => (
-    <div className={styles.edit}>
-      {activeEditField !== name ? (
-        <div onClick={() => handleActiveField(name)} role="presentation">
-          <Edit />
-        </div>
-      ) : (
-        <div onClick={saveProfile} className={styles.save} role="presentation">
-          Сохранить
-        </div>
-      )}
-    </div>
-  );
+  const EditFragment = ({ name }) => {
+    return (
+      <div className={styles.edit}>
+        {activeEditField !== name ? (
+          <div onClick={() => handleActiveField(name)}>
+            <Edit />
+          </div>
+        ) : (
+          <div onClick={saveProfile} className={styles.save}>
+            Сохранить
+          </div>
+        )}
+      </div>
+    );
+  };
 
   useEffect(() => {
     if (!uid && !client && !accessToken) {
@@ -95,7 +97,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (headers.uid) {
-      dispatch(getProfile({ headers }));
+      dispatch(getProfile({ headers: headers }));
     }
   }, [headers]);
 

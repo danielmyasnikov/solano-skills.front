@@ -1,5 +1,5 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { registrationApi, singInApi } from '../api/auth';
+import { registrationApi, signInByPhoneApi, signInByPhoneVerifyApi, singInApi } from '../api/auth';
 
 import {
   REGISTRATION_SUCCESSED,
@@ -27,16 +27,16 @@ export function* setLocalHeaders({ payload }) {
 export function* clearErrors(payload) {
   yield put({
     type: CLEAR_ERRORS,
-    payload,
+    payload: payload,
   });
 }
 
 export function* singIn(action) {
   try {
     const res = yield call(singInApi, action.payload);
-    const { client } = res.headers;
+    const client = res.headers.client;
     const accessToken = res.headers['access-token'];
-    const { uid } = res.headers;
+    const uid = res.headers.uid;
 
     localStorage.setItem('uid', uid);
     localStorage.setItem('access-token', accessToken);
@@ -61,8 +61,9 @@ export function* singIn(action) {
   }
 }
 
-export function* signInByPhone() {
+export function* signInByPhone(action) {
   try {
+    const res = yield call(signInByPhoneApi, action.payload);
     yield put({
       type: SIGN_IN_BY_PHONE_SUCCESSED,
       payload: {},
@@ -78,8 +79,9 @@ export function* signInByPhone() {
   }
 }
 
-export function* signInByPhoneVerify() {
+export function* signInByPhoneVerify(action) {
   try {
+    const res = yield call(signInByPhoneVerifyApi, action.payload);
     // const client = res.headers.client;
     // const accessToken = res.headers['access-token'];
     // const uid = res.headers.uid;
@@ -95,6 +97,7 @@ export function* signInByPhoneVerify() {
       payload: {},
     });
   } catch (err) {
+    console.log(err.response);
     const errorVerify = 'Неверный код';
     yield put({
       type: SIGN_IN_BY_PHONE_VERIFY_FAILED,
@@ -108,9 +111,9 @@ export function* signInByPhoneVerify() {
 export function* registration(action) {
   try {
     const res = yield call(registrationApi, action.payload);
-    const { client } = res.headers;
+    const client = res.headers.client;
     const accessToken = res.headers['access-token'];
-    const { uid } = res.headers;
+    const uid = res.headers.uid;
 
     localStorage.setItem('uid', uid);
     localStorage.setItem('access-token', accessToken);

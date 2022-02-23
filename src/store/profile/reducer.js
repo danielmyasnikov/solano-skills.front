@@ -2,7 +2,6 @@ import { PATCH_PROFILE_SUCCESSED, GET_PROFILE_SUCCESSED, GET_PROFILE_FAILED } fr
 
 const initialState = {};
 
-// eslint-disable-next-line default-param-last
 export default function profileReducer(state = initialState, action) {
   switch (action.type) {
     case PATCH_PROFILE_SUCCESSED: {

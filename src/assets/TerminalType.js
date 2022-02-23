@@ -1,7 +1,14 @@
 const TerminalType = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="12" cy="12" r="12" fill="#7469EF" />
-    <mask id="mask0_643_4090" maskUnits="userSpaceOnUse" x="5" y="5" width="14" height="14">
+    <mask
+      id="mask0_643_4090"
+      maskUnits="userSpaceOnUse"
+      x="5"
+      y="5"
+      width="14"
+      height="14"
+    >
       <rect x="5" y="5" width="14" height="14" fill="white" />
     </mask>
     <g mask="url(#mask0_643_4090)">

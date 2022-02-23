@@ -1,1 +1,1 @@
-export const getCourses = (state) => state.courses;
+export const getCourses = state => state.courses;

@@ -5,14 +5,14 @@ import { getExercise } from '@store/exercise/actions';
 import { clearTerminal } from '@store/terminal/actions';
 import { useParams } from 'react-router-dom';
 import { selectExercise } from '@store/exercise/selector';
-import * as AuthStore from '@store/auth';
 import QuizTemplate from './quizTemplate';
 import styles from './styles.module.less';
 import NormalExerciseTemplate from './normalExerciseTemplate';
 import { VideoExercise } from './videoExercise';
 import BulletPointExercise from './bulletPointExercise';
+import * as AuthStore from '@store/auth';
 
-const ExercisePage = () => {
+function ExercisePage() {
   const { courseId, exerciseId } = useParams();
   const history = useHistory();
   const location = useLocation();
@@ -58,10 +58,10 @@ const ExercisePage = () => {
       case 'video':
         return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} />;
       default:
-        return undefined;
+        break;
     }
   };
   return <>{renderExercise()}</>;
-};
+}
 
 export default ExercisePage;

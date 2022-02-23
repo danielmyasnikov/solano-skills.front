@@ -1,13 +1,12 @@
 import cn from 'classnames';
 import Button from '@components/mui/button';
 import TerminalType from '@assets/TerminalType';
-import { v4 as uuid } from 'uuid';
 import VideoType from '@assets/VideoType';
 import QuizType from '@assets/QuizType';
 import React, { useEffect, useState } from 'react';
+import styles from './styles.module.less';
 import ArrowDown from '@assets/ArrowDown';
 import { useHistory } from 'react-router';
-import styles from './styles.module.less';
 
 export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   const history = useHistory();
@@ -15,8 +14,7 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
   useEffect(() => {
     setActive(coursePartSlug);
   }, []);
-
-  const ExerciseTypeImage = React.memo(({ type }) => {
+  const ExerciseTypeImage = ({ type }) => {
     switch (type) {
       case 'normal_exercise':
         return <TerminalType />;
@@ -29,12 +27,11 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
       default:
         return '';
     }
-  });
-
+  };
   return (
-    <>
+    <React.Fragment>
       {parts.map((partItem, i) => (
-        <div key={uuid()} className={styles.courseWrap}>
+        <div key={partItem.title} className={styles.courseWrap}>
           <div className={styles.courseHead}>
             <div className={styles.info}>
               <div className={styles.courseTitle}>
@@ -58,9 +55,7 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
                 Изучать раздел
               </Button>
               <Button
-                className={cn(styles.btnContent, {
-                  [styles.btnContentOpen]: active === partItem.slug,
-                })}
+                className={cn(styles.btnContent, { [styles.btnContentOpen]: active === partItem.slug })}
                 variant="outlineBlack"
                 onClick={() => {
                   setActive(partItem.slug !== active ? partItem.slug : '');
@@ -72,10 +67,9 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
             </div>
           </div>
           <div className={cn(styles.listWrap, { [styles.downOpen]: active === partItem.slug })}>
-            {partItem.exercises.map((item) => (
+            {partItem.exercises.map((item, i) => (
               <div
                 key={item.title}
-                role="presentation"
                 onClick={() => {
                   history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
                   if (onClose) {
@@ -99,6 +93,6 @@ export const CourseContent = ({ onClose, parts, slug, coursePartSlug }) => {
           </div>
         </div>
       ))}
-    </>
+    </React.Fragment>
   );
 };

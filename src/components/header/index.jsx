@@ -1,32 +1,32 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import {Modal} from './modal'
+import styles from './styles.module.less';
 import Button from '@components/mui/button';
 import Input from '@components/mui/inputSearch';
 import Logo from '@assets/Logo';
 import Burger from '@assets/Burger';
 import ArrowDown from '@assets/ArrowDown';
 import AvatarDefault from '@assets/avatarDefault.png';
-import { Link } from 'react-router-dom';
 import useDebounce from '../hooks/useDebounce';
-import styles from './styles.module.less';
-import { Modal } from './modal';
+import { Link } from 'react-router-dom';
 
 const Header = ({ headerRef, handleSidebar }) => {
   const [searchValue, setSearchValue] = useState('');
-  function search() {}
   const debouncedSearch = useDebounce(search, 500);
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = () => {
     setOpenModal(!openModal);
   };
+  function search() {}
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
     debouncedSearch(e.target.value);
   };
-
+  
   return (
-    <>
+    <Fragment>
       <Modal handleClick={handleModal} open={openModal} />
       <div className={styles.wrapper}>
         <header ref={headerRef} className={styles.header}>
@@ -34,7 +34,7 @@ const Header = ({ headerRef, handleSidebar }) => {
             <div className={styles.logo}>
               <Logo />
             </div>
-            <div onClick={handleSidebar} className={styles.burgerMenu} role="presentation">
+            <div onClick={handleSidebar} className={styles.burgerMenu}>
               <Burger />
             </div>
             <div className={styles.search}>
@@ -51,14 +51,14 @@ const Header = ({ headerRef, handleSidebar }) => {
             </Button>
             <Link to="/profile">
               <div className={styles.profile}>
-                <img src={AvatarDefault} alt="" />
+                <img src={AvatarDefault} />
                 <ArrowDown />
               </div>
             </Link>
           </div>
         </header>
       </div>
-    </>
+    </Fragment>
   );
 };
 

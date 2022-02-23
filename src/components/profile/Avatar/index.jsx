@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import { AddAvatar } from './addAvatar/index.jsx';
+
 import AvatarDefault from '@assets/avatarDefault.png';
 import AddImage from '@assets/AddImage';
-import { AddAvatar } from './addAvatar/index.jsx';
 
 import styles from './styles.module.less';
 
@@ -13,7 +14,7 @@ export const Avatar = () => {
 
   return (
     <>
-      <div className={styles.avatar} onClick={avatarEditHandler} role="presentation">
+      <div className={styles.avatar} onClick={avatarEditHandler}>
         <img src={AvatarDefault} alt="Аватарка пользователя" />
         <div className={styles.addImage}>
           <AddImage />

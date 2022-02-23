@@ -1,6 +1,4 @@
-/* eslint-disable react/no-danger */
-import React, { useEffect, useState, useRef } from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -8,16 +6,16 @@ import { useParams } from 'react-router-dom';
 import { compileShell, startKernel } from '@store/terminal/actions';
 import { selectTerminal } from '@store/terminal/selector';
 
-import cn from 'classnames';
-
 import { PDFViewer } from '../pdfViewer';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 import styles from './styles.module.less';
+import cn from 'classnames';
+import { useRef } from 'react';
 
-const Output = ({ variant, presentationUrl }) => {
+const Output = ({ variant, presentation_url }) => {
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
@@ -34,9 +32,9 @@ const Output = ({ variant, presentationUrl }) => {
     if (e.keyCode === 13) {
       dispatch(
         compileShell({
-          code,
-          exerciseId,
-          lineNumber,
+          code: code,
+          exerciseId: exerciseId,
+          lineNumber: lineNumber,
           kernelId: terminal.kernelId,
           isGraphRequired: false,
         }),
@@ -64,14 +62,12 @@ const Output = ({ variant, presentationUrl }) => {
     >
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>
         <div
-          role="presentation"
           onClick={() => setActiveTab('output')}
           className={cn((activeTab === 'output' && styles.tabActive) || '', styles.tab)}
         >
           Консоль
         </div>
         <div
-          role="presentation"
           onClick={() => setActiveTab('slides')}
           className={cn((activeTab === 'slides' && styles.tabActive) || '', styles.tab)}
         >
@@ -79,15 +75,15 @@ const Output = ({ variant, presentationUrl }) => {
         </div>
       </div>
       <div className={styles[variant]}>
-        {(activeTab === 'slides' && <PDFViewer src={presentationUrl} />) || (
+        {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
           <>
             <div ref={outputRef} className={styles.content}>
-              {terminal.outputs.map((item) => (
+              {terminal.outputs.map((item, i) => (
                 <div
-                  key={uuid()}
+                  key={i}
                   className={cn({ [styles.shell]: item.status === 'shell' })}
                   dangerouslySetInnerHTML={{ __html: item.error || item.output }}
-                />
+                ></div>
               ))}
             </div>
             <div className={styles.shell}>

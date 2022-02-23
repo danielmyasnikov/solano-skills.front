@@ -1,5 +1,5 @@
-/* eslint-disable react/no-danger */
 import React, { useEffect, useRef, useState } from 'react';
+import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import FeedbackModal from '@components/common/modals/feedback/index.js';
 import CompletedTask from '@components/common/modals/completedTask';
@@ -13,12 +13,10 @@ import Terminal from '@components/common/terminal';
 import Output from '@components/common/output';
 import RadioButton from '@components/mui/radioButton';
 import { Exercise } from '@components/common/exercise';
-import styles from './styles.module.less';
 
-const BulletPointExercise = ({ onSubmit, isAuth }) => {
+function BulletPointExercise({ onSubmit, isAuth }) {
   const [solution, setSolution] = useState();
   const [bytePayload, setBytePayload] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [xp, setXp] = useState(0);
   const [doneExercises, setDoneExercises] = useState([]);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
@@ -42,10 +40,7 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
     //   setXp(xp + exercise.nested_exercises[activeExercise].xp);
     // }
 
-    exercise.nested_exercises.map((item) => {
-      xpSum += item.xp;
-      return xpSum;
-    });
+    exercise.nested_exercises.map((item) => (xpSum += item.xp));
     setXp(xpSum);
   };
 
@@ -69,8 +64,8 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
     setCorrect('');
     setBytePayload([]);
     setHint(false);
-    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz');
-    setWithoutHint(!!exercise.nested_exercises[activeExercise].hint);
+    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
+    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
   }, [exercise]);
 
   useEffect(() => {
@@ -79,13 +74,13 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
     setErrorMessage('');
     setCorrect('');
     setHint(false);
-    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz');
-    setWithoutHint(!!exercise.nested_exercises[activeExercise].hint);
+    setIsQuiz(exercise.nested_exercises[activeExercise].type === 'quiz' ? true : false);
+    setWithoutHint(exercise.nested_exercises[activeExercise].hint ? true : false);
   }, [activeExercise]);
 
   useEffect(() => {
     if (correct) {
-      if ((exercise && exercise.nested_exercises.length - 1) > activeExercise) {
+      if (exercise?.nested_exercises.length - 1 > activeExercise) {
         setDoneExercises([...doneExercises, { activeExercise }]);
         setActiveExercise(activeExercise + 1);
       } else {
@@ -124,8 +119,8 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
               nestedExercise={nestedExercise}
               xp={exercise?.nested_exercises[activeExercise].xp}
               onSubmit={() => setCompletedTaskModalOpen(true)}
-              onSetActiveExercise={({ activeEx }) => {
-                setActiveExercise(activeEx);
+              onSetActiveExercise={({ activeExercise }) => {
+                setActiveExercise(activeExercise);
                 setMessage('');
               }}
             >
@@ -146,8 +141,8 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
                           <RadioButton
                             checked={answer.value === item.value}
                             className={styles.quizItem}
-                            isHtml
-                            onChange={() => {
+                            isHtml={true}
+                            onChange={(e) => {
                               setAnswer(item);
                             }}
                             value={item.value}
@@ -198,7 +193,7 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
             onClick={() => {
               setFeedbackModalOpen(true);
             }}
-            solution
+            solution={true}
             onSetSolution={() => setSolution(exercise?.nested_exercises[activeExercise].solution)}
           />
         </div>
@@ -230,6 +225,6 @@ const BulletPointExercise = ({ onSubmit, isAuth }) => {
       </div>
     </>
   );
-};
+}
 
 export default BulletPointExercise;

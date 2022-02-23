@@ -1,1 +1,1 @@
-export const selectExercise = (state) => state.exercise;
+export const selectExercise = state => state.exercise;

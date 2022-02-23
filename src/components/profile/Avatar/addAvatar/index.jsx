@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react';
 
+import { CropAvatar } from '../cropAvatar';
+
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import Button from '@components/mui/button';
 
 import Close from '@assets/Close.js';
-import { CropAvatar } from '../cropAvatar';
 
 import styles from './styles.module.less';
 
@@ -19,7 +20,7 @@ export const AddAvatar = ({ handleClick, open }) => {
     <Dialog className={styles.dialog} maxWidth="lg" fullWidth open={open} onClose={handleClick}>
       <DialogTitle className={styles.dialogTitle}>
         <span className={styles.dialogTitleText}>Загрузка новой фотографии</span>
-        <div onClick={handleClick} role="presentation">
+        <div onClick={handleClick}>
           <Close />
         </div>
       </DialogTitle>

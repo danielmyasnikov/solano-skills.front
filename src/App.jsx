@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
 
 import * as Sentry from '@sentry/react';
 
-import { useDispatch } from 'react-redux';
-import * as AuthStore from '@store/auth';
 import Container from './components/container';
 
 import { routes } from './routes';
 
+import { useDispatch } from 'react-redux';
+
+import * as AuthStore from '@store/auth';
+
 import styles from './app.module.css';
 import './index.less';
 
-const App = () => {
+function App() {
   const dispatch = useDispatch();
 
   const uid = localStorage.getItem('uid');
@@ -34,20 +35,15 @@ const App = () => {
     <div className={styles.wrapper}>
       {/* {isLogIn && <Redirect to="/sing-in" />} */}
 
-      {routes.map((route, headerVariant) => (
+      {routes.map((route, i, headerVariant) => (
         <Route exact={route.exact} path={route.path} key={route.path}>
           {(route.wrap && (
-            <Container
-              variant={headerVariant}
-              key={uuid()}
-              {...route}
-              Component={route.component}
-            />
+            <Container variant={headerVariant} key={i} {...route} Component={route.component} />
           )) || <route.component />}
         </Route>
       ))}
     </div>
   );
-};
+}
 
 export default Sentry.withProfiler(App);
