@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Course } from './course';
 import { CoursesList } from './constants';
 import Input from '@components/mui/inputSearch';
-import ellipse from './assets/Ellipse.svg';
 import logo from './assets/Logo.svg';
 import logoModal from './assets/LogoModal.svg';
 import Button from '@components/mui/button';
@@ -93,7 +93,6 @@ export const OnBoardPage = () => {
           <div className={styles.mainCourses}>{renderCourseList()}</div>
           <div className={styles.mainRecomendation}>
             <div className={styles.mainRecomendationQuestion}>
-              <img src={ellipse} alt="ellipse" />
               <span className={styles.mainRecomendationQuestionSymbol}>?</span>
             </div>
             <span>Не уверены какой курс выбрать? Попробуйте прочитать</span>
@@ -109,7 +108,7 @@ export const OnBoardPage = () => {
         )) || (
           <>
             <span>Вы можете</span>
-            <span className={styles.activeLink}>пропустить</span>
+            <Link className={styles.activeLink}>пропустить</Link>
             <span>опрос и перейти сразу к курсам</span>
           </>
         )}
