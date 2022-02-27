@@ -1,0 +1,147 @@
+.wrapper {
+  position: relative;
+  padding: 0 50px 70px;
+  width: 92%;
+  height: 100%;
+  padding-right: 56px;
+  overflow-y: scroll;
+  box-sizing: content-box;
+}
+
+.css-cyxlny-MuiPaper-root-MuiDialog-paper {
+  overflow: hidden;
+}
+
+.dialogTitle {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.closeButton {
+  position: absolute;
+  right: 46px;
+  top: 40px;
+  width: 25px;
+  cursor: pointer;
+}
+
+.MuiDialogContent-root::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  max-width: 409px;
+  padding: 33px 70px 34px 68px;
+  border-radius: 0px 0px 34px 34px;
+  background: var(--soft-blue);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.headerTitle {
+  font-family: Jost;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 45px;
+  color: var(--color-white);
+}
+
+.headerText {
+  margin: 107px 0 0 146px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: right;
+  letter-spacing: -0.4px;
+  color: var(--very-dark-grayish-violet);
+}
+
+@media screen and(max-width: 768px) {
+  .dialogTitle {
+    flex-direction: column;
+  }
+
+  .wrapper {
+    position: relative;
+    padding: 0 30px 73px;
+    width: auto;
+    height: auto;
+    padding-right: 30px;
+  }
+
+  .wrapperPrice {
+    margin-left: 59px;
+  }
+
+  .some::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .headerText {
+    margin: 44px 0 0 96px;
+  }
+}
+
+@media screen and(max-width: 480px) {
+  .wrapper {
+    padding: 0 30px 59px;
+  }
+
+  .closeButton {
+    right: 27px;
+    top: 27px;
+  }
+
+  .header {
+    width: 318px;
+    padding: 32px 50px 32px 46px;
+  }
+
+  .headerTitle {
+    font-family: Jost;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+  }
+
+  .headerText {
+    margin: 44px 0 0 0;
+  }
+}
+
+@media screen and(max-width: 320px) {
+  .wrapper {
+    padding: 0 0 76px;
+  }
+
+  .closeButton {
+    width: 16px;
+    right: 26px;
+    top: 26px;
+  }
+
+  .header {
+    width: 255px;
+    border-radius: 24px 24px 0 0;
+    padding: 20px 57px 20px 20px;
+  }
+
+  .headerTitle {
+    font-size: 24px;
+    line-height: 27px;
+  }
+
+  .headerText {
+    width: 256px;
+    text-align: inherit;
+    padding: 0 20px;
+  }
+
+  .dialogTitle {
+    margin-bottom: 30px;
+  }
+}
