@@ -6,6 +6,7 @@ import { OnBoardPage } from '@components/onBoard';
 import { HomePage } from './components/homePage';
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
+import { PaymentPage } from './components/paymentPage';
 
 export const routes = [
   {
@@ -55,6 +56,12 @@ export const routes = [
     component: ExercisePage,
     headerVariant: 'exercise',
     wrap: true,
+    exact: true,
+  },
+  {
+    path: '/payment',
+    component: PaymentPage,
+    wrap: false,
     exact: true,
   },
 ];
