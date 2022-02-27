@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import {Modal} from './modal'
 import styles from './styles.module.less';
 import Button from '@components/mui/button';
 import Input from '@components/mui/inputSearch';
@@ -9,25 +8,24 @@ import ArrowDown from '@assets/ArrowDown';
 import AvatarDefault from '@assets/avatarDefault.png';
 import useDebounce from '../hooks/useDebounce';
 import { Link } from 'react-router-dom';
+import { ModalTariffSelection } from './ModalTariffSelection';
 
 const Header = ({ headerRef, handleSidebar }) => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearch = useDebounce(search, 500);
-  const [openModal, setOpenModal] = useState(false);
+  const [showModal, setshowModal] = useState(false);
 
-  const handleModal = () => {
-    setOpenModal(!openModal);
-  };
+  const handleShowModal = () => setshowModal(!showModal);
+
   function search() {}
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
     debouncedSearch(e.target.value);
   };
-  
+
   return (
-    <Fragment>
-      <Modal handleClick={handleModal} open={openModal} />
+    <>
       <div className={styles.wrapper}>
         <header ref={headerRef} className={styles.header}>
           <div className={styles.headerItem}>
@@ -38,27 +36,24 @@ const Header = ({ headerRef, handleSidebar }) => {
               <Burger />
             </div>
             <div className={styles.search}>
-              <Input
-                value={searchValue}
-                onChange={(e) => handleSearch(e)}
-                placeholder="Search..."
-              />
+              <Input value={searchValue} onChange={(e) => handleSearch(e)} placeholder="Поиск..." />
             </div>
           </div>
           <div className={styles.headerItem}>
-            <Button variant="containedGreen" onClick={handleModal}>
+            <Button variant="containedGreen" onClick={handleShowModal}>
               Обновить тариф
             </Button>
             <Link to="/profile">
               <div className={styles.profile}>
-                <img src={AvatarDefault} />
+                <img src={AvatarDefault} alt="avatar" />
                 <ArrowDown />
               </div>
             </Link>
           </div>
         </header>
       </div>
-    </Fragment>
+      <ModalTariffSelection handleClick={handleShowModal} open={showModal} />
+    </>
   );
 };
 

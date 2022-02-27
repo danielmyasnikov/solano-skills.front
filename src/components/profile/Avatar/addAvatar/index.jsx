@@ -20,7 +20,7 @@ export const AddAvatar = ({ handleClick, open }) => {
     <Dialog className={styles.dialog} maxWidth="lg" fullWidth open={open} onClose={handleClick}>
       <DialogTitle className={styles.dialogTitle}>
         <span className={styles.dialogTitleText}>Загрузка новой фотографии</span>
-        <div onClick={handleClick}>
+        <div className={styles.closeButton} onClick={handleClick}>
           <Close />
         </div>
       </DialogTitle>
