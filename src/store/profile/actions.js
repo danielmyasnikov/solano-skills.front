@@ -6,10 +6,10 @@ export const GET_PROFILE_REQUESTED = 'GET_PROFILE_REQUESTED';
 export const GET_PROFILE_SUCCESSED = 'GET_PROFILE_SUCCESSED';
 export const GET_PROFILE_FAILED = 'GET_PROFILE_FAILED';
 
-export const patchProfile = ({ name, about, email, headers }) => {
+export const patchProfile = ({ name, about, email, avatar, headers }) => {
   return {
     type: PATCH_PROFILE_REQUESTED,
-    payload: { name, about, email, headers },
+    payload: { name, about, email, avatar, headers },
   };
 };
 

@@ -1,14 +1,15 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Modal } from './modal';
 import styles from './styles.module.less';
 import Button from '@components/mui/button';
 import Input from '@components/mui/inputSearch';
 import Logo from '@assets/Logo';
 import Burger from '@assets/Burger';
 import ArrowDown from '@assets/ArrowDown';
-import AvatarDefault from '@assets/avatarDefault.png';
 import useDebounce from '../hooks/useDebounce';
+import { selectProfile } from '@store/profile/selector';
 import { Link } from 'react-router-dom';
-import { ModalTariffSelection } from './ModalTariffSelection';
+import { useSelector } from 'react-redux';
 
 const Header = ({ headerRef, handleSidebar }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -16,6 +17,10 @@ const Header = ({ headerRef, handleSidebar }) => {
   const [showModal, setshowModal] = useState(false);
 
   const handleShowModal = () => setshowModal(!showModal);
+
+  const profile = useSelector(selectProfile);
+
+  const handleModal = () => setOpenModal(!openModal);
 
   function search() {}
 
@@ -45,7 +50,7 @@ const Header = ({ headerRef, handleSidebar }) => {
             </Button>
             <Link to="/profile">
               <div className={styles.profile}>
-                <img src={AvatarDefault} alt="avatar" />
+                <img src={profile.avatar_cloudinary_url} alt="avatar" />
                 <ArrowDown />
               </div>
             </Link>

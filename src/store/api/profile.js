@@ -1,20 +1,29 @@
 import axios from 'axios';
 
-export const PatchProfileApi = ({ name, about, email, headers }) => {
+export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
+  const formData = new FormData();
+
+  if (name) {
+    formData.append('name', name);
+  }
+  if (about) {
+    formData.append('about', about);
+  }
+  if (email) {
+    formData.append('email', email);
+  }
+  if (avatar) {
+    formData.append('avatar', avatar);
+  }
   try {
-    return axios
-      .patch(
-        `${process.env.REACT_APP_API_COURSE}/api/v1/profile`,
-        {
-          name,
-          about,
-          email,
-        },
-        { headers: headers },
-      )
-      .then((res) => res.data);
+    return axios({
+      method: 'PATCH',
+      url: `${process.env.REACT_APP_API_COURSE}/api/v1/profile`,
+      headers,
+      data: formData,
+    }).then((res) => res.data);
   } catch (e) {
-    console.log(e);
+    throw new Error(e);
   }
 };
 

@@ -1,4 +1,11 @@
-import React, { useState, useRef, useCallback, forwardRef, useImperativeHandle } from 'react';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+  useEffect,
+} from 'react';
 
 import Button from '@components/mui/button';
 import ReactCrop from 'react-image-crop';
@@ -12,7 +19,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 import styles from './styles.module.less';
 
-export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
+export const CropAvatar = forwardRef(({ handleActionWithImage, onCropped }, ref) => {
   const Input = styled('input')({
     display: 'none',
   });
@@ -29,6 +36,7 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
   });
   const [rotate, setRotate] = useState(0);
   const [src, setSrc] = useState(null);
+  const [newCrop, setNewCrop] = useState(null);
   const [croppedImage, setCroppedImage] = useState(null);
 
   useImperativeHandle(ref, () => ({
@@ -64,9 +72,11 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
   }, []);
 
   const makeClientCrop = async (crop) => {
-    if (cropRef && crop.width && crop.height) {
+    setNewCrop(crop);
+    if (cropRef && crop && crop.width && crop.height) {
       const croppedImage = await getCroppedImg(cropRef.current, crop, 'newFile.jpeg');
       setCroppedImage(croppedImage);
+      onCropped(croppedImage);
     }
   };
 
@@ -77,6 +87,26 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
     canvas.width = crop.width;
     canvas.height = crop.height;
     const ctx = canvas.getContext('2d');
+
+    switch (rotate) {
+      case 90:
+        ctx.save();
+        ctx.translate(crop.width / 1, crop.height / 70 - 5);
+        ctx.rotate((rotate * Math.PI) / 180);
+        break;
+      case 180:
+        ctx.save();
+        ctx.translate(crop.width / 1, crop.height / 1);
+        ctx.rotate((rotate * Math.PI) / 180);
+        break;
+      case 270:
+        ctx.save();
+        ctx.translate(crop.width / 70 - 5, crop.height / 1);
+        ctx.rotate((rotate * Math.PI) / 180);
+        break;
+      default:
+        break;
+    }
 
     ctx.drawImage(
       image,
@@ -90,21 +120,27 @@ export const CropAvatar = forwardRef(({ handleActionWithImage }, ref) => {
       crop.height,
     );
 
+    ctx.restore();
+
     return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-          const base64data = reader.result;
-          resolve(base64data);
-        };
-      });
+      canvas.toBlob(
+        (blob) => {
+          blob.name = fileName;
+          resolve(blob);
+        },
+        'image/jpeg',
+        1,
+      );
     });
   };
 
   const onCropComplete = (crop) => makeClientCrop(crop);
 
   const onCropChange = (crop) => setCrop(crop);
+
+  useEffect(() => {
+    makeClientCrop(newCrop);
+  }, [rotate]);
 
   return (
     <>
