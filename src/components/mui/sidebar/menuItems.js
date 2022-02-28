@@ -11,19 +11,19 @@ import Groups from '@assets/Groups';
 import Webinars from '@assets/Webinars';
 
 export const profileItems = [
-  { label: 'Прогресс', icon: <Progress />, link: '/courses4'},
-  { label: 'Закладки', icon: <Bookmarks />, link: '/courses3'},
-  { label: 'Профессии', icon: <Professions />, link: '/courses2'},
-  { label: 'Навыки', icon: <Skills />, link: '/'},
-  { label: 'Курсы', icon: <Courses />, link: '/courses'},
-  { label: 'Сертификаты', icon: <Certificates />, link: '/courses1'},
+	{ label: 'Прогресс', icon: <Progress />, link: '/courses4' },
+	{ label: 'Закладки', icon: <Bookmarks />, link: '/courses3' },
+	{ label: 'Профессии', icon: <Professions />, link: '/courses2' },
+	{ label: 'Навыки', icon: <Skills />, link: '/' },
+	{ label: 'Курсы', icon: <Courses />, link: '/courses' },
+	{ label: 'Сертификаты', icon: <Certificates />, link: '/certificates' },
 ];
 
 export const studyItems = [
-  { label: 'Практика', icon: <Practice />, link: '/courses5'},
-  { label: 'Проекты', icon: <Projects />, link: '/courses6'},
-  { label: 'Тестирование', icon: <Testing />, link: '/courses7'},
-  { label: 'Группы', icon: <Groups />, link: '/courses8'},
-  { label: 'Вебинары', icon: <Webinars />, link: '/courses9'},
+	{ label: 'Практика', icon: <Practice />, link: '/courses5' },
+	{ label: 'Проекты', icon: <Projects />, link: '/courses6' },
+	{ label: 'Тестирование', icon: <Testing />, link: '/courses7' },
+	{ label: 'Группы', icon: <Groups />, link: '/courses8' },
+	{ label: 'Вебинары', icon: <Webinars />, link: '/courses9' },
 ];
 

@@ -1,5 +1,7 @@
 export const sidebarPath = [
-    '/courses',
-    '/profile',
-    '/courses/:courseId',
+  '/courses',
+  '/profile',
+  '/certificates',
+  '/certificates/:userId/:courseId',
+  '/courses/:courseId',
 ];

@@ -2,6 +2,8 @@ import ExercisePage from '@components/exercise';
 import Profile from '@components/profile';
 import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';
+import { CertificatesPage } from '@components/certificatesPage';
+import { StatementPage } from '@components/statementPage';
 import { OnBoardPage } from '@components/onBoard';
 import { HomePage } from './components/homePage';
 import { Registration } from './components/auth/registration';
@@ -43,6 +45,18 @@ export const routes = [
     path: '/onBoard',
     component: OnBoardPage,
     wrap: false,
+    exact: true,
+  },
+  {
+    path: '/certificates',
+    component: CertificatesPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/certificates/:userId/:courseId',
+    component: StatementPage,
+    wrap: true,
     exact: true,
   },
   {

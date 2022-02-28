@@ -1,0 +1,57 @@
+.sertificate {
+  background: #7469EF;
+  border-radius: 10px;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: luminosity;
+  }
+
+  .settings {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.54);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      margin: 0 7px;
+      cursor: pointer;
+    }
+  }
+
+  &:hover {
+    .settings {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 1450px){
+  .sertificate{
+    .settings {
+      svg {
+        margin: 0 5px;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px){
+  .sertificate{
+    .settings {
+      svg {
+        margin: 0 11px;
+      }
+    }
+  }
+}
