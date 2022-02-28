@@ -6,7 +6,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { InputUnstyled } from '@mui/material';
 import styles from './styles.module.less';
 
-export const InputPassword = ({ value, handleChange, name }) => {
+export const InputPassword = ({ value, handleChange, name, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -28,6 +28,7 @@ export const InputPassword = ({ value, handleChange, name }) => {
         </InputAdornment>
       }
       label="Password"
+      placeholder={placeholder}
     />
   );
 };

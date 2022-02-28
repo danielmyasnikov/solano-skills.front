@@ -10,8 +10,9 @@ import { RegistrationByEmail } from '../registrationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
+import cn from 'classnames';
 
-export const Registration = ({ isModal }) => {
+export const Registration = ({ variant, isModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -114,10 +115,11 @@ export const Registration = ({ isModal }) => {
 
   const renderRegistration = () => {
     return (
-      <>
-        <h1 className={styles.title}>Создайте аккаунт, чтобы начать обучение</h1>
+      <div className={cn(styles.wrapper, styles[variant])}>
+        <h1 className={cn(styles.title)}>Создайте аккаунт, чтобы начать обучение</h1>
         {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <RegistrationByEmail
+            variant={variant}
             handleChecked={handleChecked}
             handleChange={handleChange}
             email={email}
@@ -155,13 +157,21 @@ export const Registration = ({ isModal }) => {
             }}
           />
         )}
-        <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
-          {buttonTitle}
-        </Button>
+        <div className={styles.btnDiv}>
+          <Button
+            className={styles.btn}
+            variant={variant === 'home_end' ? 'outlineWhite' : 'outlinePurple'}
+            onClick={submit}
+          >
+            {buttonTitle}
+          </Button>
+        </div>
         {errors.fullMessagesError && (
-          <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+          <div className={styles.errorDiv}>
+            <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+          </div>
         )}
-        <SocialNetworks />
+        <SocialNetworks variant={variant} />
         <div className={styles.toAuth}>
           <span className={styles.text}>
             {'Уже есть аккаунт? '}
@@ -170,7 +180,7 @@ export const Registration = ({ isModal }) => {
             </Link>
           </span>
         </div>
-      </>
+      </div>
     );
   };
 

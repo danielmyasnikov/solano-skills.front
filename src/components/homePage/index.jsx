@@ -6,10 +6,9 @@ import Footer from '../footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
-import { Input } from '@components/mui/input';
-import { CheckboxBtn } from '@components/mui/checkbox';
 import styles from './styles.module.less';
 import { feedbacks, images, practices, slides } from './data';
+import { Registration } from '@components/auth/registration';
 
 export const HomePage = () => {
   const renderImage = (img) => {
@@ -54,44 +53,7 @@ export const HomePage = () => {
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
                 <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
-                <form className={styles.offer__form}>
-                  <label className={styles.offer__form__label}>E-mail</label>
-                  <div className={styles.offer__form__input}>
-                    <Input placeholder="Email@gmail.com" />
-                  </div>
-                  <div className={styles.offer__form__link}>
-                    <Link to={'/registration'}>Регистрация по номеру телефона</Link>
-                  </div>
-                  <label className={styles.offer__form__label}>Пароль</label>
-                  <div className={styles.offer__form__input}>
-                    <Input placeholder="Введите пароль" />
-                  </div>
-                  <div className={styles.offer__form__check}>
-                    <CheckboxBtn />
-                    <label>
-                      Я принимаю условия{' '}
-                      <span>
-                        <Link>Пользовательского соглашения</Link>
-                      </span>{' '}
-                      и даю своё согласие на обработку персональных данных на условиях, определенных{' '}
-                      <span>
-                        <Link>Политикой конфиденциальности.</Link>
-                      </span>
-                    </label>
-                  </div>
-                  <Button variant="outlinePurple">Перейти к обучению</Button>
-                  <div className={styles.offer__form__accounts}>
-                    <div>
-                      <images.googleAccount />
-                    </div>
-                    <div>
-                      <images.facebookAccount />
-                    </div>
-                    <div>
-                      <images.vkAccount />
-                    </div>
-                  </div>
-                </form>
+                <Registration isModal={true} variant={'home_offer'} />
               </div>
             </section>
 
@@ -249,34 +211,7 @@ export const HomePage = () => {
                 <div className={styles.signup__subtitle}>чтобы начать обучение прямо сейчас</div>
               </div>
               <div className={styles.signup__block}>
-                <form className={styles.signup__form}>
-                  <div className={styles.signup__form_flex}>
-                    <div className={styles.signup__form__block}>
-                      <label className={styles.signup__form__label}>E-mail</label>
-                      <div className={styles.signup__form__input}>
-                        <Input placeholder="Email@gmail.com" />
-                      </div>
-                    </div>
-                    <div className={styles.signup__form__link}>Регистрация по номеру телефона</div>
-                    <div className={styles.signup__form__block}>
-                      <label className={styles.signup__form__label}>Пароль</label>
-                      <div className={styles.signup__form__input}>
-                        <Input placeholder="Введите пароль" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.signup__form__check}>
-                    <CheckboxBtn />
-                    <label>
-                      Я принимаю условия <span>Пользовательского соглашения</span> и даю своё
-                      согласие на обработку персональных данных на условиях, определенных{' '}
-                      <span>Политикой конфиденциальности.</span>
-                    </label>
-                  </div>
-                  <div className={styles.signup__form__btn}>
-                    <Button variant="outlineWhite">Перейти к обучению</Button>
-                  </div>
-                </form>
+                <Registration isModal={true} variant={'home_end'} />
               </div>
             </section>
           </main>

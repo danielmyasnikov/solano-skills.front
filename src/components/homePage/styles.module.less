@@ -45,12 +45,6 @@
       box-shadow: 10px 9px 30px rgba(0, 0, 0, 0.1);
       border-radius: 25px;
 
-      button {
-        display: flex;
-        margin: 40px auto auto;
-        background: none;
-      }
-
       &__title {
         height: 74px;
         font-family: 'Jost';
@@ -134,98 +128,6 @@
       line-height: 65px;
       letter-spacing: -0.149625px;
       color: #ffffff;
-    }
-  }
-
-  &__form {
-    width: 100%;
-    height: calc(100% - 74px);
-    background: #eceafb;
-    border-radius: 25px;
-    padding: 45px 25px 25px;
-
-    &__label {
-      margin-left: 20px;
-      font-family: 'Nunito';
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 127%;
-      color: #7469ef;
-      cursor: auto;
-    }
-
-    &__input {
-      margin-top: 10px;
-
-      div {
-        background: rgba(255, 255, 255, 0.46);
-        border: 1px solid #7469ef;
-        padding: 14px 20px;
-      }
-
-      input {
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        color: rgba(70, 68, 92);
-
-        &::placeholder {
-          font-family: 'Nunito';
-          font-style: normal;
-          font-weight: 600;
-          font-size: 16px;
-          color: rgba(70, 68, 92, 0.33);
-        }
-      }
-    }
-
-    &__link {
-      margin-top: 10px;
-      margin-bottom: 40px;
-      font-family: 'Nunito';
-      font-size: 16px;
-      line-height: 142.9%;
-      text-align: center;
-      letter-spacing: -0.015em;
-
-      a {
-        color: #7469ef;
-      }
-    }
-
-    &__check {
-      margin-top: 24px;
-      display: flex;
-
-      label {
-        font-family: 'Nunito';
-        font-size: 14px;
-        line-height: 142.9%;
-        letter-spacing: -0.015em;
-        color: #525252;
-        cursor: auto;
-
-        span {
-          font-weight: normal;
-          color: #7469ef;
-
-          a {
-            color: #7469ef;
-          }
-        }
-      }
-
-      svg {
-        color: rgba(0, 0, 0, 0.26);
-      }
-    }
-
-    &__accounts {
-      width: 34%;
-      margin: 53px auto 0;
-      display: flex;
-      justify-content: space-between;
     }
   }
 }
@@ -787,85 +689,6 @@
     margin-left: 26px;
     color: #ffffff;
   }
-
-  &__form {
-    width: 100%;
-    max-width: 500px;
-    min-height: 400px;
-    margin: 0 auto;
-    border-radius: 25px;
-    color: #fff;
-
-    &__label {
-      margin-left: 30px;
-      font-family: 'Nunito';
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 127%;
-    }
-
-    &__input {
-      margin-top: 10px;
-
-      div {
-        padding: 12px 30px;
-        background: rgba(255, 255, 255, 0.26);
-        border: 1px solid #fff;
-      }
-
-      input {
-        font-family: 'Nunito';
-        font-weight: 600;
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.9);
-
-        &::placeholder {
-          font-family: 'Nunito';
-          font-weight: 600;
-          font-size: 16px;
-          color: rgba(255, 255, 255, 0.5);
-        }
-      }
-    }
-
-    &__link {
-      margin-top: 10px;
-      margin-bottom: 40px;
-      font-family: 'Nunito';
-      font-size: 16px;
-      line-height: 142.9%;
-      text-align: center;
-      letter-spacing: -0.015em;
-      text-decoration: underline;
-    }
-
-    &__check {
-      margin-top: 34px;
-      margin-bottom: 29px;
-      display: flex;
-
-      label {
-        font-family: 'Nunito';
-        font-size: 14px;
-        line-height: 142.9%;
-        letter-spacing: -0.015em;
-        color: rgba(255, 255, 255, 0.68);
-
-        span {
-          color: #ffc700;
-        }
-      }
-
-      svg {
-        color: rgba(255, 255, 255, 0.26);
-      }
-    }
-
-    &__btn {
-      width: 212px;
-      margin: 0 auto;
-    }
-  }
 }
 
 @media (min-width: 1921px) {
@@ -939,10 +762,6 @@
       &__text {
         font-size: 12px;
       }
-    }
-
-    &__form {
-      padding: 45px 30px 20px;
     }
   }
 
@@ -1125,16 +944,6 @@
         padding-right: 0;
       }
     }
-
-    &__form {
-      max-width: 350px;
-
-      &__check {
-        label {
-          font-size: 13px;
-        }
-      }
-    }
   }
 }
 
@@ -1199,60 +1008,6 @@
           font-size: 22px;
           line-height: 60px;
         }
-      }
-    }
-
-    &__form {
-      height: calc(100% - 59px);
-      padding: 20px 11px;
-
-      svg {
-        width: 30px;
-        height: 30px;
-      }
-
-      &__label {
-        margin-left: 16px;
-        font-size: 14px;
-      }
-
-      &__input {
-        margin-top: 8px;
-
-        div {
-          padding: 15px 16px;
-        }
-      }
-
-      &__link {
-        margin: 8px 16px 23px;
-        font-size: 14px;
-        text-align: left;
-        text-decoration-line: underline;
-      }
-
-      &__check {
-        span {
-          padding: 0;
-
-          svg {
-            width: 20px;
-            height: 20px;
-          }
-        }
-
-        label {
-          margin-top: 4px;
-          margin-left: 6px;
-        }
-      }
-
-      button {
-        margin-top: 20px;
-      }
-
-      &__accounts {
-        margin-top: 30px;
       }
     }
   }
@@ -1473,43 +1228,6 @@
     &__subtitle {
       font-size: 34px;
       margin-left: 14px;
-    }
-
-    &__form {
-      max-width: 300px;
-      min-height: 380px;
-      margin: 0 5% 0 auto;
-
-      &__label {
-        margin-left: 16px;
-        font-size: 14px;
-      }
-
-      &__input {
-        margin-top: 8px;
-
-        div {
-          padding: 15px 16px;
-        }
-      }
-
-      &__link {
-        font-size: 14px;
-        text-align: left;
-        margin-left: 16px;
-        margin-bottom: 25px;
-      }
-
-      &__check {
-        span {
-          padding: 0;
-        }
-
-        label {
-          margin-left: 5px;
-          font-size: 12px;
-        }
-      }
     }
   }
 }
@@ -1842,31 +1560,6 @@
       font-size: 28px;
       line-height: 41px;
     }
-
-    &__form {
-      margin-top: 28px;
-      position: relative;
-      max-width: none;
-      min-height: 0;
-
-      &_flex {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      &__block {
-        width: 48%;
-      }
-
-      &__link {
-        position: absolute;
-        top: 75px;
-      }
-
-      &__check {
-        margin-top: 50px;
-      }
-    }
   }
 }
 
@@ -2003,11 +1696,10 @@
 
     &__fact {
       margin-top: 0;
-      margin-right: 20px;
-    }
 
-    &__form {
-      border-radius: 17px;
+      &:last-child {
+        margin-left: 5%;
+      }
     }
   }
 
@@ -2196,21 +1888,6 @@
       width: 100%;
       max-width: 358px;
     }
-
-    &__form {
-      &_flex {
-        display: block;
-      }
-
-      &__block {
-        width: 100%;
-        margin-top: 40px;
-      }
-
-      &__check {
-        margin-top: 25px;
-      }
-    }
   }
 }
 
@@ -2295,20 +1972,6 @@
 
     &__fact {
       margin-top: 10px;
-    }
-
-    &__form {
-      padding: 20px 11px 10px;
-      border-radius: 13px;
-
-      &__link {
-        margin: 8px 0 23px 16px;
-      }
-
-      &__accounts {
-        margin-top: 20px;
-        width: 40%;
-      }
     }
   }
 
@@ -2499,14 +2162,6 @@
       font-size: 22px;
       line-height: 27px;
       margin-left: 10px;
-    }
-
-    &__form {
-      margin-top: 10px;
-
-      &__block:first-child {
-        margin-top: 20px;
-      }
     }
   }
 }
