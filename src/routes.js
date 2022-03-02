@@ -9,11 +9,25 @@ import { HomePage } from './components/homePage';
 import { Registration } from './components/auth/registration';
 import { Authorization } from './components/auth/authorization';
 import { PaymentPage } from './components/paymentPage';
+import { SkillsPage } from './components/skillsPage';
+import { SkillPage } from './components/skillPage';
 
 export const routes = [
   {
     path: '/courses',
     component: CoursesPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/skills',
+    component: SkillsPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/skills/:skillId',
+    component: SkillPage,
     wrap: true,
     exact: true,
   },

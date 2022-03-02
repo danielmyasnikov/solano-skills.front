@@ -158,8 +158,8 @@ export const buttonTheme = createTheme({
           props: { variant: 'outlineBlack' },
           style: {
             background: 'none',
-            color: '#2D2D2D',
-            border: '1px solid #2D2D2D',
+            color: '#46445C',
+            border: '2px solid #46445C',
             '&:hover': {
               background: 'none',
               transition: '0.2s ease-in-out',
@@ -177,6 +177,13 @@ export const buttonTheme = createTheme({
           style: {
             color: '#D6D6D6',
             border: '1px solid #D6D6D6',
+          },
+        },
+        {
+          props: { variant: 'containedBlack', disabled: true },
+          style: {
+            color: '#fff !important',
+            background: '#46445C'
           },
         },
         {

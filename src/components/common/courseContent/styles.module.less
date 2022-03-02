@@ -1,3 +1,149 @@
+.skill {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 45px;
+
+    &::after {
+      position: absolute;
+      display: block;
+      top: 132px;
+      left: 22px;
+      content: '';
+      height: 102%;
+      width: 1px;
+      background: #c4c4c4;
+    }
+  }
+
+  &__number {
+    margin-top: 90px;
+    text-align: center;
+    width: 43px;
+    height: 43px;
+    padding-top: 8px;
+    background: #ffffff;
+    border: 2px solid #c4c4c4;
+    border-radius: 50%;
+    box-sizing: border-box;
+    font-family: 'Nunito';
+    font-weight: bold;
+    font-size: 16px;
+    color: #2d2d2d;
+  }
+
+  &__block {
+    width: 92%;
+  }
+
+  &__test {
+    font-family: 'Nunito';
+    font-size: 20px;
+    line-height: 127%;
+    color: rgba(45, 45, 45, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  &__content {
+    background: #ffffff;
+    box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.04);
+    border-radius: 18px;
+    padding: 40px 40px 33px;
+    position: relative;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    font-family: 'Jost';
+    font-weight: bold;
+    font-size: 24px;
+    color: #2d2d2d;
+
+    img {
+      margin-right: 15px;
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  &__description {
+    margin-top: 10px;
+    font-family: 'Nunito';
+    width: fit-content;
+    margin-right: 260px;
+    max-width: 580px;
+    font-size: 16px;
+    line-height: 139.5%;
+    color: #2d2d2d;
+  }
+
+  .item_notAvailable {
+    opacity: 0.5;
+
+    &.item {
+      cursor: inherit;
+      &:hover {
+        circle {
+          fill: var(--purple);
+        }
+        path {
+          fill: var(--color-white);
+        }
+        .itemTitle {
+          color: var(--color-black);
+        }
+        background: none;
+        transition: none;
+      }
+    }
+  }
+
+  &__info {
+    width: 50%;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+
+    &__hour {
+      display: flex;
+      width: 100px;
+      font-family: 'Nunito';
+      font-size: 14px;
+      color: #8a92a6;
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .btn {
+    position: absolute;
+    top: 50px;
+    right: 40px;
+  }
+
+  .btnContent {
+    position: absolute;
+    top: 110px;
+    right: 40px;
+    transition: all 0.5s;
+
+    &Open {
+      top: inherit;
+      bottom: 40px;
+    }
+  }
+}
+
+.pb50 {
+  padding-bottom: 50px;
+}
+
 .courseWrap {
   width: 100%;
   &:not(:last-child) {
@@ -142,6 +288,63 @@
   svg {
     transition: 0.2s ease-in-out;
     margin-left: 8px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .skill {
+    &:not(:last-child) {
+      &::after {
+        display: none;
+      }
+    }
+
+    &__number {
+      position: absolute;
+      z-index: 1;
+      margin-top: 0;
+      top: -20px;
+      left: calc(48%);
+    }
+
+    &__block {
+      width: 100%;
+    }
+
+    &:last-child {
+      .skill__number {
+        top: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .skill {
+    &__content {
+      padding: 40px 25px 25px;
+    }
+
+    &__description {
+      margin-right: 245px;
+    }
+
+    .btn {
+      right: 25px;
+      padding: 5px 22px;
+      top: 95px;
+    }
+
+    .btnContent {
+      right: 25px;
+      padding: 5px 20px;
+      top: 145px;
+
+      &Open {
+        top: inherit;
+        bottom: 20px;
+      }
+    }
   }
 }
 

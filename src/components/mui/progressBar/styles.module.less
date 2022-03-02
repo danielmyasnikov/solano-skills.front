@@ -1,0 +1,76 @@
+.progress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  span {
+    font-size: 12px;
+    color: #8a92a6;
+    font-family: Nunito;
+    padding-right: 5px;
+  }
+  .ghost {
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    width: 100%;
+    :global {
+      .MuiLinearProgress-bar {
+        background: #7469ef;
+      }
+    }
+  }
+
+  .white {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 100%;
+    :global {
+      .MuiLinearProgress-bar {
+        background: #7469ef;
+      }
+    }
+  }
+
+  &.skills {
+    span {
+      margin-right: 10px;
+      font-family: Jost;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 127%;
+      color: rgba(45, 45, 45, 0.5);
+    }
+
+    .skills {
+      background-color: #e6e6e6;
+      border-radius: 50px;
+      width: 100%;
+      :global {
+        .MuiLinearProgress-bar {
+          background: #67c080;
+        }
+      }
+    }
+  }
+
+  &.skill {
+    span {
+      margin-right: 10px;
+      font-family: Jost;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 127%;
+      color: rgba(45, 45, 45, 0.5);
+    }
+
+    .skill {
+      background-color: #e6e6e6;
+      border-radius: 50px;
+      width: 75%;
+      :global {
+        .MuiLinearProgress-bar {
+          background: #67c080;
+        }
+      }
+    }
+  }
+}

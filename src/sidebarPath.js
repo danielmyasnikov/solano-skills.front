@@ -3,5 +3,7 @@ export const sidebarPath = [
   '/profile',
   '/certificates',
   '/certificates/:userId/:courseId',
+  '/skills',
+  '/skills/:skillId',
   '/courses/:courseId',
 ];
