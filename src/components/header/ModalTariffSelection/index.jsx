@@ -1,4 +1,4 @@
-import { Dialog, DialogContent } from '@mui/material';
+import { Dialog } from '@mui/material';
 import Close from '@assets/Close.js';
 import { Tariffs } from './Tariffs';
 

@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Modal } from './modal';
+import { ModalTariffSelection } from './ModalTariffSelection';
 import styles from './styles.module.less';
 import Button from '@components/mui/button';
 import Input from '@components/mui/inputSearch';
@@ -19,8 +19,6 @@ const Header = ({ headerRef, handleSidebar }) => {
   const handleShowModal = () => setshowModal(!showModal);
 
   const profile = useSelector(selectProfile);
-
-  const handleModal = () => setOpenModal(!openModal);
 
   function search() {}
 
