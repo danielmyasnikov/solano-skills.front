@@ -17,15 +17,17 @@ import GraphArrow from '@assets/GraphArrow';
 import Draggable from '../draggable';
 import { useRef } from 'react';
 
-function Terminal({
+const Terminal = ({
   sampleCode,
   solution,
   isGraphRequired,
   correct,
   exerciseId,
   bytePayload,
+  onAnswer,
+  xp,
   isAuth,
-}) {
+}) => {
   const [value, setValue] = useState();
   const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
@@ -80,6 +82,26 @@ function Terminal({
       setIsDisabled(true);
     }
   }, [terminal.kernelId]);
+
+  const handleAnswer = () => {
+    // if (isAuth) {
+    onAnswer();
+    dispatch(
+      compileShell({
+        code: activeTab === 'solution' ? solution : value,
+        exerciseId: exerciseId,
+        kernelId: terminal.kernelId,
+        isGraphRequired: isGraphRequired,
+        type: 'compileExercise',
+      }),
+    );
+    dispatch(
+      checkAnswer(activeTab === 'solution' ? solution : value, exerciseId, isGraphRequired, xp),
+    );
+    // } else {
+    //   setRegistrationModalOpen(true)
+    // }
+  };
 
   return (
     <div
@@ -170,28 +192,7 @@ function Terminal({
             </Button>
             <Button
               variant="containedWhite"
-              onClick={() => {
-                // if (isAuth) {
-                dispatch(
-                  compileShell({
-                    code: activeTab === 'solution' ? solution : value,
-                    exerciseId: exerciseId,
-                    kernelId: terminal.kernelId,
-                    isGraphRequired: isGraphRequired,
-                    type: 'compileExercise',
-                  }),
-                );
-                dispatch(
-                  checkAnswer(
-                    activeTab === 'solution' ? solution : value,
-                    exerciseId,
-                    isGraphRequired,
-                  ),
-                );
-                // } else {
-                //   setRegistrationModalOpen(true)
-                // }
-              }}
+              onClick={handleAnswer}
               disabled={correct || isDisabled}
             >
               Ответить
@@ -243,6 +244,6 @@ function Terminal({
       )}
     </div>
   );
-}
+};
 
 export default Terminal;

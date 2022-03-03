@@ -52,7 +52,7 @@ export const VideoExercise = ({ onSubmit }) => {
           Вы получите<span className={styles.xp}> {` ${exercise.xp} xp`}</span>
         </p>
         <div className={styles.playerWrapper}>
-          <VideoPlayer sourceData={sourceData} />
+          <VideoPlayer id={exercise.id} xp={exercise.xp} sourceData={sourceData} />
         </div>
         <div className={styles.btnWrapper}>
           <Button

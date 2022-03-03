@@ -6,16 +6,15 @@ import CompletedTask from '@components/common/modals/completedTask';
 import { getExercise } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectTerminal } from '@store/terminal/selector';
 import { selectExercise } from '@store/exercise/selector';
 import { QuizHint } from '@components/hint';
 import { Exercise } from '@components/common/exercise';
 import { NormalInstruction } from '@components/instruction';
-import RadioButton from '@components/mui/radioButton';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
+import { sendAnswer } from '@store/exercise/actions';
 
 function QuizTemplate({ onSubmit, isAuth }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -28,9 +27,8 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const { courseId, exerciseId } = useParams();
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
-  const terminal = useSelector(selectTerminal);
 
-  const handleAnswer = ( item ) => {
+  const handleAnswer = (item) => {
     setAnswer(item);
   };
 
@@ -43,18 +41,25 @@ function QuizTemplate({ onSubmit, isAuth }) {
 
   useEffect(() => {
     dispatch(getExercise(courseId, exerciseId));
-    if(!exercise) {
-      return null
+    if (!exercise) {
+      return null;
     }
   }, []);
 
   const checkAnswer = () => {
+    // if (isAuth) {
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
     } else {
       setErrorMessage(answer.error);
     }
+    if (exercise.type === 'quiz') {
+      dispatch(sendAnswer(exercise.id, answer.id, exercise.xp));
+    }
+    // } else {
+    //   setRegistrationModalOpen(true);
+    // }
   };
 
   return (
@@ -67,6 +72,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
             <Exercise exercise={exercise} />
             <NormalInstruction
               answer={answer}
+              xp={exercise.xp}
               handleAnswer={handleAnswer}
               exercise={exercise}
               onSubmit={() => setCompletedTaskModalOpen(true)}
@@ -82,16 +88,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
                       Подсказка (-30 XP)
                     </Button>
                   ))}
-                <Button
-                  variant="containedPurple"
-                  onClick={() => {
-                    // if (isAuth) {
-                    checkAnswer();
-                    // } else {
-                    //   setRegistrationModalOpen(true);
-                    // }
-                  }}
-                >
+                <Button variant="containedPurple" onClick={checkAnswer}>
                   Ответить
                 </Button>
               </div>

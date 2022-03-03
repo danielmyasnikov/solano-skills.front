@@ -12,6 +12,12 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
   useEffect(() => {
     setShowAnswer(true);
   }, [exercise]);
+
+  const answerHandler = () => {
+    onSetSolution();
+    setShowAnswer(false);
+  };
+
   return (
     <>
       <div className={cn(styles.hint, styles.hintQuiz)}>
@@ -35,14 +41,7 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
               </div>
             )}
             {solution && showAnswer && (
-              <Button
-                className={styles.btn}
-                variant="outlinePurple"
-                onClick={() => {
-                  onSetSolution();
-                  setShowAnswer(false);
-                }}
-              >
+              <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
                 Показать ответ (-70 XP)
               </Button>
             )}
@@ -53,13 +52,20 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
   );
 };
 
-export const NormalHint = ({ hint, onClick, solution, onSetSolution }) => {
+export const NormalHint = ({ hint, onClick, solution, onSetSolution, onAnswer }) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
   const exercise = useSelector(selectExercise);
   const [showAnswer, setShowAnswer] = useState(true);
   useEffect(() => {
     setShowAnswer(true);
   }, [exercise]);
+
+  const answerHandler = () => {
+    onSetSolution();
+    setShowAnswer(false);
+    onAnswer();
+  };
+
   return (
     <>
       <div className={styles.hint}>
@@ -83,14 +89,7 @@ export const NormalHint = ({ hint, onClick, solution, onSetSolution }) => {
               </div>
             )}
             {solution && showAnswer && (
-              <Button
-                className={styles.btn}
-                variant="outlinePurple"
-                onClick={() => {
-                  onSetSolution();
-                  setShowAnswer(false);
-                }}
-              >
+              <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
                 Показать ответ (-70 XP)
               </Button>
             )}
@@ -101,7 +100,14 @@ export const NormalHint = ({ hint, onClick, solution, onSetSolution }) => {
   );
 };
 
-export const BulletHint = ({ hint, activeExercise, onClick, solution, onSetSolution }) => {
+export const BulletHint = ({
+  hint,
+  activeExercise,
+  onClick,
+  solution,
+  onSetSolution,
+  onAnswer,
+}) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
   const exercise = useSelector(selectExercise);
   const [showAnswer, setShowAnswer] = useState(true);
@@ -111,6 +117,12 @@ export const BulletHint = ({ hint, activeExercise, onClick, solution, onSetSolut
   useEffect(() => {
     setShowAnswer(true);
   }, [activeExercise]);
+
+  const answerHandler = () => {
+    onSetSolution();
+    setShowAnswer(false);
+    onAnswer();
+  };
   return (
     <>
       <div className={styles.hint}>
@@ -138,14 +150,7 @@ export const BulletHint = ({ hint, activeExercise, onClick, solution, onSetSolut
               </div>
             )}
             {solution && showAnswer && (
-              <Button
-                className={styles.btn}
-                variant="outlinePurple"
-                onClick={() => {
-                  onSetSolution();
-                  setShowAnswer(false);
-                }}
-              >
+              <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
                 Показать ответ (-70 XP)
               </Button>
             )}

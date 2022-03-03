@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.less';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FeedbackModal from '@components/common/modals/feedback/index.js';
 import CompletedTask from '@components/common/modals/completedTask';
 import { selectExercise } from '@store/exercise/selector';
@@ -13,11 +13,11 @@ import Terminal from '@components/common/terminal';
 import Output from '@components/common/output';
 import RadioButton from '@components/mui/radioButton';
 import { Exercise } from '@components/common/exercise';
+import { sendAnswer } from '@store/exercise/actions';
 
 function BulletPointExercise({ onSubmit, isAuth }) {
   const [solution, setSolution] = useState();
   const [bytePayload, setBytePayload] = useState([]);
-  const [xp, setXp] = useState(0);
   const [doneExercises, setDoneExercises] = useState([]);
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [hint, setHint] = useState();
@@ -32,17 +32,9 @@ function BulletPointExercise({ onSubmit, isAuth }) {
   const [errorMessage, setErrorMessage] = useState();
   const errorRef = useRef();
   const exercise = useSelector(selectExercise);
+  const [xp, setXp] = useState(exercise.nested_exercises[activeExercise].xp);
   const terminal = useSelector(selectTerminal);
-  let xpSum = 0;
-  const calcXp = () => {
-    // для подсчета после каждой выполненного упражнения
-    // if (!doneExercises?.find((item) => item.activeExercise === activeExercise)) {
-    //   setXp(xp + exercise.nested_exercises[activeExercise].xp);
-    // }
-
-    exercise.nested_exercises.map((item) => (xpSum += item.xp));
-    setXp(xpSum);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (terminal.message.status === 'success') {
@@ -84,7 +76,6 @@ function BulletPointExercise({ onSubmit, isAuth }) {
         setDoneExercises([...doneExercises, { activeExercise }]);
         setActiveExercise(activeExercise + 1);
       } else {
-        calcXp();
         setDoneExercises([...doneExercises, { activeExercise }]);
         setCompletedTaskModalOpen(true);
       }
@@ -92,15 +83,25 @@ function BulletPointExercise({ onSubmit, isAuth }) {
   }, [correct]);
 
   useEffect(() => {
+    setXp(exercise?.nested_exercises[activeExercise].xp);
+  }, [activeExercise]);
+
+  useEffect(() => {
     if (terminal.message.error) {
       errorRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [terminal]);
 
+  const handleHelp = () => {
+    setXp(xp - 30);
+    setHint(true);
+  };
+
   const checkAnswer = () => {
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
+      dispatch(sendAnswer(exercise.id, exercise?.nested_exercises[activeExercise].id, xp));
     } else {
       setErrorMessage(answer.error);
     }
@@ -153,11 +154,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
                   <div className={styles.btnContainer}>
                     {!hint === false ||
                       (withoutHint === true && (
-                        <Button
-                          className={styles.btn}
-                          variant="outlinePurple"
-                          onClick={() => setHint(true)}
-                        >
+                        <Button className={styles.btn} variant="outlinePurple" onClick={handleHelp}>
                           Подсказка (-30 XP)
                         </Button>
                       ))}
@@ -179,11 +176,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
           </div>
           {!hint === false ||
             (withoutHint === true && !isQuiz && (
-              <Button
-                className={styles.hintBtn}
-                variant="outlinePurple"
-                onClick={() => setHint(true)}
-              >
+              <Button className={styles.hintBtn} variant="outlinePurple" onClick={handleHelp}>
                 Подсказка (-30 XP)
               </Button>
             ))}
@@ -193,6 +186,7 @@ function BulletPointExercise({ onSubmit, isAuth }) {
             onClick={() => {
               setFeedbackModalOpen(true);
             }}
+            onAnswer={() => setXp(xp - 70)}
             solution={true}
             onSetSolution={() => setSolution(exercise?.nested_exercises[activeExercise].solution)}
           />
@@ -218,6 +212,8 @@ function BulletPointExercise({ onSubmit, isAuth }) {
           exerciseId={exercise?.nested_exercises[activeExercise].id}
           correct={correct}
           isAuth={isAuth}
+          onAnswer={() => setXp(exercise?.nested_exercises[activeExercise].xp)}
+          xp={xp}
           bytePayload={bytePayload}
           isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
         />

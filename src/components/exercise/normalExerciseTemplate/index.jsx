@@ -19,6 +19,7 @@ import Draggable from '@components/common/draggable';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
+  const [xp, setXp] = useState(0);
   const [height, setHeight] = useState(0);
   const [isWarningHidden, setIsWarningHidden] = useState(true);
   const [solution, setSolution] = useState();
@@ -67,6 +68,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   }, [terminal]);
 
   useEffect(() => {
+    setXp(exercise.xp);
     setHeight(contentRef?.current?.offsetHeight);
     if (!localStorage.getItem('warning')) {
       setIsWarningHidden(false);
@@ -76,6 +78,11 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const closeWarning = () => {
     localStorage.setItem('warning', 'hidden');
     setIsWarningHidden(true);
+  };
+
+  const helpHandler = (val) => {
+    setHint(true);
+    setXp(xp - val);
   };
 
   return (
@@ -102,7 +109,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
               <Button
                 className={styles.hintBtn}
                 variant="outlinePurple"
-                onClick={() => setHint(true)}
+                onClick={() => helpHandler(30)}
               >
                 Подсказка (-30 XP)
               </Button>
@@ -112,6 +119,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
             onClick={() => {
               setFeedbackModalOpen(true);
             }}
+            onAnswer={() => helpHandler(70)}
             solution={true}
             onSetSolution={() => setSolution(exercise.solution)}
           />
@@ -134,6 +142,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
         <Terminal
           solution={solution}
           sampleCode={exercise.sample_code}
+          xp={xp}
           exerciseId={exerciseId}
           correct={correct}
           isAuth={isAuth}
