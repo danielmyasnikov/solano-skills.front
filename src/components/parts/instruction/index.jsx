@@ -9,7 +9,7 @@ export const InstructionQuizPart = ({ exercise, handleAnswer, answer }) => {
 
   return (
     <div className={styles.quiz}>
-      {exercise.instruction}
+      <div dangerouslySetInnerHTML={{ __html: exercise.instruction }}></div>
       {exercise.answers.map((item) => (
         <React.Fragment key={item.value}>
           <RadioButton

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -16,6 +17,7 @@ import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
 import WarningMobile from '@components/common/warningMobile';
 import Draggable from '@components/common/draggable';
+import UnixShell from '../../common/unixshell';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
@@ -23,6 +25,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [height, setHeight] = useState(0);
   const [isWarningHidden, setIsWarningHidden] = useState(true);
   const [solution, setSolution] = useState();
+  const { search } = useLocation();
   const [hint, setHint] = useState();
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
@@ -34,6 +37,13 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const layoutRef = useRef();
   const exercise = useSelector(selectExercise);
   const terminal = useSelector(selectTerminal);
+  const [isUnixShell, setIsUnixShell] = useState(false);
+
+  useEffect(() => {
+    if (search === '?is_unix_shell') {
+      setIsUnixShell(true);
+    }
+  }, [search]);
 
   useEffect(() => {
     if (terminal.message.status === 'success') {
@@ -139,17 +149,22 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
         )}
       </div>
       <div className={styles.terminal}>
-        <Terminal
-          solution={solution}
-          sampleCode={exercise.sample_code}
-          xp={xp}
-          exerciseId={exerciseId}
-          correct={correct}
-          isAuth={isAuth}
-          bytePayload={bytePayload}
-          isGraphRequired={exercise.is_graph_required}
-        />
-        <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+        {!isUnixShell ? (
+          <>
+            <Terminal
+              solution={solution}
+              sampleCode={exercise.sample_code}
+              exerciseId={exerciseId}
+              correct={correct}
+              isAuth={isAuth}
+              bytePayload={bytePayload}
+              isGraphRequired={exercise.is_graph_required}
+            />
+            <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+          </>
+        ) : (
+          <UnixShell />
+        )}
       </div>
     </>
   );

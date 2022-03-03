@@ -6,8 +6,17 @@ import courseSaga from './course/sagas';
 import profileSaga from './profile/sagas';
 
 import authSaga from './auth/sagas';
+import bashShellSaga from './bashShell/sagas';
 
 export default function* rootSaga() {
-  const sagas = [terminalSaga, exerciseSaga, coursesSaga, courseSaga, authSaga, profileSaga];
+  const sagas = [
+    terminalSaga,
+    exerciseSaga,
+    coursesSaga,
+    courseSaga,
+    authSaga,
+    profileSaga,
+    bashShellSaga,
+  ];
   yield all(sagas.map((s) => spawn(s)));
 }
