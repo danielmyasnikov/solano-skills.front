@@ -157,6 +157,8 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
               exerciseId={exerciseId}
               correct={correct}
               isAuth={isAuth}
+              xp={xp}
+              onAnswer={() => setXp(exercise.xp)}
               bytePayload={bytePayload}
               isGraphRequired={exercise.is_graph_required}
             />
