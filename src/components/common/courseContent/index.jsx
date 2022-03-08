@@ -92,7 +92,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                   </div>
                   {partItem.progress === 100 ? (
                     <Button variant="containedBlack" disabled={true} className={styles.btn}>
-                      Изучено <DoneIcon font-size={'small'}/>
+                      Изучено <DoneIcon font-size={'small'} />
                     </Button>
                   ) : partItem.progress === 0 ? (
                     <Button variant="outlinePurple" className={styles.btn}>
@@ -168,7 +168,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                   <div
                     key={item.title}
                     onClick={() => {
-                      history.push(`/courses/${slug}/exercises/${item.exercise_id}`);
+                      history.push(`/courses/${slug}/exercises/${item.id}`);
                       if (onClose) {
                         onClose();
                       }

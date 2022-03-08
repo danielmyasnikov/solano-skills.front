@@ -12,7 +12,7 @@ export const VideoPlayer = ({ id, xp, sourceData }) => {
   const timeHandler = useCallback(() => dispatch(sendXpByVideo(id, xp)), [dispatch, id, xp]);
 
   useEffect(() => {
-    if (ref !== undefined) {
+    if (ref && ref.current !== undefined) {
       const timeInterval = setInterval(() => {
         const plyrData = ref.current.plyr;
         const currentTime = Math.floor(plyrData.currentTime);
