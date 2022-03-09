@@ -69,10 +69,11 @@ function ExercisePage() {
     dispatch(clearTerminal());
     if (authCounter > 1) {
       if (isAuth) {
+        console.log('tyt');
         dispatch(getExercise(courseId, exerciseId, headers));
-      } else {
-        dispatch(getExercise(courseId, exerciseId));
       }
+    } else {
+      dispatch(getExercise(courseId, exerciseId));
     }
   }, [authCounter, courseId, dispatch, exerciseId, headers, isAuth, location.pathname]);
 
