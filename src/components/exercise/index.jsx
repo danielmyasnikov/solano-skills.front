@@ -69,7 +69,6 @@ function ExercisePage() {
     dispatch(clearTerminal());
     if (authCounter > 1) {
       if (isAuth) {
-        console.log('tyt');
         dispatch(getExercise(courseId, exerciseId, headers));
       }
     } else {
