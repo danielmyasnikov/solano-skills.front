@@ -23,10 +23,3 @@ export const sendAnswer = (exerciseId, courseId, xp, headers) => {
     payload: { exerciseId, courseId, xp, headers },
   };
 };
-
-export const sendXpByVideo = (exerciseId, xp) => {
-  return {
-    type: SEND_VIDEO_EXERCISE_REQUESTED,
-    payload: { exerciseId, xp },
-  };
-};
