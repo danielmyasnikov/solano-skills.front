@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      {/* {isLogIn && <Redirect to="/sing-in" />} */}
+      {/* {isLogIn && <Redirect to="/sign-in" />} */}
       <Switch>
         {routes.map((route, i, headerVariant) => (
           <Route exact={route.exact} path={route.path} key={route.path}>

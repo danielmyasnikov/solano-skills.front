@@ -112,7 +112,7 @@ const Sidebar = ({
                 <React.Fragment key={label}>
                   <Link
                     to={link}
-                    className={cn({ [styles.hideLink]: label === 'Прогресс' && !isAuth })}
+                    className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
                   >
                     <Box sx={{ margin: '0 20px' }}>
                       <List>
@@ -150,13 +150,15 @@ const Sidebar = ({
                 </React.Fragment>
               ))}
             </div>
-            <Button
-              className={styles.btn}
-              variant="outlineGreen"
-              onClick={handleUpdateSubscription}
-            >
-              Обновить подписку
-            </Button>
+            {isAuth && (
+              <Button
+                className={styles.btn}
+                variant="outlineGreen"
+                onClick={handleUpdateSubscription}
+              >
+                Обновить подписку
+              </Button>
+            )}
           </div>
         </div>
       </div>

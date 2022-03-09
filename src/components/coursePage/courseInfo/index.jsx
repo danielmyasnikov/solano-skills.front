@@ -29,7 +29,7 @@ export const CourseInfo = ({ hours, videos, exercises, xps }) => {
 
       <div className={styles.btnWrapper}>
         <Button variant="containedPurple" className={styles.btn}>
-          Практиковаться
+          Перейти к обучению
         </Button>
         <Button variant="outlinePurple">Пройти курс снова</Button>
       </div>

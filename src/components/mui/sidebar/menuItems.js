@@ -11,8 +11,8 @@ import Groups from '@assets/Groups';
 import Webinars from '@assets/Webinars';
 
 export const profileItems = [
-  { label: 'Прогресс', icon: <Progress />, link: '/progress' },
-  { label: 'Закладки', icon: <Bookmarks />, link: '/courses3' },
+  // { label: 'Прогресс', icon: <Progress />, link: '/progress' },
+  // { label: 'Закладки', icon: <Bookmarks />, link: '/courses3' },
   { label: 'Профессии', icon: <Professions />, link: '/courses2' },
   { label: 'Навыки', icon: <Skills />, link: '/skills' },
   { label: 'Курсы', icon: <Courses />, link: '/courses' },

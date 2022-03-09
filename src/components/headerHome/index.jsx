@@ -22,7 +22,7 @@ const HeaderHome = ({ handleBurger }) => (
           </div>
         </div>
         <div className={styles.header__block}>
-          <Link to={'/sing-in'}>
+          <Link to={'/sign-in'}>
             <Button variant="outlinePurple">Войти</Button>
           </Link>
           <Link to={'/registration'}>
