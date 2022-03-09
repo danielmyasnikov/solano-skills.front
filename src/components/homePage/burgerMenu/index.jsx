@@ -1,13 +1,9 @@
 import React from 'react';
-import cn from 'classnames'
-import styles from './styles.module.less'
+import cn from 'classnames';
+import styles from './styles.module.less';
 
-const BurgerMenu = isShow => {
-  return (
-    <div className={cn(styles.menu, {[styles.shown]: isShow === true})}>
+const BurgerMenu = (isShow) => {
+  return <div className={cn(styles.menu, { [styles.shown]: isShow === true })}></div>;
+};
 
-    </div>
-  );
-}
- 
 export default BurgerMenu;

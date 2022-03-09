@@ -15,9 +15,7 @@ import BurgerMenu from './burgerMenu';
 export const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleBurger = () => {
-    setShowMenu(!showMenu);
-  };
+  const handleBurger = () => setShowMenu(!showMenu);
 
   const renderImage = (img) => {
     switch (img) {
