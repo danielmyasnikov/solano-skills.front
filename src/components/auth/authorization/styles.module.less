@@ -1,5 +1,6 @@
 .title {
   max-width: 450px;
+  padding-top: 200px;
   margin-bottom: 25px;
   font-family: Jost;
   font-weight: 600;
@@ -88,8 +89,13 @@
   color: #b8b8b8;
 }
 
-.infoLink {
+.infoLink,
+.infoLinkAsButton {
   color: var(--purple);
+}
+
+.infoLinkAsButton {
+  cursor: pointer;
 }
 
 .btn {
@@ -111,4 +117,10 @@
   color: #f44336;
   font-size: 14px;
   line-height: 142.9%;
+}
+
+@media screen and (max-width: 850px) {
+  .toAuth {
+    padding-bottom: 50px;
+  }
 }

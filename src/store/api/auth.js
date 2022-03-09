@@ -25,6 +25,19 @@ export const singInApi = ({ email, password }) => {
     });
 };
 
+export const requestPasswordResetApi = ({ email, configName }) => {
+  console.log(email, configName);
+  return axios
+    .post(`${process.env.REACT_APP_API_COURSE}/auth/password`, {
+      email: email,
+      config_name: configName,
+    })
+    .then((res) => res)
+    .catch((error) => {
+      throw error;
+    });
+};
+
 export const signInByPhoneApi = ({ phonenumber }) => {
   return axios
     .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {

@@ -13,7 +13,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .logoContainer {
@@ -38,4 +37,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 850px) {
+  .content {
+    margin-top: 70px;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 514px) {
+  .container {
+    padding: 70px 20px;
+  }
 }

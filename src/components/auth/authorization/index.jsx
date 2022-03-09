@@ -15,6 +15,7 @@ import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import axios from 'axios';
 import Terms from '../terms';
+import { ForgotPassword } from '../forgotPassword';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -31,25 +32,14 @@ export const Authorization = () => {
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
 
-  function handleChecked() {
+  const handleChecked = () => {
     setCheckedError('');
     setChecked(!checked);
-  }
+  };
 
-  useEffect(() => {
-    if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
-      setButtonTitle('Авторизоваться');
-    }
-    if (isRegistrationByPhone && isPhoneNumberConfirmation) {
-      setButtonTitle('Авторизоваться');
-    }
-    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
-      setButtonTitle('Отправить код');
-    }
-  }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
-
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { value, name } = e.target;
     switch (name) {
       case 'email':
@@ -69,7 +59,7 @@ export const Authorization = () => {
       default:
         return undefined;
     }
-  }
+  };
 
   const submit = () => {
     if (!isRegistrationByPhone) {
@@ -96,24 +86,36 @@ export const Authorization = () => {
     }
   };
 
-  useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
-    }
-  }, [headers]);
+  const handleRemberMe = () => setRememberMe(!rememberMe);
 
-  function handleRemberMe() {
-    setRememberMe(!rememberMe);
-  }
-
-  function handleAuthMethod() {
+  const handleAuthMethod = () => {
     dispatch(
       AuthStore.Actions.clearErrors({
         errorMassege: '',
       }),
     );
     setIsRegistrationByPhone(!isRegistrationByPhone);
-  }
+  };
+
+  const forgotPasswordHandler = () => setForgotPassword(!forgotPassword);
+
+  useEffect(() => {
+    if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
+      setButtonTitle('Авторизоваться');
+    }
+    if (isRegistrationByPhone && isPhoneNumberConfirmation) {
+      setButtonTitle('Авторизоваться');
+    }
+    if (isRegistrationByPhone && !isPhoneNumberConfirmation) {
+      setButtonTitle('Отправить код');
+    }
+  }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
+
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      history.push('/courses');
+    }
+  }, [headers]);
 
   useEffect(() => {
     let timer;
@@ -130,63 +132,80 @@ export const Authorization = () => {
 
   return (
     <AuthContainer>
-      <h1 className={styles.title}>Добро пожаловать</h1>
-      {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
-        <AuthorizationByEmail
-          handleChange={handleChange}
-          email={email}
-          password={password}
-          errors={errors}
-          rememberMe={rememberMe}
-          handleRemberMe={handleRemberMe}
-          handleAuthMethod={handleAuthMethod}
-        />
-      )}
-      {isRegistrationByPhone && !isPhoneNumberConfirmation && (
+      {(forgotPassword && <ForgotPassword />) || (
         <>
-          <ByPhoneNumber
-            errors={errors}
-            handleAuthMethod={handleAuthMethod}
-            authMethodText="Авторизоваться по Email"
-            handleChange={handleChange}
-            phoneNumber={phoneNumber}
-            countTime={countTime}
-          />
-          <Terms
-            isPhoneNumber={isRegistrationByPhone}
-            checked={checked}
-            handleChecked={handleChecked}
-            checkedError={checkedError}
-          />
+          <h1 className={styles.title}>Добро пожаловать</h1>
+          {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
+            <AuthorizationByEmail
+              handleChange={handleChange}
+              email={email}
+              password={password}
+              errors={errors}
+              rememberMe={rememberMe}
+              handleRemberMe={handleRemberMe}
+              handleAuthMethod={handleAuthMethod}
+              onForgotPassword={forgotPasswordHandler}
+            />
+          )}
+          {isRegistrationByPhone && !isPhoneNumberConfirmation && (
+            <>
+              <ByPhoneNumber
+                errors={errors}
+                handleAuthMethod={handleAuthMethod}
+                authMethodText="Авторизоваться по Email"
+                handleChange={handleChange}
+                phoneNumber={phoneNumber}
+                countTime={countTime}
+              />
+              <Terms
+                isPhoneNumber={isRegistrationByPhone}
+                checked={checked}
+                handleChecked={handleChecked}
+                checkedError={checkedError}
+              />
+            </>
+          )}
+          {isPhoneNumberConfirmation && (
+            <PhoneNumberConfirmation
+              errors={errors}
+              handleChange={handleChange}
+              confirmationСode={confirmationСode}
+              handleAuthMethod={() => {
+                setConfirmationCode('');
+                setIsPhoneNumberConfirmation(false);
+              }}
+            />
+          )}
+          <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
+            {buttonTitle}
+          </Button>
+          <span className={styles.error}>{errors.errorMassege}</span>
         </>
       )}
-      {isPhoneNumberConfirmation && (
-        <PhoneNumberConfirmation
-          errors={errors}
-          handleChange={handleChange}
-          confirmationСode={confirmationСode}
-          handleAuthMethod={() => {
-            setConfirmationCode('');
-            setIsPhoneNumberConfirmation(false);
-          }}
-        />
-      )}
-      <Button className={styles.btn} variant="outlinePurple" onClick={submit}>
-        {buttonTitle}
-      </Button>
-      <span className={styles.error}>{errors.errorMassege}</span>
 
       <div className={styles.socialNetworksWrap}>
         <SocialNetworks />
       </div>
 
       <div className={styles.toAuth}>
-        <span className={styles.text}>
-          {'У вас нет аккаунта? '}
-          <Link className={styles.infoLink} to={'/registration'}>
-            Зарегистрироваться
-          </Link>
-        </span>
+        {(forgotPassword && (
+          <span className={styles.text}>
+            {'У вас уже есть аккаунт? '}
+            <span
+              className={styles.infoLinkAsButton}
+              onClick={() => setForgotPassword(!forgotPassword)}
+            >
+              Войдите
+            </span>
+          </span>
+        )) || (
+          <span className={styles.text}>
+            {'У вас нет аккаунта? '}
+            <Link className={styles.infoLink} to={'/registration'}>
+              Зарегистрироваться
+            </Link>
+          </span>
+        )}
       </div>
     </AuthContainer>
   );

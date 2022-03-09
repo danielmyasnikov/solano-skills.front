@@ -18,7 +18,10 @@ export const AuthorizationByEmail = ({
   checkedError,
   checked,
   handleAuthMethod,
+  onForgotPassword,
 }) => {
+  const forgotPasswordHandler = () => onForgotPassword();
+
   return (
     <>
       <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.errorMassege })}>
@@ -43,7 +46,9 @@ export const AuthorizationByEmail = ({
             Запомнить меня
           </div>
         </div>
-        <div className={styles.forgotPassword}>Забыли пароль?</div>
+        <div className={styles.forgotPassword} onClick={forgotPasswordHandler}>
+          Забыли пароль?
+        </div>
       </div>
     </>
   );

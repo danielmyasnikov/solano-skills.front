@@ -9,6 +9,8 @@ import {
   SIGN_IN_BY_PHONE_VERIFY_FAILED,
   SIGN_IN_BY_PHONE_SUCCESSED,
   SIGN_IN_BY_PHONE_VERIFY,
+  REQUEST_PASSWORD_RESET_SUCCESSED,
+  REQUEST_PASSWORD_RESET_FAILED,
 } from './actions';
 
 const initialState = {
@@ -32,18 +34,24 @@ export default function authReducer(state = initialState, action) {
       return { ...state, errors: action.payload };
     }
     case SIGN_IN_BY_PHONE_SUCCESSED: {
-      return {...state, errors: {}}
+      return { ...state, errors: {} };
     }
     case SIGN_IN_BY_PHONE_VERIFY_FAILED: {
-      return {...state, errors: { ...state.errors, ...action.payload }}
+      return { ...state, errors: { ...state.errors, ...action.payload } };
     }
     case SIGN_IN_BY_PHONE_VERIFY: {
-      return {...state, errors: {}}
+      return { ...state, errors: {} };
     }
     case SING_IN_FAILED: {
       return { ...state, errors: action.payload };
     }
     case SIGN_IN_BY_PHONE_FAILED: {
+      return { ...state, errors: { ...action.payload } };
+    }
+    case REQUEST_PASSWORD_RESET_SUCCESSED: {
+      return { ...state, errors: {} };
+    }
+    case REQUEST_PASSWORD_RESET_FAILED: {
       return { ...state, errors: { ...action.payload } };
     }
     case CLEAR_ERRORS: {
