@@ -6,16 +6,14 @@ import { CoursesDark } from '@assets/CoursesDark';
 import styles from './styles.module.less';
 import skillLogo from '@assets/skill.png';
 
-const Skill = ({ title, description, info }) => {
+const Profession = ({ title, description, info }) => {
   return (
-    <div className={styles.skill}>
+    <div className={styles.profession}>
       <div className={styles.main}>
         <div className={styles.logo}>
           <img src={skillLogo} alt={skillLogo} />
         </div>
-        <div className={styles.title}>
-          <div>{title}</div>
-        </div>
+        <div className={styles.title}>{title}</div>
       </div>
       <div className={styles.footer}>
         {info.progress ? (
@@ -44,13 +42,13 @@ const Skill = ({ title, description, info }) => {
       <div className={styles.description}>
         <div className={styles.text}>{description}</div>
         {info.progress ? (
-          <Link to={'/skills/1'}>Продолжить</Link>
+          <Link to={'/professions/1'}>Продолжить</Link>
         ) : (
-          <Link to={'/skills/1'}>Начать</Link>
+          <Link to={'/professions/1'}>Начать</Link>
         )}
       </div>
     </div>
   );
 };
 
-export default Skill;
+export default Profession;

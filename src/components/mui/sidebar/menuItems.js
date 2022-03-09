@@ -13,7 +13,7 @@ import Webinars from '@assets/Webinars';
 export const profileItems = [
 	{ label: 'Прогресс', icon: <Progress />, link: '/courses4' },
 	{ label: 'Закладки', icon: <Bookmarks />, link: '/courses3' },
-	{ label: 'Профессии', icon: <Professions />, link: '/courses2' },
+	{ label: 'Профессии', icon: <Professions />, link: '/professions' },
 	{ label: 'Навыки', icon: <Skills />, link: '/skills' },
 	{ label: 'Курсы', icon: <Courses />, link: '/courses' },
 	{ label: 'Сертификаты', icon: <Certificates />, link: '/certificates' },
