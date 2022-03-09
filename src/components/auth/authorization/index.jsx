@@ -25,7 +25,7 @@ export const Authorization = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
-  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(true);
+  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [countTime, setCountTime] = useState(0);
@@ -183,9 +183,9 @@ export const Authorization = () => {
         </>
       )}
 
-      <div className={styles.socialNetworksWrap}>
+      {/* <div className={styles.socialNetworksWrap}>
         <SocialNetworks />
-      </div>
+      </div> */}
 
       <div className={styles.toAuth}>
         {(forgotPassword && (

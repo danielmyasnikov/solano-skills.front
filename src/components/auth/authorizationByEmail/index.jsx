@@ -31,7 +31,7 @@ export const AuthorizationByEmail = ({
         <Input value={email} handleChange={handleChange} name="email" />
       </div>
       <div onClick={() => handleAuthMethod()} className={styles.link}>
-        Авторизоваться по номеру телефона
+        {/* Авторизоваться по номеру телефона */}
       </div>
       <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.errorMassege })}>
         Пароль

@@ -5,7 +5,7 @@ import styles from './styles.module.less';
 import HeaderLogo from '@assets/homepage/HeaderLogo';
 import Burger from '@assets/Burger';
 
-const HeaderHome = () => {
+const HeaderHome = ({ handleBurger }) => {
 	return (
 		<Fragment>
 			<div className={styles.wrapper}>
@@ -31,7 +31,7 @@ const HeaderHome = () => {
 								Зарегистрироваться
 							</Button>
 						</Link>
-						<div className={styles.header__burger}>
+						<div className={styles.header__burger} onClick={() => handleBurger}>
 							<Burger />
 						</div>
 					</div>

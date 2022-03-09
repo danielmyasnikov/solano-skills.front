@@ -20,7 +20,7 @@ export const Registration = ({ variant, isModal }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
-  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(true);
+  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
@@ -173,7 +173,7 @@ export const Registration = ({ variant, isModal }) => {
             <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
           </div>
         )}
-        <SocialNetworks variant={variant} />
+        {/* <SocialNetworks variant={variant} /> */}
         <div className={styles.toAuth}>
           <span className={styles.text}>
             {'Уже есть аккаунт? '}
