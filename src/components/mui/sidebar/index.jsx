@@ -10,13 +10,19 @@ import Logo from '@assets/Logo';
 import cn from 'classnames';
 import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
-import { useRef } from 'react';
-
 import { useSelector } from 'react-redux';
 
 import * as AuthStore from '@store/auth';
+import { useRef } from 'react';
 
-const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, headerTarget }) => {
+const Sidebar = ({
+  sidebarFixed,
+  isSidebarOpen,
+  closeSidebar,
+  openSidebar,
+  headerTarget,
+  onUpdateSubscription,
+}) => {
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
 
@@ -46,6 +52,8 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
       closeSidebar();
     }
   };
+
+  const handleUpdateSubscription = () => onUpdateSubscription();
 
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -142,7 +150,11 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
                 </React.Fragment>
               ))}
             </div>
-            <Button className={styles.btn} variant="outlineGreen">
+            <Button
+              className={styles.btn}
+              variant="outlineGreen"
+              onClick={handleUpdateSubscription}
+            >
               Обновить подписку
             </Button>
           </div>

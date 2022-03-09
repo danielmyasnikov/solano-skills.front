@@ -1,0 +1,121 @@
+.paymentContainerTariff {
+  width: 560px;
+  height: max-content;
+  margin-left: 20px;
+  background: var(--color-white);
+  box-shadow: 5px 4px 56px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+}
+
+.tariffInfo {
+  display: flex;
+  justify-content: space-between;
+  padding: 28px 40px 40px;
+}
+
+.tariffInfoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--light-gray);
+}
+
+.tariffInfoRight,
+.tariffInfoLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.tariffInfoRight {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.tariffInfoLeft {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.tariffInfoRight > span {
+  margin-bottom: 20px;
+}
+
+.tariffInfoRight > span:last-child {
+  margin-bottom: 0;
+}
+
+.tariffInfoLeft > span {
+  margin-bottom: 20px;
+}
+
+.tariffInfoLeft > span:last-child {
+  margin-bottom: 0;
+}
+
+.tariffInfoLeftText {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--dark-grayish-violet);
+}
+
+.tariffInfoRightText {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: #594d6d;
+}
+
+.tariffCost {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 33px 30px 40px;
+  background: linear-gradient(180deg, #7469ef 0%, #524aa8 100%);
+  border-radius: 0px 0px 16px 16px;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+}
+
+.tariffCostDifference {
+  display: flex;
+  align-items: center;
+}
+
+.tariffCostOld {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  text-decoration-line: line-through;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+@media screen and (max-width: 1386px) {
+  .tariffInfoHeader {
+    font-size: 14px;
+  }
+
+  .tariffInfoLeftText {
+    font-size: 18px;
+  }
+
+  .tariffInfoRightText {
+    font-size: 24px;
+  }
+
+  .tariffCost {
+    font-size: 24px;
+  }
+
+  .tariffCostOld {
+    font-size: 18px;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { ModalTariffSelection } from './ModalTariffSelection';
 import styles from './styles.module.less';
 import Button from '@components/mui/button';
@@ -12,13 +12,16 @@ import { useSelector } from 'react-redux';
 import { ModalActionMenu } from './ModalActionMenu';
 import cn from 'classnames';
 
-const Header = ({ headerRef, handleSidebar }) => {
+const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearch = useDebounce(search, 500);
   const [showModal, setshowModal] = useState(false);
   const [showMenuModal, setshowMenuModal] = useState(false);
 
-  const handleShowModal = () => setshowModal(!showModal);
+  const handleShowModal = () => {
+    onCloseModal();
+    setshowModal(!showModal);
+  };
 
   const profile = useSelector(selectProfile);
 
@@ -28,6 +31,10 @@ const Header = ({ headerRef, handleSidebar }) => {
     setSearchValue(e.target.value);
     debouncedSearch(e.target.value);
   };
+
+  useEffect(() => {
+    setshowModal(isShowModal);
+  }, [isShowModal]);
 
   const menuHandler = () => {
     setshowMenuModal(!showMenuModal);
