@@ -12,13 +12,31 @@ import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 
+import { useSelector } from 'react-redux';
+
+import * as AuthStore from '@store/auth';
+
 const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, headerTarget }) => {
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
+
+  const [isAuth, setIsAuth] = useState(false);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
   const location = useLocation();
   const sidebarRef = useRef();
   const windowWidth = useWindowWidth();
   const breakpoint = 1300;
+
+  const modalSidebarFixedClassNames = cn({
+    [styles.modal]: !sidebarFixed,
+    [styles.modalFixed]: sidebarFixed,
+    [styles.modalOpened]: isSidebarOpen,
+  });
+  const backdropSidebarFixedClassNames = cn({
+    [styles.backdrop]: !sidebarFixed && isSidebarOpen,
+    [styles.backdropFixed]: sidebarFixed && isSidebarOpen,
+  });
 
   const handleMouseClick = (event) => {
     if (
@@ -43,6 +61,14 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
   });
 
   useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [headers]);
+
+  useEffect(() => {
     if (isDesktop && sidebarFixed) {
       openSidebar();
     } else {
@@ -55,16 +81,6 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
       setIsDesktop(windowWidth > breakpoint ? true : false);
     }
   }, [windowWidth, sidebarFixed]);
-
-  const modalSidebarFixedClassNames = cn({
-    [styles.modal]: !sidebarFixed,
-    [styles.modalFixed]: sidebarFixed,
-    [styles.modalOpened]: isSidebarOpen,
-  });
-  const backdropSidebarFixedClassNames = cn({
-    [styles.backdrop]: !sidebarFixed && isSidebarOpen,
-    [styles.backdropFixed]: sidebarFixed && isSidebarOpen,
-  });
 
   return (
     <ThemeProvider theme={menuTheme}>
@@ -84,21 +100,20 @@ const Sidebar = ({ sidebarFixed, isSidebarOpen, closeSidebar, openSidebar, heade
                 </Box>
               )}
               <Box className={styles.label}>Профиль</Box>
-              {profileItems.map((item) => (
-                <React.Fragment key={item.label}>
-                  <Link to={item.link}>
-                    <Box
-                      sx={{
-                        margin: '0 20px',
-                      }}
-                    >
+              {profileItems.map(({ label, link, icon }) => (
+                <React.Fragment key={label}>
+                  <Link
+                    to={link}
+                    className={cn({ [styles.hideLink]: label === 'Прогресс' && !isAuth })}
+                  >
+                    <Box sx={{ margin: '0 20px' }}>
                       <List>
                         <ListItem
-                          onClick={() => setActiveTab(item.link)}
-                          className={activeTab === item.link ? styles.activeTab : ''}
+                          onClick={() => setActiveTab(link)}
+                          className={activeTab === link ? styles.activeTab : ''}
                         >
-                          <ListItemIcon>{item.icon}</ListItemIcon>
-                          <ListItemText primary={item.label} />
+                          <ListItemIcon>{icon}</ListItemIcon>
+                          <ListItemText primary={label} />
                         </ListItem>
                       </List>
                     </Box>

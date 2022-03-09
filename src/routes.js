@@ -11,6 +11,7 @@ import { Authorization } from './components/auth/authorization';
 import { PaymentPage } from './components/paymentPage';
 import { SkillsPage } from './components/skillsPage';
 import { SkillPage } from './components/skillPage';
+import { ProgressPage } from './components/progressPage';
 
 export const routes = [
   {
@@ -52,6 +53,12 @@ export const routes = [
   {
     path: '/profile',
     component: Profile,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/progress',
+    component: ProgressPage,
     wrap: true,
     exact: true,
   },
