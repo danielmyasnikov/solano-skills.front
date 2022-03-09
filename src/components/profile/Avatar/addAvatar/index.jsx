@@ -29,8 +29,6 @@ export const AddAvatar = ({ handleClick, open }) => {
 
   const getCroppedImgHandler = (img) => setCropImg(img);
 
-  console.log(cropImg);
-
   const sendImgHandler = () => {
     setModalVisibility(false);
     dispatch(
