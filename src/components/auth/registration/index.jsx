@@ -20,7 +20,7 @@ export const Registration = ({ variant, isModal }) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
-  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
+  const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(true);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
@@ -134,13 +134,14 @@ export const Registration = ({ variant, isModal }) => {
         {isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <>
             <ByPhoneNumber
+              variant={variant}
               handleAuthMethod={handleAuthMethod}
               authMethodText="Регистрация по Email"
               handleChange={handleChange}
               phoneNumber={phoneNumber}
             />
             <Terms
-              isPhoneNumber={isRegistrationByPhone}
+              variant={variant}
               checked={phoneTermsChecked}
               handleChecked={handlePhoneTermsChecked}
               checkedError={phoneTermsCheckedError}
@@ -149,6 +150,7 @@ export const Registration = ({ variant, isModal }) => {
         )}
         {isPhoneNumberConfirmation && (
           <PhoneNumberConfirmation
+            variant={variant}
             handleChange={handleChange}
             confirmationСode={confirmationСode}
             handleAuthMethod={() => {

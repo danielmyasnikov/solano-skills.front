@@ -1,7 +1,6 @@
 import {
   GET_EXERCISE_SUCCESSED,
   SEND_EXERCISE_SUCCESSED,
-  SEND_VIDEO_EXERCISE_SUCCESSED,
 } from './actions';
 
 const initialState = {};

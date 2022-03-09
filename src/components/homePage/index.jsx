@@ -39,7 +39,9 @@ export const HomePage = () => {
                   Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
                   и направлениям в сфере Информационных технологий.
                 </div>
-                <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
+                <div className={styles.offer__btnDiv}>
+                  <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
+                </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
                     <div className={styles.offer__fact__number}>{'>25'}</div>

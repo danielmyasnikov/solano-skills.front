@@ -1,5 +1,5 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { getExerciseApi, sendAnswerApi, sendXpByVideoApi } from '../api/exercise';
+import { getExerciseApi, sendAnswerApi } from '../api/exercise';
 import {
   GET_EXERCISE_REQUESTED,
   GET_EXERCISE_SUCCESSED,
@@ -7,9 +7,6 @@ import {
   SEND_EXERCISE_REQUESTED,
   SEND_EXERCISE_SUCCESSED,
   SEND_EXERCISE_FAILED,
-  SEND_VIDEO_EXERCISE_REQUESTED,
-  SEND_VIDEO_EXERCISE_SUCCESSED,
-  SEND_VIDEO_EXERCISE_FAILED,
 } from './actions';
 
 export function* getExercise(action) {

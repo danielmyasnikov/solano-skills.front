@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import InputMask from 'react-input-mask';
 
 export const PhoneNumberConfirmation = ({
+  variant,
   handleAuthMethod,
   confirmationСode,
   handleChange,
   errors,
 }) => {
   return (
-    <>
+    <div className={styles[variant]}>
       <span className={cn(styles.subTitile)}>Код подтверждения</span>
       <InputMask
         value={confirmationСode}
@@ -26,6 +27,6 @@ export const PhoneNumberConfirmation = ({
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         Изменить номер телефона
       </div>
-    </>
+    </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-
 import { sendAnswer } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import Plyr from 'plyr-react';
