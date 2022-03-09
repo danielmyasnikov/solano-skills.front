@@ -1,3 +1,70 @@
+.home_offer {
+  .subTitile {
+    font-family: 'Nunito';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 127%;
+    color: #7469ef;
+  }
+
+  .link {
+    text-align: center;
+    font-family: 'Nunito';
+    line-height: 142.9%;
+    letter-spacing: -0.015em;
+    color: #7469ef;
+    margin-bottom: 44px;
+  }
+
+  input {
+    background: rgba(255, 255, 255, 0.46);
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(70, 68, 92);
+
+    &::placeholder {
+      font-family: 'Nunito';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      color: rgba(70, 68, 92, 0.33);
+    }
+  }
+}
+
+.home_end {
+  .subTitile {
+    color: var(--color-white);
+  }
+
+  .link {
+    margin-bottom: 49px;
+    font-family: 'Nunito';
+    line-height: 142.9%;
+    text-align: center;
+    color: var(--color-white);
+    text-decoration: underline;
+  }
+
+  input {
+    background: rgba(255, 255, 255, 0.26);
+    border: 1px solid #fff;
+    font-family: 'Nunito';
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+
+    &::placeholder {
+      font-family: 'Nunito';
+      font-weight: 600;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
 .title {
   max-width: 450px;
   margin-bottom: 25px;
@@ -97,4 +164,50 @@
   color: #f44336;
   font-size: 14px;
   line-height: 142.9%;
+}
+
+@media screen and (max-width: 1110px) {
+  .home_offer {
+    .subTitile {
+      font-size: 14px;
+      margin-left: 15px;
+    }
+
+    .link {
+      text-align: left;
+      font-size: 14px;
+      margin-left: 15px;
+      margin-bottom: 25px;
+    }
+
+    input {
+      padding: 12px 15px;
+    }
+  }
+
+  .home_end {
+    .subTitile {
+      font-size: 14px;
+      margin-left: 15px;
+    }
+
+    .link {
+      text-align: left;
+      font-size: 14px;
+      margin-left: 15px;
+      margin-bottom: 25px;
+    }
+
+    input {
+      padding: 12px 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .home_end {
+    input {
+      max-width: 400px;
+    }
+  }
 }

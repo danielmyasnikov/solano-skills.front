@@ -33,6 +33,7 @@ const Terms = ({ variant, handleChecked, checked, checkedError, isPhoneNumber })
       )}
     >
       <CheckboxBtn
+        variant={variant}
         name="registration-terms"
         error={!!checkedError}
         value={checked}

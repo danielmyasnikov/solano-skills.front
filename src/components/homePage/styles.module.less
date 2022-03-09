@@ -25,13 +25,13 @@
   background-blend-mode: luminosity;
   border-radius: 38px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 64px 150px 51px 82px;
   position: relative;
 
   button {
     margin-top: 40px;
-    background-color: #fff;
   }
 
   &__block {
@@ -97,6 +97,12 @@
     line-height: 28px;
     letter-spacing: -0.005em;
     color: #fff;
+  }
+
+  &__btnDiv {
+    button {
+      background: #fff;
+    }
   }
 
   &__facts {
@@ -452,6 +458,7 @@
     height: 34px;
     padding: 0 25px;
     background: #fff4bc;
+    font-family: 'Nunito';
     border-radius: 27px;
     font-weight: 600;
     font-size: 16px;
@@ -468,12 +475,15 @@
     font-weight: 500;
     font-size: 36px;
     line-height: 46px;
+    letter-spacing: 0.005em;
   }
 
   &__text {
     margin: 30px 180px 30px 0;
+    font-family: 'Nunito';
     font-size: 18px;
     line-height: 30px;
+    letter-spacing: -0.005em;
   }
 
   a {
@@ -514,6 +524,7 @@
     height: fit-content;
     bottom: -40px;
     left: -250px;
+    font-family: 'Nunito';
 
     &__title {
       font-weight: bold;
@@ -655,6 +666,7 @@
   margin: 190px auto 100px;
   padding: 50px 70px;
   display: flex;
+  align-items: center;
   background: url('../../assets/homepage/signup.png') left 60px bottom no-repeat,
     linear-gradient(265.28deg, #7469ef 0.27%, #cac3ed 99.93%);
   background-blend-mode: luminosity;
@@ -665,6 +677,7 @@
     width: 50%;
 
     &_left {
+      align-self: flex-start;
       padding-right: 10%;
       font-family: 'Jost';
       font-weight: bold;
@@ -731,10 +744,6 @@
     background: url('../../assets/homepage/offerBg.png') 300px bottom / 612px no-repeat,
       url('../../assets/homepage/offerAir.png') right 20px top 40px no-repeat,
       linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
-
-    &__block {
-      min-height: 635px;
-    }
 
     &__title {
       margin-top: 87px;
@@ -996,7 +1005,6 @@
     }
 
     &__block {
-      min-height: 530px;
       max-width: 450px;
       width: 54%;
 
@@ -1696,6 +1704,7 @@
 
     &__fact {
       margin-top: 0;
+      background: rgba(255, 255, 255, 0.22);
 
       &:last-child {
         margin-left: 5%;
@@ -1976,6 +1985,10 @@
 
     &__fact {
       margin-top: 10px;
+
+      &:last-child {
+        margin-left: 0;
+      }
     }
   }
 
@@ -2072,9 +2085,6 @@
 
   .slogan {
     padding: 28px 20px;
-  }
-
-  .practices {
   }
 
   .practice {

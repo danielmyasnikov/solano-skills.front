@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import InputMask from 'react-input-mask';
 
 export const ByPhoneNumber = ({
+  variant,
   handleAuthMethod,
   authMethodText,
   handleChange,
@@ -11,7 +12,7 @@ export const ByPhoneNumber = ({
   countTime,
 }) => {
   return (
-    <>
+    <div className={styles[variant]}>
       <span className={cn(styles.subTitile)}>Номер телефона</span>
       <InputMask
         value={phoneNumber}
@@ -31,6 +32,6 @@ export const ByPhoneNumber = ({
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         {authMethodText}
       </div>
-    </>
+    </div>
   );
 };
