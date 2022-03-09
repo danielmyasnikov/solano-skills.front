@@ -40,8 +40,8 @@ export const buttonTheme = createTheme({
         {
           props: { variant: 'containedWhite', disabled: true },
           style: {
-            background: '#4A4856!important',
-            color: '#646370!important',
+            background: '#fff!important',
+            color: '#7469EF!important',
           },
         },
         {
@@ -94,9 +94,17 @@ export const buttonTheme = createTheme({
           },
         },
         {
-          props: { variant: 'outlineWhiteHome' },
+          props: { variant: 'outlineWhite', disabled: true },
           style: {
             background: 'none',
+            color: '#4A4856!important',
+            border: '1px solid #4A4856!important',
+          },
+        },
+        {
+          props: { variant: 'outlineWhiteHome' },
+          style: {
+            background: 'rgba(255, 255, 255, 0.24)',
             color: '#fff',
             border: '1px solid #fff',
             '&:hover': {
@@ -107,11 +115,11 @@ export const buttonTheme = createTheme({
           },
         },
         {
-          props: { variant: 'outlineWhite', disabled: true },
+          props: { variant: 'outlineWhiteHome', disabled: true },
           style: {
-            background: 'none',
-            color: '#4A4856!important',
-            border: '1px solid #4A4856!important',
+            background: 'rgba(255, 255, 255, 0.24)',
+            color: '#fff!important',
+            border: '1px solid #fff!important',
           },
         },
         {
@@ -209,6 +217,14 @@ export const buttonTheme = createTheme({
               color: '#fff',
               border: '2px solid #7469EF'
             },
+          },
+        },
+        {
+          props: { variant: 'outlineBlue', disabled: true},
+          style: {
+            background: 'none',
+            color: '#46445C!important',
+            border: '2px solid #46445C',
           },
         },
       ],

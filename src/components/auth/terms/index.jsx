@@ -39,7 +39,7 @@ const Terms = ({ variant, handleChecked, checked, checkedError, isPhoneNumber })
         value={checked}
         handleChange={handleChecked}
       />
-      <div className={styles.info} onClick={() => handleChecked}>
+      <div className={styles.info} onClick={() => handleChecked()}>
         <Content />
       </div>
     </div>
