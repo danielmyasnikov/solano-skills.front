@@ -12,6 +12,7 @@ import { PaymentPage } from './components/paymentPage';
 import { SkillsPage } from './components/skillsPage';
 import { SkillPage } from './components/skillPage';
 import { ProgressPage } from './components/progressPage';
+import Settings from './components/settings';
 
 export const routes = [
   {
@@ -39,7 +40,13 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/sing-in',
+    path: '/settings',
+    component: Settings,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/sign-in',
     component: Authorization,
     wrap: false,
     exact: true,

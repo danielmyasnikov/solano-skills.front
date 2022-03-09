@@ -10,7 +10,7 @@ import styles from './styles.module.less';
 export const ModalActionMenu = ({ totalXP }) => {
   const item = (img, text, link) => {
     const clickHandler = () => {
-      if (link === 'sing-in') {
+      if (link === 'sign-in') {
         localStorage.clear();
       }
     };
@@ -27,9 +27,9 @@ export const ModalActionMenu = ({ totalXP }) => {
     <div className={styles.wrapper}>
       <div className={styles.wrapperXP}>{totalXP} XP</div>
       {item(User, 'Перейти в профиль', 'profile')}
-      {item(Settings, 'Настройки аккаунта', '')}
+      {item(Settings, 'Настройки аккаунта', 'settings')}
       {item(Support, 'Поддержка', '')}
-      {item(Exit, 'Выйти', 'sing-in')}
+      {item(Exit, 'Выйти', 'sign-in')}
     </div>
   );
 };
