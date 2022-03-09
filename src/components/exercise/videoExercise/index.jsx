@@ -6,8 +6,9 @@ import { selectExercise } from '@store/exercise/selector';
 
 import styles from './styles.module.less';
 
-export const VideoExercise = ({ onSubmit }) => {
+export const VideoExercise = ({ onSubmit, headers }) => {
   const exercise = useSelector(selectExercise);
+
   const transcriptRef = useRef();
   const [showTranscript, setShowTranscript] = useState(false);
 
@@ -52,7 +53,7 @@ export const VideoExercise = ({ onSubmit }) => {
           Вы получите<span className={styles.xp}> {` ${exercise.xp} xp`}</span>
         </p>
         <div className={styles.playerWrapper}>
-          <VideoPlayer id={exercise.id} xp={exercise.xp} sourceData={sourceData} />
+          <VideoPlayer exercise={exercise} headers={headers} sourceData={sourceData} />
         </div>
         <div className={styles.btnWrapper}>
           <Button

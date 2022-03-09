@@ -19,11 +19,6 @@ export default function exerciseReducer(state = initialState, action) {
         outputs: [...state.outputs],
       };
     }
-    case SEND_VIDEO_EXERCISE_SUCCESSED: {
-      return {
-        outputs: [...state.outputs],
-      };
-    }
     default:
       return state;
   }

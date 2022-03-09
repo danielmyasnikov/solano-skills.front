@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as CoursesStore from '@store/courses';
+import * as AuthStore from '@store/auth';
+import { getProfile } from '@store/profile/actions';
 import { Card } from './card';
 
 import styles from './styles.module.less';
@@ -8,7 +10,15 @@ import styles from './styles.module.less';
 export const CoursesPage = () => {
   const dispatch = useDispatch();
 
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
   const { coursesList } = useSelector(CoursesStore.Selectors.getCourses);
+
+  useEffect(() => {
+    if (headers.uid) {
+      dispatch(getProfile({ headers: headers }));
+    }
+  }, [dispatch, headers]);
 
   useEffect(() => {
     dispatch(CoursesStore.Actions.loadCourcesList());

@@ -8,13 +8,15 @@ import Burger from '@assets/Burger';
 import ArrowDown from '@assets/ArrowDown';
 import useDebounce from '../hooks/useDebounce';
 import { selectProfile } from '@store/profile/selector';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ModalActionMenu } from './ModalActionMenu';
+import cn from 'classnames';
 
 const Header = ({ headerRef, handleSidebar }) => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearch = useDebounce(search, 500);
   const [showModal, setshowModal] = useState(false);
+  const [showMenuModal, setshowMenuModal] = useState(false);
 
   const handleShowModal = () => setshowModal(!showModal);
 
@@ -25,6 +27,10 @@ const Header = ({ headerRef, handleSidebar }) => {
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
     debouncedSearch(e.target.value);
+  };
+
+  const menuHandler = () => {
+    setshowMenuModal(!showMenuModal);
   };
 
   return (
@@ -46,16 +52,18 @@ const Header = ({ headerRef, handleSidebar }) => {
             <Button variant="containedGreen" onClick={handleShowModal}>
               Обновить тариф
             </Button>
-            <Link to="/profile">
-              <div className={styles.profile}>
-                <img src={profile.avatar_cloudinary_url} alt="avatar" />
-                <ArrowDown />
-              </div>
-            </Link>
+            <div
+              className={cn(styles.profile, { [styles.profileRotate]: showMenuModal })}
+              onClick={menuHandler}
+            >
+              <img src={profile.avatar_cloudinary_url} alt="avatar" />
+              <ArrowDown />
+            </div>
           </div>
         </header>
       </div>
       <ModalTariffSelection handleClick={handleShowModal} open={showModal} />
+      {showMenuModal && <ModalActionMenu totalXP={profile.xp} />}
     </>
   );
 };

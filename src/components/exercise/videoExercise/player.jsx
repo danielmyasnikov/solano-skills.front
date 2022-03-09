@@ -1,15 +1,20 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
-import { sendXpByVideo } from '@store/exercise/actions';
+import { sendAnswer } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';
 import Plyr from 'plyr-react';
 
-export const VideoPlayer = ({ id, xp, sourceData }) => {
+export const VideoPlayer = ({ sourceData, headers, exercise }) => {
   const ref = useRef();
 
   const dispatch = useDispatch();
 
-  const timeHandler = useCallback(() => dispatch(sendXpByVideo(id, xp)), [dispatch, id, xp]);
+  console.log(exercise);
+
+  const timeHandler = useCallback(
+    () => dispatch(sendAnswer(exercise.slug, exercise.course_slug, exercise.xp, headers)),
+    [dispatch, exercise.slug, exercise.course_slug, exercise.xp, headers],
+  );
 
   useEffect(() => {
     if (ref && ref.current !== undefined) {
@@ -25,7 +30,7 @@ export const VideoPlayer = ({ id, xp, sourceData }) => {
         }
       }, 1000);
     }
-  }, [id, timeHandler, xp]);
+  }, [exercise.id, timeHandler, exercise.xp]);
 
   return <Plyr ref={ref} source={sourceData} />;
 };

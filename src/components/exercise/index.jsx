@@ -19,22 +19,14 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   const [isAuth, setIsAuth] = useState(false);
+  const [authCounter, setAuthCounter] = useState(0);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
-  useEffect(() => {
-    dispatch(clearTerminal());
-    dispatch(getExercise(courseId, exerciseId));
-  }, [location.pathname]);
-  useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [headers]);
+
   const onSubmit = () => {
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
-    dispatch(getExercise(courseId, exercise.next_exercise_id));
+    dispatch(getExercise(courseId, exercise.next_exercise_id, headers));
   };
+
   const renderExercise = () => {
     switch (exercise.type) {
       case 'quiz':
@@ -56,11 +48,34 @@ function ExercisePage() {
           </div>
         );
       case 'video':
-        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} />;
+        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
       default:
         break;
     }
   };
+
+  useEffect(() => {});
+
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+    setAuthCounter(authCounter + 1);
+  }, [headers]);
+
+  useEffect(() => {
+    dispatch(clearTerminal());
+    if (authCounter > 1) {
+      if (isAuth) {
+        dispatch(getExercise(courseId, exerciseId, headers));
+      } else {
+        dispatch(getExercise(courseId, exerciseId));
+      }
+    }
+  }, [authCounter, courseId, dispatch, exerciseId, headers, isAuth, location.pathname]);
+
   return <>{renderExercise()}</>;
 }
 

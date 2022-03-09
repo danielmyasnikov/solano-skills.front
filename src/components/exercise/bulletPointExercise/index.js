@@ -101,7 +101,13 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
-      dispatch(sendAnswer(exercise.id, exercise?.nested_exercises[activeExercise].id, xp));
+      dispatch(
+        sendAnswer(
+          exercise?.nested_exercises[activeExercise].course_part_slug,
+          exercise?.nested_exercises[activeExercise].course_slug,
+          xp,
+        ),
+      );
     } else {
       setErrorMessage(answer.error);
     }
