@@ -6,15 +6,11 @@ export const SEND_EXERCISE_REQUESTED = 'SEND_EXERCISE_REQUESTED';
 export const SEND_EXERCISE_SUCCESSED = 'SEND_EXERCISE_SUCCESSED';
 export const SEND_EXERCISE_FAILED = 'SEND_EXERCISE_SUCCESSED';
 
-<<<<<<< HEAD
 export const SEND_VIDEO_EXERCISE_REQUESTED = 'SEND_VIDEO_EXERCISE_REQUESTED';
 export const SEND_VIDEO_EXERCISE_SUCCESSED = 'SEND_VIDEO_EXERCISE_SUCCESSED';
 export const SEND_VIDEO_EXERCISE_FAILED = 'SEND_VIDEO_EXERCISE_FAILED';
 
-export const getExercise = (courseId, exerciseId) => {
-=======
 export const getExercise = (courseId, exerciseId, headers) => {
->>>>>>> master
   return {
     type: GET_EXERCISE_REQUESTED,
     payload: { courseId, exerciseId, headers },
@@ -25,13 +21,6 @@ export const sendAnswer = (exerciseId, courseId, xp, headers) => {
   return {
     type: SEND_EXERCISE_REQUESTED,
     payload: { exerciseId, courseId, xp, headers },
-  };
-};
-
-export const sendAnswer = (exerciseId, answerId, xp) => {
-  return {
-    type: SEND_EXERCISE_REQUESTED,
-    payload: { exerciseId, answerId, xp },
   };
 };
 

@@ -50,7 +50,6 @@ export function* sendAnswer(action) {
   }
 }
 
-<<<<<<< HEAD
 export function* sendXpByVideo(action) {
   try {
     const response = yield call(sendXpByVideoApi, action.payload, { method: 'POST' });
@@ -74,9 +73,4 @@ export default function* exerciseSaga() {
   yield takeLeading(GET_EXERCISE_REQUESTED, getExercise);
   yield takeLeading(SEND_EXERCISE_REQUESTED, sendAnswer);
   yield takeLeading(SEND_VIDEO_EXERCISE_REQUESTED, sendXpByVideo);
-=======
-export default function* exerciseSaga() {
-  yield takeLeading(GET_EXERCISE_REQUESTED, getExercise);
-  yield takeLeading(SEND_EXERCISE_REQUESTED, sendAnswer);
->>>>>>> master
 }

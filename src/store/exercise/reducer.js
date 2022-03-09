@@ -17,14 +17,11 @@ export default function exerciseReducer(state = initialState, action) {
     case SEND_EXERCISE_SUCCESSED: {
       return {
         outputs: [...state.outputs],
-<<<<<<< HEAD
       };
     }
     case SEND_VIDEO_EXERCISE_SUCCESSED: {
       return {
         outputs: [...state.outputs],
-=======
->>>>>>> master
       };
     }
     default:
