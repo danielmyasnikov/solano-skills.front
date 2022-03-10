@@ -58,7 +58,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
     } else {
       setErrorMessage(answer.error);
     }
-    if (exercise.type === 'quiz') {
+    if (exercise.type === 'quiz' && isAuth) {
       dispatch(sendAnswer(exercise.slug, courseId, exercise.xp, headers));
     }
     // } else {
