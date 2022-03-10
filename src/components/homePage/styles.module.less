@@ -6,6 +6,14 @@
   height: 100vh;
   background-color: var(--color-white-blue);
   overflow: hidden;
+
+  .blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 42, 63, 0.57);
+    z-index: 15;
+  }
 }
 
 .wrap {
@@ -617,6 +625,12 @@
       width: 65px;
       height: 65px;
       border-radius: 50%;
+
+      img {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+      }
     }
 
     &__data {

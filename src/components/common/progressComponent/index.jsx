@@ -7,7 +7,6 @@ import ArrowRight from './assets/arrowRight.svg';
 import styles from './styles.module.less';
 
 export const ProgressComponent = ({
-  userName,
   status,
   courseTitle,
   courseLogo,
@@ -31,7 +30,6 @@ export const ProgressComponent = ({
 
   return (
     <>
-      <span className={styles.header}>С возвращением, {userName}</span>
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <div className={styles.containerLeft}>

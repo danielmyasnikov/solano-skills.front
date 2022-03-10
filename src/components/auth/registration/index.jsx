@@ -177,7 +177,7 @@ export const Registration = ({ variant, isModal }) => {
         <div className={styles.toAuth}>
           <span className={styles.text}>
             {'Уже есть аккаунт? '}
-            <Link className={styles.infoLink} to={'/sing-in'}>
+            <Link className={styles.infoLink} to={'/sign-in'}>
               Войти
             </Link>
           </span>

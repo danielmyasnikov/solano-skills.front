@@ -112,7 +112,7 @@ const Sidebar = ({
                 <React.Fragment key={label}>
                   <Link
                     to={link}
-                    className={cn({ [styles.hideLink]: label === 'Прогресс' && !isAuth })}
+                    className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
                   >
                     <Box sx={{ margin: '0 20px' }}>
                       <List>
@@ -129,34 +129,39 @@ const Sidebar = ({
                 </React.Fragment>
               ))}
               <Divider />
-              <Box className={styles.label}>Обучение</Box>
-              {studyItems.map((item) => (
-                <React.Fragment key={item.label}>
-                  <Box
-                    sx={{
-                      margin: '0 20px',
-                    }}
-                  >
-                    <List>
-                      <ListItem
-                        onClick={() => setActiveTab(item.label)}
-                        className={activeTab === item.label ? styles.activeTab : ''}
-                      >
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.label} />
-                      </ListItem>
-                    </List>
-                  </Box>
-                </React.Fragment>
-              ))}
+              <div className={styles.studing}>
+                <div className={styles.tooltip}>Данный раздел будет доступен с 1 Июля</div>
+                <Box className={styles.label}>Обучение</Box>
+                {studyItems.map((item) => (
+                  <React.Fragment key={item.label}>
+                    <Box
+                      sx={{
+                        margin: '0 20px',
+                      }}
+                    >
+                      <List>
+                        <ListItem
+                          onClick={() => setActiveTab(item.label)}
+                          className={activeTab === item.label ? styles.activeTab : ''}
+                        >
+                          <ListItemIcon>{item.icon}</ListItemIcon>
+                          <ListItemText primary={item.label} />
+                        </ListItem>
+                      </List>
+                    </Box>
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
-            <Button
-              className={styles.btn}
-              variant="outlineGreen"
-              onClick={handleUpdateSubscription}
-            >
-              Обновить подписку
-            </Button>
+            {isAuth && (
+              <Button
+                className={styles.btn}
+                variant="outlineGreen"
+                onClick={handleUpdateSubscription}
+              >
+                Обновить подписку
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -5,7 +5,12 @@ import tochki from '@assets/homepage/Tochki';
 import lectures from '@assets/homepage/lectures.png';
 import practice from '@assets/homepage/practice.png';
 import statement from '@assets/homepage/statement.png';
-import avatar from '@assets/homepage/avatar.png';
+import avatar1 from '@assets/homepage/avatar1.png';
+import avatar2 from '@assets/homepage/avatar2.png';
+import avatar3 from '@assets/homepage/avatar3.png';
+import avatar4 from '@assets/homepage/avatar4.png';
+import avatar5 from '@assets/homepage/avatar5.png';
+import avatar6 from '@assets/homepage/avatar6.png';
 
 export const images = {
   googleAccount,
@@ -15,7 +20,12 @@ export const images = {
   lectures,
   practice,
   statement,
-  avatar,
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
 };
 
 export const slides = [
@@ -146,32 +156,32 @@ export const practices = [
 
 export const feedbacks = [
   {
-    avatar: 'avatar',
+    avatar: 'avatar1',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },
   {
-    avatar: 'avatar',
+    avatar: 'avatar2',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },
   {
-    avatar: 'avatar',
+    avatar: 'avatar3',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },
   {
-    avatar: 'avatar',
+    avatar: 'avatar4',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },
   {
-    avatar: 'avatar',
+    avatar: 'avatar5',
     author: 'Linh Nguyen',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },
   {
-    avatar: 'avatar',
+    avatar: 'avatar6',
     author: 'Bernard Welch',
     text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
   },

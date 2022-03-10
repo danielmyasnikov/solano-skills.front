@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ModalTariffSelection } from './ModalTariffSelection';
 import styles from './styles.module.less';
 import Button from '@components/mui/button';
@@ -8,15 +9,23 @@ import Burger from '@assets/Burger';
 import ArrowDown from '@assets/ArrowDown';
 import useDebounce from '../hooks/useDebounce';
 import { selectProfile } from '@store/profile/selector';
+import * as AuthStore from '@store/auth';
 import { useSelector } from 'react-redux';
 import { ModalActionMenu } from './ModalActionMenu';
 import cn from 'classnames';
 
 const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
   const [searchValue, setSearchValue] = useState('');
+  const [isAuth, setIsAuth] = useState(false);
   const debouncedSearch = useDebounce(search, 500);
   const [showModal, setshowModal] = useState(false);
   const [showMenuModal, setshowMenuModal] = useState(false);
+
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
+  const history = useHistory();
+
+  const registerRouteHandler = () => history.push(`/registration`);
 
   const handleShowModal = () => {
     onCloseModal();
@@ -32,13 +41,21 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
     debouncedSearch(e.target.value);
   };
 
+  const menuHandler = () => {
+    setshowMenuModal(!showMenuModal);
+  };
+
   useEffect(() => {
     setshowModal(isShowModal);
   }, [isShowModal]);
 
-  const menuHandler = () => {
-    setshowMenuModal(!showMenuModal);
-  };
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [headers]);
 
   return (
     <>
@@ -56,16 +73,24 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
             </div>
           </div>
           <div className={styles.headerItem}>
-            <Button variant="containedGreen" onClick={handleShowModal}>
-              Обновить тариф
-            </Button>
-            <div
-              className={cn(styles.profile, { [styles.profileRotate]: showMenuModal })}
-              onClick={menuHandler}
-            >
-              <img src={profile.avatar_cloudinary_url} alt="avatar" />
-              <ArrowDown />
-            </div>
+            {(isAuth && (
+              <>
+                <Button variant="containedGreen" onClick={handleShowModal}>
+                  Обновить тариф
+                </Button>
+                <div
+                  className={cn(styles.profile, { [styles.profileRotate]: showMenuModal })}
+                  onClick={menuHandler}
+                >
+                  <img src={profile.avatar_cloudinary_url} alt="avatar" />
+                  <ArrowDown />
+                </div>
+              </>
+            )) || (
+              <Button variant="containedGreen" onClick={registerRouteHandler}>
+                Зарегистрироваться
+              </Button>
+            )}
           </div>
         </header>
       </div>

@@ -62,11 +62,17 @@ export const buttonTheme = createTheme({
           style: {
             background: 'none',
             color: '#7469EF',
-            border: '2px solid #7469ef',
+            border: '1px solid #7469ef',
             '&:hover': {
               background: '#7469ef',
               color: '#fff',
             },
+          },
+        },
+        {
+          props: { variant: 'outlinePurple', disabled: true },
+          style: {
+            border: '1px solid #C4C7CC!important',
           },
         },
         {
@@ -96,9 +102,9 @@ export const buttonTheme = createTheme({
         {
           props: { variant: 'outlineWhite', disabled: true },
           style: {
-            background: 'none',
-            color: '#4A4856!important',
-            border: '1px solid #4A4856!important',
+            background: 'rgba(255, 255, 255, 0.24)',
+            color: '#fff!important',
+            border: '1px solid #fff!important',
           },
         },
         {
@@ -110,7 +116,7 @@ export const buttonTheme = createTheme({
             '&:hover': {
               transition: '0.2s ease-in-out',
               background: '#fff',
-              color: '#7469EF;'
+              color: '#7469EF;',
             },
           },
         },
@@ -191,7 +197,7 @@ export const buttonTheme = createTheme({
           props: { variant: 'containedBlack', disabled: true },
           style: {
             color: '#fff !important',
-            background: '#46445C'
+            background: '#46445C',
           },
         },
         {
@@ -207,6 +213,14 @@ export const buttonTheme = createTheme({
           },
         },
         {
+          props: { variant: 'containedRed' },
+          style: {
+            background: 'rgba(215, 116, 116, 1)',
+            color: '#fff',
+            '&:hover': { background: 'rgba(215, 116, 116, 0.8)' },
+          },
+        },
+        {
           props: { variant: 'outlineBlue' },
           style: {
             background: 'none',
@@ -215,12 +229,12 @@ export const buttonTheme = createTheme({
             '&:hover': {
               background: '#7469EF',
               color: '#fff',
-              border: '2px solid #7469EF'
+              border: '2px solid #7469EF',
             },
           },
         },
         {
-          props: { variant: 'outlineBlue', disabled: true},
+          props: { variant: 'outlineBlue', disabled: true },
           style: {
             background: 'none',
             color: '#46445C!important',
@@ -262,7 +276,6 @@ export const menuTheme = createTheme({
           borderRadius: '5px',
           margin: '1px 0',
           ':hover': {
-            transition: '.2s ease-in-out',
             background: '#7469EF',
             color: '#fff',
             svg: {
