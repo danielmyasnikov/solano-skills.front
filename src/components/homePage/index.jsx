@@ -25,8 +25,18 @@ export const HomePage = () => {
         return images.practice;
       case 'statement':
         return images.statement;
-      case 'avatar':
-        return images.avatar;
+      case 'avatar1':
+        return images.avatar1;
+      case 'avatar2':
+        return images.avatar2;
+      case 'avatar3':
+        return images.avatar3;
+      case 'avatar4':
+        return images.avatar4;
+      case 'avatar5':
+        return images.avatar5;
+      case 'avatar6':
+        return images.avatar6;
       default:
         return;
     }
@@ -34,8 +44,9 @@ export const HomePage = () => {
 
   return (
     <div className={styles.home}>
+      <div className={cn({ [styles.blur]: showMenu === true })} onTouchStart={() => handleBurger()}></div>
       <HeaderHome handleBurger={handleBurger} />
-      <BurgerMenu isShow={showMenu} />
+      <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
         <div className={styles.container}>
           <main>

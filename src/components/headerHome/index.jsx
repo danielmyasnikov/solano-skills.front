@@ -28,7 +28,7 @@ const HeaderHome = ({ handleBurger }) => (
           <Link to={'/registration'}>
             <Button variant="containedPurple">Зарегистрироваться</Button>
           </Link>
-          <div className={styles.header__burger} onClick={() => handleBurger}>
+          <div className={styles.header__burger} onClick={() => handleBurger()}>
             <Burger />
           </div>
         </div>
