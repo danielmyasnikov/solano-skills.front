@@ -214,7 +214,11 @@ export const HomePage = () => {
                       <img src={renderImage(feedback.avatar)} />
                     </div>
                     <div className={styles.whatSays__feedback__data}>
-                      <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
+                      <div className={styles.whatSays__feedback__data__scroll}>
+                        <div className={styles.whatSays__feedback__data__text}>
+                          {feedback.text}
+                        </div>
+                      </div>
                       <div className={styles.whatSays__feedback__data__author}>
                         {feedback.author}
                       </div>

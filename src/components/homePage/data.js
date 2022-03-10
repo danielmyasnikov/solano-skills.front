@@ -157,32 +157,32 @@ export const practices = [
 export const feedbacks = [
   {
     avatar: 'avatar1',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Елена Ворончук',
+    text: '“Эта программа — настоящая революция в высшем образовании.”',
   },
   {
     avatar: 'avatar2',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Артем Шабалов',
+    text: '“Я начал с нуля и смог учиться онлайн и в итоге накопил достаточно знаний и навыков, чтобы найти новую, хорошо оплачиваемую работу.”',
   },
   {
     avatar: 'avatar3',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Ольга Белякова',
+    text: '“Специалисты по подбору кадров обратили внимание на профессиональный сертификат в моем профиле LinkedIn. На собеседовании они сказали, что полученные мной навыки впечатляют. Меня приняли на работу”',
   },
   {
     avatar: 'avatar4',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Андрей Николаев',
+    text: '“Прекрасная платформа для обучения и развития новым навыкам и профессиям, удобный формат”',
   },
   {
     avatar: 'avatar5',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Вероника Крупских',
+    text: '“Решила попробовать для себя что-то новое, благодаря данным курсам ушла с работы и теперь работаю дома в свое удовольствие”',
   },
   {
     avatar: 'avatar6',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    author: 'Иван Носков',
+    text: '“Раньше думал, что 35т.р. - потолок в моем городе. Ошибься, спасибо deepskills!!!”',
   },
 ];
