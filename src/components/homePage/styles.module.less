@@ -53,8 +53,7 @@
   }
 
   &__block {
-    max-width: 640px;
-    width: 48%;
+    width: 52%;
     z-index: 5;
 
     &__right {
@@ -94,7 +93,7 @@
       width: 129px;
       height: 43px;
       top: -50px;
-      right: 4px;
+      right: -50px;
       background: #63d167;
       box-shadow: 7px 8px 15px rgba(0, 0, 0, 0.1);
       border-radius: 117px;
@@ -636,25 +635,25 @@
     &__data {
       &__scroll {
         overflow-y: auto;
-        max-height: 135px;
+        max-height: 140px;
         padding-right: 5px;
 
         &::-webkit-scrollbar {
           width: 6px;
         }
-    
+
         &::-webkit-scrollbar-thumb {
           height: 6px;
           background-color: #e0e0e0;
           border-radius: 12px;
         }
-    
+
         &::-webkit-scrollbar-track {
           background-color: #f3f3f3;
           border-radius: 12px;
         }
       }
-       
+
       &__text {
         font-weight: bold;
         font-size: 18px;
@@ -1565,7 +1564,7 @@
 
       &__data {
         &__scroll {
-          max-height: 110px;
+          max-height: 112px;
         }
       }
     }
@@ -2014,6 +2013,16 @@
   .offer {
     border-radius: 27px;
     padding: 35px 10px 20px;
+    background: url('../../assets/homepage/offerAir.png') right 17px top 30px / 50px 30px no-repeat,
+      linear-gradient(355deg, #eae7ff -8.4%, #7469ef 84.73%);
+
+    &__title {
+      font-size: 22px;
+
+      &::before {
+        top: -50px;
+      }
+    }
 
     &__block {
       &__right {

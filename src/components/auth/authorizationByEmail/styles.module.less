@@ -24,6 +24,10 @@
   max-width: 564px;
   width: 100%;
   margin-top: 10px;
+  div {
+    background: #ececec;
+  }
+
   input {
     font-size: 18px;
     font-family: 'Nunito';
@@ -111,4 +115,18 @@
   color: #f44336;
   font-size: 14px;
   line-height: 142.9%;
+}
+
+@media screen and (max-width: 320px) {
+  .infoWrapper {
+    flex-direction: column-reverse;
+
+    .rememberMe {
+      margin-top: 15px;
+    }
+
+    .forgotPassword {
+      align-self: flex-end;
+    }
+  }
 }

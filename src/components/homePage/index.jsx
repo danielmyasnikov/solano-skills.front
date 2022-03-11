@@ -195,7 +195,9 @@ export const HomePage = () => {
                 можете обучаться с любой точки планеты где есть Интернет.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite">Посмотреть курсы</Button>
+                <Button variant="containedWhite" disabled={true}>
+                  Посмотреть курсы
+                </Button>
               </div>
             </section>
 
@@ -215,9 +217,7 @@ export const HomePage = () => {
                     </div>
                     <div className={styles.whatSays__feedback__data}>
                       <div className={styles.whatSays__feedback__data__scroll}>
-                        <div className={styles.whatSays__feedback__data__text}>
-                          {feedback.text}
-                        </div>
+                        <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
                       </div>
                       <div className={styles.whatSays__feedback__data__author}>
                         {feedback.author}
