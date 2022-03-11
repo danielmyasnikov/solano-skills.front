@@ -44,7 +44,7 @@ function ExercisePage() {
       case 'bullet_point_exercise':
         return (
           <div className={styles.exerciseContainer}>
-            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} />{' '}
+            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />{' '}
           </div>
         );
       case 'video':
@@ -63,18 +63,19 @@ function ExercisePage() {
       setIsAuth(false);
     }
     setAuthCounter(authCounter + 1);
-  }, [headers]);
+  }, [location.pathname, headers]);
 
   useEffect(() => {
     dispatch(clearTerminal());
-    if (authCounter > 1) {
-      if (isAuth) {
+    console.log(authCounter);
+    if (authCounter >= 1) {
+      if (headers) {
         dispatch(getExercise(courseId, exerciseId, headers));
+      } else {
+        dispatch(getExercise(courseId, exerciseId));
       }
-    } else {
-      dispatch(getExercise(courseId, exerciseId));
     }
-  }, [authCounter, courseId, dispatch, exerciseId, headers, isAuth, location.pathname]);
+  }, [authCounter]);
 
   return <>{renderExercise()}</>;
 }
