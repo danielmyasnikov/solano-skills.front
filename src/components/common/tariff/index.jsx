@@ -1,10 +1,10 @@
 import styles from './styles.module.less';
-import { TariffList } from './constants';
 import { useHistory } from 'react-router-dom';
 import Button from '@components/mui/button';
-import Icon from '../assets/Icon.svg';
+import Icon from './assets/Icon.svg';
 import cn from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { TariffList } from '../../constants';
 
 export const Tariffs = () => {
   const IconItem = () => <img src={Icon} alt="icon" />;

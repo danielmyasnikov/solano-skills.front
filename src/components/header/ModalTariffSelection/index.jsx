@@ -1,8 +1,8 @@
 import { Dialog } from '@mui/material';
 import Close from '@assets/Close.js';
-import { Tariffs } from './Tariffs';
 
 import styles from './styles.module.less';
+import { Tariffs } from '../../common/tariff';
 
 export const ModalTariffSelection = ({ handleClick, open }) => {
   return (
