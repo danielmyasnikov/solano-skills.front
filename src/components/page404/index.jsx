@@ -31,11 +31,11 @@ export const Page404 = () => {
       <div className={styles.content}>
         <div>Упс! Что-то пошло не так!</div>
         <div>Пожалуйста, вернитесь на главную страницу и попробуйте заново.</div>
-        {isAuth ? (
+        {isAuth && (
           <Link to={'/courses'}>
             <Button variant={'containedPurple'}>К курсам</Button>
           </Link>
-        ) : (
+        ) || (
           <Link to={'/'}>
             <Button variant={'containedPurple'}>На главную</Button>
           </Link>

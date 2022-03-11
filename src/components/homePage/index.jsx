@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 // import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
@@ -17,30 +17,25 @@ export const HomePage = () => {
 
   const handleBurger = () => setShowMenu(!showMenu);
 
-  const renderImage = (img) => {
-    switch (img) {
-      case 'lectures':
-        return images.lectures;
-      case 'practice':
-        return images.practice;
-      case 'statement':
-        return images.statement;
-      case 'avatar1':
-        return images.avatar1;
-      case 'avatar2':
-        return images.avatar2;
-      case 'avatar3':
-        return images.avatar3;
-      case 'avatar4':
-        return images.avatar4;
-      case 'avatar5':
-        return images.avatar5;
-      case 'avatar6':
-        return images.avatar6;
-      default:
-        return;
-    }
-  };
+  const renderImage = img => images[img];
+
+  const renderFeedbacks = useMemo (() => {
+    return feedbacks.map(({ avatar, text, author }) => (
+      <div className={styles.whatSays__feedback}>
+        <div className={styles.whatSays__feedback__photo}>
+          <img src={renderImage(avatar)} />
+        </div>
+        <div className={styles.whatSays__feedback__data}>
+          <div className={styles.whatSays__feedback__data__scroll}>
+            <div className={styles.whatSays__feedback__data__text}>{text}</div>
+          </div>
+          <div className={styles.whatSays__feedback__data__author}>
+            {author}
+          </div>
+        </div>
+      </div>
+    ))
+  }, [feedbacks])
 
   return (
     <div className={styles.home}>
@@ -210,21 +205,7 @@ export const HomePage = () => {
                 </div>
               </div>
               <div className={styles.whatSays__feedbacks}>
-                {feedbacks.map((feedback) => (
-                  <div className={styles.whatSays__feedback}>
-                    <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} />
-                    </div>
-                    <div className={styles.whatSays__feedback__data}>
-                      <div className={styles.whatSays__feedback__data__scroll}>
-                        <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
-                      </div>
-                      <div className={styles.whatSays__feedback__data__author}>
-                        {feedback.author}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {renderFeedbacks}
               </div>
             </section>
 
