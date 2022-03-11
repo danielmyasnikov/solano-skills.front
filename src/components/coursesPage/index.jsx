@@ -38,20 +38,22 @@ export const CoursesPage = () => {
           к обучению Deepskills.
         </p>
       </div>
-      <ProgressComponent
-        status="В процессе"
-        courseTitle="Введение в Python"
-        courseLogo={CourseLogo}
-        amountOfExercise="9"
-        progress={20}
-      />
-      <div className={styles.content}>
-        {coursesList &&
-          coursesList.map((item, i) => (
-            <React.Fragment key={i}>
-              <Card info={item} />
-            </React.Fragment>
-          ))}
+      <div div className={styles.contentWrapper}>
+        <ProgressComponent
+          status="В процессе"
+          courseTitle="Введение в Python"
+          courseLogo={CourseLogo}
+          amountOfExercise="9"
+          progress={20}
+        />
+        <div className={styles.content}>
+          {coursesList &&
+            coursesList.map((item, i) => (
+              <React.Fragment key={i}>
+                <Card info={item} />
+              </React.Fragment>
+            ))}
+        </div>
       </div>
     </div>
   );
