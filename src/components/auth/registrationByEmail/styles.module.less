@@ -1,7 +1,3 @@
-input:-webkit-autofill {
-  background-clip: text;
-}
-
 .hidden {
   display: none;
 }
@@ -186,6 +182,10 @@ input:-webkit-autofill {
   color: #f44336;
   font-size: 14px;
   line-height: 142.9%;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text !important;
 }
 
 @media (max-width: 1450px) {
