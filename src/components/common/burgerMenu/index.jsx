@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
-import BurgerExit from '@assets/homepage/BurgerExit';
+import BurgerExit from '@assets/BurgerExit';
 import Input from '@components/mui/inputSearch';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';

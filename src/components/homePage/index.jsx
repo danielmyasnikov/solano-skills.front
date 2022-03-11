@@ -10,7 +10,7 @@ import styles from './styles.module.less';
 import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
 import { Registration } from '@components/auth/registration';
-import BurgerMenu from './burgerMenu';
+import BurgerMenu from '@components/common/burgerMenu';
 
 export const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);
