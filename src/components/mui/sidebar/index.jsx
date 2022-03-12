@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import styles from './styles.module.less';
 import { profileItems, studyItems } from './menuItems';
@@ -54,6 +54,28 @@ const Sidebar = ({
   };
 
   const handleUpdateSubscription = () => onUpdateSubscription();
+
+  const renderStudyItems = useMemo(() => {
+    return studyItems.map(({ label, icon }) => (
+      <React.Fragment key={label}>
+        <Box
+          sx={{
+            margin: '0 20px',
+          }}
+        >
+          <List>
+            <ListItem
+              onClick={() => setActiveTab(label)}
+              className={activeTab === label ? styles.activeTab : ''}
+            >
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={label} />
+            </ListItem>
+          </List>
+        </Box>
+      </React.Fragment>
+    ));
+  }, [studyItems])
 
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -129,26 +151,11 @@ const Sidebar = ({
                 </React.Fragment>
               ))}
               <Divider />
-              <Box className={styles.label}>Обучение</Box>
-              {studyItems.map((item) => (
-                <React.Fragment key={item.label}>
-                  <Box
-                    sx={{
-                      margin: '0 20px',
-                    }}
-                  >
-                    <List>
-                      <ListItem
-                        onClick={() => setActiveTab(item.label)}
-                        className={activeTab === item.label ? styles.activeTab : ''}
-                      >
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.label} />
-                      </ListItem>
-                    </List>
-                  </Box>
-                </React.Fragment>
-              ))}
+              <div className={styles.studing}>
+                <div className={styles.tooltip}>Данный раздел будет доступен с 1 Июля</div>
+                <Box className={styles.label}>Обучение</Box>
+                {renderStudyItems}
+              </div>
             </div>
             {isAuth && (
               <Button
