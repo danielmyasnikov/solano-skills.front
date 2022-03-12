@@ -28,7 +28,6 @@ export const ForgotPassword = () => {
 
   const dispatch = useDispatch();
 
-  const userEmail = 'kirarussell208@gmail.com';
   const helpEmail = 'helpMePleaseSOS@gmail.com';
 
   const inputHandler = (e) => {
