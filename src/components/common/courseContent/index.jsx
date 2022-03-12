@@ -92,7 +92,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                   </div>
                   {partItem.progress === 100 ? (
                     <Button variant="containedBlack" disabled={true} className={styles.btn}>
-                      Изучено <DoneIcon font-size={'small'} />
+                      Пройти снова
                     </Button>
                   ) : partItem.progress === 0 ? (
                     <Button variant="outlinePurple" className={styles.btn}>

@@ -115,9 +115,7 @@ const Profile = () => {
 
   return (
     <div className={styles.wrapper}>
-      <HeaderPage
-        content='profile'
-      />
+      <HeaderPage content="profile" />
       <div className={styles.content}>
         <div className={cn(styles.profile, styles.card)}>
           <div className={styles.profileInfo}>

@@ -3,8 +3,6 @@ import styles from './styles.module.less';
 import { CourseContent } from '@components/common/courseContent';
 
 export const CourseList = ({ parts, description, slug, variant }) => {
-  console.log(variant);
-
   return (
     <>
       {variant === 'skill' ? (

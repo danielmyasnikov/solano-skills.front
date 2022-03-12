@@ -1,11 +1,16 @@
 .wrapper {
   position: relative;
   padding: 0 50px 70px;
-  width: 92%;
   height: 100%;
   padding-right: 56px;
   overflow-y: scroll;
+  overflow-x: hidden;
   box-sizing: content-box;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .css-cyxlny-MuiPaper-root-MuiDialog-paper {
@@ -66,8 +71,8 @@
   .wrapper {
     position: relative;
     padding: 0 30px 73px;
-    width: auto;
-    height: auto;
+    // width: auto;
+    // height: auto;
     padding-right: 30px;
   }
 
@@ -84,7 +89,7 @@
   }
 }
 
-@media screen and(max-width: 480px) {
+@media screen and(max-width: 599px) {
   .wrapper {
     padding: 0 30px 59px;
   }
@@ -113,7 +118,7 @@
   }
 }
 
-@media screen and(max-width: 320px) {
+@media screen and(max-width: 487px) {
   .wrapper {
     padding: 0 0 76px;
   }
@@ -125,7 +130,7 @@
   }
 
   .header {
-    width: 255px;
+    width: 100%;
     border-radius: 24px 24px 0 0;
     padding: 20px 57px 20px 20px;
   }
@@ -143,5 +148,11 @@
 
   .dialogTitle {
     margin-bottom: 30px;
+  }
+}
+
+@media screen and(max-width: 320px) {
+  .header {
+    width: 255px;
   }
 }

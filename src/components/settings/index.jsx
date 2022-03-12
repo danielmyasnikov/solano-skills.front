@@ -8,20 +8,26 @@ import { useRef, useState } from 'react';
 import { notificationsItems } from '../constants';
 import ChangePassword from './changePassword';
 import Social from './social';
+import { Tariffs } from '../common/tariff';
 
 const Settings = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
   const [active, setActive] = useState('subscription');
+  const [scroll, setScroll] = useState(0);
+
   const deleteAccountRef = useRef(null);
   const notificationRef = useRef(null);
   const passwordRef = useRef(null);
   const socialRef = useRef(null);
+
   const handleChange = () => {};
+
   const handleAreement = () => {
     setIsChecked(!isChecked);
     setCheckedError(false);
   };
+
   const deleteProfile = () => {
     if (isChecked) {
     } else {
@@ -49,13 +55,17 @@ const Settings = () => {
         break;
     }
   };
-  
+
   return (
-    <div className={styles.wrapper}>
+    <div onScroll={() => console.log('s')} className={styles.wrapper}>
       <HeaderPage content="settings" />
       <div className={styles.container}>
         <SettingsMenu active={active} handleChange={handleActiveMenu} />
         <div className={styles.content}>
+          <div ref={passwordRef} className={styles.password}>
+            <div className={styles.title}>Обновить тарифный план</div>
+            {/* <Tariffs /> */}
+          </div>
           <div ref={passwordRef} className={styles.password}>
             <div className={styles.title}>Изменить пароль</div>
             <div className={styles.wrap}>

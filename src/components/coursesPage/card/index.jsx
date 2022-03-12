@@ -5,6 +5,7 @@ import Button from '@components/mui/button';
 import TimerOutlined from '@assets/TimerOutlined.png';
 import AvatarDefault from '@assets/avatarDefault.png';
 import Py from '@assets/py.png';
+import { numberDeclension } from '../../common/helpers/ numberDeclension';
 
 export const Card = ({ info }) => {
   const getTypeImg = () => {
@@ -27,7 +28,7 @@ export const Card = ({ info }) => {
         <span className={css.description} dangerouslySetInnerHTML={{ __html: info?.description }} />
         <div className={css.time}>
           <img className={css.timeIcon} src={TimerOutlined} alt="" />
-          {info.time}
+          {`${info.time} ${numberDeclension(info.time, ['час', 'часа', 'часов'])}`}
         </div>
       </div>
       <div className={css.actionBlock}>

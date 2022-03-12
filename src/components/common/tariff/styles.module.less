@@ -14,6 +14,7 @@
 }
 
 .wrapperGreen {
+  border: none;
   background-color: var(--light-grayish-cyan-lime-green);
 }
 
@@ -152,6 +153,12 @@
   }
 }
 
+@media screen and(max-width: 1140px) {
+  .container {
+    width: 80%;
+  }
+}
+
 @media screen and(max-width: 710px) {
   .wrapper {
     flex-direction: column;
@@ -179,6 +186,13 @@
   .wrapperInfo {
     margin-left: 0;
     margin-bottom: 15px;
+  }
+}
+
+@media screen and(max-width: 487px) {
+  .wrapper {
+    margin-right: 20px;
+    margin-left: 20px;
   }
 }
 

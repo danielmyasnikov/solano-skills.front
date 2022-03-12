@@ -1,6 +1,8 @@
 import Button from '@components/mui/button';
 import ProgressBar from '@components/mui/progressBar';
 
+import { numberDeclension } from '../helpers/ numberDeclension';
+
 import Clock from './assets/clock.svg';
 import ArrowRight from './assets/arrowRight.svg';
 
@@ -13,21 +15,6 @@ export const ProgressComponent = ({
   amountOfExercise,
   progress,
 }) => {
-  const declOfNum = (n, text_forms) => {
-    n = Math.abs(n) % 100;
-    var n1 = n % 10;
-    if (n > 10 && n < 20) {
-      return `Осталось ${n} ${text_forms[2]}`;
-    }
-    if (n1 > 1 && n1 < 5) {
-      return `Осталось ${n} ${text_forms[1]}`;
-    }
-    if (n1 === 1) {
-      return `Осталось ${n} ${text_forms[0]}`;
-    }
-    return `Осталось ${n} ${text_forms[2]}`;
-  };
-
   return (
     <>
       <div className={styles.wrapper}>
@@ -52,7 +39,11 @@ export const ProgressComponent = ({
                 <div className={styles.containerLeftExercise}>
                   <img src={Clock} alt="clock" />
                   <span className={styles.containerLeftExerciseText}>
-                    {declOfNum(amountOfExercise, ['упражнение', 'упражнения', 'упражнений'])}
+                    {`${amountOfExercise} ${numberDeclension(amountOfExercise, [
+                      'упражнение',
+                      'упражнения',
+                      'упражнений',
+                    ])}`}
                   </span>
                 </div>
               </div>

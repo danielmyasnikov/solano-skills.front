@@ -28,7 +28,6 @@ export const ForgotPassword = () => {
 
   const dispatch = useDispatch();
 
-  const userEmail = 'kirarussell208@gmail.com';
   const helpEmail = 'helpMePleaseSOS@gmail.com';
 
   const inputHandler = (e) => {
@@ -41,10 +40,10 @@ export const ForgotPassword = () => {
   };
 
   const disabledButtonHandler = () => {
-    if (email.length) {
-      return false;
+    if (!!email.toLowerCase().match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) === false) {
+      return true;
     }
-    return true;
+    return false;
   };
 
   const ButtonResendClickhandler = () => {
@@ -62,7 +61,7 @@ export const ForgotPassword = () => {
       </span>
       <span className={styles.wrapperText}>
         {(emailSent &&
-          `Чтобы создать новый пароль, перейдите по ссылке в письме, мы отправили его на ${userEmail}`) ||
+          `Чтобы создать новый пароль, перейдите по ссылке в письме, мы отправили его на ${email}`) ||
           'Укажите, куда отправить инструкции для восстановления пароля.'}
       </span>
       {(emailSent &&

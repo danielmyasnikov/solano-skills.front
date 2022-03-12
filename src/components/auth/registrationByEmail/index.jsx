@@ -75,7 +75,7 @@ export const RegistrationByEmail = ({
           value={passwordConfirmation}
           handleChange={handleChange}
           name="passwordConfirmation"
-          placeholder={'Повторите пароль'}
+          placeholder={'Введите пароль повторно'}
         />
         {errors.passwordConfirmationError && (
           <span className={styles.error}>{errors.passwordConfirmationError}</span>

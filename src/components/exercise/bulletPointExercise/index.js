@@ -15,7 +15,7 @@ import RadioButton from '@components/mui/radioButton';
 import { Exercise } from '@components/common/exercise';
 import { sendAnswer } from '@store/exercise/actions';
 
-function BulletPointExercise({ onSubmit, isAuth }) {
+function BulletPointExercise({ onSubmit, isAuth, headers }) {
   const [solution, setSolution] = useState();
   const [bytePayload, setBytePayload] = useState([]);
   const [doneExercises, setDoneExercises] = useState([]);
@@ -101,13 +101,16 @@ function BulletPointExercise({ onSubmit, isAuth }) {
     if (answer.correct === true) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
-      dispatch(
-        sendAnswer(
-          exercise?.nested_exercises[activeExercise].course_part_slug,
-          exercise?.nested_exercises[activeExercise].course_slug,
-          xp,
-        ),
-      );
+      if (isAuth) {
+        dispatch(
+          sendAnswer(
+            exercise?.nested_exercises[activeExercise].course_part_slug,
+            exercise?.nested_exercises[activeExercise].course_slug,
+            xp,
+            headers,
+          ),
+        );
+      }
     } else {
       setErrorMessage(answer.error);
     }
