@@ -77,8 +77,6 @@ const Sidebar = ({
     ));
   }, [studyItems])
 
-  console.log(renderStudyItems);
-
   useEffect(() => {
     setActiveTab(location.pathname);
   }, [location]);

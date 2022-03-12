@@ -41,8 +41,8 @@
 .inputWrapperError {
   :global {
     .MuiInput-root {
-      border: 1px solid #f44336;
-      background: #f1e6e5;
+      border: 1px solid var(--error-red);
+      background: var(--very-light-gray-sixth);
     }
   }
 }
@@ -55,7 +55,7 @@
 }
 
 .subTitileError {
-  color: #621b16;
+  color: var(--dark-red);
 }
 
 .infoWrapper {
@@ -70,13 +70,13 @@
     .rememberMeInfo {
       font-family: 'Nunito';
       cursor: pointer;
-      color: #2d2d2d;
+      color: var(--color-black);
       font-weight: normal;
       font-size: 16px;
     }
   }
   .forgotPassword {
-    color: #bcbcbc;
+    color: var(--gray-second);
     font-weight: normal;
     font-size: 16px;
     font-family: 'Nunito';
@@ -89,7 +89,7 @@
   font-size: 12px;
   line-height: 142.9%;
   letter-spacing: -0.015em;
-  color: #b8b8b8;
+  color: var(--gray-second);
 }
 
 .infoLink {
@@ -107,7 +107,7 @@
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.15px;
-  color: #2d2d2d;
+  color: var(--color-black);
 }
 
 @media screen and (max-width: 320px) {

@@ -8,8 +8,6 @@ export const VideoPlayer = ({ sourceData, headers, exercise }) => {
 
   const dispatch = useDispatch();
 
-  console.log(exercise);
-
   const timeHandler = useCallback(
     () => dispatch(sendAnswer(exercise.slug, exercise.course_slug, exercise.xp, headers)),
     [dispatch, exercise.slug, exercise.course_slug, exercise.xp, headers],

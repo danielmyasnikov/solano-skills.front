@@ -71,7 +71,7 @@
         text-align: center;
         letter-spacing: -0.005em;
         text-transform: uppercase;
-        color: var(--color-white) fff;
+        color: var(--color-white);
       }
     }
   }
@@ -130,7 +130,7 @@
     margin-top: 26px;
     width: 246px;
     height: 52px;
-    background: #948bf9;
+    background: var(--lighth-purple);
     border-radius: 61px;
     display: flex;
     justify-content: center;
@@ -140,7 +140,7 @@
       font-weight: 600;
       font-size: 36px;
       letter-spacing: -0.0142658px;
-      color: #edd765;
+      color: var(--blur-yellow);
       text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.06);
     }
 
@@ -150,7 +150,7 @@
       font-size: 16px;
       line-height: 65px;
       letter-spacing: -0.149625px;
-      color: var(--color-white) fff;
+      color: var(--color-white);
     }
   }
 }
@@ -172,7 +172,7 @@
     span {
       font-weight: 400;
       letter-spacing: 0.001em;
-      color: #46445c;
+      color: var(--very-dark-grayish-blue);
     }
   }
 
@@ -184,18 +184,18 @@
     &_blue {
       .ways__skills {
         background: url('../../assets/homepage/trophy.png') center center no-repeat,
-          linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
+          linear-gradient(135deg, var(--skillcard-blue-one) 0%, var(--skillcard-blue-two) 100%);
       }
 
       .ways__slide {
-        background: linear-gradient(90deg, #dbe3f7 0%, #d7dff2 100%);
+        background: linear-gradient(90deg, var(--very-light-gray-third) 0%, #d7dff2 100%);
       }
     }
 
     &_red {
       .ways__skills {
         background: url('../../assets/homepage/mathematics.png') center center no-repeat,
-          linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
+          linear-gradient(135deg, var(--skillcard-red-one) 0%, var(--skillcard-red-two) 100%);
       }
 
       .ways__slide {
@@ -206,7 +206,7 @@
     &_green {
       .ways__skills {
         background: url('../../assets/homepage/courses.png') center center no-repeat,
-          linear-gradient(135deg, #50b065 0%, #94cca0 100%);
+          linear-gradient(135deg, var(--skillcard-green-one) 0%, var(--skillcard-green-two) 100%);
       }
 
       .ways__slide {
@@ -217,7 +217,7 @@
 
   &__skills {
     margin-top: 20px;
-    background: linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
+    background: linear-gradient(135deg, var(--skillcard-blue-one) 0%, var(--skillcard-blue-two) 100%);
     border-radius: 19px;
     width: 284px;
     height: 284px;
@@ -232,7 +232,7 @@
       font-size: 30px;
       line-height: 27px;
       letter-spacing: 0.005em;
-      color: var(--color-white) fff;
+      color: var(--color-white);
     }
 
     &__subtitle {
@@ -259,12 +259,12 @@
 
     &::-webkit-scrollbar-thumb {
       height: 6px;
-      background-color: #e0e0e0;
+      background-color: var(--scrollout-gray);
       border-radius: 12px;
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #f3f3f3;
+      background-color: var(--scrollin-gray);
       border-radius: 12px;
     }
   }
@@ -274,14 +274,14 @@
     width: 491px;
     height: 284px;
     margin-right: 20px;
-    color: #46445c;
+    color: var(--very-dark-grayish-blue);
     flex: 0 0 auto;
     position: relative;
 
     &__bg {
       border-radius: 19px;
       padding: 216px 35px 35px;
-      background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #dbe3f7 100%),
+      background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, var(--very-light-gray-third) 100%),
         url('../../assets/homepage/slideBg.png') left top no-repeat;
       mix-blend-mode: luminosity;
     }
@@ -342,17 +342,17 @@
   padding: 70px 100px;
   background: url('../../assets/homepage/sloganLeft.png') left top no-repeat,
     url('../../assets/homepage/sloganRight.png') right top no-repeat,
-    linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+    linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
   text-align: center;
   background-blend-mode: luminosity;
   border-radius: 38px;
-  color: var(--color-white) fff;
+  color: var(--color-white);
   position: relative;
 
   &__center {
     background: url('../../assets/homepage/startLeft.png') left top no-repeat,
       url('../../assets/homepage/startRight.png') right top no-repeat,
-      linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+      linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
     padding-top: 60px;
 
     &__description {
@@ -384,7 +384,7 @@
   width: 90%;
   margin: 0 auto;
   letter-spacing: 0.005em;
-  color: #46445c;
+  color: var(--very-dark-grayish-blue);
   font-family: 'Nunito';
 
   &__title {
@@ -474,7 +474,7 @@
     margin-top: 55px;
     height: 34px;
     padding: 0 25px;
-    background: var(--color-white) 4bc;
+    background: var(--pale-yellow);
     font-family: 'Nunito';
     border-radius: 27px;
     font-weight: 600;
@@ -534,7 +534,7 @@
     background: var(--color-white);
     padding: 15px 20px;
     position: absolute;
-    border: 1px solid #f2eeff;
+    border: 1px solid var(--very-light-gray-fourth);
     box-shadow: 6px 4px 28px rgba(116, 105, 239, 0.11);
     border-radius: 15px;
     width: 395px;
@@ -552,7 +552,7 @@
     &__subtitle {
       font-size: 16px;
       line-height: 26px;
-      color: #979797;
+      color: var(--medium-dark-gray);
     }
   }
 }
@@ -562,7 +562,7 @@
   max-width: 1720px;
   min-height: 466px;
   margin: 0 auto;
-  color: #46445c;
+  color: var(--very-dark-grayish-blue);
   font-family: 'Nunito';
 
   &__header {
@@ -596,12 +596,12 @@
 
     &::-webkit-scrollbar-thumb {
       height: 6px;
-      background-color: #e0e0e0;
+      background-color: var(--scrollout-gray);
       border-radius: 12px;
     }
 
     &::-webkit-scrollbar-track {
-      background-color: #f3f3f3;
+      background-color: var(--scrollin-gray);
       border-radius: 12px;
     }
   }
@@ -619,7 +619,7 @@
 
     &__photo {
       margin-right: 30px;
-      background: #e0e0e0;
+      background: var(--scrollout-gray);
       flex: 0 0 auto;
       width: 65px;
       height: 65px;
@@ -680,7 +680,7 @@
   min-height: 550px;
   margin: 180px auto 0;
   padding-top: 140px;
-  color: #46445c;
+  color: var(--very-dark-grayish-blue);
   position: relative;
   background: url('../../assets/homepage/join.png') right top no-repeat;
 
@@ -712,7 +712,7 @@
   display: flex;
   align-items: center;
   background: url('../../assets/homepage/signup.png') left 60px bottom no-repeat,
-    linear-gradient(265.28deg, var(--purple) 0.27%, #cac3ed 99.93%);
+    linear-gradient(265.28deg, var(--purple) 0.27%, var(--very-light-gray-fifth) 99.93%);
   background-blend-mode: luminosity;
   border-radius: 28px;
   position: relative;
@@ -736,15 +736,15 @@
     line-height: 75px;
     width: 590px;
     height: 75px;
-    background: #efc969;
+    background: var(--blur-yellow-second);
     border-radius: 46px;
-    color: #46445c;
+    color: var(--very-dark-grayish-blue);
     text-align: center;
   }
 
   &__subtitle {
     margin-left: 26px;
-    color: var(--color-white) fff;
+    color: var(--color-white);
   }
 }
 
@@ -837,12 +837,12 @@
     min-height: 334px;
     background: url('../../assets/homepage/sloganLeft.png') left top / 410px 334px no-repeat,
       url('../../assets/homepage/sloganRight.png') right top / 582px 334px no-repeat,
-      linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+      linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
 
     &__center {
       background: url('../../assets/homepage/startLeft.png') left top / 342px 334px no-repeat,
         url('../../assets/homepage/startRight.png') right top / 427px 334px no-repeat,
-        linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+        linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
     }
 
     &__title {
@@ -977,7 +977,7 @@
     margin-top: 140px;
     padding: 50px 40px;
     background: url('../../assets/homepage/signup.png') left 60px bottom / 543px 435px no-repeat,
-      linear-gradient(265.28deg, var(--purple) 0.27%, #cac3ed 99.93%);
+      linear-gradient(265.28deg, var(--purple) 0.27%, var(--very-light-gray-fifth) 99.93%);
 
     &__title {
       width: 452px;
@@ -1115,7 +1115,7 @@
     padding: 50px;
     background: url('../../assets/homepage/sloganLeft.png') left top / 400px 300px no-repeat,
       url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
-      linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+      linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
 
     &__center {
       padding: 45px;
@@ -1123,7 +1123,7 @@
 
       background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
         url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
-        linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+        linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
 
       .slogan {
         &__title {
@@ -1269,7 +1269,7 @@
     margin-top: 100px;
     background: url('../../assets/homepage/signup.png') left 110px bottom 10px / 445px 352px
         no-repeat,
-      linear-gradient(265.28deg, var(--purple) 0.27%, #cac3ed 99.93%);
+      linear-gradient(265.28deg, var(--purple) 0.27%, var(--very-light-gray-fifth) 99.93%);
 
     &__title {
       width: 100%;
@@ -1342,7 +1342,7 @@
       &_blue {
         .ways__skills {
           background: url('../../assets/homepage/trophy.png') center center / 211px 211px no-repeat,
-            linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
+            linear-gradient(135deg, var(--skillcard-blue-one) 0%, var(--skillcard-blue-two) 100%);
         }
       }
 
@@ -1350,14 +1350,14 @@
         .ways__skills {
           background: url('../../assets/homepage/mathematics.png') center center / 211px 211px
               no-repeat,
-            linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
+            linear-gradient(135deg, var(--skillcard-red-one) 0%, var(--skillcard-red-two) 100%);
         }
       }
 
       &_green {
         .ways__skills {
           background: url('../../assets/homepage/courses.png') center center / 211px 211px no-repeat,
-            linear-gradient(135deg, #50b065 0%, #94cca0 100%);
+            linear-gradient(135deg, var(--skillcard-green-one) 0%, var(--skillcard-green-two) 100%);
         }
       }
     }
@@ -1388,7 +1388,7 @@
       &__bg {
         border-radius: 19px;
         padding: 29px 30px 22px;
-        background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, #dbe3f7 100%),
+        background: linear-gradient(270deg, rgba(219, 227, 247, 0) 0%, var(--very-light-gray-third) 100%),
           url('../../assets/homepage/slideBg.png') left top / 96% no-repeat;
       }
 
@@ -1433,12 +1433,12 @@
     background: url('../../assets/homepage/sloganLeft.png') right 440px top 32px / 239px 203px
         no-repeat,
       url('../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
-      linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+      linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
 
     &__center {
       background: url('../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
         url('../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
-        linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+        linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
 
       .slogan {
         &__description {
@@ -1599,7 +1599,7 @@
     min-height: 0;
     display: block;
     background: url('../../assets/homepage/signup.png') center bottom / 445px 352px no-repeat,
-      linear-gradient(265.28deg, var(--purple) 0.27%, #cac3ed 99.93%);
+      linear-gradient(265.28deg, var(--purple) 0.27%, var(--very-light-gray-fifth) 99.93%);
 
     &__block {
       width: 100%;
@@ -1635,7 +1635,7 @@
   .slogan {
     &__center {
       background: url('../../assets/homepage/startRight.png') center top / 385px 300px no-repeat,
-        linear-gradient(90deg, #d7c096 0%, var(--purple) 50.52%, #d7c096 100%);
+        linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 50.52%, var(--slightly-desaturated-orange) 100%);
     }
   }
 
@@ -1777,12 +1777,12 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: #e0e0e0;
+        background-color: var(--scrollout-gray);
         border-radius: 12px;
       }
 
       &::-webkit-scrollbar-track {
-        background-color: #f3f3f3;
+        background-color: var(--scrollin-gray);
         border-radius: 12px;
       }
     }
@@ -1811,11 +1811,11 @@
   .slogan {
     padding: 50px 20px 40px 30px;
     background: url('../../assets/homepage/sloganRight.png') right bottom / 100% no-repeat,
-      linear-gradient(90deg, #d7c096 0%, var(--purple) 100%);
+      linear-gradient(90deg, var(--slightly-desaturated-orange) 0%, var(--purple) 100%);
 
     &__center {
       background: url('../../assets/homepage/startRight.png') center bottom / 90% no-repeat,
-        linear-gradient(270deg, #d7c096 0%, var(--purple) 100%);
+        linear-gradient(270deg, var(--slightly-desaturated-orange) 0%, var(--purple) 100%);
     }
 
     &__title {
@@ -1925,11 +1925,7 @@
 
   .join {
     margin-top: 90px;
-    background: linear-gradient(
-        125.21deg,
-        var(--color-white) fff 0%,
-        rgba(255, 255, 255, 0.83) 98.64%
-      ),
+    background: linear-gradient(125.21deg, var(--color-white) 0%, rgba(255, 255, 255, 0.83) 98.64%),
       url('../../assets/homepage/join.png') right bottom / 100% no-repeat;
 
     &__title {
@@ -1948,7 +1944,7 @@
   .signup {
     padding: 40px 20px;
     background: url('../../assets/homepage/signup.png') center bottom / 100% no-repeat,
-      linear-gradient(265.28deg, var(--purple) 0.27%, #cac3ed 99.93%);
+      linear-gradient(265.28deg, var(--purple) 0.27%, var(--very-light-gray-fifth) 99.93%);
 
     &__title {
       margin-top: 0;
@@ -2061,7 +2057,7 @@
       &_blue {
         .ways__skills {
           background: url('../../assets/homepage/trophy.png') center center / 155px 155px no-repeat,
-            linear-gradient(135deg, #6078f5 0%, #97a3e2 100%);
+            linear-gradient(135deg, var(--skillcard-blue-one) 0%, var(--skillcard-blue-two) 100%);
         }
       }
 
@@ -2069,14 +2065,14 @@
         .ways__skills {
           background: url('../../assets/homepage/mathematics.png') center center / 155px 155px
               no-repeat,
-            linear-gradient(135deg, #ef9169 0%, #eab6a0 100%);
+            linear-gradient(135deg, var(--skillcard-red-one) 0%, var(--skillcard-red-two) 100%);
         }
       }
 
       &_green {
         .ways__skills {
           background: url('../../assets/homepage/courses.png') center center / 155px 155px no-repeat,
-            linear-gradient(135deg, #50b065 0%, #94cca0 100%);
+            linear-gradient(135deg, var(--skillcard-green-one) 0%, var(--skillcard-green-two) 100%);
         }
       }
     }
