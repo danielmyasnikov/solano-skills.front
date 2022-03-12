@@ -102,9 +102,10 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
       if (isAuth) {
+        console.log('tyt');
         dispatch(
           sendAnswer(
-            exercise?.nested_exercises[activeExercise].course_part_slug,
+            exercise?.nested_exercises[activeExercise].slug,
             exercise?.nested_exercises[activeExercise].course_slug,
             xp,
             headers,
