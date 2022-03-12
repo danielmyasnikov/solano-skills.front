@@ -41,10 +41,10 @@ export const ForgotPassword = () => {
   };
 
   const disabledButtonHandler = () => {
-    if (email.length) {
-      return false;
+    if (!!email.toLowerCase().match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) === false) {
+      return true;
     }
-    return true;
+    return false;
   };
 
   const ButtonResendClickhandler = () => {
