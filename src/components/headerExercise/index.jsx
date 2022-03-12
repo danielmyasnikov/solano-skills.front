@@ -10,6 +10,7 @@ import CourseContentModal from '../common/modals/courseContent';
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
 import { selectExercise } from '@store/exercise/selector';
+import { selectProfile } from '@store/profile/selector';
 import { useHistory, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,6 +23,7 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
   const history = useHistory();
 
   const courseData = useSelector(selectCourse);
+  const profile = useSelector(selectProfile);
   const [course, setCourse] = useState({});
 
   useEffect(() => {
@@ -84,8 +86,8 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
           </Button>
         </nav>
         <nav className={cn(styles.headerItem, styles.navbarMenu)}>
-          <span className={styles.dailyXp}>Ежедневный опыт</span>
-          <div className={styles.xp}>100 xp</div>
+          <span className={styles.dailyXp}>Ваш опыт</span>
+          <div className={styles.xp}>{profile.xp} XP</div>
         </nav>
       </header>
     </div>

@@ -13,6 +13,7 @@ import * as AuthStore from '@store/auth';
 import { patchProfile, getProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
 import { TextareaAutosize } from '@mui/material';
+import HeaderPage from '../common/headerPage';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
@@ -114,13 +115,7 @@ const Profile = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Личный кабинет</h1>
-        <p className={styles.description}>
-          Здесь вы можете просматривать информацию о себе, своих достижениях, историю обучения и
-          обновлять свой тарифный план.
-        </p>
-      </div>
+      <HeaderPage content="profile" />
       <div className={styles.content}>
         <div className={cn(styles.profile, styles.card)}>
           <div className={styles.profileInfo}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
+import { numberDeclension } from '../../common/helpers/ numberDeclension';
 
 export const CourseInfo = ({ hours, videos, exercises, xps }) => {
   return (
@@ -8,7 +9,9 @@ export const CourseInfo = ({ hours, videos, exercises, xps }) => {
       <div className={styles.blocks}>
         <div className={styles.block}>
           <span className={styles.title}>{hours}</span>
-          <span className={styles.description}>часа</span>
+          <span className={styles.description}>
+            {numberDeclension(hours, ['час', 'часа', 'часов'])}
+          </span>
         </div>
 
         <div className={styles.block}>
@@ -18,7 +21,9 @@ export const CourseInfo = ({ hours, videos, exercises, xps }) => {
 
         <div className={styles.block}>
           <span className={styles.title}>{exercises}</span>
-          <span className={styles.description}>упражнения</span>
+          <span className={styles.description}>
+            {numberDeclension(exercises, ['упражнение', 'упражнения', 'упражнений'])}
+          </span>
         </div>
 
         <div className={styles.block}>
@@ -29,7 +34,7 @@ export const CourseInfo = ({ hours, videos, exercises, xps }) => {
 
       <div className={styles.btnWrapper}>
         <Button variant="containedPurple" className={styles.btn}>
-          Практиковаться
+          Начать обучение
         </Button>
         <Button variant="outlinePurple">Пройти курс снова</Button>
       </div>

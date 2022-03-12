@@ -134,13 +134,14 @@ export const Registration = ({ variant, isModal }) => {
         {isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <>
             <ByPhoneNumber
+              variant={variant}
               handleAuthMethod={handleAuthMethod}
               authMethodText="Регистрация по Email"
               handleChange={handleChange}
               phoneNumber={phoneNumber}
             />
             <Terms
-              isPhoneNumber={isRegistrationByPhone}
+              variant={variant}
               checked={phoneTermsChecked}
               handleChecked={handlePhoneTermsChecked}
               checkedError={phoneTermsCheckedError}
@@ -149,6 +150,7 @@ export const Registration = ({ variant, isModal }) => {
         )}
         {isPhoneNumberConfirmation && (
           <PhoneNumberConfirmation
+            variant={variant}
             handleChange={handleChange}
             confirmationСode={confirmationСode}
             handleAuthMethod={() => {
@@ -171,11 +173,11 @@ export const Registration = ({ variant, isModal }) => {
             <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
           </div>
         )}
-        <SocialNetworks variant={variant} />
+        {/* <SocialNetworks variant={variant} /> */}
         <div className={styles.toAuth}>
           <span className={styles.text}>
             {'Уже есть аккаунт? '}
-            <Link className={styles.infoLink} to={'/sing-in'}>
+            <Link className={styles.infoLink} to={'/sign-in'}>
               Войти
             </Link>
           </span>

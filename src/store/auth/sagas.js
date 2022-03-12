@@ -1,5 +1,11 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { registrationApi, signInByPhoneApi, signInByPhoneVerifyApi, singInApi } from '../api/auth';
+import {
+  registrationApi,
+  requestPasswordResetApi,
+  signInByPhoneApi,
+  signInByPhoneVerifyApi,
+  singInApi,
+} from '../api/auth';
 
 import {
   REGISTRATION_SUCCESSED,
@@ -16,6 +22,9 @@ import {
   SIGN_IN_BY_PHONE_VERIFY_SUCCESSED,
   SIGN_IN_BY_PHONE_VERIFY,
   SIGN_IN_BY_PHONE_VERIFY_FAILED,
+  REQUEST_PASSWORD_RESET_SUCCESSED,
+  REQUEST_PASSWORD_RESET_FAILED,
+  REQUEST_PASSWORD_RESET,
 } from './actions';
 
 export function* setLocalHeaders({ payload }) {
@@ -72,6 +81,24 @@ export function* signInByPhone(action) {
     const error = err.response.data.errors;
     yield put({
       type: SIGN_IN_BY_PHONE_FAILED,
+      payload: {
+        error,
+      },
+    });
+  }
+}
+
+export function* requestPasswordReset(action) {
+  try {
+    const res = yield call(requestPasswordResetApi, action.payload);
+    yield put({
+      type: REQUEST_PASSWORD_RESET_SUCCESSED,
+      payload: {},
+    });
+  } catch (err) {
+    const error = err.response.data.errors;
+    yield put({
+      type: REQUEST_PASSWORD_RESET_FAILED,
       payload: {
         error,
       },
@@ -150,4 +177,5 @@ export default function* authSaga() {
   yield takeLeading(SIGN_IN_BY_PHONE, signInByPhone);
   yield takeLeading(SIGN_IN_BY_PHONE_VERIFY, signInByPhoneVerify);
   yield takeLeading(LOCAL_HEADERS, setLocalHeaders);
+  yield takeLeading(REQUEST_PASSWORD_RESET, requestPasswordReset);
 }

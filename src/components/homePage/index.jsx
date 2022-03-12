@@ -1,45 +1,132 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+// import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
 import Footer from '../footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+// import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
+import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
 import { Registration } from '@components/auth/registration';
+import BurgerMenu from '@components/common/burgerMenu';
 
 export const HomePage = () => {
-  const renderImage = (img) => {
-    switch (img) {
-      case 'lectures':
-        return images.lectures;
-      case 'practice':
-        return images.practice;
-      case 'statement':
-        return images.statement;
-      case 'avatar':
-        return images.avatar;
-      default:
-        return;
-    }
-  };
+  const [showMenu, setShowMenu] = useState(false);
+
+  const handleBurger = () => setShowMenu(!showMenu);
+
+  const renderImage = (img) => images[img];
+
+  const renderSlides = useMemo(() => {
+    return slides.map((block) => (
+      <div
+        key={block.title}
+        className={
+          (block.bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
+          (block.bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
+          cn(styles.ways__block, styles.ways__block_green)
+        }
+      >
+        <div className={styles.ways__skills}>
+          <div className={styles.ways__skills__title}>{block.title}</div>
+          <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
+          <div className={styles.ways__skills__btn}>
+            <Button variant="outlineWhiteHome" disabled={true}>
+              {block.btn}
+              <KeyboardArrowRightIcon />
+            </Button>
+          </div>
+        </div>
+        <div className={styles.ways__slides}>
+          {block.items.map((item, i) => (
+            <div key={item.title + i} className={styles.ways__slideContainer}>
+              <div className={styles.ways__slide}>
+                <div className={styles.ways__slide__bg}>
+                  <div className={styles.ways__slide__title}>{item.title}</div>
+                  <div className={styles.ways__slide__text}>{item.text}</div>
+                  <div className={styles.ways__slide__button}>
+                    <Button variant="outlineBlue" disabled={true}>
+                      {block.btnlearn}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ));
+  }, [slides]);
+
+  const renderPractices = useMemo(() => {
+    return practices.map((practice) => (
+      <section className={styles.practice}>
+        <div className={styles.practice__left}>
+          <div className={styles.practice__pretitle}>{practice.pretitle}</div>
+          <div className={styles.practice__title}>{practice.title}</div>
+          <div className={styles.practice__text}>{practice.text}</div>
+          {/* <Link to={practice.route}>
+            {practice.link}
+            <KeyboardDoubleArrowRightIcon />
+          </Link> */}
+        </div>
+        <div className={styles.practice__right}>
+          <div className={styles.practice__tochki}>
+            <images.tochki />
+          </div>
+          <div className={styles.practice__img}>
+            <img src={renderImage(practice.img)} />
+          </div>
+          <div className={styles.practice__textblock}>
+            <div className={styles.practice__textblock__title}>{practice.textblockTitle}</div>
+            <div className={styles.practice__textblock__subtitle}>{practice.textblockSubtitle}</div>
+          </div>
+        </div>
+      </section>
+    ));
+  }, [practices]);
+
+  const renderFeedbacks = useMemo(() => {
+    return feedbacks.map(({ avatar, text, author }) => (
+      <div className={styles.whatSays__feedback}>
+        <div className={styles.whatSays__feedback__photo}>
+          <img src={renderImage(avatar)} />
+        </div>
+        <div className={styles.whatSays__feedback__data}>
+          <div className={styles.whatSays__feedback__data__scroll}>
+            <div className={styles.whatSays__feedback__data__text}>{text}</div>
+          </div>
+          <div className={styles.whatSays__feedback__data__author}>{author}</div>
+        </div>
+      </div>
+    ));
+  }, [feedbacks]);
 
   return (
-    <>
-      <HeaderHome />
+    <div className={styles.home}>
+      <div
+        className={cn({ [styles.blur]: showMenu === true })}
+        onTouchStart={() => handleBurger()}
+      ></div>
+      <HeaderHome handleBurger={handleBurger} />
+      <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
         <div className={styles.container}>
           <main>
             <section className={styles.offer}>
               <div className={cn(styles.offer__block, styles.offer__block__left)}>
-                <div className={styles.offer__title}>Развивайте навыки работы с данными</div>
+                <div className={styles.offer__title}>Курсы программирования на Python</div>
                 <div className={styles.offer__subtitle}>
                   Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
                   и направлениям в сфере Информационных технологий.
                 </div>
-                <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
+                <div className={styles.offer__btnDiv}>
+                  <HashLink to="/#ways">
+                    <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
+                  </HashLink>
+                </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
                     <div className={styles.offer__fact__number}>{'>25'}</div>
@@ -57,136 +144,67 @@ export const HomePage = () => {
               </div>
             </section>
 
-            <section className={styles.ways}>
+            <section className={styles.ways} id="ways">
               <div className={styles.ways__title}>
-                Пути обучения, <span>разработанные экспертами</span>
+                Подход к обучению программирования, <span>разработанный экспертами</span>
               </div>
-              {slides.map((block) => (
-                <div
-                  key={block.title}
-                  className={
-                    block.bg === 'blue'
-                      ? cn(styles.ways__block, styles.ways__block_blue)
-                      : block.bg === 'red'
-                      ? cn(styles.ways__block, styles.ways__block_red)
-                      : cn(styles.ways__block, styles.ways__block_green)
-                  }
-                >
-                  <div className={styles.ways__skills}>
-                    <div className={styles.ways__skills__title}>{block.title}</div>
-                    <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
-                    <div className={styles.ways__skills__btn}>
-                      <Button variant="outlineWhiteHome">
-                        {block.btn}
-                        <KeyboardArrowRightIcon />
-                      </Button>
-                    </div>
-                  </div>
-                  <div className={styles.ways__slides}>
-                    {block.items.map((item, i) => (
-                      <div key={item.title + i} className={styles.ways__slideContainer}>
-                        <div className={styles.ways__slide}>
-                          <div className={styles.ways__slide__bg}>
-                            <div className={styles.ways__slide__title}>{item.title}</div>
-                            <div className={styles.ways__slide__text}>{item.text}</div>
-                            <div className={styles.ways__slide__button}>
-                              <Button variant="outlineBlue">{block.btnlearn}</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              {renderSlides}
             </section>
 
             <section className={styles.slogan}>
-              <div className={styles.slogan__title}>Что такое DeepSkills?</div>
+              <div className={styles.slogan__title}>Особенности обучения от DeepSkills?</div>
               <div className={styles.slogan__description}>
-                Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от
-                основ, не связанных с кодированием, до науки о данных и машинного обучения.
+                Изучение принципов работы с языком программирования Python происходит удаленно с
+                помощью видеоуроков. Функционал платформы обучения (в вашем личном кабинете)
+                позволяет выполнять практические задачи по программированию и проверять правильность
+                их выполнения в режиме онлайн. Мы соединили воедино лучшие мировые методики онлайн
+                обучения.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite">Посмотреть курсы</Button>
+                <Button variant="containedWhite" disabled={true}>
+                  Посмотреть курсы
+                </Button>
               </div>
             </section>
 
             <section className={styles.practices}>
               <div className={styles.practices__title}>
-                <span>Практический</span> опыт обучения
+                <span>Наш практический</span> опыт обучения
               </div>
               <div className={styles.practices__subtitle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco.
+                Наши специалисты прежде чем создать данную платформу обучения, проанализировали
+                лучшие мировые методики. Мы провели опрос учеников этих компаний и на основе этой
+                информации разработали свою платформу обучения с уникальной методикой.
               </div>
             </section>
 
-            {practices.map((practice) => (
-              <section className={styles.practice}>
-                <div className={styles.practice__left}>
-                  <div className={styles.practice__pretitle}>{practice.pretitle}</div>
-                  <div className={styles.practice__title}>{practice.title}</div>
-                  <div className={styles.practice__text}>{practice.text}</div>
-                  <Link to={practice.route}>
-                    {practice.link}
-                    <KeyboardDoubleArrowRightIcon />
-                  </Link>
-                </div>
-                <div className={styles.practice__right}>
-                  <div className={styles.practice__tochki}>
-                    <images.tochki />
-                  </div>
-                  <div className={styles.practice__img}>
-                    <img src={renderImage(practice.img)} />
-                  </div>
-                  <div className={styles.practice__textblock}>
-                    <div className={styles.practice__textblock__title}>
-                      {practice.textblockTitle}
-                    </div>
-                    <div className={styles.practice__textblock__subtitle}>
-                      {practice.textblockSubtitle}
-                    </div>
-                  </div>
-                </div>
-              </section>
-            ))}
+            {renderPractices}
 
             <section className={cn(styles.slogan, styles.slogan__center)}>
-              <div className={styles.slogan__title}>Начните прямо сейчас</div>
+              <div className={styles.slogan__title}>
+                Начните обучение программированию на Python прямо сейчас
+              </div>
               <div className={styles.slogan__description}>
-                Изучайте необходимые вам навыки работы с данными онлайн в удобном для вас темпе — от
-                основ, не связанных с кодированием, до науки о данных и машинного обучения.
+                Обучатся Вы можете по своему собственному графику занятий. Удаленное обучение
+                программированию не привязывает обучающегося к месту обязательного нахождения. Вы
+                можете обучаться с любой точки планеты где есть Интернет.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite">Посмотреть курсы</Button>
+                <Button variant="containedWhite" disabled={true}>
+                  Посмотреть курсы
+                </Button>
               </div>
             </section>
 
             <section className={styles.whatSays}>
               <div className={styles.whatSays__header}>
-                <div className={styles.whatSays__header__title}>Что говорят наши пользователи</div>
+                <div className={styles.whatSays__header__title}>Отзывы наших учеников</div>
                 <div className={styles.whatSays__header__subtitle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt
+                  {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt */}
                 </div>
               </div>
-              <div className={styles.whatSays__feedbacks}>
-                {feedbacks.map((feedback) => (
-                  <div className={styles.whatSays__feedback}>
-                    <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} />
-                    </div>
-                    <div className={styles.whatSays__feedback__data}>
-                      <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
-                      <div className={styles.whatSays__feedback__data__author}>
-                        {feedback.author}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <div className={styles.whatSays__feedbacks}>{renderFeedbacks}</div>
             </section>
 
             <section className={styles.join}>
@@ -194,14 +212,16 @@ export const HomePage = () => {
                 Присоединяйтесь к команде преподавателей DeepSkills
               </div>
               <div className={styles.join__subtitle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna.
+                Если у Вас есть фундаментальные знания и практика в работе с языком программирования
+                Python, то Вы можете стать преподавателем в нашей компании. Методике изложения
+                материала - мы научим. Для того чтобы стать преподавателем нужно отправить заявку в
+                компанию. Мы обещаем провести собеседование в удобное для Вас время и дать свое
+                заключение в течение 24 часов.
               </div>
               <div className={styles.join__btn}>
-                <Button variant="containedPurple">Я преподаватель</Button>
+                <a href="https://forms.gle/nCKa2D3JK756E9eg7">
+                  <Button variant="containedPurple">Я преподаватель</Button>
+                </a>
               </div>
             </section>
 
@@ -218,6 +238,6 @@ export const HomePage = () => {
         </div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 };

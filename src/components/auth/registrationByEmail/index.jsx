@@ -43,7 +43,7 @@ export const RegistrationByEmail = ({
           </div>
         </div>
         <div onClick={() => handleAuthMethod()} className={styles.link}>
-          Регистрация по номеру телефона
+          {/* Регистрация по номеру телефона */}
         </div>
         <div className={cn({ [styles.block]: variant === 'home_end' })}>
           <span className={cn(styles.subTitile, { [styles.subTitileError]: errors.passwordError })}>
@@ -75,6 +75,7 @@ export const RegistrationByEmail = ({
           value={passwordConfirmation}
           handleChange={handleChange}
           name="passwordConfirmation"
+          placeholder={'Введите пароль повторно'}
         />
         {errors.passwordConfirmationError && (
           <span className={styles.error}>{errors.passwordConfirmationError}</span>

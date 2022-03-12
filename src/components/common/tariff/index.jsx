@@ -1,12 +1,15 @@
 import styles from './styles.module.less';
-import { TariffList } from './constants';
+import { useHistory } from 'react-router-dom';
 import Button from '@components/mui/button';
-import Icon from '../assets/Icon.svg';
+import Icon from './assets/Icon.svg';
 import cn from 'classnames';
 import { useCallback, useMemo } from 'react';
+import { TariffList } from '../../constants';
 
 export const Tariffs = () => {
   const IconItem = () => <img src={Icon} alt="icon" />;
+
+  const history = useHistory();
 
   const Sections = useCallback((isEconomy, isOptimal) => {
     return (
@@ -41,7 +44,20 @@ export const Tariffs = () => {
           <div className={cn(styles.wrapperPrice, { [styles.wrapperPriceGreen]: isOptimal })}>
             {price}
           </div>
-          <Button className={styles.wrapperButton} variant="containedPurple">
+          <Button
+            onClick={() =>
+              history.push({
+                pathname: '/payment',
+                state: {
+                  title: title,
+                  price: price.substring(0, price.indexOf('₽')),
+                },
+              })
+            }
+            to="/payment"
+            className={styles.wrapperButton}
+            variant="containedPurple"
+          >
             Активировать
           </Button>
         </div>

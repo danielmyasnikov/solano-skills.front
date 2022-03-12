@@ -1,8 +1,8 @@
 import { Dialog } from '@mui/material';
 import Close from '@assets/Close.js';
-import { Tariffs } from './Tariffs';
 
 import styles from './styles.module.less';
+import { Tariffs } from '../../common/tariff';
 
 export const ModalTariffSelection = ({ handleClick, open }) => {
   return (
@@ -26,8 +26,8 @@ export const ModalTariffSelection = ({ handleClick, open }) => {
             <span className={styles.headerTitle}>Выберите свой тарифный план</span>
           </div>
           <span className={styles.headerText}>
-            We've done it carefully and simply. Combined with the ingredients makes for beatiful
-            landings.
+            Благодаря DeepSkills Вы сможете изучать навыки работы с данными, необходимые для
+            продвижения по карьерной лестнице.
           </span>
         </div>
         <Tariffs />

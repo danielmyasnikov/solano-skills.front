@@ -19,22 +19,14 @@ function ExercisePage() {
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
   const [isAuth, setIsAuth] = useState(false);
+  const [authCounter, setAuthCounter] = useState(0);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
-  useEffect(() => {
-    dispatch(clearTerminal());
-    dispatch(getExercise(courseId, exerciseId));
-  }, [location.pathname]);
-  useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [headers]);
+
   const onSubmit = () => {
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
-    dispatch(getExercise(courseId, exercise.next_exercise_id));
+    dispatch(getExercise(courseId, exercise.next_exercise_id, headers));
   };
+
   const renderExercise = () => {
     switch (exercise.type) {
       case 'quiz':
@@ -52,15 +44,39 @@ function ExercisePage() {
       case 'bullet_point_exercise':
         return (
           <div className={styles.exerciseContainer}>
-            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} />{' '}
+            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />{' '}
           </div>
         );
       case 'video':
-        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} />;
+        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
       default:
         break;
     }
   };
+
+  useEffect(() => {});
+
+  useEffect(() => {
+    if (headers.uid && headers.client && headers['access-token']) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+    setAuthCounter(authCounter + 1);
+  }, [location.pathname, headers]);
+
+  useEffect(() => {
+    dispatch(clearTerminal());
+    console.log(authCounter);
+    if (authCounter >= 1) {
+      if (headers) {
+        dispatch(getExercise(courseId, exerciseId, headers));
+      } else {
+        dispatch(getExercise(courseId, exerciseId));
+      }
+    }
+  }, [authCounter]);
+
   return <>{renderExercise()}</>;
 }
 

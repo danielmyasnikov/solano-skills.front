@@ -111,7 +111,7 @@ export const CertificatesPage = () => {
       <div className={styles.content}>
         <div className={cn(styles.profile, styles.card)}>
           <div className={styles.profileInfo}>
-            <Avatar />
+            <Avatar avatar={profile.avatar_url} />
             {isFullnameActive && (
               <input
                 name="fullname"

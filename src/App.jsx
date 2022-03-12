@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import * as Sentry from '@sentry/react';
 
 import Container from './components/container';
 
 import { routes } from './routes';
+import { Page404 } from './components/page404';
 
 import { useDispatch } from 'react-redux';
 
@@ -33,15 +34,17 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      {/* {isLogIn && <Redirect to="/sing-in" />} */}
-
-      {routes.map((route, i, headerVariant) => (
-        <Route exact={route.exact} path={route.path} key={route.path}>
-          {(route.wrap && (
-            <Container variant={headerVariant} key={i} {...route} Component={route.component} />
-          )) || <route.component />}
-        </Route>
-      ))}
+      {/* {isLogIn && <Redirect to="/sign-in" />} */}
+      <Switch>
+        {routes.map((route, i, headerVariant) => (
+          <Route exact={route.exact} path={route.path} key={route.path}>
+            {(route.wrap && (
+              <Container variant={headerVariant} key={i} {...route} Component={route.component} />
+            )) || <route.component />}
+          </Route>
+        ))}
+        <Route component={Page404} />
+      </Switch>
     </div>
   );
 }

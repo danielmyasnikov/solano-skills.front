@@ -5,7 +5,12 @@ import tochki from '@assets/homepage/Tochki';
 import lectures from '@assets/homepage/lectures.png';
 import practice from '@assets/homepage/practice.png';
 import statement from '@assets/homepage/statement.png';
-import avatar from '@assets/homepage/avatar.png';
+import avatar1 from '@assets/homepage/avatar1.png';
+import avatar2 from '@assets/homepage/avatar2.png';
+import avatar3 from '@assets/homepage/avatar3.png';
+import avatar4 from '@assets/homepage/avatar4.png';
+import avatar5 from '@assets/homepage/avatar5.png';
+import avatar6 from '@assets/homepage/avatar6.png';
 
 export const images = {
   googleAccount,
@@ -15,7 +20,12 @@ export const images = {
   lectures,
   practice,
   statement,
-  avatar,
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
 };
 
 export const slides = [
@@ -23,9 +33,9 @@ export const slides = [
     bg: 'blue',
     img: 'trophy',
     title: 'Профессии',
-    subtitle: '23 профессии',
+    subtitle: '4 профессии',
     btn: 'Смотреть все',
-    btnlearn: 'Изучить курс',
+    btnlearn: 'Подготовиться к профессии',
     items: [
       {
         bg: 'slideBg',
@@ -50,10 +60,40 @@ export const slides = [
     ],
   },
   {
+    bg: 'green',
+    img: 'mathematics',
+    title: 'Навыки',
+    subtitle: '14 навыков',
+    btn: 'Смотреть все',
+    btnlearn: 'Получить навык',
+    items: [
+      {
+        bg: 'slideBg',
+        title: 'Разработка на Python',
+        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
+      },
+      {
+        bg: 'slideBg',
+        title: 'Импортирование данных',
+        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
+      },
+      {
+        bg: 'slideBg',
+        title: 'Изменение данных',
+        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
+      },
+      {
+        bg: 'slideBg',
+        title: 'Python программист',
+        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
+      },
+    ],
+  },
+  {
     bg: 'red',
     img: 'courses',
     title: 'Курсы',
-    subtitle: '23 профессии',
+    subtitle: '58 курсов',
     btn: 'Смотреть все',
     btnlearn: 'Изучить курс',
     items: [
@@ -79,43 +119,13 @@ export const slides = [
       },
     ],
   },
-  {
-    bg: 'green',
-    img: 'mathematics',
-    title: 'Навыки',
-    subtitle: '23 профессии',
-    btn: 'Смотреть все',
-    btnlearn: 'Изучить курс',
-    items: [
-      {
-        bg: 'slideBg',
-        title: 'Разработка на Python',
-        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
-      },
-      {
-        bg: 'slideBg',
-        title: 'Импортирование данных',
-        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
-      },
-      {
-        bg: 'slideBg',
-        title: 'Изменение данных',
-        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
-      },
-      {
-        bg: 'slideBg',
-        title: 'Python программист',
-        text: 'В этом треке вы узнаете, как манипулировать данными, писать эффективный код Python и работать со сложными данными, включая данные о дате и времени, текстовые данные и веб-данные, используя API.',
-      },
-    ],
-  },
 ];
 
 export const practices = [
   {
     pretitle: 'Лекции',
-    title: 'Короткие обучающие видео с максимальной пользой для обучения',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+    title: 'Пример видеоурока',
+    text: 'Представляем пример видеоурока по обучению программирования на языке Python. Видео длится всего 5 минут. Наша цель - гарантировать результат обучения. Результат обучения - Вы становитесь сертифицированным, профессиональным разработчиком на Python.',
     link: 'Выбрать курс',
     route: '/',
     img: 'lectures',
@@ -124,8 +134,8 @@ export const practices = [
   },
   {
     pretitle: 'Практика',
-    title: 'Практикуйтесь и применяйте свои навыки',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+    title: 'Функционал платформы обучения позволяет на практике проверить свои знания',
+    text: 'Данный функционал позволяет проверить правильность написанного вами кода на Python. В верхнем окне вы пишите собственно код фрагмента программы. В нижнем окне - при нажатии кнопки “Выполнить код”, вы получаете результат выполнения кода, тем самым проверяя его правильность.',
     link: 'Начать практиковаться',
     route: '/',
     img: 'practice',
@@ -135,7 +145,7 @@ export const practices = [
   {
     pretitle: 'Сертификация',
     title: 'После прохождения курсов вы получаете сертификат установленного образца',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+    text: 'Данный сертификат актуален при трудоустройстве, и вы можете скачать его в PDF формате, что дает вам возможность для вычета НДФЛ',
     link: 'Перейти к обучению',
     route: '/',
     img: 'statement',
@@ -146,33 +156,33 @@ export const practices = [
 
 export const feedbacks = [
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar1',
+    author: 'Елена Ворончук',
+    text: '“Эта программа — настоящая революция в высшем образовании.”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar2',
+    author: 'Артем Шабалов',
+    text: '“Я начал с нуля и смог учиться онлайн и в итоге накопил достаточно знаний и навыков, чтобы найти новую, хорошо оплачиваемую работу.”',
   },
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar3',
+    author: 'Ольга Белякова',
+    text: '“Специалисты по подбору кадров обратили внимание на профессиональный сертификат в моем профиле LinkedIn. На собеседовании они сказали, что полученные мной навыки впечатляют. Меня приняли на работу”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar4',
+    author: 'Андрей Николаев',
+    text: '“Прекрасная платформа для обучения и развития новым навыкам и профессиям, удобный формат”',
   },
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar5',
+    author: 'Вероника Крупских',
+    text: '“Решила попробовать для себя что-то новое, благодаря данным курсам ушла с работы и теперь работаю дома в свое удовольствие”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar6',
+    author: 'Иван Носков',
+    text: '“Раньше думал, что 35т.р. - потолок в моем городе. Ошибься, спасибо deepskills!!!”',
   },
 ];

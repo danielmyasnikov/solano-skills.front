@@ -1,0 +1,149 @@
+.wrapper {
+  width: 100vw;
+  padding: 22px 40px;
+  background: var(--purple);
+  box-shadow: 0px -4px 27px rgba(0, 0, 0, 0.18);
+  color: var(--color-white);
+  font-family: Nunito;
+}
+
+.wrapperLeft,
+.wrapperRight {
+  display: flex;
+  width: max-content;
+  align-items: baseline;
+}
+
+.wrapperLeft > span {
+  margin-right: 13px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.wrapperLeftIcon > svg > path {
+  fill: var(--color-white);
+}
+
+.wrapperLeftIcon > svg {
+  transform: rotate(-180deg);
+}
+
+.wrapperLeftIconRotate > svg {
+  transform: rotate(360deg);
+}
+
+.wrapperRight {
+  align-items: center;
+}
+
+.wrapperRightText {
+  font-weight: bold;
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.wrapperRightOldPrice {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--very-soft-blue);
+  text-decoration-line: line-through;
+}
+
+.TitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.tariffInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--very-soft-blue);
+}
+
+.tariffInfoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--Very-soft-blue-two);
+}
+
+.tariffInfoRight,
+.tariffInfoLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.tariffInfoRight {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.tariffInfoLeft {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.tariffInfoRight > span {
+  margin-bottom: 10px;
+}
+
+.tariffInfoRight > span:last-child {
+  margin-bottom: 0;
+}
+
+.tariffInfoLeft > span {
+  margin-bottom: 10px;
+}
+
+.tariffInfoLeft > span:last-child {
+  margin-bottom: 0;
+}
+
+.tariffInfoLeftText {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+}
+
+.tariffInfoRightText {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+}
+
+.tariffCost {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 33px 30px 40px;
+  background: linear-gradient(180deg, #7469ef 0%, #524aa8 100%);
+  border-radius: 0px 0px 16px 16px;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+}
+
+.tariffCostDifference {
+  display: flex;
+  align-items: center;
+}
+
+.tariffCostOld {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  text-decoration-line: line-through;
+  color: rgba(255, 255, 255, 0.35);
+}

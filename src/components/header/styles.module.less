@@ -29,6 +29,7 @@
 
 .profile {
   display: flex;
+  cursor: pointer;
   align-items: center;
   background: rgba(138, 146, 166, 0.16);
   padding: 2px;
@@ -40,8 +41,15 @@
     border-radius: 50%;
   }
   svg {
+    transition: .2s ease-in-out;
     cursor: pointer;
     margin: 15px;
+  }
+}
+
+.profileRotate {
+  svg {
+    transform: rotate(180deg);
   }
 }
 

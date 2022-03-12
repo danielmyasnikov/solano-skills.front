@@ -6,10 +6,17 @@ import { selectExercise } from '@store/exercise/selector';
 
 import styles from './styles.module.less';
 
-export const VideoExercise = ({ onSubmit }) => {
+export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
   const exercise = useSelector(selectExercise);
+
   const transcriptRef = useRef();
   const [showTranscript, setShowTranscript] = useState(false);
+  const [nextLesson, setNextLesson] = useState(false);
+
+  const clickHandler = () => {
+    setNextLesson(!nextLesson);
+    onSubmit();
+  };
 
   const sourceData = useMemo(
     () => ({
@@ -37,7 +44,7 @@ export const VideoExercise = ({ onSubmit }) => {
         },
       ],
     }),
-    [exercise],
+    [exercise.video_id],
   );
 
   useEffect(() => {
@@ -52,7 +59,13 @@ export const VideoExercise = ({ onSubmit }) => {
           Вы получите<span className={styles.xp}> {` ${exercise.xp} xp`}</span>
         </p>
         <div className={styles.playerWrapper}>
-          <VideoPlayer id={exercise.id} xp={exercise.xp} sourceData={sourceData} />
+          <VideoPlayer
+            nextLesson={nextLesson}
+            exercise={exercise}
+            isAuth={isAuth}
+            headers={headers}
+            sourceData={sourceData}
+          />
         </div>
         <div className={styles.btnWrapper}>
           <Button
@@ -63,7 +76,7 @@ export const VideoExercise = ({ onSubmit }) => {
           >
             {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
           </Button>
-          <Button variant={'containedPurple'} onClick={onSubmit}>
+          <Button variant={'containedPurple'} onClick={() => clickHandler()}>
             Продолжить
           </Button>
         </div>

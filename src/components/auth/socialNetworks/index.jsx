@@ -1,6 +1,6 @@
 import React from 'react';
 import GoogleAccount from '@assets/homepage/GoogleAccount';
-import FacebookAccount from '@assets/homepage/FacebookAccount';
+// import FacebookAccount from '@assets/homepage/FacebookAccount';
 import VkAccount from '@assets/homepage/VkAccount';
 import styles from './styles.module.less';
 import cn from 'classnames';
@@ -24,9 +24,9 @@ export const SocialNetworks = ({ variant }) => {
           <GoogleAccount />
         </a>
 
-        <a className={styles.iconWrapper} href="###">
+        {/* <a className={styles.iconWrapper} href="###">
           <FacebookAccount />
-        </a>
+        </a> */}
 
         <a className={styles.iconWrapper} href="###">
           <VkAccount />

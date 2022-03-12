@@ -33,12 +33,13 @@ const Terms = ({ variant, handleChecked, checked, checkedError, isPhoneNumber })
       )}
     >
       <CheckboxBtn
+        variant={variant}
         name="registration-terms"
         error={!!checkedError}
         value={checked}
         handleChange={handleChecked}
       />
-      <div className={styles.info} onClick={() => handleChecked}>
+      <div className={styles.info} onClick={() => handleChecked()}>
         <Content />
       </div>
     </div>

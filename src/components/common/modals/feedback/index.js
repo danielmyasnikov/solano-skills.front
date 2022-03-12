@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import Close from '@assets/Close.js';
 
 const FeedbackModal = ({ onClose }) => {
+  const [proplem, setProblem] = useState('');
+
   const options = [
     { value: 'variant1', label: 'Тема 1' },
     { value: 'variant2', label: 'Тема 2' },
@@ -13,6 +15,15 @@ const FeedbackModal = ({ onClose }) => {
     { value: 'variant5', label: 'Тема 5' },
     { value: 'variant6', label: 'Другое' },
   ];
+
+  const inputHandler = (e) => setProblem(e.target.value);
+
+  const disabledButtonHandler = () => {
+    if (proplem) {
+      return false;
+    }
+    return true;
+  };
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
@@ -27,8 +38,9 @@ const FeedbackModal = ({ onClose }) => {
           placeholder="Ваша проблема есть здесь"
           options={options}
         />
-        <textarea placeholder="Введите текст"></textarea>
+        <textarea onChange={(e) => inputHandler(e)} placeholder="Введите текст"></textarea>
         <Button
+          disabled={disabledButtonHandler()}
           className={styles.btn}
           variant="containedPurple"
           onClick={() => onClose()}

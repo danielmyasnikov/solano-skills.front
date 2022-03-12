@@ -15,6 +15,7 @@ import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import { sendAnswer } from '@store/exercise/actions';
+import * as AuthStore from '@store/auth';
 
 function QuizTemplate({ onSubmit, isAuth }) {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -24,9 +25,12 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [errorMessage, setErrorMessage] = useState();
   const [hint, setHint] = useState();
+
   const { courseId, exerciseId } = useParams();
+
   const dispatch = useDispatch();
   const exercise = useSelector(selectExercise);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
   const handleAnswer = (item) => {
     setAnswer(item);
@@ -40,7 +44,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
   }, [exercise]);
 
   useEffect(() => {
-    dispatch(getExercise(courseId, exerciseId));
+    dispatch(getExercise(courseId, exerciseId, headers));
     if (!exercise) {
       return null;
     }
@@ -54,8 +58,8 @@ function QuizTemplate({ onSubmit, isAuth }) {
     } else {
       setErrorMessage(answer.error);
     }
-    if (exercise.type === 'quiz') {
-      dispatch(sendAnswer(exercise.id, answer.id, exercise.xp));
+    if (exercise.type === 'quiz' && isAuth) {
+      dispatch(sendAnswer(exercise.slug, courseId, exercise.xp, headers));
     }
     // } else {
     //   setRegistrationModalOpen(true);
