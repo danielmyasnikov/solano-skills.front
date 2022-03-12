@@ -5,7 +5,12 @@ import tochki from '@assets/homepage/Tochki';
 import lectures from '@assets/homepage/lectures.png';
 import practice from '@assets/homepage/practice.png';
 import statement from '@assets/homepage/statement.png';
-import avatar from '@assets/homepage/avatar.png';
+import avatar1 from '@assets/homepage/avatar1.png';
+import avatar2 from '@assets/homepage/avatar2.png';
+import avatar3 from '@assets/homepage/avatar3.png';
+import avatar4 from '@assets/homepage/avatar4.png';
+import avatar5 from '@assets/homepage/avatar5.png';
+import avatar6 from '@assets/homepage/avatar6.png';
 
 export const images = {
   googleAccount,
@@ -15,7 +20,12 @@ export const images = {
   lectures,
   practice,
   statement,
-  avatar,
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  avatar5,
+  avatar6,
 };
 
 export const slides = [
@@ -146,33 +156,33 @@ export const practices = [
 
 export const feedbacks = [
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar1',
+    author: 'Елена Ворончук',
+    text: '“Эта программа — настоящая революция в высшем образовании.”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar2',
+    author: 'Артем Шабалов',
+    text: '“Я начал с нуля и смог учиться онлайн и в итоге накопил достаточно знаний и навыков, чтобы найти новую, хорошо оплачиваемую работу.”',
   },
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar3',
+    author: 'Ольга Белякова',
+    text: '“Специалисты по подбору кадров обратили внимание на профессиональный сертификат в моем профиле LinkedIn. На собеседовании они сказали, что полученные мной навыки впечатляют. Меня приняли на работу”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar4',
+    author: 'Андрей Николаев',
+    text: '“Прекрасная платформа для обучения и развития новым навыкам и профессиям, удобный формат”',
   },
   {
-    avatar: 'avatar',
-    author: 'Linh Nguyen',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar5',
+    author: 'Вероника Крупских',
+    text: '“Решила попробовать для себя что-то новое, благодаря данным курсам ушла с работы и теперь работаю дома в свое удовольствие”',
   },
   {
-    avatar: 'avatar',
-    author: 'Bernard Welch',
-    text: '“Write is super-useful as we can see the actual text in the actual design. We can even adjust text length to make it look good!”',
+    avatar: 'avatar6',
+    author: 'Иван Носков',
+    text: '“Раньше думал, что 35т.р. - потолок в моем городе. Ошибься, спасибо deepskills!!!”',
   },
 ];

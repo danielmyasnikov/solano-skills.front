@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 // import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
@@ -10,32 +10,108 @@ import styles from './styles.module.less';
 import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
 import { Registration } from '@components/auth/registration';
-import BurgerMenu from './burgerMenu';
+import BurgerMenu from '@components/common/burgerMenu';
 
 export const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleBurger = () => setShowMenu(!showMenu);
 
-  const renderImage = (img) => {
-    switch (img) {
-      case 'lectures':
-        return images.lectures;
-      case 'practice':
-        return images.practice;
-      case 'statement':
-        return images.statement;
-      case 'avatar':
-        return images.avatar;
-      default:
-        return;
-    }
-  };
+  const renderImage = (img) => images[img];
+
+  const renderSlides = useMemo(() => {
+    return slides.map((block) => (
+      <div
+        key={block.title}
+        className={
+          (block.bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
+          (block.bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
+          cn(styles.ways__block, styles.ways__block_green)
+        }
+      >
+        <div className={styles.ways__skills}>
+          <div className={styles.ways__skills__title}>{block.title}</div>
+          <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
+          <div className={styles.ways__skills__btn}>
+            <Button variant="outlineWhiteHome" disabled={true}>
+              {block.btn}
+              <KeyboardArrowRightIcon />
+            </Button>
+          </div>
+        </div>
+        <div className={styles.ways__slides}>
+          {block.items.map((item, i) => (
+            <div key={item.title + i} className={styles.ways__slideContainer}>
+              <div className={styles.ways__slide}>
+                <div className={styles.ways__slide__bg}>
+                  <div className={styles.ways__slide__title}>{item.title}</div>
+                  <div className={styles.ways__slide__text}>{item.text}</div>
+                  <div className={styles.ways__slide__button}>
+                    <Button variant="outlineBlue" disabled={true}>
+                      {block.btnlearn}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ));
+  }, [slides]);
+
+  const renderPractices = useMemo(() => {
+    return practices.map((practice) => (
+      <section className={styles.practice}>
+        <div className={styles.practice__left}>
+          <div className={styles.practice__pretitle}>{practice.pretitle}</div>
+          <div className={styles.practice__title}>{practice.title}</div>
+          <div className={styles.practice__text}>{practice.text}</div>
+          {/* <Link to={practice.route}>
+            {practice.link}
+            <KeyboardDoubleArrowRightIcon />
+          </Link> */}
+        </div>
+        <div className={styles.practice__right}>
+          <div className={styles.practice__tochki}>
+            <images.tochki />
+          </div>
+          <div className={styles.practice__img}>
+            <img src={renderImage(practice.img)} />
+          </div>
+          <div className={styles.practice__textblock}>
+            <div className={styles.practice__textblock__title}>{practice.textblockTitle}</div>
+            <div className={styles.practice__textblock__subtitle}>{practice.textblockSubtitle}</div>
+          </div>
+        </div>
+      </section>
+    ));
+  }, [practices]);
+
+  const renderFeedbacks = useMemo(() => {
+    return feedbacks.map(({ avatar, text, author }) => (
+      <div className={styles.whatSays__feedback}>
+        <div className={styles.whatSays__feedback__photo}>
+          <img src={renderImage(avatar)} />
+        </div>
+        <div className={styles.whatSays__feedback__data}>
+          <div className={styles.whatSays__feedback__data__scroll}>
+            <div className={styles.whatSays__feedback__data__text}>{text}</div>
+          </div>
+          <div className={styles.whatSays__feedback__data__author}>{author}</div>
+        </div>
+      </div>
+    ));
+  }, [feedbacks]);
 
   return (
     <div className={styles.home}>
+      <div
+        className={cn({ [styles.blur]: showMenu === true })}
+        onTouchStart={() => handleBurger()}
+      ></div>
       <HeaderHome handleBurger={handleBurger} />
-      <BurgerMenu isShow={showMenu} />
+      <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
         <div className={styles.container}>
           <main>
@@ -72,46 +148,7 @@ export const HomePage = () => {
               <div className={styles.ways__title}>
                 Подход к обучению программирования, <span>разработанный экспертами</span>
               </div>
-              {slides.map((block) => (
-                <div
-                  key={block.title}
-                  className={
-                    block.bg === 'blue'
-                      ? cn(styles.ways__block, styles.ways__block_blue)
-                      : block.bg === 'red'
-                      ? cn(styles.ways__block, styles.ways__block_red)
-                      : cn(styles.ways__block, styles.ways__block_green)
-                  }
-                >
-                  <div className={styles.ways__skills}>
-                    <div className={styles.ways__skills__title}>{block.title}</div>
-                    <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
-                    <div className={styles.ways__skills__btn}>
-                      <Button variant="outlineWhiteHome" disabled={true}>
-                        {block.btn}
-                        <KeyboardArrowRightIcon />
-                      </Button>
-                    </div>
-                  </div>
-                  <div className={styles.ways__slides}>
-                    {block.items.map((item, i) => (
-                      <div key={item.title + i} className={styles.ways__slideContainer}>
-                        <div className={styles.ways__slide}>
-                          <div className={styles.ways__slide__bg}>
-                            <div className={styles.ways__slide__title}>{item.title}</div>
-                            <div className={styles.ways__slide__text}>{item.text}</div>
-                            <div className={styles.ways__slide__button}>
-                              <Button variant="outlineBlue" disabled={true}>
-                                {block.btnlearn}
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              {renderSlides}
             </section>
 
             <section className={styles.slogan}>
@@ -141,35 +178,7 @@ export const HomePage = () => {
               </div>
             </section>
 
-            {practices.map((practice) => (
-              <section className={styles.practice}>
-                <div className={styles.practice__left}>
-                  <div className={styles.practice__pretitle}>{practice.pretitle}</div>
-                  <div className={styles.practice__title}>{practice.title}</div>
-                  <div className={styles.practice__text}>{practice.text}</div>
-                  {/* <Link to={practice.route}>
-                    {practice.link}
-                    <KeyboardDoubleArrowRightIcon />
-                  </Link> */}
-                </div>
-                <div className={styles.practice__right}>
-                  <div className={styles.practice__tochki}>
-                    <images.tochki />
-                  </div>
-                  <div className={styles.practice__img}>
-                    <img src={renderImage(practice.img)} />
-                  </div>
-                  <div className={styles.practice__textblock}>
-                    <div className={styles.practice__textblock__title}>
-                      {practice.textblockTitle}
-                    </div>
-                    <div className={styles.practice__textblock__subtitle}>
-                      {practice.textblockSubtitle}
-                    </div>
-                  </div>
-                </div>
-              </section>
-            ))}
+            {renderPractices}
 
             <section className={cn(styles.slogan, styles.slogan__center)}>
               <div className={styles.slogan__title}>
@@ -181,7 +190,9 @@ export const HomePage = () => {
                 можете обучаться с любой точки планеты где есть Интернет.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite">Посмотреть курсы</Button>
+                <Button variant="containedWhite" disabled={true}>
+                  Посмотреть курсы
+                </Button>
               </div>
             </section>
 
@@ -193,21 +204,7 @@ export const HomePage = () => {
                   incididunt */}
                 </div>
               </div>
-              <div className={styles.whatSays__feedbacks}>
-                {feedbacks.map((feedback) => (
-                  <div className={styles.whatSays__feedback}>
-                    <div className={styles.whatSays__feedback__photo}>
-                      <img src={renderImage(feedback.avatar)} />
-                    </div>
-                    <div className={styles.whatSays__feedback__data}>
-                      <div className={styles.whatSays__feedback__data__text}>{feedback.text}</div>
-                      <div className={styles.whatSays__feedback__data__author}>
-                        {feedback.author}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <div className={styles.whatSays__feedbacks}>{renderFeedbacks}</div>
             </section>
 
             <section className={styles.join}>
