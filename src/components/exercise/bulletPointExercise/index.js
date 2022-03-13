@@ -102,7 +102,6 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
       setErrorMessage('');
       setCompletedTaskModalOpen(true);
       if (isAuth) {
-        console.log('tyt');
         dispatch(
           sendAnswer(
             exercise?.nested_exercises[activeExercise].slug,
@@ -227,7 +226,12 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           bytePayload={bytePayload}
           isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
         />
-        <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+        <Output
+          bulletExercise={exercise?.nested_exercises[activeExercise]}
+          isBulletPointExercise={true}
+          presentation_url={exercise.presentation_url}
+          variant="outputContainer"
+        />
       </div>
     </>
   );

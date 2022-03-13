@@ -15,7 +15,12 @@ import styles from './styles.module.less';
 import cn from 'classnames';
 import { useRef } from 'react';
 
-const Output = ({ variant, presentation_url }) => {
+const Output = ({
+  variant,
+  presentation_url,
+  bulletExercise = {},
+  isBulletPointExercise = false,
+}) => {
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
@@ -45,7 +50,11 @@ const Output = ({ variant, presentation_url }) => {
   };
 
   useEffect(() => {
-    dispatch(startKernel(exerciseId));
+    if (isBulletPointExercise) {
+      dispatch(startKernel(bulletExercise.id));
+    } else {
+      dispatch(startKernel(exerciseId));
+    }
   }, [exerciseId]);
 
   useEffect(() => {

@@ -67,7 +67,6 @@ function ExercisePage() {
 
   useEffect(() => {
     dispatch(clearTerminal());
-    console.log(authCounter);
     if (authCounter >= 1) {
       if (headers) {
         dispatch(getExercise(courseId, exerciseId, headers));
