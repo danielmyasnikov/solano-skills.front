@@ -6,7 +6,6 @@ import NotificationSvg from '@assets/settings/notification';
 import SocialSvg from '@assets/settings/social';
 import DeleteSvg from '@assets/settings/delete';
 import styles from './styles.module.less';
-import { useState } from 'react';
 
 const SettingsMenu = ({ active, handleChange }) => {
   const renderSvg = (svg) => {

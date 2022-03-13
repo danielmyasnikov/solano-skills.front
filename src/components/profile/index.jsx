@@ -25,7 +25,7 @@ const Profile = () => {
   const [information, setInformation] = useState('');
   const [isInformationActive, setIsInformationActive] = useState(false);
   const fullnameRef = useRef();
-  const informationRef = useRef();
+  // const informationRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -69,6 +69,7 @@ const Profile = () => {
       case 'information':
         setIsInformationActive(!isInformationActive);
         setActiveEditField(isInformationActive ? '' : 'information');
+        break;
       default:
         break;
     }

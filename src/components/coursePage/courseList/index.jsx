@@ -5,11 +5,11 @@ import { CourseContent } from '@components/common/courseContent';
 export const CourseList = ({ parts, description, slug, variant }) => {
   return (
     <>
-      {variant === 'skill' ? (
+      {(variant === 'skill' || variant === 'profession') && (
         <div className={styles.skillWrapper}>
           <CourseContent variant={variant} parts={parts} />
         </div>
-      ) : (
+      ) || (
         <div className={styles.wrapper}>
           <div className={styles.descriptionBlock}>
             <span className={styles.descriptionTitle}>Описание курса</span>

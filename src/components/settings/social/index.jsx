@@ -12,6 +12,7 @@ const Social = () => {
         return <GoogleSvg />;
       case 'Google':
         return <VkontakteSvg />;
+      default: return;
     }
   };
   return (

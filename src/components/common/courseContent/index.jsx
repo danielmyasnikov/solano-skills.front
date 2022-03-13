@@ -6,7 +6,6 @@ import QuizType from '@assets/QuizType';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import ArrowDown from '@assets/ArrowDown';
-import DoneIcon from '@mui/icons-material/Done';
 import { DoneGreen } from '@assets/DoneGreen';
 import { TimeGrey } from '@assets/TimeGrey';
 import { useHistory } from 'react-router';
@@ -36,12 +35,12 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
 
   return (
     <React.Fragment>
-      {variant === 'skill' ? (
+      {(variant === 'skill' || variant === 'profession') && (
         <div>
           {parts.map((partItem, i) => (
             <div key={partItem.slug} className={styles.skill}>
               <div className={styles.skill__number}>
-                {partItem.progress === 100 ? <DoneGreen /> : <div>{++i}</div>}
+                {partItem.progress === 100 && <DoneGreen /> || <div>{++i}</div>}
               </div>
               <div className={styles.skill__block}>
                 {partItem.test && <div className={styles.skill__test}>Тестирование</div>}
@@ -121,7 +120,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
             </div>
           ))}
         </div>
-      ) : (
+      ) || (
         <div>
           {parts.map((partItem, i) => (
             <div key={partItem.title} className={styles.courseWrap}>

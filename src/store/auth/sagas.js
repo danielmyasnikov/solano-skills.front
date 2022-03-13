@@ -1,9 +1,9 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
 import {
   registrationApi,
-  requestPasswordResetApi,
-  signInByPhoneApi,
-  signInByPhoneVerifyApi,
+  // requestPasswordResetApi,
+  // signInByPhoneApi,
+  // signInByPhoneVerifyApi,
   singInApi,
 } from '../api/auth';
 
@@ -72,7 +72,7 @@ export function* singIn(action) {
 
 export function* signInByPhone(action) {
   try {
-    const res = yield call(signInByPhoneApi, action.payload);
+    // const res = yield call(signInByPhoneApi, action.payload);
     yield put({
       type: SIGN_IN_BY_PHONE_SUCCESSED,
       payload: {},
@@ -90,7 +90,7 @@ export function* signInByPhone(action) {
 
 export function* requestPasswordReset(action) {
   try {
-    const res = yield call(requestPasswordResetApi, action.payload);
+    // const res = yield call(requestPasswordResetApi, action.payload);
     yield put({
       type: REQUEST_PASSWORD_RESET_SUCCESSED,
       payload: {},
@@ -108,7 +108,7 @@ export function* requestPasswordReset(action) {
 
 export function* signInByPhoneVerify(action) {
   try {
-    const res = yield call(signInByPhoneVerifyApi, action.payload);
+    // const res = yield call(signInByPhoneVerifyApi, action.payload);
     // const client = res.headers.client;
     // const accessToken = res.headers['access-token'];
     // const uid = res.headers.uid;

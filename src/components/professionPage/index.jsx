@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { WrapHeader } from '../common/wrapHeader';
 import { CourseList } from '../coursePage/courseList';
 import { CourseSidebar } from '../coursePage/courseSidebar';
+import { ProfessionCertificateModal } from '@components/common/modals/professionCertificate';
 import styles from './styles.module.less';
 
 export const ProfessionPage = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const modalHandler = () => setShowModal(!showModal);
+
   const course = {
     parts: [
       {
@@ -134,6 +139,7 @@ export const ProfessionPage = () => {
     ],
     progress: 40,
     mentors: ['Александров Александр Александрович', 'Ширшов Олег Игоревич'],
+    certificate: true,
   };
 
   return (
@@ -141,8 +147,15 @@ export const ProfessionPage = () => {
       <WrapHeader variant={'profession'} />
       <div className={styles.contentWrap}>
         <CourseList variant={'skill'} parts={course.parts || []} />
-        <CourseSidebar variant={'skill'} progress={course.progress} mentors={course.mentors} />
+        <CourseSidebar
+          variant={'profession'}
+          progress={course.progress}
+          mentors={course.mentors}
+          certificate={course.certificate}
+          modalHandler={modalHandler}
+        />
       </div>
+      <ProfessionCertificateModal isOpen={showModal} modalHandler={modalHandler} />
     </div>
   );
 };
