@@ -104,7 +104,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
       if (isAuth) {
         dispatch(
           sendAnswer(
-            exercise?.nested_exercises[activeExercise].course_part_slug,
+            exercise?.nested_exercises[activeExercise].slug,
             exercise?.nested_exercises[activeExercise].course_slug,
             xp,
             headers,
@@ -226,7 +226,12 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           bytePayload={bytePayload}
           isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
         />
-        <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+        <Output
+          bulletExercise={exercise?.nested_exercises[activeExercise]}
+          isBulletPointExercise={true}
+          presentation_url={exercise.presentation_url}
+          variant="outputContainer"
+        />
       </div>
     </>
   );

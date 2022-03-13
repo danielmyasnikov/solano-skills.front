@@ -26,7 +26,6 @@ export const singInApi = ({ email, password }) => {
 };
 
 export const requestPasswordResetApi = ({ email, configName }) => {
-  console.log(email, configName);
   return axios
     .post(`${process.env.REACT_APP_API_COURSE}/auth/password`, {
       email: email,
