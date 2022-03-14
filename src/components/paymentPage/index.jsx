@@ -34,13 +34,11 @@ export const PaymentPage = () => {
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
-    handleResize();
     return () => window.removeEventListener('resize', handleResize);
-  }, [setWidth]);
+  }, []);
 
   return (
     <>
-      {/* <span>{width}</span> */}
       {(successPayment && <SuccessPayment />) || (
         <div className={styles.wrapper}>
           <header className={styles.header}>

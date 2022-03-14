@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import * as CoursesStore from '@store/courses';
-import { selectProfile } from '@store/profile/selector';
+import * as ProgressStore from '@store/progress';
 import * as AuthStore from '@store/auth';
 import { getProfile } from '@store/profile/actions';
+
 import { Card } from './card';
+import { ProgressComponent } from '../common/progressComponent';
+
 import CourseLogo from './assets/CourseLogo.svg';
 
 import styles from './styles.module.less';
-import { ProgressComponent } from '../common/progressComponent';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
-  const profile = useSelector(selectProfile);
 
   const { coursesList } = useSelector(CoursesStore.Selectors.getCourses);
+  const { progress } = useSelector(ProgressStore.Selectors.getProgress);
 
   useEffect(() => {
     if (headers.uid) {
-      dispatch(getProfile({ headers: headers }));
+      dispatch(getProfile({ headers }));
+      dispatch(ProgressStore.Actions.getProgress({ headers }));
     }
-  }, [dispatch, headers]);
+  }, [headers]);
 
   useEffect(() => {
     dispatch(CoursesStore.Actions.loadCourcesList());
@@ -39,13 +43,15 @@ export const CoursesPage = () => {
         </p>
       </div>
       <div div className={styles.contentWrapper}>
-        <ProgressComponent
-          status="В процессе"
-          courseTitle="Введение в Python"
-          courseLogo={CourseLogo}
-          amountOfExercise="9"
-          progress={20}
-        />
+        {progress && (
+          <ProgressComponent
+            status={progress.status}
+            courseTitle={progress.name}
+            courseLogo={CourseLogo}
+            amountOfExercise={progress.left_to_do}
+            progress={progress.progress}
+          />
+        )}
         <div className={styles.content}>
           {coursesList &&
             coursesList.map((item, i) => (

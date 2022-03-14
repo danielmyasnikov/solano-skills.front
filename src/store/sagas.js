@@ -7,6 +7,7 @@ import profileSaga from './profile/sagas';
 
 import authSaga from './auth/sagas';
 import bashShellSaga from './bashShell/sagas';
+import progressSaga from './progress/sagas';
 
 export default function* rootSaga() {
   const sagas = [
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     authSaga,
     profileSaga,
     bashShellSaga,
+    progressSaga,
   ];
   yield all(sagas.map((s) => spawn(s)));
 }

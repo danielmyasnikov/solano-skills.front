@@ -30,7 +30,7 @@ export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
 export const GetProfileApi = ({ headers }) => {
   try {
     return axios
-      .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers: headers })
+      .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers })
       .then((res) => res.data);
   } catch (e) {
     console.log(e);

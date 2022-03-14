@@ -84,7 +84,7 @@ export const CertificatesPage = () => {
 
   useEffect(() => {
     if (headers.uid) {
-      dispatch(getProfile({ headers: headers }));
+      dispatch(getProfile({ headers }));
     }
   }, [headers]);
 
