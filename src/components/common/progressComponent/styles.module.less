@@ -129,3 +129,80 @@
     margin-top: 17px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    align-items: center;
+  }
+
+  .btn {
+    position: inherit;
+  }
+
+  .containerLeftProgressBar {
+    width: calc(134%);
+  }
+
+  .containerLeftInfoTitle {
+    font-size: 24px;
+  }
+
+  .containerLeftLogo {
+    display: block;
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 745px) {
+  .container {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 585px) {
+  .containerLeftLogo {
+    width: 45px;
+  }
+
+  .containerLeftProgressBar {
+    width: calc(133%);
+  }
+
+  .containerLeftExerciseText,
+  .containerLeftInfoProgressText {
+    font-size: 12px;
+  }
+
+  .containerLeftExerciseClock {
+    display: none;
+  }
+
+  .containerLeftInfoProgressText {
+    top: -18px;
+  }
+
+  .containerLeftInfoTitle {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .containerLeftInfoArrow {
+    display: block;
+    width: 5px;
+  }
+
+  .containerLeftInfoTitleContainer {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .containerLeftExercise {
+    margin-left: 56px;
+  }
+
+  .wrapper {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
