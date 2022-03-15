@@ -28,7 +28,7 @@ export const AuthorizationByEmail = ({
         E-mail
       </span>
       <div className={cn(styles.inputWrapper, { [styles.inputWrapperError]: errors.errorMassege })}>
-        <Input value={email} handleChange={handleChange} name="email" placeholder="Email@gmail.com" />
+        <Input value={email} handleChange={handleChange} name="email" placeholder="Ваш e-mail" />
       </div>
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         {/* Авторизоваться по номеру телефона */}
@@ -37,7 +37,12 @@ export const AuthorizationByEmail = ({
         Пароль
       </span>
       <div className={cn(styles.inputWrapper, { [styles.inputWrapperError]: errors.errorMassege })}>
-        <InputPassword value={password} handleChange={handleChange} name="password" placeholder="Введите пароль" />
+        <InputPassword
+          value={password}
+          handleChange={handleChange}
+          name="password"
+          placeholder="Введите пароль"
+        />
       </div>
       <div className={styles.infoWrapper}>
         <div className={styles.rememberMe}>
