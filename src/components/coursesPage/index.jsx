@@ -17,12 +17,11 @@ export const CoursesPage = () => {
   const dispatch = useDispatch();
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
-
   const { coursesList } = useSelector(CoursesStore.Selectors.getCourses);
   const { progress } = useSelector(ProgressStore.Selectors.getProgress);
 
   useEffect(() => {
-    if (headers.uid) {
+    if (headers.hasOwnProperty('uid')) {
       dispatch(getProfile({ headers }));
       dispatch(ProgressStore.Actions.getProgress({ headers }));
     }
@@ -43,7 +42,7 @@ export const CoursesPage = () => {
         </p>
       </div>
       <div div className={styles.contentWrapper}>
-        {progress && (
+        {progress && headers.hasOwnProperty('uid') && (
           <ProgressComponent
             status={progress.status}
             courseTitle={progress.name}
