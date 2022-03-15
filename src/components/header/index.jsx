@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { ModalActionMenu } from './ModalActionMenu';
 import cn from 'classnames';
 
-const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
+const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupportReport }) => {
   const [searchValue, setSearchValue] = useState('');
   const [isAuth, setIsAuth] = useState(false);
   const debouncedSearch = useDebounce(search, 500);
@@ -95,7 +95,14 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal }) => {
         </header>
       </div>
       <ModalTariffSelection handleClick={handleShowModal} open={showModal} />
-      {showMenuModal && <ModalActionMenu totalXP={profile.xp} />}
+      {showMenuModal && (
+        <ModalActionMenu
+          totalXP={profile.xp}
+          onSupport={onSupportReport}
+          onOutsideClick={() => setshowMenuModal(!showMenuModal)}
+          onCloseMenu={() => setshowMenuModal(!showMenuModal)}
+        />
+      )}
     </>
   );
 };

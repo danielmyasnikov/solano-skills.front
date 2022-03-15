@@ -5,11 +5,13 @@ import HeaderExercise from '@components/headerExercise';
 import { useRouteMatch } from 'react-router-dom';
 import { sidebarPath } from '../../sidebarPath';
 import Sidebar from '@components/mui/sidebar';
+import { FeedbackModal } from '../common/modals/feedback';
 
 const Container = ({ Component, headerVariant }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sidebarFixed, setSidebarFixed] = useState(false);
   const [showModalSubscription, setShowModalSubscription] = useState(false);
+  const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const match = useRouteMatch();
   const headerRef = createRef();
 
@@ -38,29 +40,39 @@ const Container = ({ Component, headerVariant }) => {
   }, [match.path]);
 
   return (
-    <div className={styles.wrapper}>
-      {headerVariant === 'exercise' ? (
-        <HeaderExercise headerRef={headerRef} handleSidebar={handleSidebar} />
-      ) : (
-        <Header
-          onCloseModal={handleCloseModal}
-          isShowModal={showModalSubscription}
-          headerRef={headerRef}
-          handleSidebar={handleSidebar}
-        />
-      )}
-      <div className={styles.container}>
-        <Sidebar
-          closeSidebar={closeSidebar}
-          openSidebar={openSidebar}
-          headerTarget={headerRef}
-          isSidebarOpen={isSidebarOpen}
-          sidebarFixed={sidebarFixed}
-          onUpdateSubscription={handleUpdateSubscription}
-        />
-        <Component />
+    <>
+      <div className={styles.wrapper}>
+        {headerVariant === 'exercise' ? (
+          <HeaderExercise
+            headerRef={headerRef}
+            handleSidebar={handleSidebar}
+            onSupport={() => setFeedbackModalOpen(!feedbackModalOpen)}
+          />
+        ) : (
+          <Header
+            onCloseModal={handleCloseModal}
+            isShowModal={showModalSubscription}
+            headerRef={headerRef}
+            handleSidebar={handleSidebar}
+            onSupportReport={() => setFeedbackModalOpen(!feedbackModalOpen)}
+          />
+        )}
+        <div className={styles.container}>
+          <Sidebar
+            closeSidebar={closeSidebar}
+            openSidebar={openSidebar}
+            headerTarget={headerRef}
+            isSidebarOpen={isSidebarOpen}
+            sidebarFixed={sidebarFixed}
+            onUpdateSubscription={handleUpdateSubscription}
+          />
+          <Component />
+        </div>
       </div>
-    </div>
+      {feedbackModalOpen && (
+        <FeedbackModal onClose={() => setFeedbackModalOpen(!feedbackModalOpen)} />
+      )}
+    </>
   );
 };
 

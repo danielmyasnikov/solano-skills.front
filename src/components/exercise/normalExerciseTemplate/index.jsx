@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
-import FeedbackModal from '@components/common/modals/feedback/index.js';
+import { FeedbackModal } from '@components/common/modals/feedback';
 import CompletedTask from '@components/common/modals/completedTask';
 import Terminal from '@components/common/terminal';
 import { useParams } from 'react-router-dom';

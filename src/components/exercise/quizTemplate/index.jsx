@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
-import FeedbackModal from '@components/common/modals/feedback/index.js';
+import { FeedbackModal } from '@components/common/modals/feedback';
 import CompletedTask from '@components/common/modals/completedTask';
 import { getExercise } from '@store/exercise/actions';
 import { useDispatch } from 'react-redux';

@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import styles from './styles.module.less';
-import Prev from '@assets/Prev.js';
-import Next from '@assets/Next.js';
-import MenuCourse from '@assets/MenuCourse.js';
-import Button from '@components/mui/button';
-import cn from 'classnames';
-import Burger from '@assets/Burger';
-import CourseContentModal from '../common/modals/courseContent';
+
+import { useHistory, useParams, useLocation } from 'react-router';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
 import { selectExercise } from '@store/exercise/selector';
 import { selectProfile } from '@store/profile/selector';
-import { useHistory, useParams, useLocation } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 
-const HeaderExercise = ({ handleSidebar, headerRef }) => {
+import Button from '@components/mui/button';
+import CourseContentModal from '../common/modals/courseContent';
+
+import Burger from '@assets/Burger';
+import SupportIcon from '@assets/icon/supportIcon.svg';
+import Prev from '@assets/Prev.js';
+import Next from '@assets/Next.js';
+import MenuCourse from '@assets/MenuCourse.js';
+
+import cn from 'classnames';
+
+import styles from './styles.module.less';
+
+const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
   const dispatch = useDispatch();
   const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
   const { courseId } = useParams();
@@ -26,9 +34,7 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
   const profile = useSelector(selectProfile);
   const [course, setCourse] = useState({});
 
-  useEffect(() => {
-    setCourse(courseData);
-  }, [courseData]);
+  useEffect(() => setCourse(courseData), [courseData]);
 
   useEffect(() => {
     dispatch(getCourse(courseId));
@@ -86,6 +92,9 @@ const HeaderExercise = ({ handleSidebar, headerRef }) => {
           </Button>
         </nav>
         <nav className={cn(styles.headerItem, styles.navbarMenu)}>
+          <div className={styles.support} onClick={onSupport}>
+            <img src={SupportIcon} alt="support" />
+          </div>
           <span className={styles.dailyXp}>Ваш опыт</span>
           <div className={styles.xp}>{profile.xp} XP</div>
         </nav>
