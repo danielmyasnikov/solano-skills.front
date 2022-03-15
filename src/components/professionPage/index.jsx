@@ -146,7 +146,7 @@ export const ProfessionPage = () => {
     <div className={styles.wrapper}>
       <WrapHeader variant={'profession'} />
       <div className={styles.contentWrap}>
-        <CourseList variant={'skill'} parts={course.parts || []} />
+        <CourseList variant={'profession'} parts={course.parts || []} />
         <CourseSidebar
           variant={'profession'}
           progress={course.progress}

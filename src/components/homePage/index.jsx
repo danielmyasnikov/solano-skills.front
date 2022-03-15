@@ -17,38 +17,38 @@ export const HomePage = () => {
 
   const handleBurger = () => setShowMenu(!showMenu);
 
-  const renderImage = (img) => images[img];
+  const renderImage = img => images[img];
 
   const renderSlides = useMemo(() => {
-    return slides.map((block) => (
+    return slides.map(({ bg, title, subtitle, btn, items, btnlearn}) => (
       <div
-        key={block.title}
+        key={title}
         className={
-          (block.bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
-          (block.bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
+          (bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
+          (bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
           cn(styles.ways__block, styles.ways__block_green)
         }
       >
         <div className={styles.ways__skills}>
-          <div className={styles.ways__skills__title}>{block.title}</div>
-          <div className={styles.ways__skills__subtitle}>{block.subtitle}</div>
+          <div className={styles.ways__skills__title}>{title}</div>
+          <div className={styles.ways__skills__subtitle}>{subtitle}</div>
           <div className={styles.ways__skills__btn}>
             <Button variant="outlineWhiteHome" disabled={true}>
-              {block.btn}
+              {btn}
               <KeyboardArrowRightIcon />
             </Button>
           </div>
         </div>
         <div className={styles.ways__slides}>
-          {block.items.map((item, i) => (
-            <div key={item.title + i} className={styles.ways__slideContainer}>
+          {items.map(({ title, text }, i) => (
+            <div key={title + i} className={styles.ways__slideContainer}>
               <div className={styles.ways__slide}>
                 <div className={styles.ways__slide__bg}>
-                  <div className={styles.ways__slide__title}>{item.title}</div>
-                  <div className={styles.ways__slide__text}>{item.text}</div>
+                  <div className={styles.ways__slide__title}>{title}</div>
+                  <div className={styles.ways__slide__text}>{text}</div>
                   <div className={styles.ways__slide__button}>
                     <Button variant="outlineBlue" disabled={true}>
-                      {block.btnlearn}
+                      {btnlearn}
                     </Button>
                   </div>
                 </div>
@@ -58,15 +58,15 @@ export const HomePage = () => {
         </div>
       </div>
     ));
-  }, [slides]);
+  }, []);
 
   const renderPractices = useMemo(() => {
-    return practices.map((practice) => (
+    return practices.map(({ pretitle, title, text, img, textblockTitle, textblockSubtitle }) => (
       <section className={styles.practice}>
         <div className={styles.practice__left}>
-          <div className={styles.practice__pretitle}>{practice.pretitle}</div>
-          <div className={styles.practice__title}>{practice.title}</div>
-          <div className={styles.practice__text}>{practice.text}</div>
+          <div className={styles.practice__pretitle}>{pretitle}</div>
+          <div className={styles.practice__title}>{title}</div>
+          <div className={styles.practice__text}>{text}</div>
           {/* <Link to={practice.route}>
             {practice.link}
             <KeyboardDoubleArrowRightIcon />
@@ -77,16 +77,16 @@ export const HomePage = () => {
             <images.tochki />
           </div>
           <div className={styles.practice__img}>
-            <img src={renderImage(practice.img)} />
+            <img src={renderImage(img)} alt={'Иконка'}/>
           </div>
           <div className={styles.practice__textblock}>
-            <div className={styles.practice__textblock__title}>{practice.textblockTitle}</div>
-            <div className={styles.practice__textblock__subtitle}>{practice.textblockSubtitle}</div>
+            <div className={styles.practice__textblock__title}>{textblockTitle}</div>
+            <div className={styles.practice__textblock__subtitle}>{textblockSubtitle}</div>
           </div>
         </div>
       </section>
     ));
-  }, [practices]);
+  }, []);
 
   const renderFeedbacks = useMemo(() => {
     return feedbacks.map(({ avatar, text, author }) => (

@@ -81,7 +81,7 @@ export const CourseSidebar = ({ variant, tracks, datasets, coauthors, progress, 
           <div className={styles.mentorsWrapper__mentors}>
             {mentors.map(name => (
               <div className={styles.mentorsWrapper__mentor}>
-                <img src={mentor} alt="" />
+                <img src={mentor} alt="Фото" />
                 <div className={styles.mentorsWrapper__mentor__name}>
                   {name}
                 </div>

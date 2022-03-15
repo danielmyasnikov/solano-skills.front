@@ -23,11 +23,11 @@ export const Card = ({ info }) => {
   return (
     <Link className={css.wrapper} to={`/courses/${info.slug}`}>
       <div className={css.about}>
-        <img className={css.langImg} src={getTypeImg()} alt="" />
+        <img className={css.langImg} src={getTypeImg()} alt="Язык" />
         <h2 className={css.title}>{info.title}</h2>
         <span className={css.description} dangerouslySetInnerHTML={{ __html: info?.description }} />
         <div className={css.time}>
-          <img className={css.timeIcon} src={TimerOutlined} alt="" />
+          <img className={css.timeIcon} src={TimerOutlined} alt="Время" />
           {`${info.time} ${numberDeclension(info.time, ['час', 'часа', 'часов'])}`}
         </div>
       </div>

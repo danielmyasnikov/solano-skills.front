@@ -17,7 +17,7 @@ export const AuthContainer = ({ children }) => {
     <div className={styles.wrapper}>
       {width >= 850 && (
         <div className={styles.logoContainer}>
-          <img src={Logo} alt="" className={styles.logo} />
+          <img src={Logo} alt="logo" className={styles.logo} />
         </div>
       )}
       <div className={styles.container}>

@@ -19,6 +19,7 @@
   }
 
   &__number {
+    padding-top: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +50,7 @@
   }
 
   &__content {
-    background: #ffffff;
+    background: var(--color-white);
     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.04);
     border-radius: 18px;
     padding: 40px 40px 33px;
@@ -276,7 +277,7 @@
   line-height: 24px;
   padding: 1px 14px;
   border-radius: 15px;
-  background: var(--color-yelow);
+  background: var(--very-light-yellow);
 }
 
 .btnContentOpen {
@@ -289,6 +290,25 @@
   svg {
     transition: 0.2s ease-in-out;
     margin-left: 8px;
+  }
+}
+
+.takeCertificate {
+  .skill {
+    &__block {
+      padding: 100px 0;
+      background: url('../../../assets/TakeCertLeft.png') left 18px bottom -33px / 26% no-repeat,
+        url('../../../assets/TakeCertCenter.png') bottom 23px center / 41% no-repeat,
+        url('../../../assets/TakeCertRight.png') right 34px bottom -110px / 34% no-repeat,
+        var(--color-green-second);
+      font-family: 'Jost';
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--color-white);
+      text-align: center;
+      box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.04);
+      border-radius: 18px;
+    }
   }
 }
 
@@ -312,7 +332,7 @@
       width: 100%;
     }
 
-    &:last-child {
+    &:nth-last-child(2) {
       .skill__number {
         top: 20px;
       }

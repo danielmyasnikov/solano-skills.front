@@ -8,7 +8,11 @@
   width: 95%;
   max-width: 1820px;
   margin: 70px auto 0;
-  background-color: var(--color-grey);
+  background: url('../../../../assets/CertifBgTopLeft.png') top -370px left -550px no-repeat,
+    url('../../../../assets/CertifBgOthers.png') top 50px right -340px no-repeat,
+    url('../../../../assets/CertifBgOthers.png') bottom -110px left -330px no-repeat,
+    url('../../../../assets/CertifBgBottonRight.png') bottom -630px right -430px no-repeat,
+    var(--color-grey);
   border-radius: 32px;
   position: relative;
 
@@ -30,12 +34,11 @@
     margin: 0 auto;
     text-align: center;
     padding-top: 13px;
-    background: var(--color-yelow);
+    background: var(--very-light-yellow);
     border-radius: 10px;
     font-family: 'Jost';
     font-weight: 500;
     font-size: 30px;
-    line-height: 127%;
     color: var(--mostly-desaturated-dark-blue);
   }
 
@@ -172,6 +175,91 @@
           font-family: 'Nunito';
           font-weight: 700;
           font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .wrapper {
+    padding: 80px 30px 170px;
+
+    .block {
+      .certificate {
+        padding-top: 70px;
+        margin-right: 35px;
+
+        img {
+          width: 517px;
+          height: 287px;
+        }
+      }
+
+      .when {
+        max-width: none;
+
+        &__item {
+          &__text {
+            width: 92%;
+            max-width: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    .title,
+    .subtitle {
+      text-align: center;
+    }
+
+    .block {
+      flex-direction: column-reverse;
+      align-items: center;
+
+      .certificate {
+        margin-top: 45px;
+        width: 100%;
+        padding-top: 0;
+        margin-right: 0;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .when {
+        max-width: none;
+
+        &__item {
+          &__text {
+            width: 92%;
+            max-width: none;
+          }
+        }
+      }
+
+      .how {
+        .subtitle {
+          margin: 20px auto 40px;
+        }
+
+        &__list {
+          width: auto;
+        }
+
+        &__item {
+          &:not(:last-child) {
+            &::after {
+              left: 63%;
+              width: 85%;
+            }
+          }
         }
       }
     }

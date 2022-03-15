@@ -125,7 +125,7 @@
     display: flex;
     align-items: center;
     padding: 15px 20px;
-    background: #FFE27B;
+    background: var(--very-light-yellow);
     border-radius: 15px 15px 0px 0px;
     font-family: 'Jost';
     font-weight: 600;
@@ -199,6 +199,26 @@
     .card {
       width: 48%;
       margin-top: 0;
+    }
+  }
+
+  .profession {
+
+    &.wrapper {
+      margin-top: 0;
+      max-width: none;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card, .certificateWrapper {
+      width: 48%;
+      margin-top: 0;
+    }
+
+    .mentorsWrapper {
+      display: none ;
     }
   }
 }
