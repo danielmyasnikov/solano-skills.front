@@ -25,7 +25,7 @@ export const ModalActionMenu = ({ totalXP }) => {
         })}
         to={`/${link}`}
       >
-        <img src={img} alt="" />
+        <img src={img} alt="картинка" />
         <span>{text}</span>
       </Link>
     );

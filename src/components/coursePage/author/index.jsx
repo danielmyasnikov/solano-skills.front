@@ -5,7 +5,7 @@ import css from './styles.module.less';
 export const Auth = ({ instructor }) => {
   return (
     <div className={css.wrapper}>
-      <img src={instructor?.avatar_url || AvatarDefault} className={css.avatar} alt="" />
+      <img src={instructor?.avatar_url || AvatarDefault} className={css.avatar} alt="Аватар" />
 
       <div className={css.infoWrap}>
         <div className={css.label}>Преподаватель</div>

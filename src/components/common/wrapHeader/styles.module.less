@@ -3,8 +3,8 @@
   padding: 30px 40px 50px;
   border-bottom-left-radius: 34px;
   border-bottom-right-radius: 34px;
-  background: radial-gradient(115.91% 115.91% at 50% 50%, #7469ef 0%, #545266 100%);
-  color: #fff;
+  background: radial-gradient(115.91% 115.91% at 50% 50%, var(--purple) 0%, var(--very-dark-grayish-blue-second) 100%);
+  color: var(--color-white);
   position: relative;
 
   .pretitle {
@@ -29,6 +29,7 @@
 
     &__items {
       display: flex;
+      align-items: center;
     }
 
     &__item {
@@ -38,6 +39,19 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 127%;
+
+      &_certificate {
+        width: 182px;
+        height: 32px;
+        background: var(--very-light-yellow);
+        border-radius: 10px;
+        text-align: center;
+        font-family: 'Jost';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 30px;
+        color: var(--color-black);
+      }
 
       svg {
         margin-right: 5px;

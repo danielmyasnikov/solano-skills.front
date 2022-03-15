@@ -9,7 +9,7 @@ const Card = () => {
   const renderImg = (type) => {
     switch (type) {
       case 'python':
-        return <img src={Python} />;
+        return <img src={Python} alt="Иконка"/>;
 
       default:
         break;

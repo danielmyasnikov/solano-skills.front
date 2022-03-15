@@ -6,9 +6,9 @@ import QuizType from '@assets/QuizType';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import ArrowDown from '@assets/ArrowDown';
-import DoneIcon from '@mui/icons-material/Done';
 import { DoneGreen } from '@assets/DoneGreen';
 import { TimeGrey } from '@assets/TimeGrey';
+import CertificatesBlack from '@assets/CertificatesBlack.svg';
 import { useHistory } from 'react-router';
 import ProgressBar from '@components/mui/progressBar';
 import skillLogo from '@assets/skill.png';
@@ -36,25 +36,29 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
 
   return (
     <React.Fragment>
-      {variant === 'skill' ? (
+      {((variant === 'skill' || variant === 'profession') && (
         <div>
           {parts.map((partItem, i) => (
-            <div key={partItem.slug} className={styles.skill}>
+            <div key={partItem.slug} className={styles[variant]}>
               <div className={styles.skill__number}>
-                {partItem.progress === 100 ? <DoneGreen /> : <div>{++i}</div>}
+                {(partItem.progress === 100 && <DoneGreen />) || <div>{++i}</div>}
               </div>
               <div className={styles.skill__block}>
                 {partItem.test && <div className={styles.skill__test}>Тестирование</div>}
                 <div
-                  className={cn(styles.skill__content, { [styles.pb50]: active === partItem.slug })}
+                  className={cn(styles.skill__content, {
+                    [styles.pb50]: active === partItem.slug,
+                  })}
                 >
                   <div className={styles.skill__title}>
-                    <img src={skillLogo} alt={skillLogo} />
+                    <img src={skillLogo} alt={'Лого'} />
                     <div>{partItem.title}</div>
                   </div>
                   <div className={styles.skill__description}>{partItem.description}</div>
                   <div
-                    className={cn(styles.listWrap, { [styles.downOpen]: active === partItem.slug })}
+                    className={cn(styles.listWrap, {
+                      [styles.downOpen]: active === partItem.slug,
+                    })}
                   >
                     {partItem.exercises.map((item, i) => (
                       <div
@@ -120,8 +124,14 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
               </div>
             </div>
           ))}
+          {variant === 'profession' && <div className={cn(styles.takeCertificate, styles[variant])}>
+            <div className={styles.skill__number}>
+              <img src={CertificatesBlack} alt="" />
+            </div>
+            <div className={styles.skill__block}>Получение сертификата DeepSkills</div>
+          </div>}
         </div>
-      ) : (
+      )) || (
         <div>
           {parts.map((partItem, i) => (
             <div key={partItem.title} className={styles.courseWrap}>

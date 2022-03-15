@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProgressBar from '@components/mui/progressBar';
 import { Time } from '@assets/Time';
-import { Share } from '@assets/Share';
+import { CoursesDark } from '@assets/CoursesDark';
 import styles from './styles.module.less';
 import skillLogo from '@assets/skill.png';
 
@@ -11,7 +11,7 @@ const Skill = ({ title, description, info }) => {
     <div className={styles.skill}>
       <div className={styles.main}>
         <div className={styles.logo}>
-          <img src={skillLogo} alt={skillLogo} />
+          <img src={skillLogo} alt={'навык'} />
         </div>
         <div className={styles.title}>
           <div>{title}</div>
@@ -35,7 +35,7 @@ const Skill = ({ title, description, info }) => {
               <div>{info.hours}</div>
             </div>
             <div className={styles.info__item}>
-              <Share />
+              <CoursesDark />
               <div>{info.courses}</div>
             </div>
           </div>

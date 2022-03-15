@@ -11,6 +11,8 @@ import { Authorization } from './components/auth/authorization';
 import { PaymentPage } from './components/paymentPage';
 import { SkillsPage } from './components/skillsPage';
 import { SkillPage } from './components/skillPage';
+import { ProfessionsPage } from './components/professionsPage';
+import { ProfessionPage } from './components/professionPage';
 import { ProgressPage } from './components/progressPage';
 import Settings from './components/settings';
 
@@ -30,6 +32,18 @@ export const routes = [
   {
     path: '/skills/:skillId',
     component: SkillPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/professions',
+    component: ProfessionsPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/professions/:professionId',
+    component: ProfessionPage,
     wrap: true,
     exact: true,
   },

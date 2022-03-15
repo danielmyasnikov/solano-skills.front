@@ -8,13 +8,13 @@ import { useRef, useState } from 'react';
 import { notificationsItems } from '../constants';
 import ChangePassword from './changePassword';
 import Social from './social';
-import { Tariffs } from '../common/tariff';
+// import { Tariffs } from '../common/tariff';
 
 const Settings = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
   const [active, setActive] = useState('subscription');
-  const [scroll, setScroll] = useState(0);
+  // const [scroll, setScroll] = useState(0);
 
   const deleteAccountRef = useRef(null);
   const notificationRef = useRef(null);
@@ -50,6 +50,7 @@ const Settings = () => {
       }
       case 'social': {
         socialRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
       }
       default:
         break;

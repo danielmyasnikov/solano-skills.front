@@ -5,8 +5,9 @@ import styles from './styles.module.less';
 import AvatarDefault from '@assets/avatarDefault.png';
 import mentor from '@assets/mentor.png';
 import Dataset from '@assets/Dataset';
+import CertificatesBlack from '@assets/CertificatesBlack.svg';
 
-export const CourseSidebar = ({ variant, tracks, datasets, coauthors, progress, mentors }) => {
+export const CourseSidebar = ({ variant, tracks, datasets, coauthors, progress, mentors, certificate, modalHandler }) => {
   return (
     <div className={cn(styles.wrapper, styles[variant])}>
       {Object.keys(tracks || []).length > 0 && (
@@ -64,13 +65,23 @@ export const CourseSidebar = ({ variant, tracks, datasets, coauthors, progress, 
           </div>
         </div>
       )}
+      {certificate && (
+        <div className={styles.certificateWrapper}>
+          <div className={styles.certificateWrapper__title}>
+            <img src={CertificatesBlack} alt="@" />
+            <span>Зачем нужен сертификат?</span>
+          </div>
+          <div className={styles.certificateWrapper__subtitle}>Официальный документ гос. образца, подтверждающий вашу компетентность.</div>
+          <div className={styles.certificateWrapper__more} onClick={() => modalHandler()}>Узнать больше</div>
+        </div>
+      )}
       {mentors && (
         <div className={cn(styles.card, styles.mentorsWrapper)}>
           <div className={styles.mentorsWrapper__title}>Инструкторы: </div>
           <div className={styles.mentorsWrapper__mentors}>
             {mentors.map(name => (
               <div className={styles.mentorsWrapper__mentor}>
-                <img src={mentor} alt="" />
+                <img src={mentor} alt="Фото" />
                 <div className={styles.mentorsWrapper__mentor__name}>
                   {name}
                 </div>

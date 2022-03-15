@@ -11,8 +11,9 @@
 .collaboratorsWrapper,
 .datasetWrapper,
 .progressWrapper,
+.certificateWrapper,
 .mentorsWrapper {
-  background: #fff;
+  background: var(--color-white);
   color: var(--color-black);
 }
 
@@ -96,7 +97,7 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 127%;
-    color: #2d2d2d;
+    color: var(--color-black);
   }
   &__stats {
     margin-top: 20px;
@@ -114,13 +115,55 @@
   }
 }
 
+.certificateWrapper {
+  margin-top: 30px;
+  border-radius: 15px;
+  padding-bottom: 15px;
+  color: var(--color-black);
+
+  &__title {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--very-light-yellow);
+    border-radius: 15px 15px 0px 0px;
+    font-family: 'Jost';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 127%;
+
+    span {
+      margin-left: 10px;
+    }
+  }
+
+  &__subtitle {
+    padding: 10px 20px;
+    font-family: 'Nunito';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 139.5%;
+  }
+
+  &__more {
+    padding: 0 20px;
+    font-family: 'Jost';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.4px;
+    color: var(--purple);
+    cursor: pointer;
+  }
+}
+
 .mentorsWrapper {
   &__title {
     font-family: 'Jost';
     font-weight: 600;
     font-size: 18px;
     line-height: 127%;
-    color: #2D2D2D;
+    color: var(--color-black);
   }
 
   &__mentor {
@@ -131,7 +174,7 @@
     font-family: 'Nunito';
     font-size: 16px;
     line-height: 139.5%;
-    color: #2D2D2D;
+    color: var(--color-black);
 
     &__name {
       margin-left: 10px;
@@ -156,6 +199,26 @@
     .card {
       width: 48%;
       margin-top: 0;
+    }
+  }
+
+  .profession {
+
+    &.wrapper {
+      margin-top: 0;
+      max-width: none;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card, .certificateWrapper {
+      width: 48%;
+      margin-top: 0;
+    }
+
+    .mentorsWrapper {
+      display: none ;
     }
   }
 }

@@ -1,12 +1,12 @@
 import { createTheme } from '@mui/material';
 import { createBreakpoints } from '@mui/system';
 
-const breakpoints = createBreakpoints({
-  values: {
-    xs: 0,
-    md: 820,
-  },
-});
+// const breakpoints = createBreakpoints({
+//   values: {
+//     xs: 0,
+//     md: 820,
+//   },
+// });
 
 export const buttonTheme = createTheme({
   shape: {

@@ -1,6 +1,6 @@
 const Window = ({ img }) => {
   return (
-    <img src={img} alt='' />
+    <img src={img} alt='Картинка' />
   );
 };
 
