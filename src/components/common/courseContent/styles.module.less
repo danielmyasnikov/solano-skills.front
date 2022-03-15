@@ -1,4 +1,4 @@
-.skill {
+.skill, .profession {
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -313,7 +313,7 @@
 }
 
 @media screen and (max-width: 1440px) {
-  .skill {
+  .skill, .profession {
     &:not(:last-child) {
       &::after {
         display: none;
@@ -331,7 +331,17 @@
     &__block {
       width: 100%;
     }
+  }
 
+  .skill {
+    &:last-child {
+      .skill__number {
+        top: 20px;
+      }
+    }
+  }
+
+  .profession {
     &:nth-last-child(2) {
       .skill__number {
         top: 20px;

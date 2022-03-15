@@ -39,7 +39,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
       {((variant === 'skill' || variant === 'profession') && (
         <div>
           {parts.map((partItem, i) => (
-            <div key={partItem.slug} className={styles.skill}>
+            <div key={partItem.slug} className={styles[variant]}>
               <div className={styles.skill__number}>
                 {(partItem.progress === 100 && <DoneGreen />) || <div>{++i}</div>}
               </div>
@@ -124,12 +124,12 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
               </div>
             </div>
           ))}
-          <div className={cn(styles.takeCertificate, styles.skill)}>
+          {variant === 'profession' && <div className={cn(styles.takeCertificate, styles[variant])}>
             <div className={styles.skill__number}>
               <img src={CertificatesBlack} alt="" />
             </div>
             <div className={styles.skill__block}>Получение сертификата DeepSkills</div>
-          </div>
+          </div>}
         </div>
       )) || (
         <div>

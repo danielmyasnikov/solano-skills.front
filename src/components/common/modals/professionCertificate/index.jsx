@@ -1,5 +1,5 @@
 import { Modal } from '@mui/material';
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './styles.module.less';
 import Close from '@assets/Close.js';
 import Statement from '@assets/homepage/statement.png';
@@ -9,7 +9,7 @@ import { howItems, whenItems, images } from './data';
 export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
   const renderImage = (src) => images[src];
 
-  const renderHowItems = useMemo(() => {
+  const renderHowItems = () => {
     return howItems.map(({ text, number, src }) => (
       <div className={styles.how__item}>
         <img src={renderImage(src)} alt={'src'} />
@@ -17,9 +17,9 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
         <div className={styles.how__item__number}>{number}</div>
       </div>
     ));
-  });
+  };
 
-  const renderWhenItems = useMemo(() => {
+  const renderWhenItems = () => {
     return whenItems.map((text) => (
       <div className={styles.when__item}>
         <div className={styles.when__item__number}>
@@ -28,7 +28,7 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
         <div className={styles.when__item__text}>{text}</div>
       </div>
     ));
-  });
+  };
 
   return (
     <Modal open={isOpen} className={styles.scroll}>
@@ -49,7 +49,7 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
               мобильном приложении DeepSkills. Отточите свои навыки, выполняя быстрые ежедневные
               задания на компьютере или в мобильном приложении DeepSkills.
             </div>
-            <div className={styles.when__list}>{renderWhenItems}</div>
+            <div className={styles.when__list}>{renderWhenItems()}</div>
           </div>
         </div>
         <div className={styles.block}>
@@ -59,7 +59,7 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
               Докажите, что ваши навыки готовы к работе с нашей профессиональной сертификацией в
               области науки о данных.
             </div>
-            <div className={styles.how__list}>{renderHowItems}</div>
+            <div className={styles.how__list}>{renderHowItems()}</div>
           </div>
         </div>
       </div>
