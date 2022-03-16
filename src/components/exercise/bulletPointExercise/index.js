@@ -98,9 +98,9 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
   };
 
   const checkAnswer = () => {
+    setCorrect(answer.correct);
     if (answer.correct === true) {
       setErrorMessage('');
-      setCompletedTaskModalOpen(true);
       if (isAuth) {
         dispatch(
           sendAnswer(
