@@ -75,6 +75,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
       if (exercise?.nested_exercises.length - 1 > activeExercise) {
         setDoneExercises([...doneExercises, { activeExercise }]);
         setActiveExercise(activeExercise + 1);
+        setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
       } else {
         setDoneExercises([...doneExercises, { activeExercise }]);
         setCompletedTaskModalOpen(true);
