@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import * as Sentry from '@sentry/react';
@@ -8,15 +8,20 @@ import Container from './components/container';
 import { routes } from './routes';
 import { Page404 } from './components/page404';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as AuthStore from '@store/auth';
+import { getProfile } from '@store/profile/actions';
 
 import styles from './app.module.css';
 import './index.less';
 
 function App() {
+  const [authCounter, setAuthCounter] = useState(0);
+
   const dispatch = useDispatch();
+
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
   const uid = localStorage.getItem('uid');
   const client = localStorage.getItem('client');
@@ -31,6 +36,14 @@ function App() {
       dispatch(AuthStore.Actions.setLocalHeaders(headersLocal));
     }
   }, []);
+
+  useEffect(() => setAuthCounter(authCounter + 1), [headers]);
+
+  useEffect(() => {
+    if (authCounter >= 1) {
+      dispatch(getProfile({ headers }));
+    }
+  }, [authCounter]);
 
   return (
     <div className={styles.wrapper}>

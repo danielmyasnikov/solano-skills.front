@@ -98,12 +98,6 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (headers.uid) {
-      dispatch(getProfile({ headers }));
-    }
-  }, [headers]);
-
-  useEffect(() => {
     if (profile.name) {
       const date = new Date(profile.registeration_date);
       setFullname(profile.name);

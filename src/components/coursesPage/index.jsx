@@ -22,7 +22,6 @@ export const CoursesPage = () => {
 
   useEffect(() => {
     if (headers.hasOwnProperty('uid')) {
-      dispatch(getProfile({ headers }));
       dispatch(ProgressStore.Actions.getProgress({ headers }));
     }
   }, [headers]);
