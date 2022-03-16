@@ -7,6 +7,7 @@ import profileSaga from './profile/sagas';
 
 import authSaga from './auth/sagas';
 import bashShellSaga from './bashShell/sagas';
+import tariffsSaga from './tariffs/sagas';
 import progressSaga from './progress/sagas';
 
 export default function* rootSaga() {
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     authSaga,
     profileSaga,
     bashShellSaga,
+    tariffsSaga,
     progressSaga,
   ];
   yield all(sagas.map((s) => spawn(s)));

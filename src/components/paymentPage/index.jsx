@@ -28,6 +28,8 @@ export const PaymentPage = () => {
   const location = useLocation();
   const title = location.state.title;
   const price = location.state.price;
+  const oldPrice = location.state.oldPrice;
+  const totalPrice = location.state.totalPrice;
 
   const stepHandle = () => setNextStep(!nextStep);
 
@@ -101,12 +103,26 @@ export const PaymentPage = () => {
                   )}
                 </div>
               )}
-              {width >= 1184 && <PurchaseInformation title={title} price={price} />}
+              {width >= 1184 && (
+                <PurchaseInformation
+                  totalPrice={totalPrice}
+                  oldPrice={oldPrice}
+                  title={title}
+                  price={price}
+                />
+              )}
             </div>
           </div>
         </div>
       )}
-      {width < 1184 && <PurchaseInformationMobile title={title} price={price} />}
+      {width < 1184 && (
+        <PurchaseInformationMobile
+          totalPrice={totalPrice}
+          oldPrice={oldPrice}
+          title={title}
+          price={price}
+        />
+      )}
       <PaymentErrorModal />
     </>
   );

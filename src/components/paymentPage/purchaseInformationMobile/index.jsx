@@ -5,7 +5,7 @@ import cn from 'classnames';
 
 import styles from './styles.module.less';
 
-export const PurchaseInformationMobile = ({ title, price }) => {
+export const PurchaseInformationMobile = ({ oldPrice, totalPrice, title, price }) => {
   const [isShowMore, setIsShowMore] = useState(false);
 
   const showMoreHandler = () => setIsShowMore(!isShowMore);
@@ -23,8 +23,8 @@ export const PurchaseInformationMobile = ({ title, price }) => {
           </div>
         </div>
         <div className={styles.wrapperRight}>
-          <span className={styles.wrapperRightText}>3 599 ₽</span>
-          <span className={styles.wrapperRightOldPrice}>12 299 ₽</span>
+          <span className={styles.wrapperRightText}>{totalPrice} ₽</span>
+          <span className={styles.wrapperRightOldPrice}>{oldPrice} ₽</span>
         </div>
       </div>
       {isShowMore && (
@@ -36,7 +36,7 @@ export const PurchaseInformationMobile = ({ title, price }) => {
           </div>
           <div className={styles.tariffInfoRight}>
             <span className={styles.tariffInfoHeader}>Стоимость</span>
-            <span className={styles.tariffInfoRightText}>3 599 ₽</span>
+            <span className={styles.tariffInfoRightText}>{totalPrice} ₽</span>
             <span className={styles.tariffInfoRightText}>{price} ₽/месяц</span>
           </div>
         </div>

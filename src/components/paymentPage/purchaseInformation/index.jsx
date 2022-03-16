@@ -1,6 +1,6 @@
 import styles from './styles.module.less';
 
-export const PurchaseInformation = ({ title, price }) => (
+export const PurchaseInformation = ({ oldPrice, totalPrice, title, price }) => (
   <div className={styles.paymentContainerTariff}>
     <div className={styles.tariffInfo}>
       <div className={styles.tariffInfoLeft}>
@@ -10,15 +10,15 @@ export const PurchaseInformation = ({ title, price }) => (
       </div>
       <div className={styles.tariffInfoRight}>
         <span className={styles.tariffInfoHeader}>Стоимость</span>
-        <span className={styles.tariffInfoRightText}>3 599 ₽</span>
+        <span className={styles.tariffInfoRightText}>{totalPrice} ₽</span>
         <span className={styles.tariffInfoRightText}>{price} ₽/месяц</span>
       </div>
     </div>
     <div className={styles.tariffCost}>
       <span>Итого:</span>
       <div className={styles.tariffCostDifference}>
-        <span>3 599 ₽</span>
-        <span className={styles.tariffCostOld}>12 299 ₽</span>
+        <span>{totalPrice} ₽</span>
+        <span className={styles.tariffCostOld}>{oldPrice} ₽</span>
       </div>
     </div>
   </div>

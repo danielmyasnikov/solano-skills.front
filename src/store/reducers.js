@@ -6,6 +6,7 @@ import courseReducer from './course/reducer';
 import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
 import bashShellReducer from './bashShell/reducer';
+import tariffsReducer from './tariffs/reducer';
 import progressReducer from './progress/reducer';
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   course: courseReducer,
   profile: profileReducer,
   bashShell: bashShellReducer,
+  tarriffs: tariffsReducer,
   progress: progressReducer,
 });
 
