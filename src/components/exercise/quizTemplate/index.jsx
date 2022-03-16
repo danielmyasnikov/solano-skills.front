@@ -40,7 +40,6 @@ function QuizTemplate({ onSubmit, isAuth }) {
     setWithoutHint(exercise.hint ? true : false);
     setHint(false);
     setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
-    setCompletedTaskModalOpen(false);
   }, [exercise]);
 
   useEffect(() => {
