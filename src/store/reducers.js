@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   course: courseReducer,
   profile: profileReducer,
   bashShell: bashShellReducer,
-  tarriffs: tariffsReducer,
+  tariffs: tariffsReducer,
   progress: progressReducer,
 });
 

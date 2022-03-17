@@ -3,25 +3,16 @@ import { useHistory } from 'react-router-dom';
 import Button from '@components/mui/button';
 import Icon from './assets/Icon.svg';
 import cn from 'classnames';
-import { useCallback, useEffect, useMemo } from 'react';
-import { TariffList } from '../../constants';
-import * as TariffsStore from '@store/tariffs';
-import { useDispatch, useSelector } from 'react-redux';
-import { tariffs } from '@store/tariffs/selector';
+import { useCallback } from 'react';
 
-export const Tariffs = () => {
+export const Tariffs = ({ tariffList }) => {
   const IconItem = () => <img src={Icon} alt="icon" />;
-
-  const dispatch = useDispatch();
-
-  const tariffVariants = useSelector(tariffs);
-  // const tariffVariants = TariffList;
 
   const history = useHistory();
 
-  const Sections = useCallback((isEconomy, isOptimal) => {
+  const Sections = useCallback((isEconomy) => {
     return (
-      <ul className={cn(styles.list, { [styles.listOptimal]: isOptimal })}>
+      <ul className={cn(styles.list)}>
         <li className={styles.listItem}>
           {IconItem()}
           <span className={styles.listItemText}>3 курса</span>
@@ -38,20 +29,19 @@ export const Tariffs = () => {
     );
   }, []);
 
-  const RenderTariffList = useMemo(() => {
-    return tariffVariants.map(
-      ({ id, title, oldPrice, totalPrice, isEconomy, isOptimal, price }) => (
-        <div key={id} className={cn(styles.wrapper, { [styles.wrapperGreen]: isOptimal })}>
+  return (
+    <>
+      {tariffList.map(({ id, title, old_price, total_price, is_economy, is_optimal, price }) => (
+        <div key={id} className={cn(styles.wrapper, { [styles.wrapperGreen]: is_optimal })}>
           <div className={styles.container}>
             <div className={styles.wrapperTitleContainer}>
               <div className={styles.wrapperTitle}>{title}</div>
-              {isOptimal && <div className={styles.wrapperInfo}>Оптимальный</div>}
             </div>
-            {Sections(isEconomy, isOptimal)}
+            {Sections(is_economy)}
           </div>
           <div className={styles.actionContainer}>
-            <div className={cn(styles.wrapperPrice, { [styles.wrapperPriceGreen]: isOptimal })}>
-              {(isEconomy && price) || `${price}₽/месяц`}
+            <div className={cn(styles.wrapperPrice, { [styles.wrapperPriceGreen]: is_optimal })}>
+              {(is_economy && price) || `${price}₽/месяц`}
             </div>
             <Button
               onClick={() =>
@@ -60,8 +50,8 @@ export const Tariffs = () => {
                   state: {
                     title: title,
                     price: price,
-                    oldPrice: oldPrice,
-                    totalPrice: totalPrice,
+                    oldPrice: old_price,
+                    totalPrice: total_price,
                   },
                 })
               }
@@ -73,13 +63,7 @@ export const Tariffs = () => {
             </Button>
           </div>
         </div>
-      ),
-    );
-  }, [Sections]);
-
-  useEffect(() => {
-    dispatch(TariffsStore.Actions.getTariffs());
-  }, []);
-
-  return <>{tariffVariants && RenderTariffList}</>;
+      ))}
+    </>
+  );
 };
