@@ -8,6 +8,7 @@ import profileReducer from './profile/reducer';
 import bashShellReducer from './bashShell/reducer';
 import tariffsReducer from './tariffs/reducer';
 import progressReducer from './progress/reducer';
+import feedbackReducer from './feedback/reducer';
 
 const rootReducer = combineReducers({
   terminal: terminalReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   bashShell: bashShellReducer,
   tariffs: tariffsReducer,
   progress: progressReducer,
+  feedback: feedbackReducer,
 });
 
 export default rootReducer;
