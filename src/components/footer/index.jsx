@@ -17,9 +17,7 @@ const Footer = () => {
     ));
   };
 
-  const renderInfo = (arr) => {
-    return arr.map((text) => <p>{text}</p>);
-  };
+  const renderInfo = (arr) => arr.map((text) => <p>{text}</p>);
 
   return (
     <div className={styles.footer}>
