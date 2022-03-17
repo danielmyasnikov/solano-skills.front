@@ -17,7 +17,7 @@ export const ModalActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClic
 
   const item = (img, text, link) => {
     const clickHandler = () => {
-      if (link === 'sign-out') {
+      if (link === '/sign-in') {
         localStorage.clear();
       }
     };
@@ -34,7 +34,7 @@ export const ModalActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClic
         })}
       >
         {(text !== 'Поддержка' && (
-          <Link onClick={clickHandler} to={`/${link}`}>
+          <Link onClick={clickHandler} to={`${link}`}>
             <img src={img} alt="icon" />
             <span>{text}</span>
           </Link>
@@ -68,10 +68,10 @@ export const ModalActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClic
   return (
     <div ref={ref} className={styles.wrapper}>
       <div className={styles.wrapperXP}>{totalXP} XP</div>
-      {item(User, 'Перейти в профиль', 'profile')}
-      {item(Settings, 'Настройки аккаунта', 'settings')}
+      {item(User, 'Перейти в профиль', '/profile')}
+      {item(Settings, 'Настройки аккаунта', '/settings')}
       {item(Support, 'Поддержка', '')}
-      {item(Exit, 'Выйти', 'sign-out')}
+      {item(Exit, 'Выйти', '/sign-in')}
     </div>
   );
 };

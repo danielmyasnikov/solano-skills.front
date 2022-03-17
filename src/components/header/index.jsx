@@ -1,18 +1,28 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { ModalTariffSelection } from './ModalTariffSelection';
-import styles from './styles.module.less';
-import Button from '@components/mui/button';
-import Input from '@components/mui/inputSearch';
-import Logo from '@assets/Logo';
-import Burger from '@assets/Burger';
-import ArrowDown from '@assets/ArrowDown';
+import React, { useEffect, useState } from 'react';
+
 import useDebounce from '../hooks/useDebounce';
+
+import { useHistory } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
+
 import { selectProfile } from '@store/profile/selector';
 import * as AuthStore from '@store/auth';
-import { useSelector } from 'react-redux';
+
 import { ModalActionMenu } from './ModalActionMenu';
+import { ModalTariffSelection } from './ModalTariffSelection';
+import Button from '@components/mui/button';
+import Input from '@components/mui/inputSearch';
+import { Preloader } from '../mui/preloader';
+
+import Logo from '@assets/Logo';
+import DefaultAvatar from '@assets/defaultUserAvatarSmall.png';
+import Burger from '@assets/Burger';
+import ArrowDown from '@assets/ArrowDown';
+
 import cn from 'classnames';
+
+import styles from './styles.module.less';
 
 const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupportReport }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -45,9 +55,7 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
     setshowMenuModal(!showMenuModal);
   };
 
-  useEffect(() => {
-    setshowModal(isShowModal);
-  }, [isShowModal]);
+  useEffect(() => setshowModal(isShowModal), [isShowModal]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
@@ -82,7 +90,19 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
                   className={cn(styles.profile, { [styles.profileRotate]: showMenuModal })}
                   onClick={menuHandler}
                 >
-                  <img src={profile.avatar_cloudinary_url} alt="avatar" />
+                  {(Object.keys(profile).length !== 0 && (
+                    <img
+                      src={
+                        (profile.avatar_cloudinary_url && profile.avatar_cloudinary_url) ||
+                        DefaultAvatar
+                      }
+                      alt="avatar"
+                    />
+                  )) || (
+                    <div>
+                      <Preloader size="50px" />
+                    </div>
+                  )}
                   <ArrowDown />
                 </div>
               </>

@@ -14,18 +14,18 @@ import { patchProfile, getProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
 import { TextareaAutosize } from '@mui/material';
 import HeaderPage from '../common/headerPage';
+import { Preloader } from '../mui/preloader';
+import DefaultAvatar from '@assets/defaultUserAvatarBig.png';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
-  const [friendlyid, setFriendlyid] = useState('');
   const [registerationDate, setRegisterationDate] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
   const [information, setInformation] = useState('');
   const [isInformationActive, setIsInformationActive] = useState(false);
   const fullnameRef = useRef();
-  // const informationRef = useRef();
 
   const dispatch = useDispatch();
 
@@ -98,12 +98,11 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    if (profile.name) {
+    if (profile) {
       const date = new Date(profile.registeration_date);
-      setFullname(profile.name);
-      setInformation(profile.about);
+      setFullname((profile.name && profile.name) || 'Неизвестный пользователь');
+      setInformation((profile.about && profile.about) || 'Здесь может быть информация о тебе');
       setEmail(profile.email);
-      setFriendlyid(profile.friendly_id);
       setRegisterationDate(`${date.getUTCDay()}/${date.getMonth()}/${date.getFullYear()}`);
     }
   }, [profile]);
@@ -111,97 +110,102 @@ const Profile = () => {
   return (
     <div className={styles.wrapper}>
       <HeaderPage content="profile" />
-      <div className={styles.content}>
-        <div className={cn(styles.profile, styles.card)}>
-          <div className={styles.profileInfo}>
-            <Avatar avatar={profile.avatar_url} />
-            {isFullnameActive && (
-              <input
-                name="fullname"
-                onChange={handleChange}
-                ref={fullnameRef}
-                className={cn(styles.unstyled, styles.fullname, {
-                  [styles.activeFullname]: activeEditField === 'fullname',
-                })}
-                value={fullname}
-              />
-            )}
-            {!isFullnameActive && (
-              <div
-                name="fullname"
-                onChange={handleChange}
-                ref={fullnameRef}
-                className={cn(styles.unstyled, styles.fullname)}
-              >
-                {fullname}
-              </div>
-            )}
-            <EditFragment name="fullname" />
+      {(Object.keys(profile).length !== 0 && (
+        <div className={styles.content}>
+          <div className={cn(styles.profile, styles.card)}>
+            <div className={styles.profileInfo}>
+              <Avatar avatar={(profile.avatar_url && profile.avatar_url) || DefaultAvatar} />
+              {isFullnameActive && (
+                <input
+                  name="fullname"
+                  onChange={handleChange}
+                  ref={fullnameRef}
+                  className={cn(styles.unstyled, styles.fullname, {
+                    [styles.activeFullname]: activeEditField === 'fullname',
+                  })}
+                  value={fullname}
+                />
+              )}
+              {!isFullnameActive && (
+                <div
+                  name="fullname"
+                  onChange={handleChange}
+                  ref={fullnameRef}
+                  className={cn(styles.unstyled, styles.fullname)}
+                >
+                  {fullname}
+                </div>
+              )}
+              <EditFragment name="fullname" />
+            </div>
+            <div className={cn(styles.desktop, styles.links)}>
+              <Button variant="containedPurple">Обзор профиля</Button>
+              <Link to="/certificates">Сертификаты</Link>
+            </div>
           </div>
-          <div className={cn(styles.desktop, styles.links)}>
+          <div className={cn(styles.links, styles.mobile)}>
             <Button variant="containedPurple">Обзор профиля</Button>
             <Link to="/certificates">Сертификаты</Link>
           </div>
-        </div>
-        <div className={cn(styles.links, styles.mobile)}>
-          <Button variant="containedPurple">Обзор профиля</Button>
-          <Link to="/certificates">Сертификаты</Link>
-        </div>
-        <div className={styles.mainInfo}>
-          <div className={styles.statistics}>
-            <div className={styles.blocks}>
-              <div className={styles.block}>
-                <span className={styles.title}>492 870</span>
-                <span className={styles.description}>опыта набрано</span>
-              </div>
+          <div className={styles.mainInfo}>
+            <div className={styles.statistics}>
+              <div className={styles.blocks}>
+                <div className={styles.block}>
+                  <span className={styles.title}>492 870</span>
+                  <span className={styles.description}>опыта набрано</span>
+                </div>
 
-              <div className={styles.block}>
-                <span className={styles.title}>104</span>
-                <span className={styles.description}>курса пройдено</span>
-              </div>
+                <div className={styles.block}>
+                  <span className={styles.title}>104</span>
+                  <span className={styles.description}>курса пройдено</span>
+                </div>
 
-              <div className={styles.block}>
-                <span className={styles.title}>5 396</span>
-                <span className={styles.description}>упражнений выполнено</span>
-              </div>
+                <div className={styles.block}>
+                  <span className={styles.title}>5 396</span>
+                  <span className={styles.description}>упражнений выполнено</span>
+                </div>
 
-              <div className={styles.block}>
-                <span className={styles.title}>4</span>
-                <span className={styles.description}>часа</span>
+                <div className={styles.block}>
+                  <span className={styles.title}>4</span>
+                  <span className={styles.description}>часа</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            className={cn(styles.card, styles.information, {
-              [styles.activeInformation]: isInformationActive,
-            })}
-          >
-            <div className={styles.title}>
-              Информация
-              <EditFragment name="information" />
-            </div>
-            <div className={styles.items}>
-              <TextareaAutosize
-                disabled={!isInformationActive}
-                name="information"
-                aria-label="empty textarea"
-                value={information}
-                onChange={handleChange}
-              />
-              <div className={styles.additionalInfo}>
-                <div>
-                  <span>ID: </span> {friendlyid}
-                </div>
-                <div>
-                  <span>E-mail: </span> {email}
-                </div>
-                <div>
-                  <span>Дата регистрации: </span> {registerationDate}
+            <div
+              className={cn(styles.card, styles.information, {
+                [styles.activeInformation]: isInformationActive,
+              })}
+            >
+              <div className={styles.title}>
+                Информация
+                <EditFragment name="information" />
+              </div>
+              <div className={styles.items}>
+                <TextareaAutosize
+                  disabled={!isInformationActive}
+                  name="information"
+                  aria-label="empty textarea"
+                  value={(information && information) || ''}
+                  onChange={handleChange}
+                />
+                <div className={styles.additionalInfo}>
+                  <div>
+                    <span>E-mail: </span> {email}
+                  </div>
+                  <div>
+                    <span>Дата регистрации: </span> {registerationDate}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      )) || (
+        <div className={styles.preloaderContainer}>
+          <Preloader size="60px" />
+        </div>
+      )}
+      <div className={styles.content}>
         <div className={styles.courses}>
           <Card />
         </div>
