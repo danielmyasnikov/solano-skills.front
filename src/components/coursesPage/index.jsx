@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as CoursesStore from '@store/courses';
 import * as ProgressStore from '@store/progress';
 import * as AuthStore from '@store/auth';
-import { getProfile } from '@store/profile/actions';
 
 import { Card } from './card';
 import { ProgressComponent } from '../common/progressComponent';
+import { Preloader } from '../mui/preloader';
 
 import CourseLogo from './assets/CourseLogo.svg';
 
@@ -41,7 +41,7 @@ export const CoursesPage = () => {
         </p>
       </div>
       <div div className={styles.contentWrapper}>
-        {progress && headers.hasOwnProperty('uid') && (
+        {(progress.hasOwnProperty('status') && headers.hasOwnProperty('uid') && (
           <ProgressComponent
             status={progress.status}
             courseTitle={progress.name}
@@ -49,6 +49,10 @@ export const CoursesPage = () => {
             amountOfExercise={progress.left_to_do}
             progress={progress.progress}
           />
+        )) || (
+          <div className={styles.preloaderContainer}>
+            <Preloader size="60px" />
+          </div>
         )}
         <div className={styles.content}>
           {coursesList &&

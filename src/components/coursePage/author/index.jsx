@@ -1,17 +1,30 @@
 import React from 'react';
-import AvatarDefault from '@assets/avatarDefault.png';
-import css from './styles.module.less';
+
+import { Preloader } from '../../mui/preloader';
+
+import styles from './styles.module.less';
 
 export const Auth = ({ instructor }) => {
   return (
-    <div className={css.wrapper}>
-      <img src={instructor?.avatar_url || AvatarDefault} className={css.avatar} alt="Аватар" />
+    <>
+      {(instructor?.avatar_url && (
+        <div className={styles.wrapper}>
+          <img src={instructor?.avatar_url} className={styles.avatar} alt="Аватар" />
 
-      <div className={css.infoWrap}>
-        <div className={css.label}>Преподаватель</div>
-        <h4 className={css.title}>{`${instructor?.first_name} ${instructor?.last_name}`}</h4>
-        <p className={css.text} dangerouslySetInnerHTML={{ __html: instructor?.description }} />
-      </div>
-    </div>
+          <div className={styles.infoWrap}>
+            <div className={styles.label}>Преподаватель</div>
+            <h4 className={styles.title}>{`${instructor?.first_name} ${instructor?.last_name}`}</h4>
+            <p
+              className={styles.text}
+              dangerouslySetInnerHTML={{ __html: instructor?.description }}
+            />
+          </div>
+        </div>
+      )) || (
+        <div className={styles.preloaderContainer}>
+          <Preloader size="60px" />
+        </div>
+      )}
+    </>
   );
 };
