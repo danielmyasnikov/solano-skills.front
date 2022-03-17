@@ -9,6 +9,7 @@ import authSaga from './auth/sagas';
 import bashShellSaga from './bashShell/sagas';
 import tariffsSaga from './tariffs/sagas';
 import progressSaga from './progress/sagas';
+import feedbackSaga from './feedback/sagas';
 
 export default function* rootSaga() {
   const sagas = [
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     bashShellSaga,
     tariffsSaga,
     progressSaga,
+    feedbackSaga,
   ];
   yield all(sagas.map((s) => spawn(s)));
 }
