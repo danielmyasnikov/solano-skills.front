@@ -53,6 +53,7 @@
 
 .mainSearch > div > input::-webkit-input-placeholder {
   color: var(--very-light-gray);
+  opacity: 0.5;
 }
 
 .mainSearch > div > div > svg > path {
@@ -94,12 +95,14 @@
 }
 
 .mainRecomendationQuestion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 26px;
   height: 26px;
   margin-right: 21px;
   border: 2px solid #c4c4c4;
   border-radius: 50%;
-  text-align: center;
   font-family: Jost;
   font-style: normal;
   font-weight: bold;
@@ -148,30 +151,29 @@
 }
 
 @media screen and (max-width: 1459px) {
-  .item:nth-child(4n){
+  .item:nth-child(4n) {
     margin: 0 40px;
   }
-  .item:nth-child(7n){
+  .item:nth-child(7n) {
     margin: 0 40px;
   }
 }
 
 @media screen and (max-width: 1134px) {
-  .item:nth-child(3n){
+  .item:nth-child(3n) {
     margin: 0 0 50px 40px;
   }
 
-  .item:nth-child(5n){
+  .item:nth-child(5n) {
     margin: 0 50px 0px;
   }
 
-  .item:nth-child(6n){
+  .item:nth-child(6n) {
     margin: 0 40px 50px 0;
   }
 
   .mainSearch > div > input {
     width: 580px;
-
   }
 }
 
