@@ -18,12 +18,14 @@ import ErrorMessage from '@components/common/errorMessage';
 import WarningMobile from '@components/common/warningMobile';
 import Draggable from '@components/common/draggable';
 import UnixShell from '../../common/unixshell';
+import RegistrationModal from '../../common/modals/registration/registrationModal';
 
 function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const [bytePayload, setBytePayload] = useState([]);
   const [xp, setXp] = useState(0);
   const [height, setHeight] = useState(0);
   const [isWarningHidden, setIsWarningHidden] = useState(true);
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [solution, setSolution] = useState();
   const { search } = useLocation();
   const [hint, setHint] = useState();
@@ -95,10 +97,16 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     setXp(xp - val);
   };
 
+  const terminalClickHandler = () =>
+    !isAuth ? setRegistrationModalOpen(true) : setRegistrationModalOpen(false);
+
   return (
     <>
       {!isWarningHidden && <WarningMobile handleClose={closeWarning} />}
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
       <div ref={layoutRef} className={styles.layout}>
         <div ref={contentRef} className={styles.content}>
           <div className={styles.sidebar}>
@@ -148,7 +156,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
+      <div onClick={terminalClickHandler} className={styles.terminal}>
         {!isUnixShell ? (
           <>
             <Terminal
@@ -162,7 +170,11 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
               bytePayload={bytePayload}
               isGraphRequired={exercise.is_graph_required}
             />
-            <Output presentation_url={exercise.presentation_url} variant="outputContainer" />
+            <Output
+              isAuth={isAuth}
+              presentation_url={exercise.presentation_url}
+              variant="outputContainer"
+            />
           </>
         ) : (
           <UnixShell />

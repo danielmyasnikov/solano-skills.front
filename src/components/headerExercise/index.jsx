@@ -95,8 +95,12 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
           <div className={styles.support} onClick={onSupport}>
             <img src={SupportIcon} alt="support" />
           </div>
-          <span className={styles.dailyXp}>Ваш опыт</span>
-          <div className={styles.xp}>{profile.xp} XP</div>
+          {profile.hasOwnProperty('name') && (
+            <>
+              <span className={styles.dailyXp}>Ваш опыт</span>
+              <div className={styles.xp}>{profile.xp} XP</div>
+            </>
+          )}
         </nav>
       </header>
     </div>

@@ -14,6 +14,7 @@ import Output from '@components/common/output';
 import RadioButton from '@components/mui/radioButton';
 import { Exercise } from '@components/common/exercise';
 import { sendAnswer } from '@store/exercise/actions';
+import RegistrationModal from '../../common/modals/registration/registrationModal';
 
 function BulletPointExercise({ onSubmit, isAuth, headers }) {
   const [solution, setSolution] = useState();
@@ -27,6 +28,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
   const [nestedExercise, setNestedExercise] = useState([]);
   const [activeExercise, setActiveExercise] = useState(0);
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [correct, setCorrect] = useState(false);
   const [isQuiz, setIsQuiz] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
@@ -117,9 +119,15 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
     }
   };
 
+  const terminalClickHandler = () =>
+    !isAuth ? setRegistrationModalOpen(true) : setRegistrationModalOpen(false);
+
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
@@ -215,7 +223,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
+      <div onClick={terminalClickHandler} className={styles.terminal}>
         <Terminal
           solution={solution}
           sampleCode={exercise?.nested_exercises[activeExercise].sample_code}
@@ -228,6 +236,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           isGraphRequired={exercise?.nested_exercises[activeExercise].is_graph_required}
         />
         <Output
+          isAuth={isAuth}
           bulletExercise={exercise?.nested_exercises[activeExercise]}
           isBulletPointExercise={true}
           presentation_url={exercise.presentation_url}

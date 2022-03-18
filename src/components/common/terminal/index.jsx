@@ -108,6 +108,7 @@ const Terminal = ({
       className={cn(styles.terminalContainer, {
         [styles.terminalWithGraph]: isGraphRequired && bytePayload.length > 0,
         [styles.terminalFullWidth]: isGraphRequired,
+        [styles.noneEvents]: !isAuth,
       })}
     >
       {registrationModalOpen && <RegistrationModal />}

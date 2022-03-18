@@ -17,6 +17,7 @@ import { useRef } from 'react';
 
 const Output = ({
   variant,
+  isAuth = false,
   presentation_url,
   bulletExercise = {},
   isBulletPointExercise = false,
@@ -67,6 +68,7 @@ const Output = ({
     <div
       className={cn(styles.outputWrapper, {
         [styles.fullHeight]: variant === 'quizOutputContainer',
+        [styles.noneEvents]: !isAuth,
       })}
     >
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>

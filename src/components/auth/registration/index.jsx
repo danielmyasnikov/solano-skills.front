@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@components/mui/button';
 import { SocialNetworks } from './../socialNetworks';
+import Close from '@assets/Close.js';
 import * as AuthStore from '@store/auth';
 import { AuthContainer } from './../authContainer';
 import { RegistrationByEmail } from '../registrationByEmail';
@@ -12,7 +13,7 @@ import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
 import cn from 'classnames';
 
-export const Registration = ({ variant, isModal }) => {
+export const Registration = ({ variant, isModal, onClose }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -116,6 +117,9 @@ export const Registration = ({ variant, isModal }) => {
   const renderRegistration = () => {
     return (
       <div className={cn(styles.wrapper, styles[variant])}>
+        <div className={styles.closeModal} onClick={onClose}>
+          <Close />
+        </div>
         <h1 className={cn(styles.title)}>Создайте аккаунт, чтобы начать обучение</h1>
         {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <RegistrationByEmail

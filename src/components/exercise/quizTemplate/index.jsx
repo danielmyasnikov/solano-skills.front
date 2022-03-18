@@ -50,25 +50,35 @@ function QuizTemplate({ onSubmit, isAuth }) {
   }, []);
 
   const checkAnswer = () => {
-    // if (isAuth) {
-    if (answer.correct === true) {
-      setErrorMessage('');
-      setCompletedTaskModalOpen(true);
+    if (isAuth) {
+      if (answer.correct === true) {
+        setErrorMessage('');
+        setCompletedTaskModalOpen(true);
+      } else {
+        setErrorMessage(answer.error);
+      }
+      if (exercise.type === 'quiz' && isAuth) {
+        dispatch(sendAnswer(exercise.slug, courseId, exercise.xp, headers));
+      }
     } else {
-      setErrorMessage(answer.error);
+      setRegistrationModalOpen(true);
     }
-    if (exercise.type === 'quiz' && isAuth) {
-      dispatch(sendAnswer(exercise.slug, courseId, exercise.xp, headers));
+  };
+
+  const isBlockedTerminalHandler = () => {
+    if (isAuth) {
+      setRegistrationModalOpen(false);
+    } else {
+      setRegistrationModalOpen(true);
     }
-    // } else {
-    //   setRegistrationModalOpen(true);
-    // }
   };
 
   return (
     <>
       {feedbackModalOpen && <FeedbackModal onClose={() => setFeedbackModalOpen(false)} />}
-      {registrationModalOpen && <RegistrationModal />}
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.sidebar}>
@@ -116,8 +126,12 @@ function QuizTemplate({ onSubmit, isAuth }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
-        <Output presentation_url={exercise.presentation_url} variant="quizOutputContainer" />
+      <div onClick={isBlockedTerminalHandler} className={styles.terminal}>
+        <Output
+          isAuth={isAuth}
+          presentation_url={exercise.presentation_url}
+          variant="quizOutputContainer"
+        />
       </div>
     </>
   );
