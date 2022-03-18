@@ -49,11 +49,12 @@ export const CoursesPage = () => {
             amountOfExercise={progress.left_to_do}
             progress={progress.progress}
           />
-        )) || (
-          <div className={styles.preloaderContainer}>
-            <Preloader size="60px" />
-          </div>
-        )}
+        )) ||
+          (headers.hasOwnProperty('uid') && (
+            <div className={styles.preloaderContainer}>
+              <Preloader size="60px" />
+            </div>
+          ))}
         <div className={styles.content}>
           {coursesList &&
             coursesList.map((item, i) => (

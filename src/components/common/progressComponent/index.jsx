@@ -48,7 +48,7 @@ export const ProgressComponent = ({
                   </span>
                 </div>
               </div>
-              <span className={styles.containerLeftInfoProgressText}>{progress}%</span>
+              <span className={styles.containerLeftInfoProgressText}>{Math.ceil(progress)}%</span>
             </div>
           </div>
           <div className={styles.btn}>
