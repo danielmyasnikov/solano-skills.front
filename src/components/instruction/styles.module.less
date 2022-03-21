@@ -31,13 +31,13 @@
   position: relative;
   cursor: pointer;
   color: rgba(116, 105, 239, 1);
-  background: #9D96F4;
+  background: #9d96f4;
   width: 30px;
   height: 30px;
   border-radius: 30px;
   font-size: 17px;
   font-weight: bold;
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-right: 15px;
   }
   span {
@@ -55,7 +55,7 @@
 }
 
 .doneBulletPoint {
-  background: #45C679;
+  background: #45c679;
 }
 
 .header {
@@ -71,5 +71,15 @@
     font-size: 16px;
     line-height: 127%;
     color: var(--color-white);
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 913px) {
+  .header {
+    flex-direction: column;
+    height: 50px;
+    // align-items: flex-start;
+    padding-top: 5px;
+    // padding-bottom: 10px;
   }
 }

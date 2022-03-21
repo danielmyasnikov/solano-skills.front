@@ -221,7 +221,7 @@ export const HomePage = () => {
                 заключение в течение 24 часов.
               </div>
               <div className={styles.join__btn}>
-                <a href="https://forms.gle/nCKa2D3JK756E9eg7" target="_blank">
+                <a target="_blank" href="https://forms.gle/nCKa2D3JK756E9eg7" rel="noreferrer">
                   <Button variant="containedPurple">Я преподаватель</Button>
                 </a>
               </div>
