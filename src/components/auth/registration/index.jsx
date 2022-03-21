@@ -116,10 +116,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
 
   const renderRegistration = () => {
     return (
-      <div className={cn(styles.wrapper, styles[variant])}>
-        <div className={styles.closeModal} onClick={onClose}>
-          <Close />
-        </div>
+      <div style={{ overflowY: 'auto' }} className={cn(styles.wrapper, styles[variant])}>
         <h1 className={cn(styles.title)}>Создайте аккаунт, чтобы начать обучение</h1>
         {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <RegistrationByEmail

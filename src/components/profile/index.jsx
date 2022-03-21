@@ -100,10 +100,15 @@ const Profile = () => {
   useEffect(() => {
     if (profile) {
       const date = new Date(profile.registeration_date);
+      const dateSrc = date.toLocaleString('ru-RU', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      });
       setFullname((profile.name && profile.name) || 'Неизвестный пользователь');
       setInformation((profile.about && profile.about) || 'Здесь может быть информация о тебе');
       setEmail(profile.email);
-      setRegisterationDate(`${date.getUTCDay()}/${date.getMonth()}/${date.getFullYear()}`);
+      setRegisterationDate(dateSrc);
     }
   }, [profile]);
 

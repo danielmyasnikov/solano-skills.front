@@ -111,7 +111,9 @@ const Terminal = ({
         [styles.noneEvents]: !isAuth,
       })}
     >
-      {registrationModalOpen && <RegistrationModal />}
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
       <div ref={wrapperRef} className={styles.terminalWrapper}>
         <div className={styles.terminalHeader}>
           <div

@@ -17,10 +17,10 @@ export const HomePage = () => {
 
   const handleBurger = () => setShowMenu(!showMenu);
 
-  const renderImage = img => images[img];
+  const renderImage = (img) => images[img];
 
   const renderSlides = useMemo(() => {
-    return slides.map(({ bg, title, subtitle, btn, items, btnlearn}) => (
+    return slides.map(({ bg, title, subtitle, btn, items, btnlearn }) => (
       <div
         key={title}
         className={
@@ -77,7 +77,7 @@ export const HomePage = () => {
             <images.tochki />
           </div>
           <div className={styles.practice__img}>
-            <img src={renderImage(img)} alt={'Иконка'}/>
+            <img src={renderImage(img)} alt={'Иконка'} />
           </div>
           <div className={styles.practice__textblock}>
             <div className={styles.practice__textblock__title}>{textblockTitle}</div>
@@ -219,7 +219,7 @@ export const HomePage = () => {
                 заключение в течение 24 часов.
               </div>
               <div className={styles.join__btn}>
-                <a href="https://forms.gle/nCKa2D3JK756E9eg7">
+                <a target="_blank" href="https://forms.gle/nCKa2D3JK756E9eg7" rel="noreferrer">
                   <Button variant="containedPurple">Я преподаватель</Button>
                 </a>
               </div>
