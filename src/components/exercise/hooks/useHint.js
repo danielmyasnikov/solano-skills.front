@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export const useHint = (exercise) => {
   const [hint, setHint] = useState(false);
@@ -6,12 +6,16 @@ export const useHint = (exercise) => {
 
   useEffect(() => {
     setHint(false);
-    setWithoutHint(!!exercise.hint);
+    setWithoutHint(!!exercise?.hint);
   }, [exercise]);
 
   function showHint() {
     setHint(true);
   }
 
-  return { hint, withoutHint, showHint };
+  const hintValue = useMemo(() => Math.ceil(exercise?.xp * 0.3), [exercise]);
+
+  const answerHintValue = exercise?.xp - hintValue;
+
+  return { hint, hintValue, answerHintValue, withoutHint, showHint };
 };

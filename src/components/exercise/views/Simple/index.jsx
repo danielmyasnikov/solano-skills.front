@@ -43,9 +43,9 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   const { height, contentRef, layoutRef } = useDraggableContent();
 
   const { bytePayload, isUnixShell, errorRef, errorMessage } = useTerminal(exercise, onComplete);
-  const { hint, withoutHint, showHint } = useHint(exercise);
+  const { hint, hintValue, answerHintValue, withoutHint, showHint } = useHint(exercise);
   const { solution, showSolution } = useSolution(exercise);
-  const { xp, onAnswerXp, onAnswerHintXp, onHintXp } = useXp(exercise);
+  const { xp, onAnswerHintXp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
 
   const { hidden: mobileWarningIsHidden, onClose: onCloseMobileWarning } = useMobileWarning();
 
@@ -68,7 +68,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
         <div ref={contentRef} className={styles.content}>
           <div className={styles.sidebar}>
             <Exercise exercise={exercise} />
-            <Instruction xp={exercise.xp}>
+            <Instruction xp={xp}>
               <div
                 dangerouslySetInnerHTML={{ __html: exercise.instruction }}
                 className={styles.instructions}
@@ -89,7 +89,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
                   onHintXp();
                 }}
               >
-                Подсказка (-30 XP)
+                Подсказка (-{hintValue} XP)
               </Button>
             ))}
           <NormalHint
@@ -99,6 +99,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
               showHint();
               onAnswerHintXp();
             }}
+            answerHintValue={answerHintValue}
             solution
             onSetSolution={showSolution}
           />
@@ -106,6 +107,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
         {completeModal && (
           <CompletedTask
             correctMessage={exercise?.correct_message}
+            xp={xp}
             onClose={() => {
               incomplete();
               closeCompleteModal();
@@ -129,7 +131,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
               correct={completed}
               isAuth={isAuth}
               xp={xp}
-              onAnswer={onAnswerXp}
+              onAnswer={() => {}}
               bytePayload={bytePayload}
               isGraphRequired={exercise.is_graph_required}
             />

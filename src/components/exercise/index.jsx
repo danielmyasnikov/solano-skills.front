@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getExercise } from '@store/exercise/actions';
-import { clearTerminal } from '@store/terminal/actions';
-import { useParams } from 'react-router-dom';
-import { selectExercise } from '@store/exercise/selector';
-import QuizTemplate from './views/quizTemplate';
-import styles from './styles.module.less';
-import NormalExerciseTemplate from './views/normalExerciseTemplate';
-import { VideoExercise } from './views/videoExercise';
-import BulletPointExercise from './views/bulletPointExercise';
-import * as AuthStore from '@store/auth';
 import cn from 'classnames';
+
+import * as AuthStore from '@store/auth';
+import { getExercise } from '@store/exercise/actions';
+import { selectExercise } from '@store/exercise/selector';
+import { clearTerminal } from '@store/terminal/actions';
+
+import SimpleExercise from './views/Simple';
+import StepsExercise from './views/Steps';
+import QuizExercise from './views/Quiz';
+import VideoExercise from './views/Video';
+
+import styles from './styles.module.less';
 
 function ExercisePage() {
   const { courseId, exerciseId } = useParams();
@@ -31,11 +34,11 @@ function ExercisePage() {
   const renderContent = () => {
     switch (exercise.type) {
       case 'quiz':
-        return <QuizTemplate isAuth={isAuth} onSubmit={onSubmit} />;
+        return <QuizExercise isAuth={isAuth} onSubmit={onSubmit} />;
       case 'normal_exercise':
-        return <NormalExerciseTemplate isAuth={isAuth} onSubmit={onSubmit} />;
+        return <SimpleExercise isAuth={isAuth} onSubmit={onSubmit} />;
       case 'bullet_point_exercise':
-        return <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} />;
+        return <StepsExercise isAuth={isAuth} onSubmit={onSubmit} />;
       default:
         break;
     }

@@ -8,7 +8,7 @@ import { selectExercise } from '@store/exercise/selector';
 import { VideoPlayer } from './player';
 import styles from './styles.module.less';
 
-export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
+const VideoExercise = ({ isAuth, onSubmit, headers }) => {
   const transcriptRef = useRef();
 
   const exercise = useSelector(selectExercise);
@@ -92,3 +92,5 @@ export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
     </div>
   );
 };
+
+export default VideoExercise;

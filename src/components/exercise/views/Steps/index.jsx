@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styles from './styles.module.less';
 import { useDispatch, useSelector } from 'react-redux';
 import { FeedbackModal as FeedbackModalComponent } from '@components/common/modals/feedback';
@@ -27,12 +27,15 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
 
   const exercise = useSelector(selectExercise);
 
+  // TODO: temp
+  const [sum, setSum] = useState(0);
+
   const {
+    point,
+    setPoint,
+    donePoints,
     completed,
-    activeExerciseIndex,
-    doneExercises,
     completeModal,
-    setActiveExerciseIndex,
     closeCompleteModal,
     setAnswer,
     setCompleted,
@@ -42,20 +45,21 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
   } = useBulletExerciseCompleted(exercise);
 
   const nestedExercise = useMemo(() => exercise?.nested_exercises, [exercise]);
-  const activeExercise = useMemo(
-    () => exercise?.nested_exercises[activeExerciseIndex],
-    [exercise, activeExerciseIndex],
-  );
+  const activeExercise = useMemo(() => exercise?.nested_exercises[point - 1], [exercise, point]);
 
   const isQuiz = useIsQuiz(activeExercise);
-  const { hint, withoutHint, showHint } = useHint(activeExercise);
+  const { hint, withoutHint, answerHintValue, hintValue, showHint } = useHint(activeExercise);
   const { solution, showSolution } = useSolution(activeExercise);
-  const { xp, onAnswerXp, onAnswerHintXp, onHintXp } = useXp(activeExercise);
+  const { xp, onAnswerHintXp, onHintXp } = useXp(activeExercise, hintValue, answerHintValue);
   const {
     bytePayload,
     errorMessage: terminalErrorMessage,
     errorRef,
-  } = useTerminal(activeExercise, () => setCompleted(true));
+  } = useTerminal(activeExercise, () => {
+    setCompleted(true);
+
+    setSum(sum + xp);
+  });
 
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
   const { Modal: RegistrationModal, open: openRegistrationModal } = useModal(
@@ -81,10 +85,10 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
             <Exercise exercise={activeExercise} />
             <BulletInstruction
               onSetActiveExercise={({ activeExercise }) => {
-                setActiveExerciseIndex(activeExercise);
+                setPoint(activeExercise);
               }}
-              doneExercises={doneExercises}
-              activeExercise={activeExerciseIndex}
+              doneExercises={donePoints}
+              activeExercise={point}
               nestedExercise={nestedExercise}
               xp={xp}
             >
@@ -108,13 +112,14 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
                     {hint ||
                       (withoutHint && (
                         <Button className={styles.btn} variant="outlinePurple" onClick={handleHelp}>
-                          Подсказка (-30 XP)
+                          Подсказка (-{hintValue} XP)
                         </Button>
                       ))}
                     <Button
                       variant="containedPurple"
                       onClick={() => {
                         setCompleted(answer.correct);
+
                         if (!answer.correct) {
                           setErrorMessage(answer.error);
                         } else {
@@ -122,8 +127,8 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
                           if (isAuth) {
                             dispatch(
                               sendAnswer(
-                                activeExercise.slug,
-                                activeExercise.course_slug,
+                                activeExercise?.slug,
+                                activeExercise?.course_slug,
                                 xp,
                                 headers,
                               ),
@@ -139,7 +144,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
               ) : (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: activeExercise.instruction,
+                    __html: activeExercise?.instruction,
                   }}
                   className={styles.instructions}
                 />
@@ -152,16 +157,17 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           {hint ||
             (withoutHint && !isQuiz && (
               <Button className={styles.hintBtn} variant="outlinePurple" onClick={handleHelp}>
-                Подсказка (-30 XP)
+                Подсказка (-{hintValue} XP)
               </Button>
             ))}
           <BulletHint
             hint={hint}
-            activeExercise={activeExerciseIndex}
+            activeExercise={point}
             onClick={openFeedbackModal}
             onAnswer={onAnswerHintXp}
             solution
             onSetSolution={showSolution}
+            answerHintValue={answerHintValue}
           />
         </div>
         {completeModal && (
@@ -171,6 +177,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
               setCompleted(false);
               closeCompleteModal();
             }}
+            xp={sum}
             onClick={() => {
               onSubmit();
               closeCompleteModal();
@@ -181,14 +188,14 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
       <div onClick={terminalClickHandler} className={styles.terminal}>
         <Terminal
           solution={solution}
-          sampleCode={activeExercise.sample_code}
-          exerciseId={activeExercise.id}
+          sampleCode={activeExercise?.sample_code}
+          exerciseId={activeExercise?.id}
           correct={completed}
           isAuth={isAuth}
-          onAnswer={onAnswerXp}
+          onAnswer={() => {}}
           xp={xp}
           bytePayload={bytePayload}
-          isGraphRequired={activeExercise.is_graph_required}
+          isGraphRequired={activeExercise?.is_graph_required}
         />
         <Output
           isAuth={isAuth}

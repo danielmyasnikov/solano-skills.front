@@ -21,14 +21,14 @@ const Root = styled(Box)`
   }
 
   &.active {
-    cursor: pointer;
+    cursor: default;
     background: var(--color-white);
     color: var(--purple);
     box-shadow: inset 1px 1px 4px rgb(0 0 0 / 25%);
   }
 
   &.done {
-    cursor: pointer;
+    cursor: default;
     background: #45c679;
   }
 `;
@@ -46,7 +46,7 @@ export const BulletPoint = ({ onClick, isActive, isDone, index }) => (
       active: isActive,
       done: isDone,
     })}
-    onClick={onClick}
+    onClick={isDone ? () => {} : onClick}
   >
     <Inner>{isDone ? <Done /> : index + 1}</Inner>
   </Root>

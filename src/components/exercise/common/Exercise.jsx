@@ -67,8 +67,8 @@ export const Exercise = ({ exercise }) => (
       </IconWrapper>
     </SectionHeader>
     <Content>
-      <h1 dangerouslySetInnerHTML={{ __html: exercise.title || 'Заголовок не задан' }} />
-      <div dangerouslySetInnerHTML={{ __html: exercise.description }} />
+      <h1 dangerouslySetInnerHTML={{ __html: exercise?.title || 'Заголовок не задан' }} />
+      <div dangerouslySetInnerHTML={{ __html: exercise?.description }} />
     </Content>
   </>
 );

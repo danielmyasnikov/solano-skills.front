@@ -11,8 +11,7 @@ export const BulletInstruction = ({
   children,
   xp,
 }) => {
-  const doneExercisesIds = doneExercises.map((e) => e.activeExercise);
-  const lastId = doneExercises.length - 1;
+  const doneExercisesIds = [...doneExercises];
 
   return (
     <>
@@ -21,16 +20,15 @@ export const BulletInstruction = ({
         title={
           <>
             <span>
-              Инструкции {activeExercise + 1}/{nestedExercise.length}
+              Инструкции {activeExercise}/{nestedExercise.length}
             </span>
             <ExperienceTag xp={xp} floatRight />
           </>
         }
       >
         {nestedExercise?.map((item, i) => {
-          const isActiveBullet = activeExercise === i;
-          const isDoneBullet = doneExercisesIds?.find((id) => id === i) !== undefined;
-          const isLastBullet = doneExercisesIds?.find((id) => id === lastId - 1) !== undefined;
+          const isActiveBullet = activeExercise === i + 1;
+          const isDoneBullet = doneExercisesIds?.find((id) => id === i + 1) !== undefined;
 
           return (
             <BulletPoint
@@ -39,7 +37,7 @@ export const BulletInstruction = ({
               isActive={isActiveBullet}
               isDone={isDoneBullet}
               onClick={() => {
-                if (isDoneBullet || isLastBullet) {
+                if (isDoneBullet) {
                   onSetActiveExercise({ activeExercise: i });
                 }
               }}

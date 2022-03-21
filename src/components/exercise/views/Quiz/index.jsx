@@ -111,6 +111,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
           <CompletedTask
             correctMessage={exercise?.correct_message}
             onClose={() => setCompletedTaskModalOpen(false)}
+            xp={exercise.xp}
             onClick={() => {
               onSubmit();
               setCompletedTaskModalOpen(false);

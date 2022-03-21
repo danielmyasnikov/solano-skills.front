@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 const initAnswer = { value: '', correct: false, error: 'Выберите ответ' };
 
 export const useBulletExerciseCompleted = (exercise) => {
-  const [activeExerciseIndex, setActiveExerciseIndex] = useState(0);
-
-  const [doneExercises, setDoneExercises] = useState([]);
+  const [point, setPoint] = useState(1);
+  const [donePoints, setDonePoints] = useState(new Set());
 
   const [completed, setCompleted] = useState(false);
   const [completeModal, setModal] = useState(false);
@@ -16,30 +15,31 @@ export const useBulletExerciseCompleted = (exercise) => {
   useEffect(() => {
     setErrorMessage('');
     setCompleted(false);
-  }, [activeExerciseIndex]);
+  }, [point]);
 
   useEffect(() => {
     if (completed) {
-      setDoneExercises([...doneExercises, { activeExercise: activeExerciseIndex }]);
+      setDonePoints((prev) => new Set(prev.add(point)));
 
-      if (activeExerciseIndex < exercise?.nested_exercises.length - 1) {
-        setActiveExerciseIndex(activeExerciseIndex + 1);
+      if (point < exercise?.nested_exercises.length) {
+        setPoint(point + 1);
         setAnswer(initAnswer);
       } else {
         setModal(true);
       }
+      setCompleted(false);
     }
   }, [completed]);
 
   const closeCompleteModal = () => setModal(false);
 
   return {
-    activeExerciseIndex,
-    doneExercises,
+    point,
+    setPoint,
+    donePoints,
     completeModal,
     closeCompleteModal,
     completed,
-    setActiveExerciseIndex,
     setCompleted,
     answer,
     errorMessage,
