@@ -10,7 +10,7 @@ import { Avatar } from './Avatar';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
-import { patchProfile, getProfile } from '@store/profile/actions';
+import { patchProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
 import { TextareaAutosize } from '@mui/material';
 import HeaderPage from '../common/headerPage';

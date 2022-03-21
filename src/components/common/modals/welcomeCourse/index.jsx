@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router-dom';
+
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import Button from '@components/mui/button';
 import Close from '@assets/Close.js';
@@ -5,6 +7,12 @@ import Close from '@assets/Close.js';
 import styles from './styles.module.less';
 
 export const WelcomeCourse = ({ open, handleClick, logo }) => {
+  const history = useHistory();
+  const routeChange = () => {
+    const path = `/courses`;
+    history.push(path);
+  };
+
   return (
     <Dialog
       PaperProps={{
@@ -33,7 +41,9 @@ export const WelcomeCourse = ({ open, handleClick, logo }) => {
           </span>
         </DialogContent>
         <DialogActions className={styles.dialogActions}>
-          <Button variant="containedPurple">Начинаем!</Button>
+          <Button variant="containedPurple" onClick={routeChange}>
+            Начинаем!
+          </Button>
         </DialogActions>
       </div>
     </Dialog>

@@ -1,24 +1,38 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import * as AuthStore from '@store/auth';
+import { addTracks, getTracks, hideTracksModal, searchTracks } from '@store/onBoard/actions';
+import { selectTracks } from '@store/onBoard/selector';
+
+import useDebounce from '../hooks/useDebounce';
+
 import { Course } from './course';
-import { CoursesList } from './constants';
 import Input from '@components/mui/inputSearch';
+import Button from '@components/mui/button';
+import { WelcomeCourse } from '../common/modals/welcomeCourse';
+import { Preloader } from '../mui/preloader';
+
 import logo from './assets/Logo.svg';
 import logoModal from './assets/LogoModal.svg';
-import Button from '@components/mui/button';
+
 import styles from './styles.module.less';
-import useDebounce from '../hooks/useDebounce';
-import { WelcomeCourse } from '../common/modals/welcomeCourse';
 
 export const OnBoardPage = () => {
-  const [list, setList] = useState(CoursesList);
   const [searchCourse, setSearchCourse] = useState('');
   const [checkedCourseList, setCheckedCourseList] = useState([]);
   const [showButtonGoStudy, setShowButtonGoStudy] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [authCounter, setAuthCounter] = useState(0);
 
-  const showModalHandler = () => setShowModal(!showModal);
+  const dispatch = useDispatch();
+
+  const trackInfo = useSelector(selectTracks);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
+  const showModalHandler = () => dispatch(addTracks(checkedCourseList, { headers }));
 
   const handleSearch = (e) => setSearchCourse(e.target.value);
 
@@ -30,45 +44,31 @@ export const OnBoardPage = () => {
     setCheckedCourseList(checkedCourseList.filter((item) => item !== id));
 
   const isShowButton = useCallback(() => {
-    let newArr = [];
-    list.forEach((item) => {
-      checkedCourseList.forEach((id) => {
-        if (item.item_id === id) {
-          newArr.push(item);
-        }
+    if (trackInfo.trackList) {
+      let newArr = [];
+      trackInfo.trackList.forEach((item) => {
+        checkedCourseList.forEach((id) => {
+          if (item.item_id === id) {
+            newArr.push(item);
+          }
+        });
       });
-    });
-    newArr = newArr.filter((item) => item.isDevelopment);
-    newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
-  }, [checkedCourseList, list]);
-
-  const renderCourseList = () => {
-    return list.map(({ item_id, title, description, isDevelopment }) => (
-      <div key={item_id} className={styles.item}>
-        <Course
-          id={item_id}
-          title={title}
-          description={description}
-          isDevelopment={isDevelopment}
-          handleСhoice={handleChecked}
-          handleRemoveChoice={handleRemoveChecked}
-        />
-      </div>
-    ));
-  };
-
-  useEffect(() => {
-    if (searchCourse !== '') {
-      const courseItems = CoursesList.filter((course) => course.title.includes(searchCourse));
-      setList(courseItems);
-    } else {
-      setList(CoursesList);
+      newArr = newArr.filter((item) => item.is_development);
+      newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
     }
-  }, [searchCourse]);
+  }, [checkedCourseList]);
+
+  useEffect(() => dispatch(searchTracks(searchCourse, { headers })), [searchCourse]);
+
+  useEffect(() => isShowButton(), [checkedCourseList]);
+
+  useEffect(() => setAuthCounter(authCounter + 1), [headers]);
 
   useEffect(() => {
-    isShowButton();
-  }, [checkedCourseList, isShowButton]);
+    if (authCounter >= 1 && headers.hasOwnProperty('uid')) {
+      dispatch(getTracks({ headers }));
+    }
+  }, [authCounter]);
 
   return (
     <>
@@ -86,11 +86,30 @@ export const OnBoardPage = () => {
             />
           </div>
           <div className={styles.mainQuestion}>
-            {(list.length && <span>С какого курса вы бы хотели начать свое обучение?</span>) || (
-              <span>По вашему запросу мы ничего не нашли.</span>
-            )}
+            {(trackInfo.trackList && trackInfo.trackList.length && (
+              <span>С какого курса вы бы хотели начать свое обучение?</span>
+            )) || <span>По вашему запросу мы ничего не нашли.</span>}
           </div>
-          <div className={styles.mainCourses}>{renderCourseList()}</div>
+          {(trackInfo.trackList && (
+            <div className={styles.mainCourses}>
+              {trackInfo.trackList.map(({ id, title, description, is_development }) => (
+                <div key={id} className={styles.item}>
+                  <Course
+                    id={id}
+                    title={title}
+                    description={description}
+                    isDevelopment={is_development}
+                    handleСhoice={handleChecked}
+                    handleRemoveChoice={handleRemoveChecked}
+                  />
+                </div>
+              ))}
+            </div>
+          )) || (
+            <div className={styles.preloaderContainer}>
+              <Preloader color="#dfdfdf" size="60px" />
+            </div>
+          )}
           <div className={styles.mainRecomendation}>
             <div className={styles.mainRecomendationQuestion}>
               <span className={styles.mainRecomendationQuestionSymbol}>?</span>
@@ -113,7 +132,11 @@ export const OnBoardPage = () => {
           </>
         )}
       </div>
-      <WelcomeCourse logo={logoModal} open={showModal} handleClick={showModalHandler} />
+      <WelcomeCourse
+        logo={logoModal}
+        open={trackInfo.isShowWelcomeModal}
+        handleClick={() => dispatch(hideTracksModal())}
+      />
     </>
   );
 };

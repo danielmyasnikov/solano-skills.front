@@ -93,6 +93,7 @@ export const FeedbackModal = ({ onClose }) => {
                 control: (provided, state) => ({
                   ...provided,
                   boxShadow: 'none',
+                  padding: 0,
                   border: state.isFocused && 'none',
                 }),
                 menu: (provided, state) => ({
