@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { VideoPlayer } from './player';
+
 import { useSelector } from 'react-redux';
+
 import Button from '@components/mui/button';
 import { selectExercise } from '@store/exercise/selector';
 
+import { VideoPlayer } from './player';
 import styles from './styles.module.less';
 
 export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
+  const transcriptRef = useRef();
+
   const exercise = useSelector(selectExercise);
 
-  const transcriptRef = useRef();
   const [showTranscript, setShowTranscript] = useState(false);
   const [nextLesson, setNextLesson] = useState(false);
 

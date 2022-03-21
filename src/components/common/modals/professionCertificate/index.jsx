@@ -6,6 +6,9 @@ import Statement from '@assets/homepage/statement.png';
 import { DoneGreen } from '@assets/DoneGreen';
 import { howItems, whenItems, images } from './data';
 
+/*
+ * TODO: refactoring. Not working with useModal: does not have an onClose prop
+ */
 export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
   const renderImage = (src) => images[src];
 

@@ -9,16 +9,15 @@ export const InstructionQuizPart = ({ exercise, handleAnswer, answer }) => {
 
   return (
     <div className={styles.quiz}>
-      <div dangerouslySetInnerHTML={{ __html: exercise.instruction }}></div>
+      <div dangerouslySetInnerHTML={{ __html: exercise.instruction }} />
       {exercise.answers.map((item) => (
-        <React.Fragment key={item.value}>
-          <RadioButton
-            checked={answer?.value === item.value}
-            className={styles.quizItem}
-            onChange={() => handleAnswer(item)}
-            value={item.value}
-          />
-        </React.Fragment>
+        <RadioButton
+          key={item.value}
+          checked={answer?.value === item.value}
+          className={styles.quizItem}
+          onChange={() => handleAnswer(item)}
+          value={item.value}
+        />
       ))}
     </div>
   );

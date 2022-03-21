@@ -5,12 +5,13 @@ import { getExercise } from '@store/exercise/actions';
 import { clearTerminal } from '@store/terminal/actions';
 import { useParams } from 'react-router-dom';
 import { selectExercise } from '@store/exercise/selector';
-import QuizTemplate from './quizTemplate';
+import QuizTemplate from './views/quizTemplate';
 import styles from './styles.module.less';
-import NormalExerciseTemplate from './normalExerciseTemplate';
-import { VideoExercise } from './videoExercise';
-import BulletPointExercise from './bulletPointExercise';
+import NormalExerciseTemplate from './views/normalExerciseTemplate';
+import { VideoExercise } from './views/videoExercise';
+import BulletPointExercise from './views/bulletPointExercise';
 import * as AuthStore from '@store/auth';
+import cn from 'classnames';
 
 function ExercisePage() {
   const { courseId, exerciseId } = useParams();
@@ -27,34 +28,18 @@ function ExercisePage() {
     dispatch(getExercise(courseId, exercise.next_exercise_id, headers));
   };
 
-  const renderExercise = () => {
+  const renderContent = () => {
     switch (exercise.type) {
       case 'quiz':
-        return (
-          <div className={styles.exerciseContainer}>
-            <QuizTemplate isAuth={isAuth} onSubmit={onSubmit} />
-          </div>
-        );
+        return <QuizTemplate isAuth={isAuth} onSubmit={onSubmit} />;
       case 'normal_exercise':
-        return (
-          <div className={styles.exerciseContainer}>
-            <NormalExerciseTemplate isAuth={isAuth} onSubmit={onSubmit} />{' '}
-          </div>
-        );
+        return <NormalExerciseTemplate isAuth={isAuth} onSubmit={onSubmit} />;
       case 'bullet_point_exercise':
-        return (
-          <div className={styles.exerciseContainer}>
-            <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />{' '}
-          </div>
-        );
-      case 'video':
-        return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
+        return <BulletPointExercise isAuth={isAuth} onSubmit={onSubmit} />;
       default:
         break;
     }
   };
-
-  useEffect(() => {});
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
@@ -76,7 +61,19 @@ function ExercisePage() {
     }
   }, [authCounter]);
 
-  return <>{renderExercise()}</>;
+  if (exercise.type === 'video') {
+    return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
+  }
+
+  return (
+    <div
+      className={cn(styles.exerciseContainer, {
+        [styles.bulletPointContainer]: exercise.type === 'bullet_point_exercise',
+      })}
+    >
+      {renderContent()}
+    </div>
+  );
 }
 
 export default ExercisePage;

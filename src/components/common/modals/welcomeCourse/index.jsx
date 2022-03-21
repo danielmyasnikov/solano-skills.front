@@ -4,6 +4,9 @@ import Close from '@assets/Close.js';
 
 import styles from './styles.module.less';
 
+/*
+ * TODO: refactoring. Not working with useModal: does not have an onClose prop
+ */
 export const WelcomeCourse = ({ open, handleClick, logo }) => {
   return (
     <Dialog

@@ -4,8 +4,8 @@ import styles from './styles.module.less';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startEnvironment, executeBashShell } from '../../../store/bashShell/actions';
-import { selectBashShell } from '../../../store/bashShell/selector';
+import { startEnvironment, executeBashShell } from '@store/bashShell/actions';
+import { selectBashShell } from '@store/bashShell/selector';
 
 const UnixShell = () => {
   const [activeTab, setActiveTab] = useState('terminal');
@@ -191,7 +191,7 @@ const UnixShell = () => {
             ref={contentRef}
             dangerouslySetInnerHTML={{ __html: value }}
             className={styles.content}
-          ></div>
+          />
         </div>
       </div>
     </div>

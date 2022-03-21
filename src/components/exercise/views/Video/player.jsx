@@ -1,16 +1,19 @@
 import React, { useRef, useEffect, memo, useState } from 'react';
-import { sendAnswer } from '@store/exercise/actions';
+
 import { useDispatch, useSelector } from 'react-redux';
+
+import { sendAnswer } from '@store/exercise/actions';
 import { selectExercise } from '@store/exercise/selector';
+
 import Plyr from 'plyr-react';
 
 export const VideoPlayer = memo(({ isAuth, nextLesson, sourceData, headers }) => {
-  const [xpWasSent, setXpWasSent] = useState(false);
-
   const ref = useRef();
 
-  const exercise = useSelector(selectExercise);
   const dispatch = useDispatch();
+  const exercise = useSelector(selectExercise);
+
+  const [xpWasSent, setXpWasSent] = useState(false);
 
   const timeHandler = () => {
     if (isAuth) {
