@@ -7,11 +7,25 @@ import { links, otherLinks, info } from './data';
 
 const Footer = () => {
   const renderMenu = () => {
-    return links.map(({ title, style, items }) => (
+    return links.map(({ title, style, link, items }) => (
       <div className={cn(styles.colomn, styles[style])}>
-        <h5 className={styles.colomn__title}>{title}</h5>
-        {items.map((text) => (
-          <p className={styles.link}>{text}</p>
+        <Link to={link}>
+          <h5 className={styles.colomn__title}>{title}</h5>
+        </Link>
+        {items.map(({ text, link }) => (
+          <>
+            {(text === 'Стать преподавателем' && (
+              <p className={styles.link}>
+                <a href="https://forms.gle/nCKa2D3JK756E9eg7" target="_blank">
+                  {text}
+                </a>
+              </p>
+            )) || (
+              <Link to={link}>
+                <p className={styles.link}>{text}</p>
+              </Link>
+            )}
+          </>
         ))}
       </div>
     ));
