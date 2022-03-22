@@ -26,9 +26,9 @@ export const CoursesPage = () => {
     }
   }, [headers]);
 
-  useEffect(() => {
-    dispatch(CoursesStore.Actions.loadCourcesList());
-  }, []);
+  useEffect(() => dispatch(CoursesStore.Actions.loadCourcesList()), []);
+
+  console.log(progress);
 
   return (
     <div className={styles.wrapper}>
@@ -44,13 +44,15 @@ export const CoursesPage = () => {
         {(progress.hasOwnProperty('status') && headers.hasOwnProperty('uid') && (
           <ProgressComponent
             status={progress.status}
+            courseId={progress.course_id}
+            exerciseId={progress.exercise_id}
             courseTitle={progress.name}
             courseLogo={CourseLogo}
             amountOfExercise={progress.left_to_do}
             progress={progress.progress}
           />
         )) ||
-          (headers.hasOwnProperty('uid') && (
+          (headers.hasOwnProperty('uid') && !progress.hello_world && (
             <div className={styles.preloaderContainer}>
               <Preloader size="60px" />
             </div>

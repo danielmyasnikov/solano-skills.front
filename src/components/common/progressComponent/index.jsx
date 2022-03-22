@@ -1,3 +1,5 @@
+import { useHistory } from 'react-router';
+
 import Button from '@components/mui/button';
 import ProgressBar from '@components/mui/progressBar';
 
@@ -11,10 +13,16 @@ import styles from './styles.module.less';
 export const ProgressComponent = ({
   status,
   courseTitle,
+  courseId,
+  exerciseId,
   courseLogo,
   amountOfExercise,
   progress,
 }) => {
+  const history = useHistory();
+
+  const goToCourseHandler = () => history.push(`/courses/${courseId}/exercises/${exerciseId}`);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -52,7 +60,9 @@ export const ProgressComponent = ({
             </div>
           </div>
           <div className={styles.btn}>
-            <Button variant="containedPurple">Продолжить</Button>
+            <Button variant="containedPurple" onClick={goToCourseHandler}>
+              Продолжить
+            </Button>
           </div>
         </div>
       </div>
