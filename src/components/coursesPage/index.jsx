@@ -28,8 +28,6 @@ export const CoursesPage = () => {
 
   useEffect(() => dispatch(CoursesStore.Actions.loadCourcesList()), []);
 
-  console.log(progress);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
