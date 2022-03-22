@@ -140,7 +140,7 @@ export const BulletHint = ({
               <h6>Подсказка</h6>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: exercise?.nested_exercises[activeExercise].hint,
+                  __html: exercise?.nested_exercises[activeExercise - 1]?.hint,
                 }}
               />
             </div>
