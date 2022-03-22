@@ -33,9 +33,6 @@ export const useTerminal = (exercise, onSuccess) => {
 
     if (terminal.message.error) {
       setMessage(terminal.message.error);
-      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setMessage('');
     }
 
     if (terminal.bytePayload) {
@@ -43,7 +40,14 @@ export const useTerminal = (exercise, onSuccess) => {
     }
   }, [terminal]);
 
+  useEffect(() => {
+    if (!!errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [errorMessage]);
+
   return {
+    terminal,
     errorRef,
     errorMessage,
     bytePayload,

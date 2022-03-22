@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -10,17 +10,12 @@ import Terminal from '@components/common/terminal';
 import Output from '@components/common/output';
 import ErrorMessage from '@components/common/errorMessage';
 import WarningMobile from '@components/common/warningMobile';
-import Draggable from '@components/common/draggable';
 import UnixShell from '@components/common/unixshell';
 
 import { NormalHint } from '@components/hint';
 import Button from '@components/mui/button';
 
-import { Instruction } from '@components/exercise/common/Instruction';
-import { Exercise } from '@components/exercise/common/Exercise';
-
 import { useExerciseCompleted } from '@components/exercise/hooks/useExerciseCompleted';
-import { useDraggableContent } from '@components/exercise/hooks/useDraggableContent';
 import { useMobileWarning } from '@components/exercise/hooks/useMobileWarning';
 import { useTerminal } from '@components/exercise/hooks/useTerminal';
 import { useSolution } from '@components/exercise/hooks/useSolution';
@@ -32,17 +27,23 @@ import { selectExercise } from '@store/exercise/selector';
 import { useModal } from '@src/hooks/useModal';
 
 import styles from './styles.module.less';
+import cn from 'classnames';
+import { Sidebar } from '@components/exercise/views/Simple/Sidebar';
 
-function NormalExerciseTemplate({ onSubmit, isAuth }) {
+function SimpleExercise({ onSubmit, isAuth }) {
+  const [sidebar, setSidebar] = useState(true);
+  const toggleSidebar = () => setSidebar(!sidebar);
+
   const { completeModal, closeCompleteModal, completed, incomplete, onComplete } =
     useExerciseCompleted();
 
   const exercise = useSelector(selectExercise);
   const { exerciseId } = useParams();
 
-  const { height, contentRef, layoutRef } = useDraggableContent();
-
-  const { bytePayload, isUnixShell, errorRef, errorMessage } = useTerminal(exercise, onComplete);
+  const { bytePayload, isUnixShell, errorRef, errorMessage, terminal } = useTerminal(
+    exercise,
+    onComplete,
+  );
   const { hint, hintValue, answerHintValue, withoutHint, showHint } = useHint(exercise);
   const { solution, showSolution } = useSolution(exercise);
   const { xp, onAnswerHintXp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
@@ -64,45 +65,39 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
     <>
       {!mobileWarningIsHidden && <WarningMobile handleClose={onCloseMobileWarning} />}
 
-      <div ref={layoutRef} className={styles.layout}>
-        <div ref={contentRef} className={styles.content}>
-          <div className={styles.sidebar}>
-            <Exercise exercise={exercise} />
-            <Instruction xp={xp}>
-              <div
-                dangerouslySetInnerHTML={{ __html: exercise.instruction }}
-                className={styles.instructions}
-              />
-            </Instruction>
-            <Draggable parentContainer={contentRef} resizeContainer={layoutRef} height={height} />
-          </div>
-          <div ref={errorRef}>
-            <ErrorMessage message={errorMessage} />
-          </div>
-          {hint ||
-            (withoutHint && (
-              <Button
-                className={styles.hintBtn}
-                variant="outlinePurple"
-                onClick={() => {
+      <div className={cn(styles.layout, { [styles.folded]: !sidebar })}>
+        <div className={styles.content}>
+          <Sidebar open={sidebar} toggleSidebar={toggleSidebar} xp={xp} exercise={exercise} />
+          <ErrorMessage message={errorMessage} />
+          <div ref={errorRef} style={{ float: 'left', clear: 'both' }} />
+          {terminal.kernelId && sidebar && (
+            <>
+              {hint ||
+                (withoutHint && (
+                  <Button
+                    className={styles.hintBtn}
+                    variant="outlinePurple"
+                    onClick={() => {
+                      showHint();
+                      onHintXp();
+                    }}
+                  >
+                    Подсказка (-{hintValue} XP)
+                  </Button>
+                ))}
+              <NormalHint
+                hint={hint}
+                onClick={openFeedbackModal}
+                onAnswer={() => {
                   showHint();
-                  onHintXp();
+                  onAnswerHintXp();
                 }}
-              >
-                Подсказка (-{hintValue} XP)
-              </Button>
-            ))}
-          <NormalHint
-            hint={hint}
-            onClick={openFeedbackModal}
-            onAnswer={() => {
-              showHint();
-              onAnswerHintXp();
-            }}
-            answerHintValue={answerHintValue}
-            solution
-            onSetSolution={showSolution}
-          />
+                answerHintValue={answerHintValue}
+                solution
+                onSetSolution={showSolution}
+              />
+            </>
+          )}
         </div>
         {completeModal && (
           <CompletedTask
@@ -137,6 +132,7 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
             />
             <Output
               isAuth={isAuth}
+              terminal={terminal}
               presentation_url={exercise.presentation_url}
               variant="outputContainer"
             />
@@ -150,4 +146,4 @@ function NormalExerciseTemplate({ onSubmit, isAuth }) {
   );
 }
 
-export default NormalExerciseTemplate;
+export default SimpleExercise;

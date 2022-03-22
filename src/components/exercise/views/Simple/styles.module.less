@@ -8,14 +8,6 @@
   overflow-y: hidden !important;
 }
 
-.sidebar {
-  overflow-x: hidden;
-  padding-bottom: 15px;
-  background: var(--color-white);
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.04);
-  border-radius: 18px;
-}
-
 .sidebarWrapper {
   position: relative;
 }
@@ -26,6 +18,19 @@
   margin-right: 20px;
   min-width: 270px;
   max-width: 670px;
+
+  &.folded {
+    min-width: 44px !important;
+    width: 44px !important;
+
+    .content {
+      height: 100%;
+      .sidebar {
+        height: 100%;
+      }
+    }
+  }
+
   .hintBtn {
     display: flex;
     margin-top: 30px;
@@ -38,6 +43,8 @@
   max-height: 100%;
   width: 100%;
   overflow-y: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -45,7 +52,7 @@
 
 .instructions {
   margin-top: 35px;
-  margin-bottom: 20px;
+  padding-bottom: 15px;
   padding-left: 20px;
   padding-right: 10px;
   word-break: break-word;

@@ -2,23 +2,24 @@ import React from 'react';
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import cn from 'classnames';
+import InstructionSvg from '@assets/Instruction';
+import { ExperienceTag } from '@components/exercise/common/ExperienceTag';
 
 const Root = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  user-select: none;
+  cursor: pointer;
+
   column-gap: 14px;
 
   background: var(--purple);
 
   min-height: 44px;
-  padding: 6px 20px;
-
-  &.bordered {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-  }
+  padding: 0 20px;
 `;
 
 const Info = styled(Box)`
@@ -54,26 +55,18 @@ const Title = styled('span')`
   align-items: center;
 `;
 
-const Content = styled(Box)`
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-  width: auto;
-
-  &:empty {
-    display: none;
-  }
-`;
-
-const SectionHeader = ({ children, title, icon, bordered }) => (
-  <Root className={bordered ? 'bordered' : ''}>
-    <Info>
-      <IconWrapper>{icon}</IconWrapper>
-      <Title>{title}</Title>
+const InstructionHeader = ({ onClick, xp }) => (
+  <Root>
+    <Info onClick={onClick}>
+      <IconWrapper>
+        <InstructionSvg />
+      </IconWrapper>
+      <Title>
+        <span>Инструкции</span>
+        <ExperienceTag xp={xp} />
+      </Title>
     </Info>
-    <Content>{children}</Content>
   </Root>
 );
 
-export default SectionHeader;
+export default InstructionHeader;

@@ -19,6 +19,19 @@
   position: relative;
   width: calc(43% - 20px);
   margin-right: 20px;
+
+  &.folded {
+    min-width: 44px !important;
+    width: 44px !important;
+
+    .content {
+      height: 100%;
+      .sidebar {
+        height: 100%;
+      }
+    }
+  }
+
   .hintBtn {
     display: flex;
     margin-top: 30px;
@@ -30,6 +43,7 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  border-radius: 15px;
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -62,7 +76,7 @@
 }
 
 .terminal {
-  width: 57%;
+  flex: 1;
   &::-webkit-scrollbar {
     width: 0;
   }
@@ -126,10 +140,6 @@
 }
 
 @media screen and (max-width: 1533px) {
-  .terminal {
-    height: 100%;
-    overflow-y: auto;
-  }
   .resize {
     display: none;
   }
@@ -139,21 +149,5 @@
   .layout {
     width: 100%;
     margin-right: 0;
-  }
-  .terminal {
-    width: 100%;
-    overflow-y: initial;
-    margin-top: 65px;
-    :global {
-      .ace_editor {
-        min-height: 596px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .terminal {
-    height: auto;
   }
 }

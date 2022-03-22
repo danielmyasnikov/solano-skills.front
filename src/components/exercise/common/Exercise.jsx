@@ -1,6 +1,6 @@
 import React from 'react';
 import Terminal from '@assets/terminal.png';
-import SectionHeader from '@components/exercise/common/SectionHeader';
+import InstructionHeader from '@components/exercise/common/InstructionHeader';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
@@ -20,12 +20,15 @@ const Separator = styled(Box)`
   width: 2px;
   height: 100%;
 
-  background-color: var(--color-white);
+  background-color: white;
+`;
+
+const SectionWrapper = styled(Box)`
+  overflow-y: auto;
 `;
 
 const Content = styled(Box)`
   height: 50%;
-  overflow-y: auto;
   padding: 15px 20px 40px;
 
   p {
@@ -49,9 +52,9 @@ const Content = styled(Box)`
   }
 `;
 
-export const Exercise = ({ exercise }) => (
+export const Exercise = ({ exercise, children }) => (
   <>
-    <SectionHeader
+    <InstructionHeader
       icon={<img width="24px" height="24px" src={Terminal} alt="Logo" />}
       title="Упражнение"
       bordered
@@ -65,10 +68,13 @@ export const Exercise = ({ exercise }) => (
           />
         </svg>
       </IconWrapper>
-    </SectionHeader>
-    <Content>
-      <h1 dangerouslySetInnerHTML={{ __html: exercise?.title || 'Заголовок не задан' }} />
-      <div dangerouslySetInnerHTML={{ __html: exercise?.description }} />
-    </Content>
+    </InstructionHeader>
+    <SectionWrapper>
+      <Content>
+        <h1 dangerouslySetInnerHTML={{ __html: exercise?.title || 'Заголовок не задан' }} />
+        <div dangerouslySetInnerHTML={{ __html: exercise?.description }} />
+      </Content>
+      {children}
+    </SectionWrapper>
   </>
 );

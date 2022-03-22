@@ -10,8 +10,8 @@ import { selectExercise } from '@store/exercise/selector';
 import { clearTerminal } from '@store/terminal/actions';
 
 import SimpleExercise from './views/Simple';
-import StepsExercise from './views/Steps';
-import QuizExercise from './views/Quiz';
+import StepsExercise from './templates/Steps';
+import QuizExercise from './templates/Quiz';
 import VideoExercise from './views/Video';
 
 import styles from './styles.module.less';
@@ -65,7 +65,7 @@ function ExercisePage() {
   }, [authCounter]);
 
   if (exercise.type === 'video') {
-    return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
+    return <VideoExercise isAuth={isAuth} onSubmit={onSubmit} />;
   }
 
   return (

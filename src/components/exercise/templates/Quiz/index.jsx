@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -21,8 +21,14 @@ import CompletedTask from '@components/common/modals/completedTask';
 
 import styles from './styles.module.less';
 import { useHint } from '@components/exercise/hooks/useHint';
+import { Sidebar } from '@components/exercise/views/Simple/Sidebar';
+import cn from 'classnames';
 
 function QuizTemplate({ onSubmit, isAuth }) {
+  const [sidebar, setSidebar] = useState(true);
+  const toggleSidebar = () => setSidebar(!sidebar);
+  const errorRef = useRef();
+
   const dispatch = useDispatch();
 
   const exercise = useSelector(selectExercise);
@@ -43,6 +49,12 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const handleAnswer = (item) => {
     setAnswer(item);
   };
+
+  useEffect(() => {
+    if (!!errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [errorMessage]);
 
   useEffect(() => {
     setAnswer({ value: '', correct: false, error: 'Выберите ответ' });
@@ -78,33 +90,23 @@ function QuizTemplate({ onSubmit, isAuth }) {
 
   return (
     <>
-      <FeedbackModal />
-      <RegistrationModal />
-      <div className={styles.layout}>
+      <div className={cn(styles.layout, { [styles.folded]: !sidebar })}>
         <div className={styles.content}>
-          <div className={styles.sidebar}>
-            <Exercise exercise={exercise} />
-            <Instruction
-              answer={answer}
-              xp={exercise.xp}
-              handleAnswer={handleAnswer}
-              exercise={exercise}
-              onSubmit={() => setCompletedTaskModalOpen(true)}
-            >
-              <div className={styles.btnContainer}>
-                {hint ||
-                  (withoutHint && (
-                    <Button className={styles.btn} variant="outlinePurple" onClick={showHint}>
-                      Подсказка (-30 XP)
-                    </Button>
-                  ))}
-                <Button variant="containedPurple" onClick={checkAnswer}>
-                  Ответить
-                </Button>
-              </div>
-            </Instruction>
-          </div>
-          {errorMessage && <ErrorMessage message={errorMessage} />}
+          <Sidebar
+            exercise={exercise}
+            xp={exercise?.xp}
+            answer={answer}
+            handleAnswer={handleAnswer}
+            onSubmit={() => setCompletedTaskModalOpen(true)}
+            open={sidebar}
+            toggleSidebar={toggleSidebar}
+            hint={hint}
+            withoutHint={withoutHint}
+            showHint={showHint}
+            checkAnswer={checkAnswer}
+          />
+          <ErrorMessage message={errorMessage} />
+          <div ref={errorRef} style={{ float: 'left', clear: 'both' }} />
           <QuizHint hint={hint} onClick={openFeedbackModal} />
         </div>
         {completedTaskModalOpen && (
@@ -126,6 +128,9 @@ function QuizTemplate({ onSubmit, isAuth }) {
           variant="quizOutputContainer"
         />
       </div>
+
+      <FeedbackModal />
+      <RegistrationModal />
     </>
   );
 }

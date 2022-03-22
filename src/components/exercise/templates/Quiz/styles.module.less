@@ -27,17 +27,57 @@ label {
   position: relative;
   width: calc(43% - 20px);
   margin-right: 20px;
+
+  &.folded {
+    min-width: 44px !important;
+    width: 44px !important;
+
+    .content {
+      height: 100%;
+      .sidebar {
+        height: 100%;
+      }
+    }
+  }
 }
 
 .content {
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .terminal {
-  width: 57%;
   margin-top: -6px;
+  flex: 1;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.quiz {
+  margin: 0 20px 20px 20px;
+  .quizItem {
+    margin: 20px 0;
+
+    &:first-child {
+      margin-top: -10px;
+    }
+    margin-left: -9px;
+
+    label {
+      font-size: 16px;
+      align-items: flex-start;
+    }
+    span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
 }
 
 .btnContainer {
@@ -45,6 +85,7 @@ label {
   flex-direction: row;
   justify-content: flex-end;
   margin: 15px 20px 5px 20px;
+  padding-bottom: 15px;
   button {
     height: 46px;
   }

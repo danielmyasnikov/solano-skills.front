@@ -7,11 +7,13 @@ import { selectExercise } from '@store/exercise/selector';
 
 import { VideoPlayer } from './player';
 import styles from './styles.module.less';
+import * as AuthStore from '@store/auth';
 
-const VideoExercise = ({ isAuth, onSubmit, headers }) => {
+const VideoExercise = ({ isAuth, onSubmit }) => {
   const transcriptRef = useRef();
 
   const exercise = useSelector(selectExercise);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
   const [showTranscript, setShowTranscript] = useState(false);
   const [nextLesson, setNextLesson] = useState(false);

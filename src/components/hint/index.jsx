@@ -25,7 +25,7 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
           <>
             <div className={styles.hintInfo}>
               <h6>Подсказка</h6>
-              <p dangerouslySetInnerHTML={{ __html: exercise.hint }}></p>
+              <p dangerouslySetInnerHTML={{ __html: exercise.hint }} />
             </div>
             {feedbackOpen && (
               <div className={styles.feedback}>

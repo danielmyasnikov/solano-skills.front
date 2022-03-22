@@ -31,6 +31,15 @@ export const useBulletExerciseCompleted = (exercise) => {
     }
   }, [completed]);
 
+  useEffect(() => {
+    setPoint(1);
+    setDonePoints(new Set());
+    setCompleted(false);
+    setModal(false);
+    setAnswer(initAnswer);
+    setErrorMessage('');
+  }, [exercise.id]);
+
   const closeCompleteModal = () => setModal(false);
 
   return {
@@ -40,8 +49,10 @@ export const useBulletExerciseCompleted = (exercise) => {
     completeModal,
     closeCompleteModal,
     completed,
+    setErrorMessage,
     setCompleted,
     answer,
+    setAnswer,
     errorMessage,
   };
 };
