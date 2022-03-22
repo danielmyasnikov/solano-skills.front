@@ -6,7 +6,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
 // import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
+// import { BrowserTracing } from '@sentry/tracing';
 require('dotenv').config();
 
 // Sentry.init({
