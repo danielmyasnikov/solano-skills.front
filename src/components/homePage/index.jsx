@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
 import Footer from '../footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-// import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import { HashLink } from 'react-router-hash-link';
@@ -17,10 +17,10 @@ export const HomePage = () => {
 
   const handleBurger = () => setShowMenu(!showMenu);
 
-  const renderImage = img => images[img];
+  const renderImage = (img) => images[img];
 
   const renderSlides = useMemo(() => {
-    return slides.map(({ bg, title, subtitle, btn, items, btnlearn}) => (
+    return slides.map(({ bg, title, subtitle, link, btn, items, btnlearn }) => (
       <div
         key={title}
         className={
@@ -33,23 +33,25 @@ export const HomePage = () => {
           <div className={styles.ways__skills__title}>{title}</div>
           <div className={styles.ways__skills__subtitle}>{subtitle}</div>
           <div className={styles.ways__skills__btn}>
-            <Button variant="outlineWhiteHome" disabled={true}>
-              {btn}
-              <KeyboardArrowRightIcon />
-            </Button>
+            <Link to={link}>
+              <Button variant="outlineWhiteHome">
+                {btn}
+                <KeyboardArrowRightIcon />
+              </Button>
+            </Link>
           </div>
         </div>
         <div className={styles.ways__slides}>
-          {items.map(({ title, text }, i) => (
+          {items.map(({ title, text, link }, i) => (
             <div key={title + i} className={styles.ways__slideContainer}>
               <div className={styles.ways__slide}>
                 <div className={styles.ways__slide__bg}>
                   <div className={styles.ways__slide__title}>{title}</div>
                   <div className={styles.ways__slide__text}>{text}</div>
                   <div className={styles.ways__slide__button}>
-                    <Button variant="outlineBlue" disabled={true}>
-                      {btnlearn}
-                    </Button>
+                    <Link to={link}>
+                      <Button variant="outlineBlue">{btnlearn}</Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -67,17 +69,17 @@ export const HomePage = () => {
           <div className={styles.practice__pretitle}>{pretitle}</div>
           <div className={styles.practice__title}>{title}</div>
           <div className={styles.practice__text}>{text}</div>
-          {/* <Link to={practice.route}>
-            {practice.link}
-            <KeyboardDoubleArrowRightIcon />
-          </Link> */}
+          {/* <Link to={route}>
+              {link}
+              <KeyboardDoubleArrowRightIcon />
+            </Link> */}
         </div>
         <div className={styles.practice__right}>
           <div className={styles.practice__tochki}>
             <images.tochki />
           </div>
           <div className={styles.practice__img}>
-            <img src={renderImage(img)} alt={'Иконка'}/>
+            <img src={renderImage(img)} alt={'Иконка'} />
           </div>
           <div className={styles.practice__textblock}>
             <div className={styles.practice__textblock__title}>{textblockTitle}</div>
@@ -117,7 +119,7 @@ export const HomePage = () => {
           <main>
             <section className={styles.offer}>
               <div className={cn(styles.offer__block, styles.offer__block__left)}>
-                <div className={styles.offer__title}>Курсы программирования на Python</div>
+                <div className={styles.offer__title}>Развивайте навыки работы с данными</div>
                 <div className={styles.offer__subtitle}>
                   Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
                   и направлениям в сфере Информационных технологий.
@@ -140,7 +142,7 @@ export const HomePage = () => {
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
                 <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
-                <Registration isModal={true} variant={'home_offer'} />
+                <Registration key={'home_offer'} isModal={true} variant={'home_offer'} />
               </div>
             </section>
 
@@ -161,9 +163,9 @@ export const HomePage = () => {
                 обучения.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite" disabled={true}>
-                  Посмотреть курсы
-                </Button>
+                <Link to={'/courses'}>
+                  <Button variant="containedWhite">Посмотреть курсы</Button>
+                </Link>
               </div>
             </section>
 
@@ -190,9 +192,9 @@ export const HomePage = () => {
                 можете обучаться с любой точки планеты где есть Интернет.
               </div>
               <div className={styles.slogan__btn}>
-                <Button variant="containedWhite" disabled={true}>
-                  Посмотреть курсы
-                </Button>
+                <Link to={'/courses'}>
+                  <Button variant="containedWhite">Посмотреть курсы</Button>
+                </Link>
               </div>
             </section>
 
@@ -219,7 +221,7 @@ export const HomePage = () => {
                 заключение в течение 24 часов.
               </div>
               <div className={styles.join__btn}>
-                <a href="https://forms.gle/nCKa2D3JK756E9eg7">
+                <a target="_blank" href="https://forms.gle/nCKa2D3JK756E9eg7" rel="noreferrer">
                   <Button variant="containedPurple">Я преподаватель</Button>
                 </a>
               </div>
@@ -231,7 +233,7 @@ export const HomePage = () => {
                 <div className={styles.signup__subtitle}>чтобы начать обучение прямо сейчас</div>
               </div>
               <div className={styles.signup__block}>
-                <Registration isModal={true} variant={'home_end'} />
+                <Registration key={'home_end'} isModal={true} variant={'home_end'} />
               </div>
             </section>
           </main>

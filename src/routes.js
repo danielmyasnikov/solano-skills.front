@@ -3,7 +3,7 @@ import Profile from '@components/profile';
 import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';
 import { CertificatesPage } from '@components/certificatesPage';
-import { StatementPage } from '@components/statementPage';
+import { CertificatePage } from '@components/certificatePage';
 import { OnBoardPage } from '@components/onBoard';
 import { HomePage } from './components/homePage';
 import { Registration } from './components/auth/registration';
@@ -97,7 +97,7 @@ export const routes = [
   },
   {
     path: '/certificates/:userId/:courseId',
-    component: StatementPage,
+    component: CertificatePage,
     wrap: true,
     exact: true,
   },

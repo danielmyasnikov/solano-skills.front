@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.less';
-import Logo from '@assets/bigLogo.png';
+import Logo from '@assets/bigLogo.svg';
 import LogoMobile from '@assets/LogoMobile.svg';
 
 export const AuthContainer = ({ children }) => {

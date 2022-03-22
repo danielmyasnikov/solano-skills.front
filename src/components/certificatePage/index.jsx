@@ -3,11 +3,11 @@ import styles from './styles.module.less';
 import { PDFViewer } from '@components/common/pdfViewer';
 import { getCertificate } from '../../store/api/certificate';
 
-export const StatementPage = () => {
+export const CertificatePage = () => {
   const [url, setUrl] = useState('');
   const data = {
-    "html": "<h1>hello</h1>",
-    "force": "true",
+    html: '<h1>hello</h1>',
+    force: 'true',
   };
 
   useEffect(() => {
