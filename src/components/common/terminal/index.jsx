@@ -171,17 +171,15 @@ const Terminal = ({
         [styles.noneEvents]: !isAuth,
       })}
     >
-      {(correct || isDisabled || !isAuth) && (
-        <Placeholder>
-          {isAuth ? (
-            <>
+      {isAuth && (
+        <>
+          {(correct || isDisabled) && (
+            <Placeholder>
               {isDisabled && <LoadingText>Загрузка</LoadingText>}
               {correct && <LoadingText className="no-loading">Успешно!</LoadingText>}
-            </>
-          ) : (
-            <LoadingText className="no-loading">Авторизируйтесь</LoadingText>
+            </Placeholder>
           )}
-        </Placeholder>
+        </>
       )}
       {registrationModalOpen && <RegistrationModal />}
       <div ref={wrapperRef} className={styles.terminalWrapper}>

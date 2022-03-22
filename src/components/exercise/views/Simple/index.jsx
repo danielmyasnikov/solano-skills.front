@@ -34,6 +34,8 @@ function SimpleExercise({ onSubmit, isAuth }) {
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar(!sidebar);
 
+  const [reg, setReg] = useState(false);
+
   const { completeModal, closeCompleteModal, completed, incomplete, onComplete } =
     useExerciseCompleted();
 
@@ -51,13 +53,10 @@ function SimpleExercise({ onSubmit, isAuth }) {
   const { hidden: mobileWarningIsHidden, onClose: onCloseMobileWarning } = useMobileWarning();
 
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
-  const { Modal: RegistrationModal, open: openRegistrationModal } = useModal(
-    RegistrationModalComponent,
-  );
 
   function terminalClickHandler() {
     if (!isAuth) {
-      openRegistrationModal();
+      setReg(true);
     }
   }
 
@@ -141,7 +140,7 @@ function SimpleExercise({ onSubmit, isAuth }) {
       </div>
 
       <FeedbackModal />
-      <RegistrationModal />
+      {reg && <RegistrationModalComponent onClose={() => setReg(false)} />}
     </>
   );
 }

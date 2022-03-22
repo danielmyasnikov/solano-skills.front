@@ -14,7 +14,7 @@ export const useModal = (Component) => {
 
   const Modal = useCallback(
     ({ children }) => {
-      return <>{isOpen && <Component onClose={() => close()}>{children}</Component>}</>;
+      return <>{isOpen && <Component onClose={close}>{children}</Component>}</>;
     },
     [isOpen, close],
   );
