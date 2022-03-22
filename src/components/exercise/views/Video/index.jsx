@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { VideoPlayer } from './player';
+
 import { useSelector } from 'react-redux';
+
 import Button from '@components/mui/button';
 import { selectExercise } from '@store/exercise/selector';
 
+import { VideoPlayer } from './player';
 import styles from './styles.module.less';
+import * as AuthStore from '@store/auth';
 
-export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
-  const exercise = useSelector(selectExercise);
-
+const VideoExercise = ({ isAuth, onSubmit }) => {
   const transcriptRef = useRef();
+
+  const exercise = useSelector(selectExercise);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
   const [showTranscript, setShowTranscript] = useState(false);
   const [nextLesson, setNextLesson] = useState(false);
 
@@ -89,3 +94,5 @@ export const VideoExercise = ({ isAuth, onSubmit, headers }) => {
     </div>
   );
 };
+
+export default VideoExercise;

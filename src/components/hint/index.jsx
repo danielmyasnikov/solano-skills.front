@@ -25,7 +25,7 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
           <>
             <div className={styles.hintInfo}>
               <h6>Подсказка</h6>
-              <p dangerouslySetInnerHTML={{ __html: exercise.hint }}></p>
+              <p dangerouslySetInnerHTML={{ __html: exercise.hint }} />
             </div>
             {feedbackOpen && (
               <div className={styles.feedback}>
@@ -52,7 +52,14 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
   );
 };
 
-export const NormalHint = ({ hint, onClick, solution, onSetSolution, onAnswer }) => {
+export const NormalHint = ({
+  hint,
+  onClick,
+  solution,
+  onSetSolution,
+  onAnswer,
+  answerHintValue,
+}) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
   const exercise = useSelector(selectExercise);
   const [showAnswer, setShowAnswer] = useState(true);
@@ -73,7 +80,7 @@ export const NormalHint = ({ hint, onClick, solution, onSetSolution, onAnswer })
           <>
             <div className={styles.hintInfo}>
               <h6>Подсказка</h6>
-              <p dangerouslySetInnerHTML={{ __html: exercise.hint }}></p>
+              <p dangerouslySetInnerHTML={{ __html: exercise.hint }} />
             </div>
             {feedbackOpen && (
               <div className={styles.feedback}>
@@ -90,7 +97,7 @@ export const NormalHint = ({ hint, onClick, solution, onSetSolution, onAnswer })
             )}
             {solution && showAnswer && (
               <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
-                Показать ответ (-70 XP)
+                Показать ответ (-{answerHintValue} XP)
               </Button>
             )}
           </>
@@ -107,6 +114,7 @@ export const BulletHint = ({
   solution,
   onSetSolution,
   onAnswer,
+  answerHintValue,
 }) => {
   const [feedbackOpen, setFeedbackOpen] = useState(true);
   const exercise = useSelector(selectExercise);
@@ -132,9 +140,9 @@ export const BulletHint = ({
               <h6>Подсказка</h6>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: exercise?.nested_exercises[activeExercise].hint,
+                  __html: exercise?.nested_exercises[activeExercise - 1]?.hint,
                 }}
-              ></p>
+              />
             </div>
             {feedbackOpen && (
               <div className={styles.feedback}>
@@ -151,7 +159,7 @@ export const BulletHint = ({
             )}
             {solution && showAnswer && (
               <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
-                Показать ответ (-70 XP)
+                Показать ответ (-{answerHintValue} XP)
               </Button>
             )}
           </>

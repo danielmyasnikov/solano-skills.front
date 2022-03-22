@@ -13,7 +13,9 @@ const Draggable = ({ parentContainer, resizeContainer, height }) => {
   };
 
   const resize = (e) => {
-    resizeContainer.current.style.width = `${parseInt(initialSize) + parseInt(e.clientX - initialPos)}px`;
+    resizeContainer.current.style.width = `${
+      parseInt(initialSize) + parseInt(e.clientX - initialPos)
+    }px`;
   };
 
   return (
@@ -21,7 +23,7 @@ const Draggable = ({ parentContainer, resizeContainer, height }) => {
       ref={resizableRef}
       style={{ marginTop: `${height / 2}px` }}
       className={styles.draggable}
-      draggable={true}
+      draggable
       onDragStart={initial}
       onDrag={resize}
     >

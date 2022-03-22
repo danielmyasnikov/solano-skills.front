@@ -16,6 +16,66 @@ import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';
 import Draggable from '../draggable';
 import { useRef } from 'react';
+import { styled } from '@mui/material/styles';
+import { Box, Typography } from '@mui/material';
+
+const Placeholder = styled(Box)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 18px;
+  z-index: 100;
+  background-color: rgb(0 0 0 / 15%);
+  backdrop-filter: blur(2px);
+`;
+
+const LoadingText = styled(Typography)`
+  color: white;
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 127%;
+  text-align: center;
+  white-space: nowrap;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.no-loading {
+    &::after {
+      display: none !important;
+    }
+  }
+
+  &::after {
+    display: inline-block;
+    animation: dotty steps(1, end) 1.5s infinite;
+    content: '';
+  }
+
+  @keyframes dotty {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+    100% {
+      content: '';
+    }
+  }
+`;
 
 const Terminal = ({
   sampleCode,
@@ -111,9 +171,19 @@ const Terminal = ({
         [styles.noneEvents]: !isAuth,
       })}
     >
-      {registrationModalOpen && (
-        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      {(correct || isDisabled || !isAuth) && (
+        <Placeholder>
+          {isAuth ? (
+            <>
+              {isDisabled && <LoadingText>Загрузка</LoadingText>}
+              {correct && <LoadingText className="no-loading">Успешно!</LoadingText>}
+            </>
+          ) : (
+            <LoadingText className="no-loading">Авторизируйтесь</LoadingText>
+          )}
+        </Placeholder>
       )}
+      {registrationModalOpen && <RegistrationModal />}
       <div ref={wrapperRef} className={styles.terminalWrapper}>
         <div className={styles.terminalHeader}>
           <div
@@ -138,12 +208,12 @@ const Terminal = ({
             className="editor"
             width="100%"
             height="calc(100% - 71px)"
-            showGutter={true}
-            highlightActiveLine={true}
+            showGutter
+            highlightActiveLine
             defaultValue={sampleCode}
             value={activeTab === 'solution' ? solution : value}
-            readOnly={activeTab === 'solution' ? true : false}
-            wrapEnabled={true}
+            readOnly={activeTab === 'solution'}
+            wrapEnabled
             fontSize="16px"
             setOptions={{
               enableBasicAutocompletion: true,
