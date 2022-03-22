@@ -62,4 +62,4 @@ function App() {
   );
 }
 
-export default Sentry.withProfiler(App);
+// export default Sentry.withProfiler(App);
