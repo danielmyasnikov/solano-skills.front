@@ -17,8 +17,9 @@ export const ModalActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClic
 
   const item = (img, text, link) => {
     const clickHandler = () => {
-      if (link === '/sign-in') {
+      if (link === '/courses') {
         localStorage.clear();
+        window.location.reload();
       }
     };
 
@@ -71,7 +72,7 @@ export const ModalActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClic
       {item(User, 'Перейти в профиль', '/profile')}
       {item(Settings, 'Настройки аккаунта', '/settings')}
       {item(Support, 'Поддержка', '')}
-      {item(Exit, 'Выйти', '/sign-in')}
+      {item(Exit, 'Выйти', '/courses')}
     </div>
   );
 };
