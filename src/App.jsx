@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import * as Sentry from '@sentry/react';
+// import * as Sentry from '@sentry/react';
 
 import Container from './components/container';
 
@@ -62,4 +62,5 @@ function App() {
   );
 }
 
-export default Sentry.withProfiler(App);
+// export default Sentry.withProfiler(App);
+export default App;

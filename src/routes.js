@@ -15,6 +15,7 @@ import { ProfessionsPage } from './components/professionsPage';
 import { ProfessionPage } from './components/professionPage';
 import { ProgressPage } from './components/progressPage';
 import Settings from './components/settings';
+import { PasswordResetPage } from './components/auth/forgotPassword/passwordResetPage';
 
 export const routes = [
   {
@@ -33,6 +34,12 @@ export const routes = [
     path: '/skills/:skillId',
     component: SkillPage,
     wrap: true,
+    exact: true,
+  },
+  {
+    path: '/reset-password/:resetToken',
+    component: PasswordResetPage,
+    wrap: false,
     exact: true,
   },
   {

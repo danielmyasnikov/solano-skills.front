@@ -1,9 +1,12 @@
 import { useCallback, useRef } from 'react';
 
+// TODO: move to hooks
+// now stops missing references in ide
+
 const useDebounce = (callback, delay) => {
   const timer = useRef();
 
-  const debouncedCallback = useCallback(
+  return useCallback(
     (...args) => {
       if (timer.current) {
         clearTimeout(timer.current);
@@ -14,8 +17,6 @@ const useDebounce = (callback, delay) => {
     },
     [callback, delay],
   );
-
-  return debouncedCallback;
 };
 
 export default useDebounce;

@@ -30,15 +30,9 @@ export const FeedbackModal = ({ onClose }) => {
 
   const disabledButtonHandler = () => {
     if (headers.hasOwnProperty('uid')) {
-      if (proplemDescription && reason) {
-        return false;
-      }
-      return true;
+      return !(proplemDescription && reason);
     }
-    if (proplemDescription && reason && email) {
-      return false;
-    }
-    return true;
+    return !(proplemDescription && reason && email);
   };
 
   const handleSubmit = () => {
@@ -114,7 +108,7 @@ export const FeedbackModal = ({ onClose }) => {
             <textarea
               onChange={(e) => setProblemDescription(e.target.value)}
               placeholder="Введите текст"
-            ></textarea>
+            />
             <Button
               type="submit"
               disabled={disabledButtonHandler()}

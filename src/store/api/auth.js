@@ -37,6 +37,19 @@ export const requestPasswordResetApi = ({ email, configName }) => {
     });
 };
 
+export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirmation }) => {
+  return axios
+    .patch(`${process.env.REACT_APP_API_COURSE}/auth/password`, {
+      reset_password_token: resetPasswordToken,
+      password,
+      password_confirmation: passwordConfirmation,
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+};
+
 export const signInByPhoneApi = ({ phonenumber }) => {
   return axios
     .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
