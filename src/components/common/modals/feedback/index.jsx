@@ -97,6 +97,7 @@ export const FeedbackModal = ({ onClose }) => {
                 }),
                 option: (provided, state) => ({
                   ...provided,
+                  color: 'black',
                   backgroundColor: state.isFocused && 'lightgray',
                 }),
               }}
