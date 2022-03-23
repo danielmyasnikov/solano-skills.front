@@ -67,7 +67,6 @@ export default function authReducer(state = initialState, action) {
       return { ...state, errors: { ...state.errors, ...action.payload } };
     }
     case PATCH_PASSWORD_FAILED: {
-      console.log(state);
       return {
         ...state,
         recoveryPasswordStatus: 'failure',
