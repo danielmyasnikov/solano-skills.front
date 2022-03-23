@@ -1,19 +1,44 @@
 import axios from 'axios';
 
-export const getCertificate = ({ data }) => {
-  const headers = {
-    'client': 'kmWSHKf30ScUGK_KgWgm-A',
-    'access-token': 'mF0uARsv8qug8EPfRwiBrw',
-    'uid': 'daniel.g.myasnikov+cert+1@gmail.com',
-  }
-  
-  return axios
-    .post(`${process.env.REACT_APP_API_COURSE}/api/v1/courses/functions-in-python/certificates`, {
-      "html": "<h1>hello</h1>",
-      "force": "true",
-    }, { headers })
-    .then(res => res.data.file_url)
-    .catch(error => {
-      throw error;
+const client = localStorage.getItem('client');
+const accessToken = localStorage.getItem('access-token');
+const uid = localStorage.getItem('uid');
+
+export const getCertificates = async () => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API_COURSE}/api/v1/certificates`, {
+      headers: {
+        client: client,
+        'access-token': accessToken,
+        uid: uid,
+      },
     });
+    if (response.status === 200) {
+      return response.data;
+    }
+    return false;
+  } catch (err) {}
+};
+
+export const getCertificate = async (cid) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_COURSE}/api/v1/certificates/${cid}`,
+      {
+        html: '<h1>hello</h1>',
+        force: 'true',
+      },
+      {
+        headers: {
+          client: client,
+          'access-token': accessToken,
+          uid: uid,
+        },
+      },
+    );
+    if (response.status === 200) {
+      return response.data.url;
+    }
+    return false;
+  } catch (err) {}
 };

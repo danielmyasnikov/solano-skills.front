@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import * as AuthStore from '@store/auth';
+import { getCertificates } from '@store/api/certificate';
 import { selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
 
@@ -25,7 +26,7 @@ import { Preloader } from '../mui/preloader';
 export const CertificatesPage = () => {
   const fullnameRef = useRef();
 
-  const [sertificates, setSertificates] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [certificates, setCertificates] = useState();
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
@@ -84,10 +85,13 @@ export const CertificatesPage = () => {
     );
   };
 
+  const asyncGetCertificates = async () => {
+    const newCertificates = await getCertificates();
+    setCertificates(newCertificates.reverse());
+  };
+
   useEffect(() => {
-    if (!uid && !client && !accessToken) {
-      history.push('/certificates');
-    }
+    asyncGetCertificates();
   }, []);
 
   useEffect(() => {
@@ -146,10 +150,15 @@ export const CertificatesPage = () => {
           <Link to="/profile">Обзор профиля</Link>
           <Button variant="containedPurple">Сертификаты</Button>
         </div>
-        <div className={styles.sertificates}>
-          {sertificates.map(() => (
-            <Certificate />
-          ))}
+        <div className={styles.certificates}>
+          {(certificates &&
+            certificates.map((certificate) => (
+              <Certificate key={certificate.id} id={certificate.id} />
+            ))) || (
+            <div className={styles.preloader}>
+              <Preloader size="100px" />
+            </div>
+          )}
         </div>
       </div>
     </div>

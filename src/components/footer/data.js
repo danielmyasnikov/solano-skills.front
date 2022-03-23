@@ -117,14 +117,30 @@ export const links = [
 ];
 
 export const otherLinks = [
-  'Политика конфиденциальности',
-  'Оферта',
-  'Сведения об образовательной организации',
-  'Лицензия на образовательную деятельность № 040485 от 03 декабря 2019 года',
+  {
+    text: 'Политика конфиденциальности',
+    link: 'https://docs.google.com/document/d/1QnjEYt1ho0ew1f9nNn_Np6KpAzNIS4X_vIHGUZEUeFs/edit?usp=sharing'
+  },
+  {
+    text: 'Оферта',
+  },
+  {
+    text: 'Сведения об образовательной организации',
+  },
+  {
+    text: 'Лицензия на образовательную деятельность № 040485 от 03 декабря 2019 года',
+    link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing'
+  },
 ];
 
 export const info = [
-  'ООО «Дипскиллс», Москва, Ленинградский проспект 39',
-  ' строение 80, ИНН 7726381870',
-  '© DeepSkills, 2022',
+  {
+    text: 'ООО «Дипскиллс», Москва, Ленинградский проспект 39',
+  },
+  {
+    text: 'строение 80, ИНН 7726381870',
+  },
+  {
+    text: '© DeepSkills, 2022',
+  }
 ];

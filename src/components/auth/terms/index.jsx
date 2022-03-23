@@ -11,13 +11,25 @@ const Terms = ({ variant, handleChecked, checked, checkedError, isPhoneNumber })
       return (
         <>
           Я принимаю условия
-          <Link className={styles.infoLink} to={'/'}>
+          <a
+            className={styles.infoLink}
+            target={'_blank'}
+            href={
+              'https://docs.google.com/document/d/1qvbSyA2uXyHD4WHqPQNboj_0pgBEs8AE0seRg4zinWE/edit?usp=sharing'
+            }
+          >
             {' Пользовательского соглашения '}
-          </Link>
+          </a>
           и даю своё согласие на обработку персональных данных на условиях, определенных
-          <Link className={styles.infoLink} to={'/'}>
+          <a
+            className={styles.infoLink}
+            target={'_blank'}
+            href={
+              'https://docs.google.com/document/d/1QnjEYt1ho0ew1f9nNn_Np6KpAzNIS4X_vIHGUZEUeFs/edit?usp=sharing'
+            }
+          >
             {' Политикой конфиденциальности'}
-          </Link>
+          </a>
           .
         </>
       );

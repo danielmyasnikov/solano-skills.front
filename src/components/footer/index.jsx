@@ -31,7 +31,14 @@ const Footer = () => {
     ));
   };
 
-  const renderInfo = (arr) => arr.map((text) => <p>{text}</p>);
+  const renderInfo = (arr) =>
+    arr.map(({ text, link }) => (
+      <p>
+        <a href={link} target={'_blank'}>
+          {text}
+        </a>
+      </p>
+    ));
 
   return (
     <div className={styles.footer}>

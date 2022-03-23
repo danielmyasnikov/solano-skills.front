@@ -176,7 +176,9 @@ export const Registration = ({ variant, isModal, onClose }) => {
         </div>
         {errors.fullMessagesError && (
           <div className={styles.errorDiv}>
-            <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+            {errors.fullMessagesError.reverse().map((text) => (
+              <p className={styles.error}>{text || checkedError}</p>
+            ))}
           </div>
         )}
         {/* <SocialNetworks variant={variant} /> */}
