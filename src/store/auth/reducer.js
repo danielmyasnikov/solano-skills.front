@@ -11,12 +11,15 @@ import {
   SIGN_IN_BY_PHONE_VERIFY,
   REQUEST_PASSWORD_RESET_SUCCESSED,
   REQUEST_PASSWORD_RESET_FAILED,
+  PATCH_PASSWORD_SUCCESSED,
+  PATCH_PASSWORD_FAILED,
 } from './actions';
 
 const initialState = {
   headers: {},
   errors: {},
   status: '',
+  recoveryPasswordStatus: 'idle',
 };
 
 export default function authReducer(state = initialState, action) {
@@ -49,13 +52,27 @@ export default function authReducer(state = initialState, action) {
       return { ...state, errors: { ...action.payload } };
     }
     case REQUEST_PASSWORD_RESET_SUCCESSED: {
-      return { ...state, errors: {} };
+      return { ...state, recoveryPasswordStatus: 'success', errors: {} };
+    }
+    case PATCH_PASSWORD_SUCCESSED: {
+      return {
+        recoveryPasswordStatus: 'success',
+        ...action.payload.data,
+      };
     }
     case REQUEST_PASSWORD_RESET_FAILED: {
       return { ...state, errors: { ...action.payload } };
     }
     case CLEAR_ERRORS: {
       return { ...state, errors: { ...state.errors, ...action.payload } };
+    }
+    case PATCH_PASSWORD_FAILED: {
+      console.log(state);
+      return {
+        ...state,
+        recoveryPasswordStatus: 'failure',
+        errors: { ...state.errors, ...action.payload },
+      };
     }
     default:
       return state;

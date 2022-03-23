@@ -28,8 +28,6 @@ export const ForgotPassword = () => {
 
   const dispatch = useDispatch();
 
-  const helpEmail = 'helpMePleaseSOS@gmail.com';
-
   const inputHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -77,7 +75,7 @@ export const ForgotPassword = () => {
           <span className={styles.wrapperText}>
             Если вы не получили письмо, нажмите «Отправить повторно» через 00:
             <Counter onСountdownIsOver={onСountdownIsOverHandler} /> или напишите на &nbsp;
-            {helpEmail}
+            support@deepskills.ru
           </span>
         ))) || (
         <>
