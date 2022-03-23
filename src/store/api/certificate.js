@@ -14,9 +14,9 @@ export const getCertificates = async () => {
       },
     });
     if (response.status === 200) {
-      return response.data;
+      return response.data.certificates;
     }
-    return false;
+    return [];
   } catch (err) {}
 };
 
