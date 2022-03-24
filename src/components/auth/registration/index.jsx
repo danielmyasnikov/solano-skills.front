@@ -25,6 +25,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
+  const [isReg, setIsReg] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
   const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
   const [checkedError, setCheckedError] = useState('');
@@ -73,6 +74,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   function submit() {
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
+      setIsReg(true);
     }
     if (isRegistrationByPhone && phoneTermsChecked) {
       setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''));
@@ -88,7 +90,11 @@ export const Registration = ({ variant, isModal, onClose }) => {
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/onboard');
+      if (isReg) {
+        history.push('/onBoard');
+      } else {
+        history.push('/courses');
+      }
     }
   }, [headers]);
 
