@@ -26,7 +26,9 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
-  const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const { errors: reduxErrors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const [errors, setErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
 
@@ -71,6 +73,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }
 
   function submit() {
+    setIsSubmit(true);
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
     }
@@ -85,6 +88,13 @@ export const Registration = ({ variant, isModal, onClose }) => {
       setCheckedError('Ошибка ввода данных');
     }
   }
+
+  useEffect(() => {
+    if (isSubmit) {
+      setErrors(reduxErrors);
+      setIsSubmit(false);
+    }
+  }, [reduxErrors]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
