@@ -8,6 +8,7 @@ import * as AuthStore from '@store/auth';
 import { getExercise } from '@store/exercise/actions';
 import { selectExercise } from '@store/exercise/selector';
 import { clearTerminal } from '@store/terminal/actions';
+import { clearBashShell } from '@store/bashShell/actions';
 
 import SimpleExercise from './views/Simple';
 import StepsExercise from './templates/Steps';
@@ -43,6 +44,10 @@ function ExercisePage() {
         break;
     }
   };
+
+  useEffect(() => {
+    dispatch(clearBashShell());
+  }, [exerciseId]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {

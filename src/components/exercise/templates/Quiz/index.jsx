@@ -22,6 +22,7 @@ import cn from 'classnames';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import { useSolution } from '@components/exercise/hooks/useSolution';
 import { useXp } from '@components/exercise/hooks/useXp';
+import UnixShell from '@components/common/unixshell';
 
 function QuizTemplate({ onSubmit, isAuth }) {
   const [sidebar, setSidebar] = useState(true);
@@ -94,6 +95,23 @@ function QuizTemplate({ onSubmit, isAuth }) {
     }
   };
 
+  const renderStack = () => {
+    switch (exercise.stack_type) {
+      case 'shell':
+        return <UnixShell exerciseId={exerciseId} />;
+      case 'python':
+        return (
+          <Output
+            isAuth={isAuth}
+            presentation_url={exercise.presentation_url}
+            variant="quizOutputContainer"
+          />
+        );
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div className={cn(styles.layout, { [styles.folded]: !sidebar })}>
@@ -141,13 +159,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
-        <Output
-          isAuth={isAuth}
-          presentation_url={exercise.presentation_url}
-          variant="quizOutputContainer"
-        />
-      </div>
+      <div className={styles.terminal}>{renderStack()}</div>
 
       <FeedbackModal />
       {registrationModalOpen && (

@@ -19,6 +19,7 @@ import { useIsQuiz } from '@components/exercise/hooks/useIsQuiz';
 import { useBulletExerciseCompleted } from '@components/exercise/hooks/useBulletExerciseCompleted';
 import { Sidebar } from '@components/exercise/templates/Steps/Sidebar';
 import cn from 'classnames';
+import UnixShell from '@components/common/unixshell';
 
 function BulletPointExercise({ onSubmit, isAuth, headers }) {
   const dispatch = useDispatch();
@@ -102,7 +103,40 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
 
   useEffect(() => {
     setActiveExercise(nestedExercise[point - 1]);
-  }, [nestedExerciseчё, point]);
+  }, [nestedExercise, point]);
+
+  const renderStack = () => {
+    switch (exercise.stack_type) {
+      case 'shell':
+        return <UnixShell exerciseId={activeExercise?.id} />;
+      case 'python':
+        return (
+          <>
+            <Terminal
+              solution={solution}
+              sampleCode={activeExercise?.sample_code}
+              exerciseId={activeExercise?.id}
+              correct={completed}
+              isAuth={isAuth}
+              onAnswer={() => {}}
+              xp={xp}
+              bytePayload={bytePayload}
+              isGraphRequired={activeExercise?.is_graph_required}
+            />
+            <Output
+              isAuth={isAuth}
+              bulletExercise={activeExercise}
+              isBulletPointExercise
+              terminal={terminal}
+              presentation_url={exercise.presentation_url}
+              variant="outputContainer"
+            />
+          </>
+        );
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -174,27 +208,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
-        <Terminal
-          solution={solution}
-          sampleCode={activeExercise?.sample_code}
-          exerciseId={activeExercise?.id}
-          correct={completed}
-          isAuth={isAuth}
-          onAnswer={() => {}}
-          xp={xp}
-          bytePayload={bytePayload}
-          isGraphRequired={activeExercise?.is_graph_required}
-        />
-        <Output
-          isAuth={isAuth}
-          bulletExercise={activeExercise}
-          isBulletPointExercise
-          terminal={terminal}
-          presentation_url={exercise.presentation_url}
-          variant="outputContainer"
-        />
-      </div>
+      <div className={styles.terminal}>{renderStack()}</div>
 
       <FeedbackModal />
     </>

@@ -63,6 +63,37 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
 
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
 
+  const renderStack = () => {
+    switch (exercise.stack_type) {
+      case 'shell':
+        return <UnixShell exerciseId={exerciseId} />;
+      case 'python':
+        return (
+          <>
+            <Terminal
+              solution={solution}
+              sampleCode={exercise.sample_code}
+              exerciseId={exerciseId}
+              correct={completed}
+              isAuth={isAuth}
+              xp={xp}
+              onAnswer={() => {}}
+              bytePayload={bytePayload}
+              isGraphRequired={exercise.is_graph_required}
+            />
+            <Output
+              isAuth={isAuth}
+              terminal={terminal}
+              presentation_url={exercise.presentation_url}
+              variant="outputContainer"
+            />
+          </>
+        );
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       {!mobileWarningIsHidden && <WarningMobile handleClose={onCloseMobileWarning} />}
@@ -123,31 +154,7 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
           />
         )}
       </div>
-      <div className={styles.terminal}>
-        {isUnixShell ? (
-          <UnixShell />
-        ) : (
-          <>
-            <Terminal
-              solution={solution}
-              sampleCode={exercise.sample_code}
-              exerciseId={exerciseId}
-              correct={completed}
-              isAuth={isAuth}
-              xp={xp}
-              onAnswer={() => {}}
-              bytePayload={bytePayload}
-              isGraphRequired={exercise.is_graph_required}
-            />
-            <Output
-              isAuth={isAuth}
-              terminal={terminal}
-              presentation_url={exercise.presentation_url}
-              variant="outputContainer"
-            />
-          </>
-        )}
-      </div>
+      <div className={styles.terminal}>{renderStack()}</div>
 
       <FeedbackModal />
     </>

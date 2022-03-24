@@ -4,14 +4,16 @@ import styles from './styles.module.less';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startEnvironment, executeBashShell } from '@store/bashShell/actions';
+import { startEnvironment, checkExerciseBashShell } from '@store/bashShell/actions';
 import { selectBashShell } from '@store/bashShell/selector';
+import { selectProfile } from '@store/profile/selector';
 
-const UnixShell = () => {
+const UnixShell = ({ exerciseId }) => {
   const [activeTab, setActiveTab] = useState('terminal');
   const [isEditFile, setIsEditFile] = useState(true);
   const [value, setValue] = useState(`<span class="${cn(styles.caret, styles.caretEnd)}"></span>`);
   const dispatch = useDispatch();
+  const { user_id } = useSelector(selectProfile);
   const bashShell = useSelector(selectBashShell);
   const inputRef = useRef(null);
   const contentRef = useRef(null);
@@ -40,16 +42,16 @@ const UnixShell = () => {
       left = value.substring(0, selectionStart + diff);
       center = value.substring(selectionStart + 1 + diff, selectionStart + diff);
       right = value.substring(selectionStart + 1 + diff, value.length);
-      if (selectionStart !== value.length || selectionStart == 0) {
+      if (selectionStart !== value.length || selectionStart === 0) {
         setValue(
           `${left}<span class="${cn(styles.caret, {
-            [styles.caretEnd]: center == '',
+            [styles.caretEnd]: center === '',
           })}">${center}</span>${right}`,
         );
       } else {
         setValue(
           `${left} ${right} <span class="${cn(styles.caret, {
-            [styles.caretEnd]: center == '',
+            [styles.caretEnd]: center === '',
           })}">${center}</span>`,
         );
       }
@@ -120,8 +122,10 @@ const UnixShell = () => {
     }
     if (code === 'Enter') {
       dispatch(
-        executeBashShell({
+        checkExerciseBashShell({
           environmentId: bashShell.environmentId,
+          exerciseId: exerciseId,
+          userId: user_id,
           command: inputRef.current.value,
         }),
       );
