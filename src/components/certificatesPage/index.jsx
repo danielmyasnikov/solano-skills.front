@@ -86,8 +86,7 @@ export const CertificatesPage = () => {
   };
 
   const asyncGetCertificates = async () => {
-    const newCertificates = await getCertificates();
-    setCertificates(newCertificates.reverse());
+    setCertificates(await getCertificates());
   };
 
   useEffect(() => {
