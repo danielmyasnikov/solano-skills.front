@@ -5,17 +5,22 @@ import { useSelector } from 'react-redux';
 import { selectExercise } from '@store/exercise/selector';
 import Button from '@components/mui/button';
 
-export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
-  const [feedbackOpen, setFeedbackOpen] = useState(true);
+export const QuizHint = ({
+  hint,
+  onClick,
+  solution,
+  onSetSolution,
+  hintQuestion,
+  setHintQuestion,
+  answerHint,
+  setAnswerHint,
+  answerHintValue,
+}) => {
   const exercise = useSelector(selectExercise);
-  const [showAnswer, setShowAnswer] = useState(true);
-  useEffect(() => {
-    setShowAnswer(true);
-  }, [exercise]);
 
   const answerHandler = () => {
     onSetSolution();
-    setShowAnswer(false);
+    setAnswerHint(false);
   };
 
   return (
@@ -27,22 +32,22 @@ export const QuizHint = ({ hint, onClick, solution, onSetSolution }) => {
               <h6>Подсказка</h6>
               <p dangerouslySetInnerHTML={{ __html: exercise.hint }} />
             </div>
-            {feedbackOpen && (
+            {hintQuestion && (
               <div className={styles.feedback}>
                 <p>Вам помогла эта подсказка?</p>
                 <div className={styles.feedbackAnswer}>
                   <Button variant="outlineRed" onClick={onClick}>
                     Нет
                   </Button>
-                  <Button variant="outlinePurple" onClick={() => setFeedbackOpen(false)}>
+                  <Button variant="outlinePurple" onClick={() => setHintQuestion(false)}>
                     Да
                   </Button>
                 </div>
               </div>
             )}
-            {solution && showAnswer && (
+            {solution && answerHint && (
               <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
-                Показать ответ (-70 XP)
+                Показать ответ (-{answerHintValue} XP)
               </Button>
             )}
           </>
@@ -59,17 +64,15 @@ export const NormalHint = ({
   onSetSolution,
   onAnswer,
   answerHintValue,
+  answerHint,
+  setAnswerHint,
+  exercise,
+  hintQuestion,
+  setHintQuestion,
 }) => {
-  const [feedbackOpen, setFeedbackOpen] = useState(true);
-  const exercise = useSelector(selectExercise);
-  const [showAnswer, setShowAnswer] = useState(true);
-  useEffect(() => {
-    setShowAnswer(true);
-  }, [exercise]);
-
   const answerHandler = () => {
     onSetSolution();
-    setShowAnswer(false);
+    setAnswerHint(false);
     onAnswer();
   };
 
@@ -82,20 +85,20 @@ export const NormalHint = ({
               <h6>Подсказка</h6>
               <p dangerouslySetInnerHTML={{ __html: exercise.hint }} />
             </div>
-            {feedbackOpen && (
+            {hintQuestion && (
               <div className={styles.feedback}>
                 <p>Вам помогла эта подсказка?</p>
                 <div className={styles.feedbackAnswer}>
                   <Button variant="outlineRed" onClick={onClick}>
                     Нет
                   </Button>
-                  <Button variant="outlinePurple" onClick={() => setFeedbackOpen(false)}>
+                  <Button variant="outlinePurple" onClick={() => setHintQuestion(false)}>
                     Да
                   </Button>
                 </div>
               </div>
             )}
-            {solution && showAnswer && (
+            {solution && answerHint && (
               <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
                 Показать ответ (-{answerHintValue} XP)
               </Button>
@@ -115,20 +118,14 @@ export const BulletHint = ({
   onSetSolution,
   onAnswer,
   answerHintValue,
+  answerHint,
+  setAnswerHint,
+  hintQuestion,
+  setHintQuestion,
 }) => {
-  const [feedbackOpen, setFeedbackOpen] = useState(true);
-  const exercise = useSelector(selectExercise);
-  const [showAnswer, setShowAnswer] = useState(true);
-  useEffect(() => {
-    setShowAnswer(true);
-  }, [exercise]);
-  useEffect(() => {
-    setShowAnswer(true);
-  }, [activeExercise]);
-
   const answerHandler = () => {
     onSetSolution();
-    setShowAnswer(false);
+    setAnswerHint(false);
     onAnswer();
   };
   return (
@@ -140,24 +137,24 @@ export const BulletHint = ({
               <h6>Подсказка</h6>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: exercise?.nested_exercises[activeExercise - 1]?.hint,
+                  __html: activeExercise?.hint,
                 }}
               />
             </div>
-            {feedbackOpen && (
+            {hintQuestion && (
               <div className={styles.feedback}>
                 <p>Вам помогла эта подсказка?</p>
                 <div className={styles.feedbackAnswer}>
                   <Button variant="outlineRed" onClick={onClick}>
                     Нет
                   </Button>
-                  <Button variant="outlinePurple" onClick={() => setFeedbackOpen(false)}>
+                  <Button variant="outlinePurple" onClick={() => setHintQuestion(false)}>
                     Да
                   </Button>
                 </div>
               </div>
             )}
-            {solution && showAnswer && (
+            {solution && answerHint && (
               <Button className={styles.btn} variant="outlinePurple" onClick={answerHandler}>
                 Показать ответ (-{answerHintValue} XP)
               </Button>

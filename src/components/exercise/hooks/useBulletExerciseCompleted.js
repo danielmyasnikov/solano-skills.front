@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
+import { sendAnswer } from '@store/exercise/actions';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const initAnswer = { value: '', correct: false, error: 'Выберите ответ' };
 
-export const useBulletExerciseCompleted = (exercise) => {
+export const useBulletExerciseCompleted = ({ exercise, xp, headers }) => {
+  const dispatch = useDispatch();
   const [point, setPoint] = useState(1);
   const [donePoints, setDonePoints] = useState(new Set());
+  const { courseId } = useParams();
 
   const [completed, setCompleted] = useState(false);
   const [completeModal, setModal] = useState(false);
@@ -24,6 +29,7 @@ export const useBulletExerciseCompleted = (exercise) => {
       if (point < exercise?.nested_exercises.length) {
         setPoint(point + 1);
         setAnswer(initAnswer);
+        dispatch(sendAnswer(exercise.slug, courseId, xp, headers));
       } else {
         setModal(true);
       }

@@ -165,7 +165,7 @@ export const Sidebar = ({
                       ))}
                     </div>
                     <div className={styles.btnContainer}>
-                      {(hint || withoutHint) && (
+                      {!hint && !withoutHint && (
                         <Button className={styles.btn} variant="outlinePurple" onClick={handleHelp}>
                           Подсказка (-{hintValue} XP)
                         </Button>

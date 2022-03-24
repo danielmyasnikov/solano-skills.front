@@ -69,6 +69,46 @@ const LoadingText = styled(Typography)`
   }
 `;
 
+const Separator = styled(Box)`
+  width: 2px;
+  min-height: 44px;
+
+  background-color: #2c2a3f;
+`;
+
+const FolderIcon = styled(Box)`
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
+
+  height: 100%;
+  width: auto;
+
+  cursor: pointer;
+`;
+
+const IconWrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 16px;
+  margin-left: 14px;
+  margin-bottom: -4px;
+
+  &.left {
+    margin: 0;
+  }
+
+  &.open {
+    margin-left: 10px;
+  }
+
+  width: 24px;
+  height: 24px;
+`;
+
 const Output = ({
   variant,
   isAuth = false,
@@ -76,6 +116,7 @@ const Output = ({
   bulletExercise = {},
   isBulletPointExercise = false,
 }) => {
+  const [folded, setFolded] = useState(false);
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
@@ -129,10 +170,15 @@ const Output = ({
 
   return (
     <div
-      className={cn(styles.outputWrapper, {
-        [styles.fullHeight]: variant === 'quizOutputContainer',
-        [styles.noneEvents]: !isAuth,
-      })}
+      className={cn(
+        styles.outputWrapper,
+        {
+          [styles.fullHeight]: variant === 'quizOutputContainer',
+        },
+        {
+          [styles.folded]: folded,
+        },
+      )}
     >
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>
         <div
@@ -147,37 +193,62 @@ const Output = ({
         >
           Слайды
         </div>
+
+        <FolderIcon onClick={() => setFolded(!folded)}>
+          <Separator />
+          <IconWrapper>
+            <svg
+              width="16"
+              height="11"
+              viewBox="0 0 16 11"
+              fill="none"
+              style={
+                folded
+                  ? {
+                      transform: 'rotate(180deg)',
+                      marginBottom: '2.5px',
+                    }
+                  : {}
+              }
+            >
+              <path
+                d="M1.88 0.453125L8 6.55979L14.12 0.453125L16 2.33312L8 10.3331L0 2.33312L1.88 0.453125Z"
+                fill="white"
+              />
+            </svg>
+          </IconWrapper>
+        </FolderIcon>
       </div>
-      <div
-        className={styles[variant]}
-        style={{
-          position: 'relative',
-        }}
-      >
-        {isDisabled && <Placeholder />}
-        {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
-          <>
+      {!folded && (
+        <div
+          className={styles[variant]}
+          style={{
+            position: 'relative',
+          }}
+        >
+          {isDisabled && <Placeholder />}
+          {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
             <div ref={outputRef} className={styles.content}>
               {terminal.outputs.map((item, i) => (
                 <div
                   key={i}
-                  className={cn({ [styles.shell]: item.status === 'shell' })}
+                  className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
                   dangerouslySetInnerHTML={{ __html: item.error || item.output }}
                 />
               ))}
+              <div className={styles.shell}>
+                <span>In [{lineNumber}]:</span>
+                <input
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  type="text"
+                  onKeyDown={onSubmit}
+                />
+              </div>
             </div>
-            <div className={styles.shell}>
-              <span>In [{lineNumber}]:</span>
-              <input
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                type="text"
-                onKeyDown={onSubmit}
-              />
-            </div>
-          </>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

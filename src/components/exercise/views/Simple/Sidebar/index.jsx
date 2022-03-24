@@ -90,8 +90,9 @@ export const Sidebar = ({
   handleAnswer,
   hint,
   withoutHint,
-  showHint,
   checkAnswer,
+  hintValue,
+  handleHelp,
 }) => {
   const [headerFolded, setHeaderFolded] = useState(false);
   const [instructionFolded, setInstructionFolded] = useState(false);
@@ -118,18 +119,19 @@ export const Sidebar = ({
             <InstructionHeader onClick={toggleInstructionFolded} xp={xp} />
             {!instructionFolded && (
               <>
-                <Instructions dangerouslySetInnerHTML={{ __html: exercise.instruction }} />
+                <Instructions dangerouslySetInnerHTML={{ __html: exercise?.instruction }} />
                 {exercise?.type === 'quiz' && (
                   <>
+                    {!exercise?.instruction && <div style={{ height: '28px' }} />}
                     <InstructionQuizPart
                       handleAnswer={handleAnswer}
                       answer={answer}
                       exercise={exercise}
                     />
                     <div className={styles.btnContainer}>
-                      {(hint || withoutHint) && (
-                        <Button className={styles.btn} variant="outlinePurple" onClick={showHint}>
-                          Подсказка (-30 XP)
+                      {!hint && !withoutHint && (
+                        <Button className={styles.btn} variant="outlinePurple" onClick={handleHelp}>
+                          Подсказка (-{hintValue} XP)
                         </Button>
                       )}
                       <Button variant="containedPurple" onClick={checkAnswer}>

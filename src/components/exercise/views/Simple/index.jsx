@@ -30,35 +30,38 @@ import styles from './styles.module.less';
 import cn from 'classnames';
 import { Sidebar } from '@components/exercise/views/Simple/Sidebar';
 
-function SimpleExercise({ onSubmit, isAuth }) {
+function SimpleExercise({ onSubmit, isAuth, headers }) {
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar(!sidebar);
 
-  const [reg, setReg] = useState(false);
-
-  const { completeModal, closeCompleteModal, completed, incomplete, onComplete } =
-    useExerciseCompleted();
-
   const exercise = useSelector(selectExercise);
   const { exerciseId } = useParams();
+
+  const {
+    hint,
+    hintValue,
+    answerHint,
+    setAnswerHint,
+    answerHintValue,
+    hintQuestion,
+    setHintQuestion,
+    withoutHint,
+    showHint,
+  } = useHint(exercise);
+  const { solution, showSolution } = useSolution(exercise);
+  const { xp, onAnswerHintXp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
+
+  const { completeModal, closeCompleteModal, completed, incomplete, onComplete } =
+    useExerciseCompleted({ headers, xp });
 
   const { bytePayload, isUnixShell, errorRef, errorMessage, terminal } = useTerminal(
     exercise,
     onComplete,
   );
-  const { hint, hintValue, answerHintValue, withoutHint, showHint } = useHint(exercise);
-  const { solution, showSolution } = useSolution(exercise);
-  const { xp, onAnswerHintXp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
 
   const { hidden: mobileWarningIsHidden, onClose: onCloseMobileWarning } = useMobileWarning();
 
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
-
-  function terminalClickHandler() {
-    if (!isAuth) {
-      setReg(true);
-    }
-  }
 
   return (
     <>
@@ -71,28 +74,35 @@ function SimpleExercise({ onSubmit, isAuth }) {
           <div ref={errorRef} style={{ float: 'left', clear: 'both' }} />
           {terminal.kernelId && sidebar && (
             <>
-              {hint ||
-                (withoutHint && (
-                  <Button
-                    className={styles.hintBtn}
-                    variant="outlinePurple"
-                    onClick={() => {
-                      showHint();
-                      onHintXp();
-                    }}
-                  >
-                    Подсказка (-{hintValue} XP)
-                  </Button>
-                ))}
+              {!hint && !withoutHint && (
+                <Button
+                  className={styles.hintBtn}
+                  variant="outlinePurple"
+                  onClick={() => {
+                    showHint();
+                    onHintXp();
+                  }}
+                >
+                  Подсказка (-{hintValue} XP)
+                </Button>
+              )}
               <NormalHint
                 hint={hint}
-                onClick={openFeedbackModal}
+                answerHint={answerHint}
+                setAnswerHint={setAnswerHint}
+                onClick={() => {
+                  openFeedbackModal();
+                  setHintQuestion(false);
+                }}
+                exercise={exercise}
+                hintQuestion={hintQuestion}
+                setHintQuestion={setHintQuestion}
                 onAnswer={() => {
                   showHint();
                   onAnswerHintXp();
                 }}
                 answerHintValue={answerHintValue}
-                solution
+                solution={solution}
                 onSetSolution={showSolution}
               />
             </>
@@ -113,7 +123,7 @@ function SimpleExercise({ onSubmit, isAuth }) {
           />
         )}
       </div>
-      <div onClick={terminalClickHandler} className={styles.terminal}>
+      <div className={styles.terminal}>
         {isUnixShell ? (
           <UnixShell />
         ) : (
@@ -140,7 +150,6 @@ function SimpleExercise({ onSubmit, isAuth }) {
       </div>
 
       <FeedbackModal />
-      {reg && <RegistrationModalComponent onClose={() => setReg(false)} />}
     </>
   );
 }

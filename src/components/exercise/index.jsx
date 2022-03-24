@@ -36,9 +36,9 @@ function ExercisePage() {
       case 'quiz':
         return <QuizExercise isAuth={isAuth} onSubmit={onSubmit} />;
       case 'normal_exercise':
-        return <SimpleExercise isAuth={isAuth} onSubmit={onSubmit} />;
+        return <SimpleExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
       case 'bullet_point_exercise':
-        return <StepsExercise isAuth={isAuth} onSubmit={onSubmit} />;
+        return <StepsExercise isAuth={isAuth} onSubmit={onSubmit} headers={headers} />;
       default:
         break;
     }

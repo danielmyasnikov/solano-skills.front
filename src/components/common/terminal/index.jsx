@@ -11,13 +11,14 @@ import cn from 'classnames';
 import Reset from '@assets/Reset.js';
 import styles from './styles.module.less';
 import './terminal.module.less';
-import { checkAnswer, compileCode, compileShell } from '@store/terminal/actions';
+import { checkAnswer, compileShell } from '@store/terminal/actions';
 import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';
 import Draggable from '../draggable';
 import { useRef } from 'react';
 import { styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import Zoom from '@mui/material/Zoom';
+import { Box, Tooltip, Typography } from '@mui/material';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -144,23 +145,23 @@ const Terminal = ({
   }, [terminal.kernelId]);
 
   const handleAnswer = () => {
-    // if (isAuth) {
-    onAnswer();
-    dispatch(
-      compileShell({
-        code: activeTab === 'solution' ? solution : value,
-        exerciseId: exerciseId,
-        kernelId: terminal.kernelId,
-        isGraphRequired: isGraphRequired,
-        type: 'compileExercise',
-      }),
-    );
-    dispatch(
-      checkAnswer(activeTab === 'solution' ? solution : value, exerciseId, isGraphRequired, xp),
-    );
-    // } else {
-    //   setRegistrationModalOpen(true)
-    // }
+    if (isAuth) {
+      onAnswer();
+      dispatch(
+        compileShell({
+          code: activeTab === 'solution' ? solution : value,
+          exerciseId: exerciseId,
+          kernelId: terminal.kernelId,
+          isGraphRequired: isGraphRequired,
+          type: 'compileExercise',
+        }),
+      );
+      dispatch(
+        checkAnswer(activeTab === 'solution' ? solution : value, exerciseId, isGraphRequired, xp),
+      );
+    } else {
+      setRegistrationModalOpen(true);
+    }
   };
 
   return (
@@ -168,20 +169,17 @@ const Terminal = ({
       className={cn(styles.terminalContainer, {
         [styles.terminalWithGraph]: isGraphRequired && bytePayload.length > 0,
         [styles.terminalFullWidth]: isGraphRequired,
-        [styles.noneEvents]: !isAuth,
       })}
     >
-      {isAuth && (
-        <>
-          {(correct || isDisabled) && (
-            <Placeholder>
-              {isDisabled && <LoadingText>Загрузка</LoadingText>}
-              {correct && <LoadingText className="no-loading">Успешно!</LoadingText>}
-            </Placeholder>
-          )}
-        </>
+      {(correct || isDisabled) && (
+        <Placeholder>
+          {isDisabled && <LoadingText>Загрузка</LoadingText>}
+          {correct && <LoadingText className="no-loading">Успешно!</LoadingText>}
+        </Placeholder>
       )}
-      {registrationModalOpen && <RegistrationModal />}
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
       <div ref={wrapperRef} className={styles.terminalWrapper}>
         <div className={styles.terminalHeader}>
           <div
@@ -234,7 +232,11 @@ const Terminal = ({
               className={cn(styles.reset, { [styles.disable]: isDisabled || correct })}
               variant={'outlineWhite'}
               onClick={() => {
-                setValue(sampleCode);
+                if (isAuth) {
+                  setValue(sampleCode);
+                } else {
+                  setRegistrationModalOpen(true);
+                }
               }}
               disabled={correct || isDisabled}
             >
@@ -243,19 +245,19 @@ const Terminal = ({
             <Button
               variant={'outlineWhite'}
               onClick={() => {
-                // if (isAuth) {
-                dispatch(
-                  compileShell({
-                    code: activeTab === 'solution' ? solution : value,
-                    exerciseId: exerciseId,
-                    kernelId: terminal.kernelId,
-                    isGraphRequired: isGraphRequired,
-                    type: 'compileExercise',
-                  }),
-                );
-                // } else {
-                //   setRegistrationModalOpen(true);
-                // }
+                if (isAuth) {
+                  dispatch(
+                    compileShell({
+                      code: activeTab === 'solution' ? solution : value,
+                      exerciseId: exerciseId,
+                      kernelId: terminal.kernelId,
+                      isGraphRequired: isGraphRequired,
+                      type: 'compileExercise',
+                    }),
+                  );
+                } else {
+                  setRegistrationModalOpen(true);
+                }
               }}
               disabled={correct || isDisabled}
             >

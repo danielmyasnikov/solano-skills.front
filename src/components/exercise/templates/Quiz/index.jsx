@@ -5,10 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getExercise } from '@store/exercise/actions';
 
 import { selectExercise } from '@store/exercise/selector';
-import { QuizHint } from '@components/hint';
-import { Exercise } from '@components/exercise/common/Exercise';
-import { Instruction } from '@components/exercise/common/Instruction';
-import Button from '@components/mui/button';
+import { NormalHint, QuizHint } from '@components/hint';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 import { sendAnswer } from '@store/exercise/actions';
@@ -16,17 +13,20 @@ import * as AuthStore from '@store/auth';
 import { useModal } from '@src/hooks/useModal';
 
 import { FeedbackModal as FeedbackModalComponent } from '@components/common/modals/feedback';
-import RegistrationModalComponent from '@components/common/modals/registration/registrationModal';
 import CompletedTask from '@components/common/modals/completedTask';
 
 import styles from './styles.module.less';
 import { useHint } from '@components/exercise/hooks/useHint';
 import { Sidebar } from '@components/exercise/views/Simple/Sidebar';
 import cn from 'classnames';
+import RegistrationModal from '@components/common/modals/registration/registrationModal';
+import { useSolution } from '@components/exercise/hooks/useSolution';
+import { useXp } from '@components/exercise/hooks/useXp';
 
 function QuizTemplate({ onSubmit, isAuth }) {
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar(!sidebar);
+  const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const errorRef = useRef();
 
   const dispatch = useDispatch();
@@ -38,16 +38,30 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [errorMessage, setErrorMessage] = useState();
 
-  const { hint, withoutHint, showHint } = useHint(exercise);
+  const { solution, showSolution } = useSolution(exercise);
+
+  const {
+    hint,
+    withoutHint,
+    showHint,
+    hintValue,
+    setHintQuestion,
+    hintQuestion,
+    answerHint,
+    setAnswerHint,
+    answerHintValue,
+  } = useHint(exercise);
+  const { xp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
 
   const [completedTaskModalOpen, setCompletedTaskModalOpen] = useState(false);
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
-  const { Modal: RegistrationModal, open: openRegistrationModal } = useModal(
-    RegistrationModalComponent,
-  );
 
   const handleAnswer = (item) => {
     setAnswer(item);
+  };
+  const handleHelp = () => {
+    onHintXp();
+    showHint();
   };
 
   useEffect(() => {
@@ -65,26 +79,18 @@ function QuizTemplate({ onSubmit, isAuth }) {
   }, []);
 
   const checkAnswer = () => {
-    if (!isAuth) {
-      openRegistrationModal();
-      return;
-    }
-
-    if (answer.correct) {
-      setErrorMessage('');
-      setCompletedTaskModalOpen(true);
+    if (isAuth) {
+      if (answer.correct) {
+        setErrorMessage('');
+        setCompletedTaskModalOpen(true);
+        if (exercise.type === 'quiz' && isAuth) {
+          dispatch(sendAnswer(exercise.slug, courseId, xp, headers));
+        }
+      } else {
+        setErrorMessage(answer.error);
+      }
     } else {
-      setErrorMessage(answer.error);
-    }
-
-    if (exercise.type === 'quiz' && isAuth) {
-      dispatch(sendAnswer(exercise.slug, courseId, exercise.xp, headers));
-    }
-  };
-
-  const terminalClickHandler = () => {
-    if (!isAuth) {
-      openRegistrationModal();
+      setRegistrationModalOpen(true);
     }
   };
 
@@ -94,26 +100,40 @@ function QuizTemplate({ onSubmit, isAuth }) {
         <div className={styles.content}>
           <Sidebar
             exercise={exercise}
-            xp={exercise?.xp}
+            xp={xp}
+            hintValue={hintValue}
             answer={answer}
             handleAnswer={handleAnswer}
             onSubmit={() => setCompletedTaskModalOpen(true)}
             open={sidebar}
             toggleSidebar={toggleSidebar}
             hint={hint}
+            handleHelp={handleHelp}
             withoutHint={withoutHint}
             showHint={showHint}
             checkAnswer={checkAnswer}
           />
           <ErrorMessage message={errorMessage} />
           <div ref={errorRef} style={{ float: 'left', clear: 'both' }} />
-          <QuizHint hint={hint} onClick={openFeedbackModal} />
+          {sidebar && (
+            <QuizHint
+              hint={hint}
+              onClick={openFeedbackModal}
+              solution={solution}
+              answerHint={answerHint}
+              setAnswerHint={setAnswerHint}
+              hintQuestion={hintQuestion}
+              setHintQuestion={setHintQuestion}
+              answerHintValue={answerHintValue}
+              onSetSolution={showSolution}
+            />
+          )}
         </div>
         {completedTaskModalOpen && (
           <CompletedTask
             correctMessage={exercise?.correct_message}
             onClose={() => setCompletedTaskModalOpen(false)}
-            xp={exercise.xp}
+            xp={xp}
             onClick={() => {
               onSubmit();
               setCompletedTaskModalOpen(false);
@@ -121,7 +141,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
           />
         )}
       </div>
-      <div onClick={terminalClickHandler} className={styles.terminal}>
+      <div className={styles.terminal}>
         <Output
           isAuth={isAuth}
           presentation_url={exercise.presentation_url}
@@ -130,7 +150,9 @@ function QuizTemplate({ onSubmit, isAuth }) {
       </div>
 
       <FeedbackModal />
-      <RegistrationModal />
+      {registrationModalOpen && (
+        <RegistrationModal onClose={() => setRegistrationModalOpen(false)} />
+      )}
     </>
   );
 }
