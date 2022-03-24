@@ -14,7 +14,7 @@ export const getTracksApi = ({ headers }) => {
 export const addTracksApi = ({ tracks, headers }) => {
   return axios
     .post(
-      `${process.env.REACT_APP_API_COURSE}/api/v1/tracks`,
+      `${process.env.REACT_APP_API_COURSE}/api/v1/add_tracks_to_profile`,
       {
         track_ids: tracks,
       },

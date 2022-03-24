@@ -88,7 +88,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
+      history.push('/onboard');
     }
   }, [headers]);
 
