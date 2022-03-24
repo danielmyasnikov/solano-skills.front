@@ -46,7 +46,6 @@ export const ForgotPassword = () => {
 
   const ButtonResendClickhandler = () => {
     dispatch(AuthStore.Actions.requestPasswordReset(email));
-    setEmailSent(!emailSent);
     setShowResendButton(!showResendButton);
   };
 
