@@ -109,22 +109,13 @@ const IconWrapper = styled(Box)`
   height: 24px;
 `;
 
-const Output = ({
-  variant,
-  isAuth = false,
-  presentation_url,
-  bulletExercise = {},
-  isBulletPointExercise = false,
-}) => {
+const Output = ({ variant, exercise }) => {
   const [folded, setFolded] = useState(false);
   const [activeTab, setActiveTab] = useState('output');
   const [lineNumber, setLineNumber] = useState(1);
   const [code, setCode] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const outputRef = useRef();
-
-  const { exerciseId } = useParams();
 
   const terminal = useSelector(selectTerminal);
 
@@ -135,7 +126,7 @@ const Output = ({
       dispatch(
         compileShell({
           code: code,
-          exerciseId: exerciseId,
+          exerciseId: exercise?.id,
           lineNumber: lineNumber,
           kernelId: terminal.kernelId,
           isGraphRequired: false,
@@ -147,26 +138,52 @@ const Output = ({
   };
 
   useEffect(() => {
-    if (isBulletPointExercise) {
-      dispatch(startKernel(bulletExercise.id));
-    } else {
-      dispatch(startKernel(exerciseId));
-    }
-  }, [exerciseId]);
-
-  useEffect(() => {
-    if (terminal.kernelId) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-  }, [terminal.kernelId]);
+    dispatch(startKernel(exercise?.id));
+  }, [exercise?.id]);
 
   useEffect(() => {
     if (outputRef && terminal.outputs) {
       outputRef?.current?.scroll({ top: outputRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [terminal]);
+
+  function renderContent() {
+    switch (activeTab) {
+      case 'output':
+        return (
+          <div ref={outputRef} className={styles.content}>
+            {terminal.outputs.map((item, i) => {
+              const output = item.output.replace(
+                `<pre class="ansi2html-content">
+ 
+</pre>`,
+                '<pre class="ansi2html-content"></pre>',
+              );
+              return (
+                <div
+                  key={i}
+                  className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
+                  dangerouslySetInnerHTML={{ __html: item.error || output }}
+                />
+              );
+            })}
+            <div className={styles.shell}>
+              <span>In [{lineNumber}]:</span>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                type="text"
+                onKeyDown={onSubmit}
+              />
+            </div>
+          </div>
+        );
+      case 'slides':
+        return <PDFViewer src={exercise?.presentation_url} />;
+      default:
+        return undefined;
+    }
+  }
 
   return (
     <div
@@ -183,13 +200,13 @@ const Output = ({
       <div className={cn(styles.terminalHeader, styles.outputHeader)}>
         <div
           onClick={() => setActiveTab('output')}
-          className={cn((activeTab === 'output' && styles.tabActive) || '', styles.tab)}
+          className={cn({ [styles.tabActive]: activeTab === 'output' }, styles.tab)}
         >
           Консоль
         </div>
         <div
           onClick={() => setActiveTab('slides')}
-          className={cn((activeTab === 'slides' && styles.tabActive) || '', styles.tab)}
+          className={cn({ [styles.tabActive]: activeTab === 'slides' }, styles.tab)}
         >
           Слайды
         </div>
@@ -226,27 +243,8 @@ const Output = ({
             position: 'relative',
           }}
         >
-          {isDisabled && <Placeholder />}
-          {(activeTab === 'slides' && <PDFViewer src={presentation_url} />) || (
-            <div ref={outputRef} className={styles.content}>
-              {terminal.outputs.map((item, i) => (
-                <div
-                  key={i}
-                  className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
-                  dangerouslySetInnerHTML={{ __html: item.error || item.output }}
-                />
-              ))}
-              <div className={styles.shell}>
-                <span>In [{lineNumber}]:</span>
-                <input
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  type="text"
-                  onKeyDown={onSubmit}
-                />
-              </div>
-            </div>
-          )}
+          {!terminal.kernelId && <Placeholder />}
+          {renderContent()}
         </div>
       )}
     </div>

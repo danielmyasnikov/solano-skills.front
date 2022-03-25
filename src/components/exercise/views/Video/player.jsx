@@ -6,6 +6,7 @@ import { sendAnswer } from '@store/exercise/actions';
 import { selectExercise } from '@store/exercise/selector';
 
 import Plyr from 'plyr-react';
+import { getProfile } from '@store/profile/actions';
 
 export const VideoPlayer = memo(({ isAuth, nextLesson, sourceData, headers }) => {
   const ref = useRef();
@@ -18,6 +19,7 @@ export const VideoPlayer = memo(({ isAuth, nextLesson, sourceData, headers }) =>
   const timeHandler = () => {
     if (isAuth) {
       dispatch(sendAnswer(exercise.slug, exercise.course_slug, exercise.xp, headers));
+      dispatch(getProfile({ headers }));
       setXpWasSent(true);
     }
   };

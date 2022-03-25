@@ -19,6 +19,7 @@ import { useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Zoom from '@mui/material/Zoom';
 import { Box, Tooltip, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -78,45 +79,34 @@ const LoadingText = styled(Typography)`
   }
 `;
 
-const Terminal = ({
-  sampleCode,
-  solution,
-  isGraphRequired,
-  correct,
-  exerciseId,
-  bytePayload,
-  onAnswer,
-  xp,
-  isAuth,
-}) => {
+const Terminal = ({ exercise, solution, correct, bytePayload, xp, isAuth }) => {
+  const wrapperRef = useRef();
+  const dispatch = useDispatch();
+
+  const terminal = useSelector(selectTerminal);
+
   const [value, setValue] = useState();
   const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [activeTab, setActiveTab] = useState('script');
-  const wrapperRef = useRef();
-  const terminal = useSelector(selectTerminal);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (solution) {
       setActiveTab('solution');
     } else {
-      setValue(sampleCode);
+      setActiveTab('script');
+      setValue(exercise?.sample_code);
     }
-  }, [sampleCode, solution]);
-
-  useEffect(() => {
-    setActiveTab('script');
-  }, [sampleCode]);
+  }, [exercise?.sample_code, solution]);
 
   useEffect(() => {
     setHeight(wrapperRef?.current?.offsetHeight);
   }, []);
 
-  function onChange(value) {
-    setValue(value);
+  function onChange(val) {
+    setValue(val);
   }
 
   const handleActiveBytePayload = (action) => {
@@ -128,7 +118,7 @@ const Terminal = ({
     }
   };
 
-  const OpenNewWindow = () => {
+  const openNewWindow = () => {
     window.open();
   };
 
@@ -137,27 +127,27 @@ const Terminal = ({
   }, [bytePayload]);
 
   useEffect(() => {
-    if (terminal.kernelId) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+    setIsDisabled(!terminal.kernelId);
   }, [terminal.kernelId]);
 
   const handleAnswer = () => {
     if (isAuth) {
-      onAnswer();
       dispatch(
         compileShell({
           code: activeTab === 'solution' ? solution : value,
-          exerciseId: exerciseId,
+          exerciseId: exercise?.id,
           kernelId: terminal.kernelId,
-          isGraphRequired: isGraphRequired,
+          isGraphRequired: exercise?.is_graph_required,
           type: 'compileExercise',
         }),
       );
       dispatch(
-        checkAnswer(activeTab === 'solution' ? solution : value, exerciseId, isGraphRequired, xp),
+        checkAnswer(
+          activeTab === 'solution' ? solution : value,
+          exercise?.id,
+          exercise?.is_graph_required,
+          xp,
+        ),
       );
     } else {
       setRegistrationModalOpen(true);
@@ -167,8 +157,8 @@ const Terminal = ({
   return (
     <div
       className={cn(styles.terminalContainer, {
-        [styles.terminalWithGraph]: isGraphRequired && bytePayload.length > 0,
-        [styles.terminalFullWidth]: isGraphRequired,
+        [styles.terminalWithGraph]: exercise?.is_graph_required && bytePayload.length > 0,
+        [styles.terminalFullWidth]: exercise?.is_graph_required,
       })}
     >
       {(correct || isDisabled) && (
@@ -206,7 +196,7 @@ const Terminal = ({
             height="calc(100% - 71px)"
             showGutter
             highlightActiveLine
-            defaultValue={sampleCode}
+            defaultValue={exercise?.sample_code}
             value={activeTab === 'solution' ? solution : value}
             readOnly={activeTab === 'solution'}
             wrapEnabled
@@ -233,7 +223,7 @@ const Terminal = ({
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  setValue(sampleCode);
+                  setValue(exercise?.sample_code);
                 } else {
                   setRegistrationModalOpen(true);
                 }
@@ -249,9 +239,9 @@ const Terminal = ({
                   dispatch(
                     compileShell({
                       code: activeTab === 'solution' ? solution : value,
-                      exerciseId: exerciseId,
+                      exerciseId: exercise?.id,
                       kernelId: terminal.kernelId,
-                      isGraphRequired: isGraphRequired,
+                      isGraphRequired: exercise?.is_graph_required,
                       type: 'compileExercise',
                     }),
                   );
@@ -272,18 +262,18 @@ const Terminal = ({
             </Button>
           </div>
         </div>
-        {isGraphRequired && bytePayload.length > 0 && (
+        {exercise?.is_graph_required && bytePayload.length > 0 && (
           <div className={styles.resize}>
             <Draggable resizeContainer={wrapperRef} parentContainer={wrapperRef} height={height} />
           </div>
         )}
       </div>
-      {isGraphRequired && bytePayload.length > 0 && (
+      {exercise?.is_graph_required && bytePayload.length > 0 && (
         <div className={styles.bytePayload}>
           <div className={styles.terminalHeader}>
             <div className={cn(styles.tabActive, styles.tab)}>
               Графики
-              <a onClick={() => OpenNewWindow()} target="_blank">
+              <a onClick={() => openNewWindow()} target="_blank">
                 <Plots />
               </a>
             </div>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FeedbackModal as FeedbackModalComponent } from '@components/common/modals/feedback';
 import RegistrationModalComponent from '@components/common/modals/registration/registrationModal';
@@ -15,56 +15,92 @@ import UnixShell from '@components/common/unixshell';
 import { NormalHint } from '@components/hint';
 import Button from '@components/mui/button';
 
-import { useExerciseCompleted } from '@components/exercise/hooks/useExerciseCompleted';
 import { useMobileWarning } from '@components/exercise/hooks/useMobileWarning';
-import { useTerminal } from '@components/exercise/hooks/useTerminal';
-import { useSolution } from '@components/exercise/hooks/useSolution';
-import { useHint } from '@components/exercise/hooks/useHint';
-import { useXp } from '@components/exercise/hooks/useXp';
 
 import { selectExercise } from '@store/exercise/selector';
-
-import { useModal } from '@src/hooks/useModal';
 
 import styles from './styles.module.less';
 import cn from 'classnames';
 import { Sidebar } from '@components/exercise/views/Simple/Sidebar';
+import { selectTerminal } from '@store/terminal/selector';
+import { sendAnswer } from '@store/exercise/actions';
+import * as AuthStore from '@store/auth';
+import { getProfile } from '@store/profile/actions';
 
-function SimpleExercise({ onSubmit, isAuth, headers }) {
-  const [sidebar, setSidebar] = useState(true);
-  const toggleSidebar = () => setSidebar(!sidebar);
+function SimpleExercise({ onSubmit, isAuth }) {
+  const dispatch = useDispatch();
+
+  const errorRef = useRef();
 
   const exercise = useSelector(selectExercise);
+  const terminal = useSelector(selectTerminal);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
   const { exerciseId } = useParams();
 
-  const {
-    hint,
-    hintValue,
-    answerHint,
-    setAnswerHint,
-    answerHintValue,
-    hintQuestion,
-    setHintQuestion,
-    withoutHint,
-    showHint,
-  } = useHint(exercise);
-  const { solution, showSolution } = useSolution(exercise);
-  const { xp, onAnswerHintXp, onHintXp } = useXp(exercise, hintValue, answerHintValue);
+  // terminal
+  const [errorMessage, setErrorMessage] = useState('');
+  const [bytePayload, setBytePayload] = useState([]);
 
-  const { completeModal, closeCompleteModal, completed, incomplete, onComplete } =
-    useExerciseCompleted({ headers, xp });
-
-  const { bytePayload, isUnixShell, errorRef, errorMessage, terminal } = useTerminal(
-    exercise,
-    onComplete,
-  );
-
+  const [sidebar, setSidebar] = useState(true);
   const { hidden: mobileWarningIsHidden, onClose: onCloseMobileWarning } = useMobileWarning();
 
-  const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
+  // xp
+  const [xp, setXp] = useState(exercise?.xp);
+  // solution
+  const [solution, setSolution] = useState('');
+  // hint
+  const [hint, setHint] = useState(false);
+  const [answerHint, setAnswerHint] = useState(true);
+  const [hintQuestion, setHintQuestion] = useState(true);
+  const [withoutHint, setWithoutHint] = useState(false);
+
+  const hintValue = useMemo(() => Math.ceil(exercise?.xp * 0.3), [exercise]);
+  const answerHintValue = exercise?.xp - hintValue;
+  // completed
+  const [completed, setCompleted] = useState(false);
+  // modals
+  const [feedbackModal, setFeedbackModal] = useState(false);
+
+  useEffect(() => {
+    // xp
+    setXp(exercise?.xp);
+    // solution
+    setSolution('');
+    // hint
+    setHint(false);
+    setWithoutHint(!exercise?.hint);
+    setAnswerHint(true);
+    setHintQuestion(true);
+    // terminal
+    setBytePayload([]);
+    setErrorMessage('');
+  }, [exercise]);
+
+  useEffect(() => {
+    if (terminal.message.status === 'success') {
+      setCompleted(true);
+      dispatch(sendAnswer(exercise?.slug, exercise?.course_slug, xp, headers));
+      dispatch(getProfile({ headers }));
+    }
+
+    if (terminal.message.error) {
+      setErrorMessage(terminal.message.error);
+    }
+
+    if (terminal.bytePayload) {
+      setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
+    }
+  }, [terminal]);
+
+  useEffect(() => {
+    if (!!errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [errorMessage]);
 
   const renderStack = () => {
-    switch (exercise.stack_type) {
+    switch (exercise?.stack_type) {
       case 'shell':
         return <UnixShell exerciseId={exerciseId} />;
       case 'python':
@@ -72,25 +108,31 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
           <>
             <Terminal
               solution={solution}
-              sampleCode={exercise.sample_code}
-              exerciseId={exerciseId}
+              exercise={exercise}
               correct={completed}
               isAuth={isAuth}
               xp={xp}
-              onAnswer={() => {}}
               bytePayload={bytePayload}
-              isGraphRequired={exercise.is_graph_required}
+              isGraphRequired={exercise?.is_graph_required}
             />
-            <Output
-              isAuth={isAuth}
-              terminal={terminal}
-              presentation_url={exercise.presentation_url}
-              variant="outputContainer"
-            />
+            <Output exercise={exercise} variant="outputContainer" />
           </>
         );
       default:
-        break;
+        return (
+          <>
+            <Terminal
+              solution={solution}
+              exercise={exercise}
+              correct={completed}
+              isAuth={isAuth}
+              xp={xp}
+              bytePayload={bytePayload}
+              isGraphRequired={exercise?.is_graph_required}
+            />
+            <Output exercise={exercise} variant="outputContainer" />
+          </>
+        );
     }
   };
 
@@ -100,7 +142,12 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
 
       <div className={cn(styles.layout, { [styles.folded]: !sidebar })}>
         <div className={styles.content}>
-          <Sidebar open={sidebar} toggleSidebar={toggleSidebar} xp={xp} exercise={exercise} />
+          <Sidebar
+            open={sidebar}
+            toggleSidebar={() => setSidebar(!sidebar)}
+            xp={xp}
+            exercise={exercise}
+          />
           <ErrorMessage message={errorMessage} />
           <div ref={errorRef} style={{ float: 'left', clear: 'both' }} />
           {terminal.kernelId && sidebar && (
@@ -110,8 +157,8 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
                   className={styles.hintBtn}
                   variant="outlinePurple"
                   onClick={() => {
-                    showHint();
-                    onHintXp();
+                    setHint(true);
+                    setXp(xp - hintValue);
                   }}
                 >
                   Подсказка (-{hintValue} XP)
@@ -122,41 +169,40 @@ function SimpleExercise({ onSubmit, isAuth, headers }) {
                 answerHint={answerHint}
                 setAnswerHint={setAnswerHint}
                 onClick={() => {
-                  openFeedbackModal();
+                  setFeedbackModal(true);
                   setHintQuestion(false);
                 }}
                 exercise={exercise}
                 hintQuestion={hintQuestion}
                 setHintQuestion={setHintQuestion}
                 onAnswer={() => {
-                  showHint();
-                  onAnswerHintXp();
+                  setHint(true);
+                  setXp(xp - answerHintValue);
                 }}
                 answerHintValue={answerHintValue}
                 solution={solution}
-                onSetSolution={showSolution}
+                onSetSolution={() => setSolution(exercise?.solution)}
               />
             </>
           )}
         </div>
-        {completeModal && (
+        {completed && (
           <CompletedTask
             correctMessage={exercise?.correct_message}
             xp={xp}
             onClose={() => {
-              incomplete();
-              closeCompleteModal();
+              setCompleted(false);
             }}
             onClick={() => {
               onSubmit();
-              closeCompleteModal();
+              setCompleted(false);
             }}
           />
         )}
       </div>
       <div className={styles.terminal}>{renderStack()}</div>
 
-      <FeedbackModal />
+      {feedbackModal && <FeedbackModalComponent onClose={() => setFeedbackModal(false)} />}
     </>
   );
 }

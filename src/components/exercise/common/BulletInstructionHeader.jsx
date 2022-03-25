@@ -64,15 +64,7 @@ const Points = styled(Box)`
   z-index: 0;
 `;
 
-const InstructionHeader = ({
-  onClick,
-  xp,
-  point,
-  total,
-  nestedExercise,
-  onSetActiveExercise,
-  doneExercisesIds,
-}) => (
+const InstructionHeader = ({ onClick, xp, point, total, nestedExercise, doneExercisesIds }) => (
   <Root>
     <Info onClick={onClick}>
       <IconWrapper>
@@ -90,19 +82,7 @@ const InstructionHeader = ({
         const isActiveBullet = point === i + 1;
         const isDoneBullet = doneExercisesIds?.find((id) => id === i + 1) !== undefined;
 
-        return (
-          <BulletPoint
-            key={i}
-            index={i}
-            isActive={isActiveBullet}
-            isDone={isDoneBullet}
-            onClick={() => {
-              if (isDoneBullet) {
-                onSetActiveExercise({ activeExercise: i });
-              }
-            }}
-          />
-        );
+        return <BulletPoint key={i} index={i} isActive={isActiveBullet} isDone={isDoneBullet} />;
       })}
     </Points>
   </Root>

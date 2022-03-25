@@ -62,7 +62,7 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
             className={cn(styles.btn, styles.prev, {
               [styles.disabled]: !exercise.prev_exercise_id,
             })}
-            disabled={exercise.prev_exercise_id ? false : true}
+            disabled={!exercise.prev_exercise_id}
             variant="outlineBlack"
             onClick={() =>
               history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`)
@@ -82,7 +82,7 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
             onClick={() =>
               history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`)
             }
-            disabled={exercise.next_exercise_id ? false : true}
+            disabled={!exercise.next_exercise_id}
             className={cn(styles.btn, styles.next, {
               [styles.disabled]: !exercise.next_exercise_id,
             })}

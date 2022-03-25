@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FeedbackModal as FeedbackModalComponent } from '@components/common/modals/feedback';
 import CompletedTask from '@components/common/modals/completedTask';
 import { selectExercise } from '@store/exercise/selector';
-import { BulletHint, NormalHint } from '@components/hint';
+import { BulletHint } from '@components/hint';
 import Button from '@components/mui/button';
 import ErrorMessage from '@components/common/errorMessage';
 import Terminal from '@components/common/terminal';
@@ -16,35 +16,32 @@ import { useXp } from '@components/exercise/hooks/useXp';
 import { useTerminal } from '@components/exercise/hooks/useTerminal';
 import { useModal } from '@src/hooks/useModal';
 import { useIsQuiz } from '@components/exercise/hooks/useIsQuiz';
-import { useBulletExerciseCompleted } from '@components/exercise/hooks/useBulletExerciseCompleted';
 import { Sidebar } from '@components/exercise/templates/Steps/Sidebar';
 import cn from 'classnames';
 import UnixShell from '@components/common/unixshell';
+import { useParams } from 'react-router-dom';
+import { getProfile } from '@store/profile/actions';
+
+const initAnswer = { value: '', correct: false, error: 'Выберите ответ' };
 
 function BulletPointExercise({ onSubmit, isAuth, headers }) {
   const dispatch = useDispatch();
 
+  const exercise = useSelector(selectExercise);
+
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar(!sidebar);
 
-  const exercise = useSelector(selectExercise);
+  const [totalXp, setTotalXp] = useState(0);
 
-  const [currentPoints, setPoints] = useState(0);
-  const [sum, setSum] = useState(0);
+  const [step, setStep] = useState(1);
+  const [doneSteps, setDoneSteps] = useState(new Set());
 
-  const {
-    point,
-    setPoint,
-    donePoints,
-    completed,
-    completeModal,
-    closeCompleteModal,
-    setAnswer,
-    setCompleted,
-    setErrorMessage,
-    answer,
-    errorMessage,
-  } = useBulletExerciseCompleted({ exercise, xp: currentPoints, headers });
+  const [answer, setAnswer] = useState(initAnswer);
+
+  const [stepComplete, setStepComplete] = useState(false);
+  const [completeModal, setCompleteModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const nestedExercise = useMemo(() => exercise?.nested_exercises, [exercise]);
   const [activeExercise, setActiveExercise] = useState(nestedExercise[0]);
@@ -63,17 +60,21 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
     showHint,
   } = useHint(activeExercise);
   const { solution, showSolution } = useSolution(activeExercise);
-  const { xp, onAnswerHintXp, onHintXp } = useXp(activeExercise, hintValue, answerHintValue);
+
+  const [xp, setXp] = useState(activeExercise?.xp);
+
+  const onAnswerHintXp = () => setXp(xp - answerHintValue);
+  const onHintXp = () => setXp(xp - hintValue);
+
   const {
     terminal,
     bytePayload,
     errorMessage: terminalErrorMessage,
     errorRef,
   } = useTerminal(activeExercise, () => {
-    setCompleted(true);
+    setStepComplete(true);
 
-    setPoints(xp);
-    setSum(xp + sum);
+    setTotalXp(xp + totalXp);
   });
 
   const { Modal: FeedbackModal, open: openFeedbackModal } = useModal(FeedbackModalComponent);
@@ -84,7 +85,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
   };
 
   const checkAnswer = () => {
-    setCompleted(answer.correct);
+    setStepComplete(answer.correct);
     if (answer.correct) {
       setErrorMessage('');
       if (isAuth) {
@@ -102,8 +103,39 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
   }, [errorMessage]);
 
   useEffect(() => {
-    setActiveExercise(nestedExercise[point - 1]);
-  }, [nestedExercise, point]);
+    setActiveExercise(nestedExercise[step - 1]);
+  }, [nestedExercise, step]);
+
+  useEffect(() => {
+    setErrorMessage('');
+    setStepComplete(false);
+    setXp(activeExercise?.xp);
+  }, [step]);
+
+  useEffect(() => {
+    if (stepComplete) {
+      setDoneSteps((prev) => new Set(prev.add(step)));
+
+      if (step < nestedExercise.length) {
+        setStep(step + 1);
+        setAnswer(initAnswer);
+        dispatch(sendAnswer(activeExercise?.slug, activeExercise?.course_slug, xp, headers));
+        dispatch(getProfile({ headers }));
+      } else {
+        setCompleteModal(true);
+      }
+      setStepComplete(false);
+    }
+  }, [stepComplete]);
+
+  useEffect(() => {
+    setStep(1);
+    setDoneSteps(new Set());
+    setStepComplete(false);
+    setCompleteModal(false);
+    setAnswer(initAnswer);
+    setErrorMessage('');
+  }, [exercise?.id]);
 
   const renderStack = () => {
     switch (exercise.stack_type) {
@@ -113,28 +145,30 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
         return (
           <>
             <Terminal
+              exercise={activeExercise}
               solution={solution}
-              sampleCode={activeExercise?.sample_code}
-              exerciseId={activeExercise?.id}
-              correct={completed}
+              correct={stepComplete}
               isAuth={isAuth}
-              onAnswer={() => {}}
               xp={xp}
               bytePayload={bytePayload}
-              isGraphRequired={activeExercise?.is_graph_required}
             />
-            <Output
-              isAuth={isAuth}
-              bulletExercise={activeExercise}
-              isBulletPointExercise
-              terminal={terminal}
-              presentation_url={exercise.presentation_url}
-              variant="outputContainer"
-            />
+            <Output variant="outputContainer" exercise={activeExercise} />
           </>
         );
       default:
-        break;
+        return (
+          <>
+            <Terminal
+              exercise={activeExercise}
+              solution={solution}
+              correct={stepComplete}
+              isAuth={isAuth}
+              xp={xp}
+              bytePayload={bytePayload}
+            />
+            <Output variant="outputContainer" exercise={activeExercise} />
+          </>
+        );
     }
   };
 
@@ -146,26 +180,18 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
             exercise={activeExercise}
             open={sidebar}
             toggleSidebar={toggleSidebar}
-            point={point}
+            point={step}
             xp={xp}
             hint={hint}
+            hintValue={hintValue}
             withoutHint={withoutHint}
-            total={nestedExercise.length}
-            onSetActiveExercise={({ activeExercise }) => {
-              setPoint(activeExercise);
-            }}
             checkAnswer={checkAnswer}
-            doneExercises={donePoints}
+            doneExercises={doneSteps}
             nestedExercise={nestedExercise}
             isQuiz={isQuiz}
-            setCompleted={setCompleted}
-            setErrorMessage={setErrorMessage}
             setAnswer={setAnswer}
             answer={answer}
             handleHelp={handleHelp}
-            hintValue={hintValue}
-            isAuth={isAuth}
-            headers={headers}
           />
 
           <ErrorMessage message={terminalErrorMessage || errorMessage} />
@@ -197,14 +223,16 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
           <CompletedTask
             correctMessage={exercise?.correct_message}
             onClose={() => {
-              setCompleted(false);
-              closeCompleteModal();
+              onSubmit();
+              setStepComplete(false);
+              setCompleteModal(false);
             }}
-            xp={sum}
             onClick={() => {
               onSubmit();
-              closeCompleteModal();
+              setStepComplete(false);
+              setCompleteModal(false);
             }}
+            xp={totalXp}
           />
         )}
       </div>

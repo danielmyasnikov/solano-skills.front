@@ -91,19 +91,12 @@ export const Sidebar = ({
   exercise,
   xp,
   answer,
-  handleAnswer,
-  setCompleted,
-  setErrorMessage,
   handleHelp,
   hintValue,
-  isAuth,
-  headers,
   hint,
   withoutHint,
-  showHint,
   checkAnswer,
   point,
-  total,
   nestedExercise,
   onSetActiveExercise,
   doneExercises,
@@ -136,9 +129,8 @@ export const Sidebar = ({
               onClick={toggleInstructionFolded}
               xp={xp}
               point={point}
-              total={total}
+              total={nestedExercise.length}
               nestedExercise={nestedExercise}
-              onSetActiveExercise={onSetActiveExercise}
               doneExercisesIds={[...doneExercises]}
             />
             {!instructionFolded && (

@@ -23,6 +23,7 @@ import RegistrationModal from '@components/common/modals/registration/registrati
 import { useSolution } from '@components/exercise/hooks/useSolution';
 import { useXp } from '@components/exercise/hooks/useXp';
 import UnixShell from '@components/common/unixshell';
+import { getProfile } from '@store/profile/actions';
 
 function QuizTemplate({ onSubmit, isAuth }) {
   const [sidebar, setSidebar] = useState(true);
@@ -84,9 +85,8 @@ function QuizTemplate({ onSubmit, isAuth }) {
       if (answer.correct) {
         setErrorMessage('');
         setCompletedTaskModalOpen(true);
-        if (exercise.type === 'quiz' && isAuth) {
-          dispatch(sendAnswer(exercise.slug, courseId, xp, headers));
-        }
+        dispatch(sendAnswer(exercise?.slug, exercise?.course_slug, xp, headers));
+        dispatch(getProfile({ headers }));
       } else {
         setErrorMessage(answer.error);
       }
@@ -100,15 +100,9 @@ function QuizTemplate({ onSubmit, isAuth }) {
       case 'shell':
         return <UnixShell exerciseId={exerciseId} />;
       case 'python':
-        return (
-          <Output
-            isAuth={isAuth}
-            presentation_url={exercise.presentation_url}
-            variant="quizOutputContainer"
-          />
-        );
+        return <Output exercise={exercise} variant="quizOutputContainer" />;
       default:
-        break;
+        return <Output exercise={exercise} variant="quizOutputContainer" />;
     }
   };
 
