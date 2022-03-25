@@ -36,9 +36,8 @@ export const getCertificate = async (cid) => {
         },
       },
     );
-    if (response.status === 200) {
-      return response.data.url;
-    }
-    return false;
-  } catch (err) {}
+    return response;
+  } catch (err) {
+    return { error: 404 }
+  }
 };

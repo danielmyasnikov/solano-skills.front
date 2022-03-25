@@ -7,15 +7,11 @@ import { ShareIcon } from '@assets/ShareIcon';
 import styles from './styles.module.less';
 
 const Certificate = ({ id }) => {
-  const clickHandler = () => {
-    localStorage.setItem('cid', id);
-  };
-
   return (
     <div className={styles.sertificate}>
       <img src={certificateImg} />
       <div className={styles.settings}>
-        <Link to={`/certificates/${id}`} onClick={clickHandler}>
+        <Link to={`/certificates/${id}`}>
           <ZoomIcon />
         </Link>
         <DownloadIcon />

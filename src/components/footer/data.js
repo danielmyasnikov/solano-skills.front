@@ -128,7 +128,7 @@ export const otherLinks = [
     text: 'Сведения об образовательной организации',
   },
   {
-    text: 'Лицензия на образовательную деятельность № 040485 от 03 декабря 2019 года',
+    text: 'Лицензия на образовательную деятельность',
     link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing'
   },
 ];

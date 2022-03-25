@@ -30,7 +30,6 @@ function ExercisePage() {
   const onSubmit = async () => {
     if (exercise.is_certificate_ready) {
       const cid = await makeCertificate(exercise.course_slug, headers);
-      localStorage.setItem('cid', cid);
       history.push(`/certificates/${cid}`);
       return;
     }
