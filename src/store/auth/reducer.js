@@ -20,12 +20,13 @@ const initialState = {
   errors: {},
   status: '',
   recoveryPasswordStatus: 'idle',
+  isReg: false,
 };
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case REGISTRATION_SUCCESSED: {
-      return { ...state, headers: action.payload.headers };
+      return { ...state, isReg: true, headers: action.payload.headers };
     }
     case SING_IN_SUCCESSED: {
       return { ...state, headers: action.payload.headers };

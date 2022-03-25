@@ -3,7 +3,6 @@ import styles from './styles.module.less';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@components/mui/button';
-import { SocialNetworks } from './../socialNetworks';
 import Close from '@assets/Close.js';
 import * as AuthStore from '@store/auth';
 import { AuthContainer } from './../authContainer';
@@ -25,13 +24,14 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
-  const [isReg, setIsReg] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
-  const { errors: reduxErrors, headers } = useSelector(AuthStore.Selectors.getAuth);
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
+
+  const { errors: reduxErrors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const { isReg } = useSelector(AuthStore.Selectors.getAuth);
 
   useEffect(() => {
     if (!isPhoneNumberConfirmation && !isRegistrationByPhone) {
@@ -77,7 +77,6 @@ export const Registration = ({ variant, isModal, onClose }) => {
     setIsSubmit(true);
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
-      setIsReg(true);
     }
     if (isRegistrationByPhone && phoneTermsChecked) {
       setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''));
@@ -100,6 +99,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
+      history.push('/courses');
       if (isReg) {
         history.push('/onBoard');
       } else {
