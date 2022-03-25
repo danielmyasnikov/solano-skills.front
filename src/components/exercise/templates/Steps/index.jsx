@@ -12,14 +12,12 @@ import Output from '@components/common/output';
 import { sendAnswer } from '@store/exercise/actions';
 import { useSolution } from '@components/exercise/hooks/useSolution';
 import { useHint } from '@components/exercise/hooks/useHint';
-import { useXp } from '@components/exercise/hooks/useXp';
 import { useTerminal } from '@components/exercise/hooks/useTerminal';
 import { useModal } from '@src/hooks/useModal';
 import { useIsQuiz } from '@components/exercise/hooks/useIsQuiz';
 import { Sidebar } from '@components/exercise/templates/Steps/Sidebar';
 import cn from 'classnames';
 import UnixShell from '@components/common/unixshell';
-import { useParams } from 'react-router-dom';
 import { getProfile } from '@store/profile/actions';
 
 const initAnswer = { value: '', correct: false, error: 'Выберите ответ' };
@@ -104,12 +102,9 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
 
   useEffect(() => {
     setActiveExercise(nestedExercise[step - 1]);
-  }, [nestedExercise, step]);
-
-  useEffect(() => {
     setErrorMessage('');
     setStepComplete(false);
-    setXp(activeExercise?.xp);
+    setXp(nestedExercise[step - 1]?.xp);
   }, [step]);
 
   useEffect(() => {
@@ -135,7 +130,7 @@ function BulletPointExercise({ onSubmit, isAuth, headers }) {
     setCompleteModal(false);
     setAnswer(initAnswer);
     setErrorMessage('');
-  }, [exercise?.id]);
+  }, [exercise]);
 
   const renderStack = () => {
     switch (exercise.stack_type) {

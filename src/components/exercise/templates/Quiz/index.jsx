@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getExercise } from '@store/exercise/actions';
 
 import { selectExercise } from '@store/exercise/selector';
-import { NormalHint, QuizHint } from '@components/hint';
+import { QuizHint } from '@components/hint';
 import ErrorMessage from '@components/common/errorMessage';
 import Output from '@components/common/output';
 import { sendAnswer } from '@store/exercise/actions';
@@ -29,6 +29,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
   const [sidebar, setSidebar] = useState(true);
   const toggleSidebar = () => setSidebar(!sidebar);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
+
   const errorRef = useRef();
 
   const dispatch = useDispatch();
@@ -39,6 +40,8 @@ function QuizTemplate({ onSubmit, isAuth }) {
 
   const [answer, setAnswer] = useState({ value: '', correct: false, error: 'Выберите ответ' });
   const [errorMessage, setErrorMessage] = useState();
+
+  const [winnerXp, setWinnerXp] = useState(exercise?.xp);
 
   const { solution, showSolution } = useSolution(exercise);
 
@@ -85,6 +88,7 @@ function QuizTemplate({ onSubmit, isAuth }) {
       if (answer.correct) {
         setErrorMessage('');
         setCompletedTaskModalOpen(true);
+        setWinnerXp(xp);
         dispatch(sendAnswer(exercise?.slug, exercise?.course_slug, xp, headers));
         dispatch(getProfile({ headers }));
       } else {
@@ -144,8 +148,11 @@ function QuizTemplate({ onSubmit, isAuth }) {
         {completedTaskModalOpen && (
           <CompletedTask
             correctMessage={exercise?.correct_message}
-            onClose={() => setCompletedTaskModalOpen(false)}
-            xp={xp}
+            xp={winnerXp}
+            onClose={() => {
+              onSubmit();
+              setCompletedTaskModalOpen(false);
+            }}
             onClick={() => {
               onSubmit();
               setCompletedTaskModalOpen(false);

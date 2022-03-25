@@ -21,6 +21,8 @@ import MenuCourse from '@assets/MenuCourse.js';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
+import { getExercise } from '@store/exercise/actions';
+import * as AuthStore from '@store/auth';
 
 const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
   const { courseId } = useParams();
   const location = useLocation();
   const exercise = useSelector(selectExercise);
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const history = useHistory();
 
   const courseData = useSelector(selectCourse);
@@ -64,9 +67,10 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
             })}
             disabled={!exercise.prev_exercise_id}
             variant="outlineBlack"
-            onClick={() =>
-              history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`)
-            }
+            onClick={() => {
+              history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`);
+              dispatch(getExercise(courseId, exercise.prev_exercise_id, headers));
+            }}
           >
             <Prev />
           </Button>
@@ -79,9 +83,10 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
             <span>Содержание курса</span>
           </Button>
           <Button
-            onClick={() =>
-              history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`)
-            }
+            onClick={() => {
+              history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+              dispatch(getExercise(courseId, exercise.next_exercise_id, headers));
+            }}
             disabled={!exercise.next_exercise_id}
             className={cn(styles.btn, styles.next, {
               [styles.disabled]: !exercise.next_exercise_id,

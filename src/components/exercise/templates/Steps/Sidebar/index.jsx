@@ -98,7 +98,6 @@ export const Sidebar = ({
   checkAnswer,
   point,
   nestedExercise,
-  onSetActiveExercise,
   doneExercises,
   isQuiz,
   setAnswer,

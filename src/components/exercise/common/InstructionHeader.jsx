@@ -2,7 +2,6 @@ import React from 'react';
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import cn from 'classnames';
 import InstructionSvg from '@assets/Instruction';
 import { ExperienceTag } from '@components/exercise/common/ExperienceTag';
 

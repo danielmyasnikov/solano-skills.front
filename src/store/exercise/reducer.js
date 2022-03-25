@@ -5,6 +5,7 @@ const initialState = {};
 export default function exerciseReducer(state = initialState, action) {
   switch (action.type) {
     case GET_EXERCISE_SUCCESSED: {
+      console.log(action.payload.data);
       return {
         ...state,
         ...action.payload.data,

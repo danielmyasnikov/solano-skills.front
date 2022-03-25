@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FeedbackModal as FeedbackModalComponent } from '@components/common/modals/feedback';
-import RegistrationModalComponent from '@components/common/modals/registration/registrationModal';
 import CompletedTask from '@components/common/modals/completedTask';
 
 import Terminal from '@components/common/terminal';
@@ -29,6 +28,8 @@ import { getProfile } from '@store/profile/actions';
 
 function SimpleExercise({ onSubmit, isAuth }) {
   const dispatch = useDispatch();
+
+  const [winnerXp, setWinnerXp] = useState(0);
 
   const errorRef = useRef();
 
@@ -80,6 +81,7 @@ function SimpleExercise({ onSubmit, isAuth }) {
   useEffect(() => {
     if (terminal.message.status === 'success') {
       setCompleted(true);
+      setWinnerXp(xp);
       dispatch(sendAnswer(exercise?.slug, exercise?.course_slug, xp, headers));
       dispatch(getProfile({ headers }));
     }
@@ -189,7 +191,7 @@ function SimpleExercise({ onSubmit, isAuth }) {
         {completed && (
           <CompletedTask
             correctMessage={exercise?.correct_message}
-            xp={xp}
+            xp={winnerXp}
             onClose={() => {
               setCompleted(false);
             }}

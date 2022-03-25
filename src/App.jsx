@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import Container from './components/container';
 
 import { routes } from './routes';
-import { Page404 } from './components/page404';
+import { Page404 } from '@components/page404';
 
 import { useDispatch, useSelector } from 'react-redux';
 
