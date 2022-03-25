@@ -27,7 +27,9 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [checked, setChecked] = useState(false);
   const [isReg, setIsReg] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
-  const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const { errors: reduxErrors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const [errors, setErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const [checkedError, setCheckedError] = useState('');
   const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
 
@@ -72,6 +74,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }
 
   function submit() {
+    setIsSubmit(true);
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
       setIsReg(true);
@@ -87,6 +90,13 @@ export const Registration = ({ variant, isModal, onClose }) => {
       setCheckedError('Ошибка ввода данных');
     }
   }
+
+  useEffect(() => {
+    if (isSubmit) {
+      setErrors(reduxErrors);
+      setIsSubmit(false);
+    }
+  }, [reduxErrors]);
 
   useEffect(() => {
     if (headers.uid && headers.client && headers['access-token']) {
@@ -182,7 +192,9 @@ export const Registration = ({ variant, isModal, onClose }) => {
         </div>
         {errors.fullMessagesError && (
           <div className={styles.errorDiv}>
-            <span className={styles.error}>{errors.fullMessagesError || checkedError}</span>
+            {errors.fullMessagesError.reverse().map((text) => (
+              <p className={styles.error}>{text || checkedError}</p>
+            ))}
           </div>
         )}
         {/* <SocialNetworks variant={variant} /> */}

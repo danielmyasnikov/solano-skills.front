@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useHistory } from 'react-router';
-
 import { Link } from 'react-router-dom';
 
 import * as AuthStore from '@store/auth';
+import { getCertificates } from '@store/api/certificate';
 import { selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
 
@@ -21,31 +20,23 @@ import cn from 'classnames';
 
 import styles from './styles.module.less';
 import { Preloader } from '../mui/preloader';
+import { Grid } from '@mui/material';
 
 export const CertificatesPage = () => {
   const fullnameRef = useRef();
 
-  const [sertificates, setSertificates] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [certificates, setCertificates] = useState();
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
-  const [information, setInformation] = useState('');
-  const [isInformationActive, setIsInformationActive] = useState(false);
 
   const dispatch = useDispatch();
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
-  const history = useHistory();
-
-  const uid = localStorage.getItem('uid');
-  const client = localStorage.getItem('client');
-  const accessToken = localStorage.getItem('access-token');
-
   const saveProfile = () => {
     setIsFullnameActive(false);
-    setIsInformationActive(false);
     setActiveEditField('');
     dispatch(
       patchProfile({
@@ -84,10 +75,12 @@ export const CertificatesPage = () => {
     );
   };
 
+  const asyncGetCertificates = async () => {
+    setCertificates(await getCertificates(headers));
+  };
+
   useEffect(() => {
-    if (!uid && !client && !accessToken) {
-      history.push('/certificates');
-    }
+    asyncGetCertificates();
   }, []);
 
   useEffect(() => {
@@ -146,10 +139,20 @@ export const CertificatesPage = () => {
           <Link to="/profile">Обзор профиля</Link>
           <Button variant="containedPurple">Сертификаты</Button>
         </div>
-        <div className={styles.sertificates}>
-          {sertificates.map(() => (
-            <Certificate />
-          ))}
+        <div className={styles.certificates}>
+          {(certificates && (
+            <Grid container spacing={4}>
+              {certificates.map((certificate) => (
+                <Grid item xl={3} md={4} sm={6} xs={12}>
+                  <Certificate key={certificate.id} id={certificate.id} />
+                </Grid>
+              ))}
+            </Grid>
+          )) || (
+            <div className={styles.preloader}>
+              <Preloader size="100px" />
+            </div>
+          )}
         </div>
       </div>
     </div>

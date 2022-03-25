@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 
 import * as AuthStore from '@store/auth';
+import { makeCertificate } from '@store/api/exercise';
 import { getExercise } from '@store/exercise/actions';
 import { selectExercise } from '@store/exercise/selector';
 import { clearTerminal } from '@store/terminal/actions';
@@ -26,7 +27,12 @@ function ExercisePage() {
   const [authCounter, setAuthCounter] = useState(0);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    if (exercise.is_certificate_ready) {
+      const cid = await makeCertificate(exercise.course_slug, headers);
+      history.push(`/certificates/${cid}`);
+      return;
+    }
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
     dispatch(getExercise(courseId, exercise.next_exercise_id, headers));
   };

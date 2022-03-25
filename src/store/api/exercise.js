@@ -27,3 +27,20 @@ export const sendAnswerApi = ({ exerciseId, courseId, xp, headers }) => {
       throw error;
     });
 };
+
+export const makeCertificate = async (course_slug, headers) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_COURSE}/api/v1/courses/${course_slug}/certificates`,
+      {
+        html: '<h1>hello</h1>',
+        force: 'true',
+      },
+      { headers },
+    );
+    if (response.status === 200) {
+      return (response.data.id);
+    }
+    return false;
+  } catch (err) {}
+};

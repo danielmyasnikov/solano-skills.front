@@ -29,6 +29,7 @@
       padding: 17px 0;
 
       span {
+        margin-left: 20px;
         font-family: 'Jost';
         font-weight: 700;
         font-size: 20px;
@@ -52,6 +53,10 @@
           font-size: 20px;
           line-height: 28px;
           letter-spacing: -0.005em;
+          color: var(--very-dark-grayish-blue);
+        }
+
+        a {
           color: var(--very-dark-grayish-blue);
         }
       }
@@ -90,7 +95,10 @@
         font-size: 18px;
         line-height: 28px;
         letter-spacing: -0.005em;
-        color: var(--gray);
+
+        a{
+          color: var(--gray);
+        }
       }
     }
   }
@@ -203,6 +211,30 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
         gap: 50px 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .footer {
+    .block {
+      .logo {
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .footer {
+    .block {
+      .logo {
+        span {
+          font-size: 14px;
+        }
       }
     }
   }

@@ -103,7 +103,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/certificates/:userId/:courseId',
+    path: '/certificates/:certificateId',
     component: CertificatePage,
     wrap: true,
     exact: true,

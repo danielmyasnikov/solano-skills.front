@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import styles from './styles.module.less';
+import { useSelector } from 'react-redux';
+import * as AuthStore from '@store/auth';
+import { useHistory, useParams } from 'react-router';
 import { PDFViewer } from '@components/common/pdfViewer';
-import { getCertificate } from '../../store/api/certificate';
+import { Preloader } from '../mui/preloader';
+import styles from './styles.module.less';
+import { getCertificate } from '@store/api/certificate';
 
 export const CertificatePage = () => {
   const [url, setUrl] = useState('');
-  const data = {
-    html: '<h1>hello</h1>',
-    force: 'true',
+  const { certificateId } = useParams();
+  const history = useHistory();
+  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+
+  const asyncGetCertificate = async () => {
+    const res = await getCertificate(certificateId, headers);
+    res.error ? history.push('/notFound') : setUrl(res.data.url);
   };
 
   useEffect(() => {
-    async function getData(data) {
-      let responce = await getCertificate(data);
-      setUrl(responce);
-    }
-    getData(data);
+    asyncGetCertificate();
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <PDFViewer src={url} />
+      {(url && <PDFViewer src={url} />) || (
+        <div className={styles.preloader}>
+          <Preloader size="100px" />
+        </div>
+      )}
     </div>
   );
 };
