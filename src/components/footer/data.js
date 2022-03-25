@@ -123,6 +123,7 @@ export const otherLinks = [
   },
   {
     text: 'Оферта',
+    link: 'https://docs.google.com/document/d/1m8R1ofAY5tcRVOQ9wOyrZaDJ0fHaJx7JWEHNVUPaBUk/edit'
   },
   {
     text: 'Сведения об образовательной организации',
