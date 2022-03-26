@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
-import { numberDeclension } from '../../common/helpers/ numberDeclension';
+import { numberDeclension } from '../../common/helpers/numberDeclension';
 
 export const CourseInfo = ({ hours, videos, exercises, xps }) => {
   return (

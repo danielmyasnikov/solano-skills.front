@@ -5,10 +5,11 @@ import cn from 'classnames';
 import Edit from '@assets/Edit';
 import Button from '@components/mui/button';
 import { Link } from 'react-router-dom';
-import Card from './card';
+import { Card } from './card';
 import { Avatar } from './Avatar';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { numberDeclension } from '../common/helpers/numberDeclension';
 import * as AuthStore from '@store/auth';
 import { patchProfile } from '@store/profile/actions';
 import { selectProfile } from '@store/profile/selector';
@@ -156,23 +157,39 @@ const Profile = () => {
             <div className={styles.statistics}>
               <div className={styles.blocks}>
                 <div className={styles.block}>
-                  <span className={styles.title}>492 870</span>
+                  <span className={styles.title}>{profile.xp}</span>
                   <span className={styles.description}>опыта набрано</span>
                 </div>
 
                 <div className={styles.block}>
-                  <span className={styles.title}>104</span>
-                  <span className={styles.description}>курса пройдено</span>
+                  <span className={styles.title}>{profile.accomplished_courses_count}</span>
+                  <span className={styles.description}>
+                    {`${numberDeclension(profile.accomplished_courses_count, [
+                      'курс',
+                      'курса',
+                      'курсов',
+                    ])}`}
+                    &nbsp;пройдено
+                  </span>
                 </div>
 
                 <div className={styles.block}>
-                  <span className={styles.title}>5 396</span>
-                  <span className={styles.description}>упражнений выполнено</span>
+                  <span className={styles.title}>{profile.accomplished_exercises_count}</span>
+                  <span className={styles.description}>
+                    {`${numberDeclension(profile.accomplished_exercises_count, [
+                      'упражнение',
+                      'упражнения',
+                      'упражнений',
+                    ])}`}
+                    &nbsp;выполнено
+                  </span>
                 </div>
 
                 <div className={styles.block}>
-                  <span className={styles.title}>4</span>
-                  <span className={styles.description}>часа</span>
+                  <span className={styles.title}>{profile.accomplished_time}</span>
+                  <span className={styles.description}>
+                    {`${numberDeclension(profile.accomplished_time, ['час', 'часа', 'часов'])}`}
+                  </span>
                 </div>
               </div>
             </div>
@@ -212,7 +229,7 @@ const Profile = () => {
       )}
       <div className={styles.content}>
         <div className={styles.courses}>
-          <Card />
+          <Card data={profile.accomplished_courses} />
         </div>
       </div>
     </div>

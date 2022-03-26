@@ -5,7 +5,7 @@ import Button from '@components/mui/button';
 import TimerOutlined from '@assets/TimerOutlined.png';
 import AvatarDefault from '@assets/avatarDefault.png';
 import Py from '@assets/py.png';
-import { numberDeclension } from '../../common/helpers/ numberDeclension';
+import { numberDeclension } from '../../common/helpers/numberDeclension';
 
 export const Card = ({ info }) => {
   const getTypeImg = () => {

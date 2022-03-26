@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import Button from '@components/mui/button';
 import ProgressBar from '@components/mui/progressBar';
 
-import { numberDeclension } from '../helpers/ numberDeclension';
+import { numberDeclension } from '../helpers/numberDeclension';
 
 import Clock from './assets/clock.svg';
 import ArrowRight from './assets/arrowRight.svg';
