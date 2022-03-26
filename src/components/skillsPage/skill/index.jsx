@@ -32,11 +32,11 @@ const Skill = ({ title, description, info }) => {
           <div className={styles.info}>
             <div className={styles.info__item}>
               <Time />
-              <div>{info.hours}</div>
+              <div>{info.hours} часов</div>
             </div>
             <div className={styles.info__item}>
               <CoursesDark />
-              <div>{info.courses}</div>
+              <div>{info.courses} курсов</div>
             </div>
           </div>
         )}

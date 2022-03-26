@@ -13,8 +13,8 @@ export const Time = () => (
     </mask>
     <g mask="url(#mask0_2405_7262)">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.514 2 12 2C6.486 2 2 6.486 2 12ZM4 12C4 7.589 7.589 4 12 4C16.411 4 20 7.589 20 12C20 16.411 16.411 20 12 20C7.589 20 4 16.411 4 12ZM11 7V13H17V11H13V7H11Z"
         fill="#2D2D2D"
       />

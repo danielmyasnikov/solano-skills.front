@@ -3,8 +3,8 @@ export const DoneGreen = () => (
     <path
       d="M1.90405 5.50003L5.63465 9.3288L13.0958 1.67126"
       stroke="#75D366"
-      stroke-width="3"
-      stroke-linecap="round"
+      strokeWidth="3"
+      strokeLinecap="round"
     />
   </svg>
 );
