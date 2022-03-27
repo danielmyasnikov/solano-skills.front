@@ -1,5 +1,4 @@
 import { all, spawn } from 'redux-saga/effects';
-import exerciseSaga from './exercise/sagas';
 import terminalSaga from './terminal/sagas';
 import coursesSaga from './courses/sagas';
 import courseSaga from './course/sagas';
@@ -15,7 +14,6 @@ import onBoardSaga from './onBoard/sagas';
 export default function* rootSaga() {
   const sagas = [
     terminalSaga,
-    exerciseSaga,
     coursesSaga,
     courseSaga,
     authSaga,

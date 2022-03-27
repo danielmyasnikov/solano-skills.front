@@ -1,0 +1,120 @@
+.exerciseContainer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 150px);
+}
+
+.overflowHidden {
+  overflow-y: hidden !important;
+}
+
+.sidebarWrapper {
+  position: relative;
+}
+
+.layout {
+  position: relative;
+  width: calc(43% - 20px);
+  height: 100%;
+  margin-right: 20px;
+  min-width: 270px;
+  max-width: 670px;
+
+  @media screen and (max-width: 768px) {
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  &.folded {
+    min-width: 44px !important;
+    width: 44px !important;
+
+    .content {
+      height: 100%;
+      .sidebar {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.content {
+  height: fit-content;
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.instructions {
+  margin-top: 35px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 10px;
+  word-break: break-word;
+  p {
+    margin: 20px 0;
+  }
+  ol {
+    margin-left: 20px;
+  }
+  ul {
+    margin-left: 20px;
+    list-style-type: disc;
+    li {
+      margin: 20px 0;
+    }
+  }
+  p,
+  li,
+  code {
+    font-size: 16px;
+  }
+}
+
+.outputContainer {
+  white-space: break-spaces;
+  background: #2c2a3f;
+  padding: 10px 20px;
+  height: calc(40% - 47px);
+  overflow-y: auto;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  .success {
+    display: block;
+    color: rgba(200, 193, 133, 1);
+  }
+  .error {
+    display: block;
+    color: #d15555;
+  }
+  .shell {
+    display: block;
+    color: #fff;
+  }
+  span {
+    &:not(&:first-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 1533px) {
+  .resize {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .layout {
+    width: 100%;
+    .hintBtn {
+      margin-right: auto;
+    }
+  }
+}

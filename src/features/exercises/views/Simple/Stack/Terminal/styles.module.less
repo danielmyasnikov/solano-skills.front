@@ -1,0 +1,262 @@
+.header {
+  background: #413f56;
+  border-radius: 18px;
+}
+
+.terminalContainer {
+  position: relative;
+  height: 100%;
+
+  @media screen and (max-width: 768px) {
+    height: initial;
+  }
+}
+
+.terminalWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 300px;
+}
+
+.terminalWithGraph {
+  display: flex;
+  justify-content: space-between;
+  .terminalWrapper {
+    width: calc(50% - 10px);
+  }
+}
+
+.noneEvents {
+  pointer-events: none;
+}
+
+.bytePayload {
+  position: relative;
+  margin-left: 20px;
+  flex: 1 1;
+  width: calc(50% - 10px);
+  border-radius: 18px;
+  background: var(--color-white);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.04);
+  .terminalHeader {
+    .tab {
+      position: relative;
+      padding-right: 49px;
+      svg {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    object-fit: contain;
+  }
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 40px);
+}
+
+.graph {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.btnWrap {
+  display: flex;
+  justify-content: space-between;
+  button {
+    cursor: pointer;
+    font-family: Jost;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    background: none;
+    margin: 0 20px;
+    &:first-child {
+      svg {
+        margin-right: 10px;
+      }
+    }
+    &:last-child {
+      svg {
+        margin-left: 10px;
+        transform: rotate(-180deg);
+      }
+    }
+  }
+  .count {
+    font-family: Jost;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.disable {
+  font-size: 14px;
+  color: #b2b2b2;
+  cursor: default !important;
+  svg {
+    path {
+      fill: #b2b2b2;
+      stroke: #b2b2b2;
+    }
+  }
+}
+
+.terminal {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  min-width: 300px;
+}
+
+.draggable {
+  right: -13px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 15px;
+
+  padding-right: 15px;
+
+  position: absolute;
+  right: 0;
+  padding-top: 10px;
+  justify-content: flex-end;
+  padding-bottom: 15px;
+  bottom: 0;
+  width: 100%;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  background: #2c2a3f;
+  button {
+    min-height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:nth-child(1) {
+      width: 41px;
+      padding: 0;
+    }
+  }
+  .reset {
+    border-radius: 50%;
+    min-width: 46px;
+  }
+  .disable {
+    path {
+      fill: #4a4856;
+    }
+  }
+}
+
+.terminalHeader {
+  width: 100%;
+  display: flex;
+  background: #413f56;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  .tab {
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #413f56;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: #6a687a;
+    &:nth-child(1) {
+      border-top-left-radius: 18px;
+    }
+  }
+  .tabActive {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #fff;
+    background: rgba(44, 42, 63, 0.45);
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.outputHeader {
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 1366px) {
+  .terminalWithGraph {
+    flex-direction: column;
+    gap: 5px;
+
+    .terminalWrapper {
+      width: 100%;
+      height: calc(65% - 45px);
+    }
+
+    .bytePayload {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  .draggable {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .terminalContainer {
+    flex-direction: column;
+  }
+  .actions {
+    position: relative;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    button {
+      width: 170px;
+      &:first-child {
+        min-width: 41px;
+      }
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+  }
+  .terminalWithGraph {
+    height: auto;
+    .terminalWrapper {
+      width: 100%;
+    }
+    .bytePayload {
+      width: 100%;
+      margin-top: 35px;
+      img {
+        position: static;
+        transform: none;
+      }
+      .btnWrap {
+        padding: 20px 0;
+      }
+    }
+  }
+}

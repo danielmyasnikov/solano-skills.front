@@ -127,7 +127,9 @@ export const OnBoardPage = () => {
         )) || (
           <>
             <span>Вы можете</span>
-            <Link className={styles.activeLink}>пропустить</Link>
+            <Link to="/courses" className={styles.activeLink}>
+              пропустить
+            </Link>
             <span>опрос и перейти сразу к курсам</span>
           </>
         )}

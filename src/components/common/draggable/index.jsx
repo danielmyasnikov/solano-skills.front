@@ -1,13 +1,15 @@
 import DraggableImg from '@assets/Draggable';
 import styles from './styles.module.less';
 import { useRef, useState } from 'react';
+import cn from 'classnames';
 
-const Draggable = ({ parentContainer, resizeContainer, height }) => {
+const Draggable = ({ parentContainer, resizeContainer, hidden, className, noIcon }) => {
   const [initialPos, setInitialPos] = useState();
   const [initialSize, setInitialSize] = useState();
   const resizableRef = useRef();
 
   const initial = (e) => {
+    e.dataTransfer.setDragImage(resizableRef.current, 0, 0);
     setInitialPos(e.clientX);
     setInitialSize(parentContainer.current.offsetWidth);
   };
@@ -20,14 +22,17 @@ const Draggable = ({ parentContainer, resizeContainer, height }) => {
 
   return (
     <div
+      role="separator"
       ref={resizableRef}
-      style={{ marginTop: `${height / 2}px` }}
-      className={styles.draggable}
+      className={cn(className, styles.container, { [styles.noIcon]: noIcon })}
       draggable
       onDragStart={initial}
       onDrag={resize}
+      style={hidden ? { display: 'none' } : {}}
     >
-      <DraggableImg />
+      <div className={styles.draggable}>
+        <DraggableImg />
+      </div>
     </div>
   );
 };

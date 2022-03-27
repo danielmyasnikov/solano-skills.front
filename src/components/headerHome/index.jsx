@@ -6,39 +6,37 @@ import HeaderLogo from '@assets/homepage/HeaderLogo';
 import Burger from '@assets/Burger';
 
 const HeaderHome = ({ handleBurger, isAuth }) => (
-  <Fragment>
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <div className={styles.header__block}>
-          <div className={styles.header__logo}>
-            <Link to="/">
-              <HeaderLogo />
+  <div className={styles.wrapper}>
+    <header className={styles.header}>
+      <div className={styles.header__block}>
+        <div className={styles.header__logo}>
+          <Link to="/">
+            <HeaderLogo />
+          </Link>
+        </div>
+        <div className={styles.header__menu}>
+          <Link to="/courses">Обучение</Link>
+          <Link to="/tariff">Тарифы</Link>
+          <Link to="/support">Поддержка</Link>
+        </div>
+      </div>
+      <div className={styles.header__block}>
+        {!isAuth && (
+          <>
+            <Link to={'/sign-in'}>
+              <Button variant="outlinePurple">Войти</Button>
             </Link>
-          </div>
-          <div className={styles.header__menu}>
-            <Link to="/courses">Обучение</Link>
-            <Link to="/tariff">Тарифы</Link>
-            <Link to="/support">Поддержка</Link>
-          </div>
+            <Link to={'/registration'}>
+              <Button variant="containedPurple">Зарегистрироваться</Button>
+            </Link>
+          </>
+        )}
+        <div className={styles.header__burger} onClick={() => handleBurger()}>
+          <Burger />
         </div>
-        <div className={styles.header__block}>
-          {!isAuth && (
-            <>
-              <Link to={'/sign-in'}>
-                <Button variant="outlinePurple">Войти</Button>
-              </Link>
-              <Link to={'/registration'}>
-                <Button variant="containedPurple">Зарегистрироваться</Button>
-              </Link>
-            </>
-          )}
-          <div className={styles.header__burger} onClick={() => handleBurger()}>
-            <Burger />
-          </div>
-        </div>
-      </header>
-    </div>
-  </Fragment>
+      </div>
+    </header>
+  </div>
 );
 
 export default HeaderHome;

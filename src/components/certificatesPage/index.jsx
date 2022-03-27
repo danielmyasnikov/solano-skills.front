@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as AuthStore from '@store/auth';
-import { getCertificates } from '@store/api/certificate';
-import { selectProfile } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
 
 import Certificate from './certificate';
@@ -21,10 +20,12 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { Preloader } from '../mui/preloader';
 import { Grid } from '@mui/material';
+import { Api } from '@src/api/api';
+import { useHistory } from 'react-router';
 
 export const CertificatesPage = () => {
   const fullnameRef = useRef();
-
+  const history = useHistory();
   const [certificates, setCertificates] = useState();
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
@@ -32,6 +33,7 @@ export const CertificatesPage = () => {
 
   const dispatch = useDispatch();
 
+  const isAuth = useSelector(selectIsAuth);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
@@ -75,12 +77,12 @@ export const CertificatesPage = () => {
     );
   };
 
-  const asyncGetCertificates = async () => {
-    setCertificates(await getCertificates(headers));
-  };
-
   useEffect(() => {
-    asyncGetCertificates();
+    if (isAuth) {
+      Api.get('/api/v1/certificates').then((e) => setCertificates(e));
+    } else {
+      history.push('/');
+    }
   }, []);
 
   useEffect(() => {

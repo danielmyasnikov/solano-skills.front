@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import exerciseReducer from './exercise/reducer';
 import terminalReducer from './terminal/reducer';
 import coursesReducer from './courses/reducer';
 import courseReducer from './course/reducer';
@@ -10,10 +9,13 @@ import tariffsReducer from './tariffs/reducer';
 import progressReducer from './progress/reducer';
 import feedbackReducer from './feedback/reducer';
 import onBoardReducer from './onBoard/reducer';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 
 const rootReducer = combineReducers({
   terminal: terminalReducer,
-  exercise: exerciseReducer,
+  exercise: exerciseSlice.reducer,
+  exercises: exercisesSlice.reducer,
   courses: coursesReducer,
   auth: authReducer,
   course: courseReducer,

@@ -12,6 +12,7 @@ import { Preloader } from '../mui/preloader';
 import CourseLogo from './assets/CourseLogo.svg';
 
 import styles from './styles.module.less';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
@@ -19,12 +20,13 @@ export const CoursesPage = () => {
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const { coursesList } = useSelector(CoursesStore.Selectors.getCourses);
   const { progress } = useSelector(ProgressStore.Selectors.getProgress);
+  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
-    if (headers.hasOwnProperty('uid')) {
+    if (isAuth) {
       dispatch(ProgressStore.Actions.getProgress({ headers }));
     }
-  }, [headers]);
+  }, [isAuth]);
 
   useEffect(() => dispatch(CoursesStore.Actions.loadCourcesList()), []);
 
@@ -38,8 +40,8 @@ export const CoursesPage = () => {
           к обучению Deepskills.
         </p>
       </div>
-      <div div className={styles.contentWrapper}>
-        {(progress.hasOwnProperty('status') && headers.hasOwnProperty('uid') && (
+      <div className={styles.contentWrapper}>
+        {(progress.hasOwnProperty('status') && isAuth && (
           <ProgressComponent
             status={progress.status}
             courseId={progress.course_id}
@@ -50,18 +52,15 @@ export const CoursesPage = () => {
             progress={progress.progress}
           />
         )) ||
-          (headers.hasOwnProperty('uid') && !progress.hello_world && (
+          (isAuth && !progress.hello_world && (
             <div className={styles.preloaderContainer}>
               <Preloader size="60px" />
             </div>
           ))}
         <div className={styles.content}>
-          {coursesList &&
-            coursesList.map((item, i) => (
-              <React.Fragment key={i}>
-                <Card info={item} />
-              </React.Fragment>
-            ))}
+          {coursesList?.map((item, i) => (
+            <Card key={i} info={item} />
+          ))}
         </div>
       </div>
     </div>

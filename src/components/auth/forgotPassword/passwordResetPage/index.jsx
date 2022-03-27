@@ -14,6 +14,7 @@ import Button from '@components/mui/button';
 
 import cn from 'classnames';
 import styles from './styles.module.less';
+import { getProfile } from '@store/profile/actions';
 
 export const PasswordResetPage = () => {
   const [password, setPassword] = useState('');
