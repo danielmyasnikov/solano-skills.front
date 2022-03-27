@@ -3,7 +3,11 @@ import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
-import { selectStackType, selectExerciseType } from '../../../store/selectors';
+import {
+  selectStackType,
+  selectExerciseType,
+  selectRootExerciseType,
+} from '../../../store/selectors';
 
 import UnixShell from './UnixShell';
 import Terminal from './Terminal';
@@ -39,6 +43,10 @@ const Stack = () => {
   const stackType = useSelector(selectStackType);
 
   const renderStack = () => {
+    if (type === 'single_bascket' || type === 'multiple_bascket') {
+      return 'isRanging';
+    }
+
     switch (stackType) {
       case 'shell':
         return <UnixShell />;

@@ -18,6 +18,7 @@ import {
   selectExerciseContext,
   selectExerciseSidebar,
   selectFeedbackModal,
+  selectRootExercise,
   selectRootExerciseType,
   selectSignupModal,
   selectSteps,
@@ -26,6 +27,7 @@ import { exercisesSlice } from '../../store/slices/exercises.slice';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import { useEffect, useRef } from 'react';
 import { sendAnswer } from '@src/features/exercises/store/actions';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 function Exercise({ goNext }) {
   const dispatch = useDispatch();
@@ -34,12 +36,28 @@ function Exercise({ goNext }) {
   const kernelId = useSelector(selectKernelId);
 
   const type = useSelector(selectRootExerciseType);
-  const { active, total, totalDone } = useSelector(selectSteps);
+  const { active, total, totalDone, code: stepsCode } = useSelector(selectSteps);
+  const { nested_exercises } = useSelector(selectRootExercise);
 
   const { open: sidebarOpen } = useSelector(selectExerciseSidebar);
-  const { completed, exercise, xp } = useSelector(selectExerciseContext);
+  const { completed, exercise, xp, code } = useSelector(selectExerciseContext);
   const feedbackModal = useSelector(selectFeedbackModal);
   const signupModal = useSelector(selectSignupModal);
+
+  async function setStep(step) {
+    if (step !== active) {
+      let value = nested_exercises[step - 1];
+      if (stepsCode[step]) {
+        value = {
+          ...value,
+          sample_code: stepsCode[step],
+        };
+      }
+
+      await dispatch(exerciseSlice.actions.put(value));
+      await dispatch(exercisesSlice.actions.setStep({ step, code: { id: active, code } }));
+    }
+  }
 
   useEffect(() => {
     if (completed) {
@@ -47,6 +65,10 @@ function Exercise({ goNext }) {
         if (active < total) {
           if (active > totalDone) {
             dispatch(exercisesSlice.actions.onStepComplete({ xp }));
+
+            if (!exercise.is_graph_required) {
+              setStep(active + 1);
+            }
           }
         }
       }
@@ -54,8 +76,6 @@ function Exercise({ goNext }) {
       dispatch(sendAnswer({ exerciseId: exercise.slug, courseId: exercise.course_slug, xp }));
     }
   }, [completed]);
-
-  const isRanging = type === 'single_bascket' || type === 'multiple_bascket';
 
   return (
     <>
@@ -78,7 +98,7 @@ function Exercise({ goNext }) {
         )}
       </div>
 
-      {isRanging ? <>basket</> : <Stack />}
+      <Stack />
 
       {feedbackModal && (
         <FeedbackModal onClose={() => dispatch(exercisesSlice.actions.closeFeedbackModal({}))} />

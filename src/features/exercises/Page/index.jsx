@@ -8,10 +8,9 @@ import { clearBashShell } from '@store/bashShell/actions';
 import { getExerciseById } from '@src/features/exercises/store/actions';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { selectRootExercise, selectExercisesStatus } from '@src/features/exercises/store/selectors';
+import { selectExercisesStatus } from '@src/features/exercises/store/selectors';
 import ExercisePageBody from '@src/features/exercises/Page/Body';
 import { Preloader } from '@components/mui/preloader';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 const Root = styled(Box)`
   display: flex;

@@ -114,8 +114,6 @@ export default function InstructionHeader() {
   async function setStep(step) {
     if (step !== active) {
       let value = nested_exercises[step - 1];
-      console.log(stepsCode);
-      console.log(step);
       if (stepsCode[step]) {
         value = {
           ...value,

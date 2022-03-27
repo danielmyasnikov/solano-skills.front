@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import useDebounce from '../hooks/useDebounce';
 
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
@@ -60,7 +60,9 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
         <header ref={headerRef} className={styles.header}>
           <div className={styles.headerItem}>
             <div className={styles.logo}>
-              <Logo />
+              <Link to={isAuth ? '/courses' : '/'}>
+                <Logo />
+              </Link>
             </div>
             <div onClick={handleSidebar} className={styles.burgerMenu}>
               <Burger />

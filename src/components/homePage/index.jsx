@@ -1,10 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../headerHome';
 import Footer from '../footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import { HashLink } from 'react-router-hash-link';
@@ -23,51 +22,49 @@ export const HomePage = () => {
 
   const renderImage = (img) => images[img];
 
-  const renderSlides = useMemo(() => {
-    return slides.map(({ bg, title, subtitle, link, btn, items, btnlearn }) => (
-      <div
-        key={title}
-        className={
-          (bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
-          (bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
-          cn(styles.ways__block, styles.ways__block_green)
-        }
-      >
-        <div className={styles.ways__skills}>
-          <div className={styles.ways__skills__title}>{title}</div>
-          <div className={styles.ways__skills__subtitle}>{subtitle}</div>
-          <div className={styles.ways__skills__btn}>
-            <Link to={link}>
-              <Button variant="outlineWhiteHome">
-                {btn}
-                <KeyboardArrowRightIcon />
-              </Button>
-            </Link>
-          </div>
+  const renderSlides = slides.map(({ bg, title, subtitle, link, btn, items, btnlearn }) => (
+    <div
+      key={title}
+      className={
+        (bg === 'blue' && cn(styles.ways__block, styles.ways__block_blue)) ||
+        (bg === 'red' && cn(styles.ways__block, styles.ways__block_red)) ||
+        cn(styles.ways__block, styles.ways__block_green)
+      }
+    >
+      <div className={styles.ways__skills}>
+        <div className={styles.ways__skills__title}>{title}</div>
+        <div className={styles.ways__skills__subtitle}>{subtitle}</div>
+        <div className={styles.ways__skills__btn}>
+          <Link to={link}>
+            <Button variant="outlineWhiteHome">
+              {btn}
+              <KeyboardArrowRightIcon />
+            </Button>
+          </Link>
         </div>
-        <div className={styles.ways__slides}>
-          {items.map(({ title, text, link }, i) => (
-            <div key={title + i} className={styles.ways__slideContainer}>
-              <div className={styles.ways__slide}>
-                <div className={styles.ways__slide__bg}>
-                  <div className={styles.ways__slide__title}>{title}</div>
-                  <div className={styles.ways__slide__text}>{text}</div>
-                  <div className={styles.ways__slide__button}>
-                    <Link to={link}>
-                      <Button variant="outlineBlue">{btnlearn}</Button>
-                    </Link>
-                  </div>
+      </div>
+      <div className={styles.ways__slides}>
+        {items.map(({ title, text, link }, i) => (
+          <div key={title + i} className={styles.ways__slideContainer}>
+            <div className={styles.ways__slide}>
+              <div className={styles.ways__slide__bg}>
+                <div className={styles.ways__slide__title}>{title}</div>
+                <div className={styles.ways__slide__text}>{text}</div>
+                <div className={styles.ways__slide__button}>
+                  <Link to={link}>
+                    <Button variant="outlineBlue">{btnlearn}</Button>
+                  </Link>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    ));
-  }, []);
+    </div>
+  ));
 
-  const renderPractices = useMemo(() => {
-    return practices.map(({ pretitle, title, text, img, textblockTitle, textblockSubtitle }) => (
+  const renderPractices = practices.map(
+    ({ pretitle, title, text, img, textblockTitle, textblockSubtitle }) => (
       <section className={styles.practice} key={title + pretitle}>
         <div className={styles.practice__left}>
           <div className={styles.practice__pretitle}>{pretitle}</div>
@@ -91,31 +88,26 @@ export const HomePage = () => {
           </div>
         </div>
       </section>
-    ));
-  }, []);
+    ),
+  );
 
-  const renderFeedbacks = useMemo(() => {
-    return feedbacks.map(({ avatar, text, author }) => (
-      <div className={styles.whatSays__feedback} key={text + author}>
-        <div className={styles.whatSays__feedback__photo}>
-          <img src={renderImage(avatar)} />
-        </div>
-        <div className={styles.whatSays__feedback__data}>
-          <div className={styles.whatSays__feedback__data__scroll}>
-            <div className={styles.whatSays__feedback__data__text}>{text}</div>
-          </div>
-          <div className={styles.whatSays__feedback__data__author}>{author}</div>
-        </div>
+  const renderFeedbacks = feedbacks.map(({ avatar, text, author }) => (
+    <div className={styles.whatSays__feedback} key={text + author}>
+      <div className={styles.whatSays__feedback__photo}>
+        <img src={renderImage(avatar)} />
       </div>
-    ));
-  }, [feedbacks]);
+      <div className={styles.whatSays__feedback__data}>
+        <div className={styles.whatSays__feedback__data__scroll}>
+          <div className={styles.whatSays__feedback__data__text}>{text}</div>
+        </div>
+        <div className={styles.whatSays__feedback__data__author}>{author}</div>
+      </div>
+    </div>
+  ));
 
   return (
     <div className={styles.home}>
-      <div
-        className={cn({ [styles.blur]: showMenu === true })}
-        onTouchStart={() => handleBurger()}
-      />
+      <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
@@ -146,7 +138,7 @@ export const HomePage = () => {
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
                 <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
-                <Registration key={'home_offer'} isModal={true} variant={'home_offer'} />
+                <Registration key={'home_offer'} isModal variant={'home_offer'} />
               </div>
             </section>
 
@@ -237,7 +229,7 @@ export const HomePage = () => {
                 <div className={styles.signup__subtitle}>чтобы начать обучение прямо сейчас</div>
               </div>
               <div className={styles.signup__block}>
-                <Registration key={'home_end'} isModal={true} variant={'home_end'} />
+                <Registration key={'home_end'} isModal variant={'home_end'} />
               </div>
             </section>
           </main>

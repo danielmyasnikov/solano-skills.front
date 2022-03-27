@@ -1,4 +1,4 @@
-import { useRef, memo, useState } from 'react';
+import { useRef, memo } from 'react';
 
 import Plyr from 'plyr-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,19 @@ export const VideoPlayer = memo(() => {
   return (
     <>
       <Box style={{ position: 'absolute' }}>
-        <Plyr ref={ref} source={sourceData} />
+        <Plyr
+          ref={ref}
+          source={sourceData}
+          options={{
+            quality: {
+              default: localStorage.getItem('plyr')?.quality || 1080,
+            },
+            speed: {
+              default: localStorage.getItem('plyr')?.speed || 1,
+              selected: localStorage.getItem('plyr')?.speed || 1,
+            },
+          }}
+        />
       </Box>
 
       <Box
