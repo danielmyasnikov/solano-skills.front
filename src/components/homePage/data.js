@@ -107,7 +107,7 @@ export const slides = [
     bg: 'red',
     img: 'courses',
     title: 'Курсы',
-    subtitle: '58 курсов',
+    subtitle: '15 курсов',
     link: '/courses',
     btn: 'Смотреть все',
     btnlearn: 'Изучить курс',
