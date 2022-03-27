@@ -14,6 +14,7 @@ export const exercisesSlice = createSlice({
       total: 0,
       totalDone: 0,
       totalXp: 0,
+      code: {},
     },
 
     modals: {
@@ -36,7 +37,9 @@ export const exercisesSlice = createSlice({
     },
 
     setStep: (state, action) => {
-      state.steps.active = action.payload;
+      const { step, code } = action.payload;
+      state.steps.active = step;
+      state.steps.code[code.id] = code.code;
     },
     onStepComplete: (state, action) => {
       state.steps.totalDone += 1;
@@ -74,6 +77,7 @@ export const exercisesSlice = createSlice({
           total: action.payload.nested_exercises.length,
           totalDone: 0,
           totalXp: 0,
+          code: {},
         };
       }
     },

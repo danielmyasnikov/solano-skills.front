@@ -92,7 +92,7 @@ const Profile = () => {
     if (!isAuth) {
       history.push('/courses');
     }
-  }, []);
+  }, [isAuth]);
 
   useEffect(() => {
     if (profile) {

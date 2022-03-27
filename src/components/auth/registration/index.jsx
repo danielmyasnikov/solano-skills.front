@@ -28,7 +28,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
-  const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const { errors } = useSelector(AuthStore.Selectors.getAuth);
   const [checkedError, setCheckedError] = useState('');
   const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
 
@@ -92,7 +92,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
     if (isAuth) {
       history.push('/courses');
     }
-  }, [headers]);
+  }, [isAuth]);
 
   function handleChecked() {
     setCheckedError('');

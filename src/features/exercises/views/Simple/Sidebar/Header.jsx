@@ -14,8 +14,6 @@ const Root = styled(Box)`
   align-items: center;
   justify-content: space-between;
 
-  margin-right: 13px;
-
   z-index: 10;
 
   border-top-left-radius: 15px;

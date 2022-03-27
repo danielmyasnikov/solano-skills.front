@@ -14,7 +14,7 @@ import Draggable from '@components/common/draggable';
 
 const Root = styled(Box)`
   overflow-x: hidden;
-  margin-right: 13px;
+
   background: var(--color-white);
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.04);
   border-radius: 15px;

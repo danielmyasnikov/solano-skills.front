@@ -17,6 +17,7 @@ import axios from 'axios';
 import Terms from '../terms';
 import { ForgotPassword } from '../forgotPassword';
 import { selectIsAuth } from '@store/profile/selector';
+import { getProfile } from '@store/profile/actions';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export const Authorization = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [countTime, setCountTime] = useState(0);
-  const { errors, headers } = useSelector(AuthStore.Selectors.getAuth);
+  const { errors } = useSelector(AuthStore.Selectors.getAuth);
   const [checked, setChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
   const [forgotPassword, setForgotPassword] = useState(false);
@@ -117,7 +118,7 @@ export const Authorization = () => {
     if (isAuth) {
       history.push('/courses');
     }
-  }, [headers]);
+  }, [isAuth]);
 
   useEffect(() => {
     let timer;

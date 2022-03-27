@@ -6,6 +6,8 @@ export const exerciseSlice = createSlice({
   initialState: {
     exercise: null,
 
+    code: '',
+
     completed: false,
     error: '',
 
@@ -40,6 +42,8 @@ export const exerciseSlice = createSlice({
       state.completed = false;
       state.error = '';
 
+      state.code = exercise.sample_code;
+
       state.type = exercise.type;
       state.stackType = exercise.stack_type || 'python';
 
@@ -70,6 +74,10 @@ export const exerciseSlice = createSlice({
           value: exercise.xp - Math.ceil(exercise.xp * 0.3),
         },
       };
+    },
+
+    updateCode: (state, action) => {
+      state.code = action.payload;
     },
 
     useHintFeedback: (state) => {

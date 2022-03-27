@@ -14,7 +14,7 @@ import styles from './styles.module.less';
 import cn from 'classnames';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import { selectCurrentExercise } from '@src/features/exercises/store/selectors';
+import { selectCurrentExercise, selectRootExercise } from '@src/features/exercises/store/selectors';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -79,6 +79,7 @@ const Output = ({ variant }) => {
   const outputRef = useRef();
 
   const terminal = useSelector(selectTerminal);
+  const rootExercise = useSelector(selectRootExercise);
   const exercise = useSelector(selectCurrentExercise);
 
   const dispatch = useDispatch();
@@ -100,8 +101,15 @@ const Output = ({ variant }) => {
   };
 
   useEffect(() => {
-    dispatch(startKernel(exercise?.id));
-  }, [exercise?.id]);
+    if (rootExercise) {
+      dispatch(startKernel(rootExercise.id));
+    }
+  }, [rootExercise]);
+
+  useEffect(() => {
+    if (rootExercise && exercise && terminal.kernelId) {
+    }
+  }, [rootExercise, exercise, terminal.kernelId]);
 
   useEffect(() => {
     if (outputRef && terminal.outputs) {

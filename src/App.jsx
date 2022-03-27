@@ -17,33 +17,39 @@ import styles from './app.module.css';
 import './index.less';
 
 function App() {
-  const [authCounter, setAuthCounter] = useState(0);
-
   const dispatch = useDispatch();
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
-  const uid = localStorage.getItem('uid');
-  const client = localStorage.getItem('client');
-  const accessToken = localStorage.getItem('access-token');
-
-  // const isLogIn = !uid && !client && !accessToken;
-
   useEffect(() => {
+    const uid = localStorage.getItem('uid');
+    const client = localStorage.getItem('client');
+    const accessToken = localStorage.getItem('access-token');
     const expiry = localStorage.getItem('expiry');
+
+    dispatch(
+      getProfile({
+        headers: {
+          uid,
+          client,
+          'access-token': accessToken,
+        },
+      }),
+    );
+
     if (!!uid && !!client && !!accessToken && !!expiry) {
-      const headersLocal = { client, uid, 'access-token': accessToken };
-      dispatch(AuthStore.Actions.setLocalHeaders(headersLocal));
+      dispatch(AuthStore.Actions.setLocalHeaders({ client, uid, 'access-token': accessToken }));
+      if (Number(expiry) > Math.round(new Date().getTime() / 1000)) {
+        // todo
+      }
     }
   }, []);
 
-  useEffect(() => setAuthCounter(authCounter + 1), [headers]);
-
   useEffect(() => {
-    if (authCounter >= 1) {
+    if (headers.uid && headers.client && headers['access-token']) {
       dispatch(getProfile({ headers }));
     }
-  }, [authCounter]);
+  }, [headers]);
 
   return (
     <div className={styles.wrapper}>

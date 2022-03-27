@@ -102,12 +102,10 @@ const Terminal = () => {
   const exercise = useSelector(selectCurrentExercise);
   const { used: solutionUsed, content: solutionContent } = useSelector(selectSolutionHint);
   const isAuth = useSelector(selectIsAuth);
-  const { completed, xp } = useSelector(selectExerciseContext);
+  const { completed, xp, code } = useSelector(selectExerciseContext);
   const kernelId = useSelector(selectKernelId);
 
   const [bytePayload, setBytePayload] = useState([]);
-  const [value, setValue] = useState();
-  const [height, setHeight] = useState(0);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
   const isDisabled = !kernelId;
 
@@ -118,16 +116,11 @@ const Terminal = () => {
       setActiveTab('solution');
     } else {
       setActiveTab('script');
-      setValue(exercise?.sample_code);
     }
-  }, [exercise?.sample_code, solutionUsed]);
-
-  useEffect(() => {
-    setHeight(wrapperRef?.current?.offsetHeight);
-  }, []);
+  }, [solutionUsed]);
 
   function onChange(val) {
-    setValue(val);
+    dispatch(exerciseSlice.actions.updateCode(val));
   }
 
   const handleActiveBytePayload = (action) => {
@@ -168,7 +161,7 @@ const Terminal = () => {
     if (isAuth) {
       dispatch(
         compileShell({
-          code: activeTab === 'solution' ? solutionContent : value,
+          code: activeTab === 'solution' ? solutionContent : code,
           exerciseId: exercise?.id,
           kernelId: terminal.kernelId,
           isGraphRequired: exercise?.is_graph_required,
@@ -177,7 +170,7 @@ const Terminal = () => {
       );
       dispatch(
         checkAnswer(
-          activeTab === 'solution' ? solutionContent : value,
+          activeTab === 'solution' ? solutionContent : code,
           exercise?.id,
           exercise?.is_graph_required,
           xp,
@@ -228,7 +221,7 @@ const Terminal = () => {
             showGutter
             highlightActiveLine
             defaultValue={exercise?.sample_code}
-            value={activeTab === 'solution' ? solutionContent : value}
+            value={activeTab === 'solution' ? solutionContent : code}
             readOnly={activeTab === 'solution'}
             wrapEnabled
             fontSize="16px"
@@ -254,7 +247,7 @@ const Terminal = () => {
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  setValue(exercise?.sample_code);
+                  dispatch(exerciseSlice.actions.updateCode(exercise?.sample_code));
                 } else {
                   dispatch(exercisesSlice.actions.openSignupModal({}));
                 }
@@ -269,7 +262,7 @@ const Terminal = () => {
                 if (isAuth) {
                   dispatch(
                     compileShell({
-                      code: activeTab === 'solution' ? solutionContent : value,
+                      code: activeTab === 'solution' ? solutionContent : code,
                       exerciseId: exercise?.id,
                       kernelId: terminal.kernelId,
                       isGraphRequired: exercise?.is_graph_required,

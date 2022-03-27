@@ -11,9 +11,13 @@ import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
 import { Registration } from '@components/auth/registration';
 import BurgerMenu from '@components/common/burgerMenu';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);
+
+  const isAuth = useSelector(selectIsAuth);
 
   const handleBurger = () => setShowMenu(!showMenu);
 
@@ -64,7 +68,7 @@ export const HomePage = () => {
 
   const renderPractices = useMemo(() => {
     return practices.map(({ pretitle, title, text, img, textblockTitle, textblockSubtitle }) => (
-      <section className={styles.practice}>
+      <section className={styles.practice} key={title + pretitle}>
         <div className={styles.practice__left}>
           <div className={styles.practice__pretitle}>{pretitle}</div>
           <div className={styles.practice__title}>{title}</div>
@@ -92,7 +96,7 @@ export const HomePage = () => {
 
   const renderFeedbacks = useMemo(() => {
     return feedbacks.map(({ avatar, text, author }) => (
-      <div className={styles.whatSays__feedback}>
+      <div className={styles.whatSays__feedback} key={text + author}>
         <div className={styles.whatSays__feedback__photo}>
           <img src={renderImage(avatar)} />
         </div>
@@ -111,8 +115,8 @@ export const HomePage = () => {
       <div
         className={cn({ [styles.blur]: showMenu === true })}
         onTouchStart={() => handleBurger()}
-      ></div>
-      <HeaderHome handleBurger={handleBurger} />
+      />
+      <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
         <div className={styles.container}>

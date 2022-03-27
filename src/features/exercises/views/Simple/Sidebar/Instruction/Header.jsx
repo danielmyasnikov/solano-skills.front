@@ -104,17 +104,27 @@ export default function InstructionHeader() {
   const dispatch = useDispatch();
   const type = useSelector(selectRootExerciseType);
 
-  const { xp } = useSelector(selectExerciseContext);
+  const { xp, code } = useSelector(selectExerciseContext);
   const { nested_exercises } = useSelector(selectRootExercise);
-  const { active, total, totalDone } = useSelector(selectSteps);
+  const { active, total, totalDone, code: stepsCode } = useSelector(selectSteps);
 
   const toggleInstructionHeader = () =>
     dispatch(exercisesSlice.actions.toggleInstructionHeader({}));
 
   async function setStep(step) {
     if (step !== active) {
-      await dispatch(exerciseSlice.actions.put(nested_exercises[step - 1]));
-      await dispatch(exercisesSlice.actions.setStep(step));
+      let value = nested_exercises[step - 1];
+      console.log(stepsCode);
+      console.log(step);
+      if (stepsCode[step]) {
+        value = {
+          ...value,
+          sample_code: stepsCode[step],
+        };
+      }
+
+      await dispatch(exerciseSlice.actions.put(value));
+      await dispatch(exercisesSlice.actions.setStep({ step, code: { id: active, code } }));
     }
   }
 
