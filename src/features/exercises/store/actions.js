@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { Api } from '@src/api/api';
+import { Api } from '@src/api/Api';
 
 export const getExerciseById = createAsyncThunk(
   'exercises/getExerciseById',

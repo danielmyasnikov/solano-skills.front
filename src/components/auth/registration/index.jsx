@@ -12,10 +12,11 @@ import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
 import cn from 'classnames';
 import { selectIsAuth } from '@store/profile/selector';
+import { Redirect } from 'react-router';
+import { getProfile } from '@store/profile/actions';
 
 export const Registration = ({ variant, isModal, onClose }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [buttonTitle, setButtonTitle] = useState('Перейти к обучению');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -102,15 +103,10 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }, [reduxErrors]);
 
   useEffect(() => {
-    if (isAuth) {
-      history.push('/courses');
-      if (isReg) {
-        history.push('/onBoard');
-      } else {
-        history.push('/courses');
-      }
+    if (headers && headers.uid && headers.client) {
+      dispatch(getProfile({ headers }));
     }
-  }, [isAuth]);
+  }, [headers]);
 
   function handleChecked() {
     setCheckedError('');
@@ -132,6 +128,14 @@ export const Registration = ({ variant, isModal, onClose }) => {
       }),
     );
     setIsRegistrationByPhone(!isRegistrationByPhone);
+  }
+
+  if (isReg) {
+    return <Redirect to="/onBoard" />;
+  }
+
+  if (isAuth) {
+    return <Redirect to="/courses" />;
   }
 
   const renderRegistration = () => {

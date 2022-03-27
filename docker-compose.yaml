@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  nginx:
+    container_name: nginx
+    image: web-ds
+    ports:
+      - 3000:80
