@@ -12,6 +12,7 @@ import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
 import cn from 'classnames';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const Registration = ({ variant, isModal, onClose }) => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [buttonTitle, setButtonTitle] = useState('Перейти к обучению');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
+  const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
@@ -87,7 +89,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
+    if (isAuth) {
       history.push('/courses');
     }
   }, [headers]);

@@ -16,6 +16,7 @@ import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import axios from 'axios';
 import Terms from '../terms';
 import { ForgotPassword } from '../forgotPassword';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const Authorization = () => {
   const [buttonTitle, setButtonTitle] = useState('Авторизоваться');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
+  const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
@@ -112,7 +114,7 @@ export const Authorization = () => {
   }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
+    if (isAuth) {
       history.push('/courses');
     }
   }, [headers]);

@@ -11,7 +11,7 @@ import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { patchProfile } from '@store/profile/actions';
-import { selectProfile } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { TextareaAutosize } from '@mui/material';
 import HeaderPage from '../common/headerPage';
 import { Preloader } from '../mui/preloader';
@@ -25,6 +25,7 @@ const Profile = () => {
   const [isFullnameActive, setIsFullnameActive] = useState(false);
   const [information, setInformation] = useState('');
   const [isInformationActive, setIsInformationActive] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
   const fullnameRef = useRef();
 
   const dispatch = useDispatch();
@@ -33,10 +34,6 @@ const Profile = () => {
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
-
-  const uid = localStorage.getItem('uid');
-  const client = localStorage.getItem('client');
-  const accessToken = localStorage.getItem('access-token');
 
   const saveProfile = () => {
     setIsFullnameActive(false);
@@ -92,7 +89,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!uid && !client && !accessToken) {
+    if (!isAuth) {
       history.push('/courses');
     }
   }, []);

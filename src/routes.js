@@ -1,4 +1,4 @@
-import ExercisePage from '@components/exercise';
+import ExercisePage from '@src/features/exercises/Page';
 import Profile from '@components/profile';
 import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';

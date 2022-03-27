@@ -1,0 +1,196 @@
+.terminalHeader {
+  width: 100%;
+  display: flex;
+  background: #413f56;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  .tab {
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #413f56;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    color: #6a687a;
+    &:nth-child(1) {
+      border-top-left-radius: 18px;
+    }
+  }
+  .tabActive {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #fff;
+    background: rgba(44, 42, 63, 0.45);
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.quizOutputContainer {
+  background: #2c2a3f;
+  height: calc(100% - 50px);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow-y: hidden;
+  span {
+    &:not(&:first-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.noneEvents {
+  pointer-events: none;
+}
+
+.content {
+  overflow-y: auto;
+  padding: 10px 20px 10px 20px;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  bottom: 0;
+
+  .terminalLine {
+    margin-bottom: 10px !important;
+
+    & > div {
+      & > pre:empty {
+        display: none !important;
+      }
+      font-family: 'Hack';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 142%;
+    }
+  }
+
+  .shell {
+    padding: 0;
+  }
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+  }
+}
+
+.outputWrapper {
+  height: calc(75% - 47px);
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 24px;
+  }
+
+  &.folded {
+    height: 44px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    .outputHeader {
+      overflow: hidden;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+    }
+  }
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+.outputContainer {
+  background: #2c2a3f;
+  height: 100%;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow-y: hidden;
+  :global {
+    .ansi2html-content {
+      font-family: 'Hack';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 142%;
+      color: #fff;
+    }
+    .ansi31 {
+      color: #f92672;
+    }
+    .ansi32 {
+      color: #00ff19;
+    }
+    .ansi34 {
+      color: #fff;
+    }
+    .ansi36 {
+      color: #66d9ef;
+    }
+  }
+  span {
+    &:not(&:first-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.success {
+  display: block;
+  color: rgba(200, 193, 133, 1);
+}
+
+.error {
+  display: block;
+  color: #d15555;
+  margin-bottom: 15px;
+}
+
+.shell {
+  font-family: 'Hack';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #6a687a;
+
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+
+  input {
+    flex: 1;
+    font-size: 16px;
+    background: none;
+    margin-left: 10px;
+    padding-left: 10px;
+    color: #fff;
+    line-height: 24px;
+    border: 1px solid #545266;
+    &:focus {
+      outline: none;
+      border: 1px solid #858396;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .outputWrapper,
+  .quizOutputContainer {
+    height: 330px;
+  }
+  .outputWrapper {
+    margin-top: 16px;
+  }
+  .outputContainer {
+    height: 330px;
+  }
+}

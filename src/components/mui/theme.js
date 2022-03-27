@@ -252,6 +252,12 @@ export const ratingTheme = createTheme({
       styleOverrides: {
         root: {
           color: '#F7CC35',
+
+          '.MuiRating-iconEmpty': {
+            svg: {
+              fill: 'gray',
+            },
+          },
         },
       },
     },

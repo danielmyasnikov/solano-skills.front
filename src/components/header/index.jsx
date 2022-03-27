@@ -6,8 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
-import { selectProfile } from '@store/profile/selector';
-import * as AuthStore from '@store/auth';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
 import { ModalActionMenu } from './ModalActionMenu';
 import { ModalTariffSelection } from './ModalTariffSelection';
@@ -26,12 +25,10 @@ import styles from './styles.module.less';
 
 const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupportReport }) => {
   const [searchValue, setSearchValue] = useState('');
-  const [isAuth, setIsAuth] = useState(false);
+  const isAuth = useSelector(selectIsAuth);
   const debouncedSearch = useDebounce(search, 500);
   const [showModal, setshowModal] = useState(false);
   const [showMenuModal, setshowMenuModal] = useState(false);
-
-  const { headers } = useSelector(AuthStore.Selectors.getAuth);
 
   const history = useHistory();
 
@@ -56,14 +53,6 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
   };
 
   useEffect(() => setshowModal(isShowModal), [isShowModal]);
-
-  useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [headers]);
 
   return (
     <>

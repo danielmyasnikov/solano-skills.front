@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 
 import * as AuthStore from '@store/auth';
 import { useRef } from 'react';
+import { selectIsAuth } from '@store/profile/selector';
 
 const Sidebar = ({
   sidebarFixed,
@@ -26,8 +27,7 @@ const Sidebar = ({
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
 
-  const [isAuth, setIsAuth] = useState(false);
-  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+  const isAuth = useSelector(selectIsAuth);
 
   const location = useLocation();
   const sidebarRef = useRef();
@@ -75,7 +75,7 @@ const Sidebar = ({
         </Box>
       </React.Fragment>
     ));
-  }, [studyItems])
+  }, [studyItems]);
 
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -91,14 +91,6 @@ const Sidebar = ({
   });
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [headers]);
-
-  useEffect(() => {
     if (isDesktop && sidebarFixed) {
       openSidebar();
     } else {
@@ -108,7 +100,7 @@ const Sidebar = ({
 
   useEffect(() => {
     if (sidebarFixed) {
-      setIsDesktop(windowWidth > breakpoint ? true : false);
+      setIsDesktop(windowWidth > breakpoint);
     }
   }, [windowWidth, sidebarFixed]);
 

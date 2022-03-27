@@ -1,20 +1,58 @@
-.draggable {
+.container {
+  display: flex;
+  align-items: center;
   z-index: 50;
   position: absolute;
-  right: -13px;
+  right: 0;
+  justify-content: center;
+  bottom: 0;
   cursor: col-resize;
+  width: 26px;
+  top: 0;
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  &.noIcon {
+    .draggable {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .draggable {
+      background: rgba(237, 235, 255, 0.5);
+
+      svg path {
+        stroke: rgba(#7469ef, 0.5);
+      }
+    }
+  }
+
+  &:active {
+    .draggable {
+      background: rgb(237 235 255);
+
+      svg path {
+        stroke: var(--purple);
+      }
+    }
+  }
+}
+
+.draggable {
   width: 13px;
   height: 44px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   background: #fff;
   top: 0;
-  svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  margin-left: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 640px) {
