@@ -102,7 +102,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }, [reduxErrors]);
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
+    if (isAuth) {
       history.push('/courses');
       if (isReg) {
         history.push('/onBoard');
@@ -110,7 +110,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
         history.push('/courses');
       }
     }
-  }, [headers]);
+  }, [isAuth]);
 
   function handleChecked() {
     setCheckedError('');
