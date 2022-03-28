@@ -1,15 +1,31 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const headers = {
-	uid: window.localStorage.getItem('uid'),
-	'access-token': window.localStorage.getItem('access-token'),
-	client: window.localStorage.getItem('client'),
-	expiry: window.localStorage.getItem('expiry'),
-}
+const baseQuery = fetchBaseQuery({
+	baseUrl: `${process.env.REACT_APP_API_COURSE}/api/v1/`,
+	prepareHeaders: (headers) => {
+		// @ts-ignore
+		const authHeaders = {
+			uid: window.localStorage.getItem('uid'),
+			'access-token': window.localStorage.getItem('access-token'),
+			client: window.localStorage.getItem('client'),
+			expiry: window.localStorage.getItem('expiry'),
+		};
+		if (authHeaders.uid) {
+			headers.set('uid', authHeaders.uid);
+		}
+		if (authHeaders.client) {
+			headers.set('client', authHeaders.client);
+		}
+		if (authHeaders['access-token']) {
+			headers.set('access-token', authHeaders['access-token']);
+		}
+		return headers;
+	},
+})
 
 export const certificateApi = createApi({
 	reducerPath: 'certificateApi',
-	baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_API_COURSE}/api/v1/`}),
+	baseQuery,
 	endpoints: (build) => ({
 		getCertificates: build.query({
 			query: () => ({
