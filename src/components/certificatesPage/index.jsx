@@ -20,7 +20,7 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { Preloader } from '../mui/preloader';
 import { Grid } from '@mui/material';
-import { Api } from '@src/api/api';
+import { Api } from '@src/api/Api';
 import { useHistory } from 'react-router';
 
 export const CertificatesPage = () => {
