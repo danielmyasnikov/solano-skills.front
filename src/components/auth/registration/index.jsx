@@ -14,6 +14,7 @@ import cn from 'classnames';
 import { selectIsAuth } from '@store/profile/selector';
 import { Redirect, useLocation } from 'react-router';
 import { getProfile } from '@store/profile/actions';
+import { AuthorizationByEmail } from '../authorizationByEmail';
 
 export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = false }) => {
   const dispatch = useDispatch();
@@ -23,13 +24,18 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
   const [confirmationCode, setConfirmationCode] = useState('');
   const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
+  const [isAuthFromExercise, setIsAuthFromExercise] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
 
   const location = useLocation();
+
+  const history = useHistory();
 
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -80,8 +86,24 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
     }
   }
 
+  const signInHandler = () => {
+    if (location.pathname !== '/registration' && location.pathname !== '/') {
+      setIsAuthFromExercise(!isAuthFromExercise);
+      setButtonTitle('Авторизоваться');
+    } else {
+      history.push('/sign-in');
+    }
+  };
+
+  const handleRemberMe = () => setRememberMe(!rememberMe);
+
+  const forgotPasswordHandler = () => setForgotPassword(!forgotPassword);
+
   function submit() {
     setIsSubmit(true);
+    if (isAuthFromExercise) {
+      dispatch(AuthStore.Actions.singIn(email, password));
+    }
     if (checked && !isRegistrationByPhone) {
       dispatch(AuthStore.Actions.registration(email, password, passwordConfirmation));
     }
@@ -142,7 +164,11 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
 
   if (isAuth) {
     onClose?.();
-    return <Redirect to="/courses" />;
+    if (isAuthFromExercise) {
+      return <Redirect to={location.pathname} />;
+    } else {
+      return <Redirect to="/courses" />;
+    }
   }
 
   const renderRegistration = () => {
@@ -153,21 +179,36 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
             <Close />
           </div>
         )}
-        <h1 className={cn(styles.title)}>Создайте аккаунт, чтобы начать обучение</h1>
-        {!isRegistrationByPhone && !isPhoneNumberConfirmation && (
-          <RegistrationByEmail
-            variant={variant}
-            handleChecked={handleChecked}
-            handleChange={handleChange}
-            email={email}
-            password={password}
-            passwordConfirmation={passwordConfirmation}
-            errors={errors}
-            checkedError={checkedError}
-            checked={checked}
-            handleAuthMethod={handleAuthMethod}
-          />
-        )}
+        {(!isAuthFromExercise && (
+          <h1 className={cn(styles.title)}>Создайте аккаунт, чтобы начать обучение</h1>
+        )) || <h1 className={cn(styles.title)}>Добро пожаловать</h1>}
+        {!isRegistrationByPhone &&
+          !isPhoneNumberConfirmation &&
+          ((!isAuthFromExercise && (
+            <RegistrationByEmail
+              variant={variant}
+              handleChecked={handleChecked}
+              handleChange={handleChange}
+              email={email}
+              password={password}
+              passwordConfirmation={passwordConfirmation}
+              errors={errors}
+              checkedError={checkedError}
+              checked={checked}
+              handleAuthMethod={handleAuthMethod}
+            />
+          )) || (
+            <AuthorizationByEmail
+              handleChange={handleChange}
+              email={email}
+              password={password}
+              errors={errors}
+              rememberMe={rememberMe}
+              handleRemberMe={handleRemberMe}
+              handleAuthMethod={handleAuthMethod}
+              onForgotPassword={forgotPasswordHandler}
+            />
+          ))}
         {isRegistrationByPhone && !isPhoneNumberConfirmation && (
           <>
             <ByPhoneNumber
@@ -214,12 +255,28 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
         )}
         {/* <SocialNetworks variant={variant} /> */}
         <div className={styles.toAuth}>
-          <span className={styles.text}>
-            {'Уже есть аккаунт? '}
-            <Link className={styles.infoLink} to={'/sign-in'}>
-              Войти
-            </Link>
-          </span>
+          {(!isAuthFromExercise && (
+            <>
+              <span className={styles.text}>
+                {'Уже есть аккаунт? '}
+                <span className={styles.infoLink} onClick={signInHandler}>
+                  Войти
+                </span>
+              </span>
+            </>
+          )) || (
+            <>
+              <span className={styles.text}>
+                {'У вас нет аккаунта? '}
+                <span
+                  className={styles.infoLink}
+                  onClick={() => setIsAuthFromExercise(!isAuthFromExercise)}
+                >
+                  Зарегистрироваться
+                </span>
+              </span>
+            </>
+          )}
         </div>
       </div>
     );
