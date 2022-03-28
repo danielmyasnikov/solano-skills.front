@@ -11,6 +11,7 @@ import feedbackReducer from './feedback/reducer';
 import onBoardReducer from './onBoard/reducer';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { certificateApi } from '../features/certificates/certificates.api';
 
 const rootReducer = combineReducers({
   terminal: terminalReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   course: courseReducer,
   profile: profileReducer,
+  [certificateApi.reducerPath]: certificateApi.reducer,
   bashShell: bashShellReducer,
   tariffs: tariffsReducer,
   progress: progressReducer,

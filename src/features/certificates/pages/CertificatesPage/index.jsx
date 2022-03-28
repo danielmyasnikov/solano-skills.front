@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as AuthStore from '@store/auth';
-import { selectIsAuth, selectProfile } from '@store/profile/selector';
+import { selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
+import { certificateApi } from '../../certificates.api';
 
-import Certificate from './certificate';
+import Certificate from './Certificate';
 import Button from '@components/mui/button';
-import { Avatar } from '../profile/Avatar';
+import { Avatar } from '@components/profile/Avatar';
 
 import Edit from '@assets/Edit';
 import DefaultAvatar from '@assets/defaultUserAvatarBig.png';
@@ -18,22 +19,18 @@ import DefaultAvatar from '@assets/defaultUserAvatarBig.png';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
-import { Preloader } from '../mui/preloader';
+import { Preloader } from '@components/mui/preloader';
 import { Grid } from '@mui/material';
-import { Api } from '@src/api/api';
-import { useHistory } from 'react-router';
 
-export const CertificatesPage = () => {
+const CertificatesPage = () => {
   const fullnameRef = useRef();
-  const history = useHistory();
-  const [certificates, setCertificates] = useState();
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
+  const { data: certificates, isLoading } = certificateApi.useGetCertificatesQuery();
 
   const dispatch = useDispatch();
 
-  const isAuth = useSelector(selectIsAuth);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
@@ -76,14 +73,6 @@ export const CertificatesPage = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    if (isAuth) {
-      Api.get('/api/v1/certificates').then((e) => setCertificates(e));
-    } else {
-      history.push('/');
-    }
-  }, []);
 
   useEffect(() => {
     if (profile.name) {
@@ -142,11 +131,11 @@ export const CertificatesPage = () => {
           <Button variant="containedPurple">Сертификаты</Button>
         </div>
         <div className={styles.certificates}>
-          {(certificates && (
+          {(!isLoading && (
             <Grid container spacing={4}>
               {certificates.map((certificate) => (
-                <Grid item xl={3} md={4} sm={6} xs={12}>
-                  <Certificate key={certificate.id} id={certificate.id} />
+                <Grid key={certificate.id} item xl={3} md={4} sm={6} xs={12}>
+                  <Certificate id={certificate.id} />
                 </Grid>
               ))}
             </Grid>
@@ -160,3 +149,5 @@ export const CertificatesPage = () => {
     </div>
   );
 };
+
+export default CertificatesPage;
