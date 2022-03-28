@@ -12,10 +12,10 @@ import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
 import cn from 'classnames';
 import { selectIsAuth } from '@store/profile/selector';
-import { Redirect } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import { getProfile } from '@store/profile/actions';
 
-export const Registration = ({ variant, isModal, onClose }) => {
+export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = false }) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [buttonTitle, setButtonTitle] = useState('Перейти к обучению');
@@ -28,6 +28,8 @@ export const Registration = ({ variant, isModal, onClose }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
+
+  const location = useLocation();
 
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -131,10 +133,15 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }
 
   if (isReg) {
+    onClose?.();
+    if (location.pathname !== '/registration' && location.pathname !== '/') {
+      return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;
+    }
     return <Redirect to="/onBoard" />;
   }
 
   if (isAuth) {
+    onClose?.();
     return <Redirect to="/courses" />;
   }
 

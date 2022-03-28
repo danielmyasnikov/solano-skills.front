@@ -123,11 +123,10 @@ export function* patchPassword(action) {
     localStorage.setItem('expiry', expiry);
 
     const headers = { client, uid, 'access-token': accessToken };
-
     yield put({
       type: PATCH_PASSWORD_SUCCESSED,
       payload: {
-        data: response,
+        data: response.data,
         headers,
       },
     });

@@ -44,7 +44,7 @@ export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirm
       password,
       password_confirmation: passwordConfirmation,
     })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((error) => {
       throw error;
     });
