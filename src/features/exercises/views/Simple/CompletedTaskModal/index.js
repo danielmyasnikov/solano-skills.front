@@ -11,7 +11,7 @@ import {
   selectSteps,
 } from '@src/features/exercises/store/selectors';
 
-const CompletedTaskModal = ({ onClick }) => {
+const CompletedTaskModal = ({ onClick, onClose }) => {
   const rootExercise = useSelector(selectRootExercise);
   const { xp, exercise } = useSelector(selectExerciseContext);
   const type = useSelector(selectRootExerciseType);
@@ -28,7 +28,7 @@ const CompletedTaskModal = ({ onClick }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
-        <img src={Close} className={styles.closeModal} onClick={onClick} />
+        <img src={Close} className={styles.closeModal} onClick={onClose} />
         <Complete />
         <span className={styles.xp}>{value !== 0 ? `+${value} XP` : `${value} XP`}</span>
         <div className={styles.rating}>

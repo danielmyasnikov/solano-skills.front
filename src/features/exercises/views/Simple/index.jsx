@@ -25,7 +25,7 @@ import {
 } from '@src/features/exercises/store/selectors';
 import { exercisesSlice } from '../../store/slices/exercises.slice';
 import RegistrationModal from '@components/common/modals/registration/registrationModal';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { sendAnswer } from '@src/features/exercises/store/actions';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
@@ -35,6 +35,7 @@ function Exercise({ goNext }) {
 
   const kernelId = useSelector(selectKernelId);
 
+  const [completeModalClosed, setCompleteModalClosed] = useState(false);
   const type = useSelector(selectRootExerciseType);
   const { active, total, totalDone, code: stepsCode } = useSelector(selectSteps);
   const { nested_exercises } = useSelector(selectRootExercise);
@@ -91,9 +92,11 @@ function Exercise({ goNext }) {
             </>
           )}
         </div>
-        {completed && (type !== 'bullet_point_exercise' || active === total) && (
-          <CompletedTaskModal onClick={goNext} />
-        )}
+        {!completeModalClosed &&
+          completed &&
+          (type !== 'bullet_point_exercise' || active === total) && (
+            <CompletedTaskModal onClick={goNext} onClose={() => setCompleteModalClosed(true)} />
+          )}
       </div>
 
       <Stack />
