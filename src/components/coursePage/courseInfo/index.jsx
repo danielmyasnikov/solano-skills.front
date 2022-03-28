@@ -1,9 +1,12 @@
 import React from 'react';
-import Button from '@components/mui/button';
-import styles from './styles.module.less';
-import { numberDeclension } from '../../common/helpers/ numberDeclension';
 
-export const CourseInfo = ({ hours, videos, exercises, xps }) => {
+import Button from '@components/mui/button';
+
+import { numberDeclension } from '../../common/helpers/numberDeclension';
+
+import styles from './styles.module.less';
+
+export const CourseInfo = ({ hours, videos, exercises, xps, onStartLearning }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.blocks}>
@@ -33,10 +36,11 @@ export const CourseInfo = ({ hours, videos, exercises, xps }) => {
       </div>
 
       <div className={styles.btnWrapper}>
-        <Button variant="containedPurple" className={styles.btn}>
+        <Button variant="containedPurple" className={styles.btn} onClick={() => onStartLearning()}>
           Начать обучение
         </Button>
-        <Button variant="outlinePurple">Пройти курс снова</Button>
+        {/* Временно скрываем кнопку до появления функционала*/}
+        {/* <Button variant="outlinePurple">Пройти курс снова</Button> */}
       </div>
     </div>
   );

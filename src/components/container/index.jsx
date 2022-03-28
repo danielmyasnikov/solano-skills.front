@@ -3,7 +3,7 @@ import styles from './styles.module.less';
 import Header from '@components/header';
 import HeaderExercise from '@components/headerExercise';
 import { useRouteMatch } from 'react-router-dom';
-import { sidebarPath } from '../../sidebarPath';
+import { sidebarPath } from '@src/sidebarPath';
 import Sidebar from '@components/mui/sidebar';
 import { FeedbackModal } from '../common/modals/feedback';
 
@@ -32,11 +32,7 @@ const Container = ({ Component, headerVariant }) => {
   const handleUpdateSubscription = () => setShowModalSubscription(true);
 
   useEffect(() => {
-    if (sidebarPath.includes(match.path)) {
-      setSidebarFixed(true);
-    } else {
-      setSidebarFixed(false);
-    }
+    setSidebarFixed(sidebarPath.includes(match.path));
   }, [match.path]);
 
   return (

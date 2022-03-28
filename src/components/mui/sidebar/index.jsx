@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import styles from './styles.module.less';
 import { profileItems, studyItems } from './menuItems';
@@ -12,8 +12,8 @@ import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import * as AuthStore from '@store/auth';
 import { useRef } from 'react';
+import { selectIsAuth } from '@store/profile/selector';
 
 const Sidebar = ({
   sidebarFixed,
@@ -26,8 +26,7 @@ const Sidebar = ({
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
 
-  const [isAuth, setIsAuth] = useState(false);
-  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+  const isAuth = useSelector(selectIsAuth);
 
   const location = useLocation();
   const sidebarRef = useRef();
@@ -55,27 +54,19 @@ const Sidebar = ({
 
   const handleUpdateSubscription = () => onUpdateSubscription();
 
-  const renderStudyItems = useMemo(() => {
-    return studyItems.map(({ label, icon }) => (
-      <React.Fragment key={label}>
-        <Box
-          sx={{
-            margin: '0 20px',
-          }}
+  const renderStudyItems = studyItems.map(({ label, icon }) => (
+    <Box key={label} sx={{ margin: '0 20px' }}>
+      <List>
+        <ListItem
+          onClick={() => setActiveTab(label)}
+          className={activeTab === label ? styles.activeTab : ''}
         >
-          <List>
-            <ListItem
-              onClick={() => setActiveTab(label)}
-              className={activeTab === label ? styles.activeTab : ''}
-            >
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={label} />
-            </ListItem>
-          </List>
-        </Box>
-      </React.Fragment>
-    ));
-  }, [studyItems])
+          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemText primary={label} />
+        </ListItem>
+      </List>
+    </Box>
+  ));
 
   useEffect(() => {
     setActiveTab(location.pathname);
@@ -91,14 +82,6 @@ const Sidebar = ({
   });
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [headers]);
-
-  useEffect(() => {
     if (isDesktop && sidebarFixed) {
       openSidebar();
     } else {
@@ -108,7 +91,7 @@ const Sidebar = ({
 
   useEffect(() => {
     if (sidebarFixed) {
-      setIsDesktop(windowWidth > breakpoint ? true : false);
+      setIsDesktop(windowWidth > breakpoint);
     }
   }, [windowWidth, sidebarFixed]);
 
@@ -126,29 +109,30 @@ const Sidebar = ({
             <div className={styles.items}>
               {!sidebarFixed && (
                 <Box className={styles.logo}>
-                  <Logo />
+                  <Link to={isAuth ? '/courses' : '/'}>
+                    <Logo />
+                  </Link>
                 </Box>
               )}
               <Box className={styles.label}>Профиль</Box>
               {profileItems.map(({ label, link, icon }) => (
-                <React.Fragment key={label}>
-                  <Link
-                    to={link}
-                    className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
-                  >
-                    <Box sx={{ margin: '0 20px' }}>
-                      <List>
-                        <ListItem
-                          onClick={() => setActiveTab(link)}
-                          className={activeTab === link ? styles.activeTab : ''}
-                        >
-                          <ListItemIcon>{icon}</ListItemIcon>
-                          <ListItemText primary={label} />
-                        </ListItem>
-                      </List>
-                    </Box>
-                  </Link>
-                </React.Fragment>
+                <Link
+                  key={label}
+                  to={link}
+                  className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
+                >
+                  <Box sx={{ margin: '0 20px' }}>
+                    <List>
+                      <ListItem
+                        onClick={() => setActiveTab(link)}
+                        className={activeTab === link ? styles.activeTab : ''}
+                      >
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText primary={label} />
+                      </ListItem>
+                    </List>
+                  </Box>
+                </Link>
               ))}
               <Divider />
               <div className={styles.studing}>

@@ -283,8 +283,15 @@
     position: relative;
 
     &__bg {
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      right: 0;
+      left: 0;
+
+      height: 100%;
       border-radius: 19px;
-      padding: 216px 35px 35px;
+      padding: 0 35px 35px;
       background: linear-gradient(
           270deg,
           rgba(219, 227, 247, 0) 0%,
@@ -302,6 +309,10 @@
       &:hover {
         padding-top: 10px;
 
+        .ways__slide__title {
+          height: initial;
+        }
+
         .ways__slide {
           &__bg {
             padding: 35px;
@@ -317,6 +328,10 @@
     }
 
     &__title {
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+
       font-family: 'Jost';
       font-weight: 600;
       font-size: 24px;

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
-import { selectExercise } from '@store/exercise/selector';
 import { selectProfile } from '@store/profile/selector';
 
 import Button from '@components/mui/button';
@@ -21,13 +20,15 @@ import MenuCourse from '@assets/MenuCourse.js';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
+import { getExerciseById } from '@src/features/exercises/store/actions';
+import { selectRootExercise } from '@src/features/exercises/store/selectors';
 
 const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
   const dispatch = useDispatch();
   const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
   const { courseId } = useParams();
   const location = useLocation();
-  const exercise = useSelector(selectExercise);
+  const exercise = useSelector(selectRootExercise);
   const history = useHistory();
 
   const courseData = useSelector(selectCourse);
@@ -47,7 +48,7 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
           slug={courseId}
           parts={course.parts || []}
           isOpen={courseContentIsOpen}
-          coursePartSlug={exercise.course_part_slug}
+          coursePartSlug={exercise?.course_part_slug}
           onClose={() => setCourseContentIsOpen(!courseContentIsOpen)}
         />
       )}
@@ -60,13 +61,14 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
         <nav className={cn(styles.headerItem, styles.navbarCourse)}>
           <Button
             className={cn(styles.btn, styles.prev, {
-              [styles.disabled]: !exercise.prev_exercise_id,
+              [styles.disabled]: !exercise?.prev_exercise_id,
             })}
-            disabled={exercise.prev_exercise_id ? false : true}
+            disabled={!exercise?.prev_exercise_id}
             variant="outlineBlack"
-            onClick={() =>
-              history.push(`/courses/${courseId}/exercises/${exercise.prev_exercise_id}`)
-            }
+            onClick={() => {
+              history.push(`/courses/${courseId}/exercises/${exercise?.prev_exercise_id}`);
+              dispatch(getExerciseById({ courseId, exerciseId: exercise?.prev_exercise_id }));
+            }}
           >
             <Prev />
           </Button>
@@ -79,12 +81,13 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
             <span>Содержание курса</span>
           </Button>
           <Button
-            onClick={() =>
-              history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`)
-            }
-            disabled={exercise.next_exercise_id ? false : true}
+            onClick={() => {
+              history.push(`/courses/${courseId}/exercises/${exercise?.next_exercise_id}`);
+              dispatch(getExerciseById({ courseId, exerciseId: exercise?.next_exercise_id }));
+            }}
+            disabled={!exercise?.next_exercise_id}
             className={cn(styles.btn, styles.next, {
-              [styles.disabled]: !exercise.next_exercise_id,
+              [styles.disabled]: !exercise?.next_exercise_id,
             })}
             variant="outlineBlack"
           >

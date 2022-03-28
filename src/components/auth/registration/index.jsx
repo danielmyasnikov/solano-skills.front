@@ -11,22 +11,27 @@ import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import Terms from '../terms';
 import cn from 'classnames';
+import { selectIsAuth } from '@store/profile/selector';
+import { Redirect } from 'react-router';
+import { getProfile } from '@store/profile/actions';
 
 export const Registration = ({ variant, isModal, onClose }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [buttonTitle, setButtonTitle] = useState('Перейти к обучению');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [confirmationСode, setConfirmationCode] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState('');
+  const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [checked, setChecked] = useState(false);
   const [phoneTermsChecked, setPhoneTermsChecked] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+
   const [checkedError, setCheckedError] = useState('');
   const [phoneTermsCheckedError, setPhoneTermsCheckedError] = useState('');
 
@@ -98,13 +103,8 @@ export const Registration = ({ variant, isModal, onClose }) => {
   }, [reduxErrors]);
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
-      if (isReg) {
-        history.push('/onBoard');
-      } else {
-        history.push('/courses');
-      }
+    if (headers && headers.uid && headers.client) {
+      dispatch(getProfile({ headers }));
     }
   }, [headers]);
 
@@ -128,6 +128,14 @@ export const Registration = ({ variant, isModal, onClose }) => {
       }),
     );
     setIsRegistrationByPhone(!isRegistrationByPhone);
+  }
+
+  if (isReg) {
+    return <Redirect to="/onBoard" />;
+  }
+
+  if (isAuth) {
+    return <Redirect to="/courses" />;
   }
 
   const renderRegistration = () => {
@@ -174,7 +182,7 @@ export const Registration = ({ variant, isModal, onClose }) => {
           <PhoneNumberConfirmation
             variant={variant}
             handleChange={handleChange}
-            confirmationСode={confirmationСode}
+            confirmationСode={confirmationCode}
             handleAuthMethod={() => {
               setConfirmationCode('');
               setIsPhoneNumberConfirmation(false);

@@ -1,0 +1,117 @@
+.content {
+  width: 100%;
+  padding: 6.5% 0;
+  min-height: calc(100vh - 73px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 18px;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 127%;
+  color: var(--color-black);
+}
+
+.description {
+  margin-bottom: 33px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 127%;
+  color: var(--color-black);
+}
+
+.xp {
+  margin-left: 13px;
+  padding: 3px 6px;
+  background-color: var(--very-light-yellow);
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 127%;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.btnWrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+
+  button:first-child {
+    margin-right: 20px;
+  }
+}
+
+.playerWrapper {
+  position: relative;
+  max-width: 1200px;
+  max-height: 626px;
+  border-radius: 20px;
+  box-shadow: 0 4px 56px rgb(82 60 100 / 53%);
+
+  video {
+    background: white;
+    object-fit: fill;
+  }
+
+  :global {
+    .plyr-react .plyr,
+    .plyr,
+    .plyr-react,
+    .plyr--menu-open,
+    .plyr__poster video {
+      background: white;
+      height: 626px;
+      width: 1200px;
+      border-radius: 20px;
+      object-fit: fill;
+    }
+
+    .plyr:fullscreen .plyr__video-wrapper {
+      border-radius: 0;
+      object-fit: fill;
+      height: auto;
+    }
+    .plyr__video-wrapper {
+      border-radius: 20px;
+      object-fit: fill;
+      height: auto;
+    }
+
+    @media screen and (max-width: 1800px) {
+      .plyr-react .plyr,
+      .plyr,
+      .plyr-react,
+      .plyr--menu-open,
+      .plyr__poster video {
+        height: 532px;
+        width: 1021px;
+        object-fit: fill;
+      }
+    }
+    @media screen and (max-width: 1024px) {
+      .plyr-react .plyr,
+      .plyr,
+      .plyr-react,
+      .plyr--menu-open,
+      .plyr__poster video {
+        height: auto;
+        width: 90vw;
+        object-fit: fill;
+      }
+    }
+
+    --plyr-color-main: var(--purple);
+    --plyr-video-range-track-background: var(--lavender);
+  }
+}
+
+.transcript {
+  white-space: pre-line;
+  max-width: 922px;
+  padding-bottom: 66px;
+  margin: 0 auto 100px;
+}

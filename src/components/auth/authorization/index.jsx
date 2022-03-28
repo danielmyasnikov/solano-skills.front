@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import cn from 'classnames';
 import styles from './styles.module.less';
-import { InputPassword } from '@components/mui/inputPassword';
-import { Input } from '@components/mui/input';
 import Button from '@components/mui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContainer } from './../authContainer';
-import { SocialNetworks } from './../socialNetworks';
-import { CheckboxBtn } from '@components/mui/checkbox';
 import { AuthorizationByEmail } from '../authorizationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
 import { PhoneNumberConfirmation } from '../phoneNumberConfirmation';
 import axios from 'axios';
 import Terms from '../terms';
 import { ForgotPassword } from '../forgotPassword';
+import { selectIsAuth } from '@store/profile/selector';
+import { Redirect } from 'react-router';
+import { getProfile } from '@store/profile/actions';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [buttonTitle, setButtonTitle] = useState('Авторизоваться');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmationСode, setConfirmationCode] = useState('');
+  const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
   const [password, setPassword] = useState('');
@@ -112,8 +110,8 @@ export const Authorization = () => {
   }, [isPhoneNumberConfirmation, isRegistrationByPhone]);
 
   useEffect(() => {
-    if (headers.uid && headers.client && headers['access-token']) {
-      history.push('/courses');
+    if (headers && headers.uid && headers.client) {
+      dispatch(getProfile({ headers }));
     }
   }, [headers]);
 
@@ -129,6 +127,10 @@ export const Authorization = () => {
       }
     };
   }, [countTime]);
+
+  if (isAuth) {
+    return <Redirect to="/courses" />;
+  }
 
   return (
     <AuthContainer>

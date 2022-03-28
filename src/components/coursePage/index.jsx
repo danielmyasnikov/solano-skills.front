@@ -1,28 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import styles from './styles.module.less';
+
+import { useHistory, useParams } from 'react-router';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { selectCourse } from '@store/course/selector';
 import { getCourse } from '@store/course/actions';
+
 import { Auth } from './author';
 import { CourseInfo } from './courseInfo';
 import { CourseList } from './courseList';
 import { CourseSidebar } from './courseSidebar';
-import { useHistory, useLocation, useParams } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './styles.module.less';
 
 export const CoursePage = () => {
-  const { courseId } = useParams();
-  const history = useHistory();
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const courseData = useSelector(selectCourse);
   const [course, setCourse] = useState({});
-  useEffect(() => {
-    setCourse(courseData);
-  }, [courseData]);
 
-  useEffect(() => {
-    dispatch(getCourse(courseId));
-  }, []);
+  const { courseId } = useParams();
+
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
+  const courseData = useSelector(selectCourse);
+
+  const startLearningHandler = () => {
+    history.push(`/courses/${courseData.slug}/exercises/${courseData.exercises[0].id}`);
+  };
+
+  useEffect(() => setCourse(courseData), [courseData]);
+
+  useEffect(() => dispatch(getCourse(courseId)), []);
 
   return (
     <div className={styles.wrapper}>
@@ -43,6 +52,7 @@ export const CoursePage = () => {
             videos={course?.count_videos}
             exercises={course?.count_exercises}
             xps={course?.count_xps}
+            onStartLearning={startLearningHandler}
           />
         </div>
         <div className={styles.contentWrap}>
