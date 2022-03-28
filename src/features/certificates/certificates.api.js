@@ -3,7 +3,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const baseQuery = fetchBaseQuery({
 	baseUrl: `${process.env.REACT_APP_API_COURSE}/api/v1/`,
 	prepareHeaders: (headers) => {
-		// @ts-ignore
 		const authHeaders = {
 			uid: window.localStorage.getItem('uid'),
 			'access-token': window.localStorage.getItem('access-token'),
@@ -30,19 +29,21 @@ export const certificateApi = createApi({
 		getCertificates: build.query({
 			query: () => ({
 				url: 'certificates',
-				headers
 			})
 		}),
 		getCertificate: build.query({
-			query: (cid) => ({
-				url: `certificates/${cid}`,
+			query: (id) => ({
+				url: `certificates/${id}`,
 			})
 		}),
 		takeCertificate: build.mutation({
 			query: (courseId) => ({
 				url: `courses/${courseId}/certificates`,
 				method: 'POST',
-				headers
+				body: {
+					"html": "<div>hello</div>",
+					"force": true
+				}
 			})
 		}) 
 	})

@@ -34,16 +34,17 @@ export default function ExercisePageBody() {
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
   const { courseId } = useParams();
-  const { data, error } = certificateApi.useTakeCertificateMutation(exercise?.course_slug);
-  console.log(exercise?.course_slug);
-  console.log(data, error);
+  const [takeCertificate] = certificateApi.useTakeCertificateMutation(courseId);
 
   if (!exercise) {
     return null;
   }
 
   const goNext = async () => {
-    history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+    if (exercise?.is_certificate_ready) {
+      const res = await takeCertificate(courseId);
+      history.push(`/certificates/${res.data.id}`);
+    } else history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
   };
 
   switch (exercise?.type) {
