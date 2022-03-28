@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, useLocation, Link } from 'react-router-dom';
 
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import Button from '@components/mui/button';
@@ -10,11 +10,13 @@ import styles from './styles.module.less';
  * TODO: refactoring. Not working with useModal: does not have an onClose prop
  */
 export const WelcomeCourse = ({ open, handleClick, logo }) => {
-  const history = useHistory();
-  const routeChange = () => {
-    const path = `/courses`;
-    history.push(path);
-  };
+  const useQuery = () => new URLSearchParams(useLocation().search);
+
+  const query = useQuery();
+
+  const returnUrl = query.get('returnUrl');
+
+  console.log(returnUrl);
 
   return (
     <Dialog
@@ -44,9 +46,9 @@ export const WelcomeCourse = ({ open, handleClick, logo }) => {
           </span>
         </DialogContent>
         <DialogActions className={styles.dialogActions}>
-          <Button variant="containedPurple" onClick={routeChange}>
-            Начинаем!
-          </Button>
+          <Link to={returnUrl || '/courses'}>
+            <Button variant="containedPurple">Начинаем!</Button>
+          </Link>
         </DialogActions>
       </div>
     </Dialog>

@@ -44,6 +44,20 @@ export const PasswordResetPage = () => {
         history.push('/sign-in');
       }, 3000);
     } else if (recoveryPasswordStatus === 'success') {
+      const uid = localStorage.getItem('uid');
+      const client = localStorage.getItem('client');
+      const accessToken = localStorage.getItem('access-token');
+
+      dispatch(
+        getProfile({
+          headers: {
+            uid,
+            client,
+            'access-token': accessToken,
+          },
+        }),
+      );
+
       history.push('/courses');
     }
   }, [recoveryPasswordStatus]);
