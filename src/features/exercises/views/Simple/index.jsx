@@ -102,7 +102,10 @@ function Exercise({ goNext }) {
         <FeedbackModal onClose={() => dispatch(exercisesSlice.actions.closeFeedbackModal({}))} />
       )}
       {signupModal && (
-        <RegistrationModal onClose={() => dispatch(exercisesSlice.actions.closeSignupModal({}))} />
+        <RegistrationModal
+          isOpenFromExercises
+          onClose={() => dispatch(exercisesSlice.actions.closeSignupModal({}))}
+        />
       )}
     </>
   );
