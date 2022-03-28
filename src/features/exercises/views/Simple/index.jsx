@@ -66,9 +66,7 @@ function Exercise({ goNext }) {
           if (active > totalDone) {
             dispatch(exercisesSlice.actions.onStepComplete({ xp }));
 
-            if (!exercise.is_graph_required) {
-              setStep(active + 1);
-            }
+            setStep(active + 1);
           }
         }
       }

@@ -115,10 +115,20 @@ export function* requestPasswordReset(action) {
 export function* patchPassword(action) {
   try {
     const response = yield call(patchPasswordApi, action.payload);
+    const { client, uid, expiry, 'access-token': accessToken } = response.headers;
+
+    localStorage.setItem('uid', uid);
+    localStorage.setItem('access-token', accessToken);
+    localStorage.setItem('client', client);
+    localStorage.setItem('expiry', expiry);
+
+    const headers = { client, uid, 'access-token': accessToken };
+
     yield put({
       type: PATCH_PASSWORD_SUCCESSED,
       payload: {
         data: response,
+        headers,
       },
     });
   } catch (e) {

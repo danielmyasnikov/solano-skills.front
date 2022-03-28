@@ -59,6 +59,7 @@ export default function authReducer(state = initialState, action) {
     case PATCH_PASSWORD_SUCCESSED: {
       return {
         recoveryPasswordStatus: 'success',
+        headers: action.payload.headers,
         ...action.payload.data,
       };
     }
