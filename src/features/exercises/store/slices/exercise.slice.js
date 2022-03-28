@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getExerciseById } from '@src/features/exercises/store/actions';
+import { reorder } from '@src/features/exercises/utils/dnd';
 
 export const exerciseSlice = createSlice({
   name: 'exercise',
@@ -17,6 +18,17 @@ export const exerciseSlice = createSlice({
     xp: 0,
 
     quizVariants: [],
+
+    ranging: {
+      // single
+      orderIds: '',
+      // multiple
+      mainBasket: {},
+      baskets: [],
+      // common
+      title: '',
+      items: [],
+    },
 
     hints: {
       hintUsefulness: false,
@@ -61,6 +73,42 @@ export const exerciseSlice = createSlice({
         state.quizVariants = [];
       }
 
+      if (exercise.type === 'single_bascket') {
+        state.ranging = {
+          title: exercise.basckets[0].title,
+          orderIds: exercise.ids_order,
+          items: exercise.statements.map((e) => ({
+            id: String(e.id),
+            text: e.text,
+            errorMessage: e.error_message,
+          })),
+        };
+      }
+
+      if (exercise.type === 'multiple_bascket') {
+        const mainBasket = exercise.basckets.find((e) => e.is_main);
+
+        state.ranging = {
+          title: mainBasket.title,
+          baskets: exercise.basckets
+            .filter((e) => !e.is_main)
+            .map((e) => ({
+              id: e.id,
+              title: e.title,
+            })),
+          mainBasket: {
+            id: mainBasket.id,
+            title: mainBasket.title,
+          },
+          items: exercise.statements.map((e) => ({
+            id: String(e.id),
+            basketId: e.bascket_id,
+            text: e.text,
+            errorMessage: e.error_message,
+          })),
+        };
+      }
+
       state.hints = {
         feedback: false,
         hint: {
@@ -76,6 +124,21 @@ export const exerciseSlice = createSlice({
       };
     },
 
+    updateErrorIds: (state, action) => {
+      state.ranging.items.map((e, i) => ({
+        ...e,
+        isError: action.payload.find((e) => e === i + 1) !== undefined,
+      }));
+    },
+    updateItems: (state, action) => {
+      const { sourceIndex, destinationIndex } = action.payload;
+
+      state.ranging.items = reorder(
+        state.ranging.items.map((e) => ({ ...e, isError: false })),
+        sourceIndex,
+        destinationIndex,
+      );
+    },
     updateCode: (state, action) => {
       state.code = action.payload;
     },

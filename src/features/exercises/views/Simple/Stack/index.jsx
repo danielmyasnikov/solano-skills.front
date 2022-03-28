@@ -6,13 +6,16 @@ import { Box } from '@mui/material';
 import {
   selectStackType,
   selectExerciseType,
-  selectRootExerciseType,
+  selectCurrentExercise,
 } from '../../../store/selectors';
 
 import UnixShell from './UnixShell';
 import Terminal from './Terminal';
 
 import Output from './Output';
+import DndBlock from '@src/features/exercises/views/Simple/Stack/MultipleRanging';
+import React from 'react';
+import SingleRanging from '@src/features/exercises/views/Simple/Stack/SingleRanging';
 
 const Root = styled(Box)`
   flex-direction: column;
@@ -43,8 +46,12 @@ const Stack = () => {
   const stackType = useSelector(selectStackType);
 
   const renderStack = () => {
-    if (type === 'single_bascket' || type === 'multiple_bascket') {
-      return 'isRanging';
+    switch (type) {
+      case 'single_bascket':
+      case 'multiple_bascket':
+        return <SingleRanging />;
+      default:
+        break;
     }
 
     switch (stackType) {

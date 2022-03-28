@@ -11,8 +11,6 @@ import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
-import RegistrationModal from '@components/common/modals/registration/registrationModal';
-
 import Button from '@components/mui/button';
 import Draggable from '@components/common/draggable';
 
@@ -33,7 +31,7 @@ import {
   selectExerciseContext,
   selectSolutionHint,
 } from '@src/features/exercises/store/selectors';
-import { selectIsAuth } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 
 const Placeholder = styled(Box)`
@@ -98,6 +96,7 @@ const Terminal = () => {
   const wrapperRef = useRef();
   const dispatch = useDispatch();
 
+  const { user_id } = useSelector(selectProfile);
   const terminal = useSelector(selectTerminal);
   const exercise = useSelector(selectCurrentExercise);
   const { used: solutionUsed, content: solutionContent } = useSelector(selectSolutionHint);
@@ -174,6 +173,7 @@ const Terminal = () => {
           exercise?.id,
           exercise?.is_graph_required,
           xp,
+          user_id,
         ),
       );
     } else {

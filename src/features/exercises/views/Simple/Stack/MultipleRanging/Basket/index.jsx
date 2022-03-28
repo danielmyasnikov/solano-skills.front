@@ -4,6 +4,8 @@ import usePagination from '@mui/material/usePagination';
 import styles from './styles.module.less';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { useSelector } from 'react-redux';
+import { selectCurrentExercise } from '@src/features/exercises/store/selectors';
 
 const Statement = styled(Box)`
   padding: 10px;
@@ -15,7 +17,9 @@ const Statement = styled(Box)`
   margin-bottom: 10px;
 `;
 
-const Basket = ({ variant, basketInfo }) => {
+const Basket = ({ basketInfo }) => {
+  const variant = useSelector(selectCurrentExercise);
+
   const { items } = usePagination({
     count: basketInfo.statements.length,
   });

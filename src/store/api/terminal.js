@@ -38,10 +38,10 @@ export const compileShellApi = ({ code, kernelId, exerciseId, isGraphRequired })
     });
 };
 
-export const checkAnswerApi = ({ code, exerciseId, isGraphRequired, xp }) => {
+export const checkAnswerApi = ({ code, exerciseId, isGraphRequired, xp, userId }) => {
   return axios
     .post(
-      `${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=${isGraphRequired}&xp=${xp}&userId=2`,
+      `${process.env.REACT_APP_API_TERMINAL}/checkExercise/${exerciseId}?isGraphRequired=${isGraphRequired}&xp=${xp}&userId=${userId}`,
       {
         code,
       },

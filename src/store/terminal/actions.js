@@ -45,10 +45,10 @@ export const compileShell = ({ code, exerciseId, lineNumber, kernelId, type, isG
   };
 };
 
-export const checkAnswer = (code, exerciseId, isGraphRequired, xp) => {
+export const checkAnswer = (code, exerciseId, isGraphRequired, xp, userId) => {
   return {
     type: CHECK_ANSWER_REQUESTED,
-    payload: { code, exerciseId, isGraphRequired, xp },
+    payload: { code, exerciseId, isGraphRequired, xp, userId },
   };
 };
 

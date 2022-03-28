@@ -5,6 +5,7 @@ import BurgerExit from '@assets/BurgerExit.svg';
 import Input from '@components/mui/inputSearch';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Link } from 'react-router-dom';
 
 const BurgerMenu = ({ isShow, handleBurger }) => {
   const [showItems, setShowItems] = useState(false);
@@ -22,18 +23,22 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
         <div className={styles.links}>
           <div className={styles.link}>
             <div className={styles.link__title} onClick={() => setShowItems(!showItems)}>
-              Обучение{' '}
-              {showItems !== true && (
-                <KeyboardArrowDownIcon fontSize="small" />
-              ) || (
+              <Link to="/courses">
+                <span style={{ color: '#46445c' }}>Обучение</span>
+              </Link>
+              {/*
+                (!showItems ? <KeyboardArrowDownIcon fontSize="small" />) : (
                 <KeyboardArrowUpIcon fontSize="small" />
-              )}
+              )
+               */}
             </div>
-            <div className={cn(styles.link__items, { [styles.hidden]: showItems !== true })}>
+            {/*
+               <div className={cn(styles.link__items, { [styles.hidden]: !showItems })}>
               <div className={styles.link__item}>Профессии</div>
               <div className={styles.link__item}>Курсы</div>
               <div className={styles.link__item}>Навыки</div>
             </div>
+             */}
           </div>
           <div className={styles.link}>Тарифы</div>
           <div className={styles.link}>Поддержка</div>

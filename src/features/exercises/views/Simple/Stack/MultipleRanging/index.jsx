@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import Button from '@components/mui/button';
-import Basket from '../Basket';
+import Basket from './Basket';
 import styles from './styles.module.less';
+import { useSelector } from 'react-redux';
+import {
+  selectBaskets,
+  selectCurrentExercise,
+  selectMainBasket,
+} from '@src/features/exercises/store/selectors';
 
-const DndBlock = ({ variant, initBaskets, initStatements, checkAnswer }) => {
-  const [baskets, setBaskets] = useState(
-    initBaskets.map((basket) => {
-      if (basket.is_main) {
-        basket.statements = initStatements;
-        return basket;
-      } else return basket;
-    }),
-  );
+const MultipleRanging = () => {
+  const variant = useSelector(selectCurrentExercise);
+  const baskets = useSelector(selectBaskets);
+  const mainBasket = useSelector(selectMainBasket);
 
   const onDragHandler = (result) => {
     if (!result.destination) return;
@@ -39,30 +39,24 @@ const DndBlock = ({ variant, initBaskets, initStatements, checkAnswer }) => {
       destinationStatements.splice(destination.index, 0, removed);
     }
 
-    setBaskets(baskets);
+    // setBaskets(baskets);
   };
 
   return (
     <DragDropContext onDragEnd={onDragHandler}>
-      <Basket
-        key={baskets[0].id}
-        variant={variant}
-        bascketInfo={baskets.filter((basket) => basket.is_main)[0]}
-      />
+      <Basket variant={variant} bascketInfo={mainBasket} />
       {baskets.length > 1 && (
         <div className={styles.dnd}>
-          {baskets
-            .filter((basket) => !basket.is_main)
-            .map((basket) => (
-              <Basket key={basket.id} variant={'common_basket'} bascketInfo={basket} />
-            ))}
+          {baskets.map((basket) => (
+            <Basket key={basket.id} variant={'common_basket'} bascketInfo={basket} />
+          ))}
         </div>
       )}
       <div className={styles.checkAnswerBtn}>
         <Button
           variant="containedPurple"
           onClick={() => {
-            checkAnswer(baskets);
+            // checkAnswer(baskets);
           }}
         >
           Ответить
@@ -72,4 +66,4 @@ const DndBlock = ({ variant, initBaskets, initStatements, checkAnswer }) => {
   );
 };
 
-export default DndBlock;
+export default MultipleRanging;
