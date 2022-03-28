@@ -8,10 +8,10 @@ export const links = [
         text: 'Манипуляции с данными',
         link: '/courses/manipulating-data-with-pandas'
       },
-      {
-        text: 'Введение в shell',
-        link: '/courses/introduction-to-shell'
-      },
+      // {
+      //   text: 'Введение в shell',
+      //   link: '/courses/introduction-to-shell'
+      // },
       {
         text: 'Эффективный код',
         link: '/courses/writing-efficient-python-code'
@@ -30,79 +30,79 @@ export const links = [
       },
     ],
   },
-  {
-    title: 'Профессии',
-    link: '/professions',
-    style: 'professions',
-    items: [
-      {
-        text: 'Python программист',
-        link: '/professions/python-programmer'
-      },
-      {
-        text: 'Data Scientist',
-        link: '/professions/data-scientist'
-      },
-      {
-        text: 'Data Analyst',
-        link: '/professions/data-analyst'
-      },
-    ],
-  },
-  {
-    title: 'Навыки',
-    style: 'skills',
-    link: '/skills',
-    items: [
-      {
-        text: 'Python разработка',
-        link: '/skills/python-developing'
-      },
-      {
-        text: 'Измнение Data',
-        link: '/skills/data-manipulation'
-      },
-      {
-        text: 'Чистка Данных',
-        link: '/skills/data-cleaning'
-      },
-    ],
-  },
-  {
-    title: 'О компании',
-    style: 'about',
-    link: '/',
-    items: [
-      {
-        text: 'Лицензия',
-        link: '/'
-      },
-      {
-        text: 'Вакансии',
-        link: '/'
-      },
-      {
-        text: 'Отзывы',
-        link: '/'
-      },
-      {
-        text: 'Экспертам',
-        link: '/'
-      },
-      {
-        text: 'Партнёрам',
-        link: '/'
-      },
-      {
-        text: 'Контакты',
-        link: '/'
-      },
-      {
-        text: 'Помощь',
-        link: '/'
-      },
-    ],
-  },
+  // {
+  //   title: 'Профессии',
+  //   link: '/professions',
+  //   style: 'professions',
+  //   items: [
+  //     {
+  //       text: 'Python программист',
+  //       link: '/professions/python-programmer'
+  //     },
+  //     {
+  //       text: 'Data Scientist',
+  //       link: '/professions/data-scientist'
+  //     },
+  //     {
+  //       text: 'Data Analyst',
+  //       link: '/professions/data-analyst'
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'Навыки',
+  //   style: 'skills',
+  //   link: '/skills',
+  //   items: [
+  //     {
+  //       text: 'Python разработка',
+  //       link: '/skills/python-developing'
+  //     },
+  //     {
+  //       text: 'Измнение Data',
+  //       link: '/skills/data-manipulation'
+  //     },
+  //     {
+  //       text: 'Чистка Данных',
+  //       link: '/skills/data-cleaning'
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'О компании',
+  //   style: 'about',
+  //   link: '/',
+  //   items: [
+  //     {
+  //       text: 'Лицензия',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Вакансии',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Отзывы',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Экспертам',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Партнёрам',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Контакты',
+  //       link: '/'
+  //     },
+  //     {
+  //       text: 'Помощь',
+  //       link: '/'
+  //     },
+  //   ],
+  // },
   {
     title: 'Помощь',
     style: 'help',
