@@ -150,7 +150,11 @@ const CertificatesPage = () => {
               ) : (
                 certificates.map((certificate) => (
                   <Grid key={certificate.id} item xl={3} md={4} sm={6} xs={12}>
-                    <Certificate id={certificate.id} pdfUrl={certificate.url} />
+                    <Certificate
+                      id={certificate.id}
+                      pdfUrl={certificate.url.pdf}
+                      jpfUrl={certificate.url.jpg}
+                    />
                   </Grid>
                 ))
               )}
