@@ -19,7 +19,7 @@ const CertificatePage = () => {
           <Preloader size="100px" />
         </div>
       ) : (
-        <PDFViewer src={data.url} />
+        <PDFViewer src={data.url.pdf} />
       )}
     </div>
   );
