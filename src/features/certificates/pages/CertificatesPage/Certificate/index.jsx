@@ -6,7 +6,7 @@ import { DownloadIcon } from '@assets/DownloadIcon';
 import { ShareIcon } from '@assets/ShareIcon';
 import styles from './styles.module.less';
 
-const Certificate = ({ id }) => {
+const Certificate = ({ id, pdfUrl }) => {
   return (
     <div className={styles.sertificate}>
       <img src={certificateImg} />
@@ -14,7 +14,9 @@ const Certificate = ({ id }) => {
         <Link to={`/certificates/${id}`}>
           <ZoomIcon />
         </Link>
-        <DownloadIcon />
+        <a href={pdfUrl} download target="_blank">
+          <DownloadIcon />
+        </a>
         <ShareIcon />
       </div>
     </div>

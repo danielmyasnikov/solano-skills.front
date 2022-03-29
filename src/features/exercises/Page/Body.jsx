@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import Exercise from '@src/features/exercises/views/Simple';
 import { useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
+import { certificateApi } from '@src/features/certificates/certificates.api';
+import { Api } from '@src/api/api';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -31,13 +34,17 @@ export default function ExercisePageBody() {
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
   const { courseId } = useParams();
+  const [takeCertificate] = certificateApi.useTakeCertificateMutation(courseId);
 
   if (!exercise) {
     return null;
   }
 
-  const goNext = () => {
-    history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+  const goNext = async () => {
+    if (exercise?.is_certificate_ready) {
+      const res = await takeCertificate(courseId);
+      history.push(`/certificates/${res.data.id}`);
+    } else history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
   };
 
   switch (exercise?.type) {

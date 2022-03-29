@@ -13,8 +13,8 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
   const renderImage = (src) => images[src];
 
   const renderHowItems = () => {
-    return howItems.map(({ text, number, src }) => (
-      <div className={styles.how__item}>
+    return howItems.map(({ text, number, src }, i) => (
+      <div key={i} className={styles.how__item}>
         <img src={renderImage(src)} alt={'src'} />
         <div className={styles.how__item__text}>{text}</div>
         <div className={styles.how__item__number}>{number}</div>
@@ -23,8 +23,8 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
   };
 
   const renderWhenItems = () => {
-    return whenItems.map((text) => (
-      <div className={styles.when__item}>
+    return whenItems.map((text, i) => (
+      <div key={i} className={styles.when__item}>
         <div className={styles.when__item__number}>
           <DoneGreen />
         </div>

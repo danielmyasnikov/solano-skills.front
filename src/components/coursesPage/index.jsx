@@ -41,22 +41,27 @@ export const CoursesPage = () => {
         </p>
       </div>
       <div className={styles.contentWrapper}>
-        {(progress.hasOwnProperty('status') && isAuth && (
-          <ProgressComponent
-            status={progress.status}
-            courseId={progress.course_id}
-            exerciseId={progress.exercise_id}
-            courseTitle={progress.name}
-            courseLogo={CourseLogo}
-            amountOfExercise={progress.left_to_do}
-            progress={progress.progress}
-          />
-        )) ||
-          (isAuth && !progress.hello_world && (
-            <div className={styles.preloaderContainer}>
-              <Preloader size="60px" />
-            </div>
-          ))}
+        {Object.keys(progress).length > 0 && isAuth && (
+          <>
+            {progress.hasOwnProperty('status') ? (
+              <ProgressComponent
+                status={progress.status}
+                courseId={progress.course_id}
+                exerciseId={progress.exercise_id}
+                courseTitle={progress.name}
+                courseLogo={CourseLogo}
+                amountOfExercise={progress.left_to_do}
+                progress={progress.progress}
+              />
+            ) : (
+              !progress.hello_world && (
+                <div className={styles.preloaderContainer}>
+                  <Preloader size="60px" />
+                </div>
+              )
+            )}
+          </>
+        )}
         <div className={styles.content}>
           {coursesList?.map((item, i) => (
             <Card key={i} info={item} />
