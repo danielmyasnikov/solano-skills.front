@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as AuthStore from '@store/auth';
-import { selectProfile } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
 import { certificateApi } from '../../certificates.api';
 
@@ -21,16 +21,18 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { Preloader } from '@components/mui/preloader';
 import { Grid } from '@mui/material';
+import { Redirect } from 'react-router';
 
 const CertificatesPage = () => {
   const fullnameRef = useRef();
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
-  const { data: certificates, isLoading } = certificateApi.useGetCertificatesQuery();
+  const { data: certificates, isLoading, error } = certificateApi.useGetCertificatesQuery();
 
   const dispatch = useDispatch();
 
+  const isAuth = useSelector(selectIsAuth);
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
 
@@ -79,6 +81,10 @@ const CertificatesPage = () => {
       setFullname(profile.name);
     }
   }, [profile]);
+
+  if (!isAuth) {
+    return <Redirect to="/courses" />;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -131,18 +137,24 @@ const CertificatesPage = () => {
           <Button variant="containedPurple">Сертификаты</Button>
         </div>
         <div className={styles.certificates}>
-          {(!isLoading && (
-            <Grid container spacing={4}>
-              {certificates.map((certificate) => (
-                <Grid key={certificate.id} item xl={3} md={4} sm={6} xs={12}>
-                  <Certificate id={certificate.id} />
-                </Grid>
-              ))}
-            </Grid>
-          )) || (
+          {isLoading ? (
             <div className={styles.preloader}>
               <Preloader size="100px" />
             </div>
+          ) : (
+            <Grid container spacing={4}>
+              {error ? (
+                <Grid item xl={3} md={4} sm={6} xs={12}>
+                  Что-то пошло не так...
+                </Grid>
+              ) : (
+                certificates.map((certificate) => (
+                  <Grid key={certificate.id} item xl={3} md={4} sm={6} xs={12}>
+                    <Certificate id={certificate.id} pdfUrl={certificate.url} />
+                  </Grid>
+                ))
+              )}
+            </Grid>
           )}
         </div>
       </div>
