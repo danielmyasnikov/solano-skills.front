@@ -51,3 +51,6 @@ export const certificateApi = createApi({
     }),
   }),
 });
+
+export const { useGetCertificatesQuery, useGetCertificateQuery, useTakeCertificateMutation } =
+  certificateApi;

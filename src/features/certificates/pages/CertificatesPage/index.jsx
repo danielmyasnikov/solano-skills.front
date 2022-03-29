@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import * as AuthStore from '@store/auth';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { patchProfile } from '@store/profile/actions';
-import { certificateApi } from '../../certificates.api';
+import { useGetCertificatesQuery } from '@src/features/certificates/certificates.api';
 
 import Certificate from './Certificate';
 import Button from '@components/mui/button';
@@ -28,7 +28,7 @@ const CertificatesPage = () => {
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
-  const { data: certificates, isLoading, error } = certificateApi.useGetCertificatesQuery();
+  const { data: certificates, isLoading, error } = useGetCertificatesQuery();
 
   const dispatch = useDispatch();
 

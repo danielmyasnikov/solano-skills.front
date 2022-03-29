@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import Exercise from '@src/features/exercises/views/Simple';
+import VideoExercise from '@src/features/exercises/views/Video';
 import { useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { certificateApi } from '@src/features/certificates/certificates.api';
-import { Api } from '@src/api/api';
-import VideoExercise from '@src/features/exercises/views/Video';
+import { useTakeCertificateMutation } from '@src/features/certificates/certificates.api';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import CertModal from '@src/features/exercises/Page/CertModal';
 
 const Root = styled(Box)`
   display: flex;
@@ -31,36 +31,58 @@ const Root = styled(Box)`
 `;
 
 export default function ExercisePageBody() {
+  const [showModal, setShowModal] = useState(false);
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
   const { courseId } = useParams();
-  const [takeCertificate] = certificateApi.useTakeCertificateMutation(courseId);
+  const [takeCertificateApi] = useTakeCertificateMutation(courseId);
 
   if (!exercise) {
     return null;
   }
 
-  const goNext = async () => {
-    if (exercise?.is_certificate_ready) {
-      const res = await takeCertificate(courseId);
-      history.push(`/certificates/${res.data.id}`);
-    } else history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+  const takeCertificate = async () => {
+    const res = await takeCertificateApi(courseId);
+    history.push(`/certificates/${res.data.id}`);
   };
 
-  switch (exercise?.type) {
-    case 'video':
-      return <VideoExercise goNext={goNext} />;
-    case 'single_bascket':
-    case 'multiple_bascket':
-    case 'bullet_point_exercise':
-    case 'normal_exercise':
-    case 'quiz':
-      return (
-        <Root>
-          <Exercise goNext={goNext} />
-        </Root>
-      );
-    default:
-      throw Error('not implement');
-  }
+  const goNext = async () => {
+    switch (exercise?.certificate_status) {
+      case 'ready':
+        await takeCertificate();
+        return;
+      case 'information_is_required':
+        setShowModal(!showModal);
+        return;
+      case 'course_is_not_completed':
+        return;
+    }
+    history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+  };
+
+  const renderContent = () => {
+    switch (exercise?.type) {
+      case 'video':
+        return <VideoExercise goNext={goNext} />;
+      case 'single_bascket':
+      case 'multiple_bascket':
+      case 'bullet_point_exercise':
+      case 'normal_exercise':
+      case 'quiz':
+        return (
+          <Root>
+            <Exercise goNext={goNext} />
+          </Root>
+        );
+      default:
+        throw Error('not implement');
+    }
+  };
+
+  return (
+    <>
+      <CertModal onSubmit={takeCertificate} isShow={showModal} />
+      {renderContent()}
+    </>
+  );
 }
