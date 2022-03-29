@@ -42,8 +42,18 @@ export const certificateApi = createApi({
       }),
       providesTags: (result, error, id) => [{ type: 'Certificate', id }],
     }),
+    takeCertificateWithFio: build.mutation({
+      query: ({ courseId, name }) => ({
+        url: `courses/${courseId}/certificates`,
+        method: 'POST',
+        body: {
+          profile: { name },
+        },
+      }),
+      invalidatesTags: ['Certificate'],
+    }),
     takeCertificate: build.mutation({
-      query: (courseId) => ({
+      query: ({ courseId }) => ({
         url: `courses/${courseId}/certificates`,
         method: 'POST',
       }),
@@ -52,5 +62,9 @@ export const certificateApi = createApi({
   }),
 });
 
-export const { useGetCertificatesQuery, useGetCertificateQuery, useTakeCertificateMutation } =
-  certificateApi;
+export const {
+  useGetCertificatesQuery,
+  useGetCertificateQuery,
+  useTakeCertificateMutation,
+  useTakeCertificateWithFioMutation,
+} = certificateApi;

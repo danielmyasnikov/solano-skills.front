@@ -8,8 +8,9 @@ import { useHistory } from 'react-router';
 import { useTakeCertificateMutation } from '@src/features/certificates/certificates.api';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import CertModal from '@src/features/exercises/Page/CertModal';
-import { CongratulationsModal } from './CongragulationModal/CongragulationsModal';
+import FailFIOModal from '@src/features/exercises/Page/FailFIOModal';
+import { CongratulationsModal } from './CongragulationsModal';
+import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
 
 const Root = styled(Box)`
   display: flex;
@@ -32,37 +33,31 @@ const Root = styled(Box)`
 `;
 
 export default function ExercisePageBody() {
-  const [showModal, setShowModal] = useState(false);
+  const { courseId } = useParams();
+  const [showFailFIOModal, setShowFailFIOModal] = useState(false);
+  const [showCourseIsNotCompletedModal, setShowCourseIsNotCompletedModal] = useState(false);
   const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
-  const { courseId } = useParams();
-  const [takeCertificateApi] = useTakeCertificateMutation(courseId);
 
   if (!exercise) {
     return null;
   }
 
-  const takeCertificate = async () => {
-    const res = await takeCertificateApi(courseId);
-    history.push(`/certificates/${res.data.id}`);
-  };
-
   const goNext = async () => {
     switch (exercise?.certificate_status) {
       case 'ready':
-        await takeCertificate();
-        setShowCongratulationsModal(!showCongratulationsModal);
-        return;
+        setShowCongratulationsModal(true);
+        break;
       case 'information_is_required':
-        setShowModal(!showModal);
-        return;
+        setShowFailFIOModal(true);
+        break;
       case 'course_is_not_completed':
-        return;
+        setShowCourseIsNotCompletedModal(true);
+        break;
       default:
-        return;
+        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
     }
-    history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
   };
 
   const renderContent = () => {
@@ -86,8 +81,9 @@ export default function ExercisePageBody() {
 
   return (
     <>
-      <CertModal onSubmit={takeCertificate} isShow={showModal} />
-      <CongratulationsModal submit={takeCertificate} isShow={showCongratulationsModal} />
+      <FailFIOModal isShow={showFailFIOModal} />
+      <CongratulationsModal isShow={showCongratulationsModal} />
+      <NotCompleteModal isShow={showCourseIsNotCompletedModal} />
       {renderContent()}
     </>
   );

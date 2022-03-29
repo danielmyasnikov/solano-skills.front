@@ -9,6 +9,8 @@ export const exercisesSlice = createSlice({
 
     exercise: null,
 
+    certificateStatus: 'idle',
+
     steps: {
       active: 1,
       total: 0,
@@ -70,6 +72,8 @@ export const exercisesSlice = createSlice({
     [getExerciseById.fulfilled]: (state, action) => {
       state.status = 'success';
       state.exercise = action.payload;
+
+      state.certificateStatus = action.payload.certificate_status;
 
       if (action.payload.type === 'bullet_point_exercise') {
         state.steps = {
