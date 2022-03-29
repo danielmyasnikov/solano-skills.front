@@ -9,6 +9,7 @@ import { useTakeCertificateMutation } from '@src/features/certificates/certifica
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CertModal from '@src/features/exercises/Page/CertModal';
+import { CongratulationsModal } from './CongragulationModal/CongragulationsModal';
 
 const Root = styled(Box)`
   display: flex;
@@ -32,6 +33,7 @@ const Root = styled(Box)`
 
 export default function ExercisePageBody() {
   const [showModal, setShowModal] = useState(false);
+  const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
   const { courseId } = useParams();
@@ -50,11 +52,14 @@ export default function ExercisePageBody() {
     switch (exercise?.certificate_status) {
       case 'ready':
         await takeCertificate();
+        setShowCongratulationsModal(!showCongratulationsModal);
         return;
       case 'information_is_required':
         setShowModal(!showModal);
         return;
       case 'course_is_not_completed':
+        return;
+      default:
         return;
     }
     history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
@@ -82,6 +87,7 @@ export default function ExercisePageBody() {
   return (
     <>
       <CertModal onSubmit={takeCertificate} isShow={showModal} />
+      <CongratulationsModal submit={takeCertificate} isShow={showCongratulationsModal} />
       {renderContent()}
     </>
   );

@@ -11,7 +11,7 @@ import { sendFeedback } from '@store//feedback/actions';
 import Button from '@components/mui/button';
 import Close from '@assets/Close.js';
 
-import SuccessIcon from './assets/successIcon.svg';
+import SuccessIcon from '@assets/successIcon.svg';
 
 import { VariantsList } from './constants';
 
