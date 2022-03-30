@@ -41,15 +41,7 @@ const Content = styled(Box)`
 `;
 
 export default function ErrorMessage() {
-  const bottom = useRef();
-
   const { error } = useSelector(selectExerciseContext);
-
-  useEffect(() => {
-    if (!!error) {
-      bottom.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [error]);
 
   return (
     <>
@@ -66,8 +58,6 @@ export default function ErrorMessage() {
           </Content>
         </Root>
       )}
-
-      <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
     </>
   );
 }

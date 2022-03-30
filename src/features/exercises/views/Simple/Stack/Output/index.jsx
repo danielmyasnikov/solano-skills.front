@@ -123,6 +123,10 @@ const Output = ({ variant }) => {
         return (
           <div ref={outputRef} className={styles.content}>
             {terminal.outputs.map((item, i) => {
+              if (!item) {
+                return 'Что-то пошло не так...';
+              }
+
               const output = item.output.replace(
                 `<pre class="ansi2html-content">
  

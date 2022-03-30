@@ -6,6 +6,28 @@ import Sidebar from './Sidebar';
 import { useRouteMatch } from 'react-router-dom';
 import { sidebarPath } from '@src/sidebarPath';
 import { FeedbackModal } from '../common/modals/feedback';
+import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
+import { selectSidebar } from '@store/global/layout.selectors';
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${250}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }),
+);
 
 const Layout = ({ children, headerVariant }) => {
   const [sidebarFixed, setSidebarFixed] = useState(false);
@@ -13,6 +35,7 @@ const Layout = ({ children, headerVariant }) => {
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const match = useRouteMatch();
   const headerRef = createRef();
+  const sidebarOpen = useSelector(selectSidebar);
 
   const handleCloseModal = () => setShowModalSubscription(!showModalSubscription);
 
@@ -38,14 +61,13 @@ const Layout = ({ children, headerVariant }) => {
             onSupportReport={() => setFeedbackModalOpen(!feedbackModalOpen)}
           />
         )}
-        <div className={styles.container}>
-          <Sidebar
-            headerTarget={headerRef}
-            sidebarFixed={sidebarFixed}
-            onUpdateSubscription={handleUpdateSubscription}
-          />
-          {children}
-        </div>
+        <Sidebar
+          headerTarget={headerRef}
+          sidebarFixed={sidebarFixed}
+          onUpdateSubscription={handleUpdateSubscription}
+        />
+
+        <Main open={sidebarOpen}>{children}</Main>
       </div>
       {feedbackModalOpen && (
         <FeedbackModal onClose={() => setFeedbackModalOpen(!feedbackModalOpen)} />

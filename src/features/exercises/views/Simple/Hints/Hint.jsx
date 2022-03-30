@@ -6,6 +6,7 @@ import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.sli
 
 import {
   selectExerciseContext,
+  selectExerciseType,
   selectHint,
   selectRootExerciseType,
 } from '@src/features/exercises/store/selectors';
@@ -48,7 +49,7 @@ export default function Hint() {
   const dispatch = useDispatch();
 
   const { completed } = useSelector(selectExerciseContext);
-  const type = useSelector(selectRootExerciseType);
+  const type = useSelector(selectExerciseType);
 
   const { used: hintUsed, content: hintContent, value: hintValue } = useSelector(selectHint);
 

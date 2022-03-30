@@ -18,6 +18,7 @@ import {
   selectExerciseContext,
   selectExerciseSidebar,
   selectFeedbackModal,
+  selectHint,
   selectRootExercise,
   selectRootExerciseType,
   selectSignupModal,
@@ -34,6 +35,10 @@ function Exercise({ goNext }) {
   const dispatch = useDispatch();
   const wrapperRef = useRef();
 
+  const bottom = useRef();
+
+  const { error } = useSelector(selectExerciseContext);
+
   const kernelId = useSelector(selectKernelId);
 
   const [completeModalClosed, setCompleteModalClosed] = useState(false);
@@ -45,6 +50,7 @@ function Exercise({ goNext }) {
   const { completed, exercise, xp, code } = useSelector(selectExerciseContext);
   const feedbackModal = useSelector(selectFeedbackModal);
   const signupModal = useSelector(selectSignupModal);
+  const { used: hintUsed } = useSelector(selectHint);
 
   async function setStep(step) {
     if (step !== active) {
@@ -93,6 +99,17 @@ function Exercise({ goNext }) {
     }
   }, [completed]);
 
+  useEffect(() => {
+    if (!!error) {
+      bottom.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [error]);
+  useEffect(() => {
+    if (!completed && hintUsed) {
+      bottom.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [hintUsed, completed]);
+
   return (
     <>
       <WarningMobile />
@@ -101,6 +118,8 @@ function Exercise({ goNext }) {
         <div className={styles.content}>
           <Sidebar wrapperRef={wrapperRef} />
           <ErrorMessage />
+
+          <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
           {kernelId && sidebarOpen && (
             <>
               <Hint />
