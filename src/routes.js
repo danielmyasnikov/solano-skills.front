@@ -4,7 +4,6 @@ import { CoursesPage } from '@components/coursesPage';
 import { CoursePage } from '@components/coursePage';
 import CertificatesPage from '@src/features/certificates/pages/CertificatesPage';
 import CertificatePage from '@src/features/certificates/pages/CertificatePage';
-import { OnBoardPage } from '@components/onBoard';
 import { HomePage } from '@components/landings/HomePage';
 import { Registration } from '@components/auth/registration';
 import { Authorization } from '@components/auth/authorization';
@@ -16,6 +15,7 @@ import { ProfessionPage } from '@components/professionPage';
 import { ProgressPage } from '@components/progressPage';
 import Settings from '@components/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
+import { OnBoardPage } from './features/onBoard';
 
 export const routes = [
   {

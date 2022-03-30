@@ -8,11 +8,11 @@ import bashShellReducer from './bashShell/reducer';
 import tariffsReducer from './tariffs/reducer';
 import progressReducer from './progress/reducer';
 import feedbackReducer from './feedback/reducer';
-import onBoardReducer from './onBoard/reducer';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { certificateApi } from '../features/certificates/certificates.api';
 import { globalReducers } from '@store/global';
+import { tracksSlice } from '../features/onBoard/store/slice';
 
 const rootReducer = combineReducers({
   global: globalReducers,
@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   tariffs: tariffsReducer,
   progress: progressReducer,
   feedback: feedbackReducer,
-  tracks: onBoardReducer,
+  tracks: tracksSlice.reducer,
 });
 
 export default rootReducer;
