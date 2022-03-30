@@ -1,38 +1,40 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as AuthStore from '@store/auth';
-import { addTracks, getTracks, hideTracksModal, searchTracks } from '@store/onBoard/actions';
-import { selectTracks } from '@store/onBoard/selector';
+import { selectTracks } from './store/selector';
+import { selectIsAuth } from '@store/profile/selector';
 
-import useDebounce from '../hooks/useDebounce';
+import useDebounce from '../../components/hooks/useDebounce';
 
 import { Course } from './course';
 import Input from '@components/mui/inputSearch';
 import Button from '@components/mui/button';
-import { WelcomeCourse } from '../common/modals/welcomeCourse';
-import { Preloader } from '../mui/preloader';
+import { WelcomeCourse } from '../../components/common/modals/welcomeCourse';
+import { Preloader } from '../../components/mui/preloader';
 
 import logo from './assets/Logo.svg';
 import logoModal from './assets/LogoModal.svg';
 
 import styles from './styles.module.less';
+import { addTracks, getTracks, searchTracks } from './store/actions';
+import { hideTracksModal } from './store/slice';
 
 export const OnBoardPage = () => {
   const [searchCourse, setSearchCourse] = useState('');
   const [checkedCourseList, setCheckedCourseList] = useState([]);
-  const [showButtonGoStudy, setShowButtonGoStudy] = useState(false);
-  const [authCounter, setAuthCounter] = useState(0);
 
   const dispatch = useDispatch();
 
   const trackInfo = useSelector(selectTracks);
-  const { headers } = useSelector(AuthStore.Selectors.getAuth);
+  const isAuth = useSelector(selectIsAuth);
 
-  const showModalHandler = () => dispatch(addTracks(checkedCourseList, { headers }));
+  const showModalHandler = () => {
+    console.log(checkedCourseList);
+    dispatch(addTracks(checkedCourseList));
+  };
 
   const handleSearch = (e) => setSearchCourse(e.target.value);
 
@@ -43,32 +45,13 @@ export const OnBoardPage = () => {
   const handleRemoveChecked = (id) =>
     setCheckedCourseList(checkedCourseList.filter((item) => item !== id));
 
-  const isShowButton = useCallback(() => {
-    if (trackInfo.trackList) {
-      let newArr = [];
-      trackInfo.trackList.forEach((item) => {
-        checkedCourseList.forEach((id) => {
-          if (item.item_id === id) {
-            newArr.push(item);
-          }
-        });
-      });
-      newArr = newArr.filter((item) => item.is_development);
-      newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
-    }
-  }, [checkedCourseList]);
-
-  useEffect(() => dispatch(searchTracks(searchCourse, { headers })), [searchCourse]);
-
-  useEffect(() => isShowButton(), [checkedCourseList]);
-
-  useEffect(() => setAuthCounter(authCounter + 1), [headers]);
+  useEffect(() => dispatch(searchTracks(searchCourse)), [searchCourse]);
 
   useEffect(() => {
-    if (authCounter >= 1 && headers.hasOwnProperty('uid')) {
-      dispatch(getTracks({ headers }));
+    if (isAuth) {
+      dispatch(getTracks());
     }
-  }, [authCounter]);
+  }, [isAuth]);
 
   return (
     <>
@@ -110,28 +93,21 @@ export const OnBoardPage = () => {
               <Preloader color="#dfdfdf" size="60px" />
             </div>
           )}
-          <div className={styles.mainRecomendation}>
-            <div className={styles.mainRecomendationQuestion}>
-              <span className={styles.mainRecomendationQuestionSymbol}>?</span>
-            </div>
-            <span>Не уверены какой курс выбрать? Попробуйте прочитать</span>
-            <span className={`${styles.activeLink} ${styles.activeLinkMain}`}>Рекомендации</span>
-          </div>
         </div>
       </div>
       <div className={styles.footer}>
-        {(showButtonGoStudy && checkedCourseList.length && (
+        {(checkedCourseList.length && (
           <Button variant="containedWhite" onClick={showModalHandler}>
             Начать обучение
           </Button>
         )) || (
-          <>
-            <span>Вы можете</span>
+          <div className={styles.skip}>
+            Вы можете&nbsp;
             <Link to="/courses" className={styles.activeLink}>
               пропустить
             </Link>
-            <span>опрос и перейти сразу к курсам</span>
-          </>
+            &nbsp;опрос и перейти сразу к курсам
+          </div>
         )}
       </div>
       <WelcomeCourse
