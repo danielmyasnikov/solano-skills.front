@@ -6,6 +6,7 @@ import { selectIsAuth } from '@store/profile/selector';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import Box from '@mui/material/Box';
 import { sendAnswer } from '@src/features/exercises/store/actions';
+import { getProfile } from '@store/profile/actions';
 
 export const VideoPlayer = memo(() => {
   const ref = useRef();
@@ -60,7 +61,21 @@ export const VideoPlayer = memo(() => {
               courseId: exercise?.course_slug,
               xp: exercise.xp,
             }),
-          );
+          ).then(() => {
+            const uid = localStorage.getItem('uid');
+            const client = localStorage.getItem('client');
+            const accessToken = localStorage.getItem('access-token');
+
+            dispatch(
+              getProfile({
+                headers: {
+                  uid,
+                  client,
+                  'access-token': accessToken,
+                },
+              }),
+            );
+          });
         }
       }
     }

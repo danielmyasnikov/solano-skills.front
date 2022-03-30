@@ -28,6 +28,7 @@ import RegistrationModal from '@components/common/modals/registration/registrati
 import { useEffect, useRef, useState } from 'react';
 import { sendAnswer } from '@src/features/exercises/store/actions';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { getProfile } from '@store/profile/actions';
 
 function Exercise({ goNext }) {
   const dispatch = useDispatch();
@@ -72,7 +73,23 @@ function Exercise({ goNext }) {
         }
       }
 
-      dispatch(sendAnswer({ exerciseId: exercise.slug, courseId: exercise.course_slug, xp }));
+      dispatch(sendAnswer({ exerciseId: exercise.slug, courseId: exercise.course_slug, xp })).then(
+        () => {
+          const uid = localStorage.getItem('uid');
+          const client = localStorage.getItem('client');
+          const accessToken = localStorage.getItem('access-token');
+
+          dispatch(
+            getProfile({
+              headers: {
+                uid,
+                client,
+                'access-token': accessToken,
+              },
+            }),
+          );
+        },
+      );
     }
   }, [completed]);
 

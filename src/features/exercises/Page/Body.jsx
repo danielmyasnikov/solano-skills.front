@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Exercise from '@src/features/exercises/views/Simple';
 import VideoExercise from '@src/features/exercises/views/Video';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import FailFIOModal from '@src/features/exercises/Page/FailFIOModal';
 import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
+import { selectIsAuth } from '@store/profile/selector';
+import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 
 const Root = styled(Box)`
   display: flex;
@@ -33,12 +35,15 @@ const Root = styled(Box)`
 `;
 
 export default function ExercisePageBody() {
+  const dispatch = useDispatch();
   const { courseId } = useParams();
   const [showFailFIOModal, setShowFailFIOModal] = useState(false);
   const [showCourseIsNotCompletedModal, setShowCourseIsNotCompletedModal] = useState(false);
   const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
+
+  const isAuth = useSelector(selectIsAuth);
 
   if (!exercise) {
     return null;
@@ -56,7 +61,14 @@ export default function ExercisePageBody() {
         setShowCourseIsNotCompletedModal(true);
         break;
       default:
-        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+        break;
+    }
+    if (exercise.next_exercise_id) {
+      await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+    } else {
+      if (!isAuth) {
+        dispatch(exercisesSlice.actions.openSignupModal({}));
+      }
     }
   };
 

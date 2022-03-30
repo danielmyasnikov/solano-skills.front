@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import useDebounce from '../hooks/useDebounce';
+import useDebounce from '../../../hooks/useDebounce';
 
 import { Link, useHistory } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
@@ -12,7 +12,7 @@ import { ModalActionMenu } from './ModalActionMenu';
 import { ModalTariffSelection } from './ModalTariffSelection';
 import Button from '@components/mui/button';
 import Input from '@components/mui/inputSearch';
-import { Preloader } from '../mui/preloader';
+import { Preloader } from '../../../mui/preloader';
 
 import Logo from '@assets/Logo';
 import DefaultAvatar from '@assets/defaultUserAvatarSmall.png';
@@ -22,13 +22,15 @@ import ArrowDown from '@assets/ArrowDown';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
+import { toggleSidebar } from '@store/global/layout';
 
-const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupportReport }) => {
+const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const isAuth = useSelector(selectIsAuth);
   const debouncedSearch = useDebounce(search, 500);
-  const [showModal, setshowModal] = useState(false);
-  const [showMenuModal, setshowMenuModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showMenuModal, setShowMenuModal] = useState(false);
 
   const history = useHistory();
 
@@ -36,7 +38,7 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
 
   const handleShowModal = () => {
     onCloseModal();
-    setshowModal(!showModal);
+    setShowModal(!showModal);
   };
 
   const profile = useSelector(selectProfile);
@@ -49,10 +51,10 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
   };
 
   const menuHandler = () => {
-    setshowMenuModal(!showMenuModal);
+    setShowMenuModal(!showMenuModal);
   };
 
-  useEffect(() => setshowModal(isShowModal), [isShowModal]);
+  useEffect(() => setShowModal(isShowModal), [isShowModal]);
 
   return (
     <>
@@ -64,7 +66,7 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
                 <Logo />
               </Link>
             </div>
-            <div onClick={handleSidebar} className={styles.burgerMenu}>
+            <div onClick={() => dispatch(toggleSidebar({}))} className={styles.burgerMenu}>
               <Burger />
             </div>
             <div className={styles.search}>
@@ -110,8 +112,8 @@ const Header = ({ headerRef, handleSidebar, isShowModal, onCloseModal, onSupport
         <ModalActionMenu
           totalXP={profile.xp}
           onSupport={onSupportReport}
-          onOutsideClick={() => setshowMenuModal(!showMenuModal)}
-          onCloseMenu={() => setshowMenuModal(!showMenuModal)}
+          onOutsideClick={() => setShowMenuModal(!showMenuModal)}
+          onCloseMenu={() => setShowMenuModal(!showMenuModal)}
         />
       )}
     </>

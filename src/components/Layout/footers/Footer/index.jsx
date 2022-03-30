@@ -13,19 +13,19 @@ const Footer = () => {
           <h5 className={styles.colomn__title}>{title}</h5>
         </Link>
         {items.map(({ text, link }) => (
-          <>
-            {(text === 'Стать преподавателем' && (
+          <React.Fragment key={text}>
+            {text === 'Стать преподавателем' ? (
               <p className={styles.link}>
                 <a href="https://forms.gle/nCKa2D3JK756E9eg7" target="_blank">
                   {text}
                 </a>
               </p>
-            )) || (
+            ) : (
               <Link to={link}>
                 <p className={styles.link}>{text}</p>
               </Link>
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
     ));
@@ -33,7 +33,7 @@ const Footer = () => {
 
   const renderInfo = (arr) =>
     arr.map(({ text, link }) => (
-      <p>
+      <p key={text}>
         <a href={link} target={'_blank'}>
           {text}
         </a>

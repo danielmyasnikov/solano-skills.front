@@ -9,21 +9,22 @@ import { getCourse } from '@store/course/actions';
 import { selectProfile } from '@store/profile/selector';
 
 import Button from '@components/mui/button';
-import CourseContentModal from '../common/modals/courseContent';
+import CourseContentModal from '../../../common/modals/courseContent';
 
 import Burger from '@assets/Burger';
 import SupportIcon from '@assets/icon/supportIcon.svg';
-import Prev from '@assets/Prev.js';
-import Next from '@assets/Next.js';
-import MenuCourse from '@assets/MenuCourse.js';
+import Prev from '@assets/Prev';
+import Next from '@assets/Next';
+import MenuCourse from '@assets/MenuCourse';
 
 import cn from 'classnames';
 
 import styles from './styles.module.less';
 import { getExerciseById } from '@src/features/exercises/store/actions';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { toggleSidebar } from '@store/global/layout';
 
-const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
+const HeaderExercise = ({ headerRef, onSupport }) => {
   const dispatch = useDispatch();
   const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
   const { courseId } = useParams();
@@ -54,7 +55,7 @@ const HeaderExercise = ({ handleSidebar, headerRef, onSupport }) => {
       )}
       <header className={styles.header}>
         <div className={styles.headerItem}>
-          <div onClick={handleSidebar} className={styles.burgerMenu}>
+          <div onClick={() => dispatch(toggleSidebar({}))} className={styles.burgerMenu}>
             <Burger />
           </div>
         </div>

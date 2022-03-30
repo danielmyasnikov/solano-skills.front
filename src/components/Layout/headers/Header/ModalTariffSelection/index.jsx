@@ -3,10 +3,10 @@ import { tariffs } from '@store/tariffs/selector';
 import * as TariffsStore from '@store/tariffs';
 
 import { Dialog } from '@mui/material';
-import Close from '@assets/Close.js';
+import Close from '@assets/Close';
 
 import styles from './styles.module.less';
-import { Tariffs } from '../../common/tariff';
+import { Tariffs } from '../../../../common/tariff';
 import { useEffect } from 'react';
 
 export const ModalTariffSelection = ({ handleClick, open }) => {

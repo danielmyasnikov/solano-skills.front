@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import HeaderHome from '../headerHome';
-import Footer from '../footer';
+import HeaderHome from '../../Layout/headers/HomeHeader';
+import Footer from '../../Layout/footers/Footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Button from '@components/mui/button';
 import styles from './styles.module.less';

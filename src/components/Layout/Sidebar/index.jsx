@@ -4,51 +4,39 @@ import styles from './styles.module.less';
 import { profileItems, studyItems } from './menuItems';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
-import { menuTheme } from '../theme';
+import { menuTheme } from '../../mui/theme';
 import Button from '@components/mui/button';
 import Logo from '@assets/Logo';
 import cn from 'classnames';
 import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useRef } from 'react';
 import { selectIsAuth } from '@store/profile/selector';
+import { selectSidebar } from '@store/global/layout.selectors';
+import { closeSidebar, openSidebar } from '@store/global/layout';
 
-const Sidebar = ({
-  sidebarFixed,
-  isSidebarOpen,
-  closeSidebar,
-  openSidebar,
-  headerTarget,
-  onUpdateSubscription,
-}) => {
+const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
+  const location = useLocation();
+  const sidebarRef = useRef();
+  const dispatch = useDispatch();
+
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
 
   const isAuth = useSelector(selectIsAuth);
+  const isOpen = useSelector(selectSidebar);
 
-  const location = useLocation();
-  const sidebarRef = useRef();
   const windowWidth = useWindowWidth();
   const breakpoint = 1300;
-
-  const modalSidebarFixedClassNames = cn({
-    [styles.modal]: !sidebarFixed,
-    [styles.modalFixed]: sidebarFixed,
-    [styles.modalOpened]: isSidebarOpen,
-  });
-  const backdropSidebarFixedClassNames = cn({
-    [styles.backdrop]: !sidebarFixed && isSidebarOpen,
-    [styles.backdropFixed]: sidebarFixed && isSidebarOpen,
-  });
 
   const handleMouseClick = (event) => {
     if (
       !sidebarRef?.current?.contains(event.target) &&
       !headerTarget.current.contains(event.target)
     ) {
-      closeSidebar();
+      dispatch(closeSidebar({}));
     }
   };
 
@@ -83,9 +71,9 @@ const Sidebar = ({
 
   useEffect(() => {
     if (isDesktop && sidebarFixed) {
-      openSidebar();
+      dispatch(openSidebar({}));
     } else {
-      closeSidebar();
+      dispatch(closeSidebar({}));
     }
   }, [isDesktop]);
 
@@ -97,12 +85,23 @@ const Sidebar = ({
 
   return (
     <ThemeProvider theme={menuTheme}>
-      <div className={modalSidebarFixedClassNames}>
-        <div className={backdropSidebarFixedClassNames} />
+      <div
+        className={cn({
+          [styles.modal]: !sidebarFixed,
+          [styles.modalFixed]: sidebarFixed,
+          [styles.modalOpened]: isOpen,
+        })}
+      >
+        <div
+          className={cn({
+            [styles.backdrop]: !sidebarFixed && isOpen,
+            [styles.backdropFixed]: sidebarFixed && isOpen,
+          })}
+        />
         <div
           ref={sidebarRef}
           className={cn(styles.sidebar, {
-            [styles.sidebarOpened]: isSidebarOpen,
+            [styles.sidebarOpened]: isOpen,
           })}
         >
           <div className={styles.content}>

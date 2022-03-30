@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import * as AuthStore from '@store/auth';
-import HeaderHome from '@components/headerHome';
+import HeaderHome from '../../Layout/headers/HomeHeader';
 import NotFound from '@assets/NotFound';
 import NotFoundMini from '@assets/NotFoundMini';
 import Button from '@components/mui/button';
@@ -10,7 +9,7 @@ import styles from './styles.module.less';
 import BurgerMenu from '@components/common/burgerMenu';
 import { selectIsAuth } from '@store/profile/selector';
 
-export const Page404 = () => {
+export const NotFoundPage = () => {
   const [showMenu, setShowMenu] = useState(false);
   const isAuth = useSelector(selectIsAuth);
 
@@ -23,11 +22,11 @@ export const Page404 = () => {
       <div className={styles.content}>
         <div>Упс! Что-то пошло не так!</div>
         <div>Пожалуйста, вернитесь на главную страницу и попробуйте заново.</div>
-        {(isAuth && (
+        {isAuth ? (
           <Link to="/courses">
             <Button variant={'containedPurple'}>К курсам</Button>
           </Link>
-        )) || (
+        ) : (
           <Link to="/">
             <Button variant={'containedPurple'}>На главную</Button>
           </Link>

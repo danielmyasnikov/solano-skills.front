@@ -1,16 +1,20 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@components/mui/button';
 
 import { VideoPlayer } from './Player';
 
 import styles from './styles.module.less';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise, selectSignupModal } from '@src/features/exercises/store/selectors';
 import Box from '@mui/material/Box';
+import RegistrationModal from '@components/common/modals/registration/registrationModal';
+import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 
 const VideoExercise = ({ goNext }) => {
+  const dispatch = useDispatch();
   const transcriptRef = useRef();
+  const signupModal = useSelector(selectSignupModal);
 
   const [showTranscript, setShowTranscript] = useState(false);
 
@@ -48,6 +52,12 @@ const VideoExercise = ({ goNext }) => {
         <div ref={transcriptRef} className={styles.transcript}>
           {exercise.transcript}
         </div>
+      )}
+      {signupModal && (
+        <RegistrationModal
+          isOpenFromExercises
+          onClose={() => dispatch(exercisesSlice.actions.closeSignupModal({}))}
+        />
       )}
     </Box>
   );

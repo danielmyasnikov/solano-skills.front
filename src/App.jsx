@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// import * as Sentry from '@sentry/react';
-
-import Container from './components/container';
+import Layout from '@components/Layout';
 
 import { routes } from './routes';
-import { Page404 } from '@components/page404';
+import { NotFoundPage } from '@components/landings/NotFoundPage';
 
 import { useDispatch } from 'react-redux';
 
@@ -43,20 +41,22 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      {/* {isLogIn && <Redirect to="/sign-in" />} */}
       <Switch>
         {routes.map((route, i, headerVariant) => (
           <Route exact={route.exact} path={route.path} key={route.path}>
-            {(route.wrap && (
-              <Container variant={headerVariant} key={i} {...route} Component={route.component} />
-            )) || <route.component />}
+            {route.wrap ? (
+              <Layout variant={headerVariant} key={i} {...route}>
+                <route.component />
+              </Layout>
+            ) : (
+              <route.component />
+            )}
           </Route>
         ))}
-        <Route component={Page404} />
+        <Route component={NotFoundPage} />
       </Switch>
     </div>
   );
 }
 
-// export default Sentry.withProfiler(App);
 export default App;

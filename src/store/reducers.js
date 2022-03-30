@@ -12,8 +12,10 @@ import onBoardReducer from './onBoard/reducer';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { certificateApi } from '../features/certificates/certificates.api';
+import { globalReducers } from '@store/global';
 
 const rootReducer = combineReducers({
+  global: globalReducers,
   terminal: terminalReducer,
   exercise: exerciseSlice.reducer,
   exercises: exercisesSlice.reducer,

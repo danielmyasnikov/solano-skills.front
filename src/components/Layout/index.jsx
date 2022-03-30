@@ -1,31 +1,18 @@
 import React, { createRef, useEffect, useState } from 'react';
 import styles from './styles.module.less';
-import Header from '@components/header';
-import HeaderExercise from '@components/headerExercise';
+import Header from './headers/Header';
+import HeaderExercise from './headers/ExerciseHeader';
+import Sidebar from './Sidebar';
 import { useRouteMatch } from 'react-router-dom';
 import { sidebarPath } from '@src/sidebarPath';
-import Sidebar from '@components/mui/sidebar';
 import { FeedbackModal } from '../common/modals/feedback';
 
-const Container = ({ Component, headerVariant }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Layout = ({ children, headerVariant }) => {
   const [sidebarFixed, setSidebarFixed] = useState(false);
   const [showModalSubscription, setShowModalSubscription] = useState(false);
   const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
   const match = useRouteMatch();
   const headerRef = createRef();
-
-  const handleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
-
-  const openSidebar = () => {
-    setIsSidebarOpen(true);
-  };
 
   const handleCloseModal = () => setShowModalSubscription(!showModalSubscription);
 
@@ -41,7 +28,6 @@ const Container = ({ Component, headerVariant }) => {
         {headerVariant === 'exercise' ? (
           <HeaderExercise
             headerRef={headerRef}
-            handleSidebar={handleSidebar}
             onSupport={() => setFeedbackModalOpen(!feedbackModalOpen)}
           />
         ) : (
@@ -49,20 +35,16 @@ const Container = ({ Component, headerVariant }) => {
             onCloseModal={handleCloseModal}
             isShowModal={showModalSubscription}
             headerRef={headerRef}
-            handleSidebar={handleSidebar}
             onSupportReport={() => setFeedbackModalOpen(!feedbackModalOpen)}
           />
         )}
         <div className={styles.container}>
           <Sidebar
-            closeSidebar={closeSidebar}
-            openSidebar={openSidebar}
             headerTarget={headerRef}
-            isSidebarOpen={isSidebarOpen}
             sidebarFixed={sidebarFixed}
             onUpdateSubscription={handleUpdateSubscription}
           />
-          <Component />
+          {children}
         </div>
       </div>
       {feedbackModalOpen && (
@@ -72,4 +54,4 @@ const Container = ({ Component, headerVariant }) => {
   );
 };
 
-export default Container;
+export default Layout;
