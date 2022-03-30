@@ -42,7 +42,13 @@
 }
 
 .mainSearch > div {
+  width: 90%;
   border-color: var(--wild-blue-yonder);
+}
+
+.skip {
+  text-align: center;
+  line-height: 130%;
 }
 
 .preloaderContainer {
@@ -94,14 +100,6 @@
   flex-wrap: wrap;
 }
 
-.mainRecomendation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 51px;
-  color: var(--color-white);
-}
-
 .mainRecomendationQuestion {
   display: flex;
   align-items: center;
@@ -111,14 +109,6 @@
   margin-right: 21px;
   border: 2px solid #c4c4c4;
   border-radius: 50%;
-  font-family: Jost;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 103%;
-}
-
-.mainRecomendationQuestionSymbol {
   font-family: Jost;
   font-style: normal;
   font-weight: bold;
@@ -195,17 +185,14 @@
   }
 }
 
-@media screen and (max-width: 832px) {
-  .mainRecomendation {
-    flex-direction: column;
+@media screen and (max-width: 580px) {
+  .headerTitle {
+    text-align: center;
   }
+}
 
+@media screen and (max-width: 832px) {
   .activeLinkMain {
     margin-top: 10px;
-  }
-
-  .mainRecomendationQuestion {
-    top: 25px;
-    left: -315px;
   }
 }

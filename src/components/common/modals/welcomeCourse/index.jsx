@@ -16,8 +16,6 @@ export const WelcomeCourse = ({ open, handleClick, logo }) => {
 
   const returnUrl = query.get('returnUrl');
 
-  console.log(returnUrl);
-
   return (
     <Dialog
       PaperProps={{
