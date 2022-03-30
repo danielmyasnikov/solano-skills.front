@@ -33,7 +33,7 @@ export const OnBoardPage = () => {
 
   const showModalHandler = () => {
     console.log(checkedCourseList);
-    dispatch(addTracks({ tracks: checkedCourseList }));
+    dispatch(addTracks(checkedCourseList));
   };
 
   const handleSearch = (e) => setSearchCourse(e.target.value);
@@ -45,7 +45,7 @@ export const OnBoardPage = () => {
   const handleRemoveChecked = (id) =>
     setCheckedCourseList(checkedCourseList.filter((item) => item !== id));
 
-  useEffect(() => dispatch(searchTracks({ value: searchCourse })), [searchCourse]);
+  useEffect(() => dispatch(searchTracks(searchCourse)), [searchCourse]);
 
   useEffect(() => {
     if (isAuth) {
@@ -102,14 +102,11 @@ export const OnBoardPage = () => {
           </Button>
         )) || (
           <div className={styles.skip}>
-            <span>
-              Вы можете&nbsp;
-              <Link to="/courses" className={styles.activeLink}>
-                пропустить
-              </Link>
-              <span>опрос и&nbsp;</span>
-            </span>
-            <span>перейти сразу к курсам</span>
+            Вы можете&nbsp;
+            <Link to="/courses" className={styles.activeLink}>
+              пропустить
+            </Link>
+            &nbsp;опрос и перейти сразу к курсам
           </div>
         )}
       </div>
