@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { useTakeCertificateMutation } from '@src/features/certificates/certificates.api';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import FailFIOModal from '@src/features/exercises/Page/FailFIOModal';

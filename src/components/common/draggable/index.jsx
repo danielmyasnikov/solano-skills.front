@@ -3,7 +3,7 @@ import styles from './styles.module.less';
 import { useRef, useState } from 'react';
 import cn from 'classnames';
 
-const Draggable = ({ parentContainer, resizeContainer, hidden, className, noIcon }) => {
+const Draggable = ({ parentContainer, resizeContainer, hidden, className, noIcon, mt }) => {
   const [initialPos, setInitialPos] = useState();
   const [initialSize, setInitialSize] = useState();
   const resizableRef = useRef();
@@ -24,7 +24,7 @@ const Draggable = ({ parentContainer, resizeContainer, hidden, className, noIcon
     <div
       role="separator"
       ref={resizableRef}
-      className={cn(className, styles.container, { [styles.noIcon]: noIcon })}
+      className={cn(className, styles.container, { [styles.noIcon]: noIcon, [styles.mt]: mt })}
       draggable
       onDragStart={initial}
       onDrag={resize}

@@ -59,6 +59,7 @@ export const Sidebar = ({ wrapperRef }) => {
               parentContainer={wrapperRef}
               hidden={!open || headerFolded || instructionFolded}
               noIcon
+              mt
             />
           </>
         )}

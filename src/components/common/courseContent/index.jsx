@@ -12,30 +12,57 @@ import CertificatesBlack from '@assets/CertificatesBlack.svg';
 import { useHistory } from 'react-router';
 import ProgressBar from '@components/mui/progressBar';
 import skillLogo from '@assets/skill.png';
+import { useSelector } from 'react-redux';
+import { selectRootExercise } from '@src/features/exercises/store/selectors';
+
+const ExerciseTypeImage = ({ type }) => {
+  switch (type) {
+    case 'normal_exercise':
+    case 'single_bascket':
+    case 'multiple_bascket':
+    case 'bullet_point_exercise':
+      return <TerminalType />;
+    case 'video':
+      return <VideoType />;
+    case 'quiz':
+      return <QuizType />;
+    default:
+      return '';
+  }
+};
+
+const ListItem = ({ item, isActive, onClick }) => (
+  <div
+    className={cn(styles.item, {
+      [styles.item_notAvailable]: !item.is_available,
+      [styles.active]: isActive,
+    })}
+    onClick={onClick}
+  >
+    <div className={styles.itemLeft}>
+      <div className={styles.itemImg}>
+        <ExerciseTypeImage type={item.type} />
+      </div>
+      <span className={styles.itemTitle}>{item.title}</span>
+    </div>
+    <div className={styles.openRight}>
+      <div className={styles.point} />
+      <span className={styles.itemTitle}>{item.xp}</span>
+    </div>
+  </div>
+);
 
 export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug }) => {
+  const exercise = useSelector(selectRootExercise);
   const history = useHistory();
   const [active, setActive] = useState();
+
   useEffect(() => {
-    setActive(coursePartSlug);
+    setActive(exercise?.course_part_slug);
   }, []);
-  const ExerciseTypeImage = ({ type }) => {
-    switch (type) {
-      case 'normal_exercise':
-        return <TerminalType />;
-      case 'bullet_point_exercise':
-        return <TerminalType />;
-      case 'video':
-        return <VideoType />;
-      case 'quiz':
-        return <QuizType />;
-      default:
-        return '';
-    }
-  };
 
   return (
-    <React.Fragment>
+    <>
       {((variant === 'skill' || variant === 'profession') && (
         <div>
           {parts.map((partItem, i) => (
@@ -61,23 +88,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                     })}
                   >
                     {partItem.exercises.map((item, i) => (
-                      <div
-                        key={i}
-                        className={cn(styles.item, {
-                          [styles.item_notAvailable]: item.is_available === false,
-                        })}
-                      >
-                        <div className={styles.itemLeft}>
-                          <div className={styles.itemImg}>
-                            <ExerciseTypeImage type={item.type} />
-                          </div>
-                          <span className={styles.itemTitle}>{item.title}</span>
-                        </div>
-                        <div className={styles.openRight}>
-                          <div className={styles.point} />
-                          <span className={styles.itemTitle}>{item.xp}</span>
-                        </div>
-                      </div>
+                      <ListItem key={item.id} item={item} isActive={item.id === exercise.id} />
                     ))}
                   </div>
                   <div className={styles.skill__info}>
@@ -86,7 +97,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                         value={partItem.progress}
                         height={'12px'}
                         variant={'skill'}
-                        isShowValue={true}
+                        isShowValue
                       />
                     )}
                     <div className={styles.skill__info__hour}>
@@ -95,7 +106,7 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
                     </div>
                   </div>
                   {partItem.progress === 100 ? (
-                    <Button variant="containedBlack" disabled={true} className={styles.btn}>
+                    <Button variant="containedBlack" disabled className={styles.btn}>
                       Пройти снова
                     </Button>
                   ) : partItem.progress === 0 ? (
@@ -177,33 +188,23 @@ export const CourseContent = ({ variant, onClose, parts, slug, coursePartSlug })
               </div>
               <div className={cn(styles.listWrap, { [styles.downOpen]: active === partItem.slug })}>
                 {partItem.exercises.map((item, i) => (
-                  <div
-                    key={item.title}
+                  <ListItem
+                    key={item.id}
+                    isActive={item.id === exercise?.id}
+                    item={item}
                     onClick={() => {
                       history.push(`/courses/${slug}/exercises/${item.id}`);
                       if (onClose) {
                         onClose();
                       }
                     }}
-                    className={styles.item}
-                  >
-                    <div className={styles.itemLeft}>
-                      <div className={styles.itemImg}>
-                        <ExerciseTypeImage type={item.type} />
-                      </div>
-                      <span className={styles.itemTitle}>{item.title}</span>
-                    </div>
-                    <div className={styles.openRight}>
-                      <div className={styles.point} />
-                      <span className={styles.itemTitle}>{item.xp}</span>
-                    </div>
-                  </div>
+                  />
                 ))}
               </div>
             </div>
           ))}
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };

@@ -20,14 +20,8 @@ export const exerciseSlice = createSlice({
     quizVariants: [],
 
     ranging: {
-      // single
-      orderIds: '',
-      // multiple
-      mainBasket: {},
       baskets: [],
-      // common
-      title: '',
-      items: [],
+      orderIds: '',
     },
 
     hints: {
@@ -72,39 +66,35 @@ export const exerciseSlice = createSlice({
       } else {
         state.quizVariants = [];
       }
-
-      if (exercise.type === 'single_bascket') {
+      if (exercise.type === 'multiple_bascket') {
         state.ranging = {
-          title: exercise.basckets[0].title,
-          orderIds: exercise.ids_order,
-          items: exercise.statements.map((e) => ({
-            id: String(e.id),
-            text: e.text,
-            errorMessage: e.error_message,
+          baskets: exercise.basckets.map((e) => ({
+            id: `board-${e.id}`,
+            label: e.title,
+            isMain: e.is_main,
+            items: e.is_main
+              ? exercise.statements.map((u) => ({
+                  id: `item-${u.id}`,
+                  basketId: `board-${u.bascket_id}`,
+                  label: u.text,
+                  errorMessage: u.error_message,
+                }))
+              : [],
           })),
         };
       }
-
-      if (exercise.type === 'multiple_bascket') {
-        const mainBasket = exercise.basckets.find((e) => e.is_main);
-
+      if (exercise.type === 'single_bascket') {
         state.ranging = {
-          title: mainBasket.title,
-          baskets: exercise.basckets
-            .filter((e) => !e.is_main)
-            .map((e) => ({
-              id: e.id,
-              title: e.title,
+          baskets: exercise.basckets.map((e) => ({
+            id: `board-${e.id}`,
+            label: e.title,
+            isSingle: e.is_main,
+            items: exercise.statements.map((u) => ({
+              id: `item-${u.id}`,
+              basketId: `board-${u.bascket_id}`,
+              label: u.text,
+              errorMessage: u.error_message,
             })),
-          mainBasket: {
-            id: mainBasket.id,
-            title: mainBasket.title,
-          },
-          items: exercise.statements.map((e) => ({
-            id: String(e.id),
-            basketId: e.bascket_id,
-            text: e.text,
-            errorMessage: e.error_message,
           })),
         };
       }

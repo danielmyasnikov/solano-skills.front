@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import styles from './styles.module.less';
 import { profileItems, studyItems } from './menuItems';
@@ -69,7 +69,7 @@ const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
     }
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isDesktop && sidebarFixed) {
       dispatch(openSidebar({}));
     } else {
@@ -77,7 +77,7 @@ const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
     }
   }, [isDesktop]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (sidebarFixed) {
       setIsDesktop(windowWidth > breakpoint);
     }
@@ -90,6 +90,7 @@ const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
           width: 250,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
+            marginTop: '73px',
             width: 250,
             boxSizing: 'border-box',
           },
