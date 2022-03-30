@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -43,24 +43,7 @@ export const OnBoardPage = () => {
   const handleRemoveChecked = (id) =>
     setCheckedCourseList(checkedCourseList.filter((item) => item !== id));
 
-  const isShowButton = useCallback(() => {
-    if (trackInfo.trackList) {
-      let newArr = [];
-      trackInfo.trackList.forEach((item) => {
-        checkedCourseList.forEach((id) => {
-          if (item.item_id === id) {
-            newArr.push(item);
-          }
-        });
-      });
-      newArr = newArr.filter((item) => item.is_development);
-      newArr.length ? setShowButtonGoStudy(false) : setShowButtonGoStudy(true);
-    }
-  }, [checkedCourseList]);
-
   useEffect(() => dispatch(searchTracks(searchCourse, { headers })), [searchCourse]);
-
-  useEffect(() => isShowButton(), [checkedCourseList]);
 
   useEffect(() => setAuthCounter(authCounter + 1), [headers]);
 
@@ -120,7 +103,7 @@ export const OnBoardPage = () => {
         </div>
       </div>
       <div className={styles.footer}>
-        {(showButtonGoStudy && checkedCourseList.length && (
+        {(checkedCourseList.length && (
           <Button variant="containedWhite" onClick={showModalHandler}>
             Начать обучение
           </Button>
