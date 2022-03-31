@@ -23,10 +23,13 @@ import { toggleSidebar } from '@store/global/layout';
 import { openFeedbackModal, openTariffsModal } from '@store/global/modals';
 import { Button } from '@mui/material';
 import Search from '@components/mui/Search';
+import SearchBox from '@components/Layout/headers/Header/SearchBox';
+import { courses } from './SearchBox/mockData';
 
 const Header = ({ headerRef }) => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
+  const [showSearchBox, setShowSearchBox] = useState(false);
   const isAuth = useSelector(selectIsAuth);
   const debouncedSearch = useDebounce(search, 500);
   const [actionMenu, setShowActionMenu] = useState(false);
@@ -71,7 +74,10 @@ const Header = ({ headerRef }) => {
                 value={searchValue}
                 onChange={(e) => handleSearch(e)}
                 placeholder="Поиск..."
+                onFocus={() => setShowSearchBox(!showSearchBox)}
+                onBlur={() => setShowSearchBox(!showSearchBox)}
               />
+              <SearchBox courses={courses} isShow={showSearchBox} />
             </div>
           </div>
           <div className={styles.headerItem}>

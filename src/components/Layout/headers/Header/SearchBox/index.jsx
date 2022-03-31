@@ -1,0 +1,49 @@
+import React from 'react';
+import { Box, styled } from '@mui/material';
+import SearchItem from '@components/Layout/headers/Header/SearchBox/SearchItem';
+
+const Root = styled(Box)`
+  position: absolute;
+  padding: 20px;
+  top: 44px;
+  left: 0;
+  width: 400px;
+  background: var(--color-white);
+  border: 1px solid var(--light-grayish-blue);
+  box-shadow: 4px 4px 17px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+`;
+
+const Title = styled('h5')`
+  font-family: 'Jost';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: #b5b8bb;
+`;
+
+const SearchBox = ({ isShow, courses, skills, professions }) => {
+  const renderBlock = ({ title, items }) => (
+    <>
+      <Title>{title}</Title>
+      {items.map(({ icon, text }) => (
+        <SearchItem icon={icon} text={text} />
+      ))}
+    </>
+  );
+
+  return (
+    <>
+      {isShow && (
+        <Root>
+          {courses && renderBlock(courses)}
+          {skills && renderBlock(skills)}
+          {professions && renderBlock(professions)}
+        </Root>
+      )}
+    </>
+  );
+};
+
+export default SearchBox;
