@@ -363,14 +363,9 @@
   min-height: 230px;
   margin: 50px auto 125px;
   padding: 70px 80px;
-  background: url('../../../assets/homepage/sloganLeft.png') left top no-repeat,
-    url('../../../assets/homepage/sloganRight.png') right top no-repeat,
-    linear-gradient(
-      90deg,
-      var(--slightly-desaturated-orange) 0%,
-      var(--purple) 50.52%,
-      var(--slightly-desaturated-orange) 100%
-    );
+  background: url('../../../assets/landing/h-l.svg') left/contain no-repeat,
+    url('../../../assets/landing/h-r.svg') right/contain no-repeat,
+    linear-gradient(90deg, #4d4977 0%, #7469ef 35.42%, rgba(215, 192, 150, 0.92) 100%);
   background-blend-mode: luminosity;
   border-radius: 38px;
   color: var(--color-white);
@@ -398,6 +393,67 @@
     font-weight: 400;
 
     color: #ffffff;
+  }
+}
+
+.slogan2 {
+  width: 100%;
+  max-width: 1720px;
+  min-height: 230px;
+  margin: 50px auto 125px;
+  padding: 50px 180px 70px;
+  background: linear-gradient(
+    263.88deg,
+    #ddbb7b -8.21%,
+    #7469ef 38.87%,
+    rgba(116, 105, 239, 0.94) 64.9%,
+    #ddbb7b 101.71%
+  );
+  border-radius: 38px;
+  color: var(--color-white);
+  position: relative;
+
+  &__title {
+    text-align: center;
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+
+    letter-spacing: 0.005em;
+
+    color: #ffffff;
+
+    margin-bottom: 20px;
+
+    span {
+      color: #efc969;
+    }
+  }
+
+  &__description {
+    text-align: center;
+    width: 72%;
+    max-width: 960px;
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+
+    margin: 0 auto;
+    margin-bottom: 60px;
+
+    letter-spacing: -0.005em;
+
+    color: #ffffff;
+  }
+  &__btn {
+    padding-top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -857,29 +913,21 @@
   }
 
   .slogan {
-    margin: 130px auto;
-    padding: 60px 70px;
     position: relative;
-    min-height: 334px;
-    background: url('../../../assets/homepage/sloganLeft.png') left top / 410px 334px no-repeat,
-      url('../../../assets/homepage/sloganRight.png') right top / 582px 334px no-repeat,
-      linear-gradient(
-        90deg,
-        var(--slightly-desaturated-orange) 0%,
-        var(--purple) 50.52%,
-        var(--slightly-desaturated-orange) 100%
-      );
 
-    &__center {
-      background: url('../../../assets/homepage/startLeft.png') left top / 342px 334px no-repeat,
-        url('../../../assets/homepage/startRight.png') right top / 427px 334px no-repeat,
-        linear-gradient(
-          90deg,
-          var(--slightly-desaturated-orange) 0%,
-          var(--purple) 50.52%,
-          var(--slightly-desaturated-orange) 100%
-        );
+    &__title {
+      font-size: 40px;
+      line-height: 48px;
     }
+
+    &__description {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  .slogan2 {
+    position: relative;
 
     &__title {
       font-size: 40px;
@@ -1137,43 +1185,17 @@
   }
 
   .slogan {
-    min-height: 300px;
-    margin: 90px auto;
-    padding: 50px;
-    background: url('../../../assets/homepage/sloganLeft.png') left top / 400px 300px no-repeat,
-      url('../../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
-      linear-gradient(
-        90deg,
-        var(--slightly-desaturated-orange) 0%,
-        var(--purple) 50.52%,
-        var(--slightly-desaturated-orange) 100%
-      );
-
-    &__center {
-      padding: 45px;
-      min-height: 268px;
-
-      background: url('../../../assets/homepage/startLeft.png') left top / 274px 268px no-repeat,
-        url('../../../assets/homepage/startRight.png') right top / 342px 268px no-repeat,
-        linear-gradient(
-          90deg,
-          var(--slightly-desaturated-orange) 0%,
-          var(--purple) 50.52%,
-          var(--slightly-desaturated-orange) 100%
-        );
-
-      .slogan {
-        &__title {
-          line-height: 36px;
-        }
-
-        &__description {
-          width: 96%;
-          margin-bottom: 26px;
-        }
-      }
+    &__title {
+      font-size: 36px;
     }
 
+    &__description {
+      width: 98%;
+    }
+  }
+
+  .slogan2 {
+    padding: 50px 80px 70px;
     &__title {
       font-size: 36px;
     }
@@ -1472,7 +1494,6 @@
   }
 
   .slogan {
-    padding: 45px 50px;
     background: url('../../../assets/homepage/sloganLeft.png') right 440px top 32px / 239px 203px
         no-repeat,
       url('../../../assets/homepage/sloganRight.png') right top / 489px 300px no-repeat,
@@ -1500,6 +1521,17 @@
       }
     }
 
+    &__title {
+      font-size: 28px;
+    }
+
+    &__description {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .slogan2 {
     &__title {
       font-size: 28px;
     }
@@ -1880,6 +1912,13 @@
       line-height: 30px;
     }
   }
+  .slogan2 {
+    padding: 50px 20px 40px 30px;
+
+    &__title {
+      line-height: 30px;
+    }
+  }
 
   .practices {
     &__subtitle {
@@ -2205,6 +2244,10 @@
   }
 
   .slogan {
+    padding: 28px 20px;
+  }
+
+  .slogan2 {
     padding: 28px 20px;
   }
 

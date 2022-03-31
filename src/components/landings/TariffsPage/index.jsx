@@ -15,6 +15,7 @@ import { Button, Grid } from '@mui/material';
 import { Tariffs } from '@components/modals/TariffsModal/Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
 import { MailingList } from './ MailingList';
+import { LandingHeader } from '@components/landings/Header';
 
 export const TariffsPage = () => {
   const { data: tariffs, isLoading } = useGetTariffsQuery();
@@ -52,7 +53,12 @@ export const TariffsPage = () => {
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
       <div className={styles.wrap}>
         <div className={styles.container}>
-          <main>
+          <main style={{ paddingBottom: '24px' }}>
+            <LandingHeader
+              title="Выберите свой тариф"
+              desc="Изучите навыки работы с данными, необходимые для продвижения по карьерной лестнице."
+            />
+
             <section className={styles.about}>
               <Grid container spacing={4}>
                 <Grid item xs={8}>
