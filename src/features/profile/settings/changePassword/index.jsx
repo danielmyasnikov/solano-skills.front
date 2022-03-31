@@ -41,7 +41,7 @@ const ChangePassword = () => {
             {width > 1512 && <Button variant="containedPurple">Сохранить изменения</Button>}
           </div>
           <div className={styles.requirements}>
-            <div>
+            <div className={styles.requirements__text}>
               <span className={styles.preTitle}>Требования к паролю:</span>
               <ul>
                 <li>Минимум 8 символов - чем больше, тем лучше</li>

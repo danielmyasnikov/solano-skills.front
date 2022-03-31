@@ -55,7 +55,9 @@ const Settings = () => {
     <div className={styles.wrapper}>
       <HeaderPage content="settings" />
       <div className={styles.container}>
-        <SettingsMenu active={active} handleChange={handleActiveMenu} />
+        <div className={styles.setings}>
+          <SettingsMenu active={active} handleChange={handleActiveMenu} />
+        </div>
         <div className={styles.content}>
           <div ref={subscriptionRef} className={styles.password}>
             <Tariffs tariffList={tariffs} />
