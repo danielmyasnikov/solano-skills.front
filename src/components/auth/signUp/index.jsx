@@ -87,7 +87,7 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
   }
 
   const signInHandler = () => {
-    if (location.pathname !== '/registration' && location.pathname !== '/') {
+    if (location.pathname !== '/sign-up' && location.pathname !== '/') {
       setIsAuthFromExercise(!isAuthFromExercise);
       setButtonTitle('Авторизоваться');
     } else {
@@ -156,7 +156,7 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
 
   if (isReg) {
     onClose?.();
-    if (location.pathname !== '/registration' && location.pathname !== '/') {
+    if (location.pathname !== '/sign-up' && location.pathname !== '/') {
       return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;
     }
     return <Redirect to="/onBoard" />;
