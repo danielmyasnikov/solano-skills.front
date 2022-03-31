@@ -1,18 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@components/mui/button';
-
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 import {
   selectExerciseContext,
   selectExerciseType,
   selectHint,
-  selectRootExerciseType,
 } from '@src/features/exercises/store/selectors';
 
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 const HintButton = styled(Button)`
   display: flex;

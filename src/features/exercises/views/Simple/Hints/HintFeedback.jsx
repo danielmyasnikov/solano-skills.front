@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@components/mui/button';
-
 import {
   selectExerciseContext,
   selectHint,
@@ -9,7 +7,7 @@ import {
 } from '@src/features/exercises/store/selectors';
 
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';

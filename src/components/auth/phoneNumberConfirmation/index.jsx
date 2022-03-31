@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import InputMask from 'react-input-mask';
@@ -22,7 +21,7 @@ export const PhoneNumberConfirmation = ({
         alwaysShowMask={false}
         name="confirmationCode"
         mask="99"
-      ></InputMask>
+      />
       {errors?.errorVerify && <span className={styles.error}>{errors?.errorVerify}</span>}
       <div onClick={() => handleAuthMethod()} className={styles.link}>
         Изменить номер телефона

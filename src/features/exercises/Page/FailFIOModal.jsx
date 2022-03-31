@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Modal, Box } from '@mui/material';
+import { useState } from 'react';
+import { Modal, Box, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Button from '@components/mui/button';
 import { useParams } from 'react-router-dom';
 import { useTakeCertificateWithFioMutation } from '@src/features/certificates/certificates.api';
 import { useHistory } from 'react-router';

@@ -1,12 +1,12 @@
-import React from 'react';
 import styles from './styles.module.less';
-import Button from '@components/mui/button';
 import { TimeWhite } from '@assets/TimeWhite';
 import { CoursesWhite } from '@assets/CoursesWhite';
-import { TestWhite } from '@assets/TestWhite';
 import { pages, test } from './data';
+import { numberDeclension } from '@components/common/helpers/numberDeclension';
+import { Button } from '@mui/material';
+import { TestWhite } from '@assets/TestWhite';
 
-export const WrapHeader = ({ variant }) => {
+export const WrapHeader = ({ variant, info }) => {
   return (
     <div className={styles.wrapHeader}>
       <div className={styles.pretitle}>{pages[variant].pretitle}</div>
@@ -16,16 +16,26 @@ export const WrapHeader = ({ variant }) => {
           <div className={styles.titleBlock__items}>
             <div className={styles.titleBlock__item}>
               <TimeWhite />
-              <div>{test.hours}</div>
+              <div>{`${info.hours} ${numberDeclension(info.hours, ['час', 'часа', 'часов'])}`}</div>
             </div>
             <div className={styles.titleBlock__item}>
               <CoursesWhite />
-              <div>{test.courses}</div>
+              <div>{`${info.courses} ${numberDeclension(info.courses, [
+                'курс',
+                'курса',
+                'курсов',
+              ])}`}</div>
             </div>
-            <div className={styles.titleBlock__item}>
-              <TestWhite />
-              <div>{test.tests}</div>
-            </div>
+            {info.tests && (
+              <div className={styles.titleBlock__item}>
+                <TestWhite />
+                <div>{`${info.tests} ${numberDeclension(info.tests, [
+                  'тест',
+                  'теста',
+                  'тестов',
+                ])}`}</div>
+              </div>
+            )}
             {variant === 'profession' && (
               <div className={styles.titleBlock__item_certificate}>{test.certificate}</div>
             )}

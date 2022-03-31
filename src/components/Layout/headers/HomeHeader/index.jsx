@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import HeaderLogo from '@assets/homepage/HeaderLogo';
 import Burger from '@assets/Burger';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
+import { Button } from '@mui/material';
 
 const HeaderHome = ({ handleBurger }) => {
   const isAuth = useSelector(selectIsAuth);

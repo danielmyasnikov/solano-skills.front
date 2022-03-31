@@ -13,6 +13,7 @@ import {
   REQUEST_PASSWORD_RESET_FAILED,
   PATCH_PASSWORD_SUCCESSED,
   PATCH_PASSWORD_FAILED,
+  REQUEST_PASSWORD_RESET,
 } from './actions';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   status: '',
   recoveryPasswordStatus: 'idle',
   isReg: false,
+  isEmailExists: false,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -55,6 +57,9 @@ export default function authReducer(state = initialState, action) {
     case REQUEST_PASSWORD_RESET_SUCCESSED: {
       return { ...state, recoveryPasswordStatus: 'success', errors: {} };
     }
+    case REQUEST_PASSWORD_RESET: {
+      return { ...state, recoveryPasswordStatus: 'request' };
+    }
 
     case PATCH_PASSWORD_SUCCESSED: {
       return {
@@ -64,7 +69,7 @@ export default function authReducer(state = initialState, action) {
       };
     }
     case REQUEST_PASSWORD_RESET_FAILED: {
-      return { ...state, errors: { ...action.payload } };
+      return { ...state, recoveryPasswordStatus: 'failure', errors: { ...action.payload } };
     }
     case CLEAR_ERRORS: {
       return { ...state, errors: { ...state.errors, ...action.payload } };

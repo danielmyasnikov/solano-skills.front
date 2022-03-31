@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import InputMask from 'react-input-mask';
@@ -23,7 +22,7 @@ export const ByPhoneNumber = ({
         mask="+7\ (999) 999-99-99"
         name="phone"
         type="tel"
-      ></InputMask>
+      />
       {countTime > 0 && (
         <span className={styles.error}>
           Вы сможете отправить смс код повторно через {countTime} сек

@@ -5,7 +5,6 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { Sidebar } from '@src/features/exercises/views/Simple/Sidebar';
 import { selectKernelId } from '@store/terminal/selector';
-import { FeedbackModal } from '@components/common/modals/feedback';
 import ErrorMessage from '@src/features/exercises/views/Simple/ErrorMessage';
 import CompletedTaskModal from '@src/features/exercises/views/Simple/CompletedTaskModal';
 
@@ -17,15 +16,12 @@ import SolutionHint from '@src/features/exercises/views/Simple/Hints/SolutionHin
 import {
   selectExerciseContext,
   selectExerciseSidebar,
-  selectFeedbackModal,
   selectHint,
   selectRootExercise,
   selectRootExerciseType,
-  selectSignupModal,
   selectSteps,
 } from '@src/features/exercises/store/selectors';
 import { exercisesSlice } from '../../store/slices/exercises.slice';
-import RegistrationModal from '@components/common/modals/registration/registrationModal';
 import { useEffect, useRef, useState } from 'react';
 import { sendAnswer } from '@src/features/exercises/store/actions';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
@@ -48,8 +44,6 @@ function Exercise({ goNext }) {
 
   const { open: sidebarOpen } = useSelector(selectExerciseSidebar);
   const { completed, exercise, xp, code } = useSelector(selectExerciseContext);
-  const feedbackModal = useSelector(selectFeedbackModal);
-  const signupModal = useSelector(selectSignupModal);
   const { used: hintUsed } = useSelector(selectHint);
 
   async function setStep(step) {
@@ -136,16 +130,6 @@ function Exercise({ goNext }) {
       </div>
 
       <Stack />
-
-      {feedbackModal && (
-        <FeedbackModal onClose={() => dispatch(exercisesSlice.actions.closeFeedbackModal({}))} />
-      )}
-      {signupModal && (
-        <RegistrationModal
-          isOpenFromExercises
-          onClose={() => dispatch(exercisesSlice.actions.closeSignupModal({}))}
-        />
-      )}
     </>
   );
 }

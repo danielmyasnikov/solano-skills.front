@@ -9,20 +9,19 @@ import { PasswordResetErrorModal } from '../passwordResetErrorModal';
 
 import * as AuthStore from '@store/auth';
 
-import { InputPassword } from '@components/mui/inputPassword';
-import Button from '@components/mui/button';
-
 import cn from 'classnames';
 import styles from './styles.module.less';
 import { getProfile } from '@store/profile/actions';
+import { Button } from '@mui/material';
+import { InputPassword } from '@components/mui/Password';
 
 export const PasswordResetPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(false);
-  const [errorMessagePassword, setErrorMesssagePassword] = useState('');
-  const [errorMessageConfirmPassword, setErrorMesssageConfirmPassword] = useState('');
+  const [errorMessagePassword, setErrorMessagePassword] = useState('');
+  const [errorMessageConfirmPassword, setErrorMessageConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
 
@@ -66,37 +65,37 @@ export const PasswordResetPage = () => {
     if (password.length && confirmPassword.length) {
       if (password.length < 6) {
         setIsPasswordValid(false);
-        setErrorMesssagePassword('Длина должна быть не менее 6 символов');
+        setErrorMessagePassword('Длина должна быть не менее 6 символов');
       }
 
       if (confirmPassword.length < 6) {
         setIsConfirmPasswordValid(false);
-        setErrorMesssageConfirmPassword('Длина должна быть не менее 6 символов');
+        setErrorMessageConfirmPassword('Длина должна быть не менее 6 символов');
       }
 
       if (password.length >= 6) {
         setIsPasswordValid(true);
-        setErrorMesssagePassword('');
+        setErrorMessagePassword('');
       }
 
       if (confirmPassword.length >= 6) {
         setIsConfirmPasswordValid(true);
-        setErrorMesssageConfirmPassword('');
+        setErrorMessageConfirmPassword('');
       }
 
       if (password !== confirmPassword) {
         setIsPasswordValid(false);
-        setErrorMesssagePassword('Пароли должны совпадать');
+        setErrorMessagePassword('Пароли должны совпадать');
         setIsConfirmPasswordValid(false);
-        setErrorMesssagePassword('Пароли должны совпадать');
+        setErrorMessagePassword('Пароли должны совпадать');
       }
     }
 
     if (!password.length && !confirmPassword.length) {
       setIsPasswordValid(true);
-      setErrorMesssagePassword('');
+      setErrorMessagePassword('');
       setIsConfirmPasswordValid(true);
-      setErrorMesssageConfirmPassword('');
+      setErrorMessageConfirmPassword('');
     }
   }, [password, confirmPassword]);
 

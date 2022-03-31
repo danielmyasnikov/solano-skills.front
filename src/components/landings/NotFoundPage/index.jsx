@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import HeaderHome from '../../Layout/headers/HomeHeader';
 import NotFound from '@assets/NotFound';
 import NotFoundMini from '@assets/NotFoundMini';
-import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import BurgerMenu from '@components/common/burgerMenu';
 import { selectIsAuth } from '@store/profile/selector';
+import { Button } from '@mui/material';
 
 export const NotFoundPage = () => {
   const [showMenu, setShowMenu] = useState(false);

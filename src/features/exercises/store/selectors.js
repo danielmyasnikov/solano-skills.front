@@ -16,6 +16,3 @@ export const selectRootExercise = ({ exercises }) => exercises.exercise;
 export const selectRootExerciseType = ({ exercises }) => exercises.exercise.type;
 export const selectExercisesStatus = ({ exercises }) => exercises.status;
 export const selectSteps = ({ exercises }) => exercises.steps;
-
-export const selectFeedbackModal = ({ exercises }) => exercises.modals.feedback;
-export const selectSignupModal = ({ exercises }) => exercises.modals.signup;

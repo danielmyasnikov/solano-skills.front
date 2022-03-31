@@ -1,21 +1,22 @@
 import ExercisePage from '@src/features/exercises/Page';
-import Profile from '@components/profile';
-import { CoursesPage } from '@components/coursesPage';
-import { CoursePage } from '@components/coursePage';
-import CertificatesPage from '@src/features/certificates/pages/CertificatesPage';
-import CertificatePage from '@src/features/certificates/pages/CertificatePage';
+import Profile from './features/profile';
+import { CoursesPage } from './features/courses/pages/Courses';
+import { CoursePage } from './features/courses/pages/Course';
+import CertificatesPage from '@src/features/certificates/pages/Certificates';
+import CertificatePage from '@src/features/certificates/pages/Certificate';
 import { HomePage } from '@components/landings/HomePage';
-import { Registration } from '@components/auth/registration';
+import { Registration } from '@components/auth/signUp';
 import { Authorization } from '@components/auth/authorization';
-import { PaymentPage } from '@components/paymentPage';
-import { SkillsPage } from '@components/skillsPage';
-import { SkillPage } from '@components/skillPage';
-import { ProfessionsPage } from '@components/professionsPage';
-import { ProfessionPage } from '@components/professionPage';
+import { PaymentPage } from './features/payment/Page';
+import SkillsPage from '@src/features/skills/pages/SkillsPage';
+import SkillPage from '@src/features/skills/pages/SkillPage';
+import ProfessionsPage from '@src/features/professions/pages/ProfessionsPage';
+import ProfessionPage from '@src/features/professions/pages/ProfessionPage';
 import { ProgressPage } from '@components/progressPage';
-import Settings from '@components/settings';
+import Settings from './features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
 import { OnBoardPage } from './features/onBoard';
+import { SuccessPayment } from '@src/features/payment/SuccessPayment';
 
 export const routes = [
   {
@@ -121,9 +122,16 @@ export const routes = [
     wrap: true,
     exact: true,
   },
+
   {
     path: '/payment',
     component: PaymentPage,
+    wrap: false,
+    exact: true,
+  },
+  {
+    path: '/success-payment',
+    component: SuccessPayment,
     wrap: false,
     exact: true,
   },

@@ -1,8 +1,6 @@
-import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import Complete from '@assets/Complete';
 import Close from '@assets/Close.png';
-import Rating from '@components/mui/rating';
 import { useSelector } from 'react-redux';
 import {
   selectExerciseContext,
@@ -10,6 +8,7 @@ import {
   selectRootExerciseType,
   selectSteps,
 } from '@src/features/exercises/store/selectors';
+import { Button, Rating } from '@mui/material';
 
 const CompletedTaskModal = ({ onClick, onClose }) => {
   const rootExercise = useSelector(selectRootExercise);
@@ -32,7 +31,7 @@ const CompletedTaskModal = ({ onClick, onClose }) => {
         <Complete />
         <span className={styles.xp}>{value !== 0 ? `+${value} XP` : `${value} XP`}</span>
         <div className={styles.rating}>
-          <Rating readonly value={(5 * value) / max} />
+          <Rating readOnly value={(5 * value) / max} />
         </div>
         <span className={styles.title}>
           {exercise.correct_message || 'Отлично!\nВы выполнили задание!'}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.less';
 import logo from '@assets/Python.svg';
-import { CheckboxBtn } from '@components/mui/checkbox';
+import { CheckboxBtn } from '@components/mui/Checkbox';
 import cn from 'classnames';
 
 export const Course = ({
@@ -15,13 +15,18 @@ export const Course = ({
 }) => {
   const [checked, setChecked] = useState(false);
 
+  function handleClick() {
+    !checked ? handleСhoice(id) : handleRemoveChoice(id);
+    setChecked(!checked);
+  }
+
   const handleChecked = (e) => {
     e.target.checked ? handleСhoice(id) : handleRemoveChoice(id);
     setChecked(!checked);
   };
 
   return (
-    <div className={cn(styles.wrapper, { [styles.wrapperChecked]: checked })}>
+    <div className={cn(styles.wrapper, { [styles.wrapperChecked]: checked })} onClick={handleClick}>
       <div className={styles.checkbox}>
         <CheckboxBtn value={checked} handleChange={handleChecked} />
       </div>

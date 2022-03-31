@@ -11,8 +11,7 @@ import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
-import Button from '@components/mui/button';
-import Draggable from '@components/common/draggable';
+import Draggable from '@components/common/Draggable';
 
 import { selectKernelId, selectTerminal } from '@store/terminal/selector';
 import { checkAnswer, compileShell } from '@store/terminal/actions';
@@ -22,7 +21,7 @@ import GraphArrow from '@assets/GraphArrow';
 import Reset from '@assets/Reset';
 
 import { styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 
 import styles from './styles.module.less';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';

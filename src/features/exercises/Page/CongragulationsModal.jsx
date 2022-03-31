@@ -1,9 +1,7 @@
 import Modal from '@mui/material/Modal';
-import Button from '@components/mui/button';
 
-import SuccessIcon from '@assets/successIcon.svg';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useTakeCertificateMutation } from '@src/features/certificates/certificates.api';
 import { useHistory } from 'react-router';

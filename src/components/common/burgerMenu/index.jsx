@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
 import BurgerExit from '@assets/BurgerExit.svg';
-import Input from '@components/mui/inputSearch';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Link } from 'react-router-dom';
+import Search from '@components/mui/Search';
 
 const BurgerMenu = ({ isShow, handleBurger }) => {
   const [showItems, setShowItems] = useState(false);
@@ -18,7 +16,7 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
         </div>
         <div className={styles.title}>Меню</div>
         <div className={styles.search}>
-          <Input placeholder={'Какой курс вы ищите?'} />
+          <Search placeholder={'Какой курс вы ищите?'} />
         </div>
         <div className={styles.links}>
           <div className={styles.link}>

@@ -21,6 +21,4 @@ export const layoutSlice = createSlice({
   },
 });
 
-const { openSidebar, closeSidebar, toggleSidebar } = layoutSlice.actions;
-
-export { openSidebar, closeSidebar, toggleSidebar };
+export const { openSidebar, closeSidebar, toggleSidebar } = layoutSlice.actions;

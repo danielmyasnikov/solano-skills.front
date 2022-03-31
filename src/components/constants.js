@@ -56,33 +56,3 @@ export const socialItems = [
     isLinked: false,
   },
 ];
-
-export const TariffList = [
-  {
-    id: 1,
-    title: 'Эконом',
-    isEconomy: true,
-    isOptimal: false,
-    price: 'Бесплатно',
-    oldPrice: null,
-    totalPrice: null,
-  },
-  {
-    id: 2,
-    title: 'Годовой',
-    isEconomy: false,
-    isOptimal: true,
-    price: '299',
-    oldPrice: '12 299',
-    totalPrice: '3 599',
-  },
-  {
-    id: 3,
-    title: 'На месяц',
-    isEconomy: false,
-    isOptimal: false,
-    price: '900',
-    oldPrice: '14 666',
-    totalPrice: '2999',
-  },
-];

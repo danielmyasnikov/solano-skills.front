@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { selectExercisesStatus } from '@src/features/exercises/store/selectors';
 import ExercisePageBody from '@src/features/exercises/Page/Body';
-import { Preloader } from '@components/mui/preloader';
+import { Preloader } from '@components/mui/Preloader';
 
 const Root = styled(Box)`
   display: flex;
