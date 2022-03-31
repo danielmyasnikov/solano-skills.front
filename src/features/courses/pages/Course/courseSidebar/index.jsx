@@ -56,23 +56,23 @@ export const CourseSidebar = ({
           </ul>
         </div>
       )}
-      {progress && (
-        <div className={cn(styles.card, styles.progressWrapper)}>
-          <div className={styles.progressWrapper__title}>Ваш прогресс</div>
-          <ProgressBar
-            value={progress}
-            height={'12px'}
-            variant={'skill'}
-            top={'15px'}
-            isShowValue
-          />
-          <div className={styles.progressWrapper__stats}>
-            <div className={styles.progressWrapper__stat}>1 пройден</div>
-            <div className={styles.progressWrapper__stat}>1 в прогрессе</div>
-            <div className={styles.progressWrapper__stat}>3 осталось</div>
-          </div>
-        </div>
-      )}
+      {/*{progress && (*/}
+      {/*  <div className={cn(styles.card, styles.progressWrapper)}>*/}
+      {/*    <div className={styles.progressWrapper__title}>Ваш прогресс</div>*/}
+      {/*    <ProgressBar*/}
+      {/*      value={progress}*/}
+      {/*      height={'12px'}*/}
+      {/*      variant={'skill'}*/}
+      {/*      top={'15px'}*/}
+      {/*      isShowValue*/}
+      {/*    />*/}
+      {/*    <div className={styles.progressWrapper__stats}>*/}
+      {/*      <div className={styles.progressWrapper__stat}>1 пройден</div>*/}
+      {/*      <div className={styles.progressWrapper__stat}>1 в прогрессе</div>*/}
+      {/*      <div className={styles.progressWrapper__stat}>3 осталось</div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*)}*/}
       {certificate && (
         <div className={styles.certificateWrapper}>
           <div className={styles.certificateWrapper__title}>
