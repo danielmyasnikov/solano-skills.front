@@ -33,7 +33,7 @@ const Header = ({ headerRef }) => {
 
   const history = useHistory();
 
-  const registerRouteHandler = () => history.push(`/registration`);
+  const registerRouteHandler = () => history.push(`/sign-up`);
 
   const handleShowModal = () => {
     dispatch(openTariffsModal({}));

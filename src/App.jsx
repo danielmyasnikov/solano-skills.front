@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Layout from '@components/Layout';
 
 import { routes } from './routes';
-import { NotFoundPage } from '@components/landings/NotFoundPage';
+import { NotFoundPage } from '@components/NotFoundPage';
 
 import { useDispatch } from 'react-redux';
 
@@ -49,14 +49,16 @@ function App() {
         <Switch>
           {routes.map((route, i, headerVariant) => (
             <Route exact={route.exact} path={route.path} key={route.path}>
-              {route.wrap ? (
-                <Layout variant={headerVariant} key={i} {...route}>
+              <>
+                {route.wrap ? (
+                  <Layout variant={headerVariant} key={i} {...route}>
+                    <route.component />
+                  </Layout>
+                ) : (
                   <route.component />
-                  <ModalPortal />
-                </Layout>
-              ) : (
-                <route.component />
-              )}
+                )}
+                <ModalPortal />
+              </>
             </Route>
           ))}
           <Route component={NotFoundPage} />

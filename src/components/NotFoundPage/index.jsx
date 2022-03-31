@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import HeaderHome from '../../Layout/headers/HomeHeader';
+import HeaderHome from '../Layout/headers/HomeHeader';
 import NotFound from '@assets/NotFound';
 import NotFoundMini from '@assets/NotFoundMini';
 import styles from './styles.module.less';

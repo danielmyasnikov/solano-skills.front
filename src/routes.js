@@ -5,6 +5,8 @@ import { CoursePage } from './features/courses/pages/Course';
 import CertificatesPage from '@src/features/certificates/pages/Certificates';
 import CertificatePage from '@src/features/certificates/pages/Certificate';
 import { HomePage } from '@components/landings/HomePage';
+import { TariffsPage } from '@components/landings/TariffsPage';
+import { LearningPage } from '@components/landings/LearningPage';
 import { Registration } from '@components/auth/signUp';
 import { Authorization } from '@components/auth/authorization';
 import { PaymentPage } from './features/payment/Page';
@@ -19,6 +21,24 @@ import { OnBoardPage } from './features/onBoard';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
 
 export const routes = [
+  {
+    path: '/',
+    component: HomePage,
+    wrap: false,
+    exact: true,
+  },
+  {
+    path: '/tariffs',
+    component: TariffsPage,
+    wrap: false,
+    exact: true,
+  },
+  {
+    path: '/learning',
+    component: LearningPage,
+    wrap: false,
+    exact: true,
+  },
   {
     path: '/courses',
     component: CoursesPage,
@@ -56,12 +76,6 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/',
-    component: HomePage,
-    wrap: false,
-    exact: true,
-  },
-  {
     path: '/settings',
     component: Settings,
     wrap: true,
@@ -74,7 +88,7 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/registration',
+    path: '/sign-up',
     component: Registration,
     wrap: false,
     exact: true,
