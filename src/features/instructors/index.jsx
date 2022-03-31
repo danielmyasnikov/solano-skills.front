@@ -10,8 +10,8 @@ export const Instructors = () => {
         <p className={styles.description}>Здесь вы можете посмотреть квалификацию наших лекторов</p>
       </div>
       <div className={styles.content}>
-        {instructorList.map(({ id, name, diplomaImgLink, prevLink }) => (
-          <Instructor key={id} id={id} name={name} url={diplomaImgLink} prev={prevLink} />
+        {instructorList.map(({ id, name, diplomaImgLink }) => (
+          <Instructor key={id} id={id} name={name} url={diplomaImgLink} />
         ))}
       </div>
     </div>
