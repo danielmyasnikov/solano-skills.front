@@ -203,7 +203,7 @@ export const Authorization = () => {
         )) || (
           <span className={styles.text}>
             {'У вас нет аккаунта? '}
-            <Link className={styles.infoLink} to={'/registration'}>
+            <Link className={styles.infoLink} to={'/sign-up'}>
               Зарегистрироваться
             </Link>
           </span>

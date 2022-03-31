@@ -68,9 +68,9 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
         <div>
           {parts.map((partItem, i) => (
             <div key={i} className={styles[variant]}>
-              <div className={styles.skill__number}>
-                {(partItem.progress === 100 && <DoneGreen />) || <div>{++i}</div>}
-              </div>
+              {/*<div className={styles.skill__number}>*/}
+              {/*  {(partItem.progress === 100 && <DoneGreen />) || <div>{++i}</div>}*/}
+              {/*</div>*/}
               <div className={styles.skill__block}>
                 {partItem?.test && <div className={styles.skill__test}>Тестирование</div>}
                 <div
@@ -88,35 +88,35 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
                       [styles.downOpen]: active === partItem.slug,
                     })}
                   >
-                    {partItem.exercises.map((item, i) => (
-                      <div
-                        key={i}
-                        className={cn(styles.item, {
-                          [styles.item_notAvailable]: item.is_available === false,
-                        })}
-                      >
-                        <div className={styles.itemLeft}>
-                          <div className={styles.itemImg}>
-                            <ExerciseTypeImage type={item.type} />
-                          </div>
-                          <span className={styles.itemTitle}>{item.title}</span>
-                        </div>
-                        <div className={styles.openRight}>
-                          <div className={styles.point} />
-                          <span className={styles.itemTitle}>{item.xp}</span>
-                        </div>
-                      </div>
-                    ))}
+                    {/*{partItem.exercises.map((item, i) => (*/}
+                    {/*  <div*/}
+                    {/*    key={i}*/}
+                    {/*    className={cn(styles.item, {*/}
+                    {/*      [styles.item_notAvailable]: item.is_available === false,*/}
+                    {/*    })}*/}
+                    {/*  >*/}
+                    {/*    <div className={styles.itemLeft}>*/}
+                    {/*      <div className={styles.itemImg}>*/}
+                    {/*        <ExerciseTypeImage type={item.type} />*/}
+                    {/*      </div>*/}
+                    {/*      <span className={styles.itemTitle}>{item.title}</span>*/}
+                    {/*    </div>*/}
+                    {/*    <div className={styles.openRight}>*/}
+                    {/*      <div className={styles.point} />*/}
+                    {/*      <span className={styles.itemTitle}>{item.xp}</span>*/}
+                    {/*    </div>*/}
+                    {/*  </div>*/}
+                    {/*))}*/}
                   </div>
                   <div className={styles.skill__info}>
-                    {partItem.progress !== 0 && (
-                      <ProgressBar
-                        value={partItem.progress}
-                        height={'12px'}
-                        variant={'skill'}
-                        isShowValue={true}
-                      />
-                    )}
+                    {/*{partItem.progress !== 0 && (*/}
+                    {/*  <ProgressBar*/}
+                    {/*    value={partItem.progress}*/}
+                    {/*    height={'12px'}*/}
+                    {/*    variant={'skill'}*/}
+                    {/*    isShowValue={true}*/}
+                    {/*  />*/}
+                    {/*)}*/}
                     <div className={styles.skill__info__hour}>
                       <TimeGrey />
                       <div>{partItem.time} часа</div>
@@ -137,19 +137,18 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
                       </Button>
                     )}
                   </Link>
-
-                  <Button
-                    className={cn(styles.btnContent, {
-                      [styles.btnContentOpen]: active === partItem.slug,
-                    })}
-                    variant="outlineBlack"
-                    onClick={() => {
-                      setActive(partItem.slug !== active ? partItem.slug : '');
-                    }}
-                  >
-                    Содержание курса
-                    <ArrowDown />
-                  </Button>
+                  {/*<Button*/}
+                  {/*  className={cn(styles.btnContent, {*/}
+                  {/*    [styles.btnContentOpen]: active === partItem.slug,*/}
+                  {/*  })}*/}
+                  {/*  variant="outlineBlack"*/}
+                  {/*  onClick={() => {*/}
+                  {/*    setActive(partItem.slug !== active ? partItem.slug : '');*/}
+                  {/*  }}*/}
+                  {/*>*/}
+                  {/*  Содержание курса*/}
+                  {/*  <ArrowDown />*/}
+                  {/*</Button>*/}
                 </div>
               </div>
             </div>

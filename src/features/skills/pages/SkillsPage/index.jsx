@@ -18,6 +18,7 @@ const SkillsList = styled(Box)`
   grid-gap: 30px 23px;
   grid-template-columns: repeat(auto-fit, minmax(370px, 370px));
   justify-content: center;
+  padding-bottom: 100px;
 
   @media screen and (max-width: 830px) {
     grid-template-columns: 1fr;

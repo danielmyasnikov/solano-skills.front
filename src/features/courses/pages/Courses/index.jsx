@@ -13,14 +13,20 @@ import CourseLogo from './assets/CourseLogo.svg';
 import styles from './styles.module.less';
 import { selectIsAuth } from '@store/profile/selector';
 import { useGetCoursesQuery } from '@src/features/courses/courses.api';
+import { useLocation } from 'react-router-dom';
+import { PaymentErrorModal } from '@src/features/payment/PaymentErrorModal';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const { data: courses, loading, error } = useGetCoursesQuery();
   const { progress } = useSelector(ProgressStore.Selectors.getProgress);
   const isAuth = useSelector(selectIsAuth);
+
+  const paymentStatus = query.get('paymentStatus');
 
   useEffect(() => {
     if (isAuth) {
@@ -66,6 +72,8 @@ export const CoursesPage = () => {
           ))}
         </div>
       </div>
+
+      {paymentStatus === 'fail' && <PaymentErrorModal />}
     </div>
   );
 };

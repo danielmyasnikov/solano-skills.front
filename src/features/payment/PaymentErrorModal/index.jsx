@@ -5,24 +5,20 @@ import Close from '@assets/Close';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
+import { useHistory } from 'react-router';
 
-export const PaymentErrorModal = ({ isShow = false }) => {
-  const [isShowModal, setIsShowModal] = useState(isShow);
-
+export const PaymentErrorModal = () => {
+  const history = useHistory();
   return (
-    <>
-      {isShow && (
-        <div className={cn(styles.wrapper, { [styles.wrapperHide]: !isShowModal })}>
-          <div className={styles.closeButton} onClick={() => setIsShowModal(!isShowModal)}>
-            <Close />
-          </div>
-          <span className={styles.wrapperTitle}>Оплата не выполнена</span>
-          <span className={styles.wrapperText}>
-            К сожалению, мы не смогли выполнить операцию, так как на вашем счете недостаточно
-            средств. Попробуйте выбрать другой способ оплаты
-          </span>
-        </div>
-      )}
-    </>
+    <div className={cn(styles.wrapper)}>
+      <div className={styles.closeButton} onClick={() => history.push('/courses')}>
+        <Close />
+      </div>
+      <span className={styles.wrapperTitle}>Оплата не выполнена</span>
+      <span className={styles.wrapperText}>
+        К сожалению, мы не смогли выполнить операцию, так как на вашем счете недостаточно средств.
+        Попробуйте выбрать другой способ оплаты
+      </span>
+    </div>
   );
 };

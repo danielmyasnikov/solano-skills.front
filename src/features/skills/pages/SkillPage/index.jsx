@@ -29,7 +29,6 @@ const SkillPage = () => {
               variant={'skill'}
               progress={skill.info.progress}
               mentors={course.mentors}
-              progress
             />
           </div>
         </>

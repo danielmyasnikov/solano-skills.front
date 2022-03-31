@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.less';
 import HeaderLogo from '@assets/homepage/HeaderLogo';
 import Burger from '@assets/Burger';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
 import { Button } from '@mui/material';
+import { openFeedbackModal } from '@store/global/modals';
 
 const HeaderHome = ({ handleBurger }) => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   return (
     <div className={styles.wrapper}>
@@ -18,9 +20,11 @@ const HeaderHome = ({ handleBurger }) => {
             </Link>
           </div>
           <div className={styles.header__menu}>
-            <Link to="/courses">Обучение</Link>
-            <Link to="/tariff">Тарифы</Link>
-            <Link to="/support">Поддержка</Link>
+            <Link to="/learning">Обучение</Link>
+            <Link to="/tariffs">Тарифы</Link>
+            <span style={{ cursor: 'pointer' }} onClick={() => dispatch(openFeedbackModal({}))}>
+              Поддержка
+            </span>
           </div>
         </div>
         <div className={styles.header__block}>
@@ -29,7 +33,7 @@ const HeaderHome = ({ handleBurger }) => {
               <Link to={'/sign-in'}>
                 <Button variant="outlinePurple">Войти</Button>
               </Link>
-              <Link to={'/registration'}>
+              <Link to={'/sign-up'}>
                 <Button variant="containedPurple">Зарегистрироваться</Button>
               </Link>
             </>
