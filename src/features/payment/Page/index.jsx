@@ -5,17 +5,18 @@ import { useLocation } from 'react-router-dom';
 import SmallLogo from '../assets/smallLogo.svg';
 import CompanyName from '../assets/companyName.svg';
 
-import { PaymentErrorModal } from '../PaymentErrorModal';
 import { PaymentAgreement } from '../PaymentAgreement';
 
 import styles from './styles.module.less';
 import { PurchaseInformation } from './PurchaseInformation';
 import { PurchaseInformationMobile } from './PurchaseInformation/Mobile';
 import { Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const PaymentPage = () => {
   const [width, setWidth] = useState(0);
-
+  const isAuth = useSelector(selectIsAuth);
   const location = useLocation();
 
   const id = location.state?.id;
@@ -33,6 +34,10 @@ export const PaymentPage = () => {
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (!isAuth) {
+    return <Redirect to="/sign-up" />;
+  }
 
   if (!id) {
     return <Redirect to="/404" />;
@@ -84,7 +89,6 @@ export const PaymentPage = () => {
           price={price}
         />
       )}
-      <PaymentErrorModal />
     </>
   );
 };

@@ -19,6 +19,7 @@ import Settings from './features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
 import { OnBoardPage } from './features/onBoard';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
+import { FailPaymentPage } from '@src/features/payment/Fail';
 
 export const routes = [
   {
@@ -42,6 +43,12 @@ export const routes = [
   {
     path: '/courses',
     component: CoursesPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/failed-payment',
+    component: FailPaymentPage,
     wrap: true,
     exact: true,
   },
