@@ -4,6 +4,7 @@ export const routesWithFixedSidebar = [
   '/settings',
   '/progress',
   '/certificates',
+  '/instructors',
   '/certificates/:certificateId',
   '/professions',
   '/professions/:professionId',

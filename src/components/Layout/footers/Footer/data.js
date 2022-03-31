@@ -6,7 +6,7 @@ export const links = [
     items: [
       {
         text: 'Манипуляции с данными',
-        link: '/courses/manipulating-data-with-pandas'
+        link: '/courses/manipulating-data-with-pandas',
       },
       // {
       //   text: 'Введение в shell',
@@ -14,19 +14,19 @@ export const links = [
       // },
       {
         text: 'Эффективный код',
-        link: '/courses/writing-efficient-python-code'
+        link: '/courses/writing-efficient-python-code',
       },
       {
         text: 'Введение в Data Science',
-        link: '/courses/introduction-to-data-science-in-python'
+        link: '/courses/introduction-to-data-science-in-python',
       },
       {
         text: 'Разработка Python пакетов',
-        link: '/courses/developing-python-packages'
+        link: '/courses/developing-python-packages',
       },
       {
         text: 'Тестирование',
-        link: '/courses/unit-testing-python'
+        link: '/courses/unit-testing-python',
       },
     ],
   },
@@ -110,8 +110,12 @@ export const links = [
     items: [
       {
         text: 'Стать преподавателем',
-        link: '/'
-      }
+        link: '/',
+      },
+      {
+        text: 'Дипломы преподавателей',
+        link: '/instructors',
+      },
     ],
   },
 ];
@@ -119,18 +123,18 @@ export const links = [
 export const otherLinks = [
   {
     text: 'Политика конфиденциальности',
-    link: 'https://docs.google.com/document/d/1QnjEYt1ho0ew1f9nNn_Np6KpAzNIS4X_vIHGUZEUeFs/edit?usp=sharing'
+    link: 'https://docs.google.com/document/d/1QnjEYt1ho0ew1f9nNn_Np6KpAzNIS4X_vIHGUZEUeFs/edit?usp=sharing',
   },
   {
     text: 'Оферта',
-    link: 'https://docs.google.com/document/d/1m8R1ofAY5tcRVOQ9wOyrZaDJ0fHaJx7JWEHNVUPaBUk/edit'
+    link: 'https://docs.google.com/document/d/1m8R1ofAY5tcRVOQ9wOyrZaDJ0fHaJx7JWEHNVUPaBUk/edit',
   },
   {
     text: 'Сведения об образовательной организации',
   },
   {
     text: 'Лицензия на образовательную деятельность',
-    link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing'
+    link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing',
   },
 ];
 
@@ -143,5 +147,5 @@ export const info = [
   },
   {
     text: '© DeepSkills, 2022',
-  }
+  },
 ];
