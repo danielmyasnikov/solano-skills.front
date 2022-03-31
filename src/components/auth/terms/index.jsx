@@ -1,6 +1,5 @@
 import styles from './styles.module.less';
-import { Link } from 'react-router-dom';
-import { CheckboxBtn } from '@components/mui/checkbox';
+import { CheckboxBtn } from '@components/mui/Checkbox';
 import cn from 'classnames';
 
 const Terms = ({ variant, handleChecked, checked, checkedError, isPhoneNumber }) => {

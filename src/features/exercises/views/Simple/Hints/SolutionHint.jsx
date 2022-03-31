@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@components/mui/button';
-
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 import {
@@ -10,7 +8,7 @@ import {
   selectSolutionHint,
 } from '@src/features/exercises/store/selectors';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 const Root = styled(Box)`
   padding-top: 25px;

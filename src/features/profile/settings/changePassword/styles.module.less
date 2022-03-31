@@ -1,0 +1,115 @@
+.title {
+  font-family: Jost;
+  margin: 80px 0 30px 0;
+  font-size: 24px;
+  letter-spacing: 0.015em;
+  color: var(--color-black);
+  line-height: 127%;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.password {
+  .wrap {
+    background: var(--color-white);
+    box-shadow: 0px 4px 17px rgb(0 0 0 / 4%);
+    border-radius: 15px;
+    padding: 40px;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  .form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    button {
+      margin-top: 40px;
+      padding: 0;
+      align-self: flex-end;
+      font-size: 18px;
+      height: 44px;
+      width: 242px;
+    }
+  }
+  .preTitle {
+    min-width: 140px;
+    font-family: Nunito;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 127%;
+    color: var(--color-black);
+  }
+  .oldPassword {
+    display: flex;
+    align-items: center;
+
+    input::-webkit-input-placeholder {
+      color: rgba(138, 146, 166, 0.32);
+    }
+  }
+  .newPassword {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .passwordContainer {
+    width: 100%;
+    & > div {
+      margin-bottom: 10px;
+    }
+
+    & > div:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .passwordWrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+
+    input::-webkit-input-placeholder {
+      color: rgba(138, 146, 166, 0.32);
+    }
+  }
+
+  .requirements {
+    margin: 0 40px;
+    ul {
+      margin-top: 15px;
+      margin-left: 20px;
+      li {
+        color: rgba(138, 146, 166, 1);
+      }
+    }
+  }
+  input {
+    width: 100%;
+    padding: 15px 30px;
+    background: #f2f1fd;
+    border: 1px solid var(--purple);
+    border-radius: 58px;
+    font-family: Nunito;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 127%;
+    &:focus {
+      outline: 1px solid var(--purple);
+    }
+  }
+}
+
+@media screen and (max-width: 1512px) {
+  .content {
+    flex-wrap: wrap;
+  }
+}

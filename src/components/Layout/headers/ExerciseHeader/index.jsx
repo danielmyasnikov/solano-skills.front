@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from 'react';
-
-import { useHistory, useParams, useLocation } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectCourse } from '@store/course/selector';
-import { getCourse } from '@store/course/actions';
 import { selectProfile } from '@store/profile/selector';
-
-import Button from '@components/mui/button';
-import CourseContentModal from '../../../common/modals/courseContent';
 
 import Burger from '@assets/Burger';
 import SupportIcon from '@assets/icon/supportIcon.svg';
@@ -23,35 +16,19 @@ import styles from './styles.module.less';
 import { getExerciseById } from '@src/features/exercises/store/actions';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { toggleSidebar } from '@store/global/layout';
+import { openCourseContentModal, openFeedbackModal } from '@store/global/modals';
+import { Button } from '@mui/material';
 
-const HeaderExercise = ({ headerRef, onSupport }) => {
+const HeaderExercise = ({ headerRef }) => {
   const dispatch = useDispatch();
-  const [courseContentIsOpen, setCourseContentIsOpen] = useState(false);
   const { courseId } = useParams();
-  const location = useLocation();
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
 
-  const courseData = useSelector(selectCourse);
   const profile = useSelector(selectProfile);
-  const [course, setCourse] = useState({});
-
-  useEffect(() => setCourse(courseData), [courseData]);
-
-  useEffect(() => {
-    dispatch(getCourse(courseId));
-  }, [location.pathname]);
 
   return (
     <div ref={headerRef} className={styles.wrapper}>
-      {courseContentIsOpen && (
-        <CourseContentModal
-          slug={courseId}
-          parts={course.parts || []}
-          isOpen={courseContentIsOpen}
-          onClose={() => setCourseContentIsOpen(!courseContentIsOpen)}
-        />
-      )}
       <header className={styles.header}>
         <div className={styles.headerItem}>
           <div onClick={() => dispatch(toggleSidebar({}))} className={styles.burgerMenu}>
@@ -73,7 +50,7 @@ const HeaderExercise = ({ headerRef, onSupport }) => {
             <Prev />
           </Button>
           <Button
-            onClick={() => setCourseContentIsOpen(!courseContentIsOpen)}
+            onClick={() => dispatch(openCourseContentModal({}))}
             className={cn(styles.courseContent, styles.btn)}
             variant="outlineBlack"
           >
@@ -95,7 +72,7 @@ const HeaderExercise = ({ headerRef, onSupport }) => {
           </Button>
         </nav>
         <nav className={cn(styles.headerItem, styles.navbarMenu)}>
-          <div className={styles.support} onClick={onSupport}>
+          <div className={styles.support} onClick={() => dispatch(openFeedbackModal({}))}>
             <img src={SupportIcon} alt="support" />
           </div>
           {profile.hasOwnProperty('name') && (

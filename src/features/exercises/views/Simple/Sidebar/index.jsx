@@ -10,7 +10,7 @@ import SidebarBody from './Body';
 
 import InstructionHeader from './Instruction/Header';
 import InstructionBody from './Instruction/Body';
-import Draggable from '@components/common/draggable';
+import Draggable from '@components/common/Draggable';
 
 const Root = styled(Box)`
   overflow-x: hidden;

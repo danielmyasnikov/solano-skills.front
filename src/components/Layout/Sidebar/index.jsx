@@ -1,23 +1,19 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import styles from './styles.module.less';
 import { profileItems, studyItems } from './menuItems';
-import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Button } from '@mui/material';
 import { Box } from '@mui/system';
-import { menuTheme } from '../../mui/theme';
-import Button from '@components/mui/button';
 import Logo from '@assets/Logo';
 import cn from 'classnames';
 import { useWindowWidth } from '@react-hook/window-size';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { useRef } from 'react';
 import { selectIsAuth } from '@store/profile/selector';
 import { selectSidebar } from '@store/global/layout.selectors';
 import { closeSidebar, openSidebar } from '@store/global/layout';
+import { openTariffsModal } from '@store/global/modals';
 
-const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
+const Sidebar = ({ sidebarFixed, headerTarget }) => {
   const location = useLocation();
   const sidebarRef = useRef();
   const dispatch = useDispatch();
@@ -39,8 +35,6 @@ const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
       dispatch(closeSidebar({}));
     }
   };
-
-  const handleUpdateSubscription = () => onUpdateSubscription();
 
   const renderStudyItems = studyItems.map(({ label, icon }) => (
     <Box key={label} sx={{ margin: '0 20px' }}>
@@ -84,70 +78,68 @@ const Sidebar = ({ sidebarFixed, headerTarget, onUpdateSubscription }) => {
   }, [windowWidth, sidebarFixed]);
 
   return (
-    <ThemeProvider theme={menuTheme}>
-      <Drawer
-        sx={{
+    <Drawer
+      sx={{
+        width: 250,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          marginTop: '73px',
           width: 250,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            marginTop: '73px',
-            width: 250,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={isOpen}
-        ref={sidebarRef}
-      >
-        <div className={styles.content}>
-          <div className={styles.items}>
-            {!sidebarFixed && (
-              <Box className={styles.logo}>
-                <Link to={isAuth ? '/courses' : '/'}>
-                  <Logo />
-                </Link>
-              </Box>
-            )}
-            <Box className={styles.label}>Профиль</Box>
-            {profileItems.map(({ label, link, icon }) => (
-              <Link
-                key={label}
-                to={link}
-                className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
-              >
-                <Box sx={{ margin: '0 20px' }}>
-                  <List>
-                    <ListItem
-                      onClick={() => setActiveTab(link)}
-                      className={activeTab === link ? styles.activeTab : ''}
-                    >
-                      <ListItemIcon>{icon}</ListItemIcon>
-                      <ListItemText primary={label} />
-                    </ListItem>
-                  </List>
-                </Box>
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="persistent"
+      anchor="left"
+      open={isOpen}
+      ref={sidebarRef}
+    >
+      <div className={styles.content}>
+        <div className={styles.items}>
+          {!sidebarFixed && (
+            <Box className={styles.logo}>
+              <Link to={isAuth ? '/courses' : '/'}>
+                <Logo />
               </Link>
-            ))}
-            <Divider />
-            <div className={styles.studing}>
-              <div className={styles.tooltip}>Данный раздел будет доступен с 1 Июля</div>
-              <Box className={styles.label}>Обучение</Box>
-              {renderStudyItems}
-            </div>
-          </div>
-          {isAuth && (
-            <Button
-              className={styles.btn}
-              variant="outlineGreen"
-              onClick={handleUpdateSubscription}
-            >
-              Обновить подписку
-            </Button>
+            </Box>
           )}
+          <Box className={styles.label}>Профиль</Box>
+          {profileItems.map(({ label, link, icon }) => (
+            <Link
+              key={label}
+              to={link}
+              className={cn({ [styles.hideLink]: label === 'Сертификаты' && !isAuth })}
+            >
+              <Box sx={{ margin: '0 20px' }}>
+                <List>
+                  <ListItem
+                    onClick={() => setActiveTab(link)}
+                    className={activeTab === link ? styles.activeTab : ''}
+                  >
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={label} />
+                  </ListItem>
+                </List>
+              </Box>
+            </Link>
+          ))}
+          <Divider />
+          <div className={styles.studing}>
+            <div className={styles.tooltip}>Данный раздел будет доступен с 1 Июля</div>
+            <Box className={styles.label}>Обучение</Box>
+            {renderStudyItems}
+          </div>
         </div>
-      </Drawer>
-    </ThemeProvider>
+        {isAuth && (
+          <Button
+            className={styles.btn}
+            variant="outlineGreen"
+            onClick={() => dispatch(openTariffsModal({}))}
+          >
+            Обновить подписку
+          </Button>
+        )}
+      </div>
+    </Drawer>
   );
 };
 

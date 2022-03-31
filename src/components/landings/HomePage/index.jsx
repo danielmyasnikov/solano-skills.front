@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../../Layout/headers/HomeHeader';
 import Footer from '../../Layout/footers/Footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import Button from '@components/mui/button';
 import styles from './styles.module.less';
 import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
-import { Registration } from '@components/auth/registration';
+import { Registration } from '@components/auth/signUp';
 import BurgerMenu from '@components/common/burgerMenu';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
+import { Button } from '@mui/material';
 
 export const HomePage = () => {
   const [showMenu, setShowMenu] = useState(false);

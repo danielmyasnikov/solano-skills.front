@@ -1,10 +1,10 @@
-import Button from '@components/mui/button';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import styles from './styles.module.less';
 import { useSelector } from 'react-redux';
 import { selectBaskets } from '@src/features/exercises/store/selectors';
 import { Basket } from '@src/features/exercises/views/Simple/Stack/Ranging/Basket';
+import { Button } from '@mui/material';
 
 const Ranging = () => {
   const baskets = useSelector(selectBaskets);

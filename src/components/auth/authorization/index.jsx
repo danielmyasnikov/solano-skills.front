@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles.module.less';
-import Button from '@components/mui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import * as AuthStore from '@store/auth';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContainer } from './../authContainer';
 import { AuthorizationByEmail } from '../authorizationByEmail';
 import { ByPhoneNumber } from '../byPhoneNumber';
@@ -14,13 +13,14 @@ import { ForgotPassword } from '../forgotPassword';
 import { selectIsAuth } from '@store/profile/selector';
 import { Redirect } from 'react-router';
 import { getProfile } from '@store/profile/actions';
+import { Button } from '@mui/material';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [buttonTitle, setButtonTitle] = useState('Авторизоваться');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [confirmationСode, setConfirmationCode] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState('');
   const isAuth = useSelector(selectIsAuth);
   const [isPhoneNumberConfirmation, setIsPhoneNumberConfirmation] = useState(false);
   const [isRegistrationByPhone, setIsRegistrationByPhone] = useState(false);
@@ -59,7 +59,7 @@ export const Authorization = () => {
     }
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (!isRegistrationByPhone) {
       dispatch(AuthStore.Actions.singIn(email, password));
     }
@@ -77,14 +77,14 @@ export const Authorization = () => {
             setCountTime(Number(error.response.data.errors).toFixed());
           });
       };
-      sendCode();
+      await sendCode();
     }
     if (isPhoneNumberConfirmation && isRegistrationByPhone) {
-      dispatch(AuthStore.Actions.signInByPhoneVerify(confirmationСode));
+      dispatch(AuthStore.Actions.signInByPhoneVerify(confirmationCode));
     }
   };
 
-  const handleRemberMe = () => setRememberMe(!rememberMe);
+  const handleRememberMe = () => setRememberMe(!rememberMe);
 
   const handleAuthMethod = () => {
     dispatch(
@@ -144,7 +144,7 @@ export const Authorization = () => {
               password={password}
               errors={errors}
               rememberMe={rememberMe}
-              handleRemberMe={handleRemberMe}
+              handleRemberMe={handleRememberMe}
               handleAuthMethod={handleAuthMethod}
               onForgotPassword={forgotPasswordHandler}
             />
@@ -171,7 +171,7 @@ export const Authorization = () => {
             <PhoneNumberConfirmation
               errors={errors}
               handleChange={handleChange}
-              confirmationСode={confirmationСode}
+              confirmationСode={confirmationCode}
               handleAuthMethod={() => {
                 setConfirmationCode('');
                 setIsPhoneNumberConfirmation(false);

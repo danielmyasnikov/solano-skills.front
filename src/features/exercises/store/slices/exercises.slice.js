@@ -19,11 +19,6 @@ export const exercisesSlice = createSlice({
       code: {},
     },
 
-    modals: {
-      feedback: false,
-      signup: false,
-    },
-
     sidebar: {
       open: true,
       headerFolded: false,
@@ -31,13 +26,6 @@ export const exercisesSlice = createSlice({
     },
   },
   reducers: {
-    openFeedbackModal: (state) => {
-      state.modals.feedback = true;
-    },
-    closeFeedbackModal: (state) => {
-      state.modals.feedback = false;
-    },
-
     setStep: (state, action) => {
       const { step, code } = action.payload;
       state.steps.active = step;
@@ -46,13 +34,6 @@ export const exercisesSlice = createSlice({
     onStepComplete: (state, action) => {
       state.steps.totalDone += 1;
       state.steps.totalXp += action.payload.xp;
-    },
-
-    openSignupModal: (state) => {
-      state.modals.signup = true;
-    },
-    closeSignupModal: (state) => {
-      state.modals.signup = false;
     },
 
     toggleSidebar: (state) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Layout from '@components/Layout';
@@ -13,11 +13,15 @@ import { getProfile } from '@store/profile/actions';
 
 import styles from './app.module.css';
 import './index.less';
+import { ModalPortal } from '@components/modals/ModalPortal';
+import { ThemeProvider } from '@mui/material';
+
+import { theme } from './theme';
 
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const uid = localStorage.getItem('uid');
     const client = localStorage.getItem('client');
     const accessToken = localStorage.getItem('access-token');
@@ -40,22 +44,25 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <Switch>
-        {routes.map((route, i, headerVariant) => (
-          <Route exact={route.exact} path={route.path} key={route.path}>
-            {route.wrap ? (
-              <Layout variant={headerVariant} key={i} {...route}>
+    <ThemeProvider theme={theme}>
+      <div className={styles.wrapper}>
+        <Switch>
+          {routes.map((route, i, headerVariant) => (
+            <Route exact={route.exact} path={route.path} key={route.path}>
+              {route.wrap ? (
+                <Layout variant={headerVariant} key={i} {...route}>
+                  <route.component />
+                  <ModalPortal />
+                </Layout>
+              ) : (
                 <route.component />
-              </Layout>
-            ) : (
-              <route.component />
-            )}
-          </Route>
-        ))}
-        <Route component={NotFoundPage} />
-      </Switch>
-    </div>
+              )}
+            </Route>
+          ))}
+          <Route component={NotFoundPage} />
+        </Switch>
+      </div>
+    </ThemeProvider>
   );
 }
 

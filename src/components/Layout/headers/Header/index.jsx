@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import useDebounce from '../../../hooks/useDebounce';
+import useDebounce from '../../../../hooks/useDebounce';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -8,11 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
-import { ModalActionMenu } from './ModalActionMenu';
-import { ModalTariffSelection } from './ModalTariffSelection';
-import Button from '@components/mui/button';
-import Input from '@components/mui/inputSearch';
-import { Preloader } from '../../../mui/preloader';
+import { ActionMenu } from './ActionMenu';
+import { Preloader } from '../../../mui/Preloader';
 
 import Logo from '@assets/Logo';
 import DefaultAvatar from '@assets/defaultUserAvatarSmall.png';
@@ -23,22 +20,24 @@ import cn from 'classnames';
 
 import styles from './styles.module.less';
 import { toggleSidebar } from '@store/global/layout';
+import { openFeedbackModal, openTariffsModal } from '@store/global/modals';
+import { Button } from '@mui/material';
+import Search from '@components/mui/Search';
 
-const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
+const Header = ({ headerRef }) => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const isAuth = useSelector(selectIsAuth);
   const debouncedSearch = useDebounce(search, 500);
-  const [showModal, setShowModal] = useState(false);
-  const [showMenuModal, setShowMenuModal] = useState(false);
+  const [actionMenu, setShowActionMenu] = useState(false);
 
   const history = useHistory();
 
   const registerRouteHandler = () => history.push(`/registration`);
 
   const handleShowModal = () => {
-    onCloseModal();
-    setShowModal(!showModal);
+    dispatch(openTariffsModal({}));
+    setShowActionMenu(false);
   };
 
   const profile = useSelector(selectProfile);
@@ -51,10 +50,8 @@ const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
   };
 
   const menuHandler = () => {
-    setShowMenuModal(!showMenuModal);
+    setShowActionMenu(!actionMenu);
   };
-
-  useEffect(() => setShowModal(isShowModal), [isShowModal]);
 
   return (
     <>
@@ -70,27 +67,25 @@ const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
               <Burger />
             </div>
             <div className={styles.search}>
-              <Input value={searchValue} onChange={(e) => handleSearch(e)} placeholder="Поиск..." />
+              <Search
+                value={searchValue}
+                onChange={(e) => handleSearch(e)}
+                placeholder="Поиск..."
+              />
             </div>
           </div>
           <div className={styles.headerItem}>
-            {(isAuth && (
+            {isAuth ? (
               <>
                 <Button variant="containedGreen" onClick={handleShowModal}>
                   Обновить тариф
                 </Button>
                 <div
-                  className={cn(styles.profile, { [styles.profileRotate]: showMenuModal })}
+                  className={cn(styles.profile, { [styles.profileRotate]: actionMenu })}
                   onClick={menuHandler}
                 >
                   {(Object.keys(profile).length !== 0 && (
-                    <img
-                      src={
-                        (profile.avatar_cloudinary_url && profile.avatar_cloudinary_url) ||
-                        DefaultAvatar
-                      }
-                      alt="avatar"
-                    />
+                    <img src={profile.avatar_url || DefaultAvatar} alt="avatar" />
                   )) || (
                     <div>
                       <Preloader size="50px" />
@@ -99,7 +94,7 @@ const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
                   <ArrowDown />
                 </div>
               </>
-            )) || (
+            ) : (
               <Button variant="containedGreen" onClick={registerRouteHandler}>
                 Зарегистрироваться
               </Button>
@@ -107,13 +102,12 @@ const Header = ({ headerRef, isShowModal, onCloseModal, onSupportReport }) => {
           </div>
         </header>
       </div>
-      <ModalTariffSelection handleClick={handleShowModal} open={showModal} />
-      {showMenuModal && (
-        <ModalActionMenu
+      {actionMenu && (
+        <ActionMenu
           totalXP={profile.xp}
-          onSupport={onSupportReport}
-          onOutsideClick={() => setShowMenuModal(!showMenuModal)}
-          onCloseMenu={() => setShowMenuModal(!showMenuModal)}
+          onSupport={() => dispatch(openFeedbackModal({}))}
+          onOutsideClick={() => setShowActionMenu(!actionMenu)}
+          onCloseMenu={() => setShowActionMenu(!actionMenu)}
         />
       )}
     </>

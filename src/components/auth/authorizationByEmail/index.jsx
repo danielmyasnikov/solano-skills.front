@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.less';
-import { InputPassword } from '@components/mui/inputPassword';
-import { Input } from '@components/mui/input';
-import Button from '@components/mui/button';
-import { Link, useHistory } from 'react-router-dom';
-import { SocialNetworks } from './../socialNetworks';
-import { CheckboxBtn } from '@components/mui/checkbox';
-
+import { Input } from '@components/mui/Input';
+import { CheckboxBtn } from '@components/mui/Checkbox';
+import { InputPassword } from '../../mui/Password';
 export const AuthorizationByEmail = ({
   handleChange,
   email,
@@ -15,8 +10,6 @@ export const AuthorizationByEmail = ({
   rememberMe,
   handleRemberMe,
   errors,
-  checkedError,
-  checked,
   handleAuthMethod,
   onForgotPassword,
 }) => {

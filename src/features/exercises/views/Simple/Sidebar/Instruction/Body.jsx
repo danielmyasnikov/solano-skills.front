@@ -9,11 +9,9 @@ import {
 } from '@src/features/exercises/store/selectors';
 
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
-import Button from '@components/mui/button';
+import { Box, Button } from '@mui/material';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
-import React from 'react';
-import RadioButton from '@components/mui/radioButton';
+import RadioButton from '@components/mui/RadioButton';
 import { selectIsAuth } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 
