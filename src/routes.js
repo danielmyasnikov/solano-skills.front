@@ -19,6 +19,9 @@ import Settings from './features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
 import { OnBoardPage } from './features/onBoard';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
+
+import { Instructors} from './features/instructors';
+
 import { FailPaymentPage } from '@src/features/payment/Fail';
 
 export const routes = [
@@ -121,6 +124,12 @@ export const routes = [
   {
     path: '/certificates',
     component: CertificatesPage,
+    wrap: true,
+    exact: true,
+  },
+  {
+    path: '/instructors',
+    component: Instructors,
     wrap: true,
     exact: true,
   },
