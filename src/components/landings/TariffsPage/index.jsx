@@ -14,6 +14,7 @@ import { selectIsAuth } from '@store/profile/selector';
 import { Button, Grid } from '@mui/material';
 import { Tariffs } from '@components/modals/TariffsModal/Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
+import { MailingList } from './ MailingList';
 
 export const TariffsPage = () => {
   const { data: tariffs, isLoading } = useGetTariffsQuery();
@@ -58,7 +59,7 @@ export const TariffsPage = () => {
                   <Tariffs tariffList={tariffs} isTariffs />
                 </Grid>
                 <Grid item xs={4}>
-                  Будьте в курсе !
+                  <MailingList />
                 </Grid>
               </Grid>
             </section>
