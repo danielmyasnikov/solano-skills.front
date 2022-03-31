@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import useDebounce from '../../../../hooks/useDebounce';
 
@@ -21,16 +21,19 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { toggleSidebar } from '@store/global/layout';
 import { openFeedbackModal, openTariffsModal } from '@store/global/modals';
-import { Button } from '@mui/material';
+import { Button, ClickAwayListener } from '@mui/material';
 import Search from '@components/mui/Search';
+import SearchBox from '@components/Layout/headers/Header/SearchBox';
+import { useGetCoursesQuery } from '@src/features/courses/courses.api';
 
 const Header = ({ headerRef }) => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
+  const [showSearchBox, setShowSearchBox] = useState(false);
   const isAuth = useSelector(selectIsAuth);
-  const debouncedSearch = useDebounce(search, 500);
+  const { data: courses, loading, error } = useGetCoursesQuery();
   const [actionMenu, setShowActionMenu] = useState(false);
-
+  const [searchInFocus, setSearchInFocus] = useState(false);
   const history = useHistory();
 
   const registerRouteHandler = () => history.push(`/sign-up`);
@@ -42,11 +45,9 @@ const Header = ({ headerRef }) => {
 
   const profile = useSelector(selectProfile);
 
-  function search() {}
-
   const handleSearch = (e) => {
+    setShowSearchBox(true);
     setSearchValue(e.target.value);
-    debouncedSearch(e.target.value);
   };
 
   const menuHandler = () => {
@@ -67,11 +68,19 @@ const Header = ({ headerRef }) => {
               <Burger />
             </div>
             <div className={styles.search}>
-              <Search
-                value={searchValue}
-                onChange={(e) => handleSearch(e)}
-                placeholder="Поиск..."
-              />
+              <ClickAwayListener onClickAway={() => setShowSearchBox(false)}>
+                <div>
+                  <Search
+                    value={searchValue}
+                    onChange={(e) => handleSearch(e)}
+                    onFocus={() => {
+                      setShowSearchBox(true);
+                    }}
+                    placeholder="Поиск..."
+                  />
+                  <SearchBox courses={courses} searchValue={searchValue} isShow={showSearchBox} />
+                </div>
+              </ClickAwayListener>
             </div>
           </div>
           <div className={styles.headerItem}>
