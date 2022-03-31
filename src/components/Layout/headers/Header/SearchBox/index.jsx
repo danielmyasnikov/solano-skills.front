@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, styled } from '@mui/material';
 import SearchItem from '@components/Layout/headers/Header/SearchBox/SearchItem';
 
@@ -23,23 +22,28 @@ const Title = styled('h5')`
   color: #b5b8bb;
 `;
 
-const SearchBox = ({ isShow, courses, skills, professions }) => {
-  const renderBlock = ({ title, items }) => (
-    <>
-      <Title>{title}</Title>
-      {items.map(({ icon, text }) => (
-        <SearchItem icon={icon} text={text} />
-      ))}
-    </>
-  );
+const SearchBox = ({ isShow, courses, searchValue }) => {
+  const values =
+    searchValue === ''
+      ? courses?.map((e) => ({ title: e.title, icon: e.icon, link: `/courses/${e.slug}` }))
+      : courses
+          ?.filter((e) => e.title.includes(searchValue))
+          .map((e) => ({ title: e.title, icon: e.icon, link: `/courses/${e.slug}` }));
 
   return (
     <>
       {isShow && (
         <Root>
-          {courses && renderBlock(courses)}
-          {skills && renderBlock(skills)}
-          {professions && renderBlock(professions)}
+          {values && values.length > 0 ? (
+            <>
+              <Title>Курсы</Title>
+              {values.map(({ icon, title, link }) => (
+                <SearchItem icon={icon} text={title} link={link} />
+              ))}
+            </>
+          ) : (
+            <span>Ничего не найдено</span>
+          )}
         </Root>
       )}
     </>
