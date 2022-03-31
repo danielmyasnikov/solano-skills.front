@@ -112,4 +112,32 @@
   .content {
     flex-wrap: wrap;
   }
+
+  .content .form {
+    width: 100%;
+  }
+
+  .requirements {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 30px 0 0 !important;
+  }
+
+  .requirements > button {
+    height: max-content;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .requirements__text {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 487px) {
+  .wrap {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
 }

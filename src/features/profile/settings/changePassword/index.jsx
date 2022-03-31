@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SettingsInputPassword } from './settingsInputPassword';
 
@@ -8,6 +8,14 @@ import { Button } from '@mui/material';
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className={styles.password}>
@@ -30,16 +38,19 @@ const ChangePassword = () => {
                 />
               </div>
             </div>
-            <Button variant="containedPurple">Сохранить изменения</Button>
+            {width > 1512 && <Button variant="containedPurple">Сохранить изменения</Button>}
           </div>
           <div className={styles.requirements}>
-            <span className={styles.preTitle}>Требования к паролю:</span>
-            <ul>
-              <li>Минимум 8 символов - чем больше, тем лучше</li>
-              <li>Хотя бы один символ нижнего регистра</li>
-              <li>Хотя бы один символ верхнего регистра</li>
-              <li>Хотя бы одна цифра, символ или пробел</li>
-            </ul>
+            <div className={styles.requirements__text}>
+              <span className={styles.preTitle}>Требования к паролю:</span>
+              <ul>
+                <li>Минимум 8 символов - чем больше, тем лучше</li>
+                <li>Хотя бы один символ нижнего регистра</li>
+                <li>Хотя бы один символ верхнего регистра</li>
+                <li>Хотя бы одна цифра, символ или пробел</li>
+              </ul>
+            </div>
+            {width <= 1512 && <Button variant="containedPurple">Сохранить изменения</Button>}
           </div>
         </div>
       </div>
