@@ -2,10 +2,15 @@ import cn from 'classnames';
 import styles from './styles.module.less';
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { startEnvironment, checkExerciseBashShell } from '@store/bashShell/actions';
+import {
+  startEnvironment,
+  checkExerciseBashShell,
+  executeBashShell,
+} from '@store/bashShell/actions';
 import { selectBashShell } from '@store/bashShell/selector';
 import { selectProfile } from '@store/profile/selector';
 import { selectExerciseId } from '@src/features/exercises/store/selectors';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 const UnixShell = () => {
   const dispatch = useDispatch();
@@ -124,6 +129,12 @@ const UnixShell = () => {
     }
     if (code === 'Enter') {
       dispatch(
+        executeBashShell({
+          environmentId: bashShell.environmentId,
+          command: inputRef.current.value,
+        }),
+      );
+      dispatch(
         checkExerciseBashShell({
           environmentId: bashShell.environmentId,
           exerciseId: exerciseId,
@@ -139,6 +150,16 @@ const UnixShell = () => {
   useEffect(() => {
     dispatch(startEnvironment());
   }, []);
+
+  useEffect(() => {
+    if (bashShell.message.status === 'success') {
+      dispatch(exerciseSlice.actions.onComplete(undefined));
+    }
+
+    if (bashShell.message.error) {
+      dispatch(exerciseSlice.actions.onError(bashShell.message.error));
+    }
+  }, [bashShell]);
 
   const handleValue = (e) => {
     const { value, selectionStart } = e.target;
@@ -158,15 +179,6 @@ const UnixShell = () => {
   const handleFocus = () => {
     inputRef.current?.focus();
   };
-
-  // useEffect(() => {
-  //   const socket = new WebSocket('url');
-  //   socket.onopen = () => {
-  //     socket.send({
-  //       id: '',
-  //     });
-  //   };
-  // });
 
   return (
     <div className={styles.shell}>

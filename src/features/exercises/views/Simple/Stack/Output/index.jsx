@@ -123,8 +123,8 @@ const Output = ({ variant }) => {
         return (
           <div ref={outputRef} className={styles.content}>
             {terminal.outputs.map((item, i) => {
-              if (!item) {
-                return 'Что-то пошло не так...';
+              if (!item || !item.output) {
+                return null;
               }
 
               const output = item.output.replace(

@@ -26,14 +26,8 @@ export default function bashShellReducer(state = initialState, action) {
     }
     case CHECK_EXERCISE_BASH_SHELL_SUCCESSED: {
       return {
-        outputs: [
-          ...state.outputs,
-          { status: '', output: `$ ${action.payload.command}`, error: '' },
-          action.payload.data,
-        ],
-        message: {
-          status: '',
-        },
+        outputs: [...state.outputs],
+        message: action.payload.data,
         environmentId: state.environmentId,
       };
     }

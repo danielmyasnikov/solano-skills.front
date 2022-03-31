@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { VideoPlayer } from './Player';
 
@@ -7,9 +7,14 @@ import styles from './styles.module.less';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
+import { sendAnswer } from '@src/features/exercises/store/actions';
+import { getProfile } from '@store/profile/actions';
+import { selectIsAuth } from '@store/profile/selector';
 
 const VideoExercise = ({ goNext }) => {
   const transcriptRef = useRef();
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
 
   const [showTranscript, setShowTranscript] = useState(false);
 
@@ -38,7 +43,36 @@ const VideoExercise = ({ goNext }) => {
           >
             {!showTranscript ? 'Показать стенограмму' : 'Скрыть'}
           </Button>
-          <Button variant={'containedPurple'} onClick={goNext}>
+          <Button
+            variant={'containedPurple'}
+            onClick={() => {
+              if (isAuth) {
+                dispatch(
+                  sendAnswer({
+                    exerciseId: exercise.slug,
+                    courseId: exercise?.course_slug,
+                    xp: exercise.xp,
+                  }),
+                ).then(() => {
+                  const uid = localStorage.getItem('uid');
+                  const client = localStorage.getItem('client');
+                  const accessToken = localStorage.getItem('access-token');
+
+                  dispatch(
+                    getProfile({
+                      headers: {
+                        uid,
+                        client,
+                        'access-token': accessToken,
+                      },
+                    }),
+                  );
+                });
+              }
+
+              goNext();
+            }}
+          >
             Продолжить
           </Button>
         </div>
