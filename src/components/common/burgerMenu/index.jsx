@@ -4,9 +4,13 @@ import styles from './styles.module.less';
 import BurgerExit from '@assets/BurgerExit.svg';
 import { Link } from 'react-router-dom';
 import Search from '@components/mui/Search';
+import { useDispatch } from 'react-redux';
+import { openFeedbackModal } from '@store/global/modals';
 
 const BurgerMenu = ({ isShow, handleBurger }) => {
   const [showItems, setShowItems] = useState(false);
+
+  const dispatch = useDispatch();
 
   return (
     <div className={cn(styles.menu, { [styles.shown]: isShow === true })}>
@@ -21,7 +25,7 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
         <div className={styles.links}>
           <div className={styles.link}>
             <div className={styles.link__title} onClick={() => setShowItems(!showItems)}>
-              <Link to="/courses">
+              <Link to="/learning">
                 <span style={{ color: '#46445c' }}>Обучение</span>
               </Link>
               {/*
@@ -38,8 +42,19 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
             </div>
              */}
           </div>
-          <div className={styles.link}>Тарифы</div>
-          <div className={styles.link}>Поддержка</div>
+          <div className={styles.link}>
+            <Link to="/sign-in">
+              <span style={{ color: '#46445c' }}>Тарифы</span>
+            </Link>
+          </div>
+          <div className={styles.link} onClick={() => dispatch(openFeedbackModal({}))}>
+            Поддержка
+          </div>
+          <div className={styles.link}>
+            <Link to="/sign-in">
+              <span style={{ color: '#46445c' }}>Войти</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
