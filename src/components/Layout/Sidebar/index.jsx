@@ -123,11 +123,11 @@ const Sidebar = ({ sidebarFixed, headerTarget }) => {
             </Link>
           ))}
           <Divider />
-          <div className={styles.studing}>
+          {/* <div className={styles.studing}>
             <div className={styles.tooltip}>Данный раздел будет доступен с 1 Июля</div>
             <Box className={styles.label}>Обучение</Box>
             {renderStudyItems}
-          </div>
+          </div> */}
         </div>
         {isAuth && (
           <Button
