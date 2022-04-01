@@ -40,6 +40,11 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
           </div>
           <div className={styles.link}>Тарифы</div>
           <div className={styles.link}>Поддержка</div>
+          <div className={styles.link}>
+            <Link to="/sign-in">
+              <span style={{ color: '#46445c' }}>Войти</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
