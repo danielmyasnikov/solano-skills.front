@@ -112,6 +112,7 @@
 @media screen and (max-width: 950px) {
   .container {
     align-items: baseline;
+    flex-direction: column;
   }
 
   .wrapper {
@@ -153,11 +154,11 @@
   }
 }
 
-@media screen and (max-width: 745px) {
-  .container {
-    flex-direction: column;
-  }
-}
+// @media screen and (max-width: 745px) {
+//   .container {
+//     flex-direction: column;
+//   }
+// }
 @media screen and (max-width: 585px) {
   .containerLeftLogo {
     width: 45px;
@@ -200,9 +201,15 @@
   }
 
   .wrapper {
-    padding-left: 0;
-    padding-right: 0;
+    // margin-left: 20px;
+    // margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
   }
 }

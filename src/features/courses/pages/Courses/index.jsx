@@ -15,6 +15,7 @@ import { selectIsAuth } from '@store/profile/selector';
 import { useGetCoursesQuery } from '@src/features/courses/courses.api';
 import { useLocation } from 'react-router-dom';
 import { PaymentErrorModal } from '@src/features/payment/PaymentErrorModal';
+import { Grid } from '@mui/material';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
@@ -66,11 +67,13 @@ export const CoursesPage = () => {
             )}
           </>
         )}
-        <div className={styles.content}>
+        <Grid spacing={3} container className={styles.content}>
           {courses?.map((item, i) => (
-            <CourseCard key={i} info={item} />
+            <Grid item xs={12} md={6} lg={4} xl={3} key={i}>
+              <CourseCard info={item} />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </div>
 
       {paymentStatus === 'fail' && <PaymentErrorModal />}
