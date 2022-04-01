@@ -127,8 +127,8 @@ export const HomePage = () => {
                 </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
-                    <div className={styles.offer__fact__number}>{'>25'}</div>
-                    <div className={styles.offer__fact__text}>профессий</div>
+                    <div className={styles.offer__fact__number}>{'>15'}</div>
+                    <div className={styles.offer__fact__text}>курсов</div>
                   </div>
                   <div className={styles.offer__fact}>
                     <div className={styles.offer__fact__number}>15 000</div>

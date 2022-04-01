@@ -31,7 +31,15 @@
 
 .content {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   padding: 32px 40px 120px;
+}
+
+.content > div {
+  margin-right: 10px;
+}
+
+.content > div:last-child {
+  margin-right: 0;
 }
