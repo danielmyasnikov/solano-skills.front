@@ -19,6 +19,7 @@ import { ThemeProvider } from '@mui/material';
 import { YMInitializer } from 'react-yandex-metrika';
 
 import { theme } from './theme';
+import { env } from '@src/app/config';
 
 function App() {
   const dispatch = useDispatch();
@@ -65,9 +66,7 @@ function App() {
           ))}
           <Route component={NotFoundPage} />
         </Switch>
-        {process.env.NODE_ENV === 'production' && (
-          <YMInitializer accounts={[process.env.REACT_APP_SEO_YM_ID]} />
-        )}
+        {env.isProduction && <YMInitializer accounts={[env.analytics.yandexTrackingId]} />}
       </div>
     </ThemeProvider>
   );

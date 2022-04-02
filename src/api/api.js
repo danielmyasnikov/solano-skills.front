@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { env } from '@src/app/config';
 
 const makeRequest = async ({ method, url, data, defaultValue = null }) => {
   try {
     const response = await axios({
       method,
-      url: `${process.env.REACT_APP_API_COURSE}${url}`,
+      url: `${env.api.platform}${url}`,
       headers: {
         uid: window.localStorage.getItem('uid'),
         'access-token': window.localStorage.getItem('access-token'),
