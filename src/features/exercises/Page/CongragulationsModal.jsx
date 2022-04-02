@@ -21,7 +21,7 @@ const Root = styled(Box)`
   background: #f8f8f8;
   border-radius: 20px;
 
-  .content {
+  .dropZone {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,7 +74,7 @@ export const CongratulationsModal = ({ isShow }) => {
   return (
     <Modal open={isShow}>
       <Root>
-        <div className="content">
+        <div className="dropZone">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="51"

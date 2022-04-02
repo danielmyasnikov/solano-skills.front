@@ -20,7 +20,7 @@ const Root = styled(Box)`
   background: #f8f8f8;
   border-radius: 20px;
 
-  .content {
+  .dropZone {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +67,7 @@ export const NotCompleteModal = ({ isShow }) => {
   return (
     <Modal open={isShow}>
       <Root>
-        <div className="content">
+        <div className="dropZone">
           <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
             <path
               d="M25 48C37.7025 48 48 37.7025 48 25C48 12.2975 37.7025 2 25 2C12.2975 2 2 12.2975 2 25C2 37.7025 12.2975 48 25 48Z"

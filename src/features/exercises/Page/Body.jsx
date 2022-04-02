@@ -24,6 +24,8 @@ const Root = styled(Box)`
 
   padding-top: 30px;
   padding-bottom: 50px;
+  padding-left: 24px;
+  padding-right: 24px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;

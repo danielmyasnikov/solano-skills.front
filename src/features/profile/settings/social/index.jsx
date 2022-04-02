@@ -12,9 +12,9 @@ const Social = () => {
   const renderSvg = (title) => {
     switch (title) {
       case 'Вконтакте':
-        return <GoogleSvg />;
-      case 'Google':
         return <VkontakteSvg />;
+      case 'Google':
+        return <GoogleSvg />;
       default:
         return;
     }

@@ -9,7 +9,8 @@ import UnixShell from './UnixShell';
 import Terminal from './Terminal';
 
 import Output from './Output';
-import Ranging from './Ranging';
+import SingleRanging from './Ranging/Single';
+import MultipleRanging from '@src/features/exercises/views/Simple/Stack/Ranging/Multiple';
 
 const Root = styled(Box)`
   flex-direction: column;
@@ -42,8 +43,9 @@ const Stack = () => {
   const renderStack = () => {
     switch (type) {
       case 'single_bascket':
+        return <SingleRanging />;
       case 'multiple_bascket':
-        return <Ranging />;
+        return <MultipleRanging />;
       default:
         break;
     }

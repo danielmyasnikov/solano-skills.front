@@ -8,7 +8,11 @@
   padding: 30px 40px 59px 40px;
   border-bottom-left-radius: 34px;
   border-bottom-right-radius: 34px;
-  background: radial-gradient(115.91% 115.91% at 50% 50%, var(--purple) 0%, var(--very-dark-grayish-blue-second) 100%);
+  background: radial-gradient(
+    115.91% 115.91% at 50% 50%,
+    var(--purple) 0%,
+    var(--very-dark-grayish-blue-second) 100%
+  );
 }
 
 .title {
@@ -27,7 +31,7 @@
 .content {
   position: relative;
   top: -40px;
-  padding: 0 40px;
+  padding: 0 40px 40px;
 }
 
 .headerInfo {
@@ -61,11 +65,7 @@
 }
 
 @media screen and (max-width: 560px) {
-  .wrapper {
-    width: auto;
-    margin: 0 -20px;
-  }
   .content {
-    padding: 0 20px;
+    padding: 0 20px 20px;
   }
 }

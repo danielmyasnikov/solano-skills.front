@@ -22,6 +22,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 30px;
+  gap: 4px;
 }
 
 .containerLeftExercise {
@@ -73,8 +74,7 @@
 }
 
 .btn {
-  position: absolute;
-  right: 107px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1600px) {
@@ -112,6 +112,7 @@
 @media screen and (max-width: 950px) {
   .container {
     align-items: baseline;
+    flex-direction: column;
   }
 
   .wrapper {
@@ -125,18 +126,13 @@
   }
 
   .btn {
-    right: 71px;
-    margin-top: 17px;
+    margin: 17px auto 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
     align-items: center;
-  }
-
-  .btn {
-    position: inherit;
   }
 
   .containerLeftProgressBar {
@@ -153,11 +149,11 @@
   }
 }
 
-@media screen and (max-width: 745px) {
-  .container {
-    flex-direction: column;
-  }
-}
+// @media screen and (max-width: 745px) {
+//   .container {
+//     flex-direction: column;
+//   }
+// }
 @media screen and (max-width: 585px) {
   .containerLeftLogo {
     width: 45px;
@@ -187,12 +183,16 @@
 
   .containerLeftInfoArrow {
     display: block;
-    width: 5px;
+    width: 8px;
   }
 
   .containerLeftInfoTitleContainer {
     display: flex;
-    align-items: baseline;
+    align-items: center;
+  }
+
+  .containerLeft {
+    align-items: flex-start;
   }
 
   .containerLeftExercise {
@@ -200,9 +200,15 @@
   }
 
   .wrapper {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 20px;
-    margin-right: 20px;
+    // margin-left: 20px;
+    // margin-right: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 20px;
   }
 }

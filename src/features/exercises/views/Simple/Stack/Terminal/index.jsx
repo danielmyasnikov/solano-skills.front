@@ -32,6 +32,7 @@ import {
 } from '@src/features/exercises/store/selectors';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { openSignUpModal } from '@store/global/modals';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -176,7 +177,7 @@ const Terminal = () => {
         ),
       );
     } else {
-      dispatch(exercisesSlice.actions.openSignupModal({}));
+      dispatch(openSignUpModal());
     }
   };
 
@@ -248,7 +249,7 @@ const Terminal = () => {
                 if (isAuth) {
                   dispatch(exerciseSlice.actions.updateCode(exercise?.sample_code));
                 } else {
-                  dispatch(exercisesSlice.actions.openSignupModal({}));
+                  dispatch(openSignUpModal());
                 }
               }}
               disabled={completed || isDisabled}
@@ -269,7 +270,7 @@ const Terminal = () => {
                     }),
                   );
                 } else {
-                  dispatch(exercisesSlice.actions.openSignupModal({}));
+                  dispatch(openSignUpModal());
                 }
               }}
               disabled={completed || isDisabled}

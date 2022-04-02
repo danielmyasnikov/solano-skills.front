@@ -14,6 +14,7 @@ import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.sli
 import RadioButton from '@components/mui/RadioButton';
 import { selectIsAuth } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { openSignUpModal } from '@store/global/modals';
 
 const Content = styled(Box)`
   margin-top: 35px;
@@ -132,7 +133,7 @@ export default function InstructionBody() {
     if (isAuth) {
       dispatch(exerciseSlice.actions.onQuizAnswer({}));
     } else {
-      dispatch(exercisesSlice.actions.openSignupModal({}));
+      dispatch(openSignUpModal());
     }
   }
 
