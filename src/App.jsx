@@ -65,7 +65,9 @@ function App() {
           ))}
           <Route component={NotFoundPage} />
         </Switch>
-        {process.env.NODE_ENV === 'production' && <YMInitializer accounts={[process.env.ID]} />}
+        {process.env.NODE_ENV === 'production' && (
+          <YMInitializer accounts={[process.env.REACT_APP_SEO_YM_ID]} />
+        )}
       </div>
     </ThemeProvider>
   );
