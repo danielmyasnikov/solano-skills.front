@@ -43,7 +43,7 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
              */}
           </div>
           <div className={styles.link}>
-            <Link to="/sign-in">
+            <Link to="/tariffs">
               <span style={{ color: '#46445c' }}>Тарифы</span>
             </Link>
           </div>

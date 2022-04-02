@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import HeaderHome from '../../Layout/headers/HomeHeader';
 import Footer from '../../Layout/footers/Footer';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styles from './styles.module.less';
-import { HashLink } from 'react-router-hash-link';
 import { feedbacks, images, practices, slides } from './data';
-import { Registration } from '@components/auth/signUp';
 import BurgerMenu from '@components/common/burgerMenu';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Tariffs } from '@components/modals/TariffsModal/Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
 import { MailingList } from './ MailingList';
@@ -61,10 +58,10 @@ export const TariffsPage = () => {
 
             <section className={styles.about}>
               <Grid container spacing={4}>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={12} lg={8}>
                   <Tariffs tariffList={tariffs} isTariffs />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={12} lg={4} className={styles.mailing}>
                   <MailingList />
                 </Grid>
               </Grid>
@@ -73,10 +70,6 @@ export const TariffsPage = () => {
             <section className={styles.whatSays}>
               <div className={styles.whatSays__header}>
                 <div className={styles.whatSays__header__title}>Отзывы наших учеников</div>
-                <div className={styles.whatSays__header__subtitle}>
-                  {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt */}
-                </div>
               </div>
               <div className={styles.whatSays__feedbacks}>{renderFeedbacks}</div>
             </section>
