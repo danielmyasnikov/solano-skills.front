@@ -156,7 +156,7 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
   }
 
   if (isReg) {
-    ym(88095091, 'reachGoal', 'register');
+    ym('reachGoal', 'register');
     onClose?.();
     if (location.pathname !== '/sign-up' && location.pathname !== '/') {
       return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;
