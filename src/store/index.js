@@ -8,7 +8,7 @@ import { coursesApi } from '@src/features/courses/courses.api';
 import { tariffsApi } from '@src/features/payment/store/tariffs.api';
 import { professionApi } from '@src/features/professions/professions.api';
 import { skillApi } from '@src/features/skills/skills.api';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 const logger = createLogger({
   collapsed: (_, __, logEntry) => !logEntry?.error,

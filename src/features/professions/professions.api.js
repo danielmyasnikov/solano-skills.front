@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 export const professionApi = createApi({
   reducerPath: 'professionApi',

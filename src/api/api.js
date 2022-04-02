@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 const makeRequest = async ({ method, url, data, defaultValue = null }) => {
   try {

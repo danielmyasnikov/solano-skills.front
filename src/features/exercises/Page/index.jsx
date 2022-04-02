@@ -42,7 +42,7 @@ function ExercisePage() {
     case 'success':
       return <ExercisePageBody />;
     case 'error':
-      return 'Что-то пошло не так...';
+      return <>Что-то пошло не так...</>;
     case 'pending':
     case 'idle':
       return (

@@ -50,15 +50,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className={styles.wrapper}>
         <Switch>
-          {routes.map((route, i, headerVariant) => (
-            <Route exact={route.exact} path={route.path} key={route.path}>
+          {routes.map(({ exact, path, wrap, headerVariant, Component }) => (
+            <Route exact={exact} path={path} key={path}>
               <>
-                {route.wrap ? (
-                  <Layout variant={headerVariant} key={i} {...route}>
-                    <route.component />
+                {wrap ? (
+                  <Layout headerVariant={headerVariant}>
+                    <Component />
                   </Layout>
                 ) : (
-                  <route.component />
+                  <Component />
                 )}
                 <ModalPortal />
               </>

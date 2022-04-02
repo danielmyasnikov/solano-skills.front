@@ -1,5 +1,5 @@
 import FetchAPI from './FetchApi';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 class UsersAPI extends FetchAPI {
   static baseUrl() {

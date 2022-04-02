@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 export const compileCodeApi = ({ code, exerciseId, isGraphRequired }) => {
   return axios

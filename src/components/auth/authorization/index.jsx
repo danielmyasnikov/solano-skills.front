@@ -14,7 +14,7 @@ import { selectIsAuth } from '@store/profile/selector';
 import { Redirect } from 'react-router';
 import { getProfile } from '@store/profile/actions';
 import { Button } from '@mui/material';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 export const Authorization = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { env } from '@src/app/config';
+import { env } from '@src/app/config/index.ts';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${env.api.platform}/api/v1/courses`,

@@ -49,7 +49,7 @@ export const env = {
   frontendUrl: getEnv('REACT_APP_FRONTEND_URL') || `http://localhost:${getEnv('PORT') || 3000}`,
 
   analytics: {
-    yandexTrackingId: getEnv('REACT_APP_YANDEX_TRACKING_ID'),
+    yandexTrackingId: Number(getEnv('REACT_APP_YANDEX_TRACKING_ID')),
     googleCheapId: getEnv('REACT_APP_GOOGLE_CHEAP_ID'),
     googleTrackingId: getEnv('REACT_APP_GOOGLE_TRACKING_ID'), // UA-XXXXX-X
   },
