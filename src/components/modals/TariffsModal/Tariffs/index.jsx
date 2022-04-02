@@ -3,34 +3,13 @@ import { useHistory } from 'react-router-dom';
 import Icon from './assets/Icon.svg';
 import cn from 'classnames';
 import { useCallback } from 'react';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { closeTariffsModal } from '@store/global/modals';
 import { useDispatch } from 'react-redux';
 
 export const Tariffs = ({ tariffList, isTariffs }) => {
-  const IconItem = () => <img src={Icon} alt="icon" />;
-
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const Sections = useCallback((isEconomy) => {
-    return (
-      <ul className={cn(styles.list)}>
-        <li className={styles.listItem}>
-          {IconItem()}
-          <span className={styles.listItemText}>15 курсов</span>
-        </li>
-        <li className={cn(styles.listItem, { [styles.listItemEconomy]: isEconomy })}>
-          {IconItem()}
-          <span className={styles.listItemText}>Полный доступ</span>
-        </li>
-        <li className={cn(styles.listItem, { [styles.listItemEconomy]: isEconomy })}>
-          {IconItem()}
-          <span className={styles.listItemText}>Сертификат</span>
-        </li>
-      </ul>
-    );
-  }, []);
 
   return (
     <>
@@ -49,19 +28,38 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
         }) => (
           <div
             key={id}
-            className={cn(styles.wrapper, {
+            className={cn(styles.tariff, {
               [styles.border]: isTariffs,
-              [styles.wrapperGreen]: is_optimal,
+              [styles.green]: is_optimal,
             })}
           >
-            <div className={styles.container}>
-              <div className={styles.wrapperTitleContainer}>
-                <div className={styles.wrapperTitle}>{title}</div>
-              </div>
-              {Sections(is_economy)}
-            </div>
-            <div className={styles.actionContainer}>
-              <div className={cn(styles.wrapperPrice, { [styles.wrapperPriceGreen]: is_optimal })}>
+            <Grid container>
+              <Grid item xs={12} md={3} className={styles.title}>
+                <div>{title}</div>
+              </Grid>
+              <Grid item xs={12} sm={4} md={3}>
+                <ul className={cn(styles.list)}>
+                  <li className={styles.item}>
+                    <img src={Icon} alt="icon" />
+                    <span>15 курсов</span>
+                  </li>
+                  <li className={cn(styles.item, { [styles.economy]: is_economy })}>
+                    <img src={Icon} alt="icon" />
+                    <span>Полный доступ</span>
+                  </li>
+                  <li className={cn(styles.item, { [styles.economy]: is_economy })}>
+                    <img src={Icon} alt="icon" />
+                    <span>Сертификат</span>
+                  </li>
+                </ul>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                md={3}
+                className={cn(styles.price, { [styles.green]: is_optimal })}
+              >
                 <span>{(is_economy && price) || `${price}₽/месяц`}</span>
                 {id === 1 && (
                   <small>
@@ -69,31 +67,33 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                     платформы DeepSkills
                   </small>
                 )}
-              </div>
-              <Button
-                onClick={() => {
-                  dispatch(closeTariffsModal({}));
-                  history.push({
-                    pathname: '/payment',
-                    state: {
-                      id: id,
-                      title: title,
-                      price: price,
-                      oldPrice: old_price,
-                      totalPrice: total_price,
-                      description: description,
-                      confirmationText: confirmation_text,
-                      cycle: cycle,
-                    },
-                  });
-                }}
-                to="/payment"
-                className={styles.wrapperButton}
-                variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
-              >
-                Активировать
-              </Button>
-            </div>
+              </Grid>
+              <Grid item xs={12} sm={4} md={3} className={styles.wrapperButton}>
+                <Button
+                  onClick={() => {
+                    dispatch(closeTariffsModal({}));
+                    history.push({
+                      pathname: '/payment',
+                      state: {
+                        id: id,
+                        title: title,
+                        price: price,
+                        oldPrice: old_price,
+                        totalPrice: total_price,
+                        description: description,
+                        confirmationText: confirmation_text,
+                        cycle: cycle,
+                      },
+                    });
+                  }}
+                  to="/payment"
+                  className={styles.button}
+                  variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
+                >
+                  Активировать
+                </Button>
+              </Grid>
+            </Grid>
           </div>
         ),
       )}
