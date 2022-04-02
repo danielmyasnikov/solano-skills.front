@@ -16,6 +16,8 @@ import './index.less';
 import { ModalPortal } from '@components/modals/ModalPortal';
 import { ThemeProvider } from '@mui/material';
 
+import { YMInitializer } from 'react-yandex-metrika';
+
 import { theme } from './theme';
 
 function App() {
@@ -63,6 +65,7 @@ function App() {
           ))}
           <Route component={NotFoundPage} />
         </Switch>
+        {process.env.NODE_ENV === 'production' && <YMInitializer accounts={[process.env.ID]} />}
       </div>
     </ThemeProvider>
   );
