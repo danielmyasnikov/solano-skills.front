@@ -277,13 +277,15 @@ const Terminal = () => {
             >
               Выполнить код
             </Button>
-            <Button
-              variant="containedWhite"
-              onClick={handleAnswer}
-              disabled={completed || isDisabled}
-            >
-              Ответить
-            </Button>
+            {exercise.type !== 'quiz_with_script' && (
+              <Button
+                variant="containedWhite"
+                onClick={handleAnswer}
+                disabled={completed || isDisabled}
+              >
+                Ответить
+              </Button>
+            )}
           </div>
         </div>
         {exercise?.is_graph_required && bytePayload.length > 0 && (
