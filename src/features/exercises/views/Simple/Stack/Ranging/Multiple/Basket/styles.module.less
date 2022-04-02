@@ -9,40 +9,17 @@
 
   padding: 12px;
   height: 100%;
-}
 
-.mainBasketWrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 24px;
-
-  & > div {
-    max-width: 50%;
-    width: 100%;
-
-    .basket {
-      width: 100%;
-    }
-
-    background: var(--purple);
-    border-radius: 8px;
-
+  &.isMain {
     .title {
       color: white;
     }
 
-    .content {
+    .dropZone {
       border: 2px dashed white;
 
       p {
         color: white;
-      }
-
-      .card {
-        p {
-          color: #3c3c3c;
-        }
       }
     }
   }
@@ -57,12 +34,12 @@
   margin: 0.25em 0;
 }
 
-.content {
+.dropZone {
   border: 2px dashed rgba(5, 25, 45, 0.3);
   color: rgb(5, 25, 45);
   height: 100%;
   margin-top: 16px;
-  min-height: 192px;
+  min-height: 75px;
   overflow: hidden;
   padding: 8px;
   width: 100%;
@@ -73,6 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     height: 100%;
   }
 
@@ -102,27 +80,5 @@
     background: none;
     border: none;
     padding: 0;
-  }
-}
-
-.card {
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(255, 255, 255);
-  box-shadow: rgb(0 0 0 / 15%) 0 1px 3px 0;
-  margin-left: 0;
-  transition: width 0.1s ease 0s, margin-left 0.2s ease 0s;
-  z-index: 1;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  border-radius: 4px;
-  padding: 16px;
-  white-space: pre-wrap;
-  justify-content: center;
-
-  p {
-    font-weight: 600;
-    color: #3c3c3c;
-    margin: 0 7px 0 0;
   }
 }

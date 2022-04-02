@@ -1,0 +1,37 @@
+.layout {
+  border-radius: 4px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.baskets {
+  width: 100%;
+  overflow: auto;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.actions {
+  padding: 16px 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainBasketWrapper {
+  order: -1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 24px;
+
+  & > div {
+    max-width: 50%;
+    width: 100%;
+
+    background: var(--purple);
+    border-radius: 8px;
+  }
+}

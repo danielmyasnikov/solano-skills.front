@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getExerciseById } from '@src/features/exercises/store/actions';
-import { reorder } from '@src/features/exercises/utils/dnd';
 
 export const exerciseSlice = createSlice({
   name: 'exercise',
@@ -66,36 +65,39 @@ export const exerciseSlice = createSlice({
       } else {
         state.quizVariants = [];
       }
+
       if (exercise.type === 'multiple_bascket') {
         state.ranging = {
-          baskets: exercise.basckets.map((e) => ({
+          baskets: exercise.basckets.basckets.map((e) => ({
             id: `board-${e.id}`,
             label: e.title,
             isMain: e.is_main,
-            items: e.is_main
-              ? exercise.statements.map((u) => ({
-                  id: `item-${u.id}`,
-                  basketId: `board-${u.bascket_id}`,
-                  label: u.text,
-                  errorMessage: u.error_message,
-                }))
-              : [],
+            items:
+              e.items?.map((u) => ({
+                id: `item-${u.id}`,
+                basketId: `board-${u.bascket_id}`,
+                label: u.text,
+                errorMessage: u.error_message,
+              })) || [],
           })),
         };
       }
+
       if (exercise.type === 'single_bascket') {
         state.ranging = {
-          baskets: exercise.basckets.map((e) => ({
-            id: `board-${e.id}`,
-            label: e.title,
-            isSingle: e.is_main,
-            items: exercise.statements.map((u) => ({
-              id: `item-${u.id}`,
-              basketId: `board-${u.bascket_id}`,
-              label: u.text,
-              errorMessage: u.error_message,
-            })),
-          })),
+          orderIds: exercise.ids_order,
+          baskets: [
+            {
+              id: `board-${exercise.basckets.basckets[0].id}`,
+              label: exercise.basckets.basckets[0].title,
+              isSingle: true,
+              items: exercise.statements.map((e) => ({
+                id: `item-${e.id}`,
+                label: e.text,
+                errorMessage: e.error_message,
+              })),
+            },
+          ],
         };
       }
 
@@ -120,14 +122,8 @@ export const exerciseSlice = createSlice({
         isError: action.payload.find((e) => e === i + 1) !== undefined,
       }));
     },
-    updateItems: (state, action) => {
-      const { sourceIndex, destinationIndex } = action.payload;
-
-      state.ranging.items = reorder(
-        state.ranging.items.map((e) => ({ ...e, isError: false })),
-        sourceIndex,
-        destinationIndex,
-      );
+    updateBaskets: (state, action) => {
+      state.ranging.baskets = action.payload;
     },
     updateCode: (state, action) => {
       state.code = action.payload;
