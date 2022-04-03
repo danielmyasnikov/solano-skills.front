@@ -13,7 +13,9 @@ export const Card = ({ id, label, index, white, isError, isDraggable }) => (
           [styles.error]: !isDraggable && isError,
         })}
       >
-        <p style={white ? { color: '#3c3c3c' } : {}}>{label}</p>
+        <p style={white ? { color: '#3c3c3c' } : {}}>
+          <div dangerouslySetInnerHTML={{ __html: label }} />
+        </p>
         {isDraggable ? (
           <svg
             aria-label="bars icon"
