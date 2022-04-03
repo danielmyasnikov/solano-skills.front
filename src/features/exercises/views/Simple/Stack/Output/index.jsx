@@ -123,21 +123,15 @@ const Output = ({ variant }) => {
         return (
           <div ref={outputRef} className={styles.content}>
             {terminal.outputs.map((item, i) => {
-              if (!item || !item.output) {
+              if (!item || (!item.output && !item.error)) {
                 return null;
               }
 
-              const output = item.output.replace(
-                `<pre class="ansi2html-content">
- 
-</pre>`,
-                '<pre class="ansi2html-content"></pre>',
-              );
               return (
                 <div
                   key={i}
                   className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
-                  dangerouslySetInnerHTML={{ __html: item.error || output }}
+                  dangerouslySetInnerHTML={{ __html: item.error || item.output }}
                 />
               );
             })}
