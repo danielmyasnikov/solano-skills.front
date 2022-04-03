@@ -95,6 +95,7 @@ export const exerciseSlice = createSlice({
                 id: `item-${e.id}`,
                 label: e.text,
                 errorMessage: e.error_message,
+                number: e.number,
               })),
             },
           ],
