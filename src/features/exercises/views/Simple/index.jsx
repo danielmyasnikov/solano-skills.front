@@ -114,13 +114,16 @@ function Exercise({ goNext }) {
           <ErrorMessage />
 
           <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
-          {kernelId && sidebarOpen && (
-            <>
-              <Hint />
-              <HintFeedback />
-              <SolutionHint />
-            </>
-          )}
+          {sidebarOpen &&
+            (kernelId ||
+              exercise.type === 'single_bascket' ||
+              exercise.type === 'multiple_bascket') && (
+              <>
+                <Hint />
+                <HintFeedback />
+                <SolutionHint />
+              </>
+            )}
         </div>
         {!completeModalClosed &&
           completed &&
