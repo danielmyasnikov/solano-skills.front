@@ -44,20 +44,19 @@ const SingleRanging = () => {
     const answers = orderIds.split(',');
 
     setItems(
-      items.map((e) => {
-        const id = e.id.replace('item-', '');
+      items.map((item) => {
         const answerId = answers[n - 1];
-        if (Number(id) !== Number(answerId)) {
+        if (Number(item.number) !== Number(answerId)) {
           error = true;
           n += 1;
           return {
-            ...e,
+            ...item,
             isError: true,
           };
         }
         n += 1;
         return {
-          ...e,
+          ...item,
           isError: false,
         };
       }),
