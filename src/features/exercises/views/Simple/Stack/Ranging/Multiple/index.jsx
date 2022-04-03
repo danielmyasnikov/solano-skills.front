@@ -68,7 +68,6 @@ const MultipleRanging = () => {
   function checkAnswer() {
     setIsDraggable(false);
     let error = false;
-    console.log(baskets);
     setBaskets(
       baskets.map((basket) => ({
         ...basket,
@@ -111,7 +110,14 @@ const MultipleRanging = () => {
             }
 
             return (
-              <div key={basket.id} style={{ width: `${100 / (baskets.length - 1)}%` }}>
+              <div
+                key={basket.id}
+                style={{
+                  width: `${100 / (baskets.length - 1)}%`,
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
                 <Basket {...basket} isDraggable={isDraggable} />
               </div>
             );
