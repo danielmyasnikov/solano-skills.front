@@ -123,19 +123,23 @@ export const links = [
 export const otherLinks = [
   {
     text: 'Политика конфиденциальности',
-    link: 'https://docs.google.com/document/d/1QnjEYt1ho0ew1f9nNn_Np6KpAzNIS4X_vIHGUZEUeFs/edit?usp=sharing',
+    link: '/knowledge/privacy-policy/',
   },
   {
     text: 'Оферта',
-    link: 'https://docs.google.com/document/d/1m8R1ofAY5tcRVOQ9wOyrZaDJ0fHaJx7JWEHNVUPaBUk/edit',
+    link: '/knowledge/offer/',
   },
   {
-    text: 'Сведения об образовательной организации',
+    text: 'Тарифы',
+    link: '/tariffs/',
   },
-  {
-    text: 'Лицензия на образовательную деятельность',
-    link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing',
-  },
+  //{
+  //  text: 'Сведения об образовательной организации',
+  //},
+  //{
+  //  text: 'Лицензия на образовательную деятельность',
+  //  link: 'https://docs.google.com/document/d/12SHu8GUedmvlBgiT55xh9l8NkVRLKUDy83W_2sCnN0U/edit?usp=sharing',
+  //},
 ];
 
 export const info = [
