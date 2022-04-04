@@ -24,6 +24,7 @@ import { Instructors } from '@src/features/instructors';
 
 import { FailPaymentPage } from '@src/features/payment/Fail';
 import { ElementType } from 'react';
+import { AboutPage } from '@components/landings/AboutPage';
 
 export const routes: {
   path: string;
@@ -54,6 +55,12 @@ export const routes: {
     path: '/courses',
     Component: CoursesPage,
     wrap: true,
+    exact: true,
+  },
+  {
+    path: '/about',
+    Component: AboutPage,
+    wrap: false,
     exact: true,
   },
   {
