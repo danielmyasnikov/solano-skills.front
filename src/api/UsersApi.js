@@ -1,8 +1,9 @@
 import FetchAPI from './FetchApi';
+import { env } from '@src/app/config/index.ts';
 
 class UsersAPI extends FetchAPI {
   static baseUrl() {
-    return `${process.env.REACT_APP_API_COURSE}`;
+    return `${env.api.platform}`;
   }
 
   static login(login, password) {

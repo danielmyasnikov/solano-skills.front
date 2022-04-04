@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { env } from '@src/app/config/index.ts';
 
 export const startEnvironmentApi = () => {
   return axios
-    .post(`${process.env.REACT_APP_API_TERMINAL}/console/v1/bash/startEnvironment`, {})
+    .post(`${env.api.terminal}/console/v1/bash/startEnvironment`, {})
     .then((res) => res.data)
     .catch((error) => {
       throw error;
@@ -12,7 +13,7 @@ export const startEnvironmentApi = () => {
 export const checkExerciseBashShellApi = ({ environmentId, exerciseId, userId, command }) => {
   return axios
     .post(
-      `${process.env.REACT_APP_API_TERMINAL}/console/v1/bash/checkExercise/${exerciseId}?environemtId=${environmentId}&userId=${userId}`,
+      `${env.api.terminal}/console/v1/bash/checkExercise/${exerciseId}?environemtId=${environmentId}&userId=${userId}`,
       { command: command },
     )
     .then((res) => res.data)
@@ -23,10 +24,7 @@ export const checkExerciseBashShellApi = ({ environmentId, exerciseId, userId, c
 
 export const executeBashShellApi = ({ environmentId, command }) => {
   return axios
-    .post(
-      `${process.env.REACT_APP_API_TERMINAL}/console/v1/bash/execute/${environmentId}?command=${command}`,
-      {},
-    )
+    .post(`${env.api.terminal}/console/v1/bash/execute/${environmentId}?command=${command}`, {})
     .then((res) => res.data)
     .catch((error) => {
       throw error;

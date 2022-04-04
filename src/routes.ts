@@ -1,7 +1,7 @@
 import ExercisePage from '@src/features/exercises/Page';
-import Profile from './features/profile';
-import { CoursesPage } from './features/courses/pages/Courses';
-import { CoursePage } from './features/courses/pages/Course';
+import Profile from '@src/features/profile';
+import { CoursesPage } from '@src/features/courses/pages/Courses';
+import { CoursePage } from '@src/features/courses/pages/Course';
 import CertificatesPage from '@src/features/certificates/pages/Certificates';
 import CertificatePage from '@src/features/certificates/pages/Certificate';
 import { HomePage } from '@components/landings/HomePage';
@@ -9,145 +9,152 @@ import { TariffsPage } from '@components/landings/TariffsPage';
 import { LearningPage } from '@components/landings/LearningPage';
 import { Registration } from '@components/auth/signUp';
 import { Authorization } from '@components/auth/authorization';
-import { PaymentPage } from './features/payment/Page';
+import { PaymentPage } from '@src/features/payment/Page';
 import SkillsPage from '@src/features/skills/pages/SkillsPage';
 import SkillPage from '@src/features/skills/pages/SkillPage';
 import ProfessionsPage from '@src/features/professions/pages/ProfessionsPage';
 import ProfessionPage from '@src/features/professions/pages/ProfessionPage';
 import { ProgressPage } from '@components/progressPage';
-import Settings from './features/profile/settings';
+import Settings from '@src/features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
-import { OnBoardPage } from './features/onBoard';
+import { OnBoardPage } from '@src/features/onBoard';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
 
-import { Instructors} from './features/instructors';
+import { Instructors } from '@src/features/instructors';
 
 import { FailPaymentPage } from '@src/features/payment/Fail';
+import { ElementType } from 'react';
 
-export const routes = [
+export const routes: {
+  path: string;
+  Component: ElementType;
+  headerVariant?: string;
+  wrap: boolean;
+  exact: boolean;
+}[] = [
   {
     path: '/',
-    component: HomePage,
+    Component: HomePage,
     wrap: false,
     exact: true,
   },
   {
     path: '/tariffs',
-    component: TariffsPage,
+    Component: TariffsPage,
     wrap: false,
     exact: true,
   },
   {
     path: '/learning',
-    component: LearningPage,
+    Component: LearningPage,
     wrap: false,
     exact: true,
   },
   {
     path: '/courses',
-    component: CoursesPage,
+    Component: CoursesPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/failed-payment',
-    component: FailPaymentPage,
+    Component: FailPaymentPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/skills',
-    component: SkillsPage,
+    Component: SkillsPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/skills/:skillId',
-    component: SkillPage,
+    Component: SkillPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/reset-password/:resetToken',
-    component: PasswordResetPage,
+    Component: PasswordResetPage,
     wrap: false,
     exact: true,
   },
   {
     path: '/professions',
-    component: ProfessionsPage,
+    Component: ProfessionsPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/professions/:professionId',
-    component: ProfessionPage,
+    Component: ProfessionPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/settings',
-    component: Settings,
+    Component: Settings,
     wrap: true,
     exact: true,
   },
   {
     path: '/sign-in',
-    component: Authorization,
+    Component: Authorization,
     wrap: false,
     exact: true,
   },
   {
     path: '/sign-up',
-    component: Registration,
+    Component: Registration,
     wrap: false,
     exact: true,
   },
   {
     path: '/profile',
-    component: Profile,
+    Component: Profile,
     wrap: true,
     exact: true,
   },
   {
     path: '/progress',
-    component: ProgressPage,
+    Component: ProgressPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/onBoard',
-    component: OnBoardPage,
+    Component: OnBoardPage,
     wrap: false,
     exact: true,
   },
   {
     path: '/certificates',
-    component: CertificatesPage,
+    Component: CertificatesPage,
     wrap: true,
     exact: true,
   },
   {
     path: '/instructors',
-    component: Instructors,
+    Component: Instructors,
     wrap: true,
     exact: true,
   },
   {
     path: '/certificates/:certificateId',
-    component: CertificatePage,
+    Component: CertificatePage,
     wrap: true,
     exact: true,
   },
   {
     path: '/courses/:courseId',
-    component: CoursePage,
+    Component: CoursePage,
     wrap: true,
     exact: true,
   },
   {
     path: '/courses/:courseId/exercises/:exerciseId',
-    component: ExercisePage,
+    Component: ExercisePage,
     headerVariant: 'exercise',
     wrap: true,
     exact: true,
@@ -155,13 +162,13 @@ export const routes = [
 
   {
     path: '/payment',
-    component: PaymentPage,
+    Component: PaymentPage,
     wrap: false,
     exact: true,
   },
   {
     path: '/success-payment',
-    component: SuccessPayment,
+    Component: SuccessPayment,
     wrap: false,
     exact: true,
   },

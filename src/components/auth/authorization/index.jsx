@@ -14,6 +14,7 @@ import { selectIsAuth } from '@store/profile/selector';
 import { Redirect } from 'react-router';
 import { getProfile } from '@store/profile/actions';
 import { Button } from '@mui/material';
+import { env } from '@src/app/config/index.ts';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ export const Authorization = () => {
     if (isRegistrationByPhone && !isPhoneNumberConfirmation && checked) {
       const sendCode = async () => {
         return await axios
-          .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
+          .get(`${env.api.platform}/api/v1/request_signature_code`, {
             phone_number: phoneNumber,
           })
           .then(() => setIsPhoneNumberConfirmation(true))

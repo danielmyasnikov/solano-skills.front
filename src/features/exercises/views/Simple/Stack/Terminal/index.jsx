@@ -33,6 +33,7 @@ import {
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { openSignUpModal } from '@store/global/modals';
+import VertDraggable from '@components/common/VertDraggable';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -93,6 +94,7 @@ const LoadingText = styled(Typography)`
 `;
 
 const Terminal = () => {
+  const rootRef = useRef();
   const wrapperRef = useRef();
   const dispatch = useDispatch();
 
@@ -183,6 +185,7 @@ const Terminal = () => {
 
   return (
     <div
+      ref={rootRef}
       className={cn(styles.terminalContainer, {
         [styles.terminalWithGraph]: exercise?.is_graph_required && bytePayload.length > 0,
         [styles.terminalFullWidth]: exercise?.is_graph_required,
@@ -217,7 +220,6 @@ const Terminal = () => {
             theme="monokai"
             className="editor"
             width="100%"
-            height="calc(100% - 71px)"
             showGutter
             highlightActiveLine
             defaultValue={exercise?.sample_code}
@@ -277,13 +279,15 @@ const Terminal = () => {
             >
               Выполнить код
             </Button>
-            <Button
-              variant="containedWhite"
-              onClick={handleAnswer}
-              disabled={completed || isDisabled}
-            >
-              Ответить
-            </Button>
+            {exercise.type !== 'quiz_with_script' && (
+              <Button
+                variant="containedWhite"
+                onClick={handleAnswer}
+                disabled={completed || isDisabled}
+              >
+                Ответить
+              </Button>
+            )}
           </div>
         </div>
         {exercise?.is_graph_required && bytePayload.length > 0 && (
@@ -333,6 +337,7 @@ const Terminal = () => {
           </div>
         </div>
       )}
+      <VertDraggable parentContainer={rootRef} resizeContainer={wrapperRef} />
     </div>
   );
 };

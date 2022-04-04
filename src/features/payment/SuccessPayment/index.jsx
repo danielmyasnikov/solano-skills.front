@@ -24,7 +24,7 @@ export const SuccessPayment = () => {
   }, []);
 
   if (status === 'idle' || status === 'loading') {
-    return 'Loading...';
+    return <>'Loading...'</>;
   }
 
   if (status === 'failure') {

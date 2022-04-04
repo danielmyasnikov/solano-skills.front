@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { env } from '@src/app/config/index.ts';
 
 export const registrationApi = ({ email, password, passwordConfirmation }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_COURSE}/auth`, {
+    .post(`${env.api.platform}/auth`, {
       email,
       password,
       password_confirmation: passwordConfirmation,
@@ -15,7 +16,7 @@ export const registrationApi = ({ email, password, passwordConfirmation }) => {
 
 export const singInApi = ({ email, password }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_COURSE}/auth/sign_in`, {
+    .post(`${env.api.platform}/auth/sign_in`, {
       email,
       password,
     })
@@ -27,7 +28,7 @@ export const singInApi = ({ email, password }) => {
 
 export const requestPasswordResetApi = ({ email, configName }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_COURSE}/auth/password`, {
+    .post(`${env.api.platform}/auth/password`, {
       email: email,
       config_name: configName,
     })
@@ -39,7 +40,7 @@ export const requestPasswordResetApi = ({ email, configName }) => {
 
 export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirmation }) => {
   return axios
-    .patch(`${process.env.REACT_APP_API_COURSE}/auth/password`, {
+    .patch(`${env.api.platform}/auth/password`, {
       reset_password_token: resetPasswordToken,
       password,
       password_confirmation: passwordConfirmation,
@@ -50,20 +51,9 @@ export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirm
     });
 };
 
-export const signInByPhoneApi = ({ phonenumber }) => {
-  return axios
-    .get(`${process.env.REACT_APP_API_COURSE}/api/v1/request_signature_code`, {
-      phone_number: phonenumber,
-    })
-    .then((res) => res)
-    .catch((error) => {
-      throw error;
-    });
-};
-
 export const signInByPhoneVerifyApi = ({ code }) => {
   return axios
-    .post(`${process.env.REACT_APP_API_COURSE}/api/v1/verify_signature_code`, {
+    .post(`${env.api.platform}/api/v1/verify_signature_code`, {
       code,
     })
     .then((res) => res)

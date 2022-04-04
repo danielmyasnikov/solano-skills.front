@@ -19,6 +19,7 @@ import { ThemeProvider } from '@mui/material';
 import { YMInitializer } from 'react-yandex-metrika';
 
 import { theme } from './theme';
+import { env } from '@src/app/config';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,15 +50,15 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className={styles.wrapper}>
         <Switch>
-          {routes.map((route, i, headerVariant) => (
-            <Route exact={route.exact} path={route.path} key={route.path}>
+          {routes.map(({ exact, path, wrap, headerVariant, Component }) => (
+            <Route exact={exact} path={path} key={path}>
               <>
-                {route.wrap ? (
-                  <Layout variant={headerVariant} key={i} {...route}>
-                    <route.component />
+                {wrap ? (
+                  <Layout headerVariant={headerVariant}>
+                    <Component />
                   </Layout>
                 ) : (
-                  <route.component />
+                  <Component />
                 )}
                 <ModalPortal />
               </>
@@ -65,9 +66,7 @@ function App() {
           ))}
           <Route component={NotFoundPage} />
         </Switch>
-        {process.env.NODE_ENV === 'production' && (
-          <YMInitializer accounts={[process.env.REACT_APP_SEO_YM_ID]} />
-        )}
+        {env.isProduction && <YMInitializer accounts={[env.analytics.yandexTrackingId]} />}
       </div>
     </ThemeProvider>
   );

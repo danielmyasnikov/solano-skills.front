@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { env } from '@src/app/config/index.ts';
 
 export const professionApi = createApi({
   reducerPath: 'professionApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_API_COURSE}/api/v1/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${env.api.platform}/api/v1/` }),
   tagTypes: ['Profession'],
   endpoints: (build) => ({
     getProfessions: build.query({

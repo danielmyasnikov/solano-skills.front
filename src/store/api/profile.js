@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '@src/app/config/index.ts';
 
 export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
   const formData = new FormData();
@@ -18,7 +19,7 @@ export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
   try {
     return axios({
       method: 'PATCH',
-      url: `${process.env.REACT_APP_API_COURSE}/api/v1/profile`,
+      url: `${env.api.platform}/api/v1/profile`,
       headers,
       data: formData,
     }).then((res) => res.data);
@@ -29,9 +30,7 @@ export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
 
 export const GetProfileApi = ({ headers }) => {
   try {
-    return axios
-      .get(`${process.env.REACT_APP_API_COURSE}/api/v1/me`, { headers })
-      .then((res) => res.data);
+    return axios.get(`${env.api.platform}/api/v1/me`, { headers }).then((res) => res.data);
   } catch (e) {
     console.log(e);
   }

@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { env } from '@src/app/config/index.ts';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${process.env.REACT_APP_API_COURSE}/api/v1/courses`,
+  baseUrl: `${env.api.platform}/api/v1/courses`,
   prepareHeaders: (headers) => {
     const authHeaders = {
       uid: window.localStorage.getItem('uid'),

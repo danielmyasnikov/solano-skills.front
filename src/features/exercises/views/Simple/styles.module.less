@@ -46,8 +46,21 @@
   overflow-y: auto;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  &::-webkit-scrollbar {
-    width: 0;
+
+  &:hover {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+      padding-top: 44px;
+      margin-top: 44px;
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #c4c4c4;
+    }
   }
 }
 
