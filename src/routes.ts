@@ -25,6 +25,7 @@ import { Instructors } from '@src/features/instructors';
 import { FailPaymentPage } from '@src/features/payment/Fail';
 import { ElementType } from 'react';
 import { AboutPage } from '@components/landings/AboutPage';
+import { KnowledgePage } from '@components/landings/KnowledgePage';
 
 export const routes: {
   path: string;
@@ -42,6 +43,12 @@ export const routes: {
   {
     path: '/tariffs',
     Component: TariffsPage,
+    wrap: false,
+    exact: true,
+  },
+  {
+    path: '/knowledge/:tab?',
+    Component: KnowledgePage,
     wrap: false,
     exact: true,
   },
