@@ -34,8 +34,8 @@ export const AboutPage: FC = ({}) => {
           Обратная связь
         </span>
         <span className={styles.wrapper__sub_title}>Электронная почта</span>
-        <a className={styles.wrapper__email} href="mailto:DeepSkills@mail.ru">
-          DeepSkills@mail.ru
+        <a className={styles.wrapper__email} href="mailto:support@deepskills.ru">
+          support@deepskills.ru
         </a>
         <span className={styles.wrapper__sub_title}>Реквизиты</span>
         {requisites.map(({ name, value }) => requisitesRender(name, value))}

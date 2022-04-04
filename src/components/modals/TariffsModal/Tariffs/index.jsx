@@ -60,7 +60,7 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                 md={3}
                 className={cn(styles.price, { [styles.green]: is_optimal })}
               >
-                <span>{(is_economy && price) || `${price}₽/месяц`}</span>
+                <span>{(is_economy && total_price) || `${total_price}₽/месяц`}</span>
                 {id === 1 && (
                   <small>
                     * К оплате 11 880 руб за годовой доступ ко всему контенту образовательной
