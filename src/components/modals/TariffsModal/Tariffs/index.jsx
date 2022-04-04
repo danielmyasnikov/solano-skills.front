@@ -5,11 +5,22 @@ import cn from 'classnames';
 import { useCallback } from 'react';
 import { Button, Grid } from '@mui/material';
 import { closeTariffsModal } from '@store/global/modals';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { paySubscription } from '@src/features/payment/store/actions';
+import { selectIsAuth } from '@store/profile/selector';
 
 export const Tariffs = ({ tariffList, isTariffs }) => {
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const paymentHandler = (id) => {
+    if (isAuth) {
+      dispatch(paySubscription(id));
+    } else {
+      history.push('/sign-in');
+    }
+  };
 
   return (
     <>
@@ -71,7 +82,10 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
               <Grid item xs={12} sm={4} md={3} className={styles.wrapperButton}>
                 <Button
                   onClick={() => {
-                    dispatch(closeTariffsModal({}));
+                    // dispatch(closeTariffsModal({}));
+                    paymentHandler(id);
+                    /*
+
                     history.push({
                       pathname: '/payment',
                       state: {
@@ -85,8 +99,9 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                         cycle: cycle,
                       },
                     });
+
+                     */
                   }}
-                  to="/payment"
                   className={styles.button}
                   variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
                 >

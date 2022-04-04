@@ -4,6 +4,10 @@ import Close from '@assets/Close';
 import styles from './styles.module.less';
 import { Tariffs } from './Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuth } from '@store/profile/selector';
+import { paySubscription } from '@src/features/payment/store/actions';
+import { useHistory } from 'react-router';
 
 const TariffsModal = ({ onClose }) => {
   const { data: tariffs, isLoading } = useGetTariffsQuery();
