@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useParams, Link, useLocation } from 'react-router-dom';
 
@@ -9,12 +9,12 @@ import BurgerMenu from '@components/common/burgerMenu';
 import styles from '../HomePage/styles.module.less';
 import HeaderHome from '../../Layout/headers/HomeHeader';
 import Footer from '../../Layout/footers/Footer';
-import { Grid } from '@mui/material';
 import off from '@assets/pdf/Договор Публичной Оферты.pdf';
 import pol from '@assets/pdf/Политика Конфиденциальности.pdf';
-type AboutTab = 'offer' | 'privacy-policy';
+import { Requisites } from '../AboutPage/Requisites';
+type AboutTab = 'offer' | 'privacy-policy' | 'requisites';
 
-const availableRoutes = ['offer', 'privacy-policy'];
+const availableRoutes = ['offer', 'privacy-policy', 'requisites'];
 
 export const KnowledgePage = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -84,6 +84,19 @@ export const KnowledgePage = () => {
                         to="/knowledge/privacy-policy/"
                       >
                         Политика конфиденциальности
+                      </Link>
+                    </li>
+
+                    <li>
+                      <span />
+                    </li>
+
+                    <li>
+                      <Link
+                        className={cn({ [css.active]: tab === 'requisites' })}
+                        to="/knowledge/requisites/"
+                      >
+                        Реквизиты
                       </Link>
                     </li>
                   </ul>
@@ -350,77 +363,7 @@ export const KnowledgePage = () => {
                     </p>
                     <br />
                     <h2>9. Реквизиты Исполнителя</h2>
-                    <p>
-                      <Grid container>
-                        <Grid item xs={3}>
-                          Организация
-                        </Grid>
-                        <Grid item xs={3}>
-                          ООО “ДИПСКИЛЛС”
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          ИНН
-                        </Grid>
-                        <Grid item xs={3}>
-                          7723728309
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          КПП
-                        </Grid>
-                        <Grid item xs={3}>
-                          771901001
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          ОГРН/ОГРНИП
-                        </Grid>
-                        <Grid item xs={3}>
-                          1097746526448
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={12}>
-                          <br />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                          Счет
-                        </Grid>
-                        <Grid item xs={3}>
-                          40702810938000025772
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          Бик
-                        </Grid>
-                        <Grid item xs={3}>
-                          044525225
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          Наименование Банка
-                        </Grid>
-                        <Grid item xs={3}>
-                          ПАО СБЕРБАНК
-                        </Grid>
-                        <Grid item xs={6} />
-
-                        <Grid item xs={3}>
-                          К/С
-                        </Grid>
-                        <Grid item xs={3}>
-                          30101810400000000225
-                        </Grid>
-                        <Grid item xs={6} />
-                      </Grid>
-                    </p>
+                    <Requisites />
                   </>
                 )}
                 {tab === 'privacy-policy' && (
@@ -934,6 +877,14 @@ export const KnowledgePage = () => {
                       обновления редакции. Новая редакция Политики вступает в силу с момента ее
                       утверждения, если иное не предусмотрено новой редакцией Политики
                     </p>
+                  </>
+                )}
+                {tab === 'requisites' && (
+                  <>
+                    <h2 style={{ textAlign: 'center' }}>Реквизиты</h2>
+                    <div style={{ marginTop: '80px' }}>
+                      <Requisites />
+                    </div>
                   </>
                 )}
                 <br />

@@ -130,6 +130,10 @@ export const otherLinks = [
     link: '/knowledge/offer/',
   },
   {
+    text: 'Реквизиты',
+    link: '/knowledge/requisites/',
+  },
+  {
     text: 'Тарифы',
     link: '/tariffs/',
   },
