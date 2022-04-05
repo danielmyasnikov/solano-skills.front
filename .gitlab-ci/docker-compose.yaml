@@ -2,7 +2,7 @@ version: "3.9"
 services:
   ruby:
     image: ${CI_REGISTRY_IMAGE}:front_latest
-    container_name: api-${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}
+    container_name: frontend-${CI_PROJECT_NAME}-${CI_COMMIT_REF_SLUG}
     ports:
       - 3001:80
     tty: true

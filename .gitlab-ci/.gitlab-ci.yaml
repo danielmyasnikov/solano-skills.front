@@ -33,7 +33,7 @@ build-node-docker-dev:
     name: develop
   only:
     refs:
-      - create-ci-cd #change branch to develop after tests
+      - develop #change branch to develop after tests
 
 #build-node-docker-prod:
 #  extends:
@@ -85,7 +85,7 @@ deploy-dev:
     name: develop
   only:
     refs:
-      - create-ci-cd #change branch to develop after tests
+      - develop #change branch to develop after tests
 
 # Deploy to PROD
 #deploy-prod:
