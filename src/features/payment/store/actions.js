@@ -12,3 +12,7 @@ export const checkOrderStatus = createAsyncThunk('payment/checkOrderStatus', asy
     order_id: id,
   });
 });
+
+export const unsubscribe = createAsyncThunk('payment/unsubscribe', async () => {
+  return await Api.post(`/api/v1/unsubscribe`);
+});

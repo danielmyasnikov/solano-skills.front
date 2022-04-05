@@ -33,7 +33,7 @@ export const SettingsDeleteAccount = () => {
           <CheckboxBtn error={!!checkedError} value={isChecked} handleChange={handleAreement} />
           <span className={styles.grey}>Подтверждаю, что я хочу удалить свою учетную запись.</span>
         </div>
-        <Button onClick={deleteProfile} variant="containedRed">
+        <Button disabled={!isChecked} onClick={deleteProfile} variant="containedRed">
           Удалить аккаунт
         </Button>
       </div>

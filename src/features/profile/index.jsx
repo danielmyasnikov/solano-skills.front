@@ -17,11 +17,14 @@ import HeaderPage from '@components/common/HeaderPage';
 import { numberDeclension } from '@components/common/helpers/numberDeclension';
 import { Preloader } from '@components/mui/Preloader';
 
+import { openUnsubscribeModal } from '@store/global/modals';
+
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
   const [registerationDate, setRegisterationDate] = useState('');
+  const [endSubscribeDate, setEndSubscribeDate] = useState('');
   const [isFullnameActive, setIsFullnameActive] = useState(false);
   const [information, setInformation] = useState('');
   const [isInformationActive, setIsInformationActive] = useState(false);
@@ -102,6 +105,15 @@ const Profile = () => {
         month: 'numeric',
         day: 'numeric',
       });
+      if (profile.payed_till) {
+        const date = new Date(profile.payed_till);
+        const dateSrc = date.toLocaleString('ru-RU', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        });
+        setEndSubscribeDate(dateSrc);
+      }
       setFullname((profile.name && profile.name) || 'Неизвестный пользователь');
       setInformation((profile.about && profile.about) || 'Здесь может быть информация о тебе');
       setEmail(profile.email);
@@ -225,6 +237,23 @@ const Profile = () => {
                   <div>
                     <span>Дата регистрации: </span> {registerationDate}
                   </div>
+                  {(endSubscribeDate && (
+                    <div>
+                      <span>Окончание подписки:</span> {endSubscribeDate}
+                    </div>
+                  )) || (
+                    <div>
+                      <span>У Вас нет активной подписки</span> {endSubscribeDate}
+                    </div>
+                  )}
+                  {profile.subscription_status && (
+                    <div
+                      className={styles.additionalInfo__unsubscribe}
+                      onClick={() => dispatch(openUnsubscribeModal({}))}
+                    >
+                      <span>Отменить подписку</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

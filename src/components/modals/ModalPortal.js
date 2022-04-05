@@ -4,6 +4,7 @@ import {
   selectSignUpModal,
   selectTariffsModal,
   selectCourseContentModal,
+  selectUnsubscribeModal,
   selectPleasePayModal,
 } from '@store/global/modals.selectors';
 import {
@@ -12,6 +13,7 @@ import {
   closeSignUpModal,
   closeTariffsModal,
   closePleasePayModal,
+  closeUnsubscribeModal,
 } from '@store/global/modals';
 
 import SignUpModal from './SignUpModal';
@@ -19,6 +21,7 @@ import TariffsModal from './TariffsModal';
 import FeedbackModal from './FeedbackModal';
 import CourseContentModal from './CourseContentModal';
 import { PleasePayModal } from '@components/modals/PleasePayModal';
+import UnsubscribeModal from './UnsubscribeModal';
 
 export const ModalPortal = () => {
   const dispatch = useDispatch();
@@ -28,6 +31,7 @@ export const ModalPortal = () => {
   const tariffsModal = useSelector(selectTariffsModal);
   const courseContentModal = useSelector(selectCourseContentModal);
   const pleasePayModal = useSelector(selectPleasePayModal);
+  const unsubscribeModal = useSelector(selectUnsubscribeModal);
 
   return (
     <div id="modal-portal">
@@ -37,6 +41,7 @@ export const ModalPortal = () => {
       {courseContentModal && (
         <CourseContentModal onClose={() => dispatch(closeCourseContentModal({}))} />
       )}
+      {unsubscribeModal && <UnsubscribeModal onClose={() => dispatch(closeUnsubscribeModal({}))} />}
       {pleasePayModal && <PleasePayModal onClose={() => dispatch(closePleasePayModal({}))} />}
     </div>
   );

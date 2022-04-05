@@ -16,16 +16,16 @@ const Settings = () => {
 
   const subscriptionRef = useRef(null);
   const deleteAccountRef = useRef(null);
-  const notificationRef = useRef(null);
+  // const notificationRef = useRef(null);
   const passwordRef = useRef(null);
-  const socialRef = useRef(null);
+  // const socialRef = useRef(null);
 
   const handleActiveMenu = (value) => {
     setActive(value);
     switch (value) {
-      case 'notification':
-        notificationRef.current?.scrollIntoView({ behavior: 'smooth' });
-        break;
+      // case 'notification':
+      //  notificationRef.current?.scrollIntoView({ behavior: 'smooth' });
+      //  break;
       case 'delete': {
         deleteAccountRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
@@ -34,10 +34,10 @@ const Settings = () => {
         passwordRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
       }
-      case 'social': {
-        socialRef.current?.scrollIntoView({ behavior: 'smooth' });
-        break;
-      }
+      // case 'social': {
+      //   socialRef.current?.scrollIntoView({ behavior: 'smooth' });
+      //   break;
+      // }
       case 'subscription': {
         subscriptionRef.current?.scrollIntoView({ behavior: 'smooth' });
         break;
@@ -67,13 +67,17 @@ const Settings = () => {
             <ChangePassword />
           </div>
 
-          <div ref={notificationRef}>
+          {/*
+           <div ref={notificationRef}>
             <SettingsNotifications />
           </div>
+           */}
 
-          <div ref={socialRef}>
+          {/*
+           <div ref={socialRef}>
             <Social />
           </div>
+          */}
 
           <div ref={deleteAccountRef}>
             <SettingsDeleteAccount />
