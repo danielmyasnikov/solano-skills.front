@@ -160,10 +160,10 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
       ym('reachGoal', 'register');
     }
     onClose?.();
-    if (location.pathname !== '/sign-up' && location.pathname !== '/') {
-      return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;
-    }
-    return <Redirect to="/onBoard" />;
+    // if (location.pathname !== '/sign-up' && location.pathname !== '/') {
+    //   return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;
+    // }
+    // return <Redirect to="/onBoard" />;
   }
 
   if (isAuth) {
