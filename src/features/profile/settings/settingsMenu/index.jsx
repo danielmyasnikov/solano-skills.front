@@ -17,10 +17,10 @@ const SettingsMenu = ({ active, handleChange }) => {
         return <SubscriptionSvg />;
       case 'password':
         return <PasswordSvg />;
-      case 'notification':
-        return <NotificationSvg />;
-      case 'social':
-        return <SocialSvg />;
+      // case 'notification':
+      //   return <NotificationSvg />;
+      // case 'social':
+      //   return <SocialSvg />;
       case 'delete':
         return <DeleteSvg />;
       default:

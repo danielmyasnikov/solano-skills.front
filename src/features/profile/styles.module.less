@@ -120,7 +120,7 @@
   height: auto;
   white-space: break-spaces;
   textarea {
-    padding: 8px 9px;
+    padding: 0 9px 8px 0;
     resize: none;
     width: 100%;
     max-height: 400px;
@@ -185,6 +185,12 @@
       }
     }
   }
+
+  .additionalInfo__unsubscribe > span {
+    cursor: pointer;
+    color: var(--error-red) !important;
+  }
+
   .title {
     font-family: 'Jost';
     font-weight: 500;

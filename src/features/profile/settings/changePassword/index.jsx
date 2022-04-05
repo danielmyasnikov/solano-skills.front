@@ -10,6 +10,12 @@ const ChangePassword = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [width, setWidth] = useState(0);
 
+  const passwordChangeHandler = () => {
+    // в случае успеха
+    setNewPassword('');
+    setConfirmNewPassword('');
+  };
+
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -36,9 +42,14 @@ const ChangePassword = () => {
                   placeholder="Повторите пароль"
                   handleChange={(e) => setConfirmNewPassword(e.target.value)}
                 />
+                {false && <span className={styles.successChange}>Пароль изменен!</span>}
               </div>
             </div>
-            {width > 1512 && <Button variant="containedPurple">Сохранить изменения</Button>}
+            {width > 1512 && (
+              <Button variant="containedPurple" onClick={passwordChangeHandler}>
+                Сохранить изменения
+              </Button>
+            )}
           </div>
           <div className={styles.requirements}>
             <div className={styles.requirements__text}>
@@ -50,7 +61,11 @@ const ChangePassword = () => {
                 <li>Хотя бы одна цифра, символ или пробел</li>
               </ul>
             </div>
-            {width <= 1512 && <Button variant="containedPurple">Сохранить изменения</Button>}
+            {width <= 1512 && (
+              <Button variant="containedPurple" onClick={passwordChangeHandler}>
+                Сохранить изменения
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { checkOrderStatus, paySubscription } from '@src/features/payment/store/actions';
+import {
+  checkOrderStatus,
+  paySubscription,
+  unsubscribe,
+} from '@src/features/payment/store/actions';
 
 export const paymentSlice = createSlice({
   name: 'payment',
@@ -19,6 +23,12 @@ export const paymentSlice = createSlice({
     },
     [paySubscription.fulfilled]: (state, action) => {
       window.open(action.payload.form_url);
+    },
+    [unsubscribe.fulfilled]: (state, action) => {
+      state.status = 'success';
+    },
+    [unsubscribe.rejected]: (state, action) => {
+      state.status = 'failure';
     },
   },
 });
