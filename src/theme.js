@@ -13,6 +13,98 @@ export const theme = createTheme({
   shape: {
     borderRadius: 50,
   },
+  typography: {
+    h1: {
+      fontSize: '3rem',
+      fontWeight: 'Bold',
+      fontFamily: 'Jost',
+      lineHeight: '58px',
+    },
+    h2: {
+      fontSize: '2.3rem',
+      fontWeight: 'Bold',
+      fontFamily: 'Jost',
+      lineHeight: '42px',
+    },
+    h3: {
+      fontSize: '1.8rem',
+      fontWeight: 'Bold',
+      fontFamily: 'Jost',
+      lineHeight: '35px',
+    },
+    h4: {
+      fontSize: '1.5rem',
+      fontWeight: 'Bold',
+      fontFamily: 'Jost',
+      lineHeight: '30px',
+    },
+    modalHeader: {
+      fontSize: '1.3rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Jost',
+      lineHeight: '25px',
+    },
+    subTitle: {
+      fontSize: '1.3rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '25px',
+    },
+    textBar: {
+      fontSize: '1.1rem',
+      fontWeight: 'Medium',
+      fontFamily: 'Jost',
+      lineHeight: '19px',
+    },
+    mainText: {
+      fontSize: '1rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '22px',
+    },
+    textCourse: {
+      fontSize: '0.9rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '16px',
+    },
+    menuChapter: {
+      fontSize: '1rem',
+      fontWeight: 'Medium',
+      fontFamily: 'Jost',
+      lineHeight: '18px',
+    },
+    menuText: {
+      fontSize: '1rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Jost',
+      lineHeight: '18px',
+    },
+    filters: {
+      fontSize: '1rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '18px',
+    },
+    sorting: {
+      fontSize: '1rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '18px',
+    },
+    name: {
+      fontSize: '0.9rem',
+      fontWeight: 'SemiBold',
+      fontFamily: 'Jost',
+      lineHeight: '15px',
+    },
+    small: {
+      fontSize: '0.8rem',
+      fontWeight: 'Regular',
+      fontFamily: 'Nunito',
+      lineHeight: '13px',
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
