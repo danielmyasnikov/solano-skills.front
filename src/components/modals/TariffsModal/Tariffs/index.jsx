@@ -7,11 +7,12 @@ import { Button, Grid } from '@mui/material';
 import { closeTariffsModal } from '@store/global/modals';
 import { useDispatch, useSelector } from 'react-redux';
 import { paySubscription } from '@src/features/payment/store/actions';
-import { selectIsAuth } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
 export const Tariffs = ({ tariffList, isTariffs }) => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
   const history = useHistory();
 
   const paymentHandler = (id) => {
@@ -80,11 +81,64 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                 )}
               </Grid>
               <Grid item xs={12} sm={4} md={3} className={styles.wrapperButton}>
-                <Button
-                  onClick={() => {
-                    // dispatch(closeTariffsModal({}));
-                    paymentHandler(id);
-                    /*
+                {profile.subscription_type ? (
+                  <>
+                    {profile.subscription_type === 'month' ? (
+                      <>
+                        {id === 1 ? (
+                          <Button
+                            onClick={() => paymentHandler(id)}
+                            className={styles.button}
+                            variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
+                          >
+                            Обновить тариф
+                          </Button>
+                        ) : (
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              height: '100%',
+                            }}
+                            className={cn(styles.price, { [styles.green]: is_optimal })}
+                          >
+                            <span>Активен</span>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {id === 1 ? (
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              height: '100%',
+                            }}
+                            className={cn(styles.price, { [styles.green]: is_optimal })}
+                          >
+                            <span>Активен</span>
+                          </div>
+                        ) : (
+                          <Button
+                            onClick={() => paymentHandler(id)}
+                            className={styles.button}
+                            variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
+                          >
+                            Обновить тариф
+                          </Button>
+                        )}
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      // dispatch(closeTariffsModal({}));
+                      paymentHandler(id);
+                      /*
 
                     history.push({
                       pathname: '/payment',
@@ -101,12 +155,13 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                     });
 
                      */
-                  }}
-                  className={styles.button}
-                  variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
-                >
-                  Активировать
-                </Button>
+                    }}
+                    className={styles.button}
+                    variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
+                  >
+                    Активировать
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </div>
