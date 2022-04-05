@@ -9,6 +9,7 @@ variables:
   FULL_PATH: "$PROJECTS_PATH/$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/"
 
 
+
 .build-node-docker:
   stage: build-node-docker
   image: docker:latest
