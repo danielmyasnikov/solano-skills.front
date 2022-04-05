@@ -80,6 +80,7 @@ export default function ExercisePageBody() {
       case 'single_bascket':
       case 'multiple_bascket':
       case 'bullet_point_exercise':
+      case 'quiz_with_script':
       case 'normal_exercise':
       case 'quiz':
         return (
