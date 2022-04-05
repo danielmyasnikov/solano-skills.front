@@ -86,13 +86,7 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                     {profile.subscription_type === 'month' ? (
                       <>
                         {id === 1 ? (
-                          <Button
-                            onClick={() => paymentHandler(id)}
-                            className={styles.button}
-                            variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
-                          >
-                            Обновить тариф
-                          </Button>
+                          <></>
                         ) : (
                           <div
                             style={{
@@ -122,13 +116,7 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                             <span>Активен</span>
                           </div>
                         ) : (
-                          <Button
-                            onClick={() => paymentHandler(id)}
-                            className={styles.button}
-                            variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
-                          >
-                            Обновить тариф
-                          </Button>
+                          <></>
                         )}
                       </>
                     )}

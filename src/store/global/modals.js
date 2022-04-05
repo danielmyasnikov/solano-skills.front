@@ -7,6 +7,7 @@ export const modalsSlice = createSlice({
     signUpModal: false,
     tariffsModal: false,
     courseContentModal: false,
+    pleasePayModal: false,
   },
   reducers: {
     openFeedbackModal: (state) => {
@@ -36,6 +37,13 @@ export const modalsSlice = createSlice({
     closeCourseContentModal: (state) => {
       state.courseContentModal = false;
     },
+
+    openPleasePayModal: (state) => {
+      state.pleasePayModal = true;
+    },
+    closePleasePayModal: (state) => {
+      state.pleasePayModal = false;
+    },
   },
 });
 
@@ -48,4 +56,6 @@ export const {
   closeTariffsModal,
   openCourseContentModal,
   closeCourseContentModal,
+  openPleasePayModal,
+  closePleasePayModal,
 } = modalsSlice.actions;
