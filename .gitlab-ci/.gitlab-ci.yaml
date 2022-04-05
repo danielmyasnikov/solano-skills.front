@@ -65,11 +65,11 @@ build-node-docker-dev:
     - ssh $CONN_STR 
             "docker pull $YANDEX_REGISTRY:front_latest ; docker pull $YANDEX_REGISTRY:front_latest"
     - ssh $CONN_STR 
-            "find $PROJECTS_PATH/$CI_PROJECT_NAME-* -type f -name \"docker-compose.autodeploy.yaml\" -exec docker-compose -f {} down \;"
+            "find $PROJECTS_PATH/$CI_PROJECT_NAME-* -type f -name \"docker-compose.yaml\" -exec docker-compose -f {} down \;"
     - scp -r
-            ./.gitlab-ci/docker-compose.autodeploy.yaml ./.gitlab-ci/.env $CONN_STR:$FULL_PATH
+            ./.gitlab-ci/docker-compose.yaml ./.gitlab-ci/.env $CONN_STR:$FULL_PATH
     - ssh $CONN_STR 
-            "cd $FULL_PATH ; docker-compose -f docker-compose.autodeploy.yaml up -d"
+            "cd $FULL_PATH ; docker-compose -f docker-compose.yaml up -d"
     - ssh $CONN_STR
             "sleep 20 && if docker ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG | grep Restarting; then exit 1; else echo DEPLOY COMPLITED; fi"
 
