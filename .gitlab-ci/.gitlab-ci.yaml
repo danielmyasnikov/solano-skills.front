@@ -1,0 +1,101 @@
+stages:
+  - build-node-docker
+  - deploy
+
+default:
+  interruptible: false
+
+variables:
+  FULL_PATH: "$PROJECTS_PATH/$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG/"
+
+
+
+.build-node-docker:
+  stage: build-node-docker
+  image: docker:latest
+  tags:     #run on local gitlab-runner
+    - runner-cloud
+  services:
+    - docker:dind
+  before_script:
+    - docker login cr.yandex -u oauth -p $YANDEX_TOKEN
+  script:
+    #- docker pull $YANDEX_REGISTRY/api:latest || true
+    - docker build -t $YANDEX_REGISTRY:front_$CI_COMMIT_SHA -t $YANDEX_REGISTRY:front_latest -f ./.gitlab-ci/Dockerfile.front .
+    - docker push $YANDEX_REGISTRY:front_$CI_COMMIT_SHA
+    - docker push $YANDEX_REGISTRY:front_latest
+
+
+build-node-docker-dev:
+  extends:
+    - .build-node-docker
+  environment:
+    name: develop
+  only:
+    refs:
+      - develop #change branch to develop after tests
+
+#build-node-docker-prod:
+#  extends:
+#    - .build-node-docker
+#  environment:
+#    name: production
+#  only:
+#    refs:
+#      - master
+
+.deploy:
+  stage: deploy
+  image: docker:latest
+  tags:     #run on local gitlab-runner
+    - runner-cloud
+  services:
+    - docker:dind
+  before_script:
+    - eval "$BUILD_COMPOSE_ENV" # Build .env for docker-compose.autodeploy.yaml
+    - mkdir -p ~/.ssh
+    - echo "$SERVER_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config  # Allow ALL ssh connections
+  script:
+    - ssh $CONN_STR 
+            "mkdir -p $FULL_PATH ;  docker login cr.yandex -u oauth -p $YANDEX_TOKEN"
+    - ssh $CONN_STR 
+            "docker pull $YANDEX_REGISTRY:front_latest ; docker pull $YANDEX_REGISTRY:front_latest"
+    - ssh $CONN_STR 
+            "find $PROJECTS_PATH/$CI_PROJECT_NAME-* -type f -name \"docker-compose.yaml\" -exec docker-compose -f {} down \;"
+    - scp -r
+            ./.gitlab-ci/docker-compose.yaml ./.gitlab-ci/.env $CONN_STR:$FULL_PATH
+    - ssh $CONN_STR 
+            "cd $FULL_PATH ; docker-compose -f docker-compose.yaml up -d"
+    - ssh $CONN_STR
+            "sleep 20 && if docker ps | grep $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG | grep Restarting; then exit 1; else echo DEPLOY COMPLITED; fi"
+
+
+# Deploy to DEV
+deploy-dev:
+  extends:
+    - .deploy
+  variables:
+    SERVER_KEY: "$DEV_SERVER_KEY"
+    CONN_STR: "$DEV_SERVER_HOST"
+  environment:
+    name: develop
+  only:
+    refs:
+      - develop #change branch to develop after tests
+
+# Deploy to PROD
+#deploy-prod:
+#  extends:
+#    - .deploy
+#  variables:
+#    SERVER_KEY: "$PROD_SERVER_KEY"
+#    CONN_STR: "ubuntu@3.66.45.144"
+#  environment:
+#    name: production
+#  only:
+#    refs:
+#      - master
