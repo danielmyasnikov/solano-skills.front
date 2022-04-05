@@ -130,6 +130,10 @@ export const otherLinks = [
     link: '/knowledge/offer/',
   },
   {
+    text: 'Реквизиты',
+    link: '/knowledge/requisites/',
+  },
+  {
     text: 'Тарифы',
     link: '/tariffs/',
   },
@@ -144,10 +148,10 @@ export const otherLinks = [
 
 export const info = [
   {
-    text: 'ООО «Дипскиллс», Москва, Ленинградский проспект 39',
+    text: 'ООО «Дипскиллс», Москва, Измайловский вал, 2',
   },
   {
-    text: 'строение 80, ИНН 7726381870',
+    text: 'ИНН 7723728309',
   },
   {
     text: '© DeepSkills, 2022',

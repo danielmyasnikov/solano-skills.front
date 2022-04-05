@@ -136,12 +136,12 @@ export const routes: {
     wrap: true,
     exact: true,
   },
-  {
-    path: '/onBoard',
-    Component: OnBoardPage,
-    wrap: false,
-    exact: true,
-  },
+  // {
+  //   path: '/onBoard',
+  //   Component: OnBoardPage,
+  //   wrap: false,
+  //   exact: true,
+  // },
   {
     path: '/certificates',
     Component: CertificatesPage,

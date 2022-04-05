@@ -10,8 +10,8 @@ import Box from '@mui/material/Box';
 import FailFIOModal from '@src/features/exercises/Page/FailFIOModal';
 import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
-import { selectIsAuth } from '@store/profile/selector';
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
+import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 
 const Root = styled(Box)`
   display: flex;
@@ -44,6 +44,8 @@ export default function ExercisePageBody() {
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
 
+  const profile = useSelector(selectProfile);
+
   const isAuth = useSelector(selectIsAuth);
 
   if (!exercise) {
@@ -65,10 +67,14 @@ export default function ExercisePageBody() {
         break;
     }
     if (exercise.next_exercise_id) {
-      await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+      if (exercise.is_free || !!profile.subscription_type) {
+        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+      } else {
+        dispatch(openPleasePayModal());
+      }
     } else {
       if (!isAuth) {
-        dispatch(exercisesSlice.actions.openSignupModal({}));
+        dispatch(openSignUpModal({}));
       }
     }
   };
@@ -80,6 +86,7 @@ export default function ExercisePageBody() {
       case 'single_bascket':
       case 'multiple_bascket':
       case 'bullet_point_exercise':
+      case 'quiz_with_script':
       case 'normal_exercise':
       case 'quiz':
         return (

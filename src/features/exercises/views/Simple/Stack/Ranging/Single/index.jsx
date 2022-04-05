@@ -4,19 +4,22 @@ import {
   selectBaskets,
   selectExerciseContext,
   selectOrderIds,
+  selectRootExercise,
 } from '@src/features/exercises/store/selectors';
 import { Button } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
 import cn from 'classnames';
-import { openSignUpModal } from '@store/global/modals';
+import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
-import { selectIsAuth } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
 const SingleRanging = () => {
   const dispatch = useDispatch();
 
   const baskets = useSelector(selectBaskets);
+  const rootExercise = useSelector(selectRootExercise);
+  const profile = useSelector(selectProfile);
 
   const { completed } = useSelector(selectExerciseContext);
 
@@ -96,7 +99,11 @@ const SingleRanging = () => {
 
     if (!error) {
       if (isAuth) {
-        dispatch(exerciseSlice.actions.onComplete(undefined));
+        if (rootExercise.is_free || !!profile.subscription_type) {
+          dispatch(exerciseSlice.actions.onComplete(undefined));
+        } else {
+          dispatch(openPleasePayModal());
+        }
       } else {
         dispatch(openSignUpModal());
       }

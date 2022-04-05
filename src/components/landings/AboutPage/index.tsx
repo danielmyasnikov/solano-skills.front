@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { openFeedbackModal } from '@store/global/modals';
 
 import styles from './styles.module.less';
-import { requisites } from './constants';
+import { Requisites } from './Requisites';
 
 export const AboutPage: FC = ({}) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -38,7 +38,7 @@ export const AboutPage: FC = ({}) => {
           support@deepskills.ru
         </a>
         <span className={styles.wrapper__sub_title}>Реквизиты</span>
-        {requisites.map(({ name, value }) => requisitesRender(name, value))}
+        <Requisites />
         <span className={`${styles.wrapper__sub_title} ${styles.wrapper__sub_title_last}`}>
           Условия возврата денежных средств
         </span>

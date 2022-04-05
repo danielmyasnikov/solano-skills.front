@@ -1,6 +1,4 @@
-import React, { useRef, useState } from 'react';
-
-import useDebounce from '../../../../hooks/useDebounce';
+import { useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -33,7 +31,6 @@ const Header = ({ headerRef }) => {
   const isAuth = useSelector(selectIsAuth);
   const { data: courses, loading, error } = useGetCoursesQuery();
   const [actionMenu, setShowActionMenu] = useState(false);
-  const [searchInFocus, setSearchInFocus] = useState(false);
   const history = useHistory();
 
   const registerRouteHandler = () => history.push(`/sign-up`);
@@ -87,7 +84,13 @@ const Header = ({ headerRef }) => {
             {isAuth ? (
               <>
                 <Button variant="containedGreen" onClick={handleShowModal}>
-                  Обновить тариф
+                  {profile.subscription_type ? (
+                    <>
+                      {profile.subscription_type === 'month' ? 'Месячный тариф' : 'Годовой тариф'}
+                    </>
+                  ) : (
+                    'Активировать тариф'
+                  )}
                 </Button>
                 <div
                   className={cn(styles.profile, { [styles.profileRotate]: actionMenu })}
