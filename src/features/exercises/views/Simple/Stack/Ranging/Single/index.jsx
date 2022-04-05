@@ -37,6 +37,35 @@ const SingleRanging = () => {
     setItems(newItems);
   }
 
+  const limit = baskets[0].limit;
+
+  function toggleSpacing(id, plus) {
+    setItems(
+      items.map((e) => {
+        if (e.id === id) {
+          if (plus) {
+            if (e.currentSpaces < limit + 1) {
+              return {
+                ...e,
+                currentSpaces: e.currentSpaces + 1,
+              };
+            }
+          } else {
+            if (e.currentSpaces > 0) {
+              return {
+                ...e,
+                currentSpaces: e.currentSpaces - 1,
+              };
+            }
+          }
+        }
+        return e;
+      }),
+    );
+  }
+
+  const isIdent = baskets[0].isIdent;
+
   function checkAnswer() {
     setIsDraggable(false);
     let error = false;
@@ -46,7 +75,10 @@ const SingleRanging = () => {
     setItems(
       items.map((item) => {
         const answerId = answers[n - 1];
-        if (Number(item.number) !== Number(answerId)) {
+        if (
+          Number(item.number) !== Number(answerId) ||
+          (isIdent && item.spaces !== item.currentSpaces)
+        ) {
           error = true;
           n += 1;
           return {
@@ -91,11 +123,36 @@ const SingleRanging = () => {
                           ref={itemProvider.innerRef}
                           {...itemProvider.draggableProps}
                           {...itemProvider.dragHandleProps}
-                          className={cn(styles.card, {
+                          className={cn(styles.card, styles[`s${item.currentSpaces}`], {
                             [styles.error]: !isDraggable && item.isError,
+                            [styles.isIdent]: isIdent,
                           })}
                         >
                           <p>{item.label}</p>
+                          <div className={styles.arrows}>
+                            <span onClick={() => toggleSpacing(item.id)}>
+                              <svg
+                                fill="currentColor"
+                                height="15"
+                                role="Img"
+                                width="15"
+                                viewBox="0 0 10.68 17.92"
+                              >
+                                <path d="M13.31.08a1.7 1.7 0 011.197 2.896L8.417 9.09l6.09 6.115a1.7 1.7 0 01-2.395 2.394l-7.3-7.3a1.7 1.7 0 010-2.394l7.3-7.299c.312-.33.743-.52 1.197-.528z" />
+                              </svg>
+                            </span>
+                            <span onClick={() => toggleSpacing(item.id, true)}>
+                              <svg
+                                fill="currentColor"
+                                height="15"
+                                role="Img"
+                                width="15"
+                                viewBox="0 0 10.68 17.92"
+                              >
+                                <path d="M5.69 17.92a1.7 1.7 0 01-1.197-2.896l6.09-6.115-6.09-6.115A1.7 1.7 0 016.888.4l7.3 7.3a1.7 1.7 0 010 2.394l-7.3 7.299c-.312.33-.743.52-1.197.528z" />
+                              </svg>
+                            </span>
+                          </div>
                           {isDraggable ? (
                             <svg
                               aria-label="bars icon"

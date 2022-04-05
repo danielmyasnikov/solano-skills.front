@@ -91,9 +91,13 @@ export const exerciseSlice = createSlice({
               id: `board-${exercise.basckets.basckets[0].id}`,
               label: exercise.basckets.basckets[0].title,
               isSingle: true,
+              isIdent: exercise.statements.filter((e) => e.spaces_count > 0).length > 0,
+              limit: Math.max(...exercise.statements.map((e) => e.spaces_count)),
               items: exercise.statements.map((e) => ({
                 id: `item-${e.id}`,
                 label: e.text,
+                spaces: e.spaces_count,
+                currentSpaces: 0,
                 errorMessage: e.error_message,
                 number: e.number,
               })),
