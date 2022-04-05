@@ -14,7 +14,7 @@ variables:
   stage: build-node-docker
   image: docker:latest
   tags:     #run on local gitlab-runner
-    - runner-nikita-omelchenko
+    - runner-cloud
   services:
     - docker:dind
   before_script:
@@ -48,7 +48,7 @@ build-node-docker-dev:
   stage: deploy
   image: docker:latest
   tags:     #run on local gitlab-runner
-    - runner-nikita-omelchenko
+    - runner-cloud
   services:
     - docker:dind
   before_script:
