@@ -6,15 +6,15 @@ import {
   selectExerciseType,
   selectHint,
   selectQuizVariants,
+  selectRootExercise,
 } from '@src/features/exercises/store/selectors';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import RadioButton from '@components/mui/RadioButton';
-import { selectIsAuth } from '@store/profile/selector';
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
-import { openSignUpModal } from '@store/global/modals';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
+import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 
 const Content = styled(Box)`
   margin-top: 35px;
@@ -117,6 +117,8 @@ const QuizRadioButton = styled(RadioButton)`
 export default function InstructionBody() {
   const dispatch = useDispatch();
 
+  const rootExercise = useSelector(selectRootExercise);
+  const profile = useSelector(selectProfile);
   const type = useSelector(selectExerciseType);
   const { instruction } = useSelector(selectCurrentExercise);
   const { instructionFolded } = useSelector(selectExerciseSidebar);
@@ -131,7 +133,11 @@ export default function InstructionBody() {
 
   function onAnswer() {
     if (isAuth) {
-      dispatch(exerciseSlice.actions.onQuizAnswer({}));
+      if (rootExercise.is_free || !!profile.subscription_type) {
+        dispatch(exerciseSlice.actions.onQuizAnswer({}));
+      } else {
+        dispatch(openPleasePayModal());
+      }
     } else {
       dispatch(openSignUpModal());
     }

@@ -1,17 +1,19 @@
 import styles from './styles.module.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBaskets } from '@src/features/exercises/store/selectors';
+import { selectBaskets, selectRootExercise } from '@src/features/exercises/store/selectors';
 import { Basket } from './Basket';
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import { selectIsAuth } from '@store/profile/selector';
+import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
-import { openSignUpModal } from '@store/global/modals';
+import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 
 const MultipleRanging = () => {
   const dispatch = useDispatch();
 
+  const rootExercise = useSelector(selectRootExercise);
+  const profile = useSelector(selectProfile);
   const data = useSelector(selectBaskets);
   const isAuth = useSelector(selectIsAuth);
 
@@ -89,7 +91,11 @@ const MultipleRanging = () => {
 
     if (!error) {
       if (isAuth) {
-        dispatch(exerciseSlice.actions.onComplete(undefined));
+        if (rootExercise.is_free || !!profile.subscription_type) {
+          dispatch(exerciseSlice.actions.onComplete(undefined));
+        } else {
+          dispatch(openPleasePayModal());
+        }
       } else {
         dispatch(openSignUpModal());
       }

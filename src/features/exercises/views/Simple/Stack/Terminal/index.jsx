@@ -28,11 +28,12 @@ import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.sli
 import {
   selectCurrentExercise,
   selectExerciseContext,
+  selectRootExercise,
   selectSolutionHint,
 } from '@src/features/exercises/store/selectors';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
-import { openSignUpModal } from '@store/global/modals';
+import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 import VertDraggable from '@components/common/VertDraggable';
 
 const Placeholder = styled(Box)`
@@ -105,6 +106,8 @@ const Terminal = () => {
   const isAuth = useSelector(selectIsAuth);
   const { completed, xp, code } = useSelector(selectExerciseContext);
   const kernelId = useSelector(selectKernelId);
+  const rootExercise = useSelector(selectRootExercise);
+  const profile = useSelector(selectProfile);
 
   const [bytePayload, setBytePayload] = useState([]);
   const [activeBytePayload, setActiveBytePayload] = useState(0);
@@ -160,24 +163,28 @@ const Terminal = () => {
 
   const handleAnswer = () => {
     if (isAuth) {
-      dispatch(
-        compileShell({
-          code: activeTab === 'solution' ? solutionContent : code,
-          exerciseId: exercise?.id,
-          kernelId: terminal.kernelId,
-          isGraphRequired: exercise?.is_graph_required,
-          type: 'compileExercise',
-        }),
-      );
-      dispatch(
-        checkAnswer(
-          activeTab === 'solution' ? solutionContent : code,
-          exercise?.id,
-          exercise?.is_graph_required,
-          xp,
-          user_id,
-        ),
-      );
+      if (rootExercise.is_free || !!profile.subscription_type) {
+        dispatch(
+          compileShell({
+            code: activeTab === 'solution' ? solutionContent : code,
+            exerciseId: exercise?.id,
+            kernelId: terminal.kernelId,
+            isGraphRequired: exercise?.is_graph_required,
+            type: 'compileExercise',
+          }),
+        );
+        dispatch(
+          checkAnswer(
+            activeTab === 'solution' ? solutionContent : code,
+            exercise?.id,
+            exercise?.is_graph_required,
+            xp,
+            user_id,
+          ),
+        );
+      } else {
+        dispatch(openPleasePayModal());
+      }
     } else {
       dispatch(openSignUpModal());
     }
@@ -249,7 +256,11 @@ const Terminal = () => {
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  dispatch(exerciseSlice.actions.updateCode(exercise?.sample_code));
+                  if (rootExercise.is_free || !!profile.subscription_type) {
+                    dispatch(exerciseSlice.actions.updateCode(exercise?.sample_code));
+                  } else {
+                    dispatch(openPleasePayModal());
+                  }
                 } else {
                   dispatch(openSignUpModal());
                 }
@@ -262,15 +273,19 @@ const Terminal = () => {
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  dispatch(
-                    compileShell({
-                      code: activeTab === 'solution' ? solutionContent : code,
-                      exerciseId: exercise?.id,
-                      kernelId: terminal.kernelId,
-                      isGraphRequired: exercise?.is_graph_required,
-                      type: 'compileExercise',
-                    }),
-                  );
+                  if (rootExercise.is_free || !!profile.subscription_type) {
+                    dispatch(
+                      compileShell({
+                        code: activeTab === 'solution' ? solutionContent : code,
+                        exerciseId: exercise?.id,
+                        kernelId: terminal.kernelId,
+                        isGraphRequired: exercise?.is_graph_required,
+                        type: 'compileExercise',
+                      }),
+                    );
+                  } else {
+                    dispatch(openPleasePayModal());
+                  }
                 } else {
                   dispatch(openSignUpModal());
                 }
