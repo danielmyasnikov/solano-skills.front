@@ -4,17 +4,22 @@ import { SettingsInputPassword } from './settingsInputPassword';
 
 import styles from './styles.module.less';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProfileNew } from '../../store/selectors';
+import { changePassword } from '../../store/actions';
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [width, setWidth] = useState(0);
 
-  const passwordChangeHandler = () => {
-    // в случае успеха
-    setNewPassword('');
-    setConfirmNewPassword('');
-  };
+  const dispatch = useDispatch();
+
+  const profile = useSelector(selectProfileNew);
+
+  const passwordChangeHandler = () => dispatch(changePassword({ newPassword, confirmNewPassword }));
+
+  const disabledHandler = () => newPassword === confirmNewPassword && newPassword.length >= 6;
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -22,6 +27,14 @@ const ChangePassword = () => {
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (profile.changePasswordStatus === 'success') {
+      setNewPassword('');
+      setConfirmNewPassword('');
+    } else if (profile.changePasswordStatus === 'failure') {
+    }
+  }, [profile]);
 
   return (
     <div className={styles.password}>
@@ -42,11 +55,20 @@ const ChangePassword = () => {
                   placeholder="Повторите пароль"
                   handleChange={(e) => setConfirmNewPassword(e.target.value)}
                 />
-                {false && <span className={styles.successChange}>Пароль изменен!</span>}
+                {profile.changePasswordStatus === 'success' && (
+                  <span className={styles.successChange}>Пароль изменен!</span>
+                )}
+                {profile.changePasswordStatus === 'failure' && (
+                  <span className={styles.failureChange}>Произошла ошибка!</span>
+                )}
               </div>
             </div>
             {width > 1512 && (
-              <Button variant="containedPurple" onClick={passwordChangeHandler}>
+              <Button
+                disabled={!disabledHandler()}
+                variant="containedPurple"
+                onClick={passwordChangeHandler}
+              >
                 Сохранить изменения
               </Button>
             )}
@@ -62,7 +84,11 @@ const ChangePassword = () => {
               </ul>
             </div>
             {width <= 1512 && (
-              <Button variant="containedPurple" onClick={passwordChangeHandler}>
+              <Button
+                disabled={!disabledHandler()}
+                variant="containedPurple"
+                onClick={passwordChangeHandler}
+              >
                 Сохранить изменения
               </Button>
             )}

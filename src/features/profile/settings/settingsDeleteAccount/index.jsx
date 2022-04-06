@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { CheckboxBtn } from '@components/mui/Checkbox';
 
 import styles from './styles.module.less';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProfileNew } from '../../store/selectors';
+import { deleteAccount } from '../../store/actions';
+import { useHistory } from 'react-router';
 
 export const SettingsDeleteAccount = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedError, setCheckedError] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  const profile = useSelector(selectProfileNew);
 
   const handleAreement = () => {
     setIsChecked(!isChecked);
@@ -15,11 +25,16 @@ export const SettingsDeleteAccount = () => {
   };
 
   const deleteProfile = () => {
-    if (isChecked) {
-    } else {
-      setCheckedError(true);
-    }
+    dispatch(deleteAccount());
   };
+
+  useEffect(() => {
+    if (profile.deleteStatus === 'success') {
+      localStorage.clear();
+      history.push('/');
+    } else if (profile.deleteStatus === 'failure') {
+    }
+  }, [profile]);
 
   return (
     <div className={styles.deleteAccount}>
