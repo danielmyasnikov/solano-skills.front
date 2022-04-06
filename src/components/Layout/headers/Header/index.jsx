@@ -86,7 +86,9 @@ const Header = ({ headerRef }) => {
                 <Button variant="containedGreen" onClick={handleShowModal}>
                   {profile.subscription_type ? (
                     <>
-                      {profile.subscription_type === 'month' ? 'Месячный тариф' : 'Годовой тариф'}
+                      {profile.subscription_type === 'month'
+                        ? 'Оптимальный тариф'
+                        : 'Бюджетный тариф'}
                     </>
                   ) : (
                     'Активировать тариф'
