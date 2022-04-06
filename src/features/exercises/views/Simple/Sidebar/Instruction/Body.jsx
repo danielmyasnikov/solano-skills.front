@@ -148,7 +148,7 @@ export default function InstructionBody() {
       <Content dangerouslySetInnerHTML={{ __html: instruction }} />
       {type === 'quiz' && !instruction && <div style={{ height: '28px' }} />}
 
-      {type === 'quiz' && (
+      {(type === 'quiz' || type === 'quiz_with_script') && (
         <Quiz>
           {quizVariants.map((variant) => (
             <QuizRadioButton
@@ -161,7 +161,7 @@ export default function InstructionBody() {
         </Quiz>
       )}
 
-      {type === 'quiz' && (
+      {(type === 'quiz' || type === 'quiz_with_script') && (
         <ButtonWrapper>
           {!hintUsed && !!hintContent && (
             <Button
