@@ -64,11 +64,12 @@ function Exercise({ goNext }) {
   useEffect(() => {
     if (completed) {
       if (type === 'bullet_point_exercise') {
-        if (active < total) {
+        if (active <= total) {
           if (active > totalDone) {
             dispatch(exercisesSlice.actions.onStepComplete({ xp }));
-
-            setStep(active + 1);
+            if (active < total) {
+              setStep(active + 1);
+            }
           }
         }
       }
