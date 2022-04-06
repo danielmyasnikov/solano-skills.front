@@ -54,7 +54,7 @@ export const exerciseSlice = createSlice({
 
       state.xp = exercise.xp;
 
-      if (exercise.type === 'quiz' && exercise.answers) {
+      if ((exercise.type === 'quiz' || exercise.type === 'quiz_with_script') && exercise.answers) {
         state.quizVariants = exercise.answers.map((answer) => ({
           id: `${answer.correct}_${answer.error}_${answer.value}`,
           correct: answer.correct,
