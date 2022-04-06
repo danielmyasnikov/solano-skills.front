@@ -8,6 +8,7 @@ import { checkOrderStatus } from '@src/features/payment/store/actions';
 import { Button } from '@mui/material';
 import { selectPaymentStatus } from '@src/features/payment/store/selectors';
 import { Redirect } from 'react-router';
+import { getProfile } from '@store/profile/actions';
 
 export const SuccessPayment = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,24 @@ export const SuccessPayment = () => {
       dispatch(checkOrderStatus(query.get('orderId')));
     }
   }, []);
+
+  useEffect(() => {
+    if (status === 'success') {
+      const uid = localStorage.getItem('uid');
+      const client = localStorage.getItem('client');
+      const accessToken = localStorage.getItem('access-token');
+
+      dispatch(
+        getProfile({
+          headers: {
+            uid,
+            client,
+            'access-token': accessToken,
+          },
+        }),
+      );
+    }
+  }, [status]);
 
   if (status === 'idle' || status === 'loading') {
     return <>'Loading...'</>;
