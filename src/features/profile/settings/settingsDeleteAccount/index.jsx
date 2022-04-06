@@ -41,8 +41,8 @@ export const SettingsDeleteAccount = () => {
       <div className={styles.title}>Удалить аккаунт</div>
       <div className={styles.wrap}>
         <span className={styles.grey}>
-          Когда вы удаляете свою учетную запись, вы теряете доступ к службам учетной записи Front, и
-          мы безвозвратно удаляем ваши личные данные. Вы можете отменить удаление в течение 14 дней.
+          Когда вы удаляете свою учетную запись, вы теряете доступ ко всем сервисам DeepSkills,
+          восстановление невозможно.
         </span>
         <div className={styles.agreement}>
           <CheckboxBtn error={!!checkedError} value={isChecked} handleChange={handleAreement} />

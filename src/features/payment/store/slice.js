@@ -9,6 +9,7 @@ export const paymentSlice = createSlice({
   name: 'payment',
   initialState: {
     status: 'idle',
+    windowReference: null,
   },
   reducers: {},
   extraReducers: {
@@ -21,8 +22,14 @@ export const paymentSlice = createSlice({
     [checkOrderStatus.pending]: (state) => {
       state.status = 'loading';
     },
+    [paySubscription.pending]: (state, action) => {
+      state.windowReference = window.open();
+    },
+    [paySubscription.rejected]: (state, action) => {
+      state.windowReference = null;
+    },
     [paySubscription.fulfilled]: (state, action) => {
-      window.open(action.payload.form_url);
+      state.windowReference.location = action.payload.form_url;
     },
     [unsubscribe.fulfilled]: (state, action) => {
       state.status = 'success';
