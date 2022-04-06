@@ -226,6 +226,7 @@ const Profile = () => {
                 <TextareaAutosize
                   disabled={!isInformationActive}
                   name="information"
+                  minRows={6}
                   aria-label="empty textarea"
                   value={(information && information) || ''}
                   onChange={handleChange}
