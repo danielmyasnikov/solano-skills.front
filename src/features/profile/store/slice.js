@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteAccount } from './actions';
+import { changePassword, deleteAccount } from './actions';
 
 export const profileSlice = createSlice({
   name: 'profileNew',
   initialState: {
     deleteStatus: 'idle',
+    changePasswordStatus: 'idle',
   },
   reducers: {},
   extraReducers: {
@@ -13,6 +14,12 @@ export const profileSlice = createSlice({
     },
     [deleteAccount.rejected]: (state, action) => {
       state.deleteStatus = 'failure';
+    },
+    [changePassword.fulfilled]: (state, action) => {
+      state.changePasswordStatus = 'success';
+    },
+    [changePassword.rejected]: (state, action) => {
+      state.changePasswordStatus = 'failure';
     },
   },
 });

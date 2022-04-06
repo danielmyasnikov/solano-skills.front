@@ -17,7 +17,7 @@ export const SettingsDeleteAccount = () => {
 
   const history = useHistory();
 
-  const status = useSelector(selectProfileNew);
+  const profile = useSelector(selectProfileNew);
 
   const handleAreement = () => {
     setIsChecked(!isChecked);
@@ -29,12 +29,12 @@ export const SettingsDeleteAccount = () => {
   };
 
   useEffect(() => {
-    if (status === 'success') {
+    if (profile.deleteStatus === 'success') {
       localStorage.clear();
       history.push('/');
-    } else if (status === 'failure') {
+    } else if (profile.deleteStatus === 'failure') {
     }
-  }, [status]);
+  }, [profile]);
 
   return (
     <div className={styles.deleteAccount}>
