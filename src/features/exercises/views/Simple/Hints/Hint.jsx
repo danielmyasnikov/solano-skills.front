@@ -59,7 +59,7 @@ export default function Hint() {
     );
   }
 
-  if (!completed && !!hintContent && type !== 'quiz') {
+  if (!completed && !!hintContent && (type !== 'quiz' || type !== 'quiz_with_script')) {
     return (
       <HintButton
         variant="outlinePurple"
