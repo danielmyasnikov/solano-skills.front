@@ -14,6 +14,7 @@ export const SettingsInputPassword = ({ placeholder, value, handleChange }) => {
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        autocomplete="off"
         type={(isShowValue && 'text') || 'password'}
       />
       <div onClick={() => setIsShowValue(!isShowValue)}>
