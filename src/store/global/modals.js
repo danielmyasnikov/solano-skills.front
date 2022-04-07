@@ -9,6 +9,7 @@ export const modalsSlice = createSlice({
     courseContentModal: false,
     pleasePayModal: false,
     unsubscribeModal: false,
+    resetProgresseModal: false,
   },
   reducers: {
     openFeedbackModal: (state) => {
@@ -16,6 +17,13 @@ export const modalsSlice = createSlice({
     },
     closeFeedbackModal: (state) => {
       state.feedbackModal = false;
+    },
+
+    openResetProgresseModal: (state) => {
+      state.resetProgresseModal = true;
+    },
+    closeResetProgresseModal: (state) => {
+      state.resetProgresseModal = false;
     },
 
     openSignUpModal: (state) => {
@@ -68,4 +76,6 @@ export const {
   closePleasePayModal,
   openUnsubscribeModal,
   closeUnsubscribeModal,
+  openResetProgresseModal,
+  closeResetProgresseModal,
 } = modalsSlice.actions;

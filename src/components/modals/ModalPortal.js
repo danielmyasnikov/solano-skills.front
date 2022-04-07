@@ -6,6 +6,7 @@ import {
   selectCourseContentModal,
   selectUnsubscribeModal,
   selectPleasePayModal,
+  selectResetProgresseModal,
 } from '@store/global/modals.selectors';
 import {
   closeCourseContentModal,
@@ -14,6 +15,7 @@ import {
   closeTariffsModal,
   closePleasePayModal,
   closeUnsubscribeModal,
+  closeResetProgresseModal,
 } from '@store/global/modals';
 
 import SignUpModal from './SignUpModal';
@@ -22,6 +24,7 @@ import FeedbackModal from './FeedbackModal';
 import CourseContentModal from './CourseContentModal';
 import { PleasePayModal } from '@components/modals/PleasePayModal';
 import UnsubscribeModal from './UnsubscribeModal';
+import ResetProgresseModal from './ResetProgressModal';
 
 export const ModalPortal = () => {
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ export const ModalPortal = () => {
   const courseContentModal = useSelector(selectCourseContentModal);
   const pleasePayModal = useSelector(selectPleasePayModal);
   const unsubscribeModal = useSelector(selectUnsubscribeModal);
+  const resetProgresseModal = useSelector(selectResetProgresseModal);
 
   return (
     <div id="modal-portal">
@@ -43,6 +47,9 @@ export const ModalPortal = () => {
       )}
       {unsubscribeModal && <UnsubscribeModal onClose={() => dispatch(closeUnsubscribeModal({}))} />}
       {pleasePayModal && <PleasePayModal onClose={() => dispatch(closePleasePayModal({}))} />}
+      {resetProgresseModal && (
+        <ResetProgresseModal onClose={() => dispatch(closeResetProgresseModal({}))} />
+      )}
     </div>
   );
 };

@@ -6,6 +6,8 @@ import {
   selectOrderIds,
   selectRootExercise,
 } from '@src/features/exercises/store/selectors';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Button } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
@@ -135,7 +137,13 @@ const SingleRanging = () => {
                             [styles.isIdent]: isIdent,
                           })}
                         >
-                          <p>{item.label}</p>
+                          <SyntaxHighlighter
+                            language="python"
+                            style={a11yLight}
+                            className={styles.highlighter}
+                          >
+                            {item.label}
+                          </SyntaxHighlighter>
                           <div className={styles.arrows}>
                             <span onClick={() => toggleSpacing(item.id)}>
                               <svg
@@ -161,17 +169,19 @@ const SingleRanging = () => {
                             </span>
                           </div>
                           {isDraggable ? (
-                            <svg
-                              aria-label="bars icon"
-                              fill="currentColor"
-                              height="16"
-                              role="Img"
-                              width="16"
-                              viewBox="0 0 18 18"
-                              style={{ opacity: 0.3 }}
-                            >
-                              <path d="M18 14.75v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 14h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53zm0-6v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 8h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53zm0-6v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 2h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53z" />
-                            </svg>
+                            !isIdent && (
+                              <svg
+                                aria-label="bars icon"
+                                fill="currentColor"
+                                height="16"
+                                role="Img"
+                                width="16"
+                                viewBox="0 0 18 18"
+                                style={{ opacity: 0.3 }}
+                              >
+                                <path d="M18 14.75v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 14h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53zm0-6v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 8h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53zm0-6v1.5c0 .2-.07.38-.22.53a.72.72 0 01-.53.22H.75a.72.72 0 01-.53-.22.72.72 0 01-.22-.53v-1.5c0-.2.07-.38.22-.53A.72.72 0 01.75 2h16.5c.2 0 .38.07.53.22.15.15.22.33.22.53z" />
+                              </svg>
+                            )
                           ) : (
                             <>
                               {item.isError ? (
