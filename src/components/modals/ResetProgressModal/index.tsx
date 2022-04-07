@@ -4,20 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Close from '@assets/Close';
 
+import { selectNewProgress } from '../../../features/courses/store/progress/selector';
+
 import styles from './styles.module.less';
 import { Button } from '@mui/material';
+import { useParams } from 'react-router';
+import { dropProgress } from '@src/features/courses/store/progress/actions';
 
 export interface ResetProgresseModalProps {
   onClose: () => void;
 }
 
 const ResetProgresseModal = ({ onClose }: ResetProgresseModalProps) => {
-  const [sendError, setSendError] = useState(false);
+  const { courseId } = useParams<{ courseId: string }>();
+
+  const progress = useSelector(selectNewProgress);
 
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    // dispatch();
+    dispatch(dropProgress(courseId));
   };
 
   return (
