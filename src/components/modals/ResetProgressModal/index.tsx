@@ -8,7 +8,7 @@ import { selectNewProgress } from '../../../features/courses/store/progress/sele
 
 import styles from './styles.module.less';
 import { Button } from '@mui/material';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { dropProgress } from '@src/features/courses/store/progress/actions';
 
 export interface ResetProgresseModalProps {
@@ -20,11 +20,22 @@ const ResetProgresseModal = ({ onClose }: ResetProgresseModalProps) => {
 
   const progress = useSelector(selectNewProgress);
 
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    dispatch(dropProgress(courseId));
+    const newCourseId = courseId.replaceAll('-', '_');
+    // @ts-ignore
+    dispatch(dropProgress(newCourseId));
+    onClose();
   };
+
+  useEffect(() => {
+    if (progress.progressStatus === 'success') {
+      history.push(`/courses/${courseId}`);
+    }
+  }, [progress]);
 
   return (
     <div className={styles.modal}>

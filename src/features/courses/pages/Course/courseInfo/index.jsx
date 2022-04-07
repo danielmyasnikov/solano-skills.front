@@ -5,7 +5,7 @@ import { Button, Skeleton } from '@mui/material';
 import { openResetProgresseModal } from '@store/global/modals';
 import { useDispatch } from 'react-redux';
 
-export const CourseInfo = ({ hours, videos, exercises, xps, onStartLearning }) => {
+export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning }) => {
   const dispatch = useDispatch();
 
   return (
@@ -46,7 +46,7 @@ export const CourseInfo = ({ hours, videos, exercises, xps, onStartLearning }) =
         >
           Начать обучение
         </Button>
-        <Button variant="outlinePurple" onClick={() => dispatch(openResetProgresseModal())}>
+        <Button variant="outlinePurple" onClick={() => dispatch(openResetProgresseModal(id))}>
           Сбросить прогресс
         </Button>
       </div>

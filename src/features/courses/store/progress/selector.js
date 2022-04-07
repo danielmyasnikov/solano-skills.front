@@ -1,1 +1,1 @@
-export const selectNewProgress = (state) => state.NewProgress;
+export const selectNewProgress = (state) => state.newProgress;

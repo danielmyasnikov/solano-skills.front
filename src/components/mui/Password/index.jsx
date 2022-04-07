@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { InputUnstyled } from '@mui/material';
+import InputUnstyled from '@mui/base/InputUnstyled';
 import styles from './styles.module.less';
 
 export const InputPassword = ({ value, handleChange, name, placeholder }) => {
