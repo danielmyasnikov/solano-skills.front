@@ -1,4 +1,4 @@
-import { InputUnstyled } from '@mui/material';
+import InputUnstyled from '@mui/base/InputUnstyled';
 import styles from './Input.module.less';
 
 export const Input = ({ value, handleChange, name, placeholder }) => (

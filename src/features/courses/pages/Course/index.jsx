@@ -42,6 +42,7 @@ export const CoursePage = () => {
             <Auth instructor={course?.instructor} />
           </div>
           <CourseInfo
+            id={course?.course_id}
             hours={course?.time}
             videos={course?.count_videos}
             exercises={course?.count_exercises}

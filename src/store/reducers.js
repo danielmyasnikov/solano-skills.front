@@ -16,6 +16,7 @@ import { tariffsApi } from '@src/features/payment/store/tariffs.api';
 import { skillApi } from '@src/features/skills/skills.api';
 import { professionApi } from '@src/features/professions/professions.api';
 import { profileSlice } from '../features/profile/store/slice';
+import { newProgressSlice } from '../features/courses/store/progress/slice';
 
 const rootReducer = combineReducers({
   global: globalReducers,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   feedback: feedbackReducer,
   tracks: tracksSlice.reducer,
   newProfile: profileSlice.reducer,
+  newProgress: newProgressSlice.reducer,
   [certificateApi.reducerPath]: certificateApi.reducer,
   [coursesApi.reducerPath]: coursesApi.reducer,
   [tariffsApi.reducerPath]: tariffsApi.reducer,

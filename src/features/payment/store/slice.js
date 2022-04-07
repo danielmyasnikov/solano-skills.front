@@ -24,12 +24,16 @@ export const paymentSlice = createSlice({
     },
     [paySubscription.pending]: (state, action) => {
       state.windowReference = window.open();
+      state.windowReference.document.body.innerHTML = 'loading...';
     },
     [paySubscription.rejected]: (state, action) => {
       state.windowReference = null;
     },
     [paySubscription.fulfilled]: (state, action) => {
-      state.windowReference.location = action.payload.form_url;
+      const win = state.windowReference;
+      setTimeout(() => {
+        win.location = action.payload.form_url;
+      }, 2000);
     },
     [unsubscribe.fulfilled]: (state, action) => {
       state.status = 'success';
