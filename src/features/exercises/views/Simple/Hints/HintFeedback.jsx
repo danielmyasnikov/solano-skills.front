@@ -11,6 +11,7 @@ import { Box, Button } from '@mui/material';
 
 import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { openFeedbackModal } from '@store/global/modals';
 
 const Root = styled(Box)`
   margin-top: 15px;
@@ -58,7 +59,7 @@ export default function HintFeedback() {
         <Button
           variant="outlineRed"
           onClick={() => {
-            dispatch(exercisesSlice.actions.openFeedbackModal({}));
+            dispatch(openFeedbackModal({}));
             dispatch(exerciseSlice.actions.useHintFeedback({}));
           }}
         >

@@ -40,7 +40,7 @@ const SidebarWrapper = styled(Box)`
   overflow-y: auto;
 `;
 
-export const Sidebar = ({ wrapperRef }) => {
+export const Sidebar = ({ wrapperRef, goNext }) => {
   const { open, headerFolded, instructionFolded } = useSelector(selectExerciseSidebar);
 
   return (
@@ -52,7 +52,7 @@ export const Sidebar = ({ wrapperRef }) => {
             <SidebarBody />
 
             <InstructionHeader />
-            <InstructionBody />
+            <InstructionBody goNext={goNext} />
 
             <Draggable
               resizeContainer={wrapperRef}
