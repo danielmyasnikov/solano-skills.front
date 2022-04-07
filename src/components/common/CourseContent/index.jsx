@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Success from './assets/success.svg';
 
 const ExerciseTypeImage = ({ type }) => {
   switch (type) {
@@ -48,8 +49,9 @@ const ListItem = ({ item, isActive, onClick }) => (
       <span className={styles.itemTitle}>{item.title}</span>
     </div>
     <div className={styles.openRight}>
-      <div className={styles.point} />
-      <span className={styles.itemTitle}>{item.xp}</span>
+      {item.status === 'untouched' && <div className={styles.point} />}
+      {item.status === 'done' && <img src={Success} alt="success" />}
+      <span className={`${styles.itemTitle} ${styles.itemTitleXP}`}>{item.xp}</span>
     </div>
   </div>
 );

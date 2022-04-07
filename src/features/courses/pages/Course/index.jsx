@@ -42,10 +42,12 @@ export const CoursePage = () => {
             <Auth instructor={course?.instructor} />
           </div>
           <CourseInfo
+            id={course?.course_id}
             hours={course?.time}
             videos={course?.count_videos}
             exercises={course?.count_exercises}
             xps={course?.count_xps}
+            status={course?.status}
             onStartLearning={isLoading ? undefined : startLearningHandler}
           />
         </div>
