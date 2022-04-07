@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { dropProgress } from './actions';
+import { dropProgress } from './actions.ts';
 
 export const newProgressSlice = createSlice({
   name: 'newProgress',

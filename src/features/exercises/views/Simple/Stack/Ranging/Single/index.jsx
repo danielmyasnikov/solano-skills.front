@@ -7,7 +7,7 @@ import {
   selectRootExercise,
 } from '@src/features/exercises/store/selectors';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { a11yLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Button } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
@@ -139,7 +139,7 @@ const SingleRanging = () => {
                         >
                           <SyntaxHighlighter
                             language="python"
-                            style={a11yLight}
+                            style={a11yDark}
                             className={styles.highlighter}
                           >
                             {item.label}

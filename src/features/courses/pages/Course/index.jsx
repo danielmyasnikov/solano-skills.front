@@ -47,6 +47,7 @@ export const CoursePage = () => {
             videos={course?.count_videos}
             exercises={course?.count_exercises}
             xps={course?.count_xps}
+            status={course?.status}
             onStartLearning={isLoading ? undefined : startLearningHandler}
           />
         </div>

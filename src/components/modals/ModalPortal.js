@@ -24,7 +24,7 @@ import FeedbackModal from './FeedbackModal';
 import CourseContentModal from './CourseContentModal';
 import { PleasePayModal } from '@components/modals/PleasePayModal';
 import UnsubscribeModal from './UnsubscribeModal';
-import ResetProgresseModal from './ResetProgressModal';
+import ResetProgressModal from './ResetProgressModal';
 
 export const ModalPortal = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ export const ModalPortal = () => {
       {unsubscribeModal && <UnsubscribeModal onClose={() => dispatch(closeUnsubscribeModal({}))} />}
       {pleasePayModal && <PleasePayModal onClose={() => dispatch(closePleasePayModal({}))} />}
       {resetProgresseModal && (
-        <ResetProgresseModal onClose={() => dispatch(closeResetProgresseModal({}))} />
+        <ResetProgressModal onClose={() => dispatch(closeResetProgresseModal({}))} />
       )}
     </div>
   );
