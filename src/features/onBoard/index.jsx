@@ -32,7 +32,6 @@ export const OnBoardPage = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const showModalHandler = () => {
-    console.log(checkedCourseList);
     dispatch(addTracks(checkedCourseList));
   };
 

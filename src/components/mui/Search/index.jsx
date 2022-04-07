@@ -1,4 +1,5 @@
-import { InputAdornment, InputUnstyled } from '@mui/material';
+import { InputAdornment } from '@mui/material';
+import InputUnstyled from '@mui/base/InputUnstyled';
 import SearchIcon from '@assets/Search';
 import styles from './styles.module.less';
 
