@@ -14,7 +14,7 @@ import './terminal.module.less';
 import Draggable from '@components/common/Draggable';
 
 import { selectKernelId, selectTerminal } from '@store/terminal/selector';
-import { checkAnswer, compileShell } from '@store/terminal/actions';
+import { checkAnswer, clearTerminal, compileShell } from '@store/terminal/actions';
 
 import Plots from '@assets/Plots';
 import GraphArrow from '@assets/GraphArrow';

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   selectCurrentExercise,
+  selectExerciseContext,
   selectExerciseSidebar,
   selectExerciseType,
   selectHint,
@@ -114,7 +115,7 @@ const QuizRadioButton = styled(RadioButton)`
   }
 `;
 
-export default function InstructionBody() {
+export default function InstructionBody({ goNext }) {
   const dispatch = useDispatch();
 
   const rootExercise = useSelector(selectRootExercise);
@@ -122,6 +123,7 @@ export default function InstructionBody() {
   const type = useSelector(selectExerciseType);
   const { instruction } = useSelector(selectCurrentExercise);
   const { instructionFolded } = useSelector(selectExerciseSidebar);
+  const { completed } = useSelector(selectExerciseContext);
   const quizVariants = useSelector(selectQuizVariants);
   const isAuth = useSelector(selectIsAuth);
 
@@ -132,14 +134,18 @@ export default function InstructionBody() {
   }
 
   function onAnswer() {
-    if (isAuth) {
-      if (rootExercise.is_free || !!profile.subscription_type) {
-        dispatch(exerciseSlice.actions.onQuizAnswer({}));
-      } else {
-        dispatch(openPleasePayModal());
-      }
+    if (completed) {
+      goNext();
     } else {
-      dispatch(openSignUpModal());
+      if (isAuth) {
+        if (rootExercise.is_free || !!profile.subscription_type) {
+          dispatch(exerciseSlice.actions.onQuizAnswer({}));
+        } else {
+          dispatch(openPleasePayModal());
+        }
+      } else {
+        dispatch(openSignUpModal());
+      }
     }
   }
 

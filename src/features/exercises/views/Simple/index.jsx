@@ -111,7 +111,7 @@ function Exercise({ goNext }) {
 
       <div className={cn(styles.layout, { [styles.folded]: !sidebarOpen })} ref={wrapperRef}>
         <div className={styles.content}>
-          <Sidebar wrapperRef={wrapperRef} />
+          <Sidebar wrapperRef={wrapperRef} goNext={goNext} />
           <ErrorMessage />
 
           <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
