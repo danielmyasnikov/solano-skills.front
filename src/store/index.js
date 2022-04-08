@@ -4,7 +4,7 @@ import sagas from './sagas.js';
 import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
 import { certificateApi } from '@src/features/certificates/certificates.api.js';
-import { coursesApi } from '@src/features/courses/courses.api';
+import { coursesApi } from '@src/features/courses/courses.api.ts';
 import { tariffsApi } from '@src/features/payment/store/tariffs.api';
 import { professionApi } from '@src/features/professions/professions.api';
 import { skillApi } from '@src/features/skills/skills.api';

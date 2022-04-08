@@ -1,7 +1,7 @@
 import styles from './styles.module.less';
 import { CourseContent } from '../../common/CourseContent';
 import { Modal } from '@mui/material';
-import { useGetCourseQuery } from '@src/features/courses/courses.api';
+import { useGetCourseQuery } from '@src/features/courses/courses.api.ts';
 import { useParams } from 'react-router';
 
 const CourseContentModal = ({ onClose }) => {

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { env } from '@src/app/config/index.ts';
+import { env } from '@src/app/config';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${env.api.platform}/api/v1/courses`,
@@ -31,13 +31,19 @@ export const coursesApi = createApi({
     getCourses: build.query({
       query: () => '',
       providesTags: (result, error, arg) =>
-        result ? [...result.map(({ id }) => ({ type: 'Course', id })), 'Course'] : ['Course'],
+        result
+          ? [...result.map(({ id }: { id: number }) => ({ type: 'Course', id })), 'Course']
+          : ['Course'],
     }),
     getCourse: build.query({
       query: (id) => `/${id}`,
       providesTags: (result, error, id) => [{ type: 'Course', id }],
     }),
+    refetchCourses: build.mutation<null, void>({
+      queryFn: () => ({ data: null }),
+      invalidatesTags: ['Course'],
+    }),
   }),
 });
 
-export const { useGetCoursesQuery, useGetCourseQuery } = coursesApi;
+export const { useGetCoursesQuery, useGetCourseQuery, useRefetchCoursesMutation } = coursesApi;

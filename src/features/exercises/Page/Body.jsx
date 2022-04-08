@@ -12,6 +12,10 @@ import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
+import {
+  useGetCoursesQuery,
+  useRefetchCoursesMutation,
+} from '@src/features/courses/courses.api.ts';
 
 const Root = styled(Box)`
   display: flex;
@@ -44,6 +48,8 @@ export default function ExercisePageBody() {
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
 
+  const [updateCourses] = useRefetchCoursesMutation();
+
   const profile = useSelector(selectProfile);
 
   const isAuth = useSelector(selectIsAuth);
@@ -53,6 +59,8 @@ export default function ExercisePageBody() {
   }
 
   const goNext = async () => {
+    updateCourses();
+
     switch (exercise?.certificate_status) {
       case 'ready':
         setShowCongratulationsModal(true);

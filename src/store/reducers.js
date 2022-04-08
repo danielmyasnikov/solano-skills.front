@@ -11,7 +11,7 @@ import { certificateApi } from '../features/certificates/certificates.api';
 import { globalReducers } from '@store/global';
 import { tracksSlice } from '../features/onBoard/store/slice';
 import { paymentSlice } from '@src/features/payment/store/slice';
-import { coursesApi } from '@src/features/courses/courses.api';
+import { coursesApi } from '@src/features/courses/courses.api.ts';
 import { tariffsApi } from '@src/features/payment/store/tariffs.api';
 import { skillApi } from '@src/features/skills/skills.api';
 import { professionApi } from '@src/features/professions/professions.api';

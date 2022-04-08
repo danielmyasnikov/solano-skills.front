@@ -127,6 +127,10 @@
   height: 100%;
   position: relative;
   min-width: 300px;
+
+  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 18px;
+  overflow: hidden;
 }
 
 .draggable {
@@ -140,13 +144,11 @@
   row-gap: 10px;
   column-gap: 15px;
   width: auto;
+  z-index: 100;
 
-  position: absolute;
-  right: 0;
   justify-content: flex-end;
   padding: 10px 15px 15px;
-  border-top-left-radius: 18px;
-  bottom: 0;
+
   button {
     min-height: 41px;
     display: flex;
