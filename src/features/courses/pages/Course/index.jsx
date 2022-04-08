@@ -5,7 +5,7 @@ import { CourseList } from './courseList';
 import { CourseSidebar } from './courseSidebar';
 
 import styles from './styles.module.less';
-import { useGetCourseQuery } from '@src/features/courses/courses.api';
+import { useGetCourseQuery, useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
 import { Skeleton } from '@mui/material';
 import { useEffect } from 'react';
 import { getProfile } from '@store/profile/actions';
@@ -17,12 +17,8 @@ export const CoursePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const {
-    data: course,
-    isLoading,
-    error,
-    refetch,
-  } = useGetCourseQuery(courseId, { refetchOnMountOrArgChange: true });
+  const [updateCourses] = useRefetchCoursesMutation();
+  const { data: course, isLoading } = useGetCourseQuery(courseId);
 
   const startLearningHandler = () => {
     history.push(`/courses/${course.slug}/exercises/${course.exercises[0].id}`);
@@ -33,7 +29,7 @@ export const CoursePage = () => {
     const client = localStorage.getItem('client');
     const accessToken = localStorage.getItem('access-token');
 
-    refetch();
+    updateCourses();
     dispatch(
       getProfile({
         headers: {
@@ -75,7 +71,6 @@ export const CoursePage = () => {
             xps={course?.count_xps}
             status={course?.status}
             onStartLearning={isLoading ? undefined : startLearningHandler}
-            refetch={refetch}
           />
         </div>
         <div className={styles.contentWrap}>
