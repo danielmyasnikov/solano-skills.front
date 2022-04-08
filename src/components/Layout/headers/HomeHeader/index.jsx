@@ -20,7 +20,7 @@ const HeaderHome = ({ handleBurger }) => {
             </Link>
           </div>
           <div className={styles.header__menu}>
-            <Link to="/learning">Обучение</Link>
+            <Link to="/courses">Обучение</Link>
             <Link to="/tariffs">Тарифы</Link>
             <span style={{ cursor: 'pointer' }} onClick={() => dispatch(openFeedbackModal({}))}>
               Поддержка

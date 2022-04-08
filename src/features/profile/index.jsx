@@ -18,6 +18,7 @@ import { numberDeclension } from '@components/common/helpers/numberDeclension';
 import { Preloader } from '@components/mui/Preloader';
 
 import { openUnsubscribeModal } from '@store/global/modals';
+import { Api } from '@src/api/api';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
@@ -37,6 +38,9 @@ const Profile = () => {
 
   const { headers } = useSelector(AuthStore.Selectors.getAuth);
   const profile = useSelector(selectProfile);
+
+  const [doneCourses, setDoneCourses] = useState([]);
+  const [inProgressCourses, setInProgressCourses] = useState([]);
 
   const saveProfile = () => {
     setIsFullnameActive(false);
@@ -90,6 +94,15 @@ const Profile = () => {
       </div>
     );
   };
+
+  useEffect(() => {
+    Api.get(`/api/v1/courses_done`).then((e) => {
+      setDoneCourses(e);
+    });
+    Api.get(`/api/v1/courses_progress`).then((e) => {
+      setInProgressCourses(e);
+    });
+  }, []);
 
   useEffect(() => {
     if (!isAuth) {
@@ -265,9 +278,12 @@ const Profile = () => {
           <Preloader size="60px" />
         </div>
       )}
-      <div className={styles.content}>
+      <div className={styles.content} style={{ display: 'flex', gap: '10px' }}>
         <div className={styles.courses}>
-          <Card data={profile.accomplished_courses} />
+          <Card data={inProgressCourses} title="Начатые курсы" />
+        </div>
+        <div className={styles.courses}>
+          <Card data={doneCourses} title="Завершенные курсы" />
         </div>
       </div>
     </div>

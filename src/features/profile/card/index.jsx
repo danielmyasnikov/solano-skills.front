@@ -6,7 +6,7 @@ import Python from '@assets/Python.png';
 import ArrowRight from '@assets/ArrowRight';
 import { Link } from 'react-router-dom';
 
-export const Card = ({ data }) => {
+export const Card = ({ data, title }) => {
   const history = useHistory();
 
   const renderImg = (type) => {
@@ -24,15 +24,17 @@ export const Card = ({ data }) => {
     <>
       <div className={cn(styles.card, styles.progress)}>
         <div className={styles.title}>
-          Завершенные курсы
-          <Link to="/">
+          {title}
+          {/*
+             <Link to="/">
             Все <ArrowRight />
           </Link>
+          */}
         </div>
         <div className={styles.items}>
-          {data?.map(({ title, slug }) => (
-            <div onClick={() => courseClickHandler(slug)} className={styles.item}>
-              {renderImg('python')} {title}
+          {data?.map((e) => (
+            <div onClick={() => courseClickHandler(e.slug)} className={styles.item}>
+              {renderImg('python')} {e.title || e.name}
             </div>
           ))}
         </div>

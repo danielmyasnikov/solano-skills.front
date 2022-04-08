@@ -121,9 +121,9 @@ export const HomePage = () => {
                   и направлениям в сфере Информационных технологий.
                 </div>
                 <div className={styles.offer__btnDiv}>
-                  <HashLink to="/#ways">
+                  <Link to="/courses">
                     <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
-                  </HashLink>
+                  </Link>
                 </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
