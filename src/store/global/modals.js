@@ -11,6 +11,7 @@ export const modalsSlice = createSlice({
     unsubscribeModal: false,
     resetProgresseModal: false,
     courseId: undefined,
+    refetchCourse: undefined,
   },
   reducers: {
     openFeedbackModal: (state) => {
@@ -21,7 +22,9 @@ export const modalsSlice = createSlice({
     },
 
     openResetProgresseModal: (state, action) => {
-      state.courseId = action.payload;
+      state.courseId = action.payload.id;
+      state.refetchCourse = action.payload.refetch;
+
       state.resetProgresseModal = true;
     },
     closeResetProgresseModal: (state) => {

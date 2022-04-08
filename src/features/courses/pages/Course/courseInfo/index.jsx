@@ -4,8 +4,18 @@ import styles from './styles.module.less';
 import { Button, Skeleton } from '@mui/material';
 import { openResetProgresseModal } from '@store/global/modals';
 import { useDispatch } from 'react-redux';
+import { getProfile } from '@store/profile/actions';
 
-export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning, status }) => {
+export const CourseInfo = ({
+  id,
+  hours,
+  videos,
+  exercises,
+  xps,
+  onStartLearning,
+  status,
+  refetch,
+}) => {
   const dispatch = useDispatch();
 
   return (
@@ -47,7 +57,10 @@ export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning,
           Начать обучение
         </Button>
         {status === 'in_progress' && (
-          <Button variant="outlinePurple" onClick={() => dispatch(openResetProgresseModal(id))}>
+          <Button
+            variant="outlinePurple"
+            onClick={() => dispatch(openResetProgresseModal({ id, refetch }))}
+          >
             Сбросить прогресс
           </Button>
         )}

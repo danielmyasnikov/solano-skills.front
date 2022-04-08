@@ -10,6 +10,8 @@ import styles from './styles.module.less';
 import { Button } from '@mui/material';
 import { useHistory, useParams } from 'react-router';
 import { dropProgress } from '@src/features/courses/store/progress/actions';
+import { getProfile } from '@store/profile/actions';
+import { useGetCourseQuery } from '@src/features/courses/courses.api';
 
 export interface ResetProgressModalProps {
   onClose: () => void;
@@ -19,6 +21,8 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
   const progress = useSelector(selectNewProgress);
   // @ts-ignore
   const courseId = useSelector(({ global }) => global.modals.courseId);
+  // @ts-ignore
+  const refetch = useSelector(({ global }) => global.modals.refetchCourse);
 
   const history = useHistory();
 
@@ -26,6 +30,22 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
 
   const handleSubmit = () => {
     dispatch(dropProgress(courseId));
+    refetch();
+
+    const uid = localStorage.getItem('uid');
+    const client = localStorage.getItem('client');
+    const accessToken = localStorage.getItem('access-token');
+
+    dispatch(
+      getProfile({
+        headers: {
+          uid,
+          client,
+          'access-token': accessToken,
+        },
+      }),
+    );
+
     onClose();
   };
 

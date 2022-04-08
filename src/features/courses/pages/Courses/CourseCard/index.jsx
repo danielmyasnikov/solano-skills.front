@@ -29,11 +29,11 @@ export const CourseCard = ({ info }) => {
           {difficulty && (
             <span className={cn(css.difficulty, css[difficulty])}>
               {difficulty === 'easy'
-                ? 'Легкий'
+                ? 'Начинающим'
                 : difficulty === 'medium'
-                ? 'Средний'
+                ? 'Продолжающим'
                 : difficulty === 'hard'
-                ? 'Тяжелый'
+                ? 'Экспертам'
                 : difficulty}
             </span>
           )}
