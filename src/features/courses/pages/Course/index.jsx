@@ -7,17 +7,43 @@ import { CourseSidebar } from './courseSidebar';
 import styles from './styles.module.less';
 import { useGetCourseQuery } from '@src/features/courses/courses.api';
 import { Skeleton } from '@mui/material';
+import { useEffect } from 'react';
+import { getProfile } from '@store/profile/actions';
+import { useDispatch } from 'react-redux';
 
 export const CoursePage = () => {
   const { courseId } = useParams();
 
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const { data: course, isLoading, error } = useGetCourseQuery(courseId);
+  const {
+    data: course,
+    isLoading,
+    error,
+    refetch,
+  } = useGetCourseQuery(courseId, { refetchOnMountOrArgChange: true });
 
   const startLearningHandler = () => {
     history.push(`/courses/${course.slug}/exercises/${course.exercises[0].id}`);
   };
+
+  useEffect(() => {
+    const uid = localStorage.getItem('uid');
+    const client = localStorage.getItem('client');
+    const accessToken = localStorage.getItem('access-token');
+
+    refetch();
+    dispatch(
+      getProfile({
+        headers: {
+          uid,
+          client,
+          'access-token': accessToken,
+        },
+      }),
+    );
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -49,6 +75,7 @@ export const CoursePage = () => {
             xps={course?.count_xps}
             status={course?.status}
             onStartLearning={isLoading ? undefined : startLearningHandler}
+            refetch={refetch}
           />
         </div>
         <div className={styles.contentWrap}>

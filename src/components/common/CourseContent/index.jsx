@@ -49,7 +49,9 @@ const ListItem = ({ item, isActive, onClick }) => (
       <span className={styles.itemTitle}>{item.title}</span>
     </div>
     <div className={styles.openRight}>
-      {item.status === 'untouched' && <div className={styles.point} />}
+      {(item.status === 'untouched' || item.status === 'in_progress') && (
+        <div className={styles.point} />
+      )}
       {item.status === 'done' && <img src={Success} alt="success" />}
       <span className={`${styles.itemTitle} ${styles.itemTitleXP}`}>{item.xp}</span>
     </div>

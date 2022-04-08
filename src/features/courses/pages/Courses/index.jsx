@@ -16,6 +16,7 @@ import { useGetCoursesQuery } from '@src/features/courses/courses.api';
 import { useLocation } from 'react-router-dom';
 import { PaymentErrorModal } from '@src/features/payment/PaymentErrorModal';
 import { Grid } from '@mui/material';
+import { getProfile } from '@store/profile/actions';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,22 @@ export const CoursesPage = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const paymentStatus = query.get('paymentStatus');
+
+  useEffect(() => {
+    const uid = localStorage.getItem('uid');
+    const client = localStorage.getItem('client');
+    const accessToken = localStorage.getItem('access-token');
+
+    dispatch(
+      getProfile({
+        headers: {
+          uid,
+          client,
+          'access-token': accessToken,
+        },
+      }),
+    );
+  }, []);
 
   useEffect(() => {
     if (isAuth) {
