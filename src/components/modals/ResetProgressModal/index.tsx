@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,10 +8,10 @@ import { selectNewProgress } from '@src/features/courses/store/progress/selector
 
 import styles from './styles.module.less';
 import { Button } from '@mui/material';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import { dropProgress } from '@src/features/courses/store/progress/actions';
 import { getProfile } from '@store/profile/actions';
-import { useGetCourseQuery } from '@src/features/courses/courses.api';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api';
 
 export interface ResetProgressModalProps {
   onClose: () => void;
@@ -21,8 +21,7 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
   const progress = useSelector(selectNewProgress);
   // @ts-ignore
   const courseId = useSelector(({ global }) => global.modals.courseId);
-  // @ts-ignore
-  const refetch = useSelector(({ global }) => global.modals.refetchCourse);
+  const [updateCourses] = useRefetchCoursesMutation();
 
   const history = useHistory();
 
@@ -30,7 +29,6 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
 
   const handleSubmit = () => {
     dispatch(dropProgress(courseId));
-    refetch();
 
     const uid = localStorage.getItem('uid');
     const client = localStorage.getItem('client');
@@ -46,6 +44,7 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
       }),
     );
 
+    updateCourses();
     onClose();
   };
 

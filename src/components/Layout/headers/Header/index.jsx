@@ -22,7 +22,7 @@ import { openFeedbackModal, openTariffsModal } from '@store/global/modals';
 import { Button, ClickAwayListener } from '@mui/material';
 import Search from '@components/mui/Search';
 import SearchBox from '@components/Layout/headers/Header/SearchBox';
-import { useGetCoursesQuery } from '@src/features/courses/courses.api';
+import { useGetCoursesQuery } from '@src/features/courses/courses.api.ts';
 
 const Header = ({ headerRef }) => {
   const dispatch = useDispatch();

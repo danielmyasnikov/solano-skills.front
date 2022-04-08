@@ -12,7 +12,7 @@ import CourseLogo from './assets/CourseLogo.svg';
 
 import styles from './styles.module.less';
 import { selectIsAuth } from '@store/profile/selector';
-import { useGetCoursesQuery } from '@src/features/courses/courses.api';
+import { useGetCoursesQuery } from '@src/features/courses/courses.api.ts';
 import { useLocation } from 'react-router-dom';
 import { PaymentErrorModal } from '@src/features/payment/PaymentErrorModal';
 import { Grid } from '@mui/material';

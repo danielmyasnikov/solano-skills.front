@@ -18,12 +18,15 @@ import { selectRootExercise } from '@src/features/exercises/store/selectors';
 import { toggleSidebar } from '@store/global/layout';
 import { openCourseContentModal, openFeedbackModal } from '@store/global/modals';
 import { Button } from '@mui/material';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
 
 const HeaderExercise = ({ headerRef }) => {
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
+
+  const [updateCourses] = useRefetchCoursesMutation();
 
   const profile = useSelector(selectProfile);
 
@@ -45,6 +48,7 @@ const HeaderExercise = ({ headerRef }) => {
             onClick={() => {
               history.push(`/courses/${courseId}/exercises/${exercise?.prev_exercise_id}`);
               dispatch(getExerciseById({ courseId, exerciseId: exercise?.prev_exercise_id }));
+              updateCourses();
             }}
           >
             <Prev />
@@ -61,6 +65,7 @@ const HeaderExercise = ({ headerRef }) => {
             onClick={() => {
               history.push(`/courses/${courseId}/exercises/${exercise?.next_exercise_id}`);
               dispatch(getExerciseById({ courseId, exerciseId: exercise?.next_exercise_id }));
+              updateCourses();
             }}
             disabled={!exercise?.next_exercise_id}
             className={cn(styles.btn, styles.next, {

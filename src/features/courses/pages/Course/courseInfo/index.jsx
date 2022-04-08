@@ -6,16 +6,7 @@ import { openResetProgresseModal } from '@store/global/modals';
 import { useDispatch } from 'react-redux';
 import { getProfile } from '@store/profile/actions';
 
-export const CourseInfo = ({
-  id,
-  hours,
-  videos,
-  exercises,
-  xps,
-  onStartLearning,
-  status,
-  refetch,
-}) => {
+export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning, status }) => {
   const dispatch = useDispatch();
 
   return (
@@ -57,10 +48,7 @@ export const CourseInfo = ({
           Начать обучение
         </Button>
         {status === 'in_progress' && (
-          <Button
-            variant="outlinePurple"
-            onClick={() => dispatch(openResetProgresseModal({ id, refetch }))}
-          >
+          <Button variant="outlinePurple" onClick={() => dispatch(openResetProgresseModal({ id }))}>
             Сбросить прогресс
           </Button>
         )}
