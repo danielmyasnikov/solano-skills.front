@@ -11,13 +11,9 @@ import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
-import Draggable from '@components/common/Draggable';
-
 import { selectKernelId, selectTerminal } from '@store/terminal/selector';
-import { checkAnswer, clearTerminal, compileShell } from '@store/terminal/actions';
+import { checkAnswer, compileShell } from '@store/terminal/actions';
 
-import Plots from '@assets/Plots';
-import GraphArrow from '@assets/GraphArrow';
 import Reset from '@assets/Reset';
 
 import { styled } from '@mui/material/styles';
@@ -32,7 +28,6 @@ import {
   selectSolutionHint,
 } from '@src/features/exercises/store/selectors';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 import VertDraggable from '@components/common/VertDraggable';
 
@@ -109,8 +104,6 @@ const Terminal = () => {
   const rootExercise = useSelector(selectRootExercise);
   const profile = useSelector(selectProfile);
 
-  const [bytePayload, setBytePayload] = useState([]);
-  const [activeBytePayload, setActiveBytePayload] = useState(0);
   const isDisabled = !kernelId;
 
   const [activeTab, setActiveTab] = useState('script');
@@ -127,26 +120,6 @@ const Terminal = () => {
     dispatch(exerciseSlice.actions.updateCode(val));
   }
 
-  const handleActiveBytePayload = (action) => {
-    if (action === 'add' && activeBytePayload < bytePayload.length - 1) {
-      setActiveBytePayload(activeBytePayload + 1);
-    }
-    if (action === 'sub' && activeBytePayload > 0) {
-      setActiveBytePayload(activeBytePayload - 1);
-    }
-  };
-
-  const openNewWindow = () => {
-    const image = new Image();
-    image.src = bytePayload[activeBytePayload]?.payload;
-    const w = window.open('');
-    w.document.write(image.outerHTML);
-  };
-
-  useEffect(() => {
-    setActiveBytePayload(bytePayload.length - 1);
-  }, [bytePayload]);
-
   useEffect(() => {
     if (terminal.message.status === 'success') {
       dispatch(exerciseSlice.actions.onComplete(undefined));
@@ -154,10 +127,6 @@ const Terminal = () => {
 
     if (terminal.message.error) {
       dispatch(exerciseSlice.actions.onError(terminal.message.error));
-    }
-
-    if (terminal.bytePayload) {
-      setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
     }
   }, [terminal]);
 
@@ -191,13 +160,7 @@ const Terminal = () => {
   };
 
   return (
-    <div
-      ref={rootRef}
-      className={cn(styles.terminalContainer, {
-        [styles.terminalWithGraph]: exercise?.is_graph_required && bytePayload.length > 0,
-        [styles.terminalFullWidth]: exercise?.is_graph_required,
-      })}
-    >
+    <div ref={rootRef} className={styles.terminalContainer}>
       {((completed && !exercise?.is_graph_required) || isDisabled) && (
         <Placeholder>
           {isDisabled && <LoadingText>Загрузка</LoadingText>}
@@ -305,53 +268,18 @@ const Terminal = () => {
             )}
           </div>
         </div>
-        {exercise?.is_graph_required && bytePayload.length > 0 && (
-          <div className={styles.resize}>
-            <Draggable
-              resizeContainer={wrapperRef}
-              parentContainer={wrapperRef}
-              className={styles.draggable}
-            />
-          </div>
-        )}
+        {/*
+          exercise?.is_graph_required && bytePayload.length > 0 && (
+            <div className={styles.resize}>
+              <Draggable
+                resizeContainer={wrapperRef}
+                parentContainer={wrapperRef}
+                className={styles.draggable}
+              />
+            </div>
+          )
+        */}
       </div>
-      {exercise?.is_graph_required && bytePayload.length > 0 && (
-        <div className={styles.bytePayload}>
-          <div className={styles.terminalHeader}>
-            <div className={cn(styles.tabActive, styles.tab)}>
-              Графики
-              <a onClick={() => openNewWindow()} target="_blank">
-                <Plots />
-              </a>
-            </div>
-          </div>
-          <div className={styles.content}>
-            <div className={styles.graph}>
-              <img src={bytePayload[activeBytePayload]?.payload} />
-            </div>
-            <div className={styles.btnWrap}>
-              <button
-                className={cn({ [styles.disable]: activeBytePayload === 0 })}
-                onClick={() => handleActiveBytePayload('sub')}
-              >
-                <GraphArrow />
-                Назад
-              </button>
-              <div className={styles.count}>
-                {activeBytePayload + 1}
-                <span className={styles.disable}>/{bytePayload.length}</span>
-              </div>
-              <button
-                className={cn({ [styles.disable]: activeBytePayload === bytePayload.length - 1 })}
-                onClick={() => handleActiveBytePayload('add')}
-              >
-                Вперед
-                <GraphArrow />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       <VertDraggable parentContainer={rootRef} resizeContainer={wrapperRef} />
     </div>
   );

@@ -15,6 +15,8 @@ import cn from 'classnames';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { selectCurrentExercise, selectRootExercise } from '@src/features/exercises/store/selectors';
+import { Plot } from '@src/features/exercises/views/Simple/Stack/Plot';
+import Plots from '@assets/Plots';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -112,46 +114,13 @@ const Output = ({ variant }) => {
   }, [rootExercise, exercise, terminal.kernelId]);
 
   useEffect(() => {
+    if (terminal.bytePayload) {
+      setActiveTab('plots');
+    }
     if (outputRef && terminal.outputs) {
       outputRef?.current?.scroll({ top: outputRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [terminal]);
-
-  function renderContent() {
-    switch (activeTab) {
-      case 'output':
-        return (
-          <div ref={outputRef} className={styles.content}>
-            {terminal.outputs.map((item, i) => {
-              if (!item || (!item.output && !item.error)) {
-                return null;
-              }
-
-              return (
-                <div
-                  key={i}
-                  className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
-                  dangerouslySetInnerHTML={{ __html: item.error || item.output }}
-                />
-              );
-            })}
-            <div className={styles.shell}>
-              <span>In [{lineNumber}]:</span>
-              <input
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                type="text"
-                onKeyDown={onSubmit}
-              />
-            </div>
-          </div>
-        );
-      case 'slides':
-        return <PDFViewer src={exercise?.presentation_url} />;
-      default:
-        return undefined;
-    }
-  }
 
   return (
     <div
@@ -178,6 +147,14 @@ const Output = ({ variant }) => {
         >
           Слайды
         </div>
+        {exercise.is_graph_required && (
+          <div
+            onClick={() => setActiveTab('plots')}
+            className={cn({ [styles.tabActive]: activeTab === 'plots' }, styles.tab)}
+          >
+            Графики
+          </div>
+        )}
 
         <FolderIcon onClick={() => setFolded(!folded)}>
           <Separator />
@@ -212,7 +189,37 @@ const Output = ({ variant }) => {
           }}
         >
           {!terminal.kernelId && <Placeholder />}
-          {renderContent()}
+          <div
+            ref={outputRef}
+            className={cn(styles.content, { [styles.hide]: activeTab !== 'output' })}
+          >
+            {terminal.outputs.map((item, i) => {
+              if (!item || (!item.output && !item.error)) {
+                return null;
+              }
+
+              return (
+                <div
+                  key={i}
+                  className={cn(styles.terminalLine, { [styles.shell]: item.status === 'shell' })}
+                  dangerouslySetInnerHTML={{ __html: item.error || item.output }}
+                />
+              );
+            })}
+            <div className={styles.shell}>
+              <span>In [{lineNumber}]:</span>
+              <input
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                type="text"
+                onKeyDown={onSubmit}
+              />
+            </div>
+          </div>
+
+          <PDFViewer src={exercise?.presentation_url} hide={activeTab !== 'slides'} />
+
+          <Plot hide={activeTab !== 'plots'} />
         </div>
       )}
     </div>

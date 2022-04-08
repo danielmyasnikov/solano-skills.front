@@ -34,80 +34,10 @@
   pointer-events: none;
 }
 
-.bytePayload {
-  position: relative;
-  margin-left: 20px;
-  flex: 1 1;
-  width: calc(50% - 10px);
-  border-radius: 18px;
-  background: var(--color-white);
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.04);
-  .terminalHeader {
-    .tab {
-      position: relative;
-      padding-right: 49px;
-      svg {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-  }
-  img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    max-width: 400px;
-    object-fit: contain;
-  }
-}
-
 .content {
   position: relative;
   width: 100%;
   height: calc(100% - 40px);
-}
-
-.graph {
-  position: relative;
-  width: 100%;
-  height: calc(100% - 50px);
-}
-
-.btnWrap {
-  display: flex;
-  justify-content: space-between;
-  button {
-    cursor: pointer;
-    font-family: Jost;
-    font-weight: 600;
-    font-size: 16px;
-    border: none;
-    background: none;
-    margin: 0 20px;
-    &:first-child {
-      svg {
-        margin-right: 10px;
-      }
-    }
-    &:last-child {
-      svg {
-        margin-left: 10px;
-        transform: rotate(-180deg);
-      }
-    }
-  }
-  .count {
-    font-family: Jost;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-  }
 }
 
 .disable {
@@ -203,21 +133,6 @@
 }
 
 @media screen and (max-width: 1366px) {
-  .terminalWithGraph {
-    flex-direction: column;
-    gap: 5px;
-
-    .terminalWrapper {
-      width: 100%;
-      height: calc(65% - 45px);
-    }
-
-    .bytePayload {
-      width: 100%;
-      margin-left: 0;
-    }
-  }
-
   .draggable {
     display: none;
   }
@@ -239,23 +154,6 @@
       }
       &:not(:first-child) {
         margin-top: 10px;
-      }
-    }
-  }
-  .terminalWithGraph {
-    height: auto;
-    .terminalWrapper {
-      width: 100%;
-    }
-    .bytePayload {
-      width: 100%;
-      margin-top: 35px;
-      img {
-        position: static;
-        transform: none;
-      }
-      .btnWrap {
-        padding: 20px 0;
       }
     }
   }
