@@ -1,9 +1,9 @@
 import { all, spawn } from 'redux-saga/effects';
-import terminalSaga from './terminal/sagas';
 import profileSaga from './profile/sagas';
 
 import authSaga from './auth/sagas';
-import bashShellSaga from './bashShell/sagas';
+import terminalSaga from '@src/features/exercises/terminal/sagas';
+import bashShellSaga from '@src/features/exercises/bash/sagas';
 import progressSaga from './progress/sagas';
 import feedbackSaga from './feedback/sagas';
 

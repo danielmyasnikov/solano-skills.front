@@ -12,10 +12,7 @@ import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
-import {
-  useGetCoursesQuery,
-  useRefetchCoursesMutation,
-} from '@src/features/courses/courses.api.ts';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
 
 const Root = styled(Box)`
   display: flex;

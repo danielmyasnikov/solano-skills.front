@@ -11,8 +11,8 @@ import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
-import { selectKernelId, selectTerminal } from '@store/terminal/selector';
-import { checkAnswer, compileShell } from '@store/terminal/actions';
+import { selectKernelId, selectTerminal } from '../../../../terminal/selector';
+import { checkAnswer, compileShell } from '../../../../terminal/actions';
 
 import Reset from '@assets/Reset';
 

@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clearTerminal } from '@store/terminal/actions';
-import { clearBashShell } from '@store/bashShell/actions';
+import { clearTerminal } from '../terminal/actions';
+import { clearBashShell } from '../bash/actions';
 
 import { getExerciseById } from '@src/features/exercises/store/actions';
 import { styled } from '@mui/material/styles';

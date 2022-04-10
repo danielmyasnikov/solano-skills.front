@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import terminalReducer from './terminal/reducer';
+import terminalReducer from '@src/features/exercises/terminal/reducer';
+import bashShellReducer from '@src/features/exercises/bash/reducer';
 import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
-import bashShellReducer from './bashShell/reducer';
 import progressReducer from './progress/reducer';
 import feedbackReducer from './feedback/reducer';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';

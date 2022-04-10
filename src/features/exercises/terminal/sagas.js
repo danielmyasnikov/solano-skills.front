@@ -1,5 +1,10 @@
 import { call, takeLeading, put } from 'redux-saga/effects';
-import { compileCodeApi, checkAnswerApi, compileShellApi, startKernelApi } from '../api/terminal';
+import {
+  compileCodeApi,
+  checkAnswerApi,
+  compileShellApi,
+  startKernelApi,
+} from '@store/api/terminal';
 import {
   CLEAR_TERMINAL,
   COMPILE_CODE_REQUESTED,

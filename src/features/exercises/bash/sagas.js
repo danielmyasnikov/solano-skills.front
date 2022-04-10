@@ -3,7 +3,7 @@ import {
   executeBashShellApi,
   startEnvironmentApi,
   checkExerciseBashShellApi,
-} from '../api/bashShell';
+} from '@store/api/bashShell';
 import {
   CHECK_EXERCISE_BASH_SHELL_REQUESTED,
   CHECK_EXERCISE_BASH_SHELL_SUCCESSED,

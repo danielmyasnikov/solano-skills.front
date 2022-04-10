@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import styles from './styles.module.less';
 import { Sidebar } from '@src/features/exercises/views/Simple/Sidebar';
-import { selectKernelId } from '@store/terminal/selector';
+import { selectKernelId } from '../../terminal/selector';
 import ErrorMessage from '@src/features/exercises/views/Simple/ErrorMessage';
 import CompletedTaskModal from '@src/features/exercises/views/Simple/CompletedTaskModal';
 

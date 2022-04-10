@@ -6,8 +6,8 @@ import {
   startEnvironment,
   checkExerciseBashShell,
   executeBashShell,
-} from '@store/bashShell/actions';
-import { selectBashShell } from '@store/bashShell/selector';
+} from '../../../../bash/actions';
+import { selectBashShell } from '../../../../bash/selector';
 import { selectProfile } from '@store/profile/selector';
 import { selectExerciseId } from '@src/features/exercises/store/selectors';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';

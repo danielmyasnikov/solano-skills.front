@@ -2,8 +2,8 @@ import { useRef, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { compileShell, startKernel } from '@store/terminal/actions';
-import { selectTerminal } from '@store/terminal/selector';
+import { compileShell, startKernel } from '../../../../terminal/actions';
+import { selectTerminal } from '../../../../terminal/selector';
 
 import { PDFViewer } from '@components/common/pdfViewer';
 
@@ -16,7 +16,6 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { selectCurrentExercise, selectRootExercise } from '@src/features/exercises/store/selectors';
 import { Plot } from '@src/features/exercises/views/Simple/Stack/Plot';
-import Plots from '@assets/Plots';
 
 const Placeholder = styled(Box)`
   position: absolute;
