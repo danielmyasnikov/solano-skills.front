@@ -5,7 +5,7 @@ COPY . ./
 ENV REACT_APP_API_TERMINAL=https://deepskills.ru
 ENV REACT_APP_API_COURSE=https://dev.deepskills.ru
 #ENV REACT_APP_SEO_YM_ID=88095091
-RUN npm  install
+RUN npm  install --force
 RUN npm run build 
 
 FROM nginx:latest
