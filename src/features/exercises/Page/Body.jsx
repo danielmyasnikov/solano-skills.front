@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Exercise from '@src/features/exercises/views/Simple';
+import Exercise from '@src/features/exercises/views/Exercise';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
@@ -23,10 +23,7 @@ const Root = styled(Box)`
   width: 100%;
   overflow: hidden;
 
-  padding-top: 30px;
-  padding-bottom: 50px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 30px 24px 50px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;

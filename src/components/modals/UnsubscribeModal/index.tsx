@@ -19,10 +19,6 @@ const UnsubscribeModal = ({ onClose }: UnsubscribeModalProps) => {
   const [sendError, setSendError] = useState(false);
   const [endSubscribeDate, setEndSubscribeDate] = useState('');
 
-  const uid = localStorage.getItem('uid');
-  const client = localStorage.getItem('client');
-  const accessToken = localStorage.getItem('access-token');
-
   const status = useSelector(selectPaymentStatus);
   const profile = useSelector(selectProfile);
 
@@ -43,15 +39,7 @@ const UnsubscribeModal = ({ onClose }: UnsubscribeModalProps) => {
 
   useEffect(() => {
     if (status === 'success') {
-      dispatch(
-        getProfile({
-          headers: {
-            uid,
-            client,
-            'access-token': accessToken,
-          },
-        }),
-      );
+      dispatch(getProfile());
       setSendError(true);
     } else if (status === 'failure') {
       setSendError(false);

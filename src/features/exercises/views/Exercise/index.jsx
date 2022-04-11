@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
-import { Sidebar } from '@src/features/exercises/views/Simple/Sidebar';
+import { Sidebar } from '@src/features/exercises/views/Exercise/Sidebar';
 import { selectKernelId } from '../../store/selectors/terminal.selector';
-import ErrorMessage from '@src/features/exercises/views/Simple/ErrorMessage';
-import CompletedTaskModal from '@src/features/exercises/views/Simple/CompletedTaskModal';
+import ErrorMessage from '@src/features/exercises/views/Exercise/ErrorMessage';
+import CompletedTaskModal from '@src/features/exercises/views/Exercise/CompletedTaskModal';
 
 import Stack from './Stack';
-import WarningMobile from '@src/features/exercises/views/Simple/WarningMobile';
-import Hint from '@src/features/exercises/views/Simple/Hints/Hint';
-import HintFeedback from '@src/features/exercises/views/Simple/Hints/HintFeedback';
-import SolutionHint from '@src/features/exercises/views/Simple/Hints/SolutionHint';
+import WarningMobile from '@src/features/exercises/views/Exercise/WarningMobile';
+import Hint from '@src/features/exercises/views/Exercise/Hints/Hint';
+import HintFeedback from '@src/features/exercises/views/Exercise/Hints/HintFeedback';
+import SolutionHint from '@src/features/exercises/views/Exercise/Hints/SolutionHint';
 import {
   selectExerciseSidebar,
   selectRootExercise,
@@ -53,6 +53,14 @@ function Exercise({ goNext }) {
   const { completed, exercise, xp, code } = useSelector(selectExerciseContext);
   const { used: hintUsed } = useSelector(selectHint);
 
+  async function sendXp() {
+    await dispatch(
+      sendAnswer({ exerciseId: exercise.slug, courseId: exercise.course_slug, xp }),
+    ).then(() => {
+      dispatch(getProfile());
+    });
+  }
+
   async function setStep(step) {
     if (step !== active) {
       let value = nested_exercises[step - 1];
@@ -74,6 +82,7 @@ function Exercise({ goNext }) {
         if (active <= total) {
           if (active > totalDone) {
             dispatch(exercisesSlice.actions.onStepComplete({ xp }));
+
             if (active < total) {
               setStep(active + 1);
             }
@@ -81,23 +90,7 @@ function Exercise({ goNext }) {
         }
       }
 
-      dispatch(sendAnswer({ exerciseId: exercise.slug, courseId: exercise.course_slug, xp })).then(
-        () => {
-          const uid = localStorage.getItem('uid');
-          const client = localStorage.getItem('client');
-          const accessToken = localStorage.getItem('access-token');
-
-          dispatch(
-            getProfile({
-              headers: {
-                uid,
-                client,
-                'access-token': accessToken,
-              },
-            }),
-          );
-        },
-      );
+      sendXp();
     }
   }, [completed]);
 

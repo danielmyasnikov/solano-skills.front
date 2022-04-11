@@ -31,19 +31,7 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
     if (courseId) {
       dispatch(dropProgress(courseId));
 
-      const uid = localStorage.getItem('uid');
-      const client = localStorage.getItem('client');
-      const accessToken = localStorage.getItem('access-token');
-
-      dispatch(
-        getProfile({
-          headers: {
-            uid,
-            client,
-            'access-token': accessToken,
-          },
-        }),
-      );
+      dispatch(getProfile());
 
       updateCourses();
       onClose();

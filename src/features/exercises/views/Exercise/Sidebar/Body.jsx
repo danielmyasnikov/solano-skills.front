@@ -82,7 +82,7 @@ export default function SidebarBody() {
   return (
     <Content>
       <h1>{title || 'Заголовок не задан'}</h1>
-      <div dangerouslySetInnerHTML={{ __html: description }}></div>
+      <div dangerouslySetInnerHTML={{ __html: description }} />
     </Content>
   );
 }

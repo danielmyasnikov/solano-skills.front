@@ -16,7 +16,7 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { selectCurrentExercise } from '@src/features/exercises/store/selectors/exercise.selectors';
-import { Plot } from '@src/features/exercises/views/Simple/Stack/Plot';
+import { Plot } from '@src/features/exercises/views/Exercise/Stack/Plot';
 
 const Placeholder = styled(Box)`
   position: absolute;

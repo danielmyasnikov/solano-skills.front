@@ -10,7 +10,7 @@ import Terminal from './Terminal';
 
 import Output from './Output';
 import SingleRanging from './Ranging/Single';
-import MultipleRanging from '@src/features/exercises/views/Simple/Stack/Ranging/Multiple';
+import MultipleRanging from '@src/features/exercises/views/Exercise/Stack/Ranging/Multiple';
 
 const Root = styled(Box)`
   flex-direction: column;
