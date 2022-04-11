@@ -13,12 +13,12 @@ import MenuCourse from '@assets/MenuCourse';
 import cn from 'classnames';
 
 import styles from './styles.module.less';
-import { getExerciseById } from '@src/features/exercises/store/actions';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { getExerciseById } from '@src/features/exercises/store/actions/exercises.actions';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { toggleSidebar } from '@store/global/layout';
 import { openCourseContentModal, openFeedbackModal } from '@store/global/modals';
 import { Button } from '@mui/material';
-import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api';
 
 const HeaderExercise = ({ headerRef }) => {
   const dispatch = useDispatch();

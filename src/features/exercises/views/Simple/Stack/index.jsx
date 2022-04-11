@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
-import { selectStackType, selectExerciseType } from '../../../store/selectors';
+import { selectStackType, selectExerciseType } from '../../../store/selectors/exercise.selectors';
 
 import UnixShell from './UnixShell';
 import Terminal from './Terminal';

@@ -6,10 +6,13 @@ import {
   startEnvironment,
   checkExerciseBashShell,
   executeBashShell,
-} from '@store/bashShell/actions';
-import { selectBashShell } from '@store/bashShell/selector';
+} from '../../../../store/actions/bash.actions';
+import { selectBashShell } from '../../../../store/selectors/bash.selector';
 import { selectProfile } from '@store/profile/selector';
-import { selectExerciseId } from '@src/features/exercises/store/selectors';
+import {
+  selectExerciseId,
+  selectExerciseType,
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 
 const UnixShell = () => {
@@ -21,9 +24,12 @@ const UnixShell = () => {
   const { user_id } = useSelector(selectProfile);
   const bashShell = useSelector(selectBashShell);
   const exerciseId = useSelector(selectExerciseId);
+  const type = useSelector(selectExerciseType);
 
   const [activeTab, setActiveTab] = useState('terminal');
-  const [value, setValue] = useState(`<span class="${cn(styles.caret, styles.caretEnd)}"></span>`);
+  const [value, setValue] = useState(
+    `<span class="${cn(styles.caret, styles.caretEnd)}">&nbsp</span>`,
+  );
 
   const handleCaretPos = ({ direction }) => {
     const { selectionStart, value } = inputRef.current;
@@ -33,7 +39,6 @@ const UnixShell = () => {
     let maxSymbolsCountInRow = contentRef.current.offsetWidth / 9.61;
     const diff = 1;
     if (direction === 'left') {
-      console.log(selectionStart);
       left = value.substring(0, selectionStart - 1);
       center = value.substring(selectionStart - 1, selectionStart);
       right = value.substring(selectionStart, value.length);
@@ -133,15 +138,18 @@ const UnixShell = () => {
           environmentId: bashShell.environmentId,
           command: inputRef.current.value,
         }),
-      );
-      dispatch(
-        checkExerciseBashShell({
-          environmentId: bashShell.environmentId,
-          exerciseId: exerciseId,
-          userId: user_id,
-          command: inputRef.current.value,
-        }),
-      );
+      ).then(() => {
+        if (type !== 'quiz' && type !== 'quiz_with_script') {
+          dispatch(
+            checkExerciseBashShell({
+              environmentId: bashShell.environmentId,
+              exerciseId: exerciseId,
+              userId: user_id,
+              command: inputRef.current.value,
+            }),
+          );
+        }
+      });
       setValue('');
       inputRef.current.value = '';
     }
@@ -149,6 +157,7 @@ const UnixShell = () => {
 
   useEffect(() => {
     dispatch(startEnvironment());
+    inputRef.current?.focus();
   }, []);
 
   useEffect(() => {

@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  selectExerciseSidebar,
+  selectRootExercise,
+} from '@src/features/exercises/store/selectors/exercises.selectors';
+import {
   selectCurrentExercise,
   selectExerciseContext,
-  selectExerciseSidebar,
   selectExerciseType,
   selectHint,
   selectQuizVariants,
-  selectRootExercise,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';

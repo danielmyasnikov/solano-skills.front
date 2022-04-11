@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getExerciseById } from '@src/features/exercises/store/actions';
+import { getExerciseById } from '../actions/exercises.actions';
 
 export const exerciseSlice = createSlice({
   name: 'exercise',
   initialState: {
-    exercise: null,
+    exercise: {
+      id: NaN,
+      type: '',
+    },
 
     code: '',
 
@@ -24,6 +27,7 @@ export const exerciseSlice = createSlice({
     },
 
     hints: {
+      feedback: false,
       hintUsefulness: false,
 
       hint: {

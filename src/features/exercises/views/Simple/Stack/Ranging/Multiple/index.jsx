@@ -1,6 +1,7 @@
 import styles from './styles.module.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBaskets, selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectBaskets } from '@src/features/exercises/store/selectors/exercise.selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { Basket } from './Basket';
 import { Button } from '@mui/material';
 import { useState } from 'react';

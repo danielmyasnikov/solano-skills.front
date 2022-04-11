@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { selectExerciseSidebar } from '@src/features/exercises/store/selectors';
+import { selectExerciseSidebar } from '@src/features/exercises/store/selectors/exercises.selectors';
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';

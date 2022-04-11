@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getExerciseById } from '../actions';
+import { getExerciseById } from '../actions/exercises.actions';
 
 export const exercisesSlice = createSlice({
   name: 'exercises',
   initialState: {
     status: 'idle',
 
-    exercise: null,
+    exercise: {
+      type: '',
+    },
 
     certificateStatus: 'idle',
 

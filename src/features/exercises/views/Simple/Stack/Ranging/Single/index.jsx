@@ -1,11 +1,11 @@
 import styles from './styles.module.less';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import {
   selectBaskets,
   selectExerciseContext,
   selectOrderIds,
-  selectRootExercise,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { Button } from '@mui/material';

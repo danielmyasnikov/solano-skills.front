@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-import terminalReducer from './terminal/reducer';
 import authReducer from './auth/reducer';
 import profileReducer from './profile/reducer';
-import bashShellReducer from './bashShell/reducer';
 import progressReducer from './progress/reducer';
 import feedbackReducer from './feedback/reducer';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
@@ -17,16 +15,18 @@ import { skillApi } from '@src/features/skills/skills.api';
 import { professionApi } from '@src/features/professions/professions.api';
 import { profileSlice } from '../features/profile/store/slice';
 import { newProgressSlice } from '../features/courses/store/progress/slice';
+import { terminalSlice } from '@src/features/exercises/store/slices/terminal.slice';
+import { bashSlice } from '@src/features/exercises/store/slices/bash.slice';
 
 const rootReducer = combineReducers({
   global: globalReducers,
-  terminal: terminalReducer,
+  terminal: terminalSlice.reducer,
   exercise: exerciseSlice.reducer,
   exercises: exercisesSlice.reducer,
   payment: paymentSlice.reducer,
   auth: authReducer,
   profile: profileReducer,
-  bashShell: bashShellReducer,
+  bash: bashSlice.reducer,
   progress: progressReducer,
   feedback: feedbackReducer,
   tracks: tracksSlice.reducer,

@@ -2,8 +2,8 @@ import { useRef, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { compileShell, startKernel } from '@store/terminal/actions';
-import { selectTerminal } from '@store/terminal/selector';
+import { compileShell, startKernel } from '../../../../store/actions/terminal.actions';
+import { selectTerminal } from '../../../../store/selectors/terminal.selector';
 
 import { PDFViewer } from '@components/common/pdfViewer';
 
@@ -14,9 +14,9 @@ import styles from './styles.module.less';
 import cn from 'classnames';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import { selectCurrentExercise, selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
+import { selectCurrentExercise } from '@src/features/exercises/store/selectors/exercise.selectors';
 import { Plot } from '@src/features/exercises/views/Simple/Stack/Plot';
-import Plots from '@assets/Plots';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -114,7 +114,7 @@ const Output = ({ variant }) => {
   }, [rootExercise, exercise, terminal.kernelId]);
 
   useEffect(() => {
-    if (terminal.bytePayload) {
+    if (terminal.bytePayload.length > 0) {
       setActiveTab('plots');
     }
     if (outputRef && terminal.outputs) {
@@ -147,7 +147,7 @@ const Output = ({ variant }) => {
         >
           Слайды
         </div>
-        {exercise.is_graph_required && (
+        {terminal.bytePayload.length > 0 && exercise.is_graph_required && (
           <div
             onClick={() => setActiveTab('plots')}
             className={cn({ [styles.tabActive]: activeTab === 'plots' }, styles.tab)}

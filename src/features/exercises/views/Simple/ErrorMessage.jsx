@@ -1,7 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectExerciseContext } from '@src/features/exercises/store/selectors';
+import { selectExerciseContext } from '@src/features/exercises/store/selectors/exercise.selectors';
 
 import Error from '@assets/Error';
 

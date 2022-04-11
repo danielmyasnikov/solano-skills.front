@@ -3,26 +3,19 @@ import cn from 'classnames';
 import GraphArrow from '@assets/GraphArrow';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectTerminal } from '@store/terminal/selector';
+import { selectTerminal } from '../../../../store/selectors/terminal.selector';
 
 export const Plot = ({ hide }) => {
   const terminal = useSelector(selectTerminal);
 
   const [activeBytePayload, setActiveBytePayload] = useState(0);
-  const [bytePayload, setBytePayload] = useState([]);
 
   useEffect(() => {
-    setActiveBytePayload(bytePayload.length - 1);
-  }, [bytePayload]);
-
-  useEffect(() => {
-    if (terminal.bytePayload) {
-      setBytePayload([...bytePayload, { payload: terminal.bytePayload }]);
-    }
-  }, [terminal]);
+    setActiveBytePayload(terminal.bytePayload.length - 1);
+  }, [terminal.bytePayload]);
 
   const handleActiveBytePayload = (action) => {
-    if (action === 'add' && activeBytePayload < bytePayload.length - 1) {
+    if (action === 'add' && activeBytePayload < terminal.bytePayload.length - 1) {
       setActiveBytePayload(activeBytePayload + 1);
     }
     if (action === 'sub' && activeBytePayload > 0) {
@@ -33,7 +26,7 @@ export const Plot = ({ hide }) => {
   return (
     <div className={cn(styles.bytePayload, { [styles.hide]: hide })}>
       <div className={styles.graph}>
-        <img src={bytePayload[activeBytePayload]?.payload} />
+        <img src={terminal.bytePayload[activeBytePayload]} />
       </div>
       <div className={styles.btnWrap}>
         <button
@@ -46,12 +39,14 @@ export const Plot = ({ hide }) => {
         </button>
         <div className={styles.count}>
           {activeBytePayload + 1}
-          <span>/{bytePayload.length}</span>
+          <span>/{terminal.bytePayload.length}</span>
         </div>
         <button
-          className={cn({ [styles.disable]: activeBytePayload === bytePayload.length - 1 })}
+          className={cn({
+            [styles.disable]: activeBytePayload === terminal.bytePayload.length - 1,
+          })}
           onClick={() => handleActiveBytePayload('add')}
-          disabled={activeBytePayload === bytePayload.length - 1}
+          disabled={activeBytePayload === terminal.bytePayload.length - 1}
         >
           Вперед
           <GraphArrow />

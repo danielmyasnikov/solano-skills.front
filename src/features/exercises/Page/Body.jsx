@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Exercise from '@src/features/exercises/views/Simple';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { styled } from '@mui/material/styles';
@@ -12,10 +12,7 @@ import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
-import {
-  useGetCoursesQuery,
-  useRefetchCoursesMutation,
-} from '@src/features/courses/courses.api.ts';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
 
 const Root = styled(Box)`
   display: flex;
