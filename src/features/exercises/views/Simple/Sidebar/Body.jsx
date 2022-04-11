@@ -82,10 +82,7 @@ export default function SidebarBody() {
   return (
     <Content>
       <h1>{title || 'Заголовок не задан'}</h1>
-      <div id="content-box">
-        <textarea wrap="soft" spellCheck="false" id="textarea-input" />
-        <pre id="highlight-area" />
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: description }}></div>
     </Content>
   );
 }
