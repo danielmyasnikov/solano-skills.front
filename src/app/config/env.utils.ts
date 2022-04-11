@@ -3,7 +3,7 @@ type NameToType = {
 
   readonly PORT?: string;
 
-  readonly REACT_APP_API_URL: string;
+  readonly REACT_APP_API_URI: string;
 
   readonly REACT_APP_SENTRY_DSN?: string;
 

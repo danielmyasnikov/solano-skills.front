@@ -11,7 +11,7 @@ export const tariffsApi = createApi({
   tagTypes: ['Tariff'],
   endpoints: (build) => ({
     getTariffs: build.query({
-      query: () => '',
+      query: () => ({ url: '' }),
       providesTags: (result, error, arg) =>
         result ? [...result.map(({ id }) => ({ type: 'Tariff', id })), 'Tariff'] : ['Tariff'],
     }),

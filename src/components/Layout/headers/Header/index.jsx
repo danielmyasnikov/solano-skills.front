@@ -29,7 +29,7 @@ const Header = ({ headerRef }) => {
   const [searchValue, setSearchValue] = useState('');
   const [showSearchBox, setShowSearchBox] = useState(false);
   const isAuth = useSelector(selectIsAuth);
-  const { data: courses, loading, error } = useGetCoursesQuery();
+  const { data: courses } = useGetCoursesQuery();
   const [actionMenu, setShowActionMenu] = useState(false);
   const history = useHistory();
 
@@ -86,9 +86,7 @@ const Header = ({ headerRef }) => {
                 <Button variant="containedGreen" onClick={handleShowModal}>
                   {profile.subscription_type ? (
                     <>
-                      {profile.subscription_type === 'month'
-                        ? 'Оптимальный тариф'
-                        : 'Бюджетный тариф'}
+                      {profile.subscription_type === 'month' ? 'Месячный тариф' : 'Годовой тариф'}
                     </>
                   ) : (
                     'Активировать тариф'

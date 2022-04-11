@@ -4,7 +4,7 @@ export const env = {
   isProduction: getEnv('NODE_ENV') === 'production',
   port: getEnv('PORT') || 3000,
 
-  apiUrl: getEnv('REACT_APP_API_URL', true),
+  apiUrl: getEnv('REACT_APP_API_URI', true),
 
   sentryDns: getEnv('REACT_APP_SENTRY_DSN'),
 

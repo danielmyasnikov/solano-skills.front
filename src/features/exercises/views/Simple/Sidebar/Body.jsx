@@ -5,6 +5,7 @@ import { selectCurrentExercise } from '@src/features/exercises/store/selectors/e
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { useEffect } from 'react';
 
 const Content = styled(Box)`
   height: 50%;
@@ -72,6 +73,8 @@ export default function SidebarBody() {
   const { title, description } = useSelector(selectCurrentExercise);
   const { headerFolded } = useSelector(selectExerciseSidebar);
 
+  useEffect(() => {}, []);
+
   if (headerFolded) {
     return null;
   }
@@ -79,7 +82,10 @@ export default function SidebarBody() {
   return (
     <Content>
       <h1>{title || 'Заголовок не задан'}</h1>
-      <div dangerouslySetInnerHTML={{ __html: description }} />
+      <div id="content-box">
+        <textarea wrap="soft" spellCheck="false" id="textarea-input" />
+        <pre id="highlight-area" />
+      </div>
     </Content>
   );
 }

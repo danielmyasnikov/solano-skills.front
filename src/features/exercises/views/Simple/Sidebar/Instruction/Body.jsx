@@ -154,7 +154,9 @@ export default function InstructionBody({ goNext }) {
   return (
     <>
       <Content dangerouslySetInnerHTML={{ __html: instruction }} />
-      {type === 'quiz' && !instruction && <div style={{ height: '28px' }} />}
+      {(type === 'quiz' || type === 'quiz_with_script') && !instruction && (
+        <div style={{ height: '28px' }} />
+      )}
 
       {(type === 'quiz' || type === 'quiz_with_script') && (
         <Quiz>
