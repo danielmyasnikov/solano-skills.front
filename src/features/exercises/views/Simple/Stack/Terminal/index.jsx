@@ -11,8 +11,12 @@ import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
-import { selectKernelId, selectTerminal } from '../../../../terminal/selector';
-import { checkAnswer, compileShell } from '../../../../terminal/actions';
+import {
+  selectKernelId,
+  selectTerminal,
+  selectTerminalStatus,
+} from '../../../../store/selectors/terminal.selector';
+import { checkAnswer, compileShell } from '../../../../store/actions/terminal.actions';
 
 import Reset from '@assets/Reset';
 
@@ -21,15 +25,16 @@ import { Box, Typography, Button } from '@mui/material';
 
 import styles from './styles.module.less';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import {
   selectCurrentExercise,
   selectExerciseContext,
-  selectRootExercise,
   selectSolutionHint,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 import VertDraggable from '@components/common/VertDraggable';
+import { Preloader } from '@components/mui/Preloader';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -100,6 +105,7 @@ const Terminal = () => {
   const { used: solutionUsed, content: solutionContent } = useSelector(selectSolutionHint);
   const isAuth = useSelector(selectIsAuth);
   const { completed, xp, code } = useSelector(selectExerciseContext);
+  const status = useSelector(selectTerminalStatus);
   const kernelId = useSelector(selectKernelId);
   const rootExercise = useSelector(selectRootExercise);
   const profile = useSelector(selectProfile);
@@ -143,13 +149,13 @@ const Terminal = () => {
           }),
         );
         dispatch(
-          checkAnswer(
-            activeTab === 'solution' ? solutionContent : code,
-            exercise?.id,
-            exercise?.is_graph_required,
+          checkAnswer({
+            code: activeTab === 'solution' ? solutionContent : code,
+            exerciseId: exercise?.id,
+            isGraphRequired: exercise?.is_graph_required,
             xp,
-            user_id,
-          ),
+            userId: user_id,
+          }),
         );
       } else {
         dispatch(openPleasePayModal());
@@ -228,9 +234,9 @@ const Terminal = () => {
                   dispatch(openSignUpModal());
                 }
               }}
-              disabled={completed || isDisabled}
+              disabled={completed || isDisabled || status === 'loading'}
             >
-              <Reset />
+              {status === 'loading' ? <Preloader /> : <Reset />}
             </Button>
             <Button
               variant={'outlineWhite'}
@@ -253,17 +259,17 @@ const Terminal = () => {
                   dispatch(openSignUpModal());
                 }
               }}
-              disabled={completed || isDisabled}
+              disabled={completed || isDisabled || status === 'loading'}
             >
-              Выполнить код
+              {status === 'loading' ? 'Загрузка...' : 'Выполнить код'}
             </Button>
             {exercise.type !== 'quiz_with_script' && (
               <Button
                 variant="containedWhite"
                 onClick={handleAnswer}
-                disabled={completed || isDisabled}
+                disabled={completed || isDisabled || status === 'loading'}
               >
-                Ответить
+                {status === 'loading' ? 'Загрузка...' : 'Ответить'}
               </Button>
             )}
           </div>

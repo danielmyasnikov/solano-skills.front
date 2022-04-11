@@ -4,12 +4,11 @@ import {
   selectExerciseContext,
   selectHint,
   selectHintFeedback,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';
 
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import { openFeedbackModal } from '@store/global/modals';
 

@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import styles from './styles.module.less';
 import { Sidebar } from '@src/features/exercises/views/Simple/Sidebar';
-import { selectKernelId } from '../../terminal/selector';
+import { selectKernelId } from '../../store/selectors/terminal.selector';
 import ErrorMessage from '@src/features/exercises/views/Simple/ErrorMessage';
 import CompletedTaskModal from '@src/features/exercises/views/Simple/CompletedTaskModal';
 
@@ -14,16 +14,18 @@ import Hint from '@src/features/exercises/views/Simple/Hints/Hint';
 import HintFeedback from '@src/features/exercises/views/Simple/Hints/HintFeedback';
 import SolutionHint from '@src/features/exercises/views/Simple/Hints/SolutionHint';
 import {
-  selectExerciseContext,
   selectExerciseSidebar,
-  selectHint,
   selectRootExercise,
   selectRootExerciseType,
   selectSteps,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercises.selectors';
+import {
+  selectExerciseContext,
+  selectHint,
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 import { exercisesSlice } from '../../store/slices/exercises.slice';
 import { useEffect, useRef, useState } from 'react';
-import { sendAnswer } from '@src/features/exercises/store/actions';
+import { sendAnswer } from '@src/features/exercises/store/actions/exercises.actions';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
 import { getProfile } from '@store/profile/actions';
 

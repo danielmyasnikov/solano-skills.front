@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { clearTerminal } from '../terminal/actions';
-import { clearBashShell } from '../bash/actions';
+import { terminalSlice } from '../store/slices/terminal.slice';
+import { bashSlice } from '../store/slices/bash.slice';
 
-import { getExerciseById } from '@src/features/exercises/store/actions';
+import { getExerciseById } from '@src/features/exercises/store/actions/exercises.actions';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { selectExercisesStatus } from '@src/features/exercises/store/selectors';
+import { selectExercisesStatus } from '@src/features/exercises/store/selectors/exercises.selectors';
 import ExercisePageBody from '@src/features/exercises/Page/Body';
 import { Preloader } from '@components/mui/Preloader';
 
@@ -32,8 +32,8 @@ function ExercisePage() {
   const status = useSelector(selectExercisesStatus);
 
   useEffect(() => {
-    dispatch(clearBashShell());
-    dispatch(clearTerminal());
+    dispatch(terminalSlice.actions.clear());
+    dispatch(bashSlice.actions.clear());
 
     dispatch(getExerciseById({ courseId, exerciseId: exerciseId }));
   }, [courseId, exerciseId]);

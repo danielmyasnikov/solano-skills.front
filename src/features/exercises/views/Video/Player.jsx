@@ -1,9 +1,8 @@
-import { useRef, memo } from 'react';
+import { useRef, memo, useEffect } from 'react';
 
 import Plyr from 'plyr-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuth } from '@store/profile/selector';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { useSelector } from 'react-redux';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import Box from '@mui/material/Box';
 
 export const VideoPlayer = memo(() => {

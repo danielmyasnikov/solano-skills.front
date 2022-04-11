@@ -3,11 +3,11 @@ import Complete from '@assets/Complete';
 import Close from '@assets/Close.png';
 import { useSelector } from 'react-redux';
 import {
-  selectExerciseContext,
   selectRootExercise,
   selectRootExerciseType,
   selectSteps,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercises.selectors';
+import { selectExerciseContext } from '@src/features/exercises/store/selectors/exercise.selectors';
 import { Button, Rating } from '@mui/material';
 
 const CompletedTaskModal = ({ onClick, onClose }) => {

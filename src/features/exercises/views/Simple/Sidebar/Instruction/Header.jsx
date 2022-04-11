@@ -8,11 +8,11 @@ import { Box } from '@mui/material';
 
 import InstructionSvg from '@assets/Instruction';
 import {
-  selectExerciseContext,
   selectRootExercise,
   selectRootExerciseType,
   selectSteps,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercises.selectors';
+import { selectExerciseContext } from '@src/features/exercises/store/selectors/exercise.selectors';
 import { BulletPoint } from '@src/features/exercises/views/Simple/Sidebar/Instruction/BulletPoint';
 
 const Root = styled(Box)`

@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const executeBashShell = createAsyncThunk(
   'bash/execute',
   async ({ environmentId, command }: { environmentId: string; command: string }) => {
-    const response = api
+    const response = await api
       .post(`/console/v1/bash/execute/${environmentId}?command=${command}`)
       .then((res) => res.data);
 
@@ -16,7 +16,7 @@ export const executeBashShell = createAsyncThunk(
 );
 
 export const startEnvironment = createAsyncThunk('bash/startEnvironment', async () => {
-  return api.post(`/console/v1/bash/startEnvironment`).then((res) => res.data);
+  return await api.post(`/console/v1/bash/startEnvironment`).then((res) => res.data);
 });
 
 export const checkExerciseBashShell = createAsyncThunk(
@@ -32,9 +32,10 @@ export const checkExerciseBashShell = createAsyncThunk(
     userId: number;
     command: string;
   }) => {
-    const response = api
+    const response = await api
       .post(
-        `/console/v1/bash/checkExercise/${exerciseId}?environmentId=${environmentId}&userId=${userId}`,
+        `/console/v1/bash/checkExercise/${exerciseId}?environemtId=${environmentId}&userId=${userId}`,
+        { command: command },
       )
       .then((res) => res.data);
 

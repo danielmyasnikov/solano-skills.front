@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Exercise from '@src/features/exercises/views/Simple';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { styled } from '@mui/material/styles';

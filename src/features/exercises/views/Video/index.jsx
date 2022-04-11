@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { VideoPlayer } from './Player';
 
 import styles from './styles.module.less';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-import { sendAnswer } from '@src/features/exercises/store/actions';
+import { sendAnswer } from '@src/features/exercises/store/actions/exercises.actions';
 import { getProfile } from '@store/profile/actions';
 import { selectIsAuth } from '@store/profile/selector';
 

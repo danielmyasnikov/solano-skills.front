@@ -6,7 +6,7 @@ import {
   selectExerciseContext,
   selectExerciseType,
   selectHint,
-} from '@src/features/exercises/store/selectors';
+} from '@src/features/exercises/store/selectors/exercise.selectors';
 
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';

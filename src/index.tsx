@@ -4,7 +4,7 @@ import './index.less';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from '@store/index';
 // import * as Sentry from '@sentry/react';
 // import { BrowserTracing } from '@sentry/tracing';
 require('dotenv').config();
