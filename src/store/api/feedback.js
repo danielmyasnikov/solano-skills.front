@@ -1,10 +1,9 @@
-import axios from 'axios';
-import { env } from '@src/app/config/index.ts';
+import api from '@src/http/api';
 
 export const sendFeedbackApi = ({ description, feedbackType, phone, email, headers }) => {
-  return axios
+  return api
     .post(
-      `${env.api.platform}/api/v1/error_feedbacks`,
+      `/api/v1/error_feedbacks`,
       {
         description,
         feedback_type: feedbackType,

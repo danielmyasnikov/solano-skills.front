@@ -14,7 +14,7 @@ import {
 
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import RadioButton from '@components/mui/RadioButton';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';

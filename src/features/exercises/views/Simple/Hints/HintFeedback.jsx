@@ -9,7 +9,7 @@ import {
 import { styled } from '@mui/material/styles';
 import { Box, Button } from '@mui/material';
 
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { openFeedbackModal } from '@store/global/modals';
 
 const Root = styled(Box)`

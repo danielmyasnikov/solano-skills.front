@@ -2,7 +2,7 @@ import axios from 'axios';
 import { env } from '@src/app/config';
 
 const api = axios.create({
-  baseURL: env.api.platform,
+  baseURL: env.apiUrl,
 });
 
 // Request interceptor

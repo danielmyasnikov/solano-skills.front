@@ -1,12 +1,9 @@
-import axios from 'axios';
-import { env } from '@src/app/config/index.ts';
+import api from '@src/http/api';
 
-export const GetPRogressApi = ({ headers }) => {
+export const GetPRogressApi = () => {
   try {
-    return axios
-      .get(`${env.api.platform}/api/v1/progress`, { headers: headers })
-      .then((res) => res.data);
+    return api.get(`/api/v1/progress`).then((res) => res.data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 };

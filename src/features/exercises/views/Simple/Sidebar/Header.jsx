@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectExerciseSidebar } from '@src/features/exercises/store/selectors/exercises.selectors';
 
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice.ts';
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';

@@ -25,9 +25,14 @@ import {
 } from '@src/features/exercises/store/selectors/exercise.selectors';
 import { exercisesSlice } from '../../store/slices/exercises.slice';
 import { useEffect, useRef, useState } from 'react';
-import { sendAnswer } from '@src/features/exercises/store/actions/exercises.actions';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import {
+  getExerciseById,
+  sendAnswer,
+} from '@src/features/exercises/store/actions/exercises.actions';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { getProfile } from '@store/profile/actions';
+import { bashSlice } from '@src/features/exercises/store/slices/bash.slice.ts';
+import { terminalSlice } from '@src/features/exercises/store/slices/terminal.slice.ts';
 
 function Exercise({ goNext }) {
   const dispatch = useDispatch();
@@ -131,7 +136,19 @@ function Exercise({ goNext }) {
         {!completeModalClosed &&
           completed &&
           (type !== 'bullet_point_exercise' || active === total) && (
-            <CompletedTaskModal onClick={goNext} onClose={() => setCompleteModalClosed(true)} />
+            <CompletedTaskModal
+              onClick={goNext}
+              onClose={() => {
+                setCompleteModalClosed(true);
+
+                dispatch(bashSlice.actions.clear());
+                dispatch(terminalSlice.actions.clear());
+
+                dispatch(
+                  getExerciseById({ courseId: exercise.course_slug, exerciseId: exercise.id }),
+                );
+              }}
+            />
           )}
       </div>
 

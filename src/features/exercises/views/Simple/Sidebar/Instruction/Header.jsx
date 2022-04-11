@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
-import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
+import { exercisesSlice } from '@src/features/exercises/store/slices/exercises.slice.ts';
 
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';

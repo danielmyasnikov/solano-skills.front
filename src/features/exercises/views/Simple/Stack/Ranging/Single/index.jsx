@@ -13,7 +13,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
 import cn from 'classnames';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
 const SingleRanging = () => {

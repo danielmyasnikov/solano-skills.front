@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 
 const MultipleRanging = () => {

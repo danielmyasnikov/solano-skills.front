@@ -13,7 +13,7 @@ import {
   selectExerciseId,
   selectExerciseType,
 } from '@src/features/exercises/store/selectors/exercise.selectors';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 
 const UnixShell = () => {
   const dispatch = useDispatch();

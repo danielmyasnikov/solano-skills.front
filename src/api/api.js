@@ -5,7 +5,7 @@ const makeRequest = async ({ method, url, data, defaultValue = null }) => {
   try {
     const response = await axios({
       method,
-      url: `${env.api.platform}${url}`,
+      url: `${env.apiUrl}${url}`,
       headers: {
         uid: window.localStorage.getItem('uid'),
         'access-token': window.localStorage.getItem('access-token'),

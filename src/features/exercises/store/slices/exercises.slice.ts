@@ -31,6 +31,7 @@ export const exercisesSlice = createSlice({
     setStep: (state, action) => {
       const { step, code } = action.payload;
       state.steps.active = step;
+      // @ts-ignore
       state.steps.code[code.id] = code.code;
     },
     onStepComplete: (state, action) => {
@@ -49,10 +50,10 @@ export const exercisesSlice = createSlice({
     },
   },
   extraReducers: {
-    [getExerciseById.pending]: (state) => {
+    [getExerciseById.pending.type]: (state) => {
       state.status = 'pending';
     },
-    [getExerciseById.fulfilled]: (state, action) => {
+    [getExerciseById.fulfilled.type]: (state, action) => {
       state.status = 'success';
       state.exercise = action.payload;
 
@@ -68,7 +69,7 @@ export const exercisesSlice = createSlice({
         };
       }
     },
-    [getExerciseById.rejected]: (state, action) => {
+    [getExerciseById.rejected.type]: (state, action) => {
       state.status = 'error';
       console.error(action.error);
     },

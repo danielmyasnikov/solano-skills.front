@@ -24,7 +24,7 @@ import { styled } from '@mui/material/styles';
 import { Box, Typography, Button } from '@mui/material';
 
 import styles from './styles.module.less';
-import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice';
+import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import {
   selectCurrentExercise,
