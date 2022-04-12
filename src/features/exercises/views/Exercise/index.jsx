@@ -118,6 +118,8 @@ function Exercise({ goNext }) {
           <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
           {sidebarOpen &&
             (kernelId ||
+              exercise.type === 'quiz' ||
+              exercise.type === 'quiz_with_script' ||
               exercise.type === 'single_bascket' ||
               exercise.type === 'multiple_bascket') && (
               <>

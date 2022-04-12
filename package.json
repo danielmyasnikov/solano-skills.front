@@ -86,6 +86,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
     "@types/react-syntax-highlighter": "^13.5.2",
+    "@types/redux-logger": "^3.0.9",
     "prettier": "2.5.1",
     "redux-logger": "^3.0.6"
   }

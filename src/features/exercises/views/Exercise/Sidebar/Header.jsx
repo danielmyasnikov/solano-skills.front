@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
 import TerminalImg from '@assets/terminal.png';
+import { selectCurrentExercise } from '@src/features/exercises/store/selectors/exercise.selectors.ts';
 
 const Root = styled(Box)`
   display: flex;
@@ -119,6 +120,8 @@ const SidebarHeader = () => {
 
   const { open } = useSelector(selectExerciseSidebar);
 
+  const exercise = useSelector(selectCurrentExercise);
+
   const toggleSidebarHeader = () => dispatch(exercisesSlice.actions.toggleSidebarHeader({}));
   const toggleSidebar = () => dispatch(exercisesSlice.actions.toggleSidebar({}));
 
@@ -132,17 +135,19 @@ const SidebarHeader = () => {
           <Title>Упражнение</Title>
         </Content>
       )}
-      <Button onClick={toggleSidebar} className={open ? '' : 'folded'}>
-        {open && <Separator />}
-        <IconWrapper className={open ? 'open' : ''}>
-          <svg width="32" height="32" viewBox="0 0 32 32">
-            <path
-              d="M20.5467 22.12L14.44 16L20.5467 9.88L18.6667 8L10.6667 16L18.6667 24L20.5467 22.12Z"
-              fill="white"
-            />
-          </svg>
-        </IconWrapper>
-      </Button>
+      {!exercise.without_script && (
+        <Button onClick={toggleSidebar} className={open ? '' : 'folded'}>
+          {open && <Separator />}
+          <IconWrapper className={open ? 'open' : ''}>
+            <svg width="32" height="32" viewBox="0 0 32 32">
+              <path
+                d="M20.5467 22.12L14.44 16L20.5467 9.88L18.6667 8L10.6667 16L18.6667 24L20.5467 22.12Z"
+                fill="white"
+              />
+            </svg>
+          </IconWrapper>
+        </Button>
+      )}
     </Root>
   );
 };
