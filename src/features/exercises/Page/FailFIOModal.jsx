@@ -113,8 +113,8 @@ const FailFIOModal = ({ isShow }) => {
           <h2>Упс, у нас нет данных для вашего сертификата</h2>
           <p>Пожалуйста, заполните полностью Ваше ФИО</p>
           <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder="ФИО" />
-          <Button variant="containedPurple" onClick={takeCertificate}>
-            Подтвердить
+          <Button variant="containedPurple" onClick={takeCertificate} disabled={isUpdating}>
+            {isUpdating ? 'Загружаем сертификат...' : 'Подтвердить'}
           </Button>
         </div>
       </Root>

@@ -96,12 +96,18 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    Api.get(`/api/v1/courses_done`).then((e) => {
-      setDoneCourses(e);
-    });
-    Api.get(`/api/v1/courses_progress`).then((e) => {
-      setInProgressCourses(e);
-    });
+    try {
+      Api.get(`/api/v1/courses_done`).then((e) => {
+        setDoneCourses(e);
+      });
+      Api.get(`/api/v1/courses_progress`).then((e) => {
+        if (e) {
+          setInProgressCourses(e);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   useEffect(() => {
