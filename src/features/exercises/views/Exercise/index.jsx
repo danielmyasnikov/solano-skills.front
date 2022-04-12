@@ -146,7 +146,7 @@ function Exercise({ goNext }) {
           )}
       </div>
 
-      <Stack />
+      {!exercise.without_script && <Stack />}
     </>
   );
 }
