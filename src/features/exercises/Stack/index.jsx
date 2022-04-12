@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 
-import { selectStackType, selectExerciseType } from '../../../store/selectors/exercise.selectors';
+import { selectStackType, selectExerciseType } from '../store/selectors/exercise.selectors';
 
 import UnixShell from './UnixShell';
 import Terminal from './Terminal';
 
-import Output from './Output';
+import Output from './Output/index.tsx';
 import SingleRanging from './Ranging/Single';
-import MultipleRanging from '@src/features/exercises/views/Exercise/Stack/Ranging/Multiple';
+import MultipleRanging from '@src/features/exercises/Stack/Ranging/Multiple';
 
 const Root = styled(Box)`
   flex-direction: column;

@@ -66,18 +66,18 @@ export default function ExercisePageBody() {
         setShowCourseIsNotCompletedModal(true);
         break;
       default:
+        if (exercise.next_exercise_id) {
+          if (exercise.is_free || !!profile.subscription_type) {
+            await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+          } else {
+            dispatch(openPleasePayModal());
+          }
+        } else {
+          if (!isAuth) {
+            dispatch(openSignUpModal({}));
+          }
+        }
         break;
-    }
-    if (exercise.next_exercise_id) {
-      if (exercise.is_free || !!profile.subscription_type) {
-        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
-      } else {
-        dispatch(openPleasePayModal());
-      }
-    } else {
-      if (!isAuth) {
-        dispatch(openSignUpModal({}));
-      }
     }
   };
 

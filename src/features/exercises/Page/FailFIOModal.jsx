@@ -95,7 +95,6 @@ const FailFIOModal = ({ isShow }) => {
     const res = await takeCertificateMutation({ courseId, name: value });
     history.push(`/certificates/${res.data.id}`);
   };
-
   return (
     <Modal open={isShow}>
       <Root>

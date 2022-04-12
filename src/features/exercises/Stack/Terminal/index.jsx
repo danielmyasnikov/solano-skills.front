@@ -15,8 +15,8 @@ import {
   selectKernelId,
   selectTerminal,
   selectTerminalStatus,
-} from '../../../../store/selectors/terminal.selector';
-import { checkAnswer, compileShell } from '../../../../store/actions/terminal.actions';
+} from '../../store/selectors/terminal.selector';
+import { checkAnswer, compileShell } from '../../store/actions/terminal.actions';
 
 import Reset from '@assets/Reset';
 
@@ -147,16 +147,17 @@ const Terminal = () => {
             isGraphRequired: exercise?.is_graph_required,
             type: 'compileExercise',
           }),
-        );
-        dispatch(
-          checkAnswer({
-            code: activeTab === 'solution' ? solutionContent : code,
-            exerciseId: exercise?.id,
-            isGraphRequired: exercise?.is_graph_required,
-            xp,
-            userId: user_id,
-          }),
-        );
+        ).then(() => {
+          dispatch(
+            checkAnswer({
+              code: activeTab === 'solution' ? solutionContent : code,
+              exerciseId: exercise?.id,
+              isGraphRequired: exercise?.is_graph_required,
+              xp,
+              userId: user_id,
+            }),
+          );
+        });
       } else {
         dispatch(openPleasePayModal());
       }

@@ -22,6 +22,15 @@ const Title = styled('h5')`
   color: #b5b8bb;
 `;
 
+const Courses = styled('div')`
+  max-height: 240px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  gap: 10px;
+`;
+
 const SearchBox = ({ isShow, courses, searchValue }) => {
   const values =
     searchValue === ''
@@ -37,9 +46,11 @@ const SearchBox = ({ isShow, courses, searchValue }) => {
           {values && values.length > 0 ? (
             <>
               <Title>Курсы</Title>
-              {values.map(({ icon, title, link }) => (
-                <SearchItem icon={icon} text={title} link={link} />
-              ))}
+              <Courses>
+                {values.map(({ icon, title, link }) => (
+                  <SearchItem icon={icon} text={title} link={link} />
+                ))}
+              </Courses>
             </>
           ) : (
             <span>Ничего не найдено</span>

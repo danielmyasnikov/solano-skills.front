@@ -31,8 +31,6 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
     if (courseId) {
       dispatch(dropProgress(courseId));
 
-      dispatch(getProfile());
-
       updateCourses();
       onClose();
     }

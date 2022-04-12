@@ -2,8 +2,8 @@ import { useRef, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { compileShell, startKernel } from '../../../../store/actions/terminal.actions';
-import { selectTerminal } from '../../../../store/selectors/terminal.selector';
+import { compileShell, startKernel } from '../../store/actions/terminal.actions';
+import { selectTerminal } from '../../store/selectors/terminal.selector';
 
 import { PDFViewer } from '@components/common/pdfViewer';
 
@@ -13,10 +13,13 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import styles from './styles.module.less';
 import cn from 'classnames';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, TextareaAutosize } from '@mui/material';
 import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { selectCurrentExercise } from '@src/features/exercises/store/selectors/exercise.selectors';
-import { Plot } from '@src/features/exercises/views/Exercise/Stack/Plot';
+import { Plot } from '@src/features/exercises/Stack/Plot';
+import { useShell } from '@src/features/exercises/hooks/useShell';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const Placeholder = styled(Box)`
   position: absolute;
@@ -72,35 +75,35 @@ const IconWrapper = styled(Box)`
   height: 24px;
 `;
 
-const Output = ({ variant }) => {
-  const [folded, setFolded] = useState(false);
-  const [activeTab, setActiveTab] = useState('output');
-  const [lineNumber, setLineNumber] = useState(1);
-  const [code, setCode] = useState('');
+const Output = ({ variant }: any) => {
+  const dispatch = useDispatch();
 
-  const outputRef = useRef();
+  const ref = useRef(null);
 
   const terminal = useSelector(selectTerminal);
   const rootExercise = useSelector(selectRootExercise);
   const exercise = useSelector(selectCurrentExercise);
 
-  const dispatch = useDispatch();
+  const [folded, setFolded] = useState(false);
+  const [activeTab, setActiveTab] = useState('output');
 
-  const onSubmit = (e) => {
-    if (e.keyCode === 13) {
+  const { acceptInput, onChange, code, line } = useShell({
+    ref,
+    isMulti: exercise.multy_console,
+    submitCallback: ({ code, line }: any) => {
       dispatch(
         compileShell({
-          code: code,
+          code,
           exerciseId: exercise?.id,
-          lineNumber: lineNumber,
+          lineNumber: line,
           kernelId: terminal.kernelId,
           isGraphRequired: false,
         }),
       );
-      setLineNumber(lineNumber + 1);
-      setCode('');
-    }
-  };
+    },
+  });
+
+  const outputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (rootExercise) {
@@ -109,11 +112,15 @@ const Output = ({ variant }) => {
   }, [rootExercise]);
 
   useEffect(() => {
+    if (terminal.status === 'success') {
+      // @ts-ignore
+      ref.current?.focus();
+    }
     if (terminal.bytePayload.length > 0) {
       setActiveTab('plots');
     }
-    if (outputRef && terminal.outputs) {
-      outputRef?.current?.scroll({ top: outputRef.current.scrollHeight, behavior: 'smooth' });
+    if (outputRef.current && terminal.outputs) {
+      outputRef.current?.scroll({ top: outputRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [terminal]);
 
@@ -188,7 +195,7 @@ const Output = ({ variant }) => {
             ref={outputRef}
             className={cn(styles.content, { [styles.hide]: activeTab !== 'output' })}
           >
-            {terminal.outputs.map((item, i) => {
+            {terminal.outputs.map((item: any, i) => {
               if (!item || (!item.output && !item.error)) {
                 return null;
               }
@@ -202,13 +209,27 @@ const Output = ({ variant }) => {
               );
             })}
             <div className={styles.shell}>
-              <span>In [{lineNumber}]:</span>
-              <input
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                type="text"
-                onKeyDown={onSubmit}
-              />
+              <span>In [{line}]:</span>
+              <div className={styles.shellInput}>
+                {exercise.multy_console ? (
+                  <TextareaAutosize
+                    ref={ref}
+                    value={code}
+                    onChange={onChange}
+                    onKeyDown={acceptInput}
+                    disabled={terminal.status === 'loading'}
+                  />
+                ) : (
+                  <input
+                    ref={ref}
+                    value={code}
+                    onChange={onChange}
+                    type="text"
+                    onKeyDown={acceptInput}
+                    disabled={terminal.status === 'loading'}
+                  />
+                )}
+              </div>
             </div>
           </div>
 

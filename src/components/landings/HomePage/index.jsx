@@ -138,7 +138,7 @@ export const HomePage = () => {
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
                 <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
-                <Registration key={'home_offer'} isModal variant={'home_offer'} />
+                <Registration isModal variant="home_offer" />
               </div>
             </section>
 

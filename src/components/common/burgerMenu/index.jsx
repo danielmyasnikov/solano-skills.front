@@ -25,7 +25,7 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
         <div className={styles.links}>
           <div className={styles.link}>
             <div className={styles.link__title} onClick={() => setShowItems(!showItems)}>
-              <Link to="/learning">
+              <Link to="/courses">
                 <span style={{ color: '#46445c' }}>Обучение</span>
               </Link>
               {/*

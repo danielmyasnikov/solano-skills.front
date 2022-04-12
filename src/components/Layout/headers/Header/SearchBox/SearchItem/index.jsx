@@ -2,8 +2,7 @@ import { styled } from '@mui/material/styles';
 import miniPython from '@assets/miniPython.png';
 import { Link } from 'react-router-dom';
 
-const Item = styled('div')`
-  margin-top: 10px;
+const Item = styled(Link)`
   display: flex;
   width: 95%;
   cursor: pointer;
@@ -24,15 +23,12 @@ const Text = styled('p')`
   color: var(--color-black);
 `;
 
-const SearchItem = ({ icon, text, link }) => {
-  console.log(link);
+const SearchItem = ({ text, link }) => {
   return (
-    <Link to={link}>
-      <Item>
-        <Icon src={miniPython} />
-        <Text>{text}</Text>
-      </Item>
-    </Link>
+    <Item to={link}>
+      <Icon src={miniPython} />
+      <Text>{text}</Text>
+    </Item>
   );
 };
 
