@@ -59,7 +59,7 @@ export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning,
             variant="containedPurple"
             onClick={() => dispatch(openResetProgresseModal({ id }))}
           >
-            Начать сначала
+            Пройти заново
           </Button>
         )}
       </div>
