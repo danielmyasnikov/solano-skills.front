@@ -1,74 +1,75 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import User from '@assets/icon/user.svg';
-import Settings from '@assets/icon/settings.svg';
-import Support from '@assets/icon/support.svg';
-import Exit from '@assets/icon/exit.svg';
-
-import cn from 'classnames';
-
 import styles from './styles.module.less';
+import { useDispatch, useSelector } from 'react-redux';
+import { openFeedbackModal } from '@store/global/modals';
+import { selectProfile } from '@store/profile/selector';
 
-export const ActionMenu = ({ totalXP, onSupport, onCloseMenu, onOutsideClick }) => {
-  const ref = useRef();
-  const [onClickOutside, setOnClickOutside] = useState(false);
-
-  const item = (img, text, link) => {
-    const clickHandler = () => {
-      if (link === '/courses') {
-        localStorage.clear();
-        window.location.reload();
-      }
-    };
-
-    const supportClickHandler = () => {
-      onSupport();
-      onCloseMenu();
-    };
-
-    return (
-      <div className={styles.menuLink}>
-        {(text !== 'Поддержка' && (
-          <Link onClick={clickHandler} to={`${link}`}>
-            <img src={img} alt="icon" />
-            <span>{text}</span>
-          </Link>
-        )) || (
-          <div
-            onClick={() => {
-              supportClickHandler();
-            }}
-          >
-            <img src={img} alt="icon" />
-            <span>{text}</span>
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOnClickOutside(!onClickOutside);
-        onOutsideClick();
-      }
-    };
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, [onClickOutside]);
+export const ActionMenu = () => {
+  const dispatch = useDispatch();
+  const profile = useSelector(selectProfile);
 
   return (
-    <div ref={ref} className={styles.wrapper}>
-      <div className={styles.wrapperXP}>{totalXP} XP</div>
-      {item(User, 'Перейти в профиль', '/profile')}
-      {item(Settings, 'Настройки аккаунта', '/settings')}
-      {item(Support, 'Поддержка', '')}
-      {item(Exit, 'Выйти', '/courses')}
+    <div className={styles.wrapper}>
+      <div className={styles.wrapperXP}>{profile?.xp} XP</div>
+
+      <div className={styles.menuLink}>
+        <Link to="/profile">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M7.5 9C9.15685 9 10.5 7.65685 10.5 6C10.5 4.34315 9.15685 3 7.5 3C5.84315 3 4.5 4.34315 4.5 6C4.5 7.65685 5.84315 9 7.5 9C7.5 9 9.15685 9 7.5 9ZM7.5 7.5C8.32843 7.5 9 6.82843 9 6C9 5.17157 8.32843 4.5 7.5 4.5C6.67157 4.5 6 5.17157 6 6C6 6.82843 6.67157 7.5 7.5 7.5C7.5 7.5 8.32843 7.5 7.5 7.5ZM11.9446 13.5418C13.7977 12.1762 15 9.97852 15 7.5C15 3.35786 11.6421 0 7.5 0C3.35786 0 0 3.35786 0 7.5C0 9.97852 1.20226 12.1762 3.05541 13.5418C3.0895 13.5669 3.12382 13.5917 3.15834 13.6163C3.49498 13.8557 3.85223 14.068 4.22691 14.25C5.21598 14.7305 6.32652 15 7.5 15C8.67348 15 9.78402 14.7305 10.7731 14.25C10.7932 14.2402 10.8133 14.2304 10.8333 14.2204C11.2243 14.0261 11.596 13.7987 11.9446 13.5418C11.9446 13.5418 13.7977 12.1762 11.9446 13.5418ZM11.4215 12.0412C12.6945 10.941 13.5 9.31457 13.5 7.5C13.5 4.18629 10.8137 1.5 7.5 1.5C4.18629 1.5 1.5 4.18629 1.5 7.5C1.5 9.31457 2.30551 10.941 3.57846 12.0412C4.3505 10.6735 5.8174 9.75 7.5 9.75C9.18259 9.75 10.6495 10.6735 11.4215 12.0412C11.4215 12.0412 12.6945 10.941 11.4215 12.0412ZM10.1675 12.8759C9.66906 11.9102 8.66163 11.25 7.5 11.25C6.33837 11.25 5.33094 11.9102 4.83249 12.8759C5.636 13.2754 6.54177 13.5 7.5 13.5C8.45823 13.5 9.36399 13.2754 10.1675 12.8759C10.1675 12.8759 9.66906 11.9102 10.1675 12.8759Z"
+              fill="#8A92A6"
+            />
+          </svg>
+
+          <span>Перейти в профиль</span>
+        </Link>
+      </div>
+
+      <div className={styles.menuLink}>
+        <Link to="/settings">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M13.9499 8.78364C13.9833 8.53364 13.9999 8.2753 13.9999 8.0003C13.9999 7.73364 13.9833 7.46697 13.9416 7.21697L15.6333 5.9003C15.7833 5.78364 15.8249 5.55864 15.7333 5.39197L14.1333 2.6253C14.0333 2.44197 13.8249 2.38364 13.6416 2.44197L11.6499 3.24197C11.2333 2.9253 10.7916 2.65864 10.2999 2.45864L9.99993 0.341972C9.96659 0.141972 9.79993 0.000305176 9.59993 0.000305176H6.39993C6.19993 0.000305176 6.04159 0.141972 6.00826 0.341972L5.70826 2.45864C5.21659 2.65864 4.76659 2.93364 4.35826 3.24197L2.36659 2.44197C2.18326 2.3753 1.97493 2.44197 1.87493 2.6253L0.283262 5.39197C0.183262 5.56697 0.216595 5.78364 0.383262 5.9003L2.07493 7.21697C2.03326 7.46697 1.99993 7.74197 1.99993 8.0003C1.99993 8.25864 2.0166 8.53364 2.05826 8.78364L0.366595 10.1003C0.216595 10.217 0.174929 10.442 0.266595 10.6086L1.8666 13.3753C1.9666 13.5586 2.17493 13.617 2.35826 13.5586L4.34993 12.7586C4.76659 13.0753 5.20826 13.342 5.69993 13.542L5.99993 15.6586C6.04159 15.8586 6.19993 16.0003 6.39993 16.0003H9.59993C9.79993 16.0003 9.96659 15.8586 9.99159 15.6586L10.2916 13.542C10.7833 13.342 11.2333 13.0753 11.6416 12.7586L13.6333 13.5586C13.8166 13.6253 14.0249 13.5586 14.1249 13.3753L15.7249 10.6086C15.8249 10.4253 15.7833 10.217 15.6249 10.1003L13.9499 8.78364ZM7.99993 11.0003C6.34993 11.0003 4.99993 9.6503 4.99993 8.0003C4.99993 6.35031 6.34993 5.0003 7.99993 5.0003C9.64993 5.0003 10.9999 6.35031 10.9999 8.0003C10.9999 9.6503 9.64993 11.0003 7.99993 11.0003Z"
+              fill="#8A92A6"
+            />
+          </svg>
+          <span>Настройки аккаунта</span>
+        </Link>
+      </div>
+
+      <div className={styles.menuLink}>
+        <div onClick={() => dispatch(openFeedbackModal())}>
+          <svg width="15" height="13" viewBox="0 0 15 13" fill="none">
+            <path
+              d="M14.25 6.65889C14.25 2.69389 11.055 0 7.5 0C3.9825 0 0.75 2.63611 0.75 6.70222C0.3 6.94778 0 7.41 0 7.94444V9.38889C0 10.1833 0.675 10.8333 1.5 10.8333H2.25V6.42778C2.25 3.63278 4.5975 1.37222 7.5 1.37222C10.4025 1.37222 12.75 3.63278 12.75 6.42778V11.5556H6.75V13H12.75C13.575 13 14.25 12.35 14.25 11.5556V10.6744C14.6925 10.4506 15 10.01 15 9.49V7.82889C15 7.32333 14.6925 6.88278 14.25 6.65889Z"
+              fill="#8A92A6"
+            />
+          </svg>
+          <span>Поддержка</span>
+        </div>
+      </div>
+
+      <div className={styles.menuLink}>
+        <div
+          onClick={() => {
+            localStorage.clear();
+            window.location.reload();
+          }}
+        >
+          <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
+            <path
+              d="M7.25 3.25L6.2 4.3L8.15 6.25H0.5V7.75H8.15L6.2 9.7L7.25 10.75L11 7L7.25 3.25ZM14 12.25H8V13.75H14C14.825 13.75 15.5 13.075 15.5 12.25V1.75C15.5 0.925 14.825 0.25 14 0.25H8V1.75H14V12.25Z"
+              fill="#8A92A6"
+            />
+          </svg>
+          <span>Выйти</span>
+        </div>
+      </div>
     </div>
   );
 };

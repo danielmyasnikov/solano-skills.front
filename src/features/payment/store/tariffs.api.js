@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { env } from '@src/app/config/index.ts';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '@src/http/axios';
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: `${env.api.platform}/api/v1/tariffs`,
+const baseQuery = axiosBaseQuery({
+  baseUrl: `/api/v1/tariffs`,
 });
 
 export const tariffsApi = createApi({
@@ -11,7 +11,7 @@ export const tariffsApi = createApi({
   tagTypes: ['Tariff'],
   endpoints: (build) => ({
     getTariffs: build.query({
-      query: () => '',
+      query: () => ({ url: '' }),
       providesTags: (result, error, arg) =>
         result ? [...result.map(({ id }) => ({ type: 'Tariff', id })), 'Tariff'] : ['Tariff'],
     }),

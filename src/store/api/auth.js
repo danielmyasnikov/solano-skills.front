@@ -1,9 +1,8 @@
-import axios from 'axios';
-import { env } from '@src/app/config/index.ts';
+import api from '@src/http/api';
 
 export const registrationApi = ({ email, password, passwordConfirmation }) => {
-  return axios
-    .post(`${env.api.platform}/auth`, {
+  return api
+    .post(`/auth`, {
       email,
       password,
       password_confirmation: passwordConfirmation,
@@ -15,8 +14,8 @@ export const registrationApi = ({ email, password, passwordConfirmation }) => {
 };
 
 export const singInApi = ({ email, password }) => {
-  return axios
-    .post(`${env.api.platform}/auth/sign_in`, {
+  return api
+    .post(`/auth/sign_in`, {
       email,
       password,
     })
@@ -27,8 +26,8 @@ export const singInApi = ({ email, password }) => {
 };
 
 export const requestPasswordResetApi = ({ email, configName }) => {
-  return axios
-    .post(`${env.api.platform}/auth/password`, {
+  return api
+    .post(`/auth/password`, {
       email: email,
       config_name: configName,
     })
@@ -39,8 +38,8 @@ export const requestPasswordResetApi = ({ email, configName }) => {
 };
 
 export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirmation }) => {
-  return axios
-    .patch(`${env.api.platform}/auth/password`, {
+  return api
+    .patch(`/auth/password`, {
       reset_password_token: resetPasswordToken,
       password,
       password_confirmation: passwordConfirmation,
@@ -52,8 +51,8 @@ export const patchPasswordApi = ({ resetPasswordToken, password, passwordConfirm
 };
 
 export const signInByPhoneVerifyApi = ({ code }) => {
-  return axios
-    .post(`${env.api.platform}/api/v1/verify_signature_code`, {
+  return api
+    .post(`/api/v1/verify_signature_code`, {
       code,
     })
     .then((res) => res)

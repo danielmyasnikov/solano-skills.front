@@ -4,10 +4,7 @@ export const env = {
   isProduction: getEnv('NODE_ENV') === 'production',
   port: getEnv('PORT') || 3000,
 
-  api: {
-    platform: getEnv('REACT_APP_API_COURSE', true),
-    terminal: getEnv('REACT_APP_API_TERMINAL', true),
-  },
+  apiUrl: getEnv('REACT_APP_API_URI', true),
 
   sentryDns: getEnv('REACT_APP_SENTRY_DSN'),
 
@@ -45,8 +42,6 @@ export const env = {
       },
     },
   },
-
-  frontendUrl: getEnv('REACT_APP_FRONTEND_URL') || `http://localhost:${getEnv('PORT') || 3000}`,
 
   analytics: {
     yandexTrackingId: Number(getEnv('REACT_APP_YANDEX_TRACKING_ID')),

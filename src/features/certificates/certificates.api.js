@@ -1,26 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { env } from '@src/app/config/index.ts';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '@src/http/axios';
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: `${env.api.platform}/api/v1/`,
-  prepareHeaders: (headers) => {
-    const authHeaders = {
-      uid: window.localStorage.getItem('uid'),
-      'access-token': window.localStorage.getItem('access-token'),
-      client: window.localStorage.getItem('client'),
-      expiry: window.localStorage.getItem('expiry'),
-    };
-    if (authHeaders.uid) {
-      headers.set('uid', authHeaders.uid);
-    }
-    if (authHeaders.client) {
-      headers.set('client', authHeaders.client);
-    }
-    if (authHeaders['access-token']) {
-      headers.set('access-token', authHeaders['access-token']);
-    }
-    return headers;
-  },
+const baseQuery = axiosBaseQuery({
+  baseUrl: `/api/v1/`,
 });
 
 export const certificateApi = createApi({
@@ -47,7 +29,7 @@ export const certificateApi = createApi({
       query: ({ courseId, name }) => ({
         url: `courses/${courseId}/certificates`,
         method: 'POST',
-        body: {
+        data: {
           profile: { name },
         },
       }),

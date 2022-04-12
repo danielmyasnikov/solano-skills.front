@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { env } from '@src/app/config/index.ts';
+import api from '@src/http/api';
 
-export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
+export const PatchProfileApi = ({ name, about, email, avatar }) => {
   const formData = new FormData();
 
   if (name) {
@@ -17,20 +16,15 @@ export const PatchProfileApi = ({ name, about, email, avatar, headers }) => {
     formData.append('avatar', avatar);
   }
   try {
-    return axios({
-      method: 'PATCH',
-      url: `${env.api.platform}/api/v1/profile`,
-      headers,
-      data: formData,
-    }).then((res) => res.data);
+    return api.patch(`/api/v1/profile`, formData).then((res) => res.data);
   } catch (e) {
     throw new Error(e);
   }
 };
 
-export const GetProfileApi = ({ headers }) => {
+export const GetProfileApi = () => {
   try {
-    return axios.get(`${env.api.platform}/api/v1/me`, { headers }).then((res) => res.data);
+    return api.get(`/api/v1/me`).then((res) => res.data);
   } catch (e) {
     console.log(e);
   }

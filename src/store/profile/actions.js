@@ -13,9 +13,9 @@ export const patchProfile = ({ name, about, email, avatar, headers }) => {
   };
 };
 
-export const getProfile = ({ headers }) => {
+export const getProfile = () => {
   return {
     type: GET_PROFILE_REQUESTED,
-    payload: { headers },
+    payload: {},
   };
 };

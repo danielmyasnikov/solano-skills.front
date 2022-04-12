@@ -1,13 +1,12 @@
-import { useRef, memo } from 'react';
+import { useRef, memo, useEffect } from 'react';
 
 import Plyr from 'plyr-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuth } from '@store/profile/selector';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { useSelector } from 'react-redux';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import Box from '@mui/material/Box';
-
+import Prev from '@assets/prev.png';
 export const VideoPlayer = memo(() => {
-  const ref = useRef();
+  const ref = useRef(null);
 
   const exercise = useSelector(selectRootExercise);
 
@@ -17,23 +16,28 @@ export const VideoPlayer = memo(() => {
 
   const sourceData = {
     type: 'video',
+    poster: Prev,
     sources: [
       {
+        provider: 'html5',
         src: exercise.video_id['360'],
         type: 'video/mp4',
         size: 360,
       },
       {
+        provider: 'html5',
         src: exercise.video_id['540'],
         type: 'video/mp4',
         size: 576,
       },
       {
+        provider: 'html5',
         src: exercise.video_id['720'],
         type: 'video/mp4',
         size: 720,
       },
       {
+        provider: 'html5',
         src: exercise.video_id['1080'],
         type: 'video/mp4',
         size: 1080,
@@ -55,6 +59,7 @@ export const VideoPlayer = memo(() => {
               default: localStorage.getItem('plyr')?.speed || 1,
               selected: localStorage.getItem('plyr')?.speed || 1,
             },
+            storage: { enabled: true, key: 'videoPlayer' },
           }}
         />
       </Box>

@@ -28,24 +28,12 @@ const ResetProgressModal = ({ onClose }: ResetProgressModalProps) => {
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
-    dispatch(dropProgress(courseId));
+    if (courseId) {
+      dispatch(dropProgress(courseId));
 
-    const uid = localStorage.getItem('uid');
-    const client = localStorage.getItem('client');
-    const accessToken = localStorage.getItem('access-token');
-
-    dispatch(
-      getProfile({
-        headers: {
-          uid,
-          client,
-          'access-token': accessToken,
-        },
-      }),
-    );
-
-    updateCourses();
-    onClose();
+      updateCourses();
+      onClose();
+    }
   };
 
   useEffect(() => {

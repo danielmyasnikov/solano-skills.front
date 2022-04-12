@@ -4,7 +4,7 @@
 }
 
 .progress {
-  width: calc(50% - 10px);
+  width: 100%;
   padding: 30px;
   border-radius: 15px;
 }
@@ -27,11 +27,12 @@
 .items {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px;
+  padding-top: 30px;
+  column-gap: 10px;
+  row-gap: 20px;
+
   .item {
-    width: 50%;
-    margin: 20px 0;
-    padding-right: 20px;
+    flex: calc(50% - 5px);
     display: flex;
     align-items: center;
     font-family: 'Nunito';

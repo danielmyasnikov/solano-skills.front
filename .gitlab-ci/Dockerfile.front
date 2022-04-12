@@ -2,10 +2,12 @@ FROM node:12.19.0 AS BUILD
 
 WORKDIR /app
 COPY . ./
-ENV REACT_APP_API_TERMINAL=https://deepskills.ru
+ENV REACT_APP_API_TERMINAL=https://dev.deepskills.ru
 ENV REACT_APP_API_COURSE=https://dev.deepskills.ru
+ENV REACT_APP_API_URI=https://dev.deepskills.ru
 #ENV REACT_APP_SEO_YM_ID=88095091
-RUN npm  install
+RUN npm  install 
+RUN npm i --save-dev @types/redux-logger
 RUN npm run build 
 
 FROM nginx:latest

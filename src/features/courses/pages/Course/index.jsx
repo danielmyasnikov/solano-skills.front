@@ -25,20 +25,8 @@ export const CoursePage = () => {
   };
 
   useEffect(() => {
-    const uid = localStorage.getItem('uid');
-    const client = localStorage.getItem('client');
-    const accessToken = localStorage.getItem('access-token');
-
     updateCourses();
-    dispatch(
-      getProfile({
-        headers: {
-          uid,
-          client,
-          'access-token': accessToken,
-        },
-      }),
-    );
+    dispatch(getProfile());
   }, []);
 
   return (

@@ -30,15 +30,7 @@ function App() {
     const accessToken = localStorage.getItem('access-token');
     const expiry = localStorage.getItem('expiry');
 
-    dispatch(
-      getProfile({
-        headers: {
-          uid,
-          client,
-          'access-token': accessToken,
-        },
-      }),
-    );
+    dispatch(getProfile());
 
     dispatch(AuthStore.Actions.setLocalHeaders({ client, uid, 'access-token': accessToken }));
     if (Number(expiry) > Math.round(new Date().getTime() / 1000)) {

@@ -1,9 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { env } from '@src/app/config/index.ts';
+import { axiosBaseQuery } from '@src/http/axios';
 
 export const skillApi = createApi({
   reducerPath: 'skillsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${env.api.platform}/api/v1/` }),
+  baseQuery: axiosBaseQuery({ baseUrl: `/api/v1/` }),
   tagTypes: ['Skills'],
   endpoints: (build) => ({
     getSkills: build.query({

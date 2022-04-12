@@ -65,7 +65,7 @@ const Root = styled(Box)`
 export const CongratulationsModal = ({ isShow }) => {
   const history = useHistory();
   const { courseId } = useParams();
-  const [takeCertificateMutation] = useTakeCertificateMutation();
+  const [takeCertificateMutation, { isLoading: isUpdating }] = useTakeCertificateMutation();
   const takeCertificate = async () => {
     const res = await takeCertificateMutation({ courseId });
     history.push(`/certificates/${res.data.id}`);
@@ -90,8 +90,8 @@ export const CongratulationsModal = ({ isShow }) => {
           </svg>
           <h2>Поздравляем! Курс завершен!</h2>
           <p>За успешно пройденный курс вы можете получить сертификат</p>
-          <Button onClick={takeCertificate} variant="containedPurple">
-            Перейти к сертификату
+          <Button onClick={takeCertificate} variant="containedPurple" disabled={isUpdating}>
+            {isUpdating ? 'Загружаем сертификат...' : 'Перейти к сертификату'}
           </Button>
         </div>
       </Root>

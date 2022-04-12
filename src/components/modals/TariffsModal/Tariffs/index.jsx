@@ -25,108 +25,96 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
 
   return (
     <>
-      {tariffList.map(
-        ({
-          id,
-          title,
-          old_price,
-          total_price,
-          is_economy,
-          is_optimal,
-          price,
-          description,
-          cycle,
-          confirmation_text,
-        }) => (
-          <div
-            key={id}
-            className={cn(styles.tariff, {
-              [styles.border]: isTariffs,
-              [styles.green]: is_optimal,
-            })}
-          >
-            <Grid container>
-              <Grid item xs={12} md={3} className={styles.title}>
-                <div>{title}</div>
-              </Grid>
-              <Grid item xs={12} sm={4} md={3}>
-                <ul className={cn(styles.list)}>
-                  <li className={styles.item}>
-                    <img src={Icon} alt="icon" />
-                    <span>15 курсов</span>
-                  </li>
-                  <li className={cn(styles.item, { [styles.economy]: is_economy })}>
-                    <img src={Icon} alt="icon" />
-                    <span>Полный доступ</span>
-                  </li>
-                  <li className={cn(styles.item, { [styles.economy]: is_economy })}>
-                    <img src={Icon} alt="icon" />
-                    <span>Сертификат</span>
-                  </li>
-                </ul>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={4}
-                md={3}
-                className={cn(styles.price, { [styles.green]: is_optimal })}
-              >
-                <span>{(is_economy && total_price) || `${total_price}₽/месяц`}</span>
-                {id === 1 && (
-                  <small>
-                    * К оплате 11 880 руб за годовой доступ ко всему контенту образовательной
-                    платформы DeepSkills
-                  </small>
-                )}
-              </Grid>
-              <Grid item xs={12} sm={4} md={3} className={styles.wrapperButton}>
-                {profile.subscription_type ? (
-                  <>
-                    {profile.subscription_type === 'month' ? (
-                      <>
-                        {id === 1 ? (
-                          <></>
-                        ) : (
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              height: '100%',
-                            }}
-                            className={cn(styles.price, { [styles.green]: is_optimal })}
-                          >
-                            <span>Активен</span>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {id === 1 ? (
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              height: '100%',
-                            }}
-                            className={cn(styles.price, { [styles.green]: is_optimal })}
-                          >
-                            <span>Активен</span>
-                          </div>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <Button
-                    onClick={() => {
-                      // dispatch(closeTariffsModal({}));
-                      paymentHandler(id);
-                      /*
+      {tariffList.map(({ id, title, total_price, is_economy, is_optimal }) => (
+        <div
+          key={id}
+          className={cn(styles.tariff, {
+            [styles.border]: isTariffs,
+            [styles.green]: is_optimal,
+          })}
+        >
+          <Grid container>
+            <Grid item xs={12} md={3} className={styles.title}>
+              <div>{id === 1 ? 'Годовой' : 'Месячный'}</div>
+            </Grid>
+            <Grid item xs={12} sm={4} md={3}>
+              <ul className={cn(styles.list)}>
+                <li className={styles.item}>
+                  <img src={Icon} alt="icon" />
+                  <span>15 курсов</span>
+                </li>
+                <li className={cn(styles.item, { [styles.economy]: is_economy })}>
+                  <img src={Icon} alt="icon" />
+                  <span>Полный доступ</span>
+                </li>
+                <li className={cn(styles.item, { [styles.economy]: is_economy })}>
+                  <img src={Icon} alt="icon" />
+                  <span>Сертификат</span>
+                </li>
+              </ul>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              md={3}
+              className={cn(styles.price, { [styles.green]: is_optimal })}
+            >
+              <span>{(is_economy && total_price) || `${total_price}₽/месяц`}</span>
+              {id === 1 && (
+                <small>
+                  * К оплате 11 880 руб за годовой доступ ко всему контенту образовательной
+                  платформы DeepSkills
+                </small>
+              )}
+            </Grid>
+            <Grid item xs={12} sm={4} md={3} className={styles.wrapperButton}>
+              {profile.subscription_type ? (
+                <>
+                  {profile.subscription_type === 'month' ? (
+                    <>
+                      {id === 1 ? (
+                        <></>
+                      ) : (
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                          }}
+                          className={cn(styles.price, { [styles.green]: is_optimal })}
+                        >
+                          <span>Активен</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {id === 1 ? (
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '100%',
+                          }}
+                          className={cn(styles.price, { [styles.green]: is_optimal })}
+                        >
+                          <span>Активен</span>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  )}
+                </>
+              ) : (
+                <Button
+                  onClick={() => {
+                    // dispatch(closeTariffsModal({}));
+                    paymentHandler(id);
+                    /*
 
                     history.push({
                       pathname: '/payment',
@@ -143,18 +131,17 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                     });
 
                      */
-                    }}
-                    className={styles.button}
-                    variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
-                  >
-                    Активировать
-                  </Button>
-                )}
-              </Grid>
+                  }}
+                  className={styles.button}
+                  variant={id === 1 ? 'outlinePurple' : 'containedPurple'}
+                >
+                  Активировать
+                </Button>
+              )}
             </Grid>
-          </div>
-        ),
-      )}
+          </Grid>
+        </div>
+      ))}
     </>
   );
 };

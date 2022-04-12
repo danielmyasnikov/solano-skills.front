@@ -121,9 +121,9 @@ export const HomePage = () => {
                   и направлениям в сфере Информационных технологий.
                 </div>
                 <div className={styles.offer__btnDiv}>
-                  <HashLink to="/#ways">
+                  <Link to="/courses">
                     <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
-                  </HashLink>
+                  </Link>
                 </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
@@ -138,7 +138,7 @@ export const HomePage = () => {
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
                 <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
-                <Registration key={'home_offer'} isModal variant={'home_offer'} />
+                <Registration isModal variant="home_offer" />
               </div>
             </section>
 

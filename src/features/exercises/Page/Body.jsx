@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Exercise from '@src/features/exercises/views/Simple';
+import Exercise from '@src/features/exercises/views/Exercise';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectRootExercise } from '@src/features/exercises/store/selectors';
+import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { styled } from '@mui/material/styles';
@@ -12,10 +12,7 @@ import { CongratulationsModal } from './CongragulationsModal';
 import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
-import {
-  useGetCoursesQuery,
-  useRefetchCoursesMutation,
-} from '@src/features/courses/courses.api.ts';
+import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
 
 const Root = styled(Box)`
   display: flex;
@@ -26,10 +23,7 @@ const Root = styled(Box)`
   width: 100%;
   overflow: hidden;
 
-  padding-top: 30px;
-  padding-bottom: 50px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 30px 24px 50px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -72,18 +66,18 @@ export default function ExercisePageBody() {
         setShowCourseIsNotCompletedModal(true);
         break;
       default:
+        if (exercise.next_exercise_id) {
+          if (exercise.is_free || !!profile.subscription_type) {
+            await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+          } else {
+            dispatch(openPleasePayModal());
+          }
+        } else {
+          if (!isAuth) {
+            dispatch(openSignUpModal({}));
+          }
+        }
         break;
-    }
-    if (exercise.next_exercise_id) {
-      if (exercise.is_free || !!profile.subscription_type) {
-        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
-      } else {
-        dispatch(openPleasePayModal());
-      }
-    } else {
-      if (!isAuth) {
-        dispatch(openSignUpModal({}));
-      }
     }
   };
 

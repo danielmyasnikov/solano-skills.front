@@ -90,12 +90,11 @@ const FailFIOModal = ({ isShow }) => {
   const history = useHistory();
   const [value, setValue] = useState('');
   const { courseId } = useParams();
-  const [takeCertificateMutation] = useTakeCertificateWithFioMutation();
+  const [takeCertificateMutation, { isLoading: isUpdating }] = useTakeCertificateWithFioMutation();
   const takeCertificate = async () => {
     const res = await takeCertificateMutation({ courseId, name: value });
     history.push(`/certificates/${res.data.id}`);
   };
-
   return (
     <Modal open={isShow}>
       <Root>
@@ -114,8 +113,8 @@ const FailFIOModal = ({ isShow }) => {
           <h2>Упс, у нас нет данных для вашего сертификата</h2>
           <p>Пожалуйста, заполните полностью Ваше ФИО</p>
           <Input value={value} onChange={(e) => setValue(e.target.value)} placeholder="ФИО" />
-          <Button variant="containedPurple" onClick={takeCertificate}>
-            Подтвердить
+          <Button variant="containedPurple" onClick={takeCertificate} disabled={isUpdating}>
+            {isUpdating ? 'Загружаем сертификат...' : 'Подтвердить'}
           </Button>
         </div>
       </Root>
