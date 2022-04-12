@@ -58,7 +58,6 @@ function App() {
           ))}
           <Route component={NotFoundPage} />
         </Switch>
-        {env.isProduction && <YMInitializer accounts={[env.analytics.yandexTrackingId]} />}
       </div>
     </ThemeProvider>
   );

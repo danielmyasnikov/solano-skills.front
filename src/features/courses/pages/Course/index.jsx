@@ -67,11 +67,7 @@ export const CoursePage = () => {
             description={course?.long_description}
             slug={course?.slug}
           />
-          <CourseSidebar
-            coauthors={course?.coauthors}
-            datasets={course?.datasets}
-            tracks={course?.career_tracks}
-          />
+          <CourseSidebar coauthors={course?.coauthors} datasets={course?.datasets} />
         </div>
       </div>
     </div>
