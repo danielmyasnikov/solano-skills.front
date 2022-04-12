@@ -109,11 +109,6 @@ const Output = ({ variant }) => {
   }, [rootExercise]);
 
   useEffect(() => {
-    if (rootExercise && exercise && terminal.kernelId) {
-    }
-  }, [rootExercise, exercise, terminal.kernelId]);
-
-  useEffect(() => {
     if (terminal.bytePayload.length > 0) {
       setActiveTab('plots');
     }

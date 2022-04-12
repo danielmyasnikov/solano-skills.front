@@ -29,6 +29,11 @@ export const terminalSlice = createSlice({
       state.kernelId = '';
       state.bytePayload = [];
     },
+    clearMessage: (state, action) => {
+      state.message = {
+        status: '',
+      };
+    },
   },
   extraReducers: {
     [compileCode.pending.type]: (state) => {
@@ -77,9 +82,6 @@ export const terminalSlice = createSlice({
       state.status = 'success';
       if (action.payload.type === 'compileExercise') {
         state.outputs = [...state.outputs, { ...action.payload.data }] as any;
-        if (action.payload.data.bytePayload) {
-          state.bytePayload = [...state.bytePayload, action.payload.data.bytePayload] as any;
-        }
       } else {
         state.outputs = [
           ...state.outputs,
@@ -91,6 +93,9 @@ export const terminalSlice = createSlice({
           },
           { ...action.payload.data },
         ] as any;
+      }
+      if (action.payload.data.bytePayload) {
+        state.bytePayload = [...state.bytePayload, action.payload.data.bytePayload] as any;
       }
       state.message = {
         status: '',

@@ -85,6 +85,7 @@ function Exercise({ goNext }) {
 
             if (active < total) {
               setStep(active + 1);
+              dispatch(terminalSlice.actions.clearMessage());
             }
           }
         }
