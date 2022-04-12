@@ -65,7 +65,7 @@ const Root = styled(Box)`
 export const CongratulationsModal = ({ isShow }) => {
   const history = useHistory();
   const { courseId } = useParams();
-  const [takeCertificateMutation] = useTakeCertificateMutation();
+  const [takeCertificateMutation, { isLoading: isUpdating }] = useTakeCertificateMutation();
   const takeCertificate = async () => {
     const res = await takeCertificateMutation({ courseId });
     history.push(`/certificates/${res.data.id}`);

@@ -90,7 +90,7 @@ const FailFIOModal = ({ isShow }) => {
   const history = useHistory();
   const [value, setValue] = useState('');
   const { courseId } = useParams();
-  const [takeCertificateMutation] = useTakeCertificateWithFioMutation();
+  const [takeCertificateMutation, { isLoading: isUpdating }] = useTakeCertificateWithFioMutation();
   const takeCertificate = async () => {
     const res = await takeCertificateMutation({ courseId, name: value });
     history.push(`/certificates/${res.data.id}`);
