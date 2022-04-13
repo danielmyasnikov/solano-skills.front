@@ -15,6 +15,7 @@ import { Redirect, useLocation } from 'react-router';
 import { getProfile } from '@store/profile/actions';
 import { AuthorizationByEmail } from '../authorizationByEmail';
 import { Button } from '@mui/material';
+import Helmet from 'react-helmet';
 
 export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = false }) => {
   const dispatch = useDispatch();

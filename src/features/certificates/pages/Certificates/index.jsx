@@ -21,6 +21,7 @@ import styles from './styles.module.less';
 import { Preloader } from '@components/mui/Preloader';
 import { Button, Grid } from '@mui/material';
 import { Redirect } from 'react-router';
+import Helmet from 'react-helmet';
 
 const CertificatesPage = () => {
   const fullnameRef = useRef();
@@ -87,6 +88,7 @@ const CertificatesPage = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title="Сертификаты" />
       <div className={styles.header}>
         <h1 className={styles.title}>Сертификаты</h1>
         <p className={styles.description}>

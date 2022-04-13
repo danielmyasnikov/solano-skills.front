@@ -16,10 +16,9 @@ import './index.less';
 import { ModalPortal } from '@components/modals/ModalPortal';
 import { ThemeProvider } from '@mui/material';
 
-import { YMInitializer } from 'react-yandex-metrika';
+import Helmet from 'react-helmet';
 
 import { theme } from './theme';
-import { env } from '@src/app/config';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +39,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Helmet defaultTitle="DeepSkills" titleTemplate="DeepSkills | %s" />
       <div className={styles.wrapper}>
         <Switch>
           {routes.map(({ exact, path, wrap, headerVariant, Component }) => (

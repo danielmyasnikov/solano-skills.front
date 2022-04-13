@@ -16,6 +16,7 @@ import { getProfile } from '@store/profile/actions';
 import { Button } from '@mui/material';
 import { env } from '@src/app/config/index.ts';
 import api from '@src/http/api.ts';
+import Helmet from 'react-helmet';
 
 export const Authorization = () => {
   const dispatch = useDispatch();
@@ -136,6 +137,7 @@ export const Authorization = () => {
 
   return (
     <AuthContainer>
+      <Helmet title="Авторизация" />
       {(forgotPassword && <ForgotPassword />) || (
         <>
           <h1 className={styles.title}>Добро пожаловать</h1>
