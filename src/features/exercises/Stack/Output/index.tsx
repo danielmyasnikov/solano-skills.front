@@ -116,7 +116,7 @@ const Output = ({ variant }: any) => {
       // @ts-ignore
       ref.current?.focus();
     }
-    if (terminal.bytePayload.length > 0) {
+    if (typeof terminal.message.bytePayload === 'string') {
       setActiveTab('plots');
     }
     if (outputRef.current && terminal.outputs) {

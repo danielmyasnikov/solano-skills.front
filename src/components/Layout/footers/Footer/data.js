@@ -5,28 +5,28 @@ export const links = [
     style: 'courses',
     items: [
       {
-        text: 'Манипуляции с данными',
-        link: '/courses/manipulating-data-with-pandas',
-      },
-      // {
-      //   text: 'Введение в shell',
-      //   link: '/courses/introduction-to-shell'
-      // },
-      {
-        text: 'Эффективный код',
-        link: '/courses/writing-efficient-python-code',
+        text: 'Введение в Python для Data Science',
+        link: '/courses/introduction-to-data-science-in-python/',
       },
       {
-        text: 'Введение в Data Science',
-        link: '/courses/introduction-to-data-science-in-python',
+        text: 'Инструменты Python I',
+        link: '/courses/python-toolbox-1/',
       },
       {
-        text: 'Разработка Python пакетов',
-        link: '/courses/developing-python-packages',
+        text: 'Инструменты Python II',
+        link: '/courses/python-toolbox-2/',
       },
       {
-        text: 'Тестирование',
-        link: '/courses/unit-testing-python',
+        text: 'Пишем эффективный код на Python',
+        link: '/courses/writing-efficient-python-code/',
+      },
+      {
+        text: 'Понятие веб-скрапинга в Python',
+        link: '/courses/web-scraping/',
+      },
+      {
+        text: 'Объектно-ориентированное программирование в Python',
+        link: '/courses/object-oriented-programming-python/',
       },
     ],
   },

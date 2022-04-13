@@ -144,7 +144,7 @@ export const HomePage = () => {
 
             <section className={styles.ways} id="ways">
               <div className={styles.ways__title}>
-                Подход к обучению программирования, <span>разработанный экспертами</span>
+                Подход к обучению программированию, <span>разработанный экспертами</span>
               </div>
               {renderSlides}
             </section>
@@ -185,7 +185,7 @@ export const HomePage = () => {
               <div className={styles.slogan__description}>
                 Обучатся Вы можете по своему собственному графику занятий. Удаленное обучение
                 программированию не привязывает обучающегося к месту обязательного нахождения. Вы
-                можете обучаться с любой точки планеты где есть Интернет.
+                можете обучаться с любой точки планеты, где есть Интернет.
               </div>
               <div className={styles.slogan__btn}>
                 <Link to={'/courses'}>

@@ -35,9 +35,9 @@ export const MailingList = () => {
       <div className={styles.accept}>
         <CheckboxBtn value={accept} handleChange={(e) => setAccept(e.target.checked)} />
         <span>
-          Я принимаю условия <Link>Пользовательского соглашения</Link> и даю своё согласие на
-          обработку персональных данных на условиях, определенных&nbsp;
-          <Link>Политикой конфиденциальности</Link>.
+          Я принимаю условия <Link to="/knowledge">Пользовательского соглашения</Link> и даю своё
+          согласие на обработку персональных данных на условиях, определенных&nbsp;
+          <Link to="/knowledge/privacy-policy/">Политикой конфиденциальности</Link>.
         </span>
       </div>
     </div>
