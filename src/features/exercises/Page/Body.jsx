@@ -13,6 +13,8 @@ import { NotCompleteModal } from '@src/features/exercises/Page/NotCompleteModal'
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 import { openPleasePayModal, openSignUpModal } from '@store/global/modals';
 import { useRefetchCoursesMutation } from '@src/features/courses/courses.api.ts';
+import Helmet from 'react-helmet';
+import { AuthContainer } from '@components/auth/authContainer';
 
 const Root = styled(Box)`
   display: flex;
@@ -66,18 +68,23 @@ export default function ExercisePageBody() {
         setShowCourseIsNotCompletedModal(true);
         break;
       default:
+        if (exercise.next_exercise_id) {
+          const payedTill = new Date(`${profile.payed_till}T00:00:00Z`);
+          const now = new Date();
+          now.setHours(0, 0, 0, 0);
+          const isActiveSub = payedTill >= now;
+
+          if (exercise.is_free || isActiveSub) {
+            await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
+          } else {
+            dispatch(openPleasePayModal());
+          }
+        } else {
+          if (!isAuth) {
+            dispatch(openSignUpModal({}));
+          }
+        }
         break;
-    }
-    if (exercise.next_exercise_id) {
-      if (exercise.is_free || !!profile.subscription_type) {
-        await history.push(`/courses/${courseId}/exercises/${exercise.next_exercise_id}`);
-      } else {
-        dispatch(openPleasePayModal());
-      }
-    } else {
-      if (!isAuth) {
-        dispatch(openSignUpModal({}));
-      }
     }
   };
 
@@ -103,6 +110,7 @@ export default function ExercisePageBody() {
 
   return (
     <>
+      <Helmet title={exercise?.title ? exercise.title : 'Упражнение'} />
       <FailFIOModal isShow={showFailFIOModal} />
       <CongratulationsModal isShow={showCongratulationsModal} />
       <NotCompleteModal isShow={showCourseIsNotCompletedModal} />

@@ -40,16 +40,26 @@ export const CourseInfo = ({ id, hours, videos, exercises, xps, onStartLearning,
       </div>
 
       <div className={styles.btnWrapper}>
-        <Button
-          variant="containedPurple"
-          className={styles.btn}
-          onClick={() => onStartLearning?.()}
-        >
-          Начать обучение
-        </Button>
+        {status !== 'done' && (
+          <Button
+            variant="containedPurple"
+            className={styles.btn}
+            onClick={() => onStartLearning?.()}
+          >
+            {status === 'in_progress' ? 'Продолжить обучение' : 'Начать обучение'}
+          </Button>
+        )}
         {status === 'in_progress' && (
           <Button variant="outlinePurple" onClick={() => dispatch(openResetProgresseModal({ id }))}>
             Сбросить прогресс
+          </Button>
+        )}
+        {status === 'done' && (
+          <Button
+            variant="containedPurple"
+            onClick={() => dispatch(openResetProgresseModal({ id }))}
+          >
+            Пройти заново
           </Button>
         )}
       </div>

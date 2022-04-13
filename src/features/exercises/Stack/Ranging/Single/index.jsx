@@ -101,7 +101,11 @@ const SingleRanging = () => {
 
     if (!error) {
       if (isAuth) {
-        if (rootExercise.is_free || !!profile.subscription_type) {
+        const payedTill = new Date(`${profile.payed_till}T00:00:00Z`);
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        const isActiveSub = payedTill >= now;
+        if (rootExercise.is_free || isActiveSub) {
           dispatch(exerciseSlice.actions.onComplete(undefined));
         } else {
           dispatch(openPleasePayModal());

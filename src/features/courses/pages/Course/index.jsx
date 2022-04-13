@@ -10,6 +10,7 @@ import { Skeleton } from '@mui/material';
 import { useEffect } from 'react';
 import { getProfile } from '@store/profile/actions';
 import { useDispatch } from 'react-redux';
+import Helmet from 'react-helmet';
 
 export const CoursePage = () => {
   const { courseId } = useParams();
@@ -25,24 +26,13 @@ export const CoursePage = () => {
   };
 
   useEffect(() => {
-    const uid = localStorage.getItem('uid');
-    const client = localStorage.getItem('client');
-    const accessToken = localStorage.getItem('access-token');
-
     updateCourses();
-    dispatch(
-      getProfile({
-        headers: {
-          uid,
-          client,
-          'access-token': accessToken,
-        },
-      }),
-    );
+    dispatch(getProfile());
   }, []);
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title={course ? course.title : 'Курс'} />
       <div className={styles.header}>
         <h1 className={styles.title}>
           {course ? course.title : <Skeleton variant="text" width="40%" />}
@@ -79,11 +69,7 @@ export const CoursePage = () => {
             description={course?.long_description}
             slug={course?.slug}
           />
-          <CourseSidebar
-            coauthors={course?.coauthors}
-            datasets={course?.datasets}
-            tracks={course?.career_tracks}
-          />
+          <CourseSidebar coauthors={course?.coauthors} datasets={course?.datasets} />
         </div>
       </div>
     </div>

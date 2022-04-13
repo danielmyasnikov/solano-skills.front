@@ -29,7 +29,7 @@ export const certificateApi = createApi({
       query: ({ courseId, name }) => ({
         url: `courses/${courseId}/certificates`,
         method: 'POST',
-        body: {
+        data: {
           profile: { name },
         },
       }),

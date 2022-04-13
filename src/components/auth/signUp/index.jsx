@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styles from './styles.module.less';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ym from 'react-yandex-metrika';
 import Close from '@assets/Close.js';
 import * as AuthStore from '@store/auth';
 import { AuthContainer } from './../authContainer';
@@ -16,6 +15,7 @@ import { Redirect, useLocation } from 'react-router';
 import { getProfile } from '@store/profile/actions';
 import { AuthorizationByEmail } from '../authorizationByEmail';
 import { Button } from '@mui/material';
+import Helmet from 'react-helmet';
 
 export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = false }) => {
   const dispatch = useDispatch();
@@ -156,9 +156,6 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
   }
 
   if (isReg) {
-    if (process.env.NODE_ENV === 'production') {
-      ym('reachGoal', 'register');
-    }
     onClose?.();
     // if (location.pathname !== '/sign-up' && location.pathname !== '/') {
     //   return <Redirect to={`/onBoard?returnUrl=${location.pathname}`} />;

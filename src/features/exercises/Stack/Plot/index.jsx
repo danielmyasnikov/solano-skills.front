@@ -3,7 +3,7 @@ import cn from 'classnames';
 import GraphArrow from '@assets/GraphArrow';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectTerminal } from '../../../../store/selectors/terminal.selector';
+import { selectTerminal } from '../../store/selectors/terminal.selector';
 
 export const Plot = ({ hide }) => {
   const terminal = useSelector(selectTerminal);

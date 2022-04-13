@@ -17,6 +17,7 @@ import { useLocation } from 'react-router-dom';
 import { PaymentErrorModal } from '@src/features/payment/PaymentErrorModal';
 import { Grid } from '@mui/material';
 import { getProfile } from '@store/profile/actions';
+import Helmet from 'react-helmet';
 
 export const CoursesPage = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ export const CoursesPage = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title="Курсы" />
       <div className={styles.header}>
         <h1 className={styles.title}>Курсы</h1>
         <p className={styles.description}>

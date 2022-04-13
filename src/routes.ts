@@ -17,7 +17,6 @@ import ProfessionPage from '@src/features/professions/pages/ProfessionPage';
 import { ProgressPage } from '@components/progressPage';
 import Settings from '@src/features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
-import { OnBoardPage } from '@src/features/onBoard';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
 
 import { Instructors } from '@src/features/instructors';
@@ -52,12 +51,14 @@ export const routes: {
     wrap: false,
     exact: true,
   },
-  {
+  /*
+   {
     path: '/learning',
     Component: LearningPage,
     wrap: false,
     exact: true,
   },
+   */
   {
     path: '/courses',
     Component: CoursesPage,
@@ -76,6 +77,8 @@ export const routes: {
     wrap: true,
     exact: true,
   },
+  /*
+
   {
     path: '/skills',
     Component: SkillsPage,
@@ -88,12 +91,16 @@ export const routes: {
     wrap: true,
     exact: true,
   },
+
+   */
   {
     path: '/reset-password/:resetToken',
     Component: PasswordResetPage,
     wrap: false,
     exact: true,
   },
+  /*
+
   {
     path: '/professions',
     Component: ProfessionsPage,
@@ -106,6 +113,8 @@ export const routes: {
     wrap: true,
     exact: true,
   },
+
+   */
   {
     path: '/settings',
     Component: Settings,
@@ -130,12 +139,7 @@ export const routes: {
     wrap: true,
     exact: true,
   },
-  {
-    path: '/progress',
-    Component: ProgressPage,
-    wrap: true,
-    exact: true,
-  },
+
   // {
   //   path: '/onBoard',
   //   Component: OnBoardPage,

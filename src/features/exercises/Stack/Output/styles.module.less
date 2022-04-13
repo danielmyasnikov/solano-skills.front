@@ -170,18 +170,29 @@
   align-items: center;
   padding: 10px 20px 10px 20px;
 
-  input {
+  .shellInput {
+    position: relative;
     flex: 1;
-    font-size: 16px;
-    background: none;
     margin-left: 10px;
-    padding-left: 10px;
-    color: #fff;
-    line-height: 24px;
-    border: 1px solid #545266;
-    &:focus {
-      outline: none;
-      border: 1px solid #858396;
+
+    textarea {
+      resize: none;
+    }
+
+    textarea,
+    input {
+      width: 100%;
+      color: white;
+      font-size: 16px;
+      background: none;
+      padding-left: 10px;
+      line-height: 24px;
+      border: 1px solid #545266;
+
+      &:focus {
+        outline: none;
+        border: 1px solid #858396;
+      }
     }
   }
 }

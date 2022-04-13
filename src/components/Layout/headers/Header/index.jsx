@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -113,15 +113,8 @@ const Header = ({ headerRef }) => {
             )}
           </div>
         </header>
+        {actionMenu && <ActionMenu />}
       </div>
-      {actionMenu && (
-        <ActionMenu
-          totalXP={profile.xp}
-          onSupport={() => dispatch(openFeedbackModal({}))}
-          onOutsideClick={() => setShowActionMenu(!actionMenu)}
-          onCloseMenu={() => setShowActionMenu(!actionMenu)}
-        />
-      )}
     </>
   );
 };

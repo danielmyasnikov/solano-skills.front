@@ -8,11 +8,12 @@ import { feedbacks, images, practices, slides } from './data';
 import BurgerMenu from '@components/common/burgerMenu';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
-import { Grid } from '@mui/material';
+import { Grid, ThemeProvider } from '@mui/material';
 import { Tariffs } from '@components/modals/TariffsModal/Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
 import { MailingList } from './ MailingList';
 import { LandingHeader } from '@components/landings/Header';
+import Helmet from 'react-helmet';
 
 export const TariffsPage = () => {
   const { data: tariffs, isLoading } = useGetTariffsQuery();
@@ -45,6 +46,7 @@ export const TariffsPage = () => {
 
   return (
     <div className={styles.home}>
+      <Helmet title="Тарифы" />
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />

@@ -11,6 +11,7 @@ const initialState = {
   status: 'ide',
   outputs: [],
   message: {
+    bytePayload: null,
     status: '',
   },
   kernelId: '',
@@ -24,6 +25,7 @@ export const terminalSlice = createSlice({
     clear: (state, action) => {
       state.outputs = [];
       state.message = {
+        bytePayload: null,
         status: '',
       };
       state.kernelId = '';
@@ -31,6 +33,7 @@ export const terminalSlice = createSlice({
     },
     clearMessage: (state, action) => {
       state.message = {
+        bytePayload: null,
         status: '',
       };
     },
@@ -38,33 +41,66 @@ export const terminalSlice = createSlice({
   extraReducers: {
     [compileCode.pending.type]: (state) => {
       state.status = 'loading';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [compileCode.rejected.type]: (state) => {
       state.status = 'fail';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [compileShell.pending.type]: (state) => {
       state.status = 'loading';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [compileShell.rejected.type]: (state) => {
       state.status = 'fail';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [startKernel.pending.type]: (state) => {
       state.status = 'loading';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [startKernel.rejected.type]: (state) => {
       state.status = 'fail';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [checkAnswer.pending.type]: (state) => {
       state.status = 'loading';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
     [checkAnswer.rejected.type]: (state) => {
       state.status = 'fail';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
     },
 
     [compileCode.fulfilled.type]: (state, action) => {
       state.status = 'success';
       state.outputs = [...state.outputs, action.payload] as any;
       state.message = {
+        bytePayload: null,
         status: '',
       };
       if (action.payload.bytePayload) {
@@ -74,14 +110,26 @@ export const terminalSlice = createSlice({
     [startKernel.fulfilled.type]: (state, action) => {
       state.status = 'success';
       state.message = {
+        bytePayload: null,
         status: '',
       };
       state.kernelId = action.payload.output;
     },
     [compileShell.fulfilled.type]: (state, action) => {
       state.status = 'success';
+      state.message = {
+        bytePayload: null,
+        status: '',
+      };
       if (action.payload.type === 'compileExercise') {
         state.outputs = [...state.outputs, { ...action.payload.data }] as any;
+        if (action.payload.data.bytePayload) {
+          state.bytePayload = [...state.bytePayload, action.payload.data.bytePayload] as any;
+          state.message = {
+            bytePayload: action.payload.data.bytePayload,
+            status: state.message.status,
+          };
+        }
       } else {
         state.outputs = [
           ...state.outputs,
@@ -94,12 +142,6 @@ export const terminalSlice = createSlice({
           { ...action.payload.data },
         ] as any;
       }
-      if (action.payload.data.bytePayload) {
-        state.bytePayload = [...state.bytePayload, action.payload.data.bytePayload] as any;
-      }
-      state.message = {
-        status: '',
-      };
     },
     [checkAnswer.fulfilled.type]: (state, action) => {
       state.status = 'success';

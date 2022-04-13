@@ -5,6 +5,9 @@ const initialState: {
   exercise: {
     id: number;
     type: string;
+    is_graph_required: boolean;
+    multy_console: boolean;
+    presentation_url: string;
   };
 
   code: string;
@@ -43,6 +46,9 @@ const initialState: {
   exercise: {
     id: NaN,
     type: '',
+    is_graph_required: false,
+    multy_console: false,
+    presentation_url: '',
   },
 
   code: '',

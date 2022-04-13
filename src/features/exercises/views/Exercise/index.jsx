@@ -8,7 +8,7 @@ import { selectKernelId } from '../../store/selectors/terminal.selector';
 import ErrorMessage from '@src/features/exercises/views/Exercise/ErrorMessage';
 import CompletedTaskModal from '@src/features/exercises/views/Exercise/CompletedTaskModal';
 
-import Stack from './Stack';
+import Stack from '../../Stack';
 import WarningMobile from '@src/features/exercises/views/Exercise/WarningMobile';
 import Hint from '@src/features/exercises/views/Exercise/Hints/Hint';
 import HintFeedback from '@src/features/exercises/views/Exercise/Hints/HintFeedback';
@@ -118,6 +118,8 @@ function Exercise({ goNext }) {
           <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
           {sidebarOpen &&
             (kernelId ||
+              exercise.type === 'quiz' ||
+              exercise.type === 'quiz_with_script' ||
               exercise.type === 'single_bascket' ||
               exercise.type === 'multiple_bascket') && (
               <>
@@ -146,7 +148,7 @@ function Exercise({ goNext }) {
           )}
       </div>
 
-      <Stack />
+      {!exercise.without_script && <Stack />}
     </>
   );
 }

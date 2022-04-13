@@ -8,6 +8,7 @@ export const exercisesSlice = createSlice({
     status: 'idle',
 
     exercise: {
+      id: NaN,
       type: '',
     },
 

@@ -15,8 +15,8 @@ import {
   selectKernelId,
   selectTerminal,
   selectTerminalStatus,
-} from '../../../../store/selectors/terminal.selector';
-import { checkAnswer, compileShell } from '../../../../store/actions/terminal.actions';
+} from '../../store/selectors/terminal.selector';
+import { checkAnswer, compileShell } from '../../store/actions/terminal.actions';
 
 import Reset from '@assets/Reset';
 
@@ -138,7 +138,11 @@ const Terminal = () => {
 
   const handleAnswer = () => {
     if (isAuth) {
-      if (rootExercise.is_free || !!profile.subscription_type) {
+      const payedTill = new Date(`${profile.payed_till}T00:00:00Z`);
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      const isActiveSub = payedTill >= now;
+      if (rootExercise.is_free || isActiveSub) {
         dispatch(
           compileShell({
             code: activeTab === 'solution' ? solutionContent : code,
@@ -147,16 +151,17 @@ const Terminal = () => {
             isGraphRequired: exercise?.is_graph_required,
             type: 'compileExercise',
           }),
-        );
-        dispatch(
-          checkAnswer({
-            code: activeTab === 'solution' ? solutionContent : code,
-            exerciseId: exercise?.id,
-            isGraphRequired: exercise?.is_graph_required,
-            xp,
-            userId: user_id,
-          }),
-        );
+        ).then(() => {
+          dispatch(
+            checkAnswer({
+              code: activeTab === 'solution' ? solutionContent : code,
+              exerciseId: exercise?.id,
+              isGraphRequired: exercise?.is_graph_required,
+              xp,
+              userId: user_id,
+            }),
+          );
+        });
       } else {
         dispatch(openPleasePayModal());
       }
@@ -225,7 +230,11 @@ const Terminal = () => {
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  if (rootExercise.is_free || !!profile.subscription_type) {
+                  const payedTill = new Date(`${profile.payed_till}T00:00:00Z`);
+                  const now = new Date();
+                  now.setHours(0, 0, 0, 0);
+                  const isActiveSub = payedTill >= now;
+                  if (rootExercise.is_free || isActiveSub) {
                     dispatch(exerciseSlice.actions.updateCode(exercise?.sample_code));
                   } else {
                     dispatch(openPleasePayModal());
@@ -242,7 +251,11 @@ const Terminal = () => {
               variant={'outlineWhite'}
               onClick={() => {
                 if (isAuth) {
-                  if (rootExercise.is_free || !!profile.subscription_type) {
+                  const payedTill = new Date(`${profile.payed_till}T00:00:00Z`);
+                  const now = new Date();
+                  now.setHours(0, 0, 0, 0);
+                  const isActiveSub = payedTill >= now;
+                  if (rootExercise.is_free || isActiveSub) {
                     dispatch(
                       compileShell({
                         code: activeTab === 'solution' ? solutionContent : code,

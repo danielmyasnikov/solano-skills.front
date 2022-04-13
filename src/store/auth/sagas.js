@@ -186,10 +186,10 @@ export function* registration(action) {
       },
     });
   } catch (err) {
-    const emailError = err.response.data.errors.email;
-    const passwordError = err.response.data.errors.password || '';
-    const passwordConfirmationError = err.response.data.errors.password_confirmation || '';
-    const fullMessagesError = err.response.data.errors.full_messages || '';
+    const emailError = err?.response?.data?.errors?.email;
+    const passwordError = err?.response?.data?.errors?.password || '';
+    const passwordConfirmationError = err?.response?.data?.errors?.password_confirmation || '';
+    const fullMessagesError = err?.response?.data?.errors?.full_messages || '';
     yield put({
       type: REGISTRATION_FAILED,
       payload: {

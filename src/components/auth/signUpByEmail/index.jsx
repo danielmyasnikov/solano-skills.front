@@ -64,11 +64,9 @@ export const RegistrationByEmail = ({
         </div>
       </div>
       <div
-        className={cn(
-          styles.inputWrapper,
-          { [styles.inputWrapperError]: errors.passwordConfirmationError },
-          { [styles.hidden]: variant === 'home_offer' || variant === 'home_end' },
-        )}
+        className={cn(styles.inputWrapper, {
+          [styles.inputWrapperError]: errors.passwordConfirmationError,
+        })}
       >
         <InputPassword
           value={passwordConfirmation}

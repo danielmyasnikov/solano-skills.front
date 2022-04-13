@@ -19,6 +19,7 @@ import { Preloader } from '@components/mui/Preloader';
 
 import { openUnsubscribeModal } from '@store/global/modals';
 import { Api } from '@src/api/api';
+import Helmet from 'react-helmet';
 
 const Profile = () => {
   const [activeEditField, setActiveEditField] = useState('');
@@ -96,12 +97,18 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    Api.get(`/api/v1/courses_done`).then((e) => {
-      setDoneCourses(e);
-    });
-    Api.get(`/api/v1/courses_progress`).then((e) => {
-      setInProgressCourses(e);
-    });
+    try {
+      Api.get(`/api/v1/courses_done`).then((e) => {
+        setDoneCourses(e);
+      });
+      Api.get(`/api/v1/courses_progress`).then((e) => {
+        if (e) {
+          setInProgressCourses(e);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
   useEffect(() => {
@@ -136,6 +143,7 @@ const Profile = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title="Профиль" />
       <HeaderPage content="profile" />
       {(Object.keys(profile).length !== 0 && (
         <div className={styles.content}>

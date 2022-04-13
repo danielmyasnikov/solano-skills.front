@@ -9,6 +9,7 @@ import { openFeedbackModal } from '@store/global/modals';
 
 import styles from './styles.module.less';
 import { Requisites } from './Requisites';
+import Helmet from 'react-helmet';
 
 export const AboutPage: FC = ({}) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -26,6 +27,7 @@ export const AboutPage: FC = ({}) => {
 
   return (
     <div className={styles.container}>
+      <Helmet title="О Нас" />
       <HeaderHome handleBurger={() => setShowMenu(!showMenu)} />
       <div className={styles.wrapper}>
         <span className={styles.wrapper__title}>Контакты</span>
