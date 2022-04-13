@@ -12,6 +12,7 @@ import Footer from '../../Layout/footers/Footer';
 import off from '@assets/pdf/Договор Публичной Оферты.pdf';
 import pol from '@assets/pdf/Политика Конфиденциальности.pdf';
 import { Requisites } from '../AboutPage/Requisites';
+import Helmet from 'react-helmet';
 type AboutTab = 'offer' | 'privacy-policy' | 'requisites';
 
 const availableRoutes = ['offer', 'privacy-policy', 'requisites'];
@@ -53,6 +54,7 @@ export const KnowledgePage = () => {
 
   return (
     <div className={styles.home}>
+      <Helmet title="База знаний" />
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />

@@ -10,6 +10,7 @@ import { Skeleton } from '@mui/material';
 import { useEffect } from 'react';
 import { getProfile } from '@store/profile/actions';
 import { useDispatch } from 'react-redux';
+import Helmet from 'react-helmet';
 
 export const CoursePage = () => {
   const { courseId } = useParams();
@@ -31,6 +32,7 @@ export const CoursePage = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title={course ? course.title : 'Курс'} />
       <div className={styles.header}>
         <h1 className={styles.title}>
           {course ? course.title : <Skeleton variant="text" width="40%" />}
