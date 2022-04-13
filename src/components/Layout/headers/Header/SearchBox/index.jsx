@@ -36,7 +36,9 @@ const SearchBox = ({ isShow, courses, searchValue }) => {
     searchValue === ''
       ? courses?.map((e) => ({ title: e.title, icon: e.icon, link: `/courses/${e.slug}` }))
       : courses
-          ?.filter((e) => e.title.includes(searchValue))
+          ?.filter((e) =>
+            e.title.toString().toLowerCase().includes(searchValue.toString().toLowerCase()),
+          )
           .map((e) => ({ title: e.title, icon: e.icon, link: `/courses/${e.slug}` }));
 
   return (
