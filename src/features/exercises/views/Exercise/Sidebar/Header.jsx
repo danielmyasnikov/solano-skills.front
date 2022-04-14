@@ -130,7 +130,7 @@ const SidebarHeader = () => {
       {open && (
         <Content onClick={toggleSidebarHeader}>
           <IconWrapper className="left">
-            <img width="24px" height="24px" src={TerminalImg} alt="Logo" />
+            <img width="24px" height="24px" src={TerminalImg} alt="Логотип компании" />
           </IconWrapper>
           <Title>Упражнение</Title>
         </Content>

@@ -47,7 +47,7 @@ const FeedbackModal = ({ onClose }) => {
   const successSendFeedback = () => {
     return (
       <div className={styles.contentForm}>
-        <img src={SuccessIcon} alt="Success Icon" />
+        <img src={SuccessIcon} alt="Иконка успешного действия" />
         <h2>Спасибо за обратную связь</h2>
         <span>В ближайшее время мы проверим и устраним ошибку, которую вы указали.</span>
       </div>

@@ -27,7 +27,7 @@ export const Instructor = ({ id, name, url }) => {
     <div className={styles.wrapper}>
       <span>{name}</span>
       <a className={styles.instructor} href={url} target="_blank" rel="noreferrer">
-        <img src={getPrevImg()} alt="diploma" />
+        <img src={getPrevImg()} alt="Картинка диплома" />
       </a>
     </div>
   );

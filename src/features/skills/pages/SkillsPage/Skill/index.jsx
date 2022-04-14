@@ -10,7 +10,7 @@ const Skill = ({ title, description, info }) => {
     <div className={styles.skill}>
       <div className={styles.main}>
         <div className={styles.logo}>
-          <img src={skillLogo} alt={'навык'} />
+          <img src={skillLogo} alt="Иконка навыка" />
         </div>
         <div className={styles.title}>
           <div>{title}</div>

@@ -27,12 +27,16 @@ export const CourseProgress = ({
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.containerLeft}>
-          <img className={styles.containerLeftLogo} src={courseLogo} alt="courseLogo" />
+          <img className={styles.containerLeftLogo} src={courseLogo} alt="Логотип курса" />
           <div className={styles.containerLeftInfo}>
             <span className={styles.containerLeftInfoStatus}>{status}</span>
             <div className={styles.containerLeftInfoTitleContainer}>
               <span className={styles.containerLeftInfoTitle}>{courseTitle}</span>
-              <img className={styles.containerLeftInfoArrow} src={ArrowRight} alt="arrow" />
+              <img
+                className={styles.containerLeftInfoArrow}
+                src={ArrowRight}
+                alt="Указатель вправо"
+              />
             </div>
             <div className={styles.containerLeftProgress}>
               <div className={styles.containerLeftProgressBar}>
@@ -44,7 +48,7 @@ export const CourseProgress = ({
                 />
               </div>
               <div className={styles.containerLeftExercise}>
-                <img className={styles.containerLeftExerciseClock} src={Clock} alt="clock" />
+                <img className={styles.containerLeftExerciseClock} src={Clock} alt="Иконка часов" />
                 <span className={styles.containerLeftExerciseText}>
                   Осталось
                   {` ${amountOfExercise} ${numberDeclension(amountOfExercise, [

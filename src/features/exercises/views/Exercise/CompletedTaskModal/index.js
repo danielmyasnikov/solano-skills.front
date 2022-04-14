@@ -27,7 +27,12 @@ const CompletedTaskModal = ({ onClick, onClose }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>
-        <img src={Close} className={styles.closeModal} onClick={onClose} />
+        <img
+          src={Close}
+          className={styles.closeModal}
+          onClick={onClose}
+          alt="Иконка закрытия окна"
+        />
         <Complete />
         <span className={styles.xp}>{value !== 0 ? `+${value} XP` : `${value} XP`}</span>
         <div className={styles.rating}>

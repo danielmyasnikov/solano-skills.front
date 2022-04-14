@@ -21,6 +21,7 @@ import { addTracks, getTracks, searchTracks } from './store/actions';
 import { hideTracksModal } from './store/slice';
 import { Button } from '@mui/material';
 import Search from '@components/mui/Search';
+import { Helmet } from 'react-helmet';
 
 export const OnBoardPage = () => {
   const [searchCourse, setSearchCourse] = useState('');
@@ -55,8 +56,11 @@ export const OnBoardPage = () => {
   return (
     <>
       <div className={styles.wrapper}>
+        <Helmet title="OnBoard">
+          <meta name="description" content="Знакомство с продуктом." />
+        </Helmet>
         <div className={styles.header}>
-          <img className={styles.headerLogo} src={logo} alt="logo" />
+          <img className={styles.headerLogo} src={logo} alt="Логотип компании" />
           <span className={styles.headerTitle}>Добро пожаловать в DeepSkills</span>
         </div>
         <div className={styles.main}>

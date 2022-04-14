@@ -50,7 +50,7 @@ const ListItem = ({ item, isActive, onClick }) => (
       {(item.status === 'untouched' || item.status === 'in_progress') && (
         <div className={styles.point} />
       )}
-      {item.status === 'done' && <img src={Success} alt="success" />}
+      {item.status === 'done' && <img src={Success} alt="Выполнено успешно" />}
       <span className={`${styles.itemTitle} ${styles.itemTitleXP}`}>{item.xp}</span>
     </div>
   </div>
@@ -82,7 +82,7 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
                   })}
                 >
                   <div className={styles.skill__title}>
-                    <img src={skillLogo} alt={'Лого'} />
+                    <img src={skillLogo} alt="Логотип компании" />
                     <div>{partItem.title}</div>
                   </div>
                   <div className={styles.skill__description}>{partItem.description}</div>
@@ -159,7 +159,7 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
           {variant === 'profession' && (
             <div className={cn(styles.takeCertificate, styles[variant])}>
               <div className={styles.skill__number}>
-                <img src={CertificatesBlack} alt="image" />
+                <img src={CertificatesBlack} alt="Превью сертификата" />
               </div>
               <div className={styles.skill__block}>Получение сертификата DeepSkills</div>
             </div>

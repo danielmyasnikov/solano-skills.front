@@ -29,7 +29,7 @@ export const TariffsPage = () => {
   const renderFeedbacks = feedbacks.map(({ avatar, text, author }) => (
     <div className={styles.whatSays__feedback} key={text + author}>
       <div className={styles.whatSays__feedback__photo}>
-        <img src={renderImage(avatar)} />
+        <img src={renderImage(avatar)} alt="Аватар" />
       </div>
       <div className={styles.whatSays__feedback__data}>
         <div className={styles.whatSays__feedback__data__scroll}>
@@ -46,7 +46,12 @@ export const TariffsPage = () => {
 
   return (
     <div className={styles.home}>
-      <Helmet title="Тарифы" />
+      <Helmet title="Тарифы">
+        <meta
+          name="description"
+          content="Изучите навыки работы с данными, необходимые для продвижения по карьерной лестнице."
+        />
+      </Helmet>
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />

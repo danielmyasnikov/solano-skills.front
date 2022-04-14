@@ -55,7 +55,14 @@ export const CoursesPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Helmet title="Курсы" />
+      <Helmet title="Курсы">
+        <meta
+          name="description"
+          content="Пришло время засучить рукава — мы лучше всего учимся на практике. Все наши курсы являются
+          интерактивными, сочетающими короткие видеоролики с практическими упражнениями. Это подход
+          к обучению DeepSkills."
+        />
+      </Helmet>
       <div className={styles.header}>
         <h1 className={styles.title}>Курсы</h1>
         <p className={styles.description}>

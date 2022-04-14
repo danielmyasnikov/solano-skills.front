@@ -12,7 +12,7 @@ export const Card = ({ data, title }) => {
   const renderImg = (type) => {
     switch (type) {
       case 'python':
-        return <img src={Python} alt="Иконка" />;
+        return <img src={Python} alt="Иконка Python" />;
       default:
         break;
     }

@@ -8,6 +8,7 @@ import { SettingsDeleteAccount } from './settingsDeleteAccount';
 import HeaderPage from '@components/common/HeaderPage';
 import { Tariffs } from '@components/modals/TariffsModal/Tariffs';
 import { useGetTariffsQuery } from '@src/features/payment/store/tariffs.api';
+import { Helmet } from 'react-helmet';
 
 const Settings = () => {
   const [active, setActive] = useState('subscription');
@@ -53,6 +54,12 @@ const Settings = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Helmet title="Настройки профиля">
+        <meta
+          name="description"
+          content="Здесь вы можете просматривать информацию о себе, своих достижениях, историю обучения и обновлять свой тарифный план."
+        />
+      </Helmet>
       <HeaderPage content="settings" />
       <div className={styles.container}>
         <div className={styles.setings}>

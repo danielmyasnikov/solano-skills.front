@@ -2,9 +2,10 @@ import { WrapHeader } from '@components/common/wrapHeader';
 import Skill from './Skill';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import { Redirect } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import { useGetSkillsQuery } from '@src/features/skills/skills.api';
 import { Preloader } from '@components/mui/Preloader';
+import { Helmet } from 'react-helmet';
 
 const Wrapper = styled('div')`
   width: 100%;
@@ -37,6 +38,12 @@ const SkillsPage = () => {
 
   return (
     <Wrapper>
+      <Helmet title="Ваши навыки">
+        <meta
+          name="description"
+          content="Отточите свои навыки, выполняя быстрые ежедневные задания на компьютере или в мобильном приложении DeepSkills."
+        />
+      </Helmet>
       <WrapHeader variant={'skills'} />
       <SkillsList>
         {isLoading ? (

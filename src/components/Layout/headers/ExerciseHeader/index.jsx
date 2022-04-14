@@ -78,7 +78,7 @@ const HeaderExercise = ({ headerRef }) => {
         </nav>
         <nav className={cn(styles.headerItem, styles.navbarMenu)}>
           <div className={styles.support} onClick={() => dispatch(openFeedbackModal({}))}>
-            <img src={SupportIcon} alt="support" />
+            <img src={SupportIcon} alt="Иконка службы поддержки" />
           </div>
           {profile.hasOwnProperty('name') && (
             <>

@@ -11,7 +11,7 @@ const Profession = ({ title, description, info }) => {
       {info.certificate && <div className={styles.certificate}>Сертификат Deepskills</div>}
       <div className={styles.main}>
         <div className={styles.logo}>
-          <img src={skillLogo} alt={'Навык'} />
+          <img src={skillLogo} alt="Иконка навыка" />
         </div>
         <div className={styles.title}>{title}</div>
       </div>

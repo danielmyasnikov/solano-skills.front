@@ -18,7 +18,7 @@ export const SettingsInputPassword = ({ placeholder, value, handleChange }) => {
         type={(isShowValue && 'text') || 'password'}
       />
       <div onClick={() => setIsShowValue(!isShowValue)}>
-        <img src={(isShowValue && Hide) || Show} alt="actionIcon" />
+        <img src={(isShowValue && Hide) || Show} alt="Иконка действия" />
       </div>
     </div>
   );

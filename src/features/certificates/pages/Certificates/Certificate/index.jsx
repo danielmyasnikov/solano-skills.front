@@ -22,7 +22,7 @@ const Certificate = ({ id, pdfUrl, jpfUrl }) => {
   return (
     <div className={styles.sertificate}>
       <div className={styles.img}>
-        <img src={jpfUrl || certificateImg} />
+        <img src={jpfUrl || certificateImg} alt="Изображение сертификата" />
       </div>
       <div className={styles.settings}>
         {/*
@@ -30,7 +30,7 @@ const Certificate = ({ id, pdfUrl, jpfUrl }) => {
             <ZoomIcon />
           </Link>
         */}
-        <a href={pdfUrl} download target="_blank">
+        <a href={pdfUrl} download target="_blank" rel="noreferrer">
           <DownloadIcon />
         </a>
         <Tooltip title={value}>

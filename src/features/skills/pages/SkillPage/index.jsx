@@ -6,6 +6,7 @@ import { useGetSkillQuery } from '@src/features/skills/skills.api';
 import { Preloader } from '@components/mui/Preloader';
 import { CourseList } from '@src/features/courses/pages/Course/courseList';
 import { CourseSidebar } from '@src/features/courses/pages/Course/courseSidebar';
+import { Helmet } from 'react-helmet';
 
 const SkillPage = () => {
   const { skillId } = useParams();

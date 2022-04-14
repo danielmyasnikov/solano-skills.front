@@ -30,7 +30,7 @@ export const Course = ({
       <div className={styles.checkbox}>
         <CheckboxBtn value={checked} handleChange={handleChecked} />
       </div>
-      <img className={styles.logo} src={logo} alt="logo" />
+      <img className={styles.logo} src={logo} alt="Логотип компании" />
       <div className={cn(styles.info, { [styles.infoWithAttention]: isDevelopment && checked })}>
         <span className={styles.infoTitle}>{title}</span>
         <span className={styles.infoAbout}>{description}</span>

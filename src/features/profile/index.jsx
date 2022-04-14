@@ -143,7 +143,12 @@ const Profile = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Helmet title="Профиль" />
+      <Helmet title="Профиль">
+        <meta
+          name="description"
+          content="Здесь вы можете просматривать информацию о себе, своих достижениях, историю обучения и обновлять свой тарифный план."
+        />
+      </Helmet>
       <HeaderPage content="profile" />
       {(Object.keys(profile).length !== 0 && (
         <div className={styles.content}>

@@ -14,7 +14,7 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
   const renderHowItems = () => {
     return howItems.map(({ text, number, src }, i) => (
       <div key={i} className={styles.how__item}>
-        <img src={renderImage(src)} alt={'src'} />
+        <img src={renderImage(src)} alt="Иконка" />
         <div className={styles.how__item__text}>{text}</div>
         <div className={styles.how__item__number}>{number}</div>
       </div>
@@ -42,7 +42,7 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
         <div className={styles.maintitle}>Освойте профессию и получите сертификат</div>
         <div className={styles.block}>
           <div className={styles.certificate}>
-            <img src={Statement} alt={'Сертификат'} />
+            <img src={Statement} alt="Сертификат" />
           </div>
           <div className={styles.when}>
             <div className={styles.title}>Когда вы получаете сертификат</div>
