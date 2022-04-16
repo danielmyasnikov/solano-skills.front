@@ -28,6 +28,19 @@ export const KnowledgePage = () => {
   const location = useLocation();
   const [tab, setTab] = useState<AboutTab>('offer');
 
+  const getContentName = () => {
+    switch (tab) {
+      case 'offer':
+        return 'Оферта';
+      case 'privacy-policy':
+        return 'Политика конфиденциальности';
+      case 'requisites':
+        return 'Реквизиты';
+      default:
+        return '';
+    }
+  };
+
   useEffect(() => {
     if (!routeTab) {
       return;
@@ -54,7 +67,9 @@ export const KnowledgePage = () => {
 
   return (
     <div className={styles.home}>
-      <Helmet title="База знаний" />
+      <Helmet title="База знаний">
+        <meta name="description" content={getContentName()} />
+      </Helmet>
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
@@ -63,7 +78,7 @@ export const KnowledgePage = () => {
           <main className={css.main}>
             <div className={css.wrapper}>
               <div className={css.header}>
-                <h2>База знаний</h2>
+                <h1>База знаний</h1>
 
                 <div className={css.btnWrapper}>
                   <ul>

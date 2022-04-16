@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 import { Preloader } from '@components/mui/Preloader';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/system';
+import { Helmet } from 'react-helmet';
 
 const Wrapper = styled('div')`
   width: 100%;
@@ -37,6 +38,12 @@ const ProfessionsPage = () => {
 
   return (
     <Wrapper>
+      <Helmet title="Профессии">
+        <meta
+          name="description"
+          content="Отточите свои навыки, пройдите необходимые курсы и освойте желаемую профессию вместе с DeepSkills."
+        />
+      </Helmet>
       <WrapHeader variant={'professions'} />
       <ProfessionsList>
         {isLoading ? (

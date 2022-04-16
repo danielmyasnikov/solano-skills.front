@@ -13,6 +13,7 @@ import { PurchaseInformationMobile } from './PurchaseInformation/Mobile';
 import { Redirect } from 'react-router';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
+import { Helmet } from 'react-helmet';
 
 export const PaymentPage = () => {
   const [width, setWidth] = useState(0);
@@ -45,11 +46,14 @@ export const PaymentPage = () => {
 
   return (
     <>
+      <Helmet title="Оплата">
+        <meta name="description" content="Страница оплаты" />
+      </Helmet>
       <div className={styles.wrapper}>
         <header className={styles.header}>
           <div className={styles.headerImgContainer}>
-            <img src={SmallLogo} alt="logo" />
-            <img src={CompanyName} alt="company_name" />
+            <img src={SmallLogo} alt="Логотип компании" />
+            <img src={CompanyName} alt="Названиe компании" />
           </div>
           <div className={styles.headerReportContainer}>
             <div className={styles.headerReportContainerAttention}>!</div>

@@ -88,7 +88,12 @@ const CertificatesPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Helmet title="Сертификаты" />
+      <Helmet title="Сертификаты">
+        <meta
+          name="description"
+          content="Здесь вы можете просматривать сертификаты и делиться ими."
+        />
+      </Helmet>
       <div className={styles.header}>
         <h1 className={styles.title}>Сертификаты</h1>
         <p className={styles.description}>

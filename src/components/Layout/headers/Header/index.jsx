@@ -97,7 +97,7 @@ const Header = ({ headerRef }) => {
                   onClick={menuHandler}
                 >
                   {(Object.keys(profile).length !== 0 && (
-                    <img src={profile.avatar_url || DefaultAvatar} alt="avatar" />
+                    <img src={profile.avatar_url || DefaultAvatar} alt="Аватар пользователя" />
                   )) || (
                     <div>
                       <Preloader size="50px" />

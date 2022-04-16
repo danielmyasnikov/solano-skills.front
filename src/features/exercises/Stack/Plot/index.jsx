@@ -26,7 +26,7 @@ export const Plot = ({ hide }) => {
   return (
     <div className={cn(styles.bytePayload, { [styles.hide]: hide })}>
       <div className={styles.graph}>
-        <img src={terminal.bytePayload[activeBytePayload]} />
+        <img src={terminal.bytePayload[activeBytePayload]} alt="Иконка" />
       </div>
       <div className={styles.btnWrap}>
         <button

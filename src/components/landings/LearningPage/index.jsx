@@ -13,6 +13,7 @@ import { Button, Grid } from '@mui/material';
 import { FaqSection } from '@components/landings/FaqSection';
 import Box from '@mui/material/Box';
 import { LandingHeader } from '@components/landings/Header';
+import { Helmet } from 'react-helmet';
 
 export const LearningPage = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -59,7 +60,7 @@ export const LearningPage = () => {
   const renderFeedbacks = feedbacks.map(({ avatar, text, author }) => (
     <div className={styles.whatSays__feedback} key={text + author}>
       <div className={styles.whatSays__feedback__photo}>
-        <img src={renderImage(avatar)} />
+        <img src={renderImage(avatar)} alt="Fdfnfh" />
       </div>
       <div className={styles.whatSays__feedback__data}>
         <div className={styles.whatSays__feedback__data__scroll}>
@@ -72,6 +73,9 @@ export const LearningPage = () => {
 
   return (
     <div className={styles.home}>
+      <Helmet title="Как проходит обучение">
+        <meta name="description" content="Изучите структуру работы платформы и её особенности." />
+      </Helmet>
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />

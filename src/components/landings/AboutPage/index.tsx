@@ -27,10 +27,12 @@ export const AboutPage: FC = ({}) => {
 
   return (
     <div className={styles.container}>
-      <Helmet title="О Нас" />
+      <Helmet title="О Нас">
+        <meta name="description" content="Информация и контакты." />
+      </Helmet>
       <HeaderHome handleBurger={() => setShowMenu(!showMenu)} />
       <div className={styles.wrapper}>
-        <span className={styles.wrapper__title}>Контакты</span>
+        <h1 className={styles.wrapper__title}>Контакты</h1>
         <span className={styles.wrapper__sub_title}>Связаться с нами</span>
         <span className={styles.wrapper__feedback} onClick={() => dispatch(openFeedbackModal())}>
           Обратная связь

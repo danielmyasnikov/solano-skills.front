@@ -40,15 +40,15 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
             <Grid item xs={12} sm={4} md={3}>
               <ul className={cn(styles.list)}>
                 <li className={styles.item}>
-                  <img src={Icon} alt="icon" />
+                  <img src={Icon} alt="Успешная операция" />
                   <span>15 курсов</span>
                 </li>
                 <li className={cn(styles.item, { [styles.economy]: is_economy })}>
-                  <img src={Icon} alt="icon" />
+                  <img src={Icon} alt="Успешная операция" />
                   <span>Полный доступ</span>
                 </li>
                 <li className={cn(styles.item, { [styles.economy]: is_economy })}>
-                  <img src={Icon} alt="icon" />
+                  <img src={Icon} alt="Успешная операция" />
                   <span>Сертификат</span>
                 </li>
               </ul>

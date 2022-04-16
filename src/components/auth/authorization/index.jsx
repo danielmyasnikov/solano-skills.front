@@ -137,7 +137,9 @@ export const Authorization = () => {
 
   return (
     <AuthContainer>
-      <Helmet title="Авторизация" />
+      <Helmet title="Авторизация">
+        <meta name="description" content="Здесь вы можете авторизоваться." />
+      </Helmet>
       {(forgotPassword && <ForgotPassword />) || (
         <>
           <h1 className={styles.title}>Добро пожаловать</h1>

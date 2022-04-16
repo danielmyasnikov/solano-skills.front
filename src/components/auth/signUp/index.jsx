@@ -175,6 +175,9 @@ export const Registration = ({ variant, isModal, onClose, isOpenFromExercises = 
   const renderRegistration = () => {
     return (
       <div className={cn(styles.wrapper, styles[variant])}>
+        <Helmet title="Страница регистрации">
+          <meta name="description" content="Здесь вы можете зарегистрироваться." />
+        </Helmet>
         {isModal && variant !== 'home_offer' && variant !== 'home_end' && (
           <div className={styles.closeModal} onClick={onClose}>
             <Close />

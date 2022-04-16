@@ -29,7 +29,7 @@ export const WelcomeModal = ({ open, handleClick, logo }) => {
           <Close />
         </div>
         <DialogTitle className={styles.dialogTitle}>
-          <img className={styles.dialogTitleLogo} src={logo} alt="logo" />
+          <img className={styles.dialogTitleLogo} src={logo} alt="Логотип компании" />
           <span className={styles.dialogTitleTitle}>Добро пожаловать!</span>
         </DialogTitle>
         <DialogContent className={styles.dialogContent}>

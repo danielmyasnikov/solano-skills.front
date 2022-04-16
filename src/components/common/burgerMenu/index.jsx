@@ -16,7 +16,7 @@ const BurgerMenu = ({ isShow, handleBurger }) => {
     <div className={cn(styles.menu, { [styles.shown]: isShow === true })}>
       <div className={styles.content}>
         <div className={styles.exit} onClick={() => handleBurger()}>
-          <img src={BurgerExit} alt="Закрыть" />
+          <img src={BurgerExit} alt="Кнопка закрытия меню" />
         </div>
         <div className={styles.title}>Меню</div>
         <div className={styles.search}>

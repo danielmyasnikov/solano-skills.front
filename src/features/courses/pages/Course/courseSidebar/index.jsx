@@ -36,7 +36,7 @@ export const CourseSidebar = ({
           <ul className={styles.datasets}>
             {datasets.map((item, i) => (
               <li key={item.title + i} className={styles.collaborator}>
-                <img className={styles.image} src={AvatarDefault} />
+                <img className={styles.image} src={AvatarDefault} alt="Аватар по умолчанию" />
                 <span className={styles.name}>{`${item.first_name} ${item.last_name}`}</span>
               </li>
             ))}
@@ -76,7 +76,7 @@ export const CourseSidebar = ({
       {certificate && (
         <div className={styles.certificateWrapper}>
           <div className={styles.certificateWrapper__title}>
-            <img src={CertificatesBlack} alt="@" />
+            <img src={CertificatesBlack} alt="Иконка" />
             <span>Зачем нужен сертификат?</span>
           </div>
           <div className={styles.certificateWrapper__subtitle}>
@@ -93,7 +93,7 @@ export const CourseSidebar = ({
           <div className={styles.mentorsWrapper__mentors}>
             {mentors.map((name, i) => (
               <div key={i} className={styles.mentorsWrapper__mentor}>
-                <img src={mentor} alt="Фото" />
+                <img src={mentor} alt="Фото ментора" />
                 <div className={styles.mentorsWrapper__mentor__name}>{name}</div>
               </div>
             ))}

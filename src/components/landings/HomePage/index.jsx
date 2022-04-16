@@ -5,7 +5,7 @@ import HeaderHome from '../../Layout/headers/HomeHeader';
 import Footer from '../../Layout/footers/Footer';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import styles from './styles.module.less';
-import { HashLink } from 'react-router-hash-link';
+import Helmet from 'react-helmet';
 import { feedbacks, images, practices, slides } from './data';
 import { Registration } from '@components/auth/signUp';
 import BurgerMenu from '@components/common/burgerMenu';
@@ -94,7 +94,7 @@ export const HomePage = () => {
   const renderFeedbacks = feedbacks.map(({ avatar, text, author }) => (
     <div className={styles.whatSays__feedback} key={text + author}>
       <div className={styles.whatSays__feedback__photo}>
-        <img src={renderImage(avatar)} />
+        <img src={renderImage(avatar)} alt="Аватар" />
       </div>
       <div className={styles.whatSays__feedback__data}>
         <div className={styles.whatSays__feedback__data__scroll}>
@@ -107,6 +107,13 @@ export const HomePage = () => {
 
   return (
     <div className={styles.home}>
+      <Helmet title="Домашняя страница">
+        <meta
+          name="description"
+          content="Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
+                  и направлениям в сфере Информационных технологий."
+        />
+      </Helmet>
       <div className={cn({ [styles.blur]: showMenu })} onTouchStart={() => handleBurger()} />
       <HeaderHome handleBurger={handleBurger} isAuth={isAuth} />
       <BurgerMenu isShow={showMenu} handleBurger={handleBurger} />
@@ -115,7 +122,7 @@ export const HomePage = () => {
           <main>
             <section className={styles.offer}>
               <div className={cn(styles.offer__block, styles.offer__block__left)}>
-                <div className={styles.offer__title}>Развивайте навыки работы с данными</div>
+                <h1 className={styles.offer__title}>Развивайте навыки работы с данными</h1>
                 <div className={styles.offer__subtitle}>
                   Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
                   и направлениям в сфере Информационных технологий.

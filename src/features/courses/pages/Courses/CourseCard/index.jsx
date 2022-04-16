@@ -25,7 +25,7 @@ export const CourseCard = ({ info }) => {
     <Link className={css.wrapper} to={`/courses/${info.slug}`}>
       <div className={css.about}>
         <div className={css.header}>
-          <img className={css.langImg} src={getTypeImg()} alt="Язык" />
+          <img className={css.langImg} src={getTypeImg()} alt="Иконка языка" />
           {difficulty && (
             <span className={cn(css.difficulty, css[difficulty])}>
               {difficulty === 'easy'
@@ -41,7 +41,7 @@ export const CourseCard = ({ info }) => {
         <h2 className={css.title}>{info.title}</h2>
         <span className={css.description} dangerouslySetInnerHTML={{ __html: info?.description }} />
         <div className={css.time}>
-          <img className={css.timeIcon} src={TimerOutlined} alt="Время" />
+          <img className={css.timeIcon} src={TimerOutlined} alt="Иконка времени" />
           {`${info.time} ${numberDeclension(info.time, ['час', 'часа', 'часов'])}`}
         </div>
       </div>
@@ -52,7 +52,7 @@ export const CourseCard = ({ info }) => {
           </Button>
         ) : (
           <div className={css.author}>
-            <img src={author?.avatar_url || AvatarDefault} className={css.avatar} alt="" />
+            <img src={author?.avatar_url || AvatarDefault} className={css.avatar} alt="Аватар" />
             <div className={css.infoWrap}>
               <h4 className={css.authorTitle}>{`${author.first_name} ${author.last_name}`}</h4>
               <p className={css.text} dangerouslySetInnerHTML={{ __html: author?.subtitle }} />

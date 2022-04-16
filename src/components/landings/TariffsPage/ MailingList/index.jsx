@@ -15,7 +15,7 @@ export const MailingList = () => {
 
   return (
     <div className={styles.wrapper}>
-      <img className={styles.wrapper__img} src={Envelope} alt="envelope" />
+      <img className={styles.wrapper__img} src={Envelope} alt="Иконка конверта" />
       <span className={styles.wrapper__title}>Будьте в курсе!</span>
       <span className={styles.wrapper__text}>Вы можете подписаться на рассылку, чтобы первым</span>
       <span>получать новости о DeepSkills.</span>

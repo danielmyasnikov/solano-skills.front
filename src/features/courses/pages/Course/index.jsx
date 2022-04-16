@@ -32,7 +32,9 @@ export const CoursePage = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Helmet title={course ? course.title : 'Курс'} />
+      <Helmet title={course ? course.title : 'Курс'}>
+        <meta name="description" content={(course && course.description) || 'Описание курса'} />
+      </Helmet>
       <div className={styles.header}>
         <h1 className={styles.title}>
           {course ? course.title : <Skeleton variant="text" width="40%" />}

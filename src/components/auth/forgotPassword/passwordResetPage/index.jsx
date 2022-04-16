@@ -14,6 +14,7 @@ import styles from './styles.module.less';
 import { getProfile } from '@store/profile/actions';
 import { Button } from '@mui/material';
 import { InputPassword } from '@components/mui/Password';
+import { Helmet } from 'react-helmet';
 
 export const PasswordResetPage = () => {
   const [password, setPassword] = useState('');
@@ -101,6 +102,9 @@ export const PasswordResetPage = () => {
 
   return (
     <AuthContainer>
+      <Helmet title="Сброс пароля">
+        <meta name="description" content="Здесь вы можете сбросить пароль." />
+      </Helmet>
       <div className={styles.wrapper}>
         {recoveryPasswordStatus === 'failure' && <PasswordResetErrorModal />}
         <h1 className={styles.title}>Придумайте пароль</h1>
