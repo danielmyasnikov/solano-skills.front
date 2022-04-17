@@ -1,6 +1,5 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
-import LoadingBar from 'react-top-loading-bar';
+import { useLayoutEffect } from 'react';
+import { Route } from 'react-router-dom';
 
 import Layout from '@components/Layout';
 
@@ -20,11 +19,9 @@ import { ThemeProvider } from '@mui/material';
 import Helmet from 'react-helmet';
 
 import { theme } from './theme';
+import AppSwitch from '@src/app/routing/AppSwitch';
 
 function App() {
-  const [progress, setProgress] = useState(0);
-  const location = useLocation();
-
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -41,16 +38,11 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    setProgress(100);
-  }, [location]);
-
   return (
     <ThemeProvider theme={theme}>
       <Helmet defaultTitle="DeepSkills" titleTemplate="DeepSkills | %s" />
       <div className={styles.wrapper}>
-        <LoadingBar color="#67C080" progress={progress} onLoaderFinished={() => setProgress(0)} />
-        <Switch>
+        <AppSwitch>
           {routes.map(({ exact, path, wrap, headerVariant, Component }) => (
             <Route exact={exact} path={path} key={path}>
               <>
@@ -66,7 +58,7 @@ function App() {
             </Route>
           ))}
           <Route component={NotFoundPage} />
-        </Switch>
+        </AppSwitch>
       </div>
     </ThemeProvider>
   );

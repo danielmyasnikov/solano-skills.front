@@ -15,8 +15,8 @@ export const executeBashShell = createAsyncThunk(
   },
 );
 
-export const startEnvironment = createAsyncThunk('bash/startEnvironment', async () => {
-  return await api.post(`/console/v1/bash/startEnvironment`).then((res) => res.data);
+export const startEnvironment = createAsyncThunk('bash/startEnvironment', async (exerciseId) => {
+  return await api.post(`/console/v1/bash/startEnvironment/${exerciseId}`).then((res) => res.data);
 });
 
 export const checkExerciseBashShell = createAsyncThunk(

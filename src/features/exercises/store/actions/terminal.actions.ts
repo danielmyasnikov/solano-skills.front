@@ -62,9 +62,15 @@ export const compileShell = createAsyncThunk(
 
 export const startKernel = createAsyncThunk(
   'terminal/startKernel',
-  async (exerciseId: string | number) => {
+  async ({
+    exerciseId,
+    isGraphRequired,
+  }: {
+    exerciseId: string | number;
+    isGraphRequired: boolean;
+  }) => {
     return api
-      .post(`/shell/startKernel/${exerciseId}`)
+      .post(`/shell/startKernel/${exerciseId}?isGraphRequired=${isGraphRequired}`)
       .then((res) => res.data)
       .catch((e) => ({
         message: e.message,

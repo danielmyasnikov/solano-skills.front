@@ -53,12 +53,25 @@
     }
   }
   .input {
-    max-width: 0;
-    color: transparent;
-    border: 0;
+    display: inline-block;
+    word-break: break-word;
     width: 100%;
+    // max-width: 0;
+    // color: transparent;
+    // border: 0;
+
+    background: transparent;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    background: none;
+    border: none;
+
+    caret: #ff7a18 underscore;
+
     &:focus {
       outline: none;
+      border: none;
     }
   }
 }

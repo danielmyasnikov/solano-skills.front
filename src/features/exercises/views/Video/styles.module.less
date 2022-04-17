@@ -65,6 +65,10 @@
   }
 
   :global {
+    .plyr__poster {
+      transition: none;
+    }
+
     .plyr-react .plyr,
     .plyr,
     .plyr-react,
@@ -85,7 +89,8 @@
     .plyr__video-wrapper {
       border-radius: 20px;
       object-fit: fill;
-      height: auto;
+      height: 100%;
+      width: 100%;
     }
 
     @media screen and (max-width: 1800px) {

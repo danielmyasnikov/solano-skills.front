@@ -28,7 +28,10 @@ const Content = styled(Box)`
 
   li {
     margin-left: 20px;
-    list-style-type: decimal;
+  }
+
+  ul ul {
+    padding-left: 1em;
   }
 
   table {

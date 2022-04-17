@@ -113,7 +113,15 @@ export const terminalSlice = createSlice({
         bytePayload: null,
         status: '',
       };
-      state.kernelId = action.payload.output;
+      state.kernelId = action.payload.id;
+      state.outputs = [{ ...action.payload.output }] as any;
+      if (action.payload.bytePayload) {
+        state.bytePayload = [action.payload.bytePayload] as any;
+        state.message = {
+          bytePayload: action.payload.bytePayload,
+          status: state.message.status,
+        };
+      }
     },
     [compileShell.fulfilled.type]: (state, action) => {
       state.status = 'success';

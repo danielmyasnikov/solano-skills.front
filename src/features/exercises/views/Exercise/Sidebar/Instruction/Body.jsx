@@ -42,7 +42,6 @@ const Content = styled(Box)`
 
   ul {
     margin-left: 20px;
-    list-style-type: disc;
     li {
       margin: 20px 0;
     }

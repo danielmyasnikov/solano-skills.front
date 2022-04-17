@@ -107,7 +107,13 @@ const Output = ({ variant }: any) => {
 
   useEffect(() => {
     if (rootExercise) {
-      dispatch(startKernel(rootExercise.id));
+      dispatch(
+        startKernel({
+          exerciseId: rootExercise.id,
+          // @ts-ignore
+          isGraphRequired: rootExercise.is_graph_required,
+        }),
+      );
     }
   }, [rootExercise]);
 

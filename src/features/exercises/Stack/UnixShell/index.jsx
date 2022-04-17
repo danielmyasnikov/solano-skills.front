@@ -14,6 +14,8 @@ import {
   selectExerciseType,
 } from '@src/features/exercises/store/selectors/exercise.selectors';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
+import { useShell } from '@src/features/exercises/hooks/useShell.ts';
+import { compileShell } from '@src/features/exercises/store/actions/terminal.actions.ts';
 
 const UnixShell = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const UnixShell = () => {
   const type = useSelector(selectExerciseType);
 
   const [activeTab, setActiveTab] = useState('terminal');
+  /*
   const [value, setValue] = useState(
     `<span class="${cn(styles.caret, styles.caretEnd)}">&nbsp</span>`,
   );
@@ -155,21 +158,6 @@ const UnixShell = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(startEnvironment());
-    inputRef.current?.focus();
-  }, []);
-
-  useEffect(() => {
-    if (bashShell.message.status === 'success') {
-      dispatch(exerciseSlice.actions.onComplete(undefined));
-    }
-
-    if (bashShell.message.error) {
-      dispatch(exerciseSlice.actions.onError(bashShell.message.error));
-    }
-  }, [bashShell]);
-
   const handleValue = (e) => {
     const { value, selectionStart } = e.target;
     let diff = 0;
@@ -184,10 +172,45 @@ const UnixShell = () => {
       })}">${center}</span>${right}`,
     );
   };
+ * */
 
-  const handleFocus = () => {
+  const { acceptInput, onChange, code } = useShell({
+    ref: inputRef,
+    submitCallback: ({ code }) => {
+      dispatch(
+        executeBashShell({
+          environmentId: bashShell.environmentId,
+          command: code,
+        }),
+      ).then(() => {
+        if (type !== 'quiz' && type !== 'quiz_with_script') {
+          dispatch(
+            checkExerciseBashShell({
+              environmentId: bashShell.environmentId,
+              exerciseId: exerciseId,
+              userId: user_id,
+              command: code,
+            }),
+          );
+        }
+      });
+    },
+  });
+
+  useEffect(() => {
+    dispatch(startEnvironment(exerciseId));
     inputRef.current?.focus();
-  };
+  }, []);
+
+  useEffect(() => {
+    if (bashShell.message.status === 'success') {
+      dispatch(exerciseSlice.actions.onComplete(undefined));
+    }
+
+    if (bashShell.message.error) {
+      dispatch(exerciseSlice.actions.onError(bashShell.message.error));
+    }
+  }, [bashShell]);
 
   return (
     <div className={styles.shell}>
@@ -199,7 +222,7 @@ const UnixShell = () => {
           Terminal
         </div>
       </div>
-      <div className={styles.output} onClick={handleFocus}>
+      <div className={styles.output} onClick={() => inputRef.current?.focus()}>
         <div>
           {bashShell.outputs.map((item) => (
             <div>{item.output || item.error}</div>
@@ -211,13 +234,10 @@ const UnixShell = () => {
             tabIndex={0}
             className={styles.input}
             ref={inputRef}
-            onKeyDown={handleKey}
-            onChange={handleValue}
-          />
-          <div
-            ref={contentRef}
-            dangerouslySetInnerHTML={{ __html: value }}
-            className={styles.content}
+            value={code}
+            type="text"
+            onKeyDown={acceptInput}
+            onChange={onChange}
           />
         </div>
       </div>
