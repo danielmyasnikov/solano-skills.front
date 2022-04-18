@@ -410,9 +410,11 @@ export default function CoursePage() {
                 </>
               )}
               <Grid item xs={12} sx={{ display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
+                {/* @ts-ignore */}
                 <Button variant="containedRed" sx={{ ml: 'auto' }}>
                   Удалить
                 </Button>
+                {/* @ts-ignore */}
                 <Button variant="containedGreen">Сохранить</Button>
               </Grid>
             </Grid>
