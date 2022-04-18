@@ -61,13 +61,25 @@ export const exercisesSlice = createSlice({
       state.certificateStatus = action.payload.certificate_status;
 
       if (action.payload.type === 'bullet_point_exercise') {
-        state.steps = {
-          active: 1,
-          total: action.payload.nested_exercises.length,
-          totalDone: 0,
-          totalXp: 0,
-          code: {},
-        };
+        if (action.meta.arg.tab) {
+          const tab = action.meta.arg.tab - 1;
+          const len = action.payload.nested_exercises.length;
+          state.steps = {
+            active: tab <= len ? tab : len,
+            total: len,
+            totalDone: tab <= len ? tab : len,
+            totalXp: 0,
+            code: {},
+          };
+        } else {
+          state.steps = {
+            active: 1,
+            total: action.payload.nested_exercises.length,
+            totalDone: 0,
+            totalXp: 0,
+            code: {},
+          };
+        }
       }
     },
     [getExerciseById.rejected.type]: (state, action) => {

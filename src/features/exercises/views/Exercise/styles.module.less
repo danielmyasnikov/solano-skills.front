@@ -14,7 +14,7 @@
 
 .layout {
   position: relative;
-  width: calc(43% - 20px);
+  width: 40%;
   height: 100%;
   margin-right: 20px;
   min-width: 270px;
@@ -47,20 +47,22 @@
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 
-  &:hover {
-    overflow-y: auto;
+  // &.overflow:hover > div {
+  //   margin-right: -12px;
+  // }
 
-    &::-webkit-scrollbar {
-      width: 12px;
-    }
-    &::-webkit-scrollbar-track {
-      padding-top: 44px;
-      margin-top: 44px;
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #c4c4c4;
-    }
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    padding-top: 44px;
+    margin-top: 44px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
   }
 }
 

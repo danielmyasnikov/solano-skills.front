@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { terminalSlice } from '../store/slices/terminal.slice';
@@ -27,6 +27,8 @@ const Root = styled(Box)`
 
 function ExercisePage() {
   const dispatch = useDispatch();
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
   const { courseId, exerciseId } = useParams();
 
   const status = useSelector(selectExercisesStatus);
@@ -35,7 +37,7 @@ function ExercisePage() {
     dispatch(terminalSlice.actions.clear());
     dispatch(bashSlice.actions.clear());
 
-    dispatch(getExerciseById({ courseId, exerciseId: exerciseId }));
+    dispatch(getExerciseById({ courseId, exerciseId: exerciseId, tab: query.get('tab') }));
   }, [courseId, exerciseId]);
 
   switch (status) {

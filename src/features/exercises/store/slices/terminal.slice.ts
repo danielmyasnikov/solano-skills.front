@@ -114,7 +114,14 @@ export const terminalSlice = createSlice({
         status: '',
       };
       state.kernelId = action.payload.id;
-      state.outputs = [{ ...action.payload.output }] as any;
+      state.outputs = [
+        {
+          bytePayload: null,
+          error: '',
+          output: action.payload.output,
+          status: 'shell',
+        },
+      ] as any;
       if (action.payload.bytePayload) {
         state.bytePayload = [action.payload.bytePayload] as any;
         state.message = {

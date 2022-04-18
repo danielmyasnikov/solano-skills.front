@@ -17,6 +17,7 @@ const Root = styled(Box)`
   flex: 1 1;
   display: flex;
   height: 100%;
+  width: 60%;
   gap: 5px;
 
   &::-webkit-scrollbar {
@@ -36,7 +37,7 @@ const Root = styled(Box)`
   }
 `;
 
-const Stack = () => {
+const Stack = ({ width }) => {
   const type = useSelector(selectExerciseType);
   const stackType = useSelector(selectStackType);
 
@@ -65,7 +66,7 @@ const Stack = () => {
     }
   };
 
-  return <Root>{renderStack()}</Root>;
+  return <Root sx={{ width }}>{renderStack()}</Root>;
 };
 
 export default Stack;

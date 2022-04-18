@@ -25,6 +25,7 @@ import { FailPaymentPage } from '@src/features/payment/Fail';
 import { ElementType } from 'react';
 import { AboutPage } from '@components/landings/AboutPage';
 import { KnowledgePage } from '@components/landings/KnowledgePage';
+import { adminRoutes } from '@src/features/admin/adminRoutes';
 
 export const routes: {
   path: string;
@@ -190,4 +191,5 @@ export const routes: {
     wrap: false,
     exact: true,
   },
+  ...adminRoutes,
 ];

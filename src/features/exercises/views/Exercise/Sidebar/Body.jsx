@@ -34,6 +34,10 @@ const Content = styled(Box)`
     padding-left: 1em;
   }
 
+  ol ol {
+    padding-left: 1em;
+  }
+
   table {
     background-color: #fff;
     border-collapse: collapse;

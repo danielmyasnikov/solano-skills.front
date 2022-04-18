@@ -1,13 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AceEditor from 'react-ace';
 
 import cn from 'classnames';
-
-import 'ace-builds/src-noconflict/theme-monokai';
-
-import 'brace/mode/python';
-import 'brace/ext/language_tools';
 
 import './terminal.module.less';
 
@@ -22,7 +16,7 @@ import Reset from '@assets/Reset';
 
 import { styled } from '@mui/material/styles';
 import { Box, Typography, Button } from '@mui/material';
-
+import Editor, { useMonaco } from '@monaco-editor/react';
 import styles from './styles.module.less';
 import { exerciseSlice } from '@src/features/exercises/store/slices/exercise.slice.ts';
 import { selectRootExercise } from '@src/features/exercises/store/selectors/exercises.selectors';
@@ -98,6 +92,7 @@ const Terminal = () => {
   const rootRef = useRef();
   const wrapperRef = useRef();
   const dispatch = useDispatch();
+  const monaco = useMonaco();
 
   const { user_id } = useSelector(selectProfile);
   const terminal = useSelector(selectTerminal);
@@ -113,6 +108,24 @@ const Terminal = () => {
   const isDisabled = !kernelId;
 
   const [activeTab, setActiveTab] = useState('script');
+
+  useEffect(() => {
+    if (monaco) {
+      monaco.editor.defineTheme('a', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.foreground': '#EDF9FA',
+          'editor.background': '#2c2a3f',
+          'editorCursor.foreground': '#ffffff',
+          'editor.lineHighlightBackground': '#29273b',
+          'editorLineNumber.foreground': '#8F908A',
+        },
+      });
+      monaco.editor.setTheme('a');
+    }
+  }, [monaco]);
 
   useEffect(() => {
     if (solutionUsed) {
@@ -196,33 +209,22 @@ const Terminal = () => {
           )}
         </div>
         <div className={styles.terminal}>
-          <AceEditor
-            mode="python"
-            theme="monokai"
+          <Editor
+            language="python"
+            theme="a"
             className="editor"
             width="100%"
-            showGutter
-            highlightActiveLine
             defaultValue={exercise?.sample_code}
             value={activeTab === 'solution' ? solutionContent : code}
-            readOnly={activeTab === 'solution'}
-            wrapEnabled
-            fontSize="16px"
-            setOptions={{
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: true,
-              wrap: true,
-              behavioursEnabled: true,
-              newLineMode: true,
-              showGutter: true,
-              minLines: 1,
-              wrapBehavioursEnabled: true,
-              enableSnippets: true,
-              showLineNumbers: true,
+            options={{
+              fontSize: 16,
+              wordWrap: 'on',
+              snippetSuggestions: 'bottom',
               tabSize: 4,
+              quickSuggestions: true,
+              readOnly: activeTab === 'solution',
             }}
             onChange={onChange}
-            name="UNIQUE_ID_OF_DIV"
           />
           <div className={styles.actions}>
             <Button

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Exercise from '@src/features/exercises/views/Exercise';
 import VideoExercise from '@src/features/exercises/views/Video';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,6 +43,8 @@ export default function ExercisePageBody() {
   const [showCongratulationsModal, setShowCongratulationsModal] = useState(false);
   const exercise = useSelector(selectRootExercise);
   const history = useHistory();
+
+  const containerRef = useRef();
 
   const [updateCourses] = useRefetchCoursesMutation();
 
@@ -99,8 +101,8 @@ export default function ExercisePageBody() {
       case 'normal_exercise':
       case 'quiz':
         return (
-          <Root>
-            <Exercise goNext={goNext} />
+          <Root ref={containerRef}>
+            <Exercise goNext={goNext} containerRef={containerRef} />
           </Root>
         );
       default:

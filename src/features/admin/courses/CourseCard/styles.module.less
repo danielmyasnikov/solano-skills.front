@@ -1,0 +1,137 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  box-shadow: 0 4px 17px rgba(0, 0, 0, 0.04);
+  border-radius: 18px;
+  text-decoration: none;
+}
+
+.about {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 11px 20px;
+  border-bottom: 1px solid var(--light-grayish-blue);
+}
+
+.title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 127%;
+  color: var(--color-black);
+}
+
+.description {
+  font-size: 16px;
+  line-height: 139.5%;
+  color: var(--color-black);
+}
+
+.time {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: auto;
+  font-size: 14px;
+  line-height: 139.5%;
+  text-align: center;
+  color: #8a92a6;
+}
+
+.timeIcon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+
+.actionBlock {
+  padding: 15px 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.difficulty {
+  padding: 7px 21px;
+
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 127%;
+  border-radius: 10px;
+
+  &.easy {
+    color: #ffffff;
+    background: #67c080;
+  }
+
+  &.medium {
+    color: #2d2d2d;
+    background: #ffe27b;
+  }
+
+  &.hard {
+    color: #ffffff;
+    background: #de4949;
+  }
+}
+
+.langImg {
+  width: 38px;
+  height: 38px;
+}
+
+.author {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 19px;
+}
+
+.infoWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorTitle {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-family: Jost;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 107.5%;
+
+  color: var(--color-black);
+}
+
+.text {
+  margin: 0;
+  font-family: Nunito;
+  font-size: 12px;
+  line-height: 107.5%;
+
+  color: var(--color-black);
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
+    width: 100%;
+    margin-right: 0;
+  }
+}

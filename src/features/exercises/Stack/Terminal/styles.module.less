@@ -61,6 +61,18 @@
   border-bottom-right-radius: 18px;
   border-bottom-left-radius: 18px;
   overflow: hidden;
+
+  & > section {
+    flex: 1 1 100%;
+    min-width: 300px;
+    height: calc(100% - 71px) !important;
+    background: #2c2a3f;
+
+    @media screen and (max-width: 480px) {
+      height: 360px !important;
+      min-height: 360px !important;
+    }
+  }
 }
 
 .draggable {

@@ -7,7 +7,7 @@
     "@babel/runtime": "^7.15.4",
     "@craco/craco": "^6.4.0",
     "@emotion/styled": "^11.3.0",
-    "@monaco-editor/react": "^4.3.1",
+    "@monaco-editor/react": "^4.4.2",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.1.1",
     "@mui/styles": "^5.4.4",

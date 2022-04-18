@@ -10,7 +10,6 @@ import SidebarBody from './Body';
 
 import InstructionHeader from './Instruction/Header';
 import InstructionBody from './Instruction/Body';
-import Draggable from '@components/common/Draggable';
 
 const Root = styled(Box)`
   overflow-x: hidden;
@@ -40,8 +39,8 @@ const SidebarWrapper = styled(Box)`
   overflow-y: auto;
 `;
 
-export const Sidebar = ({ wrapperRef, goNext }) => {
-  const { open, headerFolded, instructionFolded } = useSelector(selectExerciseSidebar);
+export const Sidebar = ({ goNext }) => {
+  const { open } = useSelector(selectExerciseSidebar);
 
   return (
     <Root className={open ? '' : 'folded'}>
@@ -53,14 +52,6 @@ export const Sidebar = ({ wrapperRef, goNext }) => {
 
             <InstructionHeader />
             <InstructionBody goNext={goNext} />
-
-            <Draggable
-              resizeContainer={wrapperRef}
-              parentContainer={wrapperRef}
-              hidden={!open || headerFolded || instructionFolded}
-              noIcon
-              mt
-            />
           </>
         )}
       </SidebarWrapper>

@@ -3,7 +3,15 @@ import api from '@src/http/api';
 
 export const getExerciseById = createAsyncThunk(
   'exercises/getExerciseById',
-  async ({ courseId, exerciseId }: { courseId: string | number; exerciseId: string | number }) => {
+  async ({
+    courseId,
+    exerciseId,
+    tab,
+  }: {
+    courseId: string | number;
+    exerciseId: string | number;
+    tab?: number;
+  }) => {
     return api.get(`/api/v1/courses/${courseId}/exercises/${exerciseId}`).then((e) => e.data);
   },
 );

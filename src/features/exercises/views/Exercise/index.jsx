@@ -34,9 +34,10 @@ import { getProfile } from '@store/profile/actions';
 import { bashSlice } from '@src/features/exercises/store/slices/bash.slice.ts';
 import { terminalSlice } from '@src/features/exercises/store/slices/terminal.slice.ts';
 
-function Exercise({ goNext }) {
+function Exercise({ goNext, containerRef }) {
   const dispatch = useDispatch();
   const wrapperRef = useRef();
+  const contentRef = useRef();
 
   const bottom = useRef();
 
@@ -105,14 +106,21 @@ function Exercise({ goNext }) {
       bottom.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [hintUsed, completed]);
+  useEffect(() => {
+    if (contentRef.current) {
+      if (contentRef.current.scrollHeight > contentRef.current.height) {
+        contentRef.current.class = 'overflow';
+      }
+    }
+  }, []);
 
   return (
     <>
       <WarningMobile />
 
-      <div className={cn(styles.layout, { [styles.folded]: !sidebarOpen })} ref={wrapperRef}>
-        <div className={styles.content}>
-          <Sidebar wrapperRef={wrapperRef} goNext={goNext} />
+      <div className={cn(styles.layout, { [styles.folded]: !sidebarOpen })}>
+        <div className={styles.content} ref={contentRef}>
+          <Sidebar goNext={goNext} />
           <ErrorMessage />
 
           <div ref={bottom} style={{ float: 'left', clear: 'both' }} />
@@ -148,7 +156,9 @@ function Exercise({ goNext }) {
           )}
       </div>
 
-      {!exercise.without_script && <Stack />}
+      {!exercise.without_script && (
+        <Stack width={containerRef.current?.offsetWidth - wrapperRef.current?.offsetWidth} />
+      )}
     </>
   );
 }
