@@ -18,6 +18,8 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import { Button } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -57,6 +59,8 @@ export interface HeadCell {
   id: number | string;
   label: string;
   numeric: boolean;
+  isEdit: boolean;
+  editExerciseId: string;
 }
 
 interface EnhancedTableProps {
@@ -68,6 +72,7 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { order, orderBy, onRequestSort } = props;
+
   const createSortHandler = (property: string) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
@@ -125,6 +130,7 @@ export default function EnhancedTable({ rows, headCells }: any) {
   const [orderBy, setOrderBy] = React.useState<string>('id');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { courseId } = useParams<{ courseId: string }>();
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: string) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -174,6 +180,18 @@ export default function EnhancedTable({ rows, headCells }: any) {
                       {headCells.map((e: any) => (
                         <TableCell align="left">{row[e.id]}</TableCell>
                       ))}
+                      {headCells.map(
+                        (headCell: HeadCell) =>
+                          headCell.isEdit && (
+                            <Link
+                              to={`/admin/courses/${courseId}/exercise/${
+                                row[headCell.editExerciseId]
+                              }`}
+                            >
+                              edit
+                            </Link>
+                          ),
+                      )}
                     </TableRow>
                   );
                 })}
