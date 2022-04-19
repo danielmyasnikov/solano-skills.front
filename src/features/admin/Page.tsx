@@ -42,6 +42,7 @@ export default function AdminPage() {
         </Breadcrumbs>
         <Grid spacing={3} container>
           <AdminCard title="Курсы" to="/admin/courses" />
+          <AdminCard title="Пользователи" to="/admin/users" />
         </Grid>
       </Wrapper>
     </Container>
