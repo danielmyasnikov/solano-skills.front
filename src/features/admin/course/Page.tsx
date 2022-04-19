@@ -30,6 +30,7 @@ import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 import { url_slug } from './slug-util';
 import EnhancedTable, { HeadCell } from '@src/features/admin/components/Table';
+import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled('div')`
   display: flex;
@@ -46,17 +47,21 @@ const AdminInput = styled(TextField)`
 `;
 
 export default function CoursePage() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const tabQuery = query.get('tab');
   const [tab, setTab] = useState(0);
 
   const [searchTerm, setSearchTerm] = useState('');
 
   const { courseId } = useParams<{ courseId: string }>();
 
-  const [translateTitle, setTranslateTitle] = useState(true);
+  const [translateTitle, setTranslateTitle] = useState(false);
   const [inDevelop, setInDevelop] = useState(true);
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
+  const [tempSlug, setTempSlug] = useState('');
 
   const [preview, setPreview] = useState('');
   const [description, setDescription] = useState('');
@@ -95,6 +100,7 @@ export default function CoursePage() {
 
     setTitle(course.title);
     setSlug(course.slug);
+    setTempSlug(url_slug(course.title));
 
     setPreview(course.description);
     setDescription(course.long_description);
@@ -103,6 +109,18 @@ export default function CoursePage() {
     setLang(course.lang);
     setDifficulty(course.difficulty);
   }, [course]);
+
+  useEffect(() => {
+    if (tabQuery === 'content') {
+      setTab(0);
+    }
+    if (tabQuery === 'blocks') {
+      setTab(1);
+    }
+    if (tabQuery === 'exercises') {
+      setTab(2);
+    }
+  }, [tabQuery]);
 
   if (isLoading) {
     return <>Loading...</>;
@@ -150,9 +168,7 @@ export default function CoursePage() {
                       fullWidth
                       onChange={(e) => {
                         setTitle(e.target.value);
-                        if (translateTitle) {
-                          setSlug(url_slug(e.target.value));
-                        }
+                        setTempSlug(url_slug(e.target.value));
                       }}
                     />
                   </Grid>
@@ -168,20 +184,26 @@ export default function CoursePage() {
                       control={
                         <Switch
                           checked={translateTitle}
-                          onChange={() => setTranslateTitle(!translateTitle)}
+                          onChange={() => {
+                            setTranslateTitle(!translateTitle);
+                          }}
                         />
                       }
-                      label="slug"
+                      label="авто"
                       labelPlacement="top"
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <AdminInput
                       label="Url"
-                      value={slug}
+                      value={translateTitle ? tempSlug : slug}
                       fullWidth
                       onChange={(e) => {
-                        setSlug(url_slug(e.target.value));
+                        if (translateTitle) {
+                          setTempSlug(url_slug(e.target.value));
+                        } else {
+                          setSlug(url_slug(e.target.value));
+                        }
                       }}
                     />
                   </Grid>
@@ -397,12 +419,6 @@ export default function CoursePage() {
                           disablePadding: false,
                           label: 'Url Slug',
                         },
-                        {
-                          editExerciseId: 'exercise_id',
-                          isEdit: true,
-                          numeric: true,
-                          disablePadding: true,
-                        },
                       ]}
                       rows={
                         !searchTerm || searchTerm === ''
@@ -411,6 +427,9 @@ export default function CoursePage() {
                               e.title.toLowerCase().includes(searchTerm.toLowerCase()),
                             ) ?? []
                       }
+                      generateEditUrl={(e: any) => {
+                        return `/admin/courses/${courseId}/exercise/${e.exercise_id}`;
+                      }}
                     />
                   </Grid>
                 </>

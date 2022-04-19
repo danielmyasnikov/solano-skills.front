@@ -1,7 +1,7 @@
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 
-const RadioButton = ({ checked, value, className, onChange }) => (
+const RadioButton = ({ checked, value, className = '', onChange }) => (
   <RadioGroup
     sx={{
       '&.MuiFormGroup-root': {

@@ -9,16 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { Button } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -120,17 +112,19 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell align={'left'} padding={'normal'} sx={{ pl: '24px', pr: '24px' }}>
+          Действия
+        </TableCell>
       </TableRow>
     </TableHead>
   );
 }
 
-export default function EnhancedTable({ rows, headCells }: any) {
+export default function EnhancedTable({ rows, headCells, generateEditUrl }: any) {
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<string>('id');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { courseId } = useParams<{ courseId: string }>();
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: string) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -175,23 +169,22 @@ export default function EnhancedTable({ rows, headCells }: any) {
                         padding="normal"
                         sx={{ pl: '24px', pr: '24px' }}
                       >
-                        {row.id}
+                        {row.id ?? row.slug}
                       </TableCell>
                       {headCells.map((e: any) => (
                         <TableCell align="left">{row[e.id]}</TableCell>
                       ))}
-                      {headCells.map(
-                        (headCell: HeadCell) =>
-                          headCell.isEdit && (
-                            <Link
-                              to={`/admin/courses/${courseId}/exercise/${
-                                row[headCell.editExerciseId]
-                              }`}
-                            >
-                              edit
-                            </Link>
-                          ),
-                      )}
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="normal"
+                        sx={{ pl: '24px', pr: '24px' }}
+                      >
+                        <a href={generateEditUrl(row)} target="_blank">
+                          Редактировать
+                        </a>
+                      </TableCell>
                     </TableRow>
                   );
                 })}

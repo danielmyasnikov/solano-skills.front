@@ -9,6 +9,7 @@ import { tariffsApi } from '@src/features/payment/store/tariffs.api';
 import { professionApi } from '@src/features/professions/professions.api';
 import { skillApi } from '@src/features/skills/skills.api';
 import { env } from '@src/app/config';
+import { exercisesApi } from '@src/features/exercises/store/exercises.api';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -19,6 +20,7 @@ const middlewares: Middleware[] = [
   tariffsApi.middleware,
   professionApi.middleware,
   skillApi.middleware,
+  exercisesApi.middleware,
 ];
 
 if (!env.isProduction) {

@@ -17,6 +17,7 @@ import { profileSlice } from '../features/profile/store/slice';
 import { newProgressSlice } from '../features/courses/store/progress/slice';
 import { terminalSlice } from '@src/features/exercises/store/slices/terminal.slice';
 import { bashSlice } from '@src/features/exercises/store/slices/bash.slice';
+import { exercisesApi } from '@src/features/exercises/store/exercises.api';
 
 const rootReducer = combineReducers({
   global: globalReducers,
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   [tariffsApi.reducerPath]: tariffsApi.reducer,
   [professionApi.reducerPath]: professionApi.reducer,
   [skillApi.reducerPath]: skillApi.reducer,
+  [exercisesApi.reducerPath]: exercisesApi.reducer,
 });
 
 export default rootReducer;

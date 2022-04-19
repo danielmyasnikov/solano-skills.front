@@ -10,6 +10,13 @@ const Wrapper = styled('div')`
   padding-bottom: 64px;
 `;
 
+const AdminCardTitle = styled(Typography)`
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  color: #323c43;
+`;
+
 function AdminCard({ title, to }: any) {
   return (
     <Grid item xs={12} md={4} lg={3}>
@@ -21,11 +28,13 @@ function AdminCard({ title, to }: any) {
             justifyContent: 'center',
             width: '100%',
             minHeight: '180px',
-            borderRadius: '32px',
+            borderRadius: '7px',
+            background: 'white',
+            boxShadow: '2px 10px 20px rgb(0 0 0 / 10%)',
           }}
         >
           <CardContent>
-            <Typography variant="h3">{title}</Typography>
+            <AdminCardTitle variant="h3">{title}</AdminCardTitle>
           </CardContent>
         </Card>
       </Link>
