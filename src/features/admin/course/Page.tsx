@@ -397,6 +397,12 @@ export default function CoursePage() {
                           disablePadding: false,
                           label: 'Url Slug',
                         },
+                        {
+                          editExerciseId: 'exercise_id',
+                          isEdit: true,
+                          numeric: true,
+                          disablePadding: true,
+                        },
                       ]}
                       rows={
                         !searchTerm || searchTerm === ''
