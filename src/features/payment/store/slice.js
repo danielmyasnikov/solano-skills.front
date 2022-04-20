@@ -3,6 +3,7 @@ import {
   checkOrderStatus,
   paySubscription,
   unsubscribe,
+  changeSubscriptionType,
 } from '@src/features/payment/store/actions';
 
 export const paymentSlice = createSlice({
@@ -39,6 +40,12 @@ export const paymentSlice = createSlice({
       state.status = 'success';
     },
     [unsubscribe.rejected]: (state, action) => {
+      state.status = 'failure';
+    },
+    [changeSubscriptionType.fulfilled]: (state, action) => {
+      state.status = 'success';
+    },
+    [changeSubscriptionType.rejected]: (state, action) => {
       state.status = 'failure';
     },
   },

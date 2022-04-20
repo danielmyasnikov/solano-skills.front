@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { Button, Grid } from '@mui/material';
 import { closeTariffsModal } from '@store/global/modals';
 import { useDispatch, useSelector } from 'react-redux';
-import { paySubscription } from '@src/features/payment/store/actions';
+import { paySubscription, changeSubscriptionType } from '@src/features/payment/store/actions';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
 
 export const Tariffs = ({ tariffList, isTariffs }) => {
@@ -21,6 +21,10 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
     } else {
       history.push('/sign-in');
     }
+  };
+
+  const changeTariffHandler = (id) => {
+    dispatch(changeSubscriptionType(id));
   };
 
   return (
@@ -74,7 +78,9 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                   {profile.subscription_type === 'month' ? (
                     <>
                       {id === 1 ? (
-                        <></>
+                        <Button variant="containedPurple" onClick={() => changeTariffHandler(id)}>
+                          Сменить тарифный план
+                        </Button>
                       ) : (
                         <div
                           style={{

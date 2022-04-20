@@ -16,3 +16,12 @@ export const checkOrderStatus = createAsyncThunk('payment/checkOrderStatus', asy
 export const unsubscribe = createAsyncThunk('payment/unsubscribe', async () => {
   return await Api.post(`/api/v1/unsubscribe`);
 });
+
+export const changeSubscriptionType = createAsyncThunk(
+  'payment/changeSubscriptionType',
+  async (id) => {
+    return await Api.post(`/api/v1/change_subscription_type`, {
+      id,
+    });
+  },
+);

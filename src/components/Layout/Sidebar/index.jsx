@@ -6,7 +6,7 @@ import { Box } from '@mui/system';
 import Logo from '@assets/Logo';
 import cn from 'classnames';
 import { useWindowWidth } from '@react-hook/window-size';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth } from '@store/profile/selector';
 import { selectSidebar } from '@store/global/layout.selectors';
@@ -17,6 +17,7 @@ const Sidebar = ({ sidebarFixed, headerTarget }) => {
   const location = useLocation();
   const sidebarRef = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [activeTab, setActiveTab] = useState('');
   const [isDesktop, setIsDesktop] = useState('');
@@ -35,6 +36,8 @@ const Sidebar = ({ sidebarFixed, headerTarget }) => {
       dispatch(closeSidebar({}));
     }
   };
+
+  const signInRouteHandler = () => history.push(`/sign-in`);
 
   const renderStudyItems = studyItems.map(({ label, icon }) => (
     <Box key={label} sx={{ margin: '0 20px' }}>
@@ -129,13 +132,17 @@ const Sidebar = ({ sidebarFixed, headerTarget }) => {
             {renderStudyItems}
           </div> */}
         </div>
-        {isAuth && (
+        {(isAuth && (
           <Button
             className={styles.btn}
             variant="outlineGreen"
             onClick={() => dispatch(openTariffsModal({}))}
           >
             Обновить подписку
+          </Button>
+        )) || (
+          <Button className={styles.btn} variant="outlineGreen" onClick={signInRouteHandler}>
+            Войти
           </Button>
         )}
       </div>
