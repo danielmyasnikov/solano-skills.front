@@ -18,6 +18,7 @@ import { ProgressPage } from '@components/progressPage';
 import Settings from '@src/features/profile/settings';
 import { PasswordResetPage } from '@components/auth/forgotPassword/passwordResetPage';
 import { SuccessPayment } from '@src/features/payment/SuccessPayment';
+import { ResubscribePayment } from '@src/features/payment/SuccessResubscribe';
 
 import { Instructors } from '@src/features/instructors';
 
@@ -188,6 +189,12 @@ export const routes: {
   {
     path: '/success-payment',
     Component: SuccessPayment,
+    wrap: false,
+    exact: true,
+  },
+  {
+    path: '/resubscribe-payment',
+    Component: ResubscribePayment,
     wrap: false,
     exact: true,
   },
