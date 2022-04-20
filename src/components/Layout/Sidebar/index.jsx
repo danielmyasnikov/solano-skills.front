@@ -141,7 +141,7 @@ const Sidebar = ({ sidebarFixed, headerTarget }) => {
             Обновить подписку
           </Button>
         )) || (
-          <Button className={styles.btn} variant="outlineGreen" onClick={signInRouteHandler}>
+          <Button className={styles.btnSignIn} variant="outlineGreen" onClick={signInRouteHandler}>
             Войти
           </Button>
         )}

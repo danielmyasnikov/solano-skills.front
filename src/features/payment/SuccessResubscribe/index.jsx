@@ -15,7 +15,7 @@ export const ResubscribePayment = () => {
   return (
     <div className={styles.wrapper}>
       <Helmet title="Страница успешной оплаты">
-        <meta name="description" content="Оплата произведена успешно, можно начинать обучение." />
+        <meta name="description" content="Ваш тарифный план успешно обновлен!" />
       </Helmet>
       <span className={styles.wrapperTitle}>Добро пожаловать</span>
       <img src={LogoInfo} alt="Логотип компании" />
