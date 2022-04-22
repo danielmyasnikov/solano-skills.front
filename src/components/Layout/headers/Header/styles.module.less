@@ -31,6 +31,10 @@
   position: relative;
 }
 
+.actionContainer > button:last-child {
+  margin-left: 15px;
+}
+
 .profile {
   display: flex;
   cursor: pointer;
@@ -83,13 +87,14 @@
   .profile {
     margin-left: 20px;
   }
+  .search {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 668px) {
-  .headerItem {
-    button {
-      display: none;
-    }
+  .headerItem .actionContainer > button:first-child {
+    display: none;
   }
 }
 

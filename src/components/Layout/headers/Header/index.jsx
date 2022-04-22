@@ -35,6 +35,8 @@ const Header = ({ headerRef }) => {
 
   const registerRouteHandler = () => history.push(`/sign-up`);
 
+  const signInRouteHandler = () => history.push(`/sign-in`);
+
   const handleShowModal = () => {
     dispatch(openTariffsModal({}));
     setShowActionMenu(false);
@@ -107,9 +109,14 @@ const Header = ({ headerRef }) => {
                 </div>
               </>
             ) : (
-              <Button variant="containedGreen" onClick={registerRouteHandler}>
-                Зарегистрироваться
-              </Button>
+              <div className={styles.actionContainer}>
+                <Button variant="outlineGreen" onClick={signInRouteHandler}>
+                  Войти
+                </Button>
+                <Button variant="containedGreen" onClick={registerRouteHandler}>
+                  Зарегистрироваться
+                </Button>
+              </div>
             )}
           </div>
         </header>

@@ -2,16 +2,18 @@ import styles from './styles.module.less';
 import { useHistory } from 'react-router-dom';
 import Icon from './assets/Icon.svg';
 import cn from 'classnames';
-import { useCallback } from 'react';
+import { useEffect } from 'react';
 import { Button, Grid } from '@mui/material';
-import { closeTariffsModal } from '@store/global/modals';
 import { useDispatch, useSelector } from 'react-redux';
 import { paySubscription } from '@src/features/payment/store/actions';
 import { selectIsAuth, selectProfile } from '@store/profile/selector';
+import { useChangeSubscriptionTypeMutation } from '@src/features/payment/store/payments.api';
 
 export const Tariffs = ({ tariffList, isTariffs }) => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const [changeSubscriptionTypeMutation, { isLoading: isUpdating }] =
+    useChangeSubscriptionTypeMutation();
   const profile = useSelector(selectProfile);
   const history = useHistory();
 
@@ -22,6 +24,14 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
       history.push('/sign-in');
     }
   };
+
+  const changeSubscriptionType = (id) => {
+    changeSubscriptionTypeMutation({ id });
+  };
+
+  useEffect(() => {
+    isUpdating && history.push('/resubscribe-payment');
+  }, [isUpdating]);
 
   return (
     <>
@@ -74,7 +84,12 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
                   {profile.subscription_type === 'month' ? (
                     <>
                       {id === 1 ? (
-                        <></>
+                        <Button
+                          variant="containedPurple"
+                          onClick={() => changeSubscriptionType(id)}
+                        >
+                          Сменить тарифный план
+                        </Button>
                       ) : (
                         <div
                           style={{

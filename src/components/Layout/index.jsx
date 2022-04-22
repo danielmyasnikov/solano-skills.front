@@ -49,7 +49,9 @@ const Layout = ({ children, headerVariant }) => {
       )}
       <Sidebar headerTarget={headerRef} sidebarFixed={sidebarFixed} />
 
-      <Main open={sidebarOpen}>{children}</Main>
+      <Main className={styles.main} open={sidebarOpen}>
+        {children}
+      </Main>
     </div>
   );
 };
