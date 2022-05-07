@@ -37,7 +37,7 @@ const TariffsModal = ({ onClose }) => {
             <span className={styles.headerTitle}>Выберите свой тарифный план</span>
           </div>
           <span className={styles.headerText}>
-            Благодаря DeepSkills Вы сможете изучать навыки работы с данными, необходимые для
+            Благодаря solanoskills Вы сможете изучать навыки работы с данными, необходимые для
             продвижения по карьерной лестнице.
           </span>
         </div>

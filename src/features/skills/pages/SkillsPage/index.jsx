@@ -41,7 +41,7 @@ const SkillsPage = () => {
       <Helmet title="Ваши навыки">
         <meta
           name="description"
-          content="Отточите свои навыки, выполняя быстрые ежедневные задания на компьютере или в мобильном приложении DeepSkills."
+          content="Отточите свои навыки, выполняя быстрые ежедневные задания на компьютере или в мобильном приложении solanoskills."
         />
       </Helmet>
       <WrapHeader variant={'skills'} />

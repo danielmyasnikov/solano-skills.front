@@ -121,7 +121,7 @@ export default function ExercisePage() {
       id: 1,
       first_name: 'Виталий',
       last_name: 'Кулиев',
-      avatar_url: 'https://storage.yandexcloud.net/deepskills-avatars/vitaly-kuliev.jpg',
+      avatar_url: 'https://storage.yandexcloud.net/solanoskills-avatars/vitaly-kuliev.jpg',
     },
   ];
 

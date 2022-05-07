@@ -60,7 +60,7 @@ export const CoursesPage = () => {
           name="description"
           content="Пришло время засучить рукава — мы лучше всего учимся на практике. Все наши курсы являются
           интерактивными, сочетающими короткие видеоролики с практическими упражнениями. Это подход
-          к обучению DeepSkills."
+          к обучению solanoskills."
         />
       </Helmet>
       <div className={styles.header}>
@@ -68,7 +68,7 @@ export const CoursesPage = () => {
         <p className={styles.description}>
           Пришло время засучить рукава — мы лучше всего учимся на практике. Все наши курсы являются
           интерактивными, сочетающими короткие видеоролики с практическими упражнениями. Это подход
-          к обучению DeepSkills.
+          к обучению solanoskills.
         </p>
       </div>
       <div className={styles.contentWrapper}>

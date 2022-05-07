@@ -18,7 +18,7 @@ export const MailingList = () => {
       <img className={styles.wrapper__img} src={Envelope} alt="Иконка конверта" />
       <span className={styles.wrapper__title}>Будьте в курсе!</span>
       <span className={styles.wrapper__text}>Вы можете подписаться на рассылку, чтобы первым</span>
-      <span>получать новости о DeepSkills.</span>
+      <span>получать новости о solanoskills.</span>
       <span className={styles.wrapper__text}>А также мы будем рассказывать Вам о появлении</span>
       <span>новых курсов, акциях и скидках.</span>
       <div className={styles.inputsContainer}>

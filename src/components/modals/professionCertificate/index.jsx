@@ -48,8 +48,8 @@ export const ProfessionCertificateModal = ({ isOpen, modalHandler }) => {
             <div className={styles.title}>Когда вы получаете сертификат</div>
             <div className={styles.subtitle}>
               Освойте новую профессию, выполняя быстрые ежедневные задания на компьютере или в
-              мобильном приложении DeepSkills. Отточите свои навыки, выполняя быстрые ежедневные
-              задания на компьютере или в мобильном приложении DeepSkills.
+              мобильном приложении solanoskills. Отточите свои навыки, выполняя быстрые ежедневные
+              задания на компьютере или в мобильном приложении solanoskills.
             </div>
             <div className={styles.when__list}>{renderWhenItems()}</div>
           </div>

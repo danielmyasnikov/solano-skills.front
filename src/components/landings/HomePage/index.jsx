@@ -157,7 +157,7 @@ export const HomePage = () => {
             </section>
 
             <section className={styles.slogan}>
-              <div className={styles.slogan__title}>Особенности обучения от DeepSkills?</div>
+              <div className={styles.slogan__title}>Особенности обучения от solanoskills?</div>
               <div className={styles.slogan__description}>
                 Изучение принципов работы с языком программирования Python происходит удаленно с
                 помощью видеоуроков. Функционал платформы обучения (в вашем личном кабинете)
@@ -214,7 +214,7 @@ export const HomePage = () => {
 
             <section className={styles.join}>
               <div className={styles.join__title}>
-                Присоединяйтесь к команде преподавателей DeepSkills
+                Присоединяйтесь к команде преподавателей solanoskills
               </div>
               <div className={styles.join__subtitle}>
                 Если у Вас есть фундаментальные знания и практика в работе с языком программирования

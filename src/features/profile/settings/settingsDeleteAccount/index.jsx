@@ -41,7 +41,7 @@ export const SettingsDeleteAccount = () => {
       <div className={styles.title}>Удалить аккаунт</div>
       <div className={styles.wrap}>
         <span className={styles.grey}>
-          Когда вы удаляете свою учетную запись, вы теряете доступ ко всем сервисам DeepSkills,
+          Когда вы удаляете свою учетную запись, вы теряете доступ ко всем сервисам solanoskills,
           восстановление невозможно.
         </span>
         <div className={styles.agreement}>

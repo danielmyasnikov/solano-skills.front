@@ -40,7 +40,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Helmet defaultTitle="DeepSkills" titleTemplate="DeepSkills | %s" />
+      <Helmet defaultTitle="solanoskills" titleTemplate="solanoskills | %s" />
       <div className={styles.wrapper}>
         <AppSwitch>
           {routes.map(({ exact, path, wrap, headerVariant, Component }) => (

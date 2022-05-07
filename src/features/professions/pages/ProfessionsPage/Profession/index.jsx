@@ -8,7 +8,7 @@ import skillLogo from '@assets/skill.png';
 const Profession = ({ title, description, info }) => {
   return (
     <div className={styles.profession}>
-      {info.certificate && <div className={styles.certificate}>Сертификат Deepskills</div>}
+      {info.certificate && <div className={styles.certificate}>Сертификат solanoskills</div>}
       <div className={styles.main}>
         <div className={styles.logo}>
           <img src={skillLogo} alt="Иконка навыка" />

@@ -74,7 +74,7 @@ export const Tariffs = ({ tariffList, isTariffs }) => {
               {id === 1 && (
                 <small>
                   * К оплате 11 880 руб за годовой доступ ко всему контенту образовательной
-                  платформы DeepSkills
+                  платформы solanoskills
                 </small>
               )}
             </Grid>

@@ -61,7 +61,7 @@ export const OnBoardPage = () => {
         </Helmet>
         <div className={styles.header}>
           <img className={styles.headerLogo} src={logo} alt="Логотип компании" />
-          <span className={styles.headerTitle}>Добро пожаловать в DeepSkills</span>
+          <span className={styles.headerTitle}>Добро пожаловать в solanoskills</span>
         </div>
         <div className={styles.main}>
           <div className={styles.mainSearch}>

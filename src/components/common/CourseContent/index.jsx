@@ -161,7 +161,7 @@ export const CourseContent = ({ variant, onClose, parts, slug }) => {
               <div className={styles.skill__number}>
                 <img src={CertificatesBlack} alt="Превью сертификата" />
               </div>
-              <div className={styles.skill__block}>Получение сертификата DeepSkills</div>
+              <div className={styles.skill__block}>Получение сертификата solanoskills</div>
             </div>
           )}
         </div>

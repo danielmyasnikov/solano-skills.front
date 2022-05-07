@@ -82,7 +82,7 @@ export const ForgotPassword = () => {
           <span className={styles.wrapperText}>
             Если вы не получили письмо, нажмите «Отправить повторно» через 00:
             <Counter onCountDownIsOverHandler={onCountDownIsOverHandler} /> или напишите на &nbsp;
-            support@deepskills.ru
+            support@solanoskills.ru
           </span>
         ))) || (
         <>

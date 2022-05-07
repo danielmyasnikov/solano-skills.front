@@ -154,6 +154,6 @@ export const info = [
     text: 'ИНН 7723728309',
   },
   {
-    text: '© DeepSkills, 2022',
+    text: '© solanoskills, 2022',
   },
 ];

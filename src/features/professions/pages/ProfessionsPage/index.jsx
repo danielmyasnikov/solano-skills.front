@@ -41,7 +41,7 @@ const ProfessionsPage = () => {
       <Helmet title="Профессии">
         <meta
           name="description"
-          content="Отточите свои навыки, пройдите необходимые курсы и освойте желаемую профессию вместе с DeepSkills."
+          content="Отточите свои навыки, пройдите необходимые курсы и освойте желаемую профессию вместе с solanoskills."
         />
       </Helmet>
       <WrapHeader variant={'professions'} />

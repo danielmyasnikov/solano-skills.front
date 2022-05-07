@@ -47,7 +47,7 @@ const Footer = () => {
           <div className={styles.container}>
             <div className={styles.logo}>
               <FooterLogo />
-              <span>support@deepskills.ru</span>
+              <span>support@solanoskills.ru</span>
             </div>
           </div>
         </div>
