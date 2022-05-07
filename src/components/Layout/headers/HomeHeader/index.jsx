@@ -16,14 +16,14 @@ const HeaderHome = ({ handleBurger }) => {
         <div className={styles.header__block}>
           <div className={styles.header__logo}>
             <Link to="/">
-              <HeaderLogo />
+              Solano Skills
             </Link>
           </div>
           <div className={styles.header__menu}>
-            <Link to="/courses">Обучение</Link>
-            <Link to="/tariffs">Тарифы</Link>
+            <Link to="/courses">Education</Link>
+            <Link to="/tariffs">Tariffs</Link>
             <span style={{ cursor: 'pointer' }} onClick={() => dispatch(openFeedbackModal({}))}>
-              Поддержка
+              Support
             </span>
           </div>
         </div>
@@ -31,10 +31,10 @@ const HeaderHome = ({ handleBurger }) => {
           {!isAuth && (
             <>
               <Link to={'/sign-in'}>
-                <Button variant="outlinePurple">Войти</Button>
+                <Button variant="outlinePurple">Login</Button>
               </Link>
               <Link to={'/sign-up'}>
-                <Button variant="containedPurple">Зарегистрироваться</Button>
+                <Button variant="containedPurple">Registration</Button>
               </Link>
             </>
           )}

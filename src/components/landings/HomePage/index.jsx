@@ -122,64 +122,58 @@ export const HomePage = () => {
           <main>
             <section className={styles.offer}>
               <div className={cn(styles.offer__block, styles.offer__block__left)}>
-                <h1 className={styles.offer__title}>Развивайте навыки работы с данными</h1>
+                <h1 className={styles.offer__title}>Master your Solano Skills</h1>
                 <div className={styles.offer__subtitle}>
-                  Обучаем с нуля профессиям и предоставляем знания по востребованным специальностям
-                  и направлениям в сфере Информационных технологий.
+                  Where people onboard on web3 and Solano Blockchain
                 </div>
                 <div className={styles.offer__btnDiv}>
                   <Link to="/courses">
-                    <Button variant="outlinePurpleWithoutBorder">Посмотреть курсы</Button>
+                    <Button variant="outlinePurpleWithoutBorder">Review Courses</Button>
                   </Link>
                 </div>
                 <div className={styles.offer__facts}>
                   <div className={styles.offer__fact}>
                     <div className={styles.offer__fact__number}>{'>15'}</div>
-                    <div className={styles.offer__fact__text}>курсов</div>
+                    <div className={styles.offer__fact__text}>courses</div>
                   </div>
                   <div className={styles.offer__fact}>
                     <div className={styles.offer__fact__number}>15 000</div>
-                    <div className={styles.offer__fact__text}>учеников</div>
+                    <div className={styles.offer__fact__text}>students</div>
                   </div>
                 </div>
               </div>
               <div className={cn(styles.offer__block, styles.offer__block__right)}>
-                <div className={styles.offer__block__right__title}>Попробуйте бесплатно</div>
+                <div className={styles.offer__block__right__title}>Try for free</div>
                 <Registration isModal variant="home_offer" />
               </div>
             </section>
 
             <section className={styles.ways} id="ways">
               <div className={styles.ways__title}>
-                Подход к обучению программированию, <span>разработанный экспертами</span>
+                Expert driven approach to , <span>Solano Blockchain</span>
               </div>
               {renderSlides}
             </section>
 
             <section className={styles.slogan}>
-              <div className={styles.slogan__title}>Особенности обучения от solanoskills?</div>
+              <div className={styles.slogan__title}>Why we are different Solano Skills?</div>
               <div className={styles.slogan__description}>
-                Изучение принципов работы с языком программирования Python происходит удаленно с
-                помощью видеоуроков. Функционал платформы обучения (в вашем личном кабинете)
-                позволяет выполнять практические задачи по программированию и проверять правильность
-                их выполнения в режиме онлайн. Мы соединили воедино лучшие мировые методики онлайн
-                обучения.
+                Solano Skills is the education platform where Edutech2.0 and Web3.0 joins each other.
+                We advocate for microlearning and learn by doing approach.
               </div>
               <div className={styles.slogan__btn}>
                 <Link to={'/courses'}>
-                  <Button variant="containedWhite">Посмотреть курсы</Button>
+                  <Button variant="containedWhite">Courses</Button>
                 </Link>
               </div>
             </section>
 
             <section className={styles.practices}>
               <div className={styles.practices__title}>
-                <span>Наш практический</span> опыт обучения
+                <span>We use </span> proven learning methodology
               </div>
               <div className={styles.practices__subtitle}>
-                Наши специалисты прежде чем создать данную платформу обучения, проанализировали
-                лучшие мировые методики. Мы провели опрос учеников этих компаний и на основе этой
-                информации разработали свою платформу обучения с уникальной методикой.
+                Our tutors are highly trained to provider easy to follow .
               </div>
             </section>
 
@@ -187,53 +181,37 @@ export const HomePage = () => {
 
             <section className={cn(styles.slogan, styles.slogan__center)}>
               <div className={styles.slogan__title}>
-                Начните обучение программированию на Python прямо сейчас
+                Start learning Solano Blockchain right now
               </div>
               <div className={styles.slogan__description}>
-                Обучатся Вы можете по своему собственному графику занятий. Удаленное обучение
-                программированию не привязывает обучающегося к месту обязательного нахождения. Вы
-                можете обучаться с любой точки планеты, где есть Интернет.
+                Learn the skills you need online at your own pace—from non-coding essentials
+                to Blockchain and Solano.
               </div>
               <div className={styles.slogan__btn}>
                 <Link to={'/courses'}>
-                  <Button variant="containedWhite">Посмотреть курсы</Button>
+                  <Button variant="containedWhite">Review Courses</Button>
                 </Link>
               </div>
             </section>
 
-            <section className={styles.whatSays}>
-              <div className={styles.whatSays__header}>
-                <div className={styles.whatSays__header__title}>Отзывы наших учеников</div>
-                <div className={styles.whatSays__header__subtitle}>
-                  {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                  incididunt */}
-                </div>
-              </div>
-              <div className={styles.whatSays__feedbacks}>{renderFeedbacks}</div>
-            </section>
-
             <section className={styles.join}>
               <div className={styles.join__title}>
-                Присоединяйтесь к команде преподавателей solanoskills
+                Are you an educator?
               </div>
               <div className={styles.join__subtitle}>
-                Если у Вас есть фундаментальные знания и практика в работе с языком программирования
-                Python, то Вы можете стать преподавателем в нашей компании. Методике изложения
-                материала - мы научим. Для того чтобы стать преподавателем нужно отправить заявку в
-                компанию. Мы обещаем провести собеседование в удобное для Вас время и дать свое
-                заключение в течение 24 часов.
+                Solano Skills has lots of Classrooms for free for you and your students.
               </div>
               <div className={styles.join__btn}>
                 <a target="_blank" href="https://forms.gle/nCKa2D3JK756E9eg7" rel="noreferrer">
-                  <Button variant="containedPurple">Я преподаватель</Button>
+                  <Button variant="containedPurple">I'm a educator</Button>
                 </a>
               </div>
             </section>
 
             <section className={styles.signup}>
               <div className={cn(styles.signup__block, styles.signup__block_left)}>
-                <div className={styles.signup__title}>Зарегистрируйтесь,</div>
-                <div className={styles.signup__subtitle}>чтобы начать обучение прямо сейчас</div>
+                <div className={styles.signup__title}>Registration,</div>
+                <div className={styles.signup__subtitle}>to start learning today</div>
               </div>
               <div className={styles.signup__block}>
                 <Registration key={'home_end'} isModal variant={'home_end'} />
